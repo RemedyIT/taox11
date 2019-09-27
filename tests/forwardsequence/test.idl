@@ -1,0 +1,50 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  interface iforward;
+  typedef sequence<iforward> iforwardSeq;
+  typedef sequence<iforwardSeq> forwardSeq2;
+  interface iforward
+  {
+    readonly attribute long uid;
+    void dump();
+  };
+
+  local interface iLocal;
+  typedef sequence<iLocal> iLocalSeq;
+  typedef sequence<iLocalSeq> iLocalSeq2;
+  local interface iLocal
+  {
+    readonly attribute long uid;
+    void dump();
+  };
+
+  /// An interface for testing IDL primitive types
+  interface Hello
+  {
+    // Create object
+    Test::iforward get_forward();
+
+    /// Transfer a iforward-Seq in and out
+    iforwardSeq inout_forwardSeq (in iforwardSeq in_v, out iforwardSeq out_v, inout iforwardSeq inout_v);
+    forwardSeq2 inout_forwardSeq2 (in forwardSeq2 in_v, out forwardSeq2 out_v, inout forwardSeq2 inout_v);
+    // Not allowed
+    //    /// Transfer a iLocal-Seq in and out
+    //    iLocalSeq inout_iLocalSeq (in iLocalSeq pin, out iLocalSeq pout, inout iLocalSeq pinout);
+
+    // Create a sequence of locals for a forwarded interface.
+    void createLocal();
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};

@@ -1,0 +1,31 @@
+// -*- MPC -*-
+
+project(*out_Idl): ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*out_server): taox11_server {
+  after += *out_Idl
+  Source_Files {
+    hello.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*out_client): taox11_client {
+  after += *out_Idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}
+

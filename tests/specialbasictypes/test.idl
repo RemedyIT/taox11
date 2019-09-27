@@ -1,0 +1,47 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  /// An interface for testing IDL primitive types
+  interface Hello
+  {
+    /// Get and set a char
+    char getset_char (in char min, in char max);
+    /// Get a char by out
+    void out_char (in char numin, out char num);
+    /// Transfer a char by inout
+    void inout_char (inout char min, inout char max);
+
+    /// Get and set and set a wchar
+    wchar getset_wchar (in wchar min, in wchar max);
+    /// Get a wchar by out
+    void out_wchar (in wchar cin, out wchar c);
+    /// Transfer a wchar by inout
+    void inout_wchar (in wchar cin, inout wchar c);
+
+    /// Get and set and set a octet
+    octet getset_octet (in octet min, in octet max);
+    /// Get a octet by out
+    void out_octet (in octet numin, out octet num);
+    /// Transfer a octet by inout
+    void inout_octet (inout octet num);
+
+    /// Get and set a boolean
+    boolean getset_boolean (in boolean min, in boolean max);
+    /// Get a boolean by out
+    void out_boolean (in boolean blin, out boolean bl);
+    /// Transfer a boolean by inout
+    void inout_boolean (inout boolean bl);
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};

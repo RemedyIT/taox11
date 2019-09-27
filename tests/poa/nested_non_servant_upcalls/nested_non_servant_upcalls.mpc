@@ -1,0 +1,19 @@
+// -*- MPC -*-
+
+project(*IDL) : ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project: taox11_server, avoids_minimum_corba, avoids_corba_e_compact, avoids_corba_e_micro {
+  exename = nested_non_servant_upcalls
+  after += *IDL
+  source_files {
+    nested_non_servant_upcalls.cpp
+    servant_activator.cpp
+    testS.cpp
+    testC.cpp
+  }
+}

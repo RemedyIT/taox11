@@ -1,0 +1,20 @@
+// -*- MPC -*-
+
+project(*narrow_idl): ridl_ostream_defaults {
+  idlflags += -Sp
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*narrow_server): taox11_server, taox11_messaging {
+  after += *narrow_idl
+  Source_Files {
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}

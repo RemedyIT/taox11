@@ -1,0 +1,51 @@
+
+// generated from <%= ridl_template_path %>
+template<>
+struct traits < <%= scoped_cxxtype %>>
+  : IDL::common_traits< <%= scoped_cxxtype %>>
+{
+  template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
+  static inline OStrm_& write_on(
+      OStrm_& os_, in_type val_,
+      Formatter fmt_ = Formatter ())
+  {
+    return fmt_ (os_, val_);
+  }
+
+  template <typename Formatter = std::false_type>
+  static inline __Writer<Formatter> write (in_type val) { return {val}; }
+};
+
+template <typename OStrm_>
+struct formatter< <%= scoped_cxxtype %>, OStrm_>
+{
+  inline OStrm_& operator ()(
+      OStrm_& os_,
+      <%= scoped_cxx_in_type %> val_)
+  {
+    switch (val_)
+    {
+% enumerators.each do |e|
+      case <%= scoped_cxxtype %>::<%=e.cxxname %>: os_ << "<%= formatted_cxxname %>::<%=e.cxxname %>"; break;
+%end
+    }
+    return os_;
+  }
+};
+
+template <typename OStrm_, typename Fmt>
+inline OStrm_& operator <<(
+    OStrm_& os,
+    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> w)
+{
+  typedef IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> writer_t;
+  typedef typename std::conditional<
+                      std::is_same<
+                        typename writer_t::formatter_t,
+                        std::false_type>::value,
+                      formatter< <%= scoped_cxxtype %>, OStrm_>,
+                      typename writer_t::formatter_t>::type formatter_t;
+  return IDL::traits< <%= scoped_cxxtype %>>::write_on (
+      os, w.val_,
+      formatter_t ());
+}

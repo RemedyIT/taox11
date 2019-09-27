@@ -1,0 +1,19 @@
+// -*- MPC -*-
+project(*idl): ridl_ostream_defaults  {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*Server): taox11_server, avoids_corba_e_micro {
+  after +=*idl
+  Source_Files {
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+

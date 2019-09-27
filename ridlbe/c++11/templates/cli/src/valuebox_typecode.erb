@@ -1,0 +1,12 @@
+
+// generated from <%= ridl_template_path %>
+static TAO_TAO::TypeCode::Alias<char const *,
+  TAO_CORBA::TypeCode_ptr const *,
+  TAO_TAO::Null_RefCount_Policy>
+    _tao<%= cxx_typecode %> (
+      TAO_CORBA::tk_value_box,
+      "<%= repository_id %>",
+      "<%= cxxname %>",
+      std::addressof(<%= scoped_boxed_cxx_typecode %>));
+
+TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> = std::addressof(_tao<%= cxx_typecode %>);

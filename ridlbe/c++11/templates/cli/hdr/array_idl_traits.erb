@@ -1,0 +1,50 @@
+
+// generated from <%= ridl_template_path %>
+// Unaliased type : <%= resolved_cxxtype %>
+% alias_md5 =  resolved_cxxtype.to_md5
+// MD5            : <%= alias_md5 %>
+#if !defined(_ALIAS_<%= alias_md5 %>_TRAITS_DECL_)
+#define _ALIAS_<%= alias_md5 %>_TRAITS_DECL_
+
+template<>
+struct traits < <%= scoped_cxxtype %>>
+  : IDL::common_traits< <%= scoped_cxxtype %>>
+{
+  /// IDL::traits<> for the element of the array
+  typedef IDL::traits< <%= scoped_element_traits_cxx_typename %>> element_traits;
+  /// std::integral_constant type of value_type uint32_t
+  /// indicating the number of dimensions of the array
+  typedef std::integral_constant<uint32_t, <%= cxxdim_sizes.size %>> dimensions;
+
+  template <typename OStrm_,
+            typename Formatter = formatter< <%= scoped_cxxtype %>, OStrm_>
+           >
+  static inline OStrm_& write_on(
+      OStrm_& os_, in_type val_,
+      Formatter fmt_ = Formatter ())
+  {
+    return fmt_ (os_, val_);
+  }
+
+  template <typename Formatter = std::false_type>
+  static inline __Writer<Formatter> write (in_type val) { return {val}; }
+};
+
+template <typename OStrm_, typename Fmt>
+inline OStrm_& operator <<(
+    OStrm_& os,
+    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> w)
+{
+  typedef IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> writer_t;
+  typedef typename std::conditional<
+                      std::is_same<
+                        typename writer_t::formatter_t,
+                        std::false_type>::value,
+                      formatter< <%= scoped_cxxtype %>, OStrm_>,
+                      typename writer_t::formatter_t>::type formatter_t;
+  return IDL::traits< <%= scoped_cxxtype %>>::write_on (
+      os, w.val_,
+      formatter_t ());
+}
+
+#endif

@@ -1,0 +1,7 @@
+% if generate_typecode_support?
+
+// generated from <%= ridl_template_path %>
+TAOX11_NAMESPACE::CORBA::typecode_reference const <%= scoped_cxx_typecode %> =
+  TAOX11_NAMESPACE::CORBA::make_reference<TAOX11_NAMESPACE::CORBA::TypeCode_impl> (
+    __tao::<%= scoped_cxx_typecode %>, true);
+% end

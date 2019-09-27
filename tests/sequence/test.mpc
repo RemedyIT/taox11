@@ -1,0 +1,34 @@
+// -*- MPC -*-
+
+project(*sequence_idl): ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*sequence_server): taox11_server {
+  after += *sequence_idl
+  Source_Files {
+    foo.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*sequence_client): taox11_client {
+  after += *sequence_idl
+  Source_Files {
+    client.cpp
+    test_sequences.cpp
+    test_corba_sequences.cpp
+    test_bounded_sequences.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}
+

@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project(*server): taox11_client {
+  exename = invalid_name
+}
+

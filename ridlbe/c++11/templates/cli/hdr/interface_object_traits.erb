@@ -1,0 +1,73 @@
+
+// generated from <%= ridl_template_path %>
+% _intf_traits_decl_incl_guard_ = scoped_cxxname.to_include_guard
+#if !defined (_INTF_<%= _intf_traits_decl_incl_guard_ %>_TRAITS_DECL_)
+#define _INTF_<%= _intf_traits_decl_incl_guard_ %>_TRAITS_DECL_
+namespace TAOX11_NAMESPACE
+{
+  namespace CORBA
+  {
+% if is_abstract?
+    template<>
+    <%= stub_export_macro %>abstractbase_traits< <%= scoped_cxxtype %>>::ref_type
+    abstractbase_traits< <%= scoped_cxxtype %>>::narrow (
+        abstractbase_reference<CORBA::AbstractBase>);
+% else
+    template<>
+    <%= stub_export_macro %>object_traits< <%= scoped_cxxtype %>>::shared_ptr_type
+    object_traits< <%= scoped_cxxtype %>>::lock_shared (
+        <%= scoped_cxxtype %>* p);
+%   if is_remote?
+    template<>
+    <%= stub_export_macro %>object_traits< <%= scoped_cxxtype %>>::ref_type
+    object_traits< <%= scoped_cxxtype %>>::narrow (
+       object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
+%   else
+%     if declare_local_object_narrow_specialization?
+    template<>
+    <%= stub_export_macro %>object_traits< <%= scoped_cxxtype %>>::ref_type
+    object_traits< <%= scoped_cxxtype %>>::narrow (
+       object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
+%     end
+%   end
+% end
+  } // namespace CORBA
+
+  namespace IDL
+  {
+    template<>
+    struct traits < <%= scoped_cxxtype %>> :
+% if is_abstract?
+      public IDL::common_byval_traits <CORBA::abstractbase_reference < <%= scoped_cxxtype %>>>,
+      public CORBA::abstractbase_traits < <%= scoped_cxxtype %>>
+% else
+      public IDL::common_byval_traits <CORBA::object_reference < <%= scoped_cxxtype %>>>,
+      public CORBA::object_traits < <%= scoped_cxxtype %>>
+% end
+    {
+      /// std::false_type or std::true_type type indicating whether
+      /// this interface is declared as local
+      typedef std::<%= is_local? %>_type is_local;
+      /// std::false_type or std::true_type type indicating whether
+      /// this interface is declared as abstract
+      typedef std::<%= is_abstract? %>_type is_abstract;
+% if is_local?
+      /// Trait for the type from which a local implementation needs
+      /// to be derived from
+      typedef <%= scoped_cxxtype %> base_type;
+% end
+
+      template <typename OStrm_, typename Formatter = formatter< <%= scoped_cxxtype %>, OStrm_>>
+      static inline OStrm_& write_on(
+          OStrm_& os_, in_type val_,
+          Formatter fmt_ = Formatter ())
+      {
+        return fmt_ (os_, val_);
+      }
+
+      template <typename Formatter = std::false_type>
+      static inline __Writer<Formatter> write (in_type val) { return {val}; }
+    };
+  } // namespace IDL
+} // namespace TAOX11_NAMESPACE
+#endif // !_INTF_<%= _intf_traits_decl_incl_guard_ %>_TRAITS_DECL_

@@ -1,0 +1,8 @@
+// -*- MPC -*-
+
+project : taox11_defaults, ridl_defaults, taoexe {
+  libs += taox11
+
+  IDL_Files {
+  }
+}

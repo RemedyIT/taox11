@@ -1,0 +1,32 @@
+// -*- MPC -*-
+
+project(*idl): ridl_ostream_defaults, taox11_valuetype {
+  IDL_Files {
+    factory.idl
+  }
+  custom_only = 1
+}
+
+project(*Server): taox11_server, taox11_valuetype {
+  after += *idl
+  Source_Files {
+    factoryc_impl.cpp
+    factorys_impl.cpp
+    server.cpp
+  }
+  Source_Files {
+    factoryC.cpp
+    factoryS.cpp
+  }
+}
+
+project(*Client): taox11_client, taox11_valuetype {
+  after += *idl
+  Source_Files {
+    factoryc_impl.cpp
+    client.cpp
+  }
+  Source_Files {
+    factoryC.cpp
+  }
+}

@@ -1,0 +1,19 @@
+/**
+ * @file    sender.idl
+ * @author  Marcel Smit
+ *
+ * @brief   CORBA C++11 Multi Threaded test application
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+#include "receiver.idl"
+
+interface Sender
+{
+  exception Table_Full {};
+
+  /// Receive the Receiver object and return a id for the object.
+  long receiver_object (in Receiver recv)
+    raises (Table_Full);
+};

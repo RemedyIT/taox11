@@ -1,0 +1,269 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+#include "orb.idl"
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  typedef boolean boolArray[5];
+  typedef boolean boolArray2[3][5];
+  typedef boolean boolArray3[33][14][15];
+
+  typedef char charArray[5];
+  typedef char charArray2[3][5];
+  typedef char charArray3[3][4][5];
+
+  typedef wchar wcharArray[5];
+  typedef wchar wcharArray2[3][5];
+  typedef wchar wcharArray3[3][4][5];
+
+  typedef octet octetArray[5];
+  typedef octet octetArray2[7][8];
+  typedef octet octetArray3[3][4][5];
+
+  typedef short shortArray[5];
+  typedef short shortArray2[7][8];
+  typedef short shortArray3[33][14][15];
+
+  typedef unsigned short ushortArray[5];
+  typedef unsigned short ushortArray2[7][8];
+  typedef unsigned short ushortArray3[33][14][15];
+
+  typedef long longArray[5];
+  typedef long longArray2[7][8];
+  typedef long longArray3[33][14][15];
+
+  typedef unsigned long ulongArray[5];
+  typedef unsigned long ulongArray2[7][8];
+  typedef unsigned long ulongArray3[33][14][15];
+
+  typedef long long llongArray[5];
+  typedef long long llongArray2[7][8];
+  typedef long long llongArray3[33][14][15];
+
+  typedef unsigned long long ullongArray[5];
+  typedef unsigned long long ullongArray2[7][8];
+  typedef unsigned long long ullongArray3[33][14][15];
+
+  typedef float floatArray[5];
+  typedef float floatArray2[7][8];
+  typedef float floatArray3[33][14][15];
+
+  typedef double doubleArray[5];
+  typedef double doubleArray2[7][8];
+  typedef double doubleArray3[33][14][15];
+
+  /// An interface for testing IDL primitive types
+  interface Hello
+  {
+    // Using typedef inside and outside of interface is part of this test.
+    typedef long double ldoubleArray[5];
+    typedef long double ldoubleArray2[7][8];
+    typedef long double ldoubleArray3[33][14][15];
+
+    /// Get and set a bool-Array
+    boolArray get_boolArray (in boolArray pin);
+    /// Transfer a bool-Array in and out
+    boolArray inout_boolArray (in boolArray pin, out boolArray pout, inout boolArray pinout);
+
+    /// Get and set a 2-dimensional bool-Array
+    boolArray2 get_boolArray2 (in boolArray2 pin);
+    /// Transfer a 2-dimensional bool-Array in and out
+    boolArray2 inout_boolArray2 (in boolArray2 pin, out boolArray2 pout, inout boolArray2 pinout);
+
+    /// Get and set a 3-dimensional bool-Array
+    boolArray3 get_boolArray3 (in boolArray3 pin);
+    /// Transfer a 3-dimensional bool-Array in and out
+    boolArray3 inout_boolArray3 (in boolArray3 pin, out boolArray3 pout, inout boolArray3 pinout);
+
+    /// Get and set a char-Array
+    charArray get_charArray (in charArray pin);
+    /// Transfer a char-Array in and out
+    charArray inout_charArray (in charArray pin, out charArray pout, inout charArray pinout);
+
+    /// Get and set a 2-dimensional char-Array
+    charArray2 get_charArray2 (in charArray2 pin);
+    /// Transfer a 2-dimensional char-Array in and out
+    charArray2 inout_charArray2 (in charArray2 pin, out charArray2 pout, inout charArray2 pinout);
+
+    /// Get and set a 3-dimensional char-Array
+    charArray3 get_charArray3 (in charArray3 pin);
+    /// Transfer a 3-dimensional char-Array in and out
+    charArray3 inout_charArray3 (in charArray3 pin, out charArray3 pout, inout charArray3 pinout);
+
+    /// Get and set a wchar-Array
+    wcharArray get_wcharArray (in wcharArray pin);
+    /// Transfer a wchar-Array in and out
+    wcharArray inout_wcharArray (in wcharArray pin, out wcharArray pout, inout wcharArray pinout);
+
+    /// Get and set a 2-dimensional wchar-Array
+    wcharArray2 get_wcharArray2 (in wcharArray2 pin);
+    /// Transfer a 2-dimensional wchar-Array in and out
+    wcharArray2 inout_wcharArray2 (in wcharArray2 pin, out wcharArray2 pout, inout wcharArray2 pinout);
+
+    /// Get and set a 3-dimensional wchar-Array
+    wcharArray3 get_wcharArray3 (in wcharArray3 pin);
+    /// Transfer a 3-dimensional wchar-Array in and out
+    wcharArray3 inout_wcharArray3 (in wcharArray3 pin, out wcharArray3 pout, inout wcharArray3 pinout);
+
+    /// Get and set a octet-Array
+    octetArray get_octetArray (in octetArray pin);
+    /// Transfer a octet-Array in and out
+    octetArray inout_octetArray (in octetArray pin, out octetArray pout, inout octetArray pinout);
+
+    /// Get and set a 2-dimensional octet-Array
+    octetArray2 get_octetArray2 (in octetArray2 pin);
+    /// Transfer a 2-dimensional octet-Array in and out
+    octetArray2 inout_octetArray2 (in octetArray2 pin, out octetArray2 pout, inout octetArray2 pinout);
+
+    /// Get and set a 3-dimensional octet-Array
+    octetArray3 get_octetArray3 (in octetArray3 pin);
+    /// Transfer a 3-dimensional octet-Array in and out
+    octetArray3 inout_octetArray3 (in octetArray3 pin, out octetArray3 pout, inout octetArray3 pinout);
+
+    /// Get and set a short-Array
+    shortArray get_shortArray (in shortArray pin);
+    /// Transfer a short-Array in and out
+    shortArray inout_shortArray (in shortArray pin, out shortArray pout, inout shortArray pinout);
+
+    /// Get and set a 2-dimensional short-Array
+    shortArray2 get_shortArray2 (in shortArray2 pin);
+    /// Transfer a 2-dimensional short-Array in and out
+    shortArray2 inout_shortArray2 (in shortArray2 pin, out shortArray2 pout, inout shortArray2 pinout);
+
+    /// Get and set a 3-dimensional short-Array
+    shortArray3 get_shortArray3 (in shortArray3 pin);
+    /// Transfer a 3-dimensional short-Array in and out
+    shortArray3 inout_shortArray3 (in shortArray3 pin, out shortArray3 pout, inout shortArray3 pinout);
+
+    /// Get and set a ushort-Array
+    ushortArray get_ushortArray (in ushortArray pin);
+    /// Transfer a ushort-Array in and out
+    ushortArray inout_ushortArray (in ushortArray pin, out ushortArray pout, inout ushortArray pinout);
+
+    /// Get and set a 2-dimensional ushort-Array
+    ushortArray2 get_ushortArray2 (in ushortArray2 pin);
+    /// Transfer a 2-dimensional ushort-Array in and out
+    ushortArray2 inout_ushortArray2 (in ushortArray2 pin, out ushortArray2 pout, inout ushortArray2 pinout);
+
+    /// Get and set a 3-dimensional ushort-Array
+    ushortArray3 get_ushortArray3 (in ushortArray3 pin);
+    /// Transfer a 3-dimensional ushort-Array in and out
+    ushortArray3 inout_ushortArray3 (in ushortArray3 pin, out ushortArray3 pout, inout ushortArray3 pinout);
+
+    /// Get and set a long-Array
+    longArray get_longArray (in longArray pin);
+    /// Transfer a long-Array in and out
+    longArray inout_longArray (in longArray pin, out longArray pout, inout longArray pinout);
+
+    /// Get and set a 2-dimensional long-Array
+    longArray2 get_longArray2 (in longArray2 pin);
+    /// Transfer a 2-dimensional long-Array in and out
+    longArray2 inout_longArray2 (in longArray2 pin, out longArray2 pout, inout longArray2 pinout);
+
+    /// Get and set a 3-dimensional long-Array
+    longArray3 get_longArray3 (in longArray3 pin);
+    /// Transfer a 3-dimensional long-Array in and out
+    longArray3 inout_longArray3 (in longArray3 pin, out longArray3 pout, inout longArray3 pinout);
+
+    /// Get and set a ulong-Array
+    ulongArray get_ulongArray (in ulongArray pin);
+    /// Transfer a ulong-Array in and out
+    ulongArray inout_ulongArray (in ulongArray pin, out ulongArray pout, inout ulongArray pinout);
+
+    /// Get and set a 2-dimensional ulong-Array
+    ulongArray2 get_ulongArray2 (in ulongArray2 pin);
+    /// Transfer a 2-dimensional ulong-Array in and out
+    ulongArray2 inout_ulongArray2 (in ulongArray2 pin, out ulongArray2 pout, inout ulongArray2 pinout);
+
+    /// Get and set a 3-dimensional ulong-Array
+    ulongArray3 get_ulongArray3 (in ulongArray3 pin);
+    /// Transfer a 3-dimensional ulong-Array in and out
+    ulongArray3 inout_ulongArray3 (in ulongArray3 pin, out ulongArray3 pout, inout ulongArray3 pinout);
+
+    /// Get and set a llong-Array
+    llongArray get_llongArray (in llongArray pin);
+    /// Transfer a llong-Array in and out
+    llongArray inout_llongArray (in llongArray pin, out llongArray pout, inout llongArray pinout);
+
+    /// Get and set a 2-dimensional llong-Array
+    llongArray2 get_llongArray2 (in llongArray2 pin);
+    /// Transfer a 2-dimensional llong-Array in and out
+    llongArray2 inout_llongArray2 (in llongArray2 pin, out llongArray2 pout, inout llongArray2 pinout);
+
+    /// Get and set a 3-dimensional llong-Array
+    llongArray3 get_llongArray3 (in llongArray3 pin);
+    /// Transfer a 3-dimensional llong-Array in and out
+    llongArray3 inout_llongArray3 (in llongArray3 pin, out llongArray3 pout, inout llongArray3 pinout);
+
+    /// Get and set a ullong-Array
+    ullongArray get_ullongArray (in ullongArray pin);
+    /// Transfer a ullong-Array in and out
+    ullongArray inout_ullongArray (in ullongArray pin, out ullongArray pout, inout ullongArray pinout);
+
+    /// Get and set a 2-dimensional ullong-Array
+    ullongArray2 get_ullongArray2 (in ullongArray2 pin);
+    /// Transfer a 2-dimensional ullong-Array in and out
+    ullongArray2 inout_ullongArray2 (in ullongArray2 pin, out ullongArray2 pout, inout ullongArray2 pinout);
+
+    /// Get and set a 3-dimensional ullong-Array
+    ullongArray3 get_ullongArray3 (in ullongArray3 pin);
+    /// Transfer a 3-dimensional ullong-Array in and out
+    ullongArray3 inout_ullongArray3 (in ullongArray3 pin, out ullongArray3 pout, inout ullongArray3 pinout);
+
+    /// Get and set a float-Array
+    floatArray get_floatArray (in floatArray pin);
+    /// Transfer a float-Array in and out
+    floatArray inout_floatArray (in floatArray pin, out floatArray pout, inout floatArray pinout);
+
+    /// Get and set a 2-dimensional float-Array
+    floatArray2 get_floatArray2 (in floatArray2 pin);
+    /// Transfer a 2-dimensional float-Array in and out
+    floatArray2 inout_floatArray2 (in floatArray2 pin, out floatArray2 pout, inout floatArray2 pinout);
+
+    /// Get and set a 3-dimensional float-Array
+    floatArray3 get_floatArray3 (in floatArray3 pin);
+    /// Transfer a 3-dimensional float-Array in and out
+    floatArray3 inout_floatArray3 (in floatArray3 pin, out floatArray3 pout, inout floatArray3 pinout);
+
+    /// Get and set a double-Array
+    doubleArray get_doubleArray (in doubleArray pin);
+    /// Transfer a double-Array in and out
+    doubleArray inout_doubleArray (in doubleArray pin, out doubleArray pout, inout doubleArray pinout);
+
+    /// Get and set a 2-dimensional double-Array
+    doubleArray2 get_doubleArray2 (in doubleArray2 pin);
+    /// Transfer a 2-dimensional double-Array in and out
+    doubleArray2 inout_doubleArray2 (in doubleArray2 pin, out doubleArray2 pout, inout doubleArray2 pinout);
+
+    /// Get and set a 3-dimensional double-Array
+    doubleArray3 get_doubleArray3 (in doubleArray3 pin);
+    /// Transfer a 3-dimensional double-Array in and out
+    doubleArray3 inout_doubleArray3 (in doubleArray3 pin, out doubleArray3 pout, inout doubleArray3 pinout);
+
+    /// Get and set a long double-Array
+    ldoubleArray get_ldoubleArray (in ldoubleArray pin);
+    /// Transfer a long double-Array in and out
+    ldoubleArray inout_ldoubleArray (in ldoubleArray pin, out ldoubleArray pout, inout ldoubleArray pinout);
+
+    /// Get and set a 2-dimensional long double-Array
+    ldoubleArray2 get_ldoubleArray2 (in ldoubleArray2 pin);
+    /// Transfer a 2-dimensional long double-Array in and out
+    ldoubleArray2 inout_ldoubleArray2 (in ldoubleArray2 pin, out ldoubleArray2 pout, inout ldoubleArray2 pinout);
+
+    /// Get and set a 3-dimensional long double-Array
+    ldoubleArray3 get_ldoubleArray3 (in ldoubleArray3 pin);
+    /// Transfer a 3-dimensional long double-Array in and out
+    ldoubleArray3 inout_ldoubleArray3 (in ldoubleArray3 pin, out ldoubleArray3 pout, inout ldoubleArray3 pinout);
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};

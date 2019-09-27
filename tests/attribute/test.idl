@@ -1,0 +1,75 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  enum enumType
+  {
+    a, b, c
+  };
+
+  typedef float arrayType[5];
+
+  typedef sequence<float> sequenceType;
+
+  struct structType
+  {
+    char c;
+    short si;
+    wstring ws;
+  };
+
+  union unionType switch(char)
+  {
+    case 'L': long longData;
+    case 'Z': wchar wchar_tData;
+    case 'H': boolean boolData;
+    case 'W': double doubleData;
+    case 's': string stringData;
+    case 'w': wstring wstringData;
+  };
+
+  /// An interface for testing IDL primitive types
+  interface Hello
+  {
+    /// Special basic type attributes
+    readonly attribute char at_char_ro;
+    attribute char at_char;
+    attribute wchar at_wchar_t;
+    attribute octet at_uint8_t;
+    attribute boolean at_bool;
+    attribute string at_string;
+    attribute wstring at_wstring;
+
+    /// Basic type attributes
+    attribute short at_int16_t;
+    attribute unsigned short at_uint16_t;
+    attribute long at_int32_t;
+    attribute unsigned long at_uint32_t;
+    attribute long long at_int64_t;
+    attribute unsigned long long at_uint64_t;
+    attribute float at_float;
+    attribute double at_double;
+    attribute long double at_ldouble;
+
+    /// Complex type attributes
+    attribute enumType at_enum;
+    attribute arrayType at_array;
+    attribute sequenceType at_sequence;
+    attribute structType at_struct;
+    attribute unionType at_union;
+
+    /// Using c++11 keyword for attribute name
+    attribute char do;
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};

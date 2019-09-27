@@ -1,0 +1,47 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+#include "orb.idl"
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  typedef wstring<5> bounded_bar;
+
+  /// A wstring interface
+  interface Hello
+  {
+    /// Get and set a wstring
+    wstring getset_string (in wstring text);
+    /// Out a wstring
+    void out_string (out wstring text);
+    /// InOut a wstring
+    void inout_string (inout wstring text);
+
+    /// Get and set a large wstring
+    wstring getset_lstring (in wstring text);
+    /// Out a large wstring
+    void out_lstring (out wstring text);
+    /// InOut a large wstring
+    void inout_lstring (inout wstring text);
+
+    /// Get and set a string-sequence
+    CORBA::WStringSeq getset_stringSeq (in CORBA::WStringSeq seq);
+    /// Out a string-sequence
+    void out_stringSeq (out CORBA::WStringSeq seq);
+    /// InOut a string-sequence
+    void inout_stringSeq (inout CORBA::WStringSeq seq);
+
+    /// Testing BAD_PARAM
+    void bounded_string (in bounded_bar text);
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};

@@ -1,0 +1,49 @@
+
+// generated from <%= ridl_template_path %>
+// Unaliased type : <%= resolved_cxxtype %>
+% alias_md5 =  resolved_cxxtype.to_md5
+// MD5            : <%= alias_md5 %>
+#if !defined (_ALIAS_<%= alias_md5 %>_ARG_TRAITS_)
+#define _ALIAS_<%= alias_md5 %>_ARG_TRAITS_
+namespace TAOX11_NAMESPACE
+{
+  /// Argument traits specializations for <%= name %>
+  template<>
+  class Arg_Traits< <%= scoped_cxxtype %>>
+    : public Basic_Arg_Traits_T<
+        <%= scoped_cxxtype %>,
+% if generate_any_support?
+%   if generate_anyinsert_adapter?
+        Any_Insert_Policy_AnyInsert_Adapter>
+%   else
+        Any_Insert_Policy_Stream>
+%   end
+% else
+        Any_Insert_Policy_Noop>
+% end
+  {
+  };
+} // namespace TAOX11_NAMESPACE
+
+TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+
+#define _ALIAS_<%= scoped_cxxname.scope_to_cxxname %>_CDR_OPS_IMPL_
+
+// CDR streaming methods for <%= scoped_cxxname %>
+<%= stub_export_macro %>bool _cdr_in_<%= scoped_cxxname.scope_to_cxxname %> (TAO_OutputCDR &, const IDL::traits< <%= scoped_cxxtype %>>::value_type&);
+<%= stub_export_macro %>bool _cdr_out_<%= scoped_cxxname.scope_to_cxxname %> (TAO_InputCDR &, IDL::traits< <%= scoped_cxxtype %>>::value_type&);
+
+/// @name CDR streaming operator specializations for <%= scoped_cxxname %>
+//@{
+inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR &cdr, const IDL::traits< <%= scoped_cxxtype %>>::value_type &v)
+{
+  return _cdr_in_<%= scoped_cxxname.scope_to_cxxname %> (cdr, v);
+}
+inline TAO_CORBA::Boolean operator>> (TAO_InputCDR &cdr, IDL::traits< <%= scoped_cxxtype %>>::value_type& v)
+{
+  return _cdr_out_<%= scoped_cxxname.scope_to_cxxname %> (cdr, v);
+}
+//@}
+
+TAO_END_VERSIONED_NAMESPACE_DECL
+# endif // !_ALIAS_<%= alias_md5 %>_ARG_TRAITS_

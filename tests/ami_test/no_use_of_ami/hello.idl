@@ -1,0 +1,18 @@
+/**
+ * @file    hello.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module Test
+  {
+    interface B
+      {
+        long op_B (in long in_l);
+        /// A method to shutdown the ORB
+        /// This method is used to simplify the test shutdown process
+        oneway void shutdown ();
+      };
+  };

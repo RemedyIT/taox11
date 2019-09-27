@@ -1,0 +1,23 @@
+A demo of the AMI callback model.
+
+Description:
+
+This is a simple demo of the AMI callback model implemented with TAOX11.
+The client in this test invokes both asynchronous as synchronous calls.
+
+Some more information about this example, can be found here:
+$TAOX11_ROOT/docs/ami/index.html
+
+How to run:
+
+You can use the run_test.pl script to run it.
+
+Notes:
+
+ -For use of asynchronus invocations with TAOX11, you have to annotate
+  this in the idl-file with #pragma corba_ami <interface> or with an
+  annotation //@CORBA (ami=true) before the interface declaration .
+
+ -Use the switch -GC on the ridl compiler to generate AMI support.
+
+ -Make use of amic_traits

@@ -1,0 +1,20 @@
+
+// generated from <%= ridl_template_path %>
+% _vt_fwd_incl_guard_ = scoped_cxxname.to_include_guard
+#if !defined (_VALUETYPE_<%= _vt_fwd_incl_guard_ %>_FWD_)
+#define _VALUETYPE_<%= _vt_fwd_incl_guard_ %>_FWD_
+
+class <%= stub_export_macro %><%= cxxname %>;
+% unless is_abstract?
+namespace obv
+{
+  class <%= stub_export_macro %><%= obv_cxxname %>;
+} // namespace obv
+%   if has_factory?
+class <%= stub_export_macro %><%= factory_cxxname %>;
+%   end
+% end
+
+#endif // !_VALUETYPE_<%= _vt_fwd_incl_guard_ %>_FWD_
+%#
+% visit_template('typecode') if generate_typecode_support?

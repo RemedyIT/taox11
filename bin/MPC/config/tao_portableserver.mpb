@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project : core_anytypecode {
+  after   += PortableServer
+  libs    += TAO_PortableServer
+}

@@ -1,0 +1,32 @@
+// -*- MPC -*-
+
+project(*Locator_idl): ridl_ostream_defaults {
+  idlflags += -Sp
+  IDL_Files {
+    simple_test.idl
+  }
+  custom_only = 1
+}
+
+project(*Locator_Server): taox11_server, taox11_ior_table {
+  after += *Locator_idl
+  Source_Files {
+    simple_test_i.cpp
+    server.cpp
+  }
+  Source_Files {
+    simple_testS.cpp
+    simple_testC.cpp
+  }
+}
+
+project(*Locator_Client): taox11_client {
+  after += *Locator_idl
+  exename = client
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    simple_testC.cpp
+  }
+}

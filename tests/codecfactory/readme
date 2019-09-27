@@ -1,0 +1,34 @@
+
+This test verifies that CodecFactory and CDR encapsulation Codec
+support is working properly.
+
+It does so by encoding a structure into an octet sequence, decoding
+into a new instance of the structure from the octet sequence, and then
+comparing the contents of the two structures. The encoded and decoded
+structures are dumped to cout.
+
+It also checks whether the following exceptions are thrown in predefined cases:
+
+CodecFactory:
+- create_codec
+  - UnknownEncoding
+- create_codec_with_codesets
+  - UnknownEncoding
+  - UnsupportedCodeset
+
+Codec:
+- encode
+  - InvalidTypeForEncoding
+- decode
+  - FormatMismatch
+- encode_value
+  - InvalidTypeForEncoding
+- decode_value
+  - FormatMismatch
+  - TypeMismatch
+
+
+Run the test as follows:
+
+$ perl run_test.pl
+

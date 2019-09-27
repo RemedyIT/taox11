@@ -1,0 +1,18 @@
+/**
+ * @file    treenode.idl
+ * @author  Marcel Smit
+ *
+ * @brief   Testing forward declarations of valuetypes
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+#include "treebase.idl"
+
+//
+// A concrete node type
+//
+valuetype StringNode : BaseNode
+{
+  public string name;
+};

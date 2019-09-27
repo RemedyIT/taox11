@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project : taolib, tao_codecfactory, interceptors {
+  after   += PI
+  libs    += TAO_PI
+}

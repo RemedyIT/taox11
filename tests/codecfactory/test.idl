@@ -1,0 +1,26 @@
+/**
+ * @file    test.idl
+ * @author  Marcel Smit
+ *
+ * @brief   CORBA C++11 Codec Test
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module Test
+{
+  struct Bar
+  {
+    long A;
+    long B;
+    unsigned long long C;
+    string D;
+    wstring E;
+  };
+
+  struct Foo
+  {
+    wstring F;
+  };
+};

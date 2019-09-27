@@ -1,0 +1,38 @@
+// -*- MPC -*-
+
+project(*idl): ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*Server): taox11_server, taox11_messaging {
+  after += *idl
+  Source_Files {
+    oneway_receiver.cpp
+    shutdown_helper.cpp
+    server.cpp
+  }
+  Header_Files {
+    oneway_receiver.h
+    shutdown_helper.h
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*Client): taox11_server, taox11_messaging {
+  exename = client
+  after += *idl
+  Source_Files {
+    client.cpp
+  }
+  Header_Files {
+  }
+  Source_Files {
+    testC.cpp
+  }
+}

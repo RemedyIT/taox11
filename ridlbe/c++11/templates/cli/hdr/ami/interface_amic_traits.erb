@@ -1,0 +1,33 @@
+
+// generated from <%= ridl_template_path %>
+namespace IDL
+{
+  template <typename OStrm_>
+  struct formatter< <%= amic_scoped_cxxtype %>, OStrm_>
+  {
+    inline OStrm_& operator ()(
+        OStrm_& os_,
+        <%= amic_scoped_cxx_in_type %> val_)
+    {
+      os_ << IDL::traits<TAOX11_CORBA::Object>::_dump (std::move (val_), "<%= formatted_cxxname %>", true);
+      return os_;
+    }
+  };
+
+  template <typename OStrm_, typename Fmt>
+  inline OStrm_& operator <<(
+      OStrm_& os,
+      TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::__Writer<Fmt> w)
+  {
+    typedef TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::__Writer<Fmt> writer_t;
+    typedef typename std::conditional<
+                        std::is_same<
+                          typename writer_t::formatter_t,
+                          std::false_type>::value,
+                        IDL::formatter< <%= amic_scoped_cxxtype %>, OStrm_>,
+                        typename writer_t::formatter_t>::type formatter_t;
+    return TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::write_on (
+        os, w.val_,
+        formatter_t ());
+  }
+} // namespace IDL

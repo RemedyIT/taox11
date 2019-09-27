@@ -1,0 +1,31 @@
+// -*- MPC -*-
+
+project(*array_gen_Idl): ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*array_Server): taox11_server {
+  after += *array_gen_Idl
+  Source_Files {
+    foo.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*array_Client): taox11_client {
+  after += *array_gen_Idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}
+

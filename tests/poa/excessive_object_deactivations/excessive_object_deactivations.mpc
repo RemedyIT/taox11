@@ -1,0 +1,21 @@
+// -*- MPC -*-
+project(*idl): ridl_ostream_defaults  {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project: taox11_server, avoids_corba_e_micro {
+  exename = excessive_object_deactivations
+
+  after +=*idl
+
+  Source_Files {
+    excessive_object_deactivations.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}

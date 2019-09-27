@@ -1,0 +1,35 @@
+/**
+ * @file    ami_test.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+#pragma corba_ami "A::AmiMyFoo"
+
+module A
+  {
+    interface AmiMyFoo
+      {
+        long amifoo (in long in_l);
+
+        attribute long my_amifoo_attrib;
+      };
+
+    interface MyFoo
+       {
+         long foo (in long in_l);
+
+         attribute long my_foo_attrib;
+       };
+
+    interface Hello
+      {
+        AmiMyFoo get_iAmiMyFoo();
+        MyFoo get_iMyFoo ();
+
+        /// A method to shutdown the ORB
+        /// This method is used to simplify the test shutdown process
+        oneway void shutdown ();
+      };
+  };

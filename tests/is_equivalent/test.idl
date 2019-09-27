@@ -1,0 +1,43 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  interface Hello;
+  interface Hello_Factory;
+
+  interface Hello_Factory
+  {
+    Hello get_hello ();
+
+    void get_hello_2(out Hello hello_obj);
+
+    boolean equivalent (in Hello_Factory f);
+  };
+
+  /// A very simple interface
+  interface Hello
+  {
+    /// Return a simple string
+    string get_string ();
+
+    /// Return the factory for Hello
+    Hello_Factory get_factory ();
+
+    boolean equivalent_factory (in Hello_Factory f);
+
+    boolean equivalent_hello (in Hello h);
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+};

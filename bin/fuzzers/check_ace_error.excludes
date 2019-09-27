@@ -1,0 +1,4 @@
+taox11\/lichk\/.*
+taox11\/util\/md5\.cpp
+.*(C|S|P|SP)\.(h|inl|cpp)
+taox11\/tests\/.*\/tao\/.*

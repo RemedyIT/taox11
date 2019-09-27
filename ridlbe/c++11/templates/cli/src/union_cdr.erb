@@ -1,0 +1,175 @@
+
+// generated from <%= ridl_template_path %>
+TAO_CORBA::Boolean operator<< (
+    TAO_OutputCDR &strm,
+    const <%= scoped_cxxname %> &_tao_union)
+{
+  if ( !(strm << <%= switchtype.cdr_from_fmt % "_tao_union._d ()" %>) )
+  {
+    return false;
+  }
+
+  bool result = true;
+% if switchtype_boolean?
+%   _defmem = default_member
+%   _ndefmem = non_default_members
+%   if (_defmem && _ndefmem.empty?) || (!_ndefmem.empty? && _ndefmem.first.labels.size>1)
+%     # in these cases there is only a single member mapping all labels
+%     _m = _defmem || _ndefmem.shift
+  result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
+%   else
+%     # here we have 1 or 2 nondef members with or without a default
+%     _m = _ndefmem.shift # get first non-default member
+%     _lbl = _m.labels.first
+  if (<%= _lbl == 'false' ? '!' : '' %>_tao_union._d ())
+  {
+    result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
+  }
+%     if _defmem || !_ndefmem.empty?
+  else
+  {
+%     _m = _defmem || _ndefmem.shift # get other (non-)default member
+    result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
+  }
+%     end
+%   end
+% else
+  switch (_tao_union._d ())
+  {
+%   members.each do |_m|
+%     unless _m.is_default?
+%       _m.nondefault_labels.each do |_lbl|
+    case <%= _lbl %>:
+%       end
+    {
+      result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
+    }
+    break;
+%     end
+%   end
+%   if needs_switch_default?
+    default:
+%     if has_default?
+%       _m_def = default_member
+    {
+      result = strm << <%= _m_def.cdr_from_fmt % "_tao_union.#{_m_def.cxxname} ()" %>;
+    }
+%     end
+    break;
+%   end
+  }
+% end
+  return result;
+}
+
+TAO_CORBA::Boolean operator>> (
+    TAO_InputCDR &strm,
+    <%= scoped_cxxname %> &_tao_union)
+{
+  <%= scoped_switch_cxxtype %> _tao_discriminant;
+  if ( !(strm >> <%= switchtype.cdr_to_fmt % "_tao_discriminant" %>) )
+  {
+    return false;
+  }
+
+% if switchtype_boolean?
+%   _defmem = default_member
+%   _ndefmem = non_default_members
+%   if (_defmem && _ndefmem.empty?) || (!_ndefmem.empty? && _ndefmem.first.labels.size>1)
+%     # in these cases there is only a single member mapping all labels
+%     _m = _defmem || _ndefmem.shift
+  // initialize associated default value
+  <%= _m.cxx_member_type %> temp_val<% if _m.is_pod? %> {}<% end %>;
+  // extract
+  if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
+  {
+    // set union member and associated (default) discriminant
+    _tao_union.<%= _m.cxxname %> (temp_val);
+    // set extracted discriminant
+    _tao_union._d (_tao_discriminant);
+    return true;
+  }
+%   else
+%     # here we have 1 or 2 nondef members with or without a default
+%     _m = _ndefmem.shift # get first non-default member
+%     _lbl = _m.labels.first
+  if (<%= _lbl == 'false' ? '!' : '' %>_tao_discriminant)
+  {
+    // initialize associated default value
+    <%= _m.cxx_member_type %> temp_val<% if _m.is_pod? %> {}<% end %>;
+    // extract
+    if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
+    {
+      // set union member and associated (default) discriminant
+      _tao_union.<%= _m.cxxname %> (temp_val);
+      // set extracted discriminant
+      _tao_union._d (_tao_discriminant);
+      return true;
+    }
+  }
+%     if _defmem || !_ndefmem.empty?
+  else
+  {
+%     _m = _defmem || _ndefmem.shift # get other (non-)default member
+    // initialize associated default value
+    <%= _m.cxx_member_type %> temp_val<% if _m.is_pod? %> {}<% end %>;
+    // extract
+    if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
+    {
+      // set union member and associated (default) discriminant
+      _tao_union.<%= _m.cxxname %> (temp_val);
+      // set extracted discriminant
+      _tao_union._d (_tao_discriminant);
+      return true;
+    }
+  }
+%     end
+%   end
+% else
+  switch (_tao_discriminant)
+  {
+% members.each do |_m|
+%   unless _m.is_default?
+%     _m.nondefault_labels.each do |_lbl|
+    case <%= _lbl %>:
+%     end
+    {
+      // initialize associated default value
+      <%= _m.cxx_member_type %> temp_val<% if _m.is_pod? %> {}<% end %>;
+      // extract
+      if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
+      {
+        // set union member and associated (default) discriminant
+        _tao_union.<%= _m.cxxname %> (temp_val);
+        // set extracted discriminant
+        _tao_union._d (_tao_discriminant);
+        return true;
+      }
+    }
+    break;
+%   end
+% end
+% if needs_switch_default?
+    default:
+%   if has_default?
+%     _m_def = default_member
+    {
+      // initialize associated default value
+      <%= _m_def.cxx_member_type %> temp_val<% if _m_def.is_pod? %> {}<% end %>;
+      // extract
+      if (strm >> <%= _m_def.cdr_to_fmt % "temp_val" %>)
+      {
+        // set union member and associated (default) discriminant
+        _tao_union.<%= _m_def.cxxname %> (temp_val);
+        // set extracted discriminant
+        _tao_union._d (_tao_discriminant);
+        return true;
+      }
+    }
+%   end
+    break;
+% end
+  }
+% end
+  return false;
+}

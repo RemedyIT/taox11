@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project : taox11_portableserver, taox11_ifr_client, taox11_avoids_corba_e, avoids_minimum_corba {
+  libs  += taox11_ifr_client_skel
+  after += taox11_ifr_client_skel
+}

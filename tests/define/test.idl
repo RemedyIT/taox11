@@ -1,0 +1,16 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+// Use a check here, if correct, nothing should be generated
+#if !defined (TAOX11_A) && !defined (TAOX11_B) && !defined (TAOX11_C)
+interface Hello
+{
+  /// Return a simple string
+  string get_string ();
+};
+#endif

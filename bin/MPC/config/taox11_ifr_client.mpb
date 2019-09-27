@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project : taox11_lib, taox11_anytypecode, taox11_avoids_corba_e, avoids_minimum_corba {
+  libs    += taox11_ifr_client_stub
+  after   += taox11_ifr_client_stub
+}

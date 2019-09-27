@@ -1,0 +1,168 @@
+
+// generated from <%= ridl_template_path %>
+% unless is_inherited?
+void <%= interface.scoped_srvproxy_cxxname %>::<%= name %>_skel (
+  TAO_ServerRequest & server_request,
+  TAO_TAO::Portable_Server::Servant_Upcall * TAO_INTERCEPTOR (servant_upcall),
+  <%= interface.scoped_srvproxy_cxxname %>::skel_type & servant)
+{
+%   if has_raises? &&  generate_typecode_support?
+#if TAO_HAS_INTERCEPTORS == 1
+  static TAO_CORBA::TypeCode_ptr const exceptions[] =
+  {
+% first_raise = true
+%   raises.each do |_ex|
+    <%= first_raise ? '':','  %>TC_helper::get_tao_tc(::<%= _ex.scoped_cxx_typecode %>)
+% first_raise = false
+%    end
+  };
+#endif /* TAO_HAS_INTERCEPTORS */
+
+% end
+  PS::SArg_Traits<void>::ret_val retval;
+% nr_arguments = 1
+% unless is_oneway? || is_void?
+  PS::SArg_Traits< <%= scoped_cxx_arg_type %>>::in_arg_val _taox11_ami_return_val;
+% nr_arguments += 1
+% end
+%    arguments.each do |_arg|
+%       case _arg.direction
+%       when :out
+  PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %>;
+% nr_arguments += 1
+%       when :inout
+  PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %>;
+% nr_arguments += 1
+%       end
+%     end
+
+  TAO_TAO::Argument * const args[] =
+  {
+    std::addressof(retval)
+% unless is_oneway? || is_void?
+    , std::addressof(_taox11_ami_return_val)
+% end
+%     arguments.each do |_arg|
+%       unless _arg.direction == :in
+    , std::addressof(_taox11_<%= _arg.cxxname %>)
+%       end
+%     end
+  };
+
+  TAOX11_NAMESPACE::Upcall_Command command (
+    [&]() {
+% _ix = 0
+%   unless is_oneway? || is_void?
+      PS::SArg_Traits< <%= scoped_cxx_arg_type %>>::in_arg_type retval =
+% _ix = _ix + 1
+        std::move (PS::get_in_arg< <%= scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>));
+%   end
+%   arguments.each do |_arg|
+%       case _arg.direction
+%       when :out  #out become in
+% _ix = _ix + 1
+      PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_type <%= _arg.cxxname %> =
+        std::move (PS::get_in_arg< <%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>));
+%       when :inout #inout become in
+% _ix = _ix + 1
+      PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_type <%= _arg.cxxname %> =
+        std::move (PS::get_in_arg< <%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>));
+%       end
+%   end
+% _op_start = "servant.#{cxxname} ("
+% _args2 = arguments.dup
+% if is_void?
+%     _arg2_string = ""
+%     _arg_string_empty = 1
+% else
+%     _arg2_string = "retval"
+%     _arg_string_empty = 0
+% end
+% while !_args2.empty?
+%   _arg = _args2.shift
+%   if (_arg.direction == :out) || (_arg.direction == :inout)
+%     if _arg_string_empty == 1
+%      end_line = ""
+%     else
+%       end_line = ",\n"
+%       end_line << (' ' * _op_start.size)
+%     end
+%     _arg2_string << end_line
+%     _arg2_string << "#{_arg.cxxname}"
+%     _arg_string_empty = 0
+%   end
+% end
+      <%= _op_start %><%= _arg2_string %>);
+    } );
+
+  TAO_TAO::Upcall_Wrapper upcall_wrapper;
+  upcall_wrapper.upcall (server_request
+                         , args
+                         , <%= nr_arguments %> // Number of arguments in the args array
+                         , command
+#if TAO_HAS_INTERCEPTORS == 1
+                         , servant_upcall
+%   if has_raises? &&  generate_typecode_support?
+                         , exceptions
+                         , <%= raises.size %>
+%   else
+                         , nullptr // No user exceptions declared
+                         , 0
+%   end
+#endif  /* TAO_HAS_INTERCEPTORS == 1 */
+                         );
+}
+
+%# exception variant of operation
+void <%= interface.scoped_srvproxy_cxxname %>::<%= name %>_excep_skel (
+  TAO_ServerRequest & server_request,
+  TAO_TAO::Portable_Server::Servant_Upcall * TAO_INTERCEPTOR (servant_upcall),
+  <%= interface.scoped_srvproxy_cxxname %>::skel_type & servant)
+{
+%   if has_raises? &&  generate_typecode_support?
+#if TAO_HAS_INTERCEPTORS == 1
+  static TAO_CORBA::TypeCode_ptr const exceptions[] =
+  {
+% first_raise = true
+%   raises.each do |_ex|
+    <%= first_raise ? '':','  %>TC_helper::get_tao_tc(::<%= _ex.scoped_cxx_typecode %>)
+% first_raise = false
+%    end
+  };
+#endif /* TAO_HAS_INTERCEPTORS */
+
+% end
+  PS::SArg_Traits< void >::ret_val retval;
+  PS::SArg_Traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder >::in_arg_val _tao_excep_holder;
+
+  TAO_TAO::Argument * const args[] =
+  {
+    std::addressof(retval),
+    std::addressof(_tao_excep_holder)
+  };
+
+  TAOX11_NAMESPACE::Upcall_Command command (
+    [&]() {
+      PS::SArg_Traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder >::in_arg_type arg_1 =
+        std::move (PS::get_in_arg< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder > (server_request.operation_details (), args, 1));
+      servant.<%= cxxname %>_excep (arg_1);
+    } );
+
+  TAO_TAO::Upcall_Wrapper upcall_wrapper;
+  upcall_wrapper.upcall (server_request
+                         , args
+                         , 2
+                         , command
+#if TAO_HAS_INTERCEPTORS == 1
+                         , servant_upcall
+%   if has_raises? &&  generate_typecode_support?
+                         , exceptions
+                         , <%= raises.size %>
+%   else
+                         , nullptr // No user exceptions declared
+                         , 0
+%   end
+#endif  /* TAO_HAS_INTERCEPTORS == 1 */
+                         );
+}
+% end #unless inherited

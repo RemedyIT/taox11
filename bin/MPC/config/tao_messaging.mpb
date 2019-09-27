@@ -1,0 +1,5 @@
+// -*- MPC -*-
+
+project : tao_valuetype, tao_portableserver, tao_pi, corba_messaging, tao_messaging_optional {
+  after    += Messaging
+}

@@ -1,0 +1,32 @@
+// -*- MPC -*-
+
+project(*ior_table_idl): ridl_ostream_defaults {
+  idlflags += -Sp
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*ior_table_server): taox11_server, taox11_ior_table {
+  after += *ior_table_idl
+  Source_Files {
+    hello.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*ior_table_client): taox11_client {
+  after += *ior_table_idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}
+

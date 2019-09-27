@@ -1,0 +1,17 @@
+
+// generated from <%= ridl_template_path %>
+
+namespace _impl {
+
+% write_regen_section("#{scoped_cxxname}"+'[Constructors]', indent: 1) do
+  // your constructor(s)
+  <%= skel_cxxname %>::<%= skel_cxxname %> ()
+    : CORBA::servant_traits< <%= scoped_cxxtype %>>::base_type ()
+  {
+  }
+% end
+
+  <%= skel_cxxname %>::~<%= skel_cxxname %> ()
+  {
+% nest(2) { write_regen_section("#{scoped_cxxname}"+'[Dtor Body]', default_content: '// your destructor body') }
+  }

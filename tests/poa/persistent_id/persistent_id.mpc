@@ -1,0 +1,27 @@
+// -*- MPC -*-
+
+project(POA_IDL*): ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(POA_server*): taox11_server, avoids_corba_e_micro {
+  after += POA_IDL*
+  Source_Files {
+    testC.cpp
+    testS.cpp
+    server.cpp
+  }
+}
+
+project(POA_client*): taox11_client {
+  exename = client
+  after += POA_IDL*
+  after += POA_server*
+  Source_Files {
+    testC.cpp
+    client.cpp
+  }
+}

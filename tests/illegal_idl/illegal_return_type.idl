@@ -1,0 +1,25 @@
+/**
+ * @file    illegal_return_type.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module Test
+{
+  typedef sequence<char> mycharSeq;
+
+  /// A dummy  interface for testing IDL compiler
+  interface Hello
+  {
+    /// Get and set a char-sequence
+    mycharSeq get_charSeq (in mycharSeq seq);
+
+    // Illegal IDL construct:
+    sequence<char> get_charSeq2 ();
+
+    // A method to shutdown the ORB
+    oneway void shutdown ();
+  };
+};

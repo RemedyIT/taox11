@@ -1,0 +1,31 @@
+/**
+ * @file    diamond.idl
+ * @author  Marcel Smit
+ *
+ * @brief   CORBA C++11 Collocation Test
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+module Diamond
+{
+  interface Top
+    {
+      string shape ();
+    };
+
+  interface Left : Top
+    {
+      string color ();
+    };
+
+  interface Right : Top
+    {
+      long width ();
+    };
+
+  interface Bottom : Left, Right
+    {
+      string name ();
+    };
+};

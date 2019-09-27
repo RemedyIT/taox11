@@ -1,0 +1,71 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+struct V
+{
+  octet   o;
+};
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  enum EEnum
+  {
+    A,
+    B,
+    C
+  };
+  struct Simple
+  {
+    octet   o;
+    long    l;
+    string  s;
+    double  d;
+    boolean b;
+    wchar    c;
+    EEnum   e;
+  };
+  struct SS
+  {
+    long len;
+  };
+  struct AllBasicTypes
+  {
+    short a;
+    long b;
+    long long c;
+    unsigned short d;
+    unsigned long e;
+    unsigned long long f;
+    float g;
+    double h;
+    long double i;
+    char j;
+    wchar k;
+    boolean l;
+    octet m;
+  };
+
+  /// A very simple interface
+  interface Foo
+  {
+    boolean pass_struct (in Simple s);
+
+    Simple return_struct ();
+
+    boolean get_struct (out Simple s);
+
+    boolean update_struct (inout Simple s);
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+};

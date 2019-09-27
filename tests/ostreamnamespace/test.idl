@@ -1,0 +1,49 @@
+/**
+ * @file    test.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+// test ostream operators Any in wrong namespace.
+// Use global namespace for Reason, build test with taox11_anytypecode
+// and idl flag --namespace TAOX11_NAMESPACE
+  enum Reason
+  {
+    one,
+    two,
+    three
+  };
+
+  exception ReasonEx
+  {
+     Reason why;
+     boolean reason_bool;
+  };
+
+
+module Test
+{
+  exception FooEx
+  {
+    string message;
+  };
+
+  /// A very simple interface
+  interface Foo
+  {
+    void do_it () raises (FooEx);
+
+    void do_reason () raises (ReasonEx);
+
+    boolean pass_data (in any s);
+
+    /* This method is used to simplify the test shutdown process
+    */
+    oneway void shutdown ();
+  };
+};
+
+
+
+

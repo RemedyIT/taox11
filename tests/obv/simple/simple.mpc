@@ -1,0 +1,37 @@
+// -*- MPC -*-
+
+project(*_gen_Idl): ridl_ostream_defaults {
+  IDL_Files {
+    simple.idl
+    base.idl
+  }
+  custom_only = 1
+}
+
+project(*_Client): taox11_client, taox11_valuetype {
+  after += *_gen_Idl
+  Source_Files {
+    simple_impl.cpp
+    client.cpp
+  }
+  Source_Files {
+    simpleC.cpp
+    baseC.cpp
+  }
+}
+
+project(*_Server): taox11_server, taox11_valuetype {
+  after += *_gen_Idl
+  Source_Files {
+    simple_impl.cpp
+    client_i.cpp
+    server.cpp
+  }
+  Source_Files {
+    simpleC.cpp
+    baseC.cpp
+    simpleS.cpp
+    baseS.cpp
+  }
+}
+

@@ -1,0 +1,42 @@
+
+// generated from <%= ridl_template_path %>
+namespace _impl
+{
+  class <%= implementation_export_macro %><%= skel_cxxname %>
+    : public CORBA::servant_traits< <%= scoped_cxxtype %>>::base_type
+% nest { write_regen_section("#{scoped_cxxname}"+'[Base List]', default_content: '// your base classes') }
+  {
+  protected:
+% nest(2) { write_regen_section("#{scoped_cxxname}"+'[Constructors]', default_content: ['/// Constructor(s)', "#{skel_cxxname} ();"]) }
+
+    /// Destructor
+    virtual ~<%= skel_cxxname %> ();
+
+    template <typename T> friend class CORBA::servant_reference;
+
+    template <typename _Tp1, typename, typename ...Args>
+    friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+
+% nest(2) { write_regen_section("#{scoped_cxxname}"+'[User Protected]', default_content: '// your protected definitions') }
+  public:
+%   if has_abstract_base?
+%     unless abstractbase_operations.empty?
+
+    /** @name Inherited abstract interface operations */
+    //@{
+%       abstractbase_operations.each do |_op|
+%         nest(2) { _op.visit_operation }
+%       end
+    //@}
+%     end
+%     unless abstractbase_attributes.empty?
+
+    /** @name Inherited abstract interface attributes */
+    //@{
+%       abstractbase_attributes.each do |_att|
+%         nest(2) { _att.visit_attribute }
+%       end
+    //@}
+%     end
+%   end
+% inc_nest

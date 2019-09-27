@@ -1,0 +1,7 @@
+// -*- MPC -*-
+
+project : taox11_lib, taox11_ifr_client, typecodefactory, taox11_avoids_corba_e, avoids_minimum_corba {
+  after += taox11_typecodefactory
+  libs += taox11_typecodefactory
+
+}

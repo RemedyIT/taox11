@@ -1,0 +1,34 @@
+
+// generated from <%= ridl_template_path %>
+%#
+%#  Constructor inlines
+%#
+%#  Default CTOR
+inline <%= scoped_cxxname %>::<%= cxxname %> ()
+  : TAOX11_NAMESPACE::CORBA::UserException ("<%= repository_id %>", "<%= cxxname %>")
+{
+}
+%#
+%#  Initializer CTOR
+% if member_count > 0
+%   _ms = members.dup
+
+inline <%= scoped_cxxname %>::<%= cxxname %> (
+%   unless _ms.empty?
+%     _indent = (' ' * (2+scoped_cxxname.size+2))
+%     while !_ms.empty?
+%       _m = _ms.shift
+%       if _m.is_array?
+       <%= _indent %><%= "#{_m.cxx_in_type} #{_m.cxxname}" %><%= _ms.empty? ? ')' : ',' %>
+%       else
+       <%= _indent %><%= "#{_m.cxx_byval_type} #{_m.cxxname}" %><%= _ms.empty? ? ')' : ',' %>
+%       end
+%     end
+%   end
+  : TAOX11_NAMESPACE::CORBA::UserException ("<%= repository_id %>", "<%= cxxname %>")
+%   members.each do |_m|
+  , <%= _m.cxxname %>_ (std::move (<%= _m.cxxname %>))
+%   end
+{
+}
+% end

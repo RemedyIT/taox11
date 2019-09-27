@@ -1,0 +1,17 @@
+/**
+ * @file    simple_test.idl
+ * @author  Marcel Smit
+ *
+ * @brief   CORBA C++11 client IORTable application
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module Simple
+{
+  interface SimpleTest
+  {
+    void shutdown ();
+  };
+};

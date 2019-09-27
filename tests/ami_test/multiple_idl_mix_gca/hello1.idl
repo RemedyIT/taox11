@@ -1,0 +1,17 @@
+/**
+ * @file    hello1.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+#include hello2.idl
+
+module Test
+  {
+    interface A
+      {
+        long op_A (in long in_l, in B out_B)
+           raises (IntErr);
+      };
+  };

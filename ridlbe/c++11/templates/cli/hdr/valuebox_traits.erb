@@ -1,0 +1,45 @@
+
+// generated from <%= ridl_template_path %>
+% _vbox_traits_decl_incl_guard_ = scoped_cxxname.to_include_guard
+#if !defined (_VBOX_<%= _vbox_traits_decl_incl_guard_ %>_TRAITS_DECL_)
+#define _VBOX_<%= _vbox_traits_decl_incl_guard_ %>_TRAITS_DECL_
+namespace TAOX11_NAMESPACE
+{
+  namespace CORBA
+  {
+    template<>
+    struct <%= stub_export_macro %>valuetype_traits< <%= scoped_cxxtype %>>
+    {
+      /// Strong reference type
+      typedef valuetype_reference< <%= scoped_cxxtype %>> ref_type;
+      /// Weak reference type
+      typedef weak_valuetype_reference< <%= scoped_cxxtype %>> weak_ref_type;
+
+      static ref_type narrow (valuetype_reference<ValueBase>);
+    };
+  } // namespace CORBA
+
+  namespace IDL
+  {
+    template<>
+    struct traits < <%= scoped_cxxtype %>>
+      : public IDL::common_byval_traits<CORBA::valuetype_reference< <%= scoped_cxxtype %>>>,
+        public CORBA::valuetype_traits < <%= scoped_cxxtype %>>
+    {
+      /// IDL::traits for the boxed type of the valuebox
+      typedef IDL::traits< <%= scoped_boxed_traits_cxx_typename %>>  boxed_traits;
+
+      template <typename OStrm_, typename Formatter = formatter< <%= scoped_cxxtype %>, OStrm_>>
+      static inline OStrm_& write_on(
+          OStrm_& os_, in_type val_,
+          Formatter fmt_ = Formatter ())
+      {
+        return fmt_ (os_, val_);
+      }
+
+      template <typename Formatter = std::false_type>
+      static inline __Writer<Formatter> write (in_type val) { return {val}; }
+    };
+  } // namespace IDL
+} // namespace TAOX11_NAMESPACE
+#endif // !_VBOX_<%= _vbox_traits_decl_incl_guard_ %>_TRAITS_DECL_

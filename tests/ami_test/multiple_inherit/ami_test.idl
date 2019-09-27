@@ -1,0 +1,57 @@
+/**
+ * @file    ami_test.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+#pragma corba_ami "Test::A"
+#pragma corba_ami "Test::B"
+#pragma corba_ami "Test::C"
+#pragma corba_ami "Test::D"
+
+module Test
+  {
+    exception IntErr {
+      long id;
+      string err_string;
+    };
+
+    interface A
+      {
+        long op_A (in long in_l)
+          raises (IntErr);
+      };
+
+    interface B: A
+      {
+        long op_B (in long in_l)
+          raises (IntErr);
+      };
+
+    interface C : A
+      {
+        long op_C (in long in_l)
+          raises (IntErr);
+      };
+
+    interface D : B, C
+      {
+        long op_D (in long in_l)
+          raises (IntErr);
+      };
+
+
+
+    interface Hello
+      {
+        A get_iA();
+        B get_iB ();
+        C get_iC();
+        D get_iD();
+
+        /// A method to shutdown the ORB
+        /// This method is used to simplify the test shutdown process
+        oneway void shutdown ();
+      };
+  };

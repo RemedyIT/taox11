@@ -1,0 +1,84 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+#include "orb.idl"
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  /// An interface for testing IDL primitive types
+  interface Hello
+  {
+    /// Get and set a short
+    short getset_short (in short min, in short max);
+    /// Get a short by out
+    void out_short (in short numin, out short num);
+    /// Transfer a short by inout
+    void inout_short (inout short min, inout short max);
+
+    /// Get and set an unsigned short
+    unsigned short getset_ushort (in unsigned short min, in unsigned short max);
+    /// Get an unsigned short by out
+    void out_ushort (in unsigned short numin, out unsigned short num);
+    /// Transfer an unsigned short by inout
+    void inout_ushort (inout unsigned short min, inout unsigned short max);
+
+    /// Get and set a long
+    long getset_long (in long min, in long max);
+    /// Get a long by out
+    void out_long (in long numin, out long num);
+    /// Transfer a long by inout
+    void inout_long (inout long min, inout long max);
+
+    /// Get and set an unsigned long
+    unsigned long getset_ulong (in unsigned long min, in unsigned long max);
+    /// Get an unsigned long by out
+    void out_ulong (in unsigned long numin, out unsigned long num);
+    /// Transfer an unsigned long by inout
+    void inout_ulong (inout unsigned long min, inout unsigned long max);
+
+    /// Get and set a long long
+    long long getset_longlong (in long long min, in long long max);
+    /// Get a long long by out
+    void out_longlong (in long long numin, out long long num);
+    /// Transfer a long long by inout
+    void inout_longlong (inout long long min, inout long long max);
+
+    /// Get an unsigned long long
+    unsigned long long getset_ulonglong (in unsigned long long min, in unsigned long long max);
+    /// Get an unsigned long long by out
+    void out_ulonglong (in unsigned long long numin, out unsigned long long num);
+    /// Transfer an unsigned long long by inout
+    void inout_ulonglong (inout unsigned long long min, inout unsigned long long  max);
+
+    /// Get and set a float
+    float getset_float (in float min, in float max);
+    /// Get a float by out
+    void out_float (in float numin, out float num);
+    /// Transfer a float by inout
+    void inout_float (inout float min, inout float max);
+
+    /// Get and set a double
+    double getset_double (in double min, in double max);
+    /// Get a double by out
+    void out_double (in double numin, out double num);
+    /// Transfer a double by inout
+    void inout_double (inout double min, inout double max);
+
+    /// Get and set a long double
+    long double getset_longdouble (in long double min, in long double max);
+    /// Get a long double by out
+    void out_longdouble (in long double numin, out long double num);
+    /// Transfer a long double by inout
+    void inout_longdouble (inout long double min, inout long double max);
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};

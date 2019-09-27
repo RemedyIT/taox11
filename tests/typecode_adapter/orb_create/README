@@ -1,0 +1,28 @@
+
+
+Normally, a typecode is created at compile time by the
+IDL compiler for each declaration in an IDL file, or at
+runtime by the  Interface Repository. However, in some
+situations, such as a bridge between ORBs, a typecode may
+have to be  created without any knowledge of the IDL and outside
+any Interface Repository. In such cases, the typecode
+creation methods of the pseudo-object CORBA::ORB are used.
+
+This program is a simple example of the use of the
+CORBA::ORB::create_*_tc methods.
+
+These typecode creation methods make use of the functions
+of the same name in typecodefactory. The taox11_typecodefactory
+library is found in TAOX11_ROOT/tao/x11/typecodefactory, and
+is used by CORBA::ORB::create_*_tc to create typecodes. This library
+may be compiled, but, to keep dependencies and footprint
+to a minimum, it is not linked and loaded automatically.
+If an application makes use of one or more of the
+CORBA::ORB typecode creation methods, the application must
+contain the line
+
+#include "<path>/"tao/x11/typecodefactory/typecodefactory.h"
+
+and link the taox11_typecodefactory library. The #inlcude line
+will automatically load the library for linking, if it has
+been compiled.

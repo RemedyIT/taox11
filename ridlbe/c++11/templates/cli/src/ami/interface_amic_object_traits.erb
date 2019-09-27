@@ -1,0 +1,35 @@
+
+// generated from <%= ridl_template_path %>
+template<>
+object_traits< <%= amic_scoped_cxxtype %>>::shared_ptr_type
+object_traits< <%= amic_scoped_cxxtype %>>::lock_shared (
+    <%= amic_scoped_cxxtype %>* p)
+{
+  return std::dynamic_pointer_cast< <%= amic_scoped_cxxtype %>> (p->_lock_shared ());
+}
+% if is_remote?
+template<>
+object_reference< <%= amic_scoped_cxxtype %>>
+object_traits< <%= amic_scoped_cxxtype %>>::narrow (
+  object_reference<TAOX11_NAMESPACE::CORBA::Object> obj)
+{
+  try {
+    if (obj)
+    {
+      if (obj->_is_local ())
+      {
+        return ref_type (std::dynamic_pointer_cast< <%= amic_scoped_cxxtype %>> (obj.stub_));
+      }
+      // remote
+      <%= scoped_proxy_cxxtype %>_ptr const _pp =
+        <%= scoped_proxy_cxxtype %>::_narrow (obj->get_proxy ()->get ());
+      if (!TAO_CORBA::is_nil (_pp))
+      {
+        return object_reference< <%= amic_scoped_cxxtype %>> (new <%= amic_scoped_cxxtype %> (_pp));
+      }
+    }
+  }
+  catch_tao_system_ex(_ex)
+  return object_reference< <%= amic_scoped_cxxtype %>> ();
+}
+% end

@@ -1,0 +1,23 @@
+#--------------------------------------------------------------------
+# @file    require.rb
+# @author  Martin Corino
+#
+# @brief   IDL language mapping loader
+#
+# @copyright Copyright (c) Remedy IT Expertise BV
+# Chamber of commerce Rotterdam nr.276339, The Netherlands
+#--------------------------------------------------------------------
+
+# base modules
+require 'ridlbe/c++11/config'
+require 'ridlbe/c++11/visitorbase'
+
+# visitors
+Dir.glob(File.join(File.dirname(__FILE__), 'visitors', '*.rb')).each do |f|
+  require "ridlbe/c++11/visitors/#{File.basename(f, '.*')}"
+end
+
+# writers
+Dir.glob(File.join(File.dirname(__FILE__), 'writers', '*.rb')).each do |f|
+  require "ridlbe/c++11/writers/#{File.basename(f, '.*')}"
+end

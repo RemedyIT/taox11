@@ -1,0 +1,32 @@
+
+// generated from <%= ridl_template_path %>
+template <typename OStrm_>
+struct formatter< <%= scoped_cxxtype %>, OStrm_>
+{
+  typedef typename IDL::traits< <%= scoped_cxxtype %>>::boxed_traits boxed_traits;
+
+  inline OStrm_& operator ()(
+      OStrm_& os_,
+      <%= scoped_cxx_in_type %> val_)
+  {
+    os_ << "<%= formatted_cxxname %> {" << boxed_traits::write (val_->_value()) << '}';
+    return os_;
+  }
+};
+
+template <typename OStrm_, typename Fmt>
+inline OStrm_& operator <<(
+    OStrm_& os,
+    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> w)
+{
+  typedef IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> writer_t;
+  typedef typename std::conditional<
+                      std::is_same<
+                        typename writer_t::formatter_t,
+                        std::false_type>::value,
+                      formatter< <%= scoped_cxxtype %>, OStrm_>,
+                      typename writer_t::formatter_t>::type formatter_t;
+  return IDL::traits< <%= scoped_cxxtype %>>::write_on (
+      os, w.val_,
+      formatter_t ());
+}

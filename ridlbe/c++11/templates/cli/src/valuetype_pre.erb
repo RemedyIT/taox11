@@ -1,0 +1,143 @@
+
+// generated from <%= ridl_template_path %>
+% if is_truncatable?
+<%= cxxname %>::<%= cxxname %> ()
+{
+  this->_set_truncatable (true);
+}
+
+% end
+bool
+<%= cxxname %>::_obv_unmarshal (
+    TAO_InputCDR &strm,
+    <%= cxxname %>::_ref_type &new_vt)
+{
+  TAO_CORBA::ValueBase *base {};
+  TAO_CORBA::Boolean is_indirected { false };
+  TAO_CORBA::Boolean is_null_object { false };
+  TAO_CORBA::Boolean const retval =
+  TAO_CORBA::ValueBase::_tao_unmarshal_pre (
+        strm,
+        base,
+        __<%= cxxname.downcase %>_repository_id.c_str (),
+        is_null_object,
+        is_indirected);
+
+  if (is_null_object)
+  {
+    new_vt = nullptr;
+    return true;
+  }
+  if (!retval)
+    return false;
+
+  TAOX11_NAMESPACE::Valuetype_proxy* vp =
+      TAOX11_NAMESPACE::Valuetype_proxy::_downcast (base);
+  if (vp == nullptr)
+    return false;
+
+  <%= cxxname %>::_ref_type vtnew =
+      TAOX11_IDL::traits<<%= cxxname %>>::narrow (vp->get_locked_value ());
+  if (!vtnew)
+    return false;
+
+  if (!is_indirected && !vtnew->_obv_unmarshal_v (strm))
+    return false;
+
+  // Now base must point to the unmarshaled object.
+  // Align the pointer to the right subobject.
+  new_vt = vtnew;
+
+  return true;
+}
+
+const std::string <%= cxxname %>::__<%= cxxname.downcase %>_repository_id {"<%= repository_id %>"};
+
+const std::string&
+<%= cxxname %>::_obv_repository_id () const
+{
+  return __<%= cxxname.downcase %>_repository_id;
+}
+
+void
+<%= cxxname %>::_obv_get_truncatable_repo_ids (std::vector<std::string const*>& idlist) const
+{
+  idlist.push_back (std::addressof(__<%= cxxname.downcase %>_repository_id));
+% if is_truncatable?
+%   bases.each do |_base|
+  ::<%= _base.scoped_cxxname %>::_obv_get_truncatable_repo_ids (idlist);
+%   end
+% end
+}
+
+% if supports_abstract_interfaces?
+// from CORBA::ValueBase
+TAOX11_IDL::traits<TAOX11_CORBA::AbstractBase>::ref_type
+<%= cxxname %>::_obv_abstract_base ()
+{
+  return this->TAOX11_CORBA::AbstractBase::_lock ();
+}
+
+// from CORBA::AbstractBase
+TAOX11_IDL::traits<TAOX11_CORBA::Object>::ref_type
+<%= cxxname %>::_to_object ()
+{
+  return {};
+}
+
+TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
+<%= cxxname %>::_to_value ()
+{
+  return this->TAOX11_CORBA::ValueBase::_lock ();
+}
+
+bool
+<%= cxxname %>::_is_object ()
+{
+  return false;
+}
+
+TAOX11_CORBA::ValueBase::_shared_ptr_type
+<%= cxxname %>::_lock_shared ()
+{
+  if (!this->TAOX11_CORBA::AbstractBase::_is_locked ())
+  {
+    _shared_ptr_type const _spsrv =
+        std::dynamic_pointer_cast<<%= skel_cxxname %>> (this->TAOX11_CORBA::ValueBase::_lock_shared ());
+    this->TAOX11_CORBA::AbstractBase::_initialize_shared (_spsrv);
+    return _spsrv;
+  }
+  else
+    return this->TAOX11_CORBA::ValueBase::_lock_shared ();
+}
+
+% end
+% unless is_abstract?
+bool
+<%= cxxname %>::_obv_match_formal_type (ptrdiff_t p) const
+{
+  return p == reinterpret_cast<ptrdiff_t> (std::addressof(<%= cxxname %>::_obv_unmarshal));
+}
+
+bool
+<%= cxxname %>::_obv_marshal_v (TAO_OutputCDR &strm) const
+{
+  TAO_ChunkInfo ci (this->_is_truncatable () || this->_uses_chunking ());
+  return this->_obv_marshal_<%= scoped_cxxname.scope_to_cxxname %>_v (strm, ci);
+}
+
+bool
+<%= cxxname %>::_obv_unmarshal_v (TAO_InputCDR &strm)
+{
+  TAO_ChunkInfo ci (this->_is_truncatable () || this->_uses_chunking (), 1);
+  return this->_obv_unmarshal_<%= scoped_cxxname.scope_to_cxxname %>_v (strm, ci);
+}
+%   if generate_typecode_support?
+
+TAOX11_CORBA::typecode_reference
+<%= cxxname %>::_obv_typecode () const
+{
+  return <%= scoped_cxx_typecode %>;
+}
+%   end
+% end

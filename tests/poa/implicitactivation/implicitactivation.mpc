@@ -1,0 +1,22 @@
+// -*- MPC -*-
+
+project(*hello_gen_Idl): ridl_ostream_defaults {
+  idlflags += -Sp
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*hello_gen_Server): taox11_server, avoids_corba_e_compact, avoids_corba_e_micro {
+  after += *hello_gen_Idl
+  Source_Files {
+    hello.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+

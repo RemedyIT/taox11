@@ -1,0 +1,125 @@
+/**
+ * @file    test.idl
+ * @author  Martin Corino
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+#include "orb.idl"
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  /// An interface for testing IDL primitive types
+  interface Hello
+  {
+    /// Get and set a char-sequence
+    CORBA::CharSeq get_CharSeq (in CORBA::CharSeq seq);
+    /// Get a char-sequence by out
+    void out_CharSeq (out CORBA::CharSeq seq);
+    /// Transfer a char-sequence by inout
+    void inout_CharSeq (inout CORBA::CharSeq seq);
+
+   /// Get and set a WChar-sequence
+    CORBA::WCharSeq get_WCharSeq (in CORBA::WCharSeq seq);
+    /// Get a WChar-sequence by out
+    void out_WCharSeq (out CORBA::WCharSeq seq);
+    /// Transfer a WChar-sequence by inout
+    void inout_WCharSeq (inout CORBA::WCharSeq seq);
+
+    /// Get and set a String-sequence
+    CORBA::StringSeq get_StringSeq (in CORBA::StringSeq seq);
+    /// Get a String-sequence by out
+    void out_StringSeq (out CORBA::StringSeq seq);
+    /// Transfer a String-sequence by inout
+    void inout_StringSeq (inout CORBA::StringSeq seq);
+
+   /// Get and set a WString-sequence
+    CORBA::WStringSeq get_WStringSeq (in CORBA::WStringSeq seq);
+    /// Get a WString-sequence by out
+    void out_WStringSeq (out CORBA::WStringSeq seq);
+    /// Transfer a WString-sequence by inout
+    void inout_WStringSeq (inout CORBA::WStringSeq seq);
+
+    /// Get and set a Octet-sequence
+    CORBA::OctetSeq get_OctetSeq (in CORBA::OctetSeq seq);
+    /// Get a Octet-sequence by out
+    void out_OctetSeq (out CORBA::OctetSeq seq);
+    /// Transfer a Octet-sequence by inout
+    void inout_OctetSeq (inout CORBA::OctetSeq seq);
+
+    /// Get and set a Boolean-sequence
+    CORBA::BooleanSeq get_BooleanSeq (in CORBA::BooleanSeq seq);
+    /// Get a Boolean-sequence by out
+    void out_BooleanSeq (out CORBA::BooleanSeq seq);
+    /// Transfer a Boolean-sequence by inout
+    void inout_BooleanSeq (inout CORBA::BooleanSeq seq);
+
+    /// Get and set a Short-sequence
+    CORBA::ShortSeq get_ShortSeq (in CORBA::ShortSeq seq);
+    /// Get a Short-sequence by out
+    void out_ShortSeq (out CORBA::ShortSeq seq);
+    /// Transfer a Short-sequence by inout
+    void inout_ShortSeq (inout CORBA::ShortSeq seq);
+
+    /// Get and set a UShort-sequence
+    CORBA::UShortSeq get_UShortSeq (in CORBA::UShortSeq seq);
+    /// Get a UShort-sequence by out
+    void out_UShortSeq (out CORBA::UShortSeq seq);
+    /// Transfer a UShort-sequence by inout
+    void inout_UShortSeq (inout CORBA::UShortSeq seq);
+
+    /// Get and set a Long-sequence
+    CORBA::LongSeq get_LongSeq (in CORBA::LongSeq seq);
+    /// Get a Long-sequence by out
+    void out_LongSeq (out CORBA::LongSeq seq);
+    /// Transfer a Long-sequence by inout
+    void inout_LongSeq (inout CORBA::LongSeq seq);
+
+    /// Get and set a ULong-sequence
+    CORBA::ULongSeq get_ULongSeq (in CORBA::ULongSeq seq);
+    /// Get a ULong-sequence by out
+    void out_ULongSeq (out CORBA::ULongSeq seq);
+    /// Transfer a ULong-sequence by inout
+    void inout_ULongSeq (inout CORBA::ULongSeq seq);
+
+    /// Get and set a LongLong-sequence
+    CORBA::LongLongSeq get_LongLongSeq (in CORBA::LongLongSeq seq);
+    /// Get a LongLong-sequence by out
+    void out_LongLongSeq (out CORBA::LongLongSeq seq);
+    /// Transfer a LongLong-sequence by inout
+    void inout_LongLongSeq (inout CORBA::LongLongSeq seq);
+
+    /// Get and set a ULongLong-sequence
+    CORBA::ULongLongSeq get_ULongLongSeq (in CORBA::ULongLongSeq seq);
+    /// Get a ULongLong-sequence by out
+    void out_ULongLongSeq (out CORBA::ULongLongSeq seq);
+    /// Transfer a ULongLong-sequence by inout
+    void inout_ULongLongSeq (inout CORBA::ULongLongSeq seq);
+
+    /// Get and set a Float-sequence
+    CORBA::FloatSeq get_FloatSeq (in CORBA::FloatSeq seq);
+    /// Get a Float-sequence by out
+    void out_FloatSeq (out CORBA::FloatSeq seq);
+    /// Transfer a Float-sequence by inout
+    void inout_FloatSeq (inout CORBA::FloatSeq seq);
+
+    /// Get and set a Double-sequence
+    CORBA::DoubleSeq get_DoubleSeq (in CORBA::DoubleSeq seq);
+    /// Get a Double-sequence by out
+    void out_DoubleSeq (out CORBA::DoubleSeq seq);
+    /// Transfer a Double-sequence by inout
+    void inout_DoubleSeq (inout CORBA::DoubleSeq seq);
+
+    /// Get and set a LongDouble-sequence
+    CORBA::LongDoubleSeq get_LongDoubleSeq (in CORBA::LongDoubleSeq seq);
+    /// Get a LongDouble-sequence by out
+    void out_LongDoubleSeq (out CORBA::LongDoubleSeq seq);
+    /// Transfer a Double-sequence by inout
+    void inout_LongDoubleSeq (inout CORBA::LongDoubleSeq seq);
+
+    /// A method to shutdown the ORB
+    oneway void shutdown ();
+  };
+};

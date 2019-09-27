@@ -1,0 +1,22 @@
+// -*- IDL -*-
+/**
+ * @file ServerRequestInterceptorFwd.pidl
+ *
+ * @author  Martin Corino
+ *
+ * @brief Pre-compiled IDL source for forward declaration of
+ *        ServerRequestInterceptor
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+#ifndef _TAOX11_SERVER_REQUEST_INTERCEPTOR_FWD_IDL_
+#define _TAOX11_SERVER_REQUEST_INTERCEPTOR_FWD_IDL_
+
+module PortableInterceptor
+{
+  local interface ServerRequestInterceptor;
+};
+
+#endif  /* _TAOX11_SERVER_REQUEST_INTERCEPTOR_FWD_IDL_ */

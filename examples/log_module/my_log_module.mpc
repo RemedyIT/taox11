@@ -1,0 +1,21 @@
+// -*- MPC -*-
+
+project(*lib): taox11_lib {
+  requires += x11_logging
+  dynamicflags += MY_LOGGER_BUILD_DLL
+
+  Source_Files {
+    my_log_module.cpp
+  }
+
+  Header_Files {
+    my_log_module.h
+  }
+}
+
+project (*exe): taox11_exe, my_log_module {
+  requires += x11_logging
+  Source_Files {
+    test_my_log_module.cpp
+  }
+}

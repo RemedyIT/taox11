@@ -1,0 +1,55 @@
+
+// generated from <%= ridl_template_path %>
+#if defined(_ALIAS_ANYOP_<%= scoped_cxxname.scope_to_cxxname %>_IMPL_)
+void
+_any_cp_in_<%= scoped_cxxname.scope_to_cxxname %> (
+    TAOX11_CORBA::Any& any,
+    <%= scoped_cxx_in_type %> _val)
+{
+  TAOX11_NAMESPACE::Any_Dual_Impl_T<
+      IDL::traits< <%= scoped_cxxname %>>,
+% if is_local?
+      TAOX11_NAMESPACE::NULL_Marshal_Policy
+% else
+      TAOX11_NAMESPACE::CDR_Marshal_Policy
+% end
+        >::insert_copy (
+          any,
+          <%= scoped_cxx_typecode %>,
+          _val);
+}
+void
+_any_mv_in_<%= scoped_cxxname.scope_to_cxxname %> (
+    TAOX11_CORBA::Any& any,
+    <%= scoped_cxx_move_type %> _val)
+{
+   Any_Dual_Impl_T<
+      IDL::traits< <%= scoped_cxxname %>>,
+% if is_local?
+      TAOX11_NAMESPACE::NULL_Marshal_Policy
+% else
+      TAOX11_NAMESPACE::CDR_Marshal_Policy
+% end
+        >::insert (
+          any,
+          <%= scoped_cxx_typecode %>,
+          std::move(_val));
+}
+bool
+_any_out_<%= scoped_cxxname.scope_to_cxxname %> (
+    const TAOX11_CORBA::Any& any,
+    <%= scoped_cxx_out_type %> _val)
+{
+  return Any_Dual_Impl_T<
+      IDL::traits< <%= scoped_cxxname %>>,
+% if is_local?
+      TAOX11_NAMESPACE::NULL_Marshal_Policy
+% else
+      TAOX11_NAMESPACE::CDR_Marshal_Policy
+% end
+        >::extract (
+          any,
+          <%= scoped_cxx_typecode %>,
+          _val);
+}
+#endif // _ALIAS_ANYOP_<%= scoped_cxxname.scope_to_cxxname %>_IMPL_

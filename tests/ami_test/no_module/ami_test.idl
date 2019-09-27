@@ -1,0 +1,59 @@
+/**
+ * @file    ami_test.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+#pragma corba_ami "MyFoo"
+
+
+
+
+exception DidTheRightThing {
+  long id;
+  string whatDidTheRightThing;
+};
+
+struct structType
+{
+  long as;
+  long bs;
+};
+
+interface MyFoo
+{
+  long foo (out long out_l,
+            in long in_l,
+            in string in_str)
+    raises (DidTheRightThing);
+
+  attribute long yadda;
+
+  string foo_struct (out structType out_t);
+
+  attribute boolean bool_attr
+    getraises (DidTheRightThing);
+
+};
+
+module A
+{
+  interface MyDerived : MyFoo
+  {
+    long do_something (in string str);
+    attribute long my_derived_attrib;
+  }; //@CORBA (ami=true)
+};
+
+interface Hello
+{
+  MyFoo get_iMyFoo();
+  A::MyDerived get_iMyDerived ();
+
+  /// A method to shutdown the ORB
+  /// This method is used to simplify the test shutdown process
+  oneway void shutdown ();
+}; //@CORBA (ami=false)
+
+

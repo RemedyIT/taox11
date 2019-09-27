@@ -1,0 +1,52 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  interface iforward;
+  typedef iforward iforwardArray[5];
+  typedef iforward iforwardArray2[3][5];
+  typedef iforward iforwardArray3[7][6][5];
+  typedef sequence<iforward> iforwardSeq;
+  interface iforward
+  {
+    readonly attribute long uid;
+    void dump();
+  };
+
+  local interface iLocal;
+  typedef iLocal iLocalArray[5];
+  typedef iLocal iLocalArray2[7][8];
+  typedef iLocal iLocalArray3[7][6][5];
+  typedef sequence<iLocal> iLocalSeq;
+  local interface iLocal
+  {
+    void dump();
+  };
+
+  /// An interface for testing IDL primitive types
+  interface Hello
+  {
+    // Create object
+    Test::iforward get_forward();
+
+    /// Transfer a iforward-Array in and out
+    iforwardArray inout_forwardArray (in iforwardArray in_v, out iforwardArray out_v, inout iforwardArray inout_v);
+    iforwardArray2 inout_forwardArray2 (in iforwardArray2 pin, out iforwardArray2 pout, inout iforwardArray2 pinout);
+    iforwardArray3 inout_forwardArray3 (in iforwardArray3 pin, out iforwardArray3 pout, inout iforwardArray3 pinout);
+    // Not allowed
+    //    /// Transfer a iLocal-Array in and out
+    //    iLocalArray inout_iLocalArray (in iLocalArray pin, out iLocalArray pout, inout iLocalArray pinout);
+    //    iLocalArray2 inout_iLocalArray2 (in iLocalArray2 pin, out iLocalArray2 pout, inout iLocalArray2 pinout);
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};

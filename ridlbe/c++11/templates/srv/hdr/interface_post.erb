@@ -1,0 +1,18 @@
+% unless is_local?
+
+  private:
+    // generated from <%= ridl_template_path %>
+    /** @name Illegal to be called. Deleted explicitly to let the compiler detect any violation */
+    //@{
+    <%= skel_cxxname %> (const <%= skel_cxxname %>&) = delete;
+    <%= skel_cxxname %> (<%= skel_cxxname %>&&) = delete;
+    <%= skel_cxxname %>& operator= (const <%= skel_cxxname %>&) = delete;
+    <%= skel_cxxname %>& operator= (<%= skel_cxxname %>&&) = delete;
+    //@}
+    friend class POA::<%= srvproxy_cxxname %>;
+
+    POA::<%= srvproxy_cxxname %>_ptr <%= srvproxy_cxxname.downcase %>_{};
+  };
+
+} // namespace POA
+% end

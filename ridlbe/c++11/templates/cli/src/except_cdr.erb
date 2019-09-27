@@ -1,0 +1,33 @@
+
+// generated from <%= ridl_template_path %>
+TAO_CORBA::Boolean operator<< (
+    TAO_OutputCDR &strm,
+    const <%= scoped_cxxname %> &_tao_aggregate)
+{
+  // First marshal the repository ID and then all members
+  return (strm << _tao_aggregate._rep_id ())<%= (member_count == 0 ? ';' : ' &&') %>
+% if member_count > 0
+%   _n = member_count-1
+%   members.each_with_index do |_m, _i|
+         (strm << <%= _m.cdr_from_fmt % "_tao_aggregate.#{_m.cxxname} ()" %>)<%= ((_i < _n ) ? ' &&' : ';') %>
+%   end
+% else
+% end
+}
+
+TAO_CORBA::Boolean operator>> (
+% if member_count > 0
+    TAO_InputCDR &strm,
+    <%= scoped_cxxname %> &_tao_aggregate)
+{
+  return
+%   members.each_with_index do |_m, _i|
+    (strm >> <%= _m.cdr_to_fmt % "_tao_aggregate.#{_m.cxxname} ()" %>)<%= ((_i < _n) ? ' &&' : ';') %>
+%   end
+% else
+    TAO_InputCDR &,
+    <%= scoped_cxxname %> &)
+{
+  return true;
+% end
+}

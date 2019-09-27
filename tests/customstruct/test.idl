@@ -1,0 +1,84 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  /// An interface for testing IDL primitive types
+
+  struct simpleStruct
+  {
+    char c;
+    boolean b;
+    octet o;
+    wchar wc;
+  };
+
+  struct basicStruct
+  {
+    short si;
+    unsigned short usi;
+    long li;
+    unsigned long uli;
+    long long lli;
+    unsigned long long ulli;
+    float f;
+    double df;
+    long double ldf;
+    string s;
+    wstring ws;
+  };
+
+  struct sequenceStruct;
+  typedef sequence<sequenceStruct> seqStructseq;
+  typedef    sequence<short> shortseq;
+
+  struct sequenceStruct
+  {
+    short short1;
+    shortseq list;
+    seqStructseq children;
+  };
+
+  enum numeral {First, Second, Third};
+  typedef octet octetArray[20][30];
+
+  struct enumStruct
+  {
+    numeral num;
+    octetArray arr;
+    simpleStruct sbs;
+    basicStruct bs;
+  };
+
+  interface Hello
+  {
+    typedef char mychar;
+    struct specialStruct2
+    {
+      mychar c;
+      boolean b;
+    };
+
+    // Get a sctruct of special-datatypes.
+    simpleStruct get_struct();
+    // Transfer a sctruct of special-datatypes.
+    simpleStruct inout_simpleStruct (in simpleStruct pin, out simpleStruct pout, inout simpleStruct pinout);
+    // Transfer a sctruct of basic-datatypes.
+    basicStruct inout_basicStruct (in basicStruct pin, out basicStruct pout, inout basicStruct pinout);
+    // Transfer a sctruct of special-datatypes.
+    sequenceStruct inout_sequenceStruct (in sequenceStruct pin, out sequenceStruct pout, inout sequenceStruct pinout);
+    sequenceStruct get_sequenceStruct2(in sequenceStruct pin, inout sequenceStruct pinout);
+    // Transfer a sctruct of special-datatypes.
+    enumStruct inout_enumStruct  (in enumStruct pin, out enumStruct pout, inout enumStruct pinout);
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process.
+    oneway void shutdown ();
+  };
+};

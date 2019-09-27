@@ -1,0 +1,478 @@
+include::_{backend}_settings.adoc[]
+
+= The TAOX11 RIDL Compiler
+
+The TAOX11 package contains its own developed IDL compiler. This IDL
+compiler is written in the https://www.ruby-lang.org[Ruby] programming
+language and uses the Open Source
+https://www.remedy.nl/products/ridl.html[RIDL] compiler
+framework developed by Remedy IT.
+RIDL supports the implementation of different pluggable code generator
+backends for various IDL language mappings using a single frontend. The
+TAOX11 IDL compiler implements such a pluggable code generator backend
+for the IDL to {cxx11} language mapping.
+
+== Scope
+
+This document describes the options and features of the RIDL compiler.
+It is not a reference manual or tutorial on OMG IDL. For more
+information on OMG IDL see the
+https://www.omg.org/spec/IDL/3.5[IDL 3.5 specification],
+the https://www.omg.org/spec/CORBA[CORBA specification], and the
+http://www.amazon.com/gp/product/0201379279/ref=as_li_tf_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0201379279&linkCode=as2&tag=theaceorb-20[Advanced
+CORBA Programming with C++] book.
+
+== Usage
+
+The basic command line for the RIDL compiler is:
+
+-------------------------------------------
+ridlc [options] [<idlfile> [<idlfile> ...]]
+-------------------------------------------
+
+Use the following command to get information on the various command line
+options also shown below:
+
+--------
+ridlc -h
+--------
+
+== Options
+
+[width="100%",cols="<2l,<4l,<3a,<1",options="header",]
+|=======================================================================
+|Short command line option|
+Long command line or sub-option|
+Description|
+Default
+
+|-I|--include=PATH|
+
+Adds include searchpath.|
+
+nil
+
+|-Dmacro=[value]||
+
+Defines a preprocessor macro. By default the following macros are
+defined: +
+
+* `__RIDL__` set to the stringified version number of the RIDL frontend
+* `__RIDLBE__` set to the id of the active (main) RIDL backend; here
+`{cxx11}`
+* `__RIDLBE_VER__` set to the stringified version of the active (main)
+RIDL backend|
+
+|-n|--namespace=NAMESPACE|
+
+Defines root level enclosing namespace.|
+
+nil
+
+|-v|--verbose|
+
+Set verbosity level. Repeat to increment.|
+
+0
+
+||--stdidl|
+
+Adds include path to standard IDL files provided with RIDL.|
+
+off
+
+||--search-includepath|
+
+Use include paths to find main IDL source.|
+
+off
+
+||--stubs-only|
+
+Only generate client stubs, no servant code.|
+
+off
+
+||--no-stubs|
+
+Do not generate client stubs, only servant code.|
+
+off
+
+||--stub-pfx=POSTFIX|
+
+Specifies postfix for generated client stub source filename. +
+Filenames are formed like: <idl basename><postfix>.<language extension>|
+
+C
+
+||--skel-pfx=POSTFIX|
+
+Specifies postfix for generated servant skeleton source filename. +
+Filenames are formed like: <idl basename><postfix>.<language extension>|
+
+S
+
+||--proxy-pfx=POSTFIX|
+
+Specifies postfix for generated proxy header filename. +
+Filenames are formed like: <idl basename><postfix>.<language extension>|
+
+P
+
+4+|-i<include options>
+
+||-ic|
+
+Generate include statements with "" for standard included files.|
+
+on
+
+||-in|
+
+Generate include statements with <> for standard included files.|
+
+off
+
+4+|-o<output options> DIR
+
+||-o DIR|
+
+Output directory for the generated files.|
+
+current directory
+
+||-oS DIR|
+
+Output directory for the generated skeleton files.|
+
+Value of `-o` or current directory
+
+||-oI DIR|
+
+Output directory for the generated implementation files.|
+
+Value of `-o` or current directory
+
+4+|-W<extended option>=OPT
+
+||-Wb,export_macro=MACRO|
+
+Sets export macro for all files|
+
+||-Wb,export_include=FILE|
+
+Sets export include file for all files|
+
+||-Wb,export_file=FILE|
+
+Sets export file to generate for -Gxh|
+
+||-Wb,pre_include=FILE|
+
+Sets include file generated before any other include|
+
+||-Wb,post_include=FILE|
+
+Sets include file generated at the end of the file|
+
+||-Wb,base_export_macro=MACRO|
+
+Sets base export macro. Will be used as prefix for any export macro
+which is generated but not explicitly set as export macro|
+
+||-Wb,base_export_include=FILE|
+
+Sets base export include file. Will be used as prefix for any export_include which
+is generated but not explicit explicitly set as include file|
+
+||-Wb,stub_export_macro=MACRO|
+
+Sets export macro for client files|
+
+||-Wb,stub_export_include=FILE|
+
+Sets export include file for client files|
+
+||-Wb,stub_export_file=FILE|
+
+Sets stub export file to generate for -Gxhst|
+
+||-Wb,amic_export_macro=MACRO|
+
+Sets export macro for AMI client files|
+
+||-Wb,amic_export_include=FILE|
+
+Sets export include file for AMI client files|
+
+||-Wb,amic_export_file=FILE|
+
+Sets AMI export file to generate for -Gxhsta|
+
+||-Wb,skel_export_macro=MACRO|
+
+Sets export macro for servant files|
+
+||-Wb,skel_export_include=FILE|
+
+Sets export include file for servant files|
+
+||-Wb,skel_export_file=FILE|
+
+Sets skeleton export file to generate for -Gxhsk|
+
+||-Wb,impl_export_macro=MACRO|
+
+Sets export macro for implementation files|
+
+||-Wb,impl_export_include=FILE|
+
+Sets export include file for implementation files|
+
+||-Wb,impl_export_file=FILE|
+
+Sets implementation export file to generate for -Gxhimpl|
+
+||-Wb,anytypecode_export_macro=MACRO|
+
+Sets export macro for Any ops and TypeCode|
+
+||-Wb,anytypecode_export_include=FILE|
+
+Sets export include file for Any ops and TypeCode|
+
+||-Wb,include_guard=MACRO|
+
+Guard to prevent the generated client header file to be included|
+
+||-Wb,safe_include=FILE|
+
+Include that should be used instead of the own generated client header
+file|
+
+||-Wb,unique_include=FILE|
+
+Include that should be generated as only contents of the generated
+client header file|
+
+||-Wb,add_pre_include=FILE|
+
+Adds include file to be generated before other includes (except
+pre_include)|
+
+||-Wb,add_post_include=FILE|
+
+Adds include file to be generated at the end of the file (before
+post_include)|
+
+4+|-G<generation options>
+
+||-GC|
+
+Generate the code for AMI callback (not generated by default)|
+
+off
+
+||-GCa|
+
+Generate the code for AMI callback, option for backwards compatibility|
+
+off
+
+||-Gp|
+
+Generate the code for through POA collocation (generated by default)|
+
+on
+
+||-Gd|
+
+Generate the code for direct collocation (default is through POA collocation). +
+Currently not implemented.|
+
+off
+
+||-Gatc|
+
+Generate Any and TypeCode support implementation in separate *A.cpp file
+ (not generated by default)|
+
+off
+
+||-Gaia|
+
+Generate AnyInsert_Adapter version of the Any insert policy  (not generated by default). +
+Used with the sequence of basic types in the ORB.|
+
+off
+
+||-Gce|
+
+Generate CORBA/e support (not generated by default)|
+
+off
+
+||-Glons|
+
+Generate declaration for an object_traits::narrow
+specialization for local objects (not generated by default)|
+
+off
+
+||-Gos|
+
+Generate std::ostream insertion operators (not generated by default)|
+
+off
+
+||-Gxh|
+
+Generate export header file (not generated by default)|
+
+off
+
+||-Gxhst|
+
+Generate export header file for stub (not generated by default).|
+
+off
+
+||-Gxhsk|
+
+Generate export header file for skeleton (not generated by default).|
+
+off
+
+||-Gxhsta|
+
+Generate export header file for AMI stub (not generated by default).|
+
+off
+
+||-Gxhimpl|
+
+Generate export header file for implementation code (not generated by
+default).|
+
+off
+
+||-Gisrv|
+
+Generate implementation classes for servants (not generated by default;
+ignored with -SS or --stubs-only).|
+
+off
+
+4+|-S<suppression options>
+
+||-Sna|
+
+Suppress generating for native types (generated by default)|
+
+off
+
+||-SS|
+
+Suppress generating skeleton implementation and inline file
+ (generated by default)|
+
+off
+
+||-Ssh|
+
+Suppress generating skeleton header file
+ (generated by default)|
+
+off
+
+||-Sorb|
+
+Suppress generating include of orb.h
+ (generated by default)|
+
+off
+
+||-Sots|
+
+Suppress generating interface traits specializations
+ (generated by default)|
+
+off
+
+||-Scc|
+
+Suppress generating client source file
+ (generated by default)|
+
+off
+
+||-Sch|
+
+Suppress generating client header file
+ (generated by default)|
+
+off
+
+||-Scp|
+
+Suppress generating client proxy header file
+ (generated by default)|
+
+off
+
+||-Scdr|
+
+Suppress generating CDR streaming operators
+ (generated by default)|
+
+off
+
+||-Sa|
+
+Suppress Any support (generated by default)|
+
+off
+
+||-Sal|
+
+Suppress Any support for local interfaces
+ (generated by default)|
+
+off
+
+||-Sp|
+
+Suppress generating though POA collocated stubs
+ (generated by default)|
+
+off
+
+||-St|
+
+Suppress TypeCode support (generated by default)|
+
+off
+
+||-Sci|
+
+Suppress generating client inline file
+ (generated by default)|
+
+off
+
+||-Ssi|
+
+Suppress generating skeleton inline file
+ (generated by default)|
+
+off
+
+|-V|--version|
+
+Show version information and exit.|
+
+|-h|--help|
+
+Show help message and exit.|
+|=======================================================================

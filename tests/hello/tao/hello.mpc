@@ -1,0 +1,36 @@
+// -*- MPC -*-
+
+project(*tao_hello_idl): taoidldefaults {
+  idlflags += -Sp
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*tao_hello_Server): taoserver {
+  after += *tao_hello_idl
+  Source_Files {
+    hello.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+  IDL_Files {
+  }
+}
+
+project(*tao_hello_Client): taoclient {
+  after += *tao_hello_idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+  IDL_Files {
+  }
+}
+

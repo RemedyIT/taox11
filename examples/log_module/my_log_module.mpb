@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project {
+  after += my_log_module_lib
+  libs += my_log_module_lib
+}

@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project : taox11_lib, iortable, taox11_pi {
+  after += taox11_ior_table
+  libs += taox11_ior_table
+}

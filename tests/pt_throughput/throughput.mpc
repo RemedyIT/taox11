@@ -1,0 +1,29 @@
+// -*- MPC -*-
+
+project(*throughput_gen_Idl): ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*throughput_gen_Server): taox11_server, strategies {
+  after += *throughput_gen_Idl
+  Source_Files {
+    receiver_factory.cpp
+    receiver.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*throughput_gen_Client): taox11_client, strategies {
+  after += *throughput_gen_Idl
+  Source_Files {
+    client.cpp
+    testC.cpp
+  }
+}

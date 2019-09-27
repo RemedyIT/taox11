@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+feature(corba_messaging) : tao_valuetype, tao_portableserver, tao_pi {
+  libs  += TAO_Messaging
+  after += Messaging
+}

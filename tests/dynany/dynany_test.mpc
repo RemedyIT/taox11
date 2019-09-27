@@ -1,0 +1,27 @@
+// -*- MPC -*-
+project(*gen_idl): ridl_ostream_defaults, taox11_dynamicany  {
+  IDL_Files {
+    da_tests.idl
+  }
+  custom_only = 1
+}
+
+project(*basic): taox11_server, taox11_dynamicany {
+  after += *gen_idl
+  exename  = basic_test
+
+  Source_Files {
+    data.cpp
+    driver.cpp
+    analyzer.cpp
+    test_dynany.cpp
+    test_dynarray.cpp
+    test_dynenum.cpp
+    test_dynsequence.cpp
+    test_dynstruct.cpp
+    test_dynunion.cpp
+    test_dynvalue.cpp
+    test_wrapper.cpp
+    da_testsC.cpp
+  }
+}

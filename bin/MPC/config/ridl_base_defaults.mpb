@@ -1,0 +1,43 @@
+// -*- MPC -*-
+
+project: taox11_basedefaults, taobaseidldefaults {
+  // Set the idl compiler and flags as template values, except for
+  // automake.
+  specific {
+    tao_idl      =
+    tao_idl_dep  =
+    tao_idlflags =
+  }
+
+  Modify_Custom(IDL) {
+    automatic_in         = 1
+    automatic_out        = 1
+    dependent            =
+    dependent_libs       =
+    command              = $(TAOX11_BASE_ROOT)/bin/ridlc
+    inputext             = .idl
+
+    optional(source_outputext) {
+      commandflags(!-SS) = .cpp
+    }
+
+    optional(source_pre_extension) {
+      commandflags(-GC) += AmiC
+      commandflags(-GCa) += AmiC
+    }
+
+    optional(header_pre_extension) {
+      commandflags(!-Scp) += CP
+      commandflags(!-Ssh) += SP
+      commandflags(-GC) += AmiC, AmiCP
+      commandflags(-GCa) += AmiC, AmiCP
+    }
+  }
+
+  after -= TAO_IDL_EXE
+  idlflags -= $(TAO_IDLFLAGS)
+  idlflags -= -Sa -St
+  idlflags += -Wb,pre_include=ace/pre.h \
+              -Wb,post_include=ace/post.h -I$(TAOX11_ROOT)
+  idlflags += $(RIDLCFLAGS) -Sci -Ssi -Sa -St
+}

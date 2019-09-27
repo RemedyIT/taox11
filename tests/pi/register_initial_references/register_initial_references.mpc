@@ -1,0 +1,22 @@
+// -*- MPC -*-
+project(*idl): ridl_ostream_defaults, taox11_anytypecode, avoids_corba_e_micro {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*server): taox11_server, taox11_pi, avoids_corba_e_micro {
+  after += *idl
+  Source_Files {
+    test_i.cpp
+    server_orbinitializer.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+  IDL_Files {
+  }
+}

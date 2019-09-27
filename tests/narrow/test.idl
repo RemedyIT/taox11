@@ -1,0 +1,12 @@
+/**
+ * @file    test.idl
+ * @author  Marcel Smit
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// A very simple interface
+interface Hello
+{
+};

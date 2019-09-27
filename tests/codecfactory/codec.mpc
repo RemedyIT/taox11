@@ -1,0 +1,17 @@
+// -*- MPC -*-
+
+project(*idl): ridl_ostream_defaults, taox11_anytypecode {
+  idlflags += -SS
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*client): taox11_client, taox11_codecfactory {
+  after += *idl
+  Source_Files {
+    testC.cpp
+    client.cpp
+  }
+}

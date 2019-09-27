@@ -1,0 +1,15 @@
+
+// generated from <%= ridl_template_path %>
+% if is_concrete?
+TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
+<%= factory_cxxname %>::create_for_unmarshal ()
+{
+  return TAOX11_CORBA::make_reference< <%= scoped_cxx_traits_type %>::obv_type> ();
+}
+
+% end
+const std::string&
+<%= factory_cxxname %>::_obv_repository_id () const
+{
+  return ::<%= scoped_cxxname %>::__<%= cxxname.downcase %>_repository_id;
+}

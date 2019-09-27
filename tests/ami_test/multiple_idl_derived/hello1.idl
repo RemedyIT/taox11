@@ -1,0 +1,18 @@
+/**
+ * @file    hello1.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+#include hello2.idl
+#pragma corba_ami "Test::A"
+
+module Test
+  {
+
+    interface A : B
+      {
+        long op_A (in long in_l);
+      };
+  };

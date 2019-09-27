@@ -1,0 +1,9 @@
+// -*- MPC -*-
+
+
+project(*x11): taox11_exe {
+  requires += x11_logging
+  Source_Files {
+    log_test.cpp
+  }
+}

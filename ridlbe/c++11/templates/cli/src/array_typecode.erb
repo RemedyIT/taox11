@@ -1,0 +1,24 @@
+
+// generated from <%= ridl_template_path %>
+% cxxdim_sizes.reverse.each_with_index do |sz, ix|
+static TAO_TAO::TypeCode::Sequence< TAO_CORBA::TypeCode_ptr const *,
+  TAO_TAO::Null_RefCount_Policy>
+    _tao<%= cxx_typecode %>_arytc_<%= ix %> (
+      TAO_CORBA::tk_array,
+      std::addressof(<%= ix>0 ? "_tao#{cxx_typecode}_arytc_#{ix-1}_ptr" : basetype_scoped_cxx_typecode %>),
+      <%= sz %>U);
+
+static TAO_CORBA::TypeCode_ptr const _tao<%= cxx_typecode %>_arytc_<%= ix %>_ptr =
+  std::addressof(_tao<%= cxx_typecode %>_arytc_<%= ix %>);
+
+% end
+static TAO_TAO::TypeCode::Alias<char const *,
+                            TAO_CORBA::TypeCode_ptr const *,
+                            TAO_TAO::Null_RefCount_Policy>
+  _tao<%= cxx_typecode %> (
+    TAO_CORBA::tk_alias,
+    "<%= repository_id %>",
+    "<%= cxxname %>",
+    std::addressof(_tao<%= cxx_typecode %>_arytc_<%= cxxdim_sizes.size-1 %>_ptr));
+
+TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> = std::addressof(_tao<%= cxx_typecode %>);

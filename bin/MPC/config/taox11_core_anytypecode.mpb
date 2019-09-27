@@ -1,0 +1,7 @@
+// -*- MPC -*-
+
+// Only to be used in TAOX11 core projects
+project : core_anytypecode {
+  after += taox11_anytypecode
+  libs += taox11_anytypecode
+}

@@ -1,0 +1,9 @@
+// -*- MPC -*-
+
+project : taox11_lib, taox11_anytypecode, valuetype {
+  after += taox11_valuetype
+  libs += taox11_valuetype
+
+  IDL_Files {
+  }
+}

@@ -1,0 +1,46 @@
+// -*- MPC -*-
+
+project(taox11_ior_table_idl) : ridl_core_defaults, install {
+  custom_only = 1
+  IDL_Files {
+    idlflags += -Gp -Gd -St -SS -Sorb -Glons \
+                -Wb,export_macro=TAOX11_IORTable_Export \
+                -Wb,export_include=tao/x11/ior_table/taox11_ior_table_export.h \
+                -Wb,include_guard=TAOX11_IORTABLE_SAFE_INCLUDE \
+                -Wb,safe_include=tao/x11/ior_table/ior_table.h \
+                -o . --namespace TAOX11_NAMESPACE
+    gendir = .
+    $(TAO_ROOT)/tao/IORTable/IORTable.pidl
+  }
+
+  specific {
+    install_dir = tao/x11/ior_table
+  }
+}
+
+project(taox11_ior_table) : taox11_lib, taox11_portableserver, \
+                            install, iortable {
+  after        += taox11_ior_table_idl
+  sharedname    = taox11_ior_table
+  dynamicflags += TAOX11_IOR_TABLE_BUILD_DLL
+  libout = $(TAOX11_ROOT)/../lib
+
+  Source_Files {
+    ior_table.cpp
+    ior_table_impl.cpp
+    locator_cb.cpp
+    IORTableC.cpp
+  }
+
+  Header_Files {
+    ior_table.h
+    ior_table_impl.h
+    locator_cb.h
+    taox11_ior_table_export.h
+    IORTableC.h
+  }
+
+  specific {
+    install_dir = tao/x11/ior_table
+  }
+}

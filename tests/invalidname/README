@@ -1,0 +1,6 @@
+This program tests whether resolve_initial_references does throw
+an InvalidName exception which we can catch
+
+Run the application as follows.
+
+% invalid_name

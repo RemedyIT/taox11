@@ -1,0 +1,16 @@
+/**
+ * @file    test.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+module A
+  {
+    interface Test
+      {
+        long foo (in long in_l);
+
+        oneway void shutdown ();
+      }; //@CORBA (ami=true)
+  };

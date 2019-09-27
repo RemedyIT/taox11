@@ -1,0 +1,16 @@
+// -*- MPC -*-
+
+project(*Server): taox11_server, taox11_portableserver, avoids_minimum_corba, avoids_corba_e_compact, avoids_corba_e_micro {
+   libs += Generic_Servant
+   after += POA_Generic_Servant_Lib
+
+   specific(automake) {
+     includes += $(srcdir)/../generic_servant
+   }
+   includes += ../generic_servant
+   libpaths += ../generic_servant
+
+   Source_Files {
+    server.cpp
+  }
+}

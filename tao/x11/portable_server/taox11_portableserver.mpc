@@ -1,0 +1,190 @@
+// -*- MPC -*-
+
+project(taox11_portableserver_idl) : ridl_core_defaults, install, pidl_install {
+  custom_only = 1
+  idlflags += -Gp -Gd -Glons -SS -Sorb -o . --namespace TAOX11_NAMESPACE \
+              -I $(TAO_ROOT) \
+              -Wb,export_macro=TAOX11_PortableServer_Export \
+              -Wb,export_include=tao/x11/portable_server/taox11_portableserver_export.h
+
+  IDL_Files {
+    idlflags -= -Sa -St
+    gendir = .
+    $(TAO_ROOT)/tao/PortableServer/ForwardRequest.pidl
+  }
+
+  IDL_Files {
+    idlflags += -Sal
+    idlflags -= -Sa -St
+    gendir = .
+    $(TAO_ROOT)/tao/PortableServer/IdAssignmentPolicy.pidl
+    $(TAO_ROOT)/tao/PortableServer/IdUniquenessPolicy.pidl
+    $(TAO_ROOT)/tao/PortableServer/ImplicitActivationPolicy.pidl
+    $(TAO_ROOT)/tao/PortableServer/LifespanPolicy.pidl
+    $(TAO_ROOT)/tao/PortableServer/RequestProcessingPolicy.pidl
+    $(TAO_ROOT)/tao/PortableServer/ServantRetentionPolicy.pidl
+    $(TAO_ROOT)/tao/PortableServer/ThreadPolicy.pidl
+  }
+
+  IDL_Files {
+    idlflags += -Sal
+    idlflags -= -Sa -St
+    gendir = .
+    $(TAO_ROOT)/tao/PortableServer/AdapterActivator.pidl
+    $(TAO_ROOT)/tao/PortableServer/ServantActivator.pidl
+    $(TAO_ROOT)/tao/PortableServer/ServantLocator.pidl
+    $(TAO_ROOT)/tao/PortableServer/ServantManager.pidl
+  }
+
+  IDL_Files {
+    idlflags -= -Sa -St
+    idlflags += -Gos
+    gendir = .
+    $(TAO_ROOT)/tao/PortableServer/POAManager.pidl
+  }
+
+  IDL_Files {
+    idlflags -= -Sa -St
+    gendir = .
+    $(TAO_ROOT)/tao/PortableServer/POAManagerFactory.pidl
+    $(TAO_ROOT)/tao/PortableServer/POA.pidl
+    $(TAO_ROOT)/tao/PortableServer/PS_Current.pidl
+    $(TAO_ROOT)/tao/PortableServer/PortableServer_include.pidl
+    $(TAO_ROOT)/tao/PortableServer/PortableServer.pidl
+  }
+  IDL_Files {
+    idlflags += -Scp -Sna
+    idlflags += -Wb,add_post_include=tao/x11/portable_server/servant_forward.h
+    idlflags -= -Sa -St
+    gendir = .
+    $(TAO_ROOT)/tao/PortableServer/PS_Forward.pidl
+  }
+}
+
+project(taox11_portableserver) : taox11_lib, portableserver, taox11_anytypecode {
+  after += taox11_portableserver_idl
+  sharedname = taox11_portable_server
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags += TAOX11_PORTABLESERVER_BUILD_DLL
+
+  Source_Files {
+    ForwardRequestC.cpp
+    AdapterActivatorC.cpp
+    IdAssignmentPolicyC.cpp
+    IdUniquenessPolicyC.cpp
+    ImplicitActivationPolicyC.cpp
+    LifespanPolicyC.cpp
+    RequestProcessingPolicyC.cpp
+    ServantActivatorC.cpp
+    ServantLocatorC.cpp
+    ServantManagerC.cpp
+    ServantRetentionPolicyC.cpp
+    ThreadPolicyC.cpp
+    POAManagerC.cpp
+    POAManagerFactoryC.cpp
+    POAC.cpp
+    PS_CurrentC.cpp
+    PortableServer_includeC.cpp
+    PortableServerC.cpp
+  }
+
+  Source_Files {
+    adapter_activator_cb.cpp
+    poa_policies_impl.cpp
+    portableserver_impl.cpp
+    portableserver_functions.cpp
+    servant_proxy.cpp
+    servant_manager_cb.cpp
+    servant_locator_cb.cpp
+    servant_activator_cb.cpp
+    servantbase.cpp
+    operation_table_std_map.cpp
+    upcall_command.cpp
+  }
+
+  Header_Files {
+    ForwardRequestC.h
+    AdapterActivatorC.h
+    IdAssignmentPolicyC.h
+    IdUniquenessPolicyC.h
+    ImplicitActivationPolicyC.h
+    LifespanPolicyC.h
+    RequestProcessingPolicyC.h
+    ServantActivatorC.h
+    ServantLocatorC.h
+    ServantManagerC.h
+    ServantRetentionPolicyC.h
+    ThreadPolicyC.h
+    POAManagerC.h
+    POAManagerFactoryC.h
+    POAC.h
+    PS_CurrentC.h
+    PS_ForwardC.h
+    ForwardRequestP.h
+    AdapterActivatorP.h
+    IdAssignmentPolicyP.h
+    IdUniquenessPolicyP.h
+    ImplicitActivationPolicyP.h
+    LifespanPolicyP.h
+    RequestProcessingPolicyP.h
+    ServantActivatorP.h
+    ServantLocatorP.h
+    ServantManagerP.h
+    ServantRetentionPolicyP.h
+    ThreadPolicyP.h
+    POAManagerP.h
+    POAManagerFactoryP.h
+    POAP.h
+    PS_CurrentP.h
+    ForwardRequestS.h
+    AdapterActivatorS.h
+    IdAssignmentPolicyS.h
+    IdUniquenessPolicyS.h
+    ImplicitActivationPolicyS.h
+    LifespanPolicyS.h
+    RequestProcessingPolicyS.h
+    ServantActivatorS.h
+    ServantLocatorS.h
+    ServantManagerS.h
+    ServantRetentionPolicyS.h
+    ThreadPolicyS.h
+    POAManagerS.h
+    POAManagerFactoryS.h
+    POAS.h
+    PS_CurrentS.h
+    PS_ForwardS.h
+  }
+
+  Header_Files {
+    taox11_portableserver_export.h
+    adapter_activator_cb.h
+    portableserver.h
+    poa_policies_impl.h
+    portableserver_impl.h
+    portableserver_functions.h
+    portableserver_proxies.h
+    servant_proxy.h
+    servant_manager_cb.h
+    servant_locator_cb.h
+    servant_activator_cb.h
+    servantbase.h
+    operation_table_std_map.h
+    stub_sarg_traits.h
+    basic_arguments.h
+    special_basic_arguments.h
+    upcall_command.h
+    sarg_traits_t.h
+    basic_sargument_t.h
+    special_basic_sargument_t.h
+    long_double_sargument_t.h
+  }
+
+  Template_Files {
+    basic_sargument_t.cpp
+    special_basic_sargument_t.cpp
+    long_double_sargument_t.cpp
+  }
+
+  PIDL_Files {
+  }
+}

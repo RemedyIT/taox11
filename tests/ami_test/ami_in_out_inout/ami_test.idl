@@ -1,0 +1,111 @@
+/**
+ * @file   ami_test.idl
+ * @author Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+#pragma corba_ami "A::AMI_Test"
+
+
+module A
+  {
+    enum enumType
+      {
+        ae,
+        be,
+        ce,
+        de,
+        ee
+      };
+
+    struct structType
+      {
+        long as;
+        long bs;
+      };
+
+    enum dataType
+      {
+        dtEmpty,
+        dtLong,
+        dtShort
+      };
+
+    union unionData switch (dataType)
+      {
+        case dtLong: long longData;
+        case dtShort: short shortData;
+        // by default (implicit), empty union
+      };
+
+    typedef long arrayType[5];
+    typedef sequence<long> longSeq;
+
+    interface AMI_Test
+      {
+        char foo_char (out char out_c,
+                       in char in_c,
+                       inout char inout_c);
+
+        wchar foo_wchar (in wchar in_wc,
+                         out wchar out_wc,
+                         inout wchar inout_wc);
+
+        octet foo_octet (out octet out_o,
+                         in octet in_o,
+                         inout octet inout_o);
+
+        boolean foo_bool (inout boolean inout_b,
+                          out boolean out_b,
+                          in boolean in_b);
+
+        enumType foo_enum (out enumType out_e,
+                           inout enumType inout_e,
+                           in enumType in_e);
+
+        structType foo_struct (out structType out_t,
+                               in structType in_t,
+                               inout structType inout_t);
+
+        longSeq foo_sequence (out longSeq out_seq,
+                              in longSeq in_seq,
+                              inout longSeq inout_seq);
+
+        arrayType foo_array (out arrayType out_a,
+                             in arrayType in_a,
+                             inout arrayType inout_a);
+
+        unionData foo_union (out unionData out_u,
+                             in unionData in_u,
+                             inout unionData inout_u);
+
+        wstring foo_wstring (out wstring out_w,
+                             in wstring in_w,
+                             inout wstring inout_w);
+
+        string foo_string (out string out_s,
+                           in string in_s,
+                           inout string inout_s);
+
+        unsigned long long foo_u_l_l (out unsigned long long out_ull,
+                                      in unsigned long long in_ull,
+                                      inout unsigned long long inout_ull);
+
+        float foo_float (out float out_f,
+                         in float in_f,
+                         inout float inout_f);
+
+        long double foo_long_double (out long double out_ld,
+                                     in long double in_ld,
+                                     inout long double inout_ld);
+
+        void foo_void_in (in long in_l);
+        void foo_void_out (out long out_l);
+        void foo_void_inout (inout long inout_l);
+        long foo_no_arg ();
+        void foo_void_no_arg ();
+
+        oneway void shutdown ();
+      };
+  };

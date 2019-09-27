@@ -1,0 +1,21 @@
+// -*- MPC -*-
+
+project(*idl): ridl_ostream_defaults  {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(POA Default Servant): taox11_server, avoids_minimum_corba, avoids_corba_e_compact, avoids_corba_e_micro {
+  exename = default_servant
+  after +=*idl
+
+  Source_Files {
+    default_servant.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}

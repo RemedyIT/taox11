@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project : taolib, tao_portableserver, tao_valuetype {
+  after   += ObjRefTemplate
+  libs    += TAO_ObjRefTemplate
+}

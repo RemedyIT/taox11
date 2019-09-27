@@ -1,0 +1,42 @@
+/**
+ * @file    dynvalue_test.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @brief   This file contains a DynAny analyzer that dumps the contents of a DynAny
+ *          with TAOX11_TEST_LOG
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module DynValue_Test
+{
+  valuetype BoxedLong long;
+
+  valuetype NestedValue
+  {
+    public short Nested_s1;
+    public short Nested_s2;
+  };
+
+  valuetype NullValue
+  {
+  };
+
+  //This test should be expanded in the future with truncatable valuetype
+  //Example:
+  //  valuetype BaseValue
+  //   {
+  //     public unsigned short Base_us1;
+  //     public unsigned short Base_us2;
+  //   };
+  //
+  //   valuetype Trunc : truncatable BaseValue
+  //   {
+  //     public  BoxedLong   Trunc_bl;
+  //     public  NestedValue Trunc_nested;
+  //     private NullValue   Trunc_null1;
+  //     private NullValue   Trunc_null2;
+  //     private NullValue   Trunc_null3;
+  //   };
+};

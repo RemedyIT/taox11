@@ -1,0 +1,9 @@
+// -*- MPC -*-
+
+project : x11_logger_base {
+}
+
+feature(x11_logging) {
+  after += x11_logger
+  libs += x11_logger
+}

@@ -1,0 +1,50 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+
+  interface iA
+  {
+    string do_something_A();
+  };
+
+  interface iB : iA
+  {
+    string do_something_B();
+  };
+
+  interface iC : iB
+  {
+    string do_something_C();
+  };
+
+  interface iD
+  {
+    string do_something_D ();
+  };
+
+  interface iE : iC, iD
+  {
+    string do_something_E ();
+  };
+
+  interface Hello
+  {
+    iA get_iA ();
+    iB get_iB ();
+    iC get_iC ();
+    iD get_iD ();
+    iE get_iE ();
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};

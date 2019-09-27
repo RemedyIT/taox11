@@ -1,0 +1,15 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+interface Hello
+{
+  void method ();
+  Hello create_POA ();
+  void destroy_POA ();
+  void shutdown ();
+};

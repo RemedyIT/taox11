@@ -1,0 +1,25 @@
+
+project(x11_logger) : x11_logger_base {
+  requires += x11_logging
+  sharedname    = x11_logger
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags  = X11_LOGGER_BUILD_DLL
+
+  Source_Files {
+    log_base.cpp
+  }
+
+  Header_Files {
+    X11_logger_export.h
+    log_base.h
+    logstream_t.h
+  }
+
+  Template_Files {
+    logstream_t.cpp
+  }
+
+  specific {
+    install_dir = tao/x11/logger
+  }
+}

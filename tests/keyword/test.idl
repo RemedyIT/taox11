@@ -1,0 +1,517 @@
+/**
+ * @file    test.idl
+ * @author  unknownauthor
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+
+  /// Testing the int16_t C++ keyword, declared as typedef name
+  /**
+   * Should be renamed to _cxx_int16_t in C++ code.
+   * The generated doxygen documentation tags should use the original IDL name (int16_t)
+   */
+  typedef short int32_t;
+
+  /// Testing the auto C++ keyword, declared as exception
+  /**
+   * Should be renamed to _cxx_auto in C++ code.
+   * The generated doxygen documentation tags should use the original IDL name (auto)
+   */
+  exception auto
+  {
+    /// Contains a message
+    string message;
+    /// Contains the ID of the error.
+    long id;
+  };
+
+  /// Should become exception inout;
+  exception _inout {};
+
+  /// Testing the 'what' keyword to prevent clash with standard
+  /// std::exception member
+  exception my_x
+  {
+    /// provides cause description
+    string what;
+  };
+
+  /// Testing escaped identifiers, enum is a IDL and C++ reserved
+  /// keyword so should result in _cxx_enum
+  enum _enum
+  {
+    dtLong,
+    dtShort
+  };
+  union _struct switch (long)
+  {
+    case 3: long b_03_4;
+    case 4: string b_03_5;
+  };
+
+  /// Testing the bool C++ keyword
+  /**
+   * Should be renamed to _cxx_bool in C++ code.
+   * The generated doxygen documentation tags should use the original IDL name (bool)
+   */
+  enum bool
+  {
+    // long // IDL keyword not allowed.
+
+    /// Testing the asm C++ keyword
+    /**
+     * Should be renamed to _cxx_asm in C++ code. Generated documentation tags
+     * should just use 'asm'
+     */
+    asm,
+    /// Testing the underscores
+    /**
+     * Underscore's in front of name are removed and prevent a prefix in code.
+     * _char, _long, _float, _double, _int are allowed, but will not compile:
+     * The doxygen documentation should refer to the names below.
+     */
+    // doxygen start group generates a compile error. //@{
+    /// Underscore allowed (will be '_char' in code)
+    __char,
+    /// Underscore allowed (will be '_long' in code)
+    __long,
+    /// Underscore allowed (will be 'someenum' in code)
+    _someenum
+    // //@}
+  };
+
+  enum int16_t
+  {
+    char_, long_, float_, double_
+  };
+
+  enum int_least8_t
+  {
+    char8_, long8_, floa8t_, double8_
+  };
+
+  struct cpplib_keyword_struct
+  {
+    char wchar_t;
+    long std;
+    long printf;
+    long cout;
+    long CORBA;
+    long define;
+    long include;
+  };
+
+  /// Testing the  int64_t C++ keyword, declared as union
+  /**
+   * Should be renamed to _cxx_int64_t in C++ code.
+   * The generated doxygen documentation tags should use the original IDL name (int64_t)
+   */
+  union int64_t switch (int16_t)
+    {
+      /// int16_t as char_
+      case char_: char charData;
+
+      /// int16_t as long_
+      case long_: long longData;
+
+      /// int16_t as float_
+      case float_: float floatData;
+
+      /// int16_t as double_
+      case double_: double doubleData;
+      // by default (implicit), empty union
+    };
+
+
+  struct int_keyword_struct
+  {
+    /// Allowed
+    long int;
+    /// Allowed
+    long int_;
+    /// Allowed, but will not compile: becomes 'long _int' but doxygen documentation should refer to '__int'
+    long __int;
+  };
+
+  // Allowed, but will not compile:
+  //  struct int32_t
+  //  {
+  //    long member;
+  //  };
+
+  /// Testing the C++ keywords
+  /**
+   * Putting all C++ keywords in a struct. All should have the '_cxx_' prefix in
+   * the code. The generated doxygen documentation should use the original IDL name
+   */
+  struct cpp_keyword_struct
+  {
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long alignas;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long alignof;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long and;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long and_eq;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long asm;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long auto;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long bitand;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long bitor;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long bool;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long break;
+
+    // IDL error for case
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long catch;
+
+    // IDL error for char
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long char16_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long char32_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long class;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long compl;
+
+    // IDL error for const
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long constexpr;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long const_cast;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long continue;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long decltype;
+
+    // IDL error for default
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long delete;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long do;
+
+    // IDL error for double
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long dynamic_cast;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long else;
+
+    // IDL error for enum
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long explicit;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long export;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long extern;
+
+    // IDL error for false
+
+    // IDL error for float
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long for;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long friend;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long goto;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long if;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long inline;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long int;
+
+    // IDL error for long
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long mutable;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long namespace;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long new;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long not;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long not_eq;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long noexcept;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long nullptr;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long operator;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long or;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long or_eq;
+
+    // IDL error for private
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long protected;
+
+    // IDL error for public;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long register;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long reinterpret_cast;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long return;
+
+    // IDL error for short
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long signed;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long sizeof;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long static;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long static_assert;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long static_cast;
+
+    // IDL error for struct
+
+    // IDL error for switch
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long template;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long this;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long thread_local;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long throw;
+
+    // IDL error for true
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long try;
+
+    // IDL error for typedef
+
+    // IDL error for typeid
+
+    // IDL error for typename
+
+    // IDL error for union
+
+    // IDL error for unsigned
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long using;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long virtual;
+
+    // long void; IDL keyword
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long volatile;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long wchar_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long while;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long xor;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long xor_eq;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uint8_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long int16_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uint16_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long int32_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uint32_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long int64_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uint64_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long int_fast8_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long int_fast16_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long int_fast32_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long int_fast64_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long int_least8_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long int_least16_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long int_least32_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long int_least64_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long intmax_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long intptr_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uint_fast8_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uint_fast16_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uint_fast32_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uint_fast64_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uint_least8_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uint_least16_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uint_least32_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uint_least64_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uintmax_t;
+
+    /// Prefix _cxx_ will be added in code but the generated doxygen tags should refer to the original name
+    long uintptr_t;
+  };
+
+  /// An interface for testing IDL primitive types
+  interface Hello
+  {
+    ///Testing the doxygen output of consts
+    /**
+      * Reserved keyword (int_fast16_t) as const variable. Will be '_cxx_' in code but
+      * the doxygen documentation should refer to 'int_fast16_t'
+      */
+    const short int_fast16_t = -1023;
+    /**
+      * Reserved keyword (uint_fast16_t) as const variable. Will be '_cxx_' in code but
+      * the doxygen documentation should refer to 'uint_fast16_t'
+      */
+    const unsigned short uint_fast16_t = 1023;
+    /**
+      * Reserved keyword (int32_t) as const variable. Will be '_cxx_' in code but
+      * the doxygen documentation should refer to 'int32_t'
+      */
+    const long int32_t = -81234;
+
+    /**
+      * Reserved keyword (bool, which is an enum) as return type, in, inout, and out
+      * parameter.
+      */
+    bool inout_bool (in bool v_in, out bool v_out, inout bool v_inout);
+
+    /// A reserved keyword as method name
+    /**
+      * Reserved keyword (uint32_t) as method name. Will be '_cxx_' in code but
+      * the doxygen documentation should refer to 'uint32_t'
+      */
+    short uint32_t (in short uint16_t) raises (_inout, auto);
+
+    /**
+      * Reserved keyword (int16_t, which is a struct) as return type, in, inout, and out
+      * parameter.
+      */
+    int16_t inout_int16_t (in int16_t v_in, out int16_t v_out, inout int16_t v_inout);
+
+    struct shortStruct
+    {
+      short  field;
+    };
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+};

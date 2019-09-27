@@ -1,0 +1,17 @@
+
+
+typecodefactory -------
+
+This library is used by the CORBA::ORB to create typecodes.
+To minimize dependencies and footprint, this library need not be
+built or linked by an application. However, if an
+application needs to call CORBA::ORB::create_*_tc(),
+then it should #include the library's header file
+typecodefactory.h and link the library.
+This will automatically load the library, assuming
+it has been compiled.
+
+
+Since the TypeCodeFactory must deal with Interface
+Repository data types, it depends on the
+taox11_ifr_client library.

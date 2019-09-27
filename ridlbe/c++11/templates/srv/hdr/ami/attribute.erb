@@ -1,0 +1,23 @@
+
+// generated from <%= ridl_template_path %>
+virtual
+void
+get_<%= cxxname %> (
+    <%= scoped_cxx_in_type %> ami_return_val) = 0;
+
+virtual
+void
+get_<%= cxxname %>_excep (
+    IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder) = 0;
+
+% unless is_readonly?
+virtual
+void
+set_<%= cxxname %> () = 0;
+
+virtual
+void
+set_<%= cxxname %>_excep (
+    IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder) = 0;
+
+% end

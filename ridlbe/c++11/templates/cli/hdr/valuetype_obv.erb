@@ -1,0 +1,96 @@
+
+// generated from <%= ridl_template_path %>
+namespace obv
+{
+  class <%= stub_export_macro %><%= cxxname %>
+    : public virtual <%= scoped_cxxtype %>
+% bases.each do |_base|
+%   unless _base.is_abstract?
+    , public virtual <%= _base.scoped_cxx_traits_type %>::obv_type
+%   end
+% end
+  {
+  protected:
+#if defined (_MSC_VER) && (_MSC_VER < 1920)
+    // msvc14.(0|1) have a problem with defaulted constructors, issue #4005
+    <%= cxxname %> () {}
+#else
+    <%= cxxname %> () = default;
+#endif /* _MSC_VER < 1920 */
+    ~<%= cxxname %> () = default;
+    <%= cxxname %> (const <%= cxxname %>&) = default;
+    <%= cxxname %> (<%= cxxname %>&&) = default;
+% if member_count > 0
+%   _ms = members.dup
+    explicit <%= cxxname %> (
+%   unless _ms.empty?
+%     while !_ms.empty?
+%       _m = _ms.shift
+      <%= "#{_m.scoped_cxx_byval_type} #{_m.cxxname}" %><%= _ms.empty? ? ')' : ',' %>
+%     end
+%   end
+%   _first = true
+%   members.each do |_m|
+      <%= _first ? ': ' : ', '%><%= _m.cxxname %>_ (std::move (<%= _m.cxxname %>))
+%     _first = false
+%   end
+    {}
+% end
+
+  private:
+    <%= cxxname %>& operator= (const <%= cxxname %>&) = delete;
+    <%= cxxname %>& operator= (<%= cxxname %>&&) = delete;
+
+  public:
+% if is_concrete?
+    template <typename _Tp1, typename, typename ...Args>
+    friend TAOX11_CORBA::valuetype_reference<_Tp1> TAOX11_CORBA::make_reference(Args&& ...args);
+
+    virtual TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
+    _copy_value () const override;
+
+% end
+% unless (_vt_pub_members = members.find_all { |_m| _m.is_public? }).empty?
+    /// @name Public state members
+    //@{
+%   _vt_pub_members.each do |_m|
+    virtual void <%= _m.cxxname %> (<%= _m.scoped_cxx_in_type %> _x11_<%= _m.cxxname %>) override;
+%     unless _m.is_pod? || _m.is_reference?
+    virtual void <%= _m.cxxname %> (<%= _m.scoped_cxx_move_type %> _x11_<%= _m.cxxname %>) override;
+%     end
+    virtual <%= _m.scoped_cxx_in_type %> <%= _m.cxxname %> () const override;
+    virtual <%= _m.scoped_cxx_out_type %> <%= _m.cxxname %> () override;
+
+%   end
+    //@}
+% end
+  protected:
+% unless (_vt_priv_members = members.find_all { |_m| !_m.is_public? }).empty?
+    /// Private state members
+%   _vt_priv_members.each do |_m|
+    virtual void <%= _m.cxxname %> (<%= _m.scoped_cxx_in_type %> _x11_<%= _m.cxxname %>) override;
+%     unless _m.is_pod? || _m.is_reference?
+    virtual void <%= _m.cxxname %> (<%= _m.scoped_cxx_move_type %> _x11_<%= _m.cxxname %>) override;
+%     end
+    virtual <%= _m.scoped_cxx_in_type %> <%= _m.cxxname %> () const override;
+    virtual <%= _m.scoped_cxx_out_type %> <%= _m.cxxname %> () override;
+
+%   end
+% end
+    /// Marshaling support
+    virtual bool
+    _obv_marshal_<%= scoped_cxxname.scope_to_cxxname %>_v (TAO_OutputCDR &, TAO_ChunkInfo &) const override;
+
+    /// Demarshaling support
+    virtual bool
+    _obv_unmarshal_<%= scoped_cxxname.scope_to_cxxname %>_v (TAO_InputCDR &, TAO_ChunkInfo &) override;
+
+    bool _obv_marshal_state (TAO_OutputCDR &, TAO_ChunkInfo &) const;
+    bool _obv_unmarshal_state (TAO_InputCDR &, TAO_ChunkInfo &);
+
+  private:
+% members.each do |_m|
+    <%= _m.scoped_cxx_member_type %> <%= _m.cxxname %>_<% if _m.is_pod? %> {}<% end %>;
+% end
+  }; // class <%= cxxname %>
+} // namespace obv

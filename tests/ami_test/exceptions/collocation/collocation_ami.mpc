@@ -1,0 +1,37 @@
+// -*- MPC -*-
+
+project(*idl) : ridl_ostream_defaults {
+  idlflags += -GC
+  custom_only = 1
+
+  IDL_Files {
+    ami_coll.idl
+  }
+}
+
+project(*tst_server) :  taox11_server, taox11_ami_client {
+  after += *idl
+  exename = server
+
+  Source_Files {
+    server.cpp
+    ami_coll_i.cpp
+  }
+  Source_Files {
+    ami_collS.cpp
+    ami_collC.cpp
+    ami_collAmiC.cpp
+  }
+}
+
+project(*tst_client) : taox11_client {
+  exename = client
+  after += *idl
+
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    ami_collC.cpp
+  }
+}

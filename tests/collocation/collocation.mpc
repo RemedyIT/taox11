@@ -1,0 +1,53 @@
+// -*- MPC -*-
+
+project(*idl): ridl_ostream_defaults {
+  idlflags    += -Wb,skel_export_macro=DIAMOND_Export \
+                 -Wb,stub_export_macro=MY_STUB_Export \
+                 -Wb,skel_export_include=diamond_export.h \
+                 -Wb,stub_export_include=stub_export.h \
+                 -Gd -St -Sa
+
+  idlflags += -Gxhst -Gxhsk
+  IDL_Files {
+    diamond.idl
+  }
+  custom_only = 1
+}
+
+
+project(*test_stub): taox11_lib {
+  after += *idl
+
+  sharedname   = collocation_test_stub
+  dynamicflags += MY_STUB_BUILD_DLL
+
+  Source_Files {
+    diamondC.cpp
+  }
+}
+
+project(*diamond) : taox11_portableserver {
+  after       += *idl *test_stub
+  after       += collocation_test_stub
+
+  sharedname   = collocation_diamond
+  dynamicflags += DIAMOND_BUILD_DLL
+
+  libs        += collocation_test_stub
+
+  Source_Files {
+    diamond_i.cpp
+    diamondS.cpp
+  }
+}
+
+project(*server) : taox11_server, strategies {
+  after   += *test_stub *diamond
+  libs    += collocation_test_stub collocation_diamond
+  exename  = collocation
+
+  Source_Files {
+    collocation_tester.cpp
+    collocation.cpp
+  }
+}

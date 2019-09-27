@@ -1,0 +1,277 @@
+// -*- MPC -*-
+
+project(ridl_orb_idl) : pidlc_defaults {
+  custom_only = 1
+  PIDLC_Files {
+    gendir = $(TAOX11_ROOT)/ridlbe/c++11
+    orb.idl
+  }
+}
+
+project(taox11_core_idl) : ridl_core_defaults, install, pidl_install {
+  custom_only = 1
+  idlflags += -SS -Sorb -Gp -Gd -Gatc -o . \
+              -I $(TAO_ROOT) \
+              -Wb,export_macro=TAOX11_Export \
+              -Wb,export_include=tao/x11/taox11_export.h \
+              -Wb,anytypecode_export_macro=TAOX11_AnyTypeCode_Export \
+              -Wb,anytypecode_export_include=tao/x11/anytypecode/taox11_anytypecode_export.h
+
+  idlflags -= -Sa -St
+
+  idlflags += --namespace TAOX11_NAMESPACE
+
+  IDL_Files {
+    gendir = .
+    $(TAO_ROOT)/tao/Messaging_SyncScope.pidl >> Messaging_SyncScopeA.cpp
+    $(TAO_ROOT)/tao/PI_Forward.pidl >> PI_ForwardA.cpp
+    $(TAO_ROOT)/tao/PortableInterceptor.pidl >> PortableInterceptorA.cpp
+    $(TAO_ROOT)/tao/IOP.pidl >> IOPA.cpp
+    $(TAO_ROOT)/tao/TAO.pidl >> TAOA.cpp
+    $(TAO_ROOT)/tao/Messaging_PolicyValue.pidl >> Messaging_PolicyValueA.cpp
+    $(TAO_ROOT)/tao/Current.pidl >> CurrentA.cpp
+    $(TAO_ROOT)/tao/Services.pidl >> ServicesA.cpp
+  }
+
+  IDL_Files {
+    gendir = .
+    idlflags += -Gos
+    $(TAO_ROOT)/tao/TimeBase.pidl >> TimeBaseA.cpp
+  }
+
+  IDL_Files {
+    gendir = .
+    idlflags += -Glons
+    $(TAO_ROOT)/tao/Policy_Forward.pidl >> Policy_ForwardA.cpp
+    $(TAO_ROOT)/tao/Policy_Manager.pidl >> Policy_ManagerA.cpp
+    $(TAO_ROOT)/tao/Policy_Current.pidl >> Policy_CurrentA.cpp
+  }
+
+  IDL_Files {
+    idlflags -= -Wb,export_macro=TAOX11_Export \
+                -Wb,export_include=tao/x11/taox11_export.h
+    idlflags += -Sots \
+                -Wb,export_macro=TAOX11_AnyTypeCode_Export \
+                -Wb,export_include=tao/x11/anytypecode/taox11_anytypecode_export.h
+    idlflags += -Gos
+    gendir = .
+    $(TAO_ROOT)/tao/Typecode_types.pidl >> Typecode_typesA.cpp
+  }
+
+  IDL_Files {
+    gendir = .
+    $(TAO_ROOT)/tao/orb_types.pidl >> orb_typesA.cpp
+    $(TAO_ROOT)/tao/CONV_FRAME.pidl >> CONV_FRAMEA.cpp
+    $(TAO_ROOT)/tao/ParameterMode.pidl >> ParameterModeA.cpp
+  }
+
+  IDL_Files {
+    idlflags += -Gaia -Gos
+    gendir = .
+    $(TAO_ROOT)/tao/BooleanSeq.pidl >> BooleanSeqA.cpp
+    $(TAO_ROOT)/tao/CharSeq.pidl >> CharSeqA.cpp
+    $(TAO_ROOT)/tao/DoubleSeq.pidl >> DoubleSeqA.cpp
+    $(TAO_ROOT)/tao/FloatSeq.pidl >> FloatSeqA.cpp
+    $(TAO_ROOT)/tao/LongDoubleSeq.pidl >> LongDoubleSeqA.cpp
+    $(TAO_ROOT)/tao/LongLongSeq.pidl >> LongLongSeqA.cpp
+    $(TAO_ROOT)/tao/LongSeq.pidl >> LongSeqA.cpp
+    $(TAO_ROOT)/tao/OctetSeq.pidl >> OctetSeqA.cpp
+    $(TAO_ROOT)/tao/ShortSeq.pidl >> ShortSeqA.cpp
+    $(TAO_ROOT)/tao/StringSeq.pidl >> StringSeqA.cpp
+    $(TAO_ROOT)/tao/ULongLongSeq.pidl >> ULongLongSeqA.cpp
+    $(TAO_ROOT)/tao/ULongSeq.pidl >> ULongSeqA.cpp
+    $(TAO_ROOT)/tao/UShortSeq.pidl >> UShortSeqA.cpp
+    $(TAO_ROOT)/tao/WCharSeq.pidl >> WCharSeqA.cpp
+    $(TAO_ROOT)/tao/WStringSeq.pidl >> WStringSeqA.cpp
+  }
+
+  //PidlInstallWithoutBuilding_Files {
+  //  InterfaceDef.pidl
+  //  InvalidName.pidl
+  //  Object_Key.pidl
+  //  WrongTransaction.pidl
+  //  orb.idl
+  //}
+}
+
+project(taox11) : taolib, taox11_defaults {
+  after += taox11_core_idl
+  sharedname = taox11
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags += TAOX11_BUILD_DLL
+
+  Source_Files {
+    CurrentC.cpp
+    orb_typesC.cpp
+    Policy_ForwardC.cpp
+    Policy_ManagerC.cpp
+    Policy_CurrentC.cpp
+    PolicyC.cpp
+    ServicesC.cpp
+    BooleanSeqC.cpp
+    CharSeqC.cpp
+    DoubleSeqC.cpp
+    FloatSeqC.cpp
+    CONV_FRAMEC.cpp
+    ParameterModeC.cpp
+    LongDoubleSeqC.cpp
+    LongLongSeqC.cpp
+    LongSeqC.cpp
+    OctetSeqC.cpp
+    ShortSeqC.cpp
+    StringSeqC.cpp
+    ULongLongSeqC.cpp
+    ULongSeqC.cpp
+    UShortSeqC.cpp
+    WCharSeqC.cpp
+    WStringSeqC.cpp
+    IOPC.cpp
+    Messaging_PolicyValueC.cpp
+    Messaging_SyncScopeC.cpp
+//    PI_ForwardC.cpp
+//    PortableInterceptorC.cpp
+    TimeBaseC.cpp
+  }
+
+  Source_Files {
+    log.cpp
+    orb.cpp
+    orb_registry.cpp
+    object.cpp
+    object_loader.cpp
+    stub_arg_traits.cpp
+    exception.cpp
+    system_exception.cpp
+    user_exception.cpp
+    user_exception_proxy_out.cpp
+    valuefactory_manager_adapter.cpp
+    valuetype_adapter.cpp
+    ifr_client_adapter.cpp
+    nvlist_adapter.cpp
+    dynamic_adapter.cpp
+    typecode_factory_adapter.cpp
+    policyfactory_manager_adapter.cpp
+    policy_current_impl.cpp
+    policy_manager_impl.cpp
+    anyinsert_adapter.cpp
+  }
+
+  Header_Files {
+    anyinsert_adapter.h
+    CurrentC.h
+    orb_typesC.h
+    InterfaceDefC.h
+    Typecode_typesC.h
+    CONV_FRAMEC.h
+    ParameterModeC.h
+    Policy_ForwardC.h
+    Policy_ManagerC.h
+    Policy_CurrentC.h
+    PolicyC.h
+    ServicesC.h
+    BooleanSeqC.h
+    CharSeqC.h
+    DoubleSeqC.h
+    FloatSeqC.h
+    LongDoubleSeqC.h
+    LongLongSeqC.h
+    LongSeqC.h
+    OctetSeqC.h
+    ShortSeqC.h
+    StringSeqC.h
+    ULongLongSeqC.h
+    ULongSeqC.h
+    UShortSeqC.h
+    WCharSeqC.h
+    WStringSeqC.h
+    IOPC.h
+    Messaging_PolicyValueC.h
+    Messaging_SyncScopeC.h
+    PI_ForwardC.h
+    PortableInterceptorC.h
+    TimeBaseC.h
+    CurrentP.h
+    Typecode_typesP.h
+    CONV_FRAMEP.h
+    ParameterModeP.h
+    orb_typesP.h
+    Policy_ForwardP.h
+    Policy_ManagerP.h
+    Policy_CurrentP.h
+    PolicyP.h
+    ServicesP.h
+    BooleanSeqP.h
+    CharSeqP.h
+    DoubleSeqP.h
+    FloatSeqP.h
+    LongDoubleSeqP.h
+    LongLongSeqP.h
+    LongSeqP.h
+    OctetSeqP.h
+    ShortSeqP.h
+    StringSeqP.h
+    ULongLongSeqP.h
+    ULongSeqP.h
+    UShortSeqP.h
+    WCharSeqP.h
+    WStringSeqP.h
+    IOPP.h
+    Messaging_PolicyValueP.h
+    Messaging_SyncScopeP.h
+    PI_ForwardP.h
+    PortableInterceptorP.h
+    TimeBaseP.h
+  }
+
+  Header_Files {
+    stddef.h
+    taox11_export.h
+    exception.h
+    system_exception.h
+    system_exception_x11.h
+    user_exception.h
+    user_exception_proxy_out.h
+    object.h
+    object_loader.h
+    orb.h
+    corba.h
+    objproxy.h
+    stub_arg_traits.h
+    std_mutex.h
+    cdr_long_double.h
+    valuefactory_manager_adapter.h
+    valuetype_adapter.h
+    ifr_client_adapter.h
+    nvlist_adapter.h
+    dynamic_adapter.h
+    typecode_factory_adapter.h
+    policyfactory_manager_adapter.h
+    log.h
+    basic_traits.h
+    basic_arguments.h
+    special_basic_arguments.h
+    anyinsert_adapter.h
+    object_traits_t.h
+    arg_traits_t.h
+    basic_argument_t.h
+    bounded_string_t.h
+    bounded_vector_t.h
+    special_basic_argument_t.h
+    user_exception_proxy_in_t.h
+    sequence_cdr_t.h
+    sequence_os_t.h
+    array_cdr_t.h
+    array_os_t.h
+    long_double_argument_t.h
+    idl_traits_t.h
+    bounded_type_traits_t.h
+  }
+
+  Template_Files {
+    basic_argument_t.cpp
+    special_basic_argument_t.cpp
+    user_exception_proxy_in_t.cpp
+    long_double_argument_t.cpp
+  }
+
+}

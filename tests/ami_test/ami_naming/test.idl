@@ -1,0 +1,68 @@
+/**
+ * @file    test.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+module A
+  {
+
+    struct AMI_TestHandler{
+      char c;
+    };
+
+    struct bar{
+      char AMI_TestHandler;
+    };
+
+    interface Test
+      {
+        long sendc_ami_foo (in boolean in_b);
+
+        long foo (in long in_l);
+
+        long sendc_foo (in short in_s);
+
+        attribute boolean sendc_ami_get_yadda;
+
+        attribute short sendc_get_yadda;
+
+        attribute long yadda;
+
+        //test attribute name with c++11 keyword
+        attribute long do;
+
+       }; //@CORBA (ami=true)
+
+    const char AMI_AMI_TestHandler = 'b';
+
+    interface Two
+      {
+        long foo_two (in long in_l);
+
+        //test operation name with c++11 keyword
+        long do (in long in_l);
+      }; //@CORBA (ami=true)
+
+    interface Hello
+      {
+        Test get_iTest();
+        Two get_iTwo ();
+
+        /// A method to shutdown the ORB
+        /// This method is used to simplify the test shutdown process
+        oneway void shutdown ();
+      };
+
+  };
+
+module B
+  {
+    struct AMI_TwoHandler{
+     char c;
+    };
+
+    const char AMI_AMI_TwoHandler = 'c';
+
+  };

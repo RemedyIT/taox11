@@ -1,0 +1,24 @@
+
+// generated from <%= ridl_template_path %>
+/// @copydoc <%= doc_scoped_name %>
+class <%= stub_export_macro %><%= cxxname %> final
+ : public TAOX11_NAMESPACE::CORBA::UserException
+{
+public:
+
+  virtual void _raise () const override;
+
+% if generate_cdr_streaming?
+  virtual void _tao_encode (TAO_OutputCDR &cdr) const override;
+
+  virtual void _tao_decode (TAO_InputCDR &cdr) override;
+% end
+
+% if generate_any_support?
+  virtual void _any_insert (TAOX11_CORBA::Any &) const override;
+
+  virtual void _any_insert (TAOX11_CORBA::Any &) override;
+% end
+
+  /// Deep copy
+  virtual TAOX11_NAMESPACE::CORBA::Exception *_tao_duplicate () const override;

@@ -1,0 +1,27 @@
+// -*- IDL -*-
+/**
+ * @file   test.idl
+ *
+ * @brief  Simple IDL file to test PortableInterceptor::Current
+ *         support.
+ *
+ * @author  Martin Corino
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module PICurrentTest
+{
+
+  interface test
+  {
+    void invoke_me ();
+
+    void invoke_you ();
+
+    void invoke_we ();
+
+    oneway void shutdown ();
+  };
+
+};

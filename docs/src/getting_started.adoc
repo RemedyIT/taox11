@@ -1,0 +1,366 @@
+include::_{backend}_settings.adoc[]
+
+= Getting started with TAOX11
+
+== What is TAOX11?
+
+TAOX11 is the CORBA implementation supporting the
+https://www.omg.org/spec/CPP11[IDL to C++11] Language Mapping.
+TAOX11 uses the core of
+https://www.remedy.nl/opensource/tao.html[TAO] to provide you as
+user with a large set of features and capabilities. TAO is a well
+known and stable CORBA implementation with a rich set of features and
+capabilities.
+
+=== Supported features
+
+TAOX11 has the following major features:
+
+. Compliant with the IDL to {cxx11} v1.3 language mapping
+. CORBA v3.3 compliant
+. Full support of the IDL type system (basic types, constant, enum,
+string, wide string, sequence, array, struct, union, typedef, exception)
+. Full support for local and remote CORBA interfaces
+. Full POA support
+. Full support for valuetype and abstract interfaces
+. Full support for Any
+. Through POA Collocation optimization
+. <<ami/taox11_ami.html#,CORBA AMI support>>
+. Messaging and BiDirection GIOP Policies support
+. IOR Table support
+. CodecFactory support
+. DynamicAny and TypeCodeFactory support
+
+=== The IDL to {cxx11} language mapping
+
+The IDL to {cxx11} language mapping is much easier to learn and use than the IDL
+to C++ language mapping. The IDL to {cxx11} language mapping brings you
+the following improvements:
+
+Integration of standard {cxx11} types::
+
+ The {cxx11} language mapping leverages standard {cxx11} types for all IDL
+standard types like the integer types, floating point types, character
+types, booleans, strings (`std::string`), sequences
+(`std::vector`) and arrays (`std::array`). This mapping provides a great
+improvement of ease of use and far better opportunities for integration
+with other {cpp}(11) based software (like the
+http://en.wikipedia.org/wiki/{cpp}_standard_library[{cpp}(11) Standard
+Library]).
+Have a look at the
+CORBA Programming with TAOX11
+and Comparing IDL to
+{cpp} with IDL to {cxx11} tutorials on the
+https://taox11.remedy.nl/documents/presentations.html[TAOX11] website for
+more details.
+
+Simplified memory management::
+
+ The complete `\_ptr/_var` concept has been removed (!) together with
+constructs like `_duplicate` for CORBA object references and
+`string_dup` for CORBA strings. +
+ Instead the {cxx11} mapping leverages standardized concepts from the
+{cxx11} language for the new reference types based on the standard {cxx11}
+`std::shared_ptr`/`std::weak_ptr` semantics for object, servant, and
+valuetype references implementing a memory management concept without
+any need for developer controlled reference counting, `new` or `delete`.
+Other ('old style') pointer types have been replaced by implementations
+relying on the new {cxx11} _move semantics_ completely foregoing reference
+counting requirements. +
+ As you can see in the https://taox11.remedy.nl/documents/presentations.html[IDL2C++11
+tutorial], memory management has become much easier and far less error
+prone.
+
+API slim down::
+
+ The implementation of standardized concepts has led to a significant
+clean up and slim down of the API for standard CORBA classes and code
+generated from IDL definitions. This again improves usability and
+reduces the learning curve.
+
+Reduced complexity::
+
+ All of the above leads to a vastly less complex programming model for
+CORBA applications not only increasing ease of use and reduced learning
+curves but also ultimately leading to software with significantly fewer
+_source lines of code_ (SLOCs) or in other words; cheaper and better
+maintainable software. +
+
+On the Remedy IT https://taox11.remedy.nl/documents/presentations.html[TAOX11]
+product website you can find the
+Programming with IDL to {cxx11} tutorial and the
+Comparing IDL to {cpp} with IDL to
+{cxx11} tutorial.
+
+== Why TAOX11?
+
+Based on the new IDL to {cxx11} mapping TAOX11 brings you the following
+benefits:
+
+.  Development time reduction +
+ The many improvements in the new IDL to {cxx11} mapping will speed up you
+development significantly because of:
+* reduced learning curves as a result of reduced complexity and
+increased standardization
+* reduced error correction as a result of simplified memory managements
+as well as the reduced complexity
+* improved software reuse as a result of increased standards integration
+.  Costs reduction +
+ Your increased development speed and better maintainable software built
+with TAOX11 will save you time and (thus) money.
+.  Full interoperability +
+ Just like the old mapping, TAOX11 applications are interoperable with
+other CORBA applications, even if they are programmed in another
+programming language and/or are running on another operating system.
+.  Scaffolding toolset BRIX11 +
+ <<{parent_dir}/brix11/brix11.adoc#,BRIX11>> is a
+http://en.wikipedia.org/wiki/Scaffold_%28programming%29[scaffolding]
+toolset provided by Remedy IT to help you start up your development with
+TAOX11. See <<BRIX11,here>> for more information on this.
+.  Reusable logging framework +
+ TAOX11 provides you a <<x11_logging.adoc#,logging
+framework>> based on C++ streaming operators allowing you to easily add
+clear and concise logging statements to your source code. This framework
+is used to implement the TAOX11 core logging support and can be reused
+to implement your application logging while keeping the control settings
+separate. +
+ The logging framework is highly configurable allowing you to fully
+control your logging output and format.
+
+== Compilation of TAOX11
+
+=== Supported compilers
+
+TAOX11 is currently supported using the following compilers
+
+* GCC version 4.8 or newer
+
+At this moment these are the only supported compilers. Remedy IT is
+working with various compiler vendors to get the needed {cxx11} features
+supported in their respective products.
+
+=== Supported platforms
+
+TAOX11 is currently supported on
+
+* CentOS 7.3 x86_64 using GCC 4.8.5
+
+TAOX11 is using at least the following {cxx11} features
+
+* Strongly typed enumerations
+* `std::shared_ptr` and `std::weak_ptr`
+* `constexpr`, generalized constant expressions
+* Range-based for loop
+* Explicit overrides and final
+* `nullptr` constant
+* Explicit conversion operators
+* Unrestricted unions
+* Variadic templates
+* Explicitly defaulted and deleted special member functions
+* Lambdas
+
+=== Compilation
+
+==== Linux
+
+Before compiling TAOX11 on Linux check the following
+prerequisites:
+
+[cols="<,<",options="header",]
+|=========================================
+|Prerequisite |Package name
+|ruby 2.0 or newer|ruby
+|perl version 5.10 or newer |perl
+|gcc version 4.7 or newer |gcc
+|g++ version 4.7 or newer |gcc-c++
+|clang 5 or newer |clang
+|GNU make version 3.81 or newer |make
+|GNU Bash|bash
+|=========================================
+
+==== Windows
+
+See the
+<<windows_instructions.adoc#,Development on Windows>>
+information for more details on the TAOX11 prerequisites, compilation, and setting up a
+development environment for TAOX11.
+
+==== Android
+
+For the prerequisites, installation, and usage of TAOX11 on Android read our
+<<taox11_on_android.adoc#,Android>> instructions.
+
+=== Directory structure
+
+The taox11 directory contains the following directories after
+setup +
+
+[cols="<,<7",options="header",]
+|=========================================
+|Folder|Description
+|ACE | The ACE+TAO+MPC source code which is used by TAOX11
+|bin | Contains the <<ridlc#,ridlc>> and <<BRIX11,brix11>> start scripts
+|brix11 | The <<BRIX11,brix11>> toolset
+|ciaox11 | The headers, templates, libraries, tests and examples for the CIAOX11 LwCCM framework
+|dancex11 | The DnCX11 deployment tooling runtime components
+|docs | Common documentation resources
+|etc | Miscellaneous configuration files
+|lib | Precompiled libraries
+|ridl | The RIDL compiler front end
+|taox11 | The TAOX11 core, RIDL backend for {cxx11}, examples, tests, headers, and templates
+|=========================================
+
+== Developing with TAOX11
+
+TAOX11 reuses both the (classic) build system provided by ACE&TAO which
+is based on link:{docs_root}/../../ACE/MPC/docs/html/MakeProjectCreator.html[MPC] for
+makefile (or other compiler project file) generation as well as the Perl
+based test framework used for the regression tests.
+
+See link:{docs_root}/../../ACE/MPC/docs/html/MakeProjectCreator.html[this] page for more
+information about MPC. MPC makes sure that all compiler flags are set
+correctly so that every library and application is built with the same
+compiler flags. TAOX11 will also use MPC.
+
+It is *strongly* advised that the GNU makefiles or Visual Studio solutions
+for your TAOX11 applications are generated with the aid of MPC.
+
+TAOX11 is distributed as a binary package so there is no need to compile
+ACE, TAO, or any other parts required by TAOX11 as well as the TAOX11
+libraries themselves.
+
+There are two ways to develop your application with TAOX11:
+
+.  Using the BRIX11 toolset
+.  The classic (TAO) way
+
+=== BRIX11
+
+<<{parent_dir}/brix11/brix11.adoc#,BRIX11>> is a toolset provided by Remedy
+IT to help you start up your TAOX11 development and to simplify building
+and running your TAOX11 applications.
+
+BRIX11 provides a common, integrated interface simplifying the execution
+of various commands from the normal development cycle.
+Additionally it supports generation of boiler plate, starter code for
+IDL files, client and/or server code and CORBA servant implementations
+as well as generate a (standard) MPC project file and test script
+(`run_test.pl` file). BRIX11 is also able to compile and run the
+application once all files are generated.
+
+Using BRIX11 there is also no need to set any environment variables
+since BRIX11 will analyze your development environment and configure the
+environment for the development commands fully automatically. In fact
+you can immediately start using BRIX11 after installation of TAOX11 by
+calling the `brix11` script located in the `bin` directory in the root
+of the installation folder (the only thing you might want to do is to
+add the path to the `bin` directory to the `PATH` so you can execute
+`brix11` from anywhere).
+
+To build and run the whole test suite of TAOX11, using BRIX11, go to the
+root of the TAOX11 installation and run the following commands:
+
+* `bin/brix11 generate make taox11/tests` for generating the build files
+for all tests
+* `bin/brix11 generate make taox11/examples` for generating the build
+files for all examples
+* `bin/brix11 make taox11/tests` for building all tests
+* `bin/brix11 make taox11/examples` for building all examples
+* `bin/brix11 run list` for running the tests listed in
+`<package_root>/taox11/bin/taox11_test.lst`
+
+or do this by using one chained command
+
+* `bin/brix11 gen make taox11/tests -- gen make taox11/examples -- make taox11/tests -- make taox11/examples -- run list`
+
+Use the BRIX11 _help_ command to learn more about the commands used.
+
+Another way to run all tests is to use the output of the BRIX11
+_environment_ command to create a 'setenv' script and use it to update
+your environment with `source /path/of/setenv` (or use the _environment_
+command directly see `brix11 help env`) and then execute
+`perl $ACE_ROOT/bin/auto_run_tests.pl -r $TAOX11_BASE_ROOT -l $TAOX11_BASE_ROOT/bin/taox11_tests.lst`
+to run the tests.
+
+More information about BRIX11 can be found
+<<{parent_dir}/brix11/brix11.adoc#,here>>.
+
+=== Classic development
+
+To build and run a TAOX11 unit test or your own TAOX11 application,
+perform the following steps to make sure all needed environment
+variables are set correctly.
+
+- Open a terminal and navigate to the root directory of the package
+(typically `taox11_<version>`) and then either
+
+** create a _setenv_ (or _setenv.bat_) script using brix11 by invoking
+`bin/brix11 env > setenv` (or `bin\brix11 env > setenv.bat` on Windows)
+and next invoke `source setenv` (or `setenv.bat` on Windows) +
+ *or*
+** (on Linux) use the brix11 _environment_ command directly to update the
+current environment by invoking `$(bin/brix11 env)`
+
+Navigate to the root of the TAOX11 test/examples directory, to a
+specific test/example, or to the root directory of your application. Be
+aware that MPC files are needed in order to generate the GNU makefiles or
+Visual Studio solutions.
+
+For GNU Make invoke `mwc.pl -type gnuace` (on Windows use
+`perl %TAOX11_ROOT%/bin/mwc.pl -type gnuace`).
+This will create the GNU makefiles. MPC will iterate through all sub
+directories and parse the MPC files. Once the GNU makefiles are generated, invoke `make`.
+
+For Visual Studio 2015 invoke
+`perl %TAOX11_ROOT%/bin/mwc.pl -type vc14` and for Visual Studio 2017
+invoke `perl %TAOX11_ROOT%/bin/mwc.pl -type vs2017`.
+This will create the Visual Studio solutions. MPC will iterate through all sub
+directories and parse the MPC files. Once the Visual Studio solutions
+are generated start Visual Studio and build the generated solution.
+
+Each test in the TAOX11 tests or examples directory contains a perl script.
+This perl script runs the compiled test or example. This script can be executed by
+invoking `perl run_test.pl`.
+
+=== Libraries and MPC
+
+Building TAOX11 applications requires you to link against the TAOX11
+libraries. Making use of MPC and BRIX11 makes it easier for you to link
+against the TAOX11 libraries. This <<lib_mpc.adoc#,page>>
+gives an overview of all the TAOX11 libraries and which MPC base
+project(s) you need to create a working TAOX11 application (BRIX11
+generated MPC project files will automatically use these base projects
+correctly).
+
+=== Manually compile TAOX11 applications
+
+<<compilation.adoc#,This page>> shows how to manually
+compile and link your TAOX11 applications. It gives an overview of which
+command line options are used and which libraries are needed when
+linking a simple TAOX11 client or server application. It gives some
+background information about the GCC options used.
+
+== Support
+
+TAOX11 and BRIX11 are supported by Remedy IT. Please read the
+<<taox11_faq.adoc#,FAQ-section>> first before asking a
+question. +
+ If your problem was not listed in the FAQ, you can submit your issue
+online through our https://swsupport.remedy.nl[Software Support Portal]
+or by sending an email with a detailed description using our
+PROBLEM-REPORT-FORM to
+mailto:taox11support@remedy.nl[taox11support@remedy.nl]. The
+PROBLEM-REPORT-FORM is available in the root directory of the TAOX11
+package, please follow the directions in the PRF.
+
+=== Training material
+
+A basic tutorial about the IDL to {cxx11} language mapping is available at
+the Remedy IT
+https://taox11.remedy.nl/documents/presentations.html[TAOX11 product website]. There
+you can also find a comparison between the IDL to C++ and IDL to {cxx11}
+language mapping. +
+ +
+ Remedy IT offers a
+https://taox11.remedy.nl/services/training.html[CORBA
+Programming with {cxx11}] course.

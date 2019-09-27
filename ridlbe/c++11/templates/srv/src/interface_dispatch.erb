@@ -1,0 +1,5 @@
+// generated from <%= ridl_template_path %>
+void <%= srvproxy_cxxname %>::_dispatch (TAO_ServerRequest & req, TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall)
+{
+  this->synchronous_upcall_dispatch (req, servant_upcall, this);
+}

@@ -1,0 +1,18 @@
+// generated from <%= ridl_template_path %>
+% _intf_traits_decl_incl_guard_ = scoped_proxy_cxxname.to_include_guard
+#if !defined (_INTF_<%= _intf_traits_decl_incl_guard_ %>_VAR_OUT_CH_)
+#define _INTF_<%= _intf_traits_decl_incl_guard_ %>_VAR_OUT_CH_
+% unless is_abstract?
+
+class <%= proxy_cxxname %>;
+typedef <%= proxy_cxxname %> *<%= proxy_cxxname %>_ptr;
+
+typedef
+  TAO_Objref_Var_T< <%= proxy_cxxname %>>
+    <%= proxy_cxxname %>_var;
+
+typedef
+  TAO_Objref_Out_T< <%= proxy_cxxname %>>
+    <%= proxy_cxxname %>_out;
+% end
+#endif // !_INTF_<%= _intf_traits_decl_incl_guard_ %>_VAR_OUT_CH_

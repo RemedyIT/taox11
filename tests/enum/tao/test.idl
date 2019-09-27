@@ -1,0 +1,59 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  /// An interface for testing IDL primitive types
+  enum enumType
+  {
+    a,
+    b,
+    c
+  };
+
+  enum enumTypeRepeat
+  {
+    d,
+    e,
+    f
+  };
+
+  const enumType MY_A = a;
+
+
+  /// A very simple interface
+  interface Hello
+  {
+    enum enumTypeRepeat
+    {
+      d,
+      e,
+      f
+    };
+
+    enum enumInInterfaceType
+    {
+      g,
+      h,
+      i
+    };
+
+    const enumType MY_A = a;
+    const Test::enumType MY_B = b;
+
+    /// Get an enum.
+    enumType get_enum();
+    /// Transfer an enum in both directions.
+    enumType inout_enum(in enumType pin, out enumType pout, inout enumType pinout);
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process.
+    oneway void shutdown ();
+  };
+};

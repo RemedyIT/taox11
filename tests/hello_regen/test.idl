@@ -1,0 +1,43 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  interface Foo
+  {
+    struct S
+    {
+      boolean f;
+    };
+  };
+
+  /// A very simple interface
+  interface Hello
+  {
+    /// integer property
+    attribute long int_prop;
+
+    /// Return a simple string
+    string get_string ();
+
+    /// Foo factory
+    void create_foo (out Foo foo_inst);
+
+    Foo::S update (in Foo::S s);
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+
+  /// A simple typedef
+  typedef Hello Hello2;
+};

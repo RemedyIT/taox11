@@ -1,0 +1,41 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+#include "tao/TimeBase.pidl"
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  interface Hello
+  {
+    /// Return a UTC
+    TimeBase::UtcT get_UtcT ();
+    /// Set a UtcT
+    void set_UtcT (in TimeBase::UtcT u);
+    /// Out a UtcT
+    void out_UtcT (out TimeBase::UtcT u);
+    /// InOut a UtcT
+    void inout_UtcT (inout TimeBase::UtcT u);
+    /// Attribute
+    attribute TimeBase::UtcT utc;
+
+    /// Return a IntervalT
+    TimeBase::IntervalT get_IntervalT ();
+    /// Set a IntervalT
+    void set_IntervalT (in TimeBase::IntervalT i);
+    /// Out a IntervalT
+    void out_IntervalT (out TimeBase::IntervalT i);
+    /// InOut a IntervalT
+    void inout_IntervalT (inout TimeBase::IntervalT i);
+    /// Attribute
+    attribute TimeBase::IntervalT itv;
+
+    /// A method to shutdown the ORB
+    oneway void shutdown ();
+  };
+};

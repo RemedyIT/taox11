@@ -1,0 +1,57 @@
+
+project(taox11_dynamicany_idl) : ridl_defaults, taox11_valuetype,  install {
+  custom_only = 1
+  IDL_Files {
+    idlflags +=  -Glons -Gp -Gd -Sci -SS -Sorb -o . \
+                -I $(TAO_ROOT) --namespace TAOX11_NAMESPACE \
+                -Wb,export_macro=TAOX11_DynamicAny_Export \
+                -Wb,export_include=tao/x11/dynamic_any/taox11_dynamicany_export.h \
+                -Wb,include_guard=TAOX11_DYNAMICANY_SAFE_INCLUDE \
+                -Wb,safe_include=tao/x11/dynamic_any/dynamicany.h
+    gendir = .
+    $(TAO_ROOT)/tao/DynamicAny/DynamicAny.pidl
+  }
+
+  specific {
+    install_dir = tao/x11/dynamic_any
+  }
+}
+
+
+project(taox11_dynamicany) : taox11_lib, install, taox11_valuetype, taox11_avoids_corba_e {
+  after       += taox11_dynamicany_idl
+  sharedname    = taox11_dynamicany
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags  = TAOX11_DYNAMICANY_BUILD_DLL
+
+  Source_Files {
+    basic_type_traits.cpp
+    dynamicany.cpp
+    DynamicAnyC.cpp
+    dynany_impl.cpp
+    dynarray_i.cpp
+    dyn_common.cpp
+    dynenum_i.cpp
+    dynsequence_i.cpp
+    dynstruct_i.cpp
+    dynunion_i.cpp
+    dynvalue_i.cpp
+    dynvaluebox_i.cpp
+    dynvaluecommon_i.cpp
+    dynanyfactory.cpp
+  }
+
+  Header_Files {
+   *.h
+   DynamicAnyC.h
+   DynamicAnyS.h
+  }
+
+  Template_Files {
+    dynanyutils_t.cpp
+  }
+
+  specific {
+    install_dir = tao/tao/x11/dynamic_any
+  }
+}

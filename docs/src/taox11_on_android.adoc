@@ -1,0 +1,110 @@
+include::_{backend}_settings.adoc[]
+
+= TAOX11 Development for Android
+
+== Setting up the TAOX11 Android Development Environment
+
+=== Requirements
+
+The TAOX11 development environment requires the installation of a GCC
+toolchain >= 4.7
+extracted from an official Android NDK installation. Downloadable
+installation packages can be found
+https://developer.android.com/tools/sdk/ndk/index.html[here]
+
+The standard TAOX11 development environment expects a standalone
+toolchain installed according to the documentation in the
+_./docs/STANDALONE-TOOLCHAIN.html_ file from the Android NDK
+installation. Using the unextracted toolchain from the NDK installation
+may work, but this has not been tested and is not supported.
+
+To be able to use the toolchain to compile and link TAOX11 applications
+for Android the `<standalone_toolchain_path>/bin` directory needs to be
+added to the `PATH`.
+
+Additionally a functioning Perl interpreter is required for MPC based
+build file generation and running test scripts as also described for
+native Linux installations.
+
+=== Installing
+
+For the Android cross compilation two TAOX11 trees have to be created
+onto your system. As first you need to create the host tree which
+provides the <<ridlc.adoc#,RIDL>> compiler and
+<<{parent_dir}/brix11/brix11.adoc#,BRIX11>> scaffolding tool that runs on
+your development system. Create the host version into a directory which
+we call from now `<host_dir>`
+
+Secondly you need to create the target Android version
+into a directory which we call from now `<target_dir>` This target tree
+provides the TAOX11 headers that you need to compile against and the
+TAOX11 libraries that you need for linking and runtime execution.
+
+=== Configuration
+
+In order to enable the Android target development tools to find the RIDL
+and BRIX11 modules in the host tree you need to define the
+`X11_HOST_ROOT` environment variable to point to the host tree
+installation root as follows:
+`export X11_HOST_ROOT=<host_dir>/<taox11>`.
+
+Additionally you can add `<target_dir>/<taox11>/bin>` to your
+`PATH` environment variable to make the RIDL and BRIX11 starter scripts
+available in your path. If you do not do that you will always be able to
+start the tools using invocations like
+`<target_dir>/<taox11>/bin>/brix11 <args>`.
+
+=== Building and running
+
+When you have installed the required development support software (host
+and target) as described above you can go on to developing with TAOX11
+as described in that section of the
+<<getting_started.adoc#_developing_with_taox11,Getting Started with
+TAOX11>> document.
+
+Please be aware when configuring your build environment manually that
+the following environment variables should point to the target tree as
+follows:
+
+* `ACE_ROOT=<target_dir><taox11>/ACE/ACE`
+* `TAO_ROOT=<target_dir><taox11>/ACE/TAO`
+* `MPC_ROOT=<target_dir><taox11>/ACE/MPC`
+* `MPC_BASE=<target_dir><taox11>/taox11/bin/MPC`
+* `TAOX11_BASE_ROOT=<target_dir><taox11>`
+* `TAOX11_ROOT=<target_dir><taox11>/taox11`
+
+When using <<{parent_dir}/brix11/brix11.adoc#,BRIX11>> this is handled automatically
+(for more information see the Getting started document mentioned above).
+
+Running the (cross compiled) applications on an Android target (the
+binaries are not executable on the host system) requires a number of
+additional steps and/or facilities as described below.
+
+==== Dependencies
+
+As TAOX11 implements a {cxx11} language mapping for IDL all TAOX11 shared
+libraries and applications use and link the shared STD {cpp} library
+provided with the standalone toolchain (see the
+_./docs/CPLUSPLUS-SUPPORT.html_ file from the Android NDK installation).
+As this library is *NOT* installed on Android systems by default you
+will have to deploy it along with your application binaries.
+
+==== Running TAOX11 Android applications
+
+Executing TAOX11 Android applications on an Android target system
+requires at least the following:
+
+* Availability of all required TAOX11 binaries on the Android system
+including all required TAOX11 libraries from
+** `$TAOX11_BASE_ROOT/lib` and
+** `$ACE_ROOT/lib`
++
+required by the application(s) as well as the application binary(-ies)
+themselves (client and or server executable(s) and/or application shared
+libraries)
+* Availability of the shared `gnustl_shared` STD {cpp} library from the
+Android standalone toolchain on the Android system
+* Library search paths (through LD_LIBRARY_PATH or installation in
+system directories) to include the locations of the above mentioned
+shared library binaries
+

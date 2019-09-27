@@ -1,0 +1,44 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  interface Hello;
+  interface Hello2;
+
+  interface Hello_Factory
+  {
+    void get_hello (in string log_string,
+                    out Hello hello_obj,
+                    out Hello2 hello2_obj);
+  };
+
+  /// A very simple interface
+  interface Hello
+  {
+    /// Return a simple string
+    string get_string ();
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+
+  interface StringInterface
+  {
+    const string HelloString = "Hello!!!";
+  };
+
+  interface Hello2
+  {
+    void get_string (out StringInterface si);
+  };
+};

@@ -1,0 +1,65 @@
+// -*- MPC -*-
+
+project(portable_interceptor_server_idl) : ridl_core_defaults, install, pidl_install {
+  custom_only = 1
+  idlflags += -Sorb -SS -Ssh -Sci -Gp -Gd \
+              -Wb,export_macro=TAOX11_PI_Server_Export \
+              -Wb,export_include=tao/x11/pi_server/taox11_pi_server_export.h \
+              -I $(TAO_ROOT) -o . --namespace TAOX11_NAMESPACE
+  IDL_Files {
+    gendir = .
+    idlflags += -Wb,unique_include=tao/x11/pi_server/pi_server.h
+    $(TAO_ROOT)/tao/PI_Server/PI_Server_include.pidl
+  }
+  IDL_Files {
+    gendir = .
+    idlflags += -Scc -Sal -Glons
+    idlflags -= -Sa -St
+    ServerRequestInterceptorFwd.pidl
+  }
+  IDL_Files {
+    gendir = .
+    idlflags += -Sal -Glons \
+                -Wb,include_guard=TAOX11_PI_SERVER_SAFE_INCLUDE \
+                -Wb,safe_include=tao/x11/pi_server/pi_server.h
+    idlflags -= -Sa -St
+    ServerRequestInterceptor.pidl
+    $(TAO_ROOT)/tao/PI_Server/ServerRequestInfo.pidl
+  }
+
+  specific {
+    install_dir = tao/x11/pi_server
+  }
+}
+
+project(portable_interceptor_server) : taox11_lib, install, taox11_pi, tao_pi_server {
+  after       += portable_interceptor_server_idl
+  sharedname   = taox11_pi_server
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags += TAOX11_PI_SERVER_BUILD_DLL
+
+  Source_Files {
+    pi_server.cpp
+    server_request_info.cpp
+    server_request_interceptor_proxy.cpp
+    server_request_interceptor_proxy_factory.cpp
+    PI_Server_includeC.cpp
+    ServerRequestInterceptorC.cpp
+    ServerRequestInfoC.cpp
+  }
+
+  Header_Files {
+    taox11_pi_server_export.h
+    pi_server.h
+    server_request_info.h
+    server_request_interceptor_proxy.h
+    server_request_interceptor_proxy_factory.h
+    ServerRequestInfoC.h
+    ServerRequestInterceptorC.h
+    PI_Server_includeC.h
+  }
+
+  specific {
+    install_dir = tao/x11/pi_server
+  }
+}

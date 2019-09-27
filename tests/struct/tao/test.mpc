@@ -1,0 +1,23 @@
+// -*- MPC -*-
+
+project(*tao_struct_idl): taoidldefaults {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*tao_struct_Server): taoserver {
+  exename = server
+  after += *tao_struct_idl
+  Source_Files {
+    foo.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+  IDL_Files {
+  }
+}

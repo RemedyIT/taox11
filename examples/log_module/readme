@@ -1,0 +1,8 @@
+This example shows how to use the TAOX11 logging framework
+
+The TAOX11 logging framework provides a way to declare so
+called user defined logging modules. Each module can have its
+own settings to manipulate the logging output.
+
+Please have a look at the ../../taox11/docs/x11_logging.html
+document for a detailed explanation of the TAOX11 logging framework.

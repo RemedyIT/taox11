@@ -1,0 +1,30 @@
+// -*- MPC -*-
+
+project(*idl): ridl_ostream_defaults, taox11_anytypecode {
+  IDL_Files {
+    ccs.idl
+  }
+  custom_only = 1
+}
+
+project(*server): taox11_server, taox11_cosnaming_stub, taox11_anytypecode, avoids_corba_e_compact, avoids_corba_e_micro {
+  after += *idl
+  Source_Files {
+    icp.cpp
+    server.cpp
+  }
+  Source_Files {
+    ccsC.cpp
+    ccsS.cpp
+  }
+}
+
+project(*client): taox11_client, taox11_cosnaming_stub, taox11_anytypecode {
+  after += *idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    ccsC.cpp
+  }
+}

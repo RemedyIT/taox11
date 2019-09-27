@@ -1,0 +1,49 @@
+//--------------------------------------------------------------------
+// valuebox.mpc
+//
+// Author: Mark Drijver
+//
+// Copyright (c) Remedy IT Expertise BV
+// Chamber of commerce Rotterdam nr.276339, The Netherlands
+//--------------------------------------------------------------------
+
+project(*idl): ridl_ostream_defaults, taox11_valuetype {
+  IDL_Files {
+    vb_basic.idl
+    vb_struct.idl
+    vb_union.idl
+    valuebox.idl
+  }
+  custom_only = 1
+}
+
+project(*Server): taox11_server, taox11_valuetype {
+  after += *idl
+  Source_Files {
+    test_impl.cpp
+    server.cpp
+  }
+  Source_Files {
+    vb_basicC.cpp
+    vb_basicS.cpp
+    vb_structC.cpp
+    vb_structS.cpp
+    vb_unionC.cpp
+    vb_unionS.cpp
+    valueboxC.cpp
+    valueboxS.cpp
+  }
+}
+
+project(*Client): taox11_client, taox11_valuetype {
+  after += *idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    vb_basicC.cpp
+    vb_structC.cpp
+    vb_unionC.cpp
+    valueboxC.cpp
+  }
+}

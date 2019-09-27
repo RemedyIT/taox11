@@ -1,0 +1,27 @@
+// -*- MPC -*-
+
+project(*POA_IDL) : ridl_ostream_defaults, taox11_anytypecode {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*POA_Client) : taox11_client, taox11_anytypecode, avoids_minimum_corba, avoids_corba_e_compact, avoids_corba_e_micro {
+  after += *POA_IDL
+  source_files {
+    client.cpp
+    testC.cpp
+  }
+}
+
+project(*POA_Server) : taox11_server, taox11_anytypecode, avoids_minimum_corba, avoids_corba_e_compact, avoids_corba_e_micro {
+  after += *POA_IDL
+  source_files {
+    test_i.cpp
+    server.cpp
+    servant_activator.cpp
+    testS.cpp
+    testC.cpp
+  }
+}

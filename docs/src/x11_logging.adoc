@@ -1,0 +1,730 @@
+include::_{backend}_settings.adoc[]
+
+= Logging with {cxx11}
+
+Remedy IT has developed a {cxx11} based logging library which supplies
+various streaming operators and macros for logging purposes. +
+
+You can control the logging output by using two parameters:
+
+. Priority +
+  Controls which messages are logged. The following priorities are
+  defined:
+  * `LP_TRACE`
+  * `LP_DEBUG`
+  * `LP_INFO`
+  * `LP_WARNING`
+  * `LP_ERROR`
+  * `LP_CRITICAL`
+  * `LP_PANIC`
+  * `LP_ALL_ERROR` (which is `LP_ERROR | LP_CRITICAL | LP_PANIC`)
+  * `LP_ALL` (which is `LP_TRACE | LP_DEBUG | LP_INFO | LP_WARNING | LP_ERROR | LP_CRITICAL | LP_PANIC`)
+. Verbosity +
+  Controls the format of a log message. The following verbosity flags are defined:
+  * `V_PRIO` -> prints priority (e.g. [LP_DEBUG], [LP_INFO])
+  * `V_THREAD_ID` -> prints the thread ID
+  * `V_PROCESS_ID` -> prints the process ID
+  * `V_TIME` -> prints time
+  * `V_DATETIME` -> prints date and time
+  * `V_CATEGORY` -> prints category (e.g. TAOX11, TESTX11, <user_defined>)
+
+== The default logging framework
+
+The logging framework provides seven logging streams matching the seven
+logging priorities:
+
+* taox11_trace
+* taox11_debug
+* taox11_info
+* taox11_warning
+* taox11_error
+* taox11_critical
+* taox11_panic
+
+Besides these 'regular' streams the framework also provides the same
+streams for wide strings. These streams are identically named except for
+a `_w` postfix, like for instance `taox11_debug_w`
+
+The various TAOX11 logging streams operators behave the same as
+`std::cout` and `std::cerr`. The TAOX11 logging streams can be mixed at
+will as shown here:
+
+----------------------------------------------------------------------------------------
+  taox11_panic << "This is a panic message";
+  taox11_debug << "This message will be continued ";
+  taox11_info << "This info log message will be the second logging output" << std::endl;
+  taox11_debug << "after the info log message has been logged." << std::endl;
+  taox11_error << "This is an error message ";
+  taox11_error.flush ();
+  taox11_warning << "followed by a warning message" << std::endl;
+----------------------------------------------------------------------------------------
+
+Output: +
+
+---------------------------------------------------------------------------
+ This is a panic message
+ This info log message will be the second logging output
+ This message will be continued after the info log message has been logged.
+ This is an error message followed by a warning message
+---------------------------------------------------------------------------
+
+Be aware that in the above example the TAOX11 logging framework has been
+configured so that all messages are logged and that all verbosity levels
+are off.
+
+This in contrast to the TAOX11 logging default. By default only the
+`panic` messages are written to the console and full verbosity is on.
+The same example code would output the following in the default
+situation:
+
+Output: +
+
+--------------------------------------------------------------------------------------
+X11   [LP_PANIC] - (20533|140438470678336) - 11:19:50.104278 - This is a panic message
+--------------------------------------------------------------------------------------
+
+The next paragraphs will show you how to configure the default TAOX11
+logging framework.
+
+=== Controlling which messages are logged
+
+==== In code
+
+The TAOX11 default logging framework can be controlled by using the
+`X11_LOGGER` type. +
+To log for instance only the debug and warning messages, you'll have to
+invoke
+
+----------------------------------------------------------------
+X11_LOGGER::priority_mask (x11_logger::X11_LogMask::LP_DEBUG |
+                           x11_logger::X11_LogMask::LP_WARNING);
+----------------------------------------------------------------
+
+in your code before the logging code is executed.
+
+The output of the example above in this case will be:
+
+---------------------------------------------------------------------------------------------------------------------------------------
+X11 [LP_DEBUG] - (21556|140019666728768) - 11:33:29.005899 - This message will be continued after the info log message has been logged.
+X11 [LP_WARNING] - (21556|140019666728768) - 11:33:29.005994 - followed by a warning message
+---------------------------------------------------------------------------------------------------------------------------------------
+
+==== Environment variable
+
+The same can be established by setting the `X11_LOG_MASK` environment
+variable:
+
+-----------------------------------
+export X11_LOG_MASK="debug|warning"
+-----------------------------------
+
+Be aware to quote the value of this environment variable. The name of every
+defined priority mask can be used (excluding the `LP_` prefix). The value of
+the environment variable is case insensitive.
+
+=== Controlling how the messages are logged
+
+You also can control the format of the output message by setting the
+verbosity mask. Again, the verbosity mask can be controlled by either
+using the `X11_LOGGER` type in code or by setting an environment
+variable.
+
+==== In code
+
+To log for instance only the category and the date/time, you must invoke
+
+-----------------------------------------------------------------
+X11_LOGGER::verbosity_mask (x11_logger::X11_Verbose::V_CATEGORY |
+                            x11_logger::X11_Verbose::V_DATETIME);
+-----------------------------------------------------------------
+
+at startup.
+
+The output of the above example in this case will be:
+
+------------------------------------------------------------------------------------------------
+X11 11:33:29.005899 - This message will be continued after the info log message has been logged.
+X11 11:33:29.005994 - followed by a warning message
+------------------------------------------------------------------------------------------------
+
+==== Environment variable
+
+Set the `X11_VERBOSE` environment variable to manipulate the default
+verbosity mask. Setting `X11_VERBOSE` to `category|datetime` will have
+the same effect on the logging output as mentioned in the previous
+paragraph. The name of every defined verbosity flag can be used
+(excluding the `V_` prefix).The value of the environment variable is
+case insensitive. Additionally the names for the `V_PROCESS_ID` and
+`V_THREAD_ID` can optionally be shortened to `"process"` and `"thread"`
+respectively.
+
+*Be aware that using the singleton to manipulate the verbosity and/or
+priority masks will override any setting made by the environment
+variables!*
+
+Please have a look at the TAOX11 `ccs` and `AMI` examples to see how the
+logging output is manipulated in code.
+
+=== Controlling where the messages are logged
+
+The X11 logging framework also allows you to define where your messages
+are logged (in place of or besides the default standard error stream). +
+ There are 4 possible output targets defined for X11 log streams:
+
+* `x11_logger::OS_STDERR` outputs error messages on the standard error
+stream
+* `x11_logger::OS_SYSLOG` outputs error messages to the system log for
+the platform (see the ACE documentation for more information)
+* `x11_logger::OS_FILE` outputs error messages to a disk file
+* `x11_logger::OS_IPC` outputs error messages to a ACE logger daemon
+(see the ACE documentation for more information)
+* `x11_logger::OS_CUSTOM` outputs error messages to a custom ACE logger backend
+(see the ACE documentation for more information)
+
+The `OS_FILE` target allows you to define the following details of the
+logging sink:
+
+* the path and base name for the file (default working directory and
+category name)
+* a maximum size for the logfile (default no limit)
+* the number of rolling versions of the logfile (default 1)
+* whether to include the PID in the logfile name (defined with
+`x11_logger::FF_PROCESS`)
+* whether to append or truncate when (re)starting logging (defined with
+`x11_logger::FF_TRUNCATE`)
+
+==== In code
+
+To redirect log output to a file as well as to the standard error stream
+in code you would use:
+
+------------------------------------------------
+X11_LOGGER::output_mask (x11_logger::OS_STDERR |
+                         x11_logger::OS_FILE);
+------------------------------------------------
+
+To set the file name and define a maximum size of 10Mb and 5 rolling
+versions with truncation you would use:
+
+-------------------------------------------------------------------------
+X11_LOGGER::set_logfile_path ("/my/log/root/my_log");
+X11_LOGGER::set_logfile_specs (10*1024*1024, 5, x11_logger::FF_TRUNCATE);
+-------------------------------------------------------------------------
+
+This would create a maximum of 5 logfiles located at _/my/log/root/_
+with a maximum size of 10Mb named _my_log.log_ and optionally
+_my_log.log.1_ to _my_log.log.4_ where the highest numbered version file
+is the oldest.
+
+==== Environment variable
+
+You could also specify the logger settings above by setting the
+`X11_LOG_OUTPUT` environment variable appropriately like:
+
+-------------------------------------------------------------
+X11_LOG_OUTPUT="STDERR|FILE=/my/log/root/my_log,10485100,5,T"
+-------------------------------------------------------------
+
+The format for specifying the LOG_OUTPUT environment variable is as
+follows:
+
+-----------------------------------------------------------------------------------
+environment-value := <sink> ['|' <sink> [ ... ]]
+<sink>            := 'STDERR' |
+                     'SYSLOG' |
+                     'IPC' |
+                     <file>
+<file>            := 'FILE' [ '=' <filespec> ]
+<filespec>        := [<base>] [ ',' [<maxsize>] [',' [<versions>] [ ',' <flags> ]]]
+<flags>           := 'T' | 'P' | 'TP'
+-----------------------------------------------------------------------------------
+
+In case a field is left empty the default applies. +
+ The value for <base> can be either a folder path, a base name or both.
+In case the value is supposed to be a folder path it should specify an
+existing directory and the category name will than be appended as the
+base for the file name. +
+ In case the process flag (FF_PROCESS or 'P') is specified the PID of
+the process logging the messages will be appended to the logfile name
+as: _my_log-999999.log_.
+
+== User defined log module
+
+In order to control your own log messages you can also define your own
+log module(s). Each log module defines its own category and per category
+you can set the priority mask and the log message verbosity.
+
+TAOX11 implements and uses separate log modules for the core library
+code and the regression tests to enable the possibility to control the
+output independently. This way it was possible to have the regression
+tests by default output all log messages while the core maintains the
+default of outputting only panic messages.
+
+The category for the TAOX11 core logger module is (not surprisingly)
+`TAOX11` while the category for the test log module is `TESTX11`.
+
+=== Create your own logging module
+
+To create your own logging module (by preference in a shared library so
+you do not link the module into each and every executable/shared library
+of your application) you have to derive your logging module from
+`x11_logger::Log_Module` like this:
+
+_my_logger.h_
+
+[source,c++]
+------------------------------------------------------------------------------------
+ #include "tao/x11/logger/log_base.h"
+
+ namespace my_logger
+ {
+   class My_Log_Export My_Log_Module final
+     : public x11_logger::Log_Module
+   {
+   public:
+     virtual ~My_Log_Module () {}
+
+     static inline My_Log_Module* getInstance();
+
+     // This defined your logger type.
+     typedef x11_logger::Log_Type_T<My_Log_Module> log_type;
+
+   private:
+     My_Log_Module ();
+
+     typedef ACE_Singleton <My_Log_Module, ACE_SYNCH_MUTEX> My_Log_Module_Singleton;
+     friend class ACE_Singleton <My_Log_Module, ACE_SYNCH_MUTEX>;
+   };
+
+   inline My_Log_Module* My_Log_Module::getInstance()
+   {
+     return My_Log_Module::instance ();
+   }
+
+   inline My_Log_Module::My_Log_Module ()
+     : x11_logger::Log_Module ("MY_LOG_CATEGORY")
+   {
+     // Example verbosity
+     this->verbosity_mask (V_CATEGORY|V_PROCESS_ID|V_DATETIME);
+     // Example priority: Only log the errors.
+     this->priority_mask (x11_logger::X11_LogMask::LP_ALL_ERROR);
+   }
+ };
+------------------------------------------------------------------------------------
+
+_my_logger.cpp_
+
+[source,c++]
+-----------------------------------------------------------------
+ #include "my_logger.h"
+
+ namespace my_logger
+ {
+   My_Log_Module::My_Log_Module ()
+     : x11_logger::Log_Module ("MY_LOG_CATEGORY")
+   {
+     // Example verbosity
+     this->verbosity_mask (V_CATEGORY|V_PROCESS_ID|V_DATETIME);
+     // Example priority: Only log the errors.
+     this->priority_mask (x11_logger::X11_LogMask::LP_ALL_ERROR);
+   }
+ };
+-----------------------------------------------------------------
+
+Define your own logger type shorthand macro, like this
+
+[source,c++]
+--------------------------------------
+  #define MY_CATEGORY_LOGGER \
+    my_logger::My_Log_Module::log_type
+--------------------------------------
+
+Now you'll want to create your shorthand category specific logger macros
+as follows:
+
+[source,c++]
+-----------------------------------------------------------------------
+  #define MY_CATEGORY_TRACE      X11_TRACE_LOG(MY_CATEGORY_LOGGER)
+  #define MY_CATEGORY_DEBUG      X11_DEBUG_LOG(MY_CATEGORY_LOGGER)
+  #define MY_CATEGORY_INFO       X11_INFO_LOG(MY_CATEGORY_LOGGER)
+  #define MY_CATEGORY_WARNING    X11_WARNING_LOG(MY_CATEGORY_LOGGER)
+  #define MY_CATEGORY_ERROR      X11_ERROR_LOG(MY_CATEGORY_LOGGER)
+  #define MY_CATEGORY_CRITICAL   X11_CRITICAL_LOG(MY_CATEGORY_LOGGER)
+  #define MY_CATEGORY_PANIC      X11_PANIC_LOG(MY_CATEGORY_LOGGER)
+
+  #define MY_CATEGORY_TRACE_W    X11_TRACE_W_LOG(MY_CATEGORY_LOGGER)
+  #define MY_CATEGORY_DEBUG_W    X11_DEBUG_W_LOG(MY_CATEGORY_LOGGER)
+  #define MY_CATEGORY_INFO_W     X11_INFO_W_LOG(MY_CATEGORY_LOGGER)
+  #define MY_CATEGORY_WARNING_W  X11_WARNING_W_LOG(MY_CATEGORY_LOGGER)
+  #define MY_CATEGORY_ERROR_W    X11_ERROR_W_LOG(MY_CATEGORY_LOGGER)
+  #define MY_CATEGORY_CRITICAL_W X11_CRITICAL_W_LOG(MY_CATEGORY_LOGGER)
+  #define MY_CATEGORY_PANIC_W    X11_PANIC_W_LOG(MY_CATEGORY_LOGGER)
+-----------------------------------------------------------------------
+
+Now you can use these macros in code, like this
+
+[source,c++]
+------------------------------------------------------------------
+  MY_CATEGORY_DEBUG << "This is a debug log message" << std::endl;
+  MY_CATEGORY_INFO << "This is a info log message "
+  MY_CATEGORY_INFO.flush (); //write the message to the console
+  //do something else
+  MY_CATEGORY_INFO << "which finishes now" << std::endl;
+------------------------------------------------------------------
+
+=== Example of a user defined logging module
+
+The package contains an example on how to create your own logging
+module. The `<install_root>/taox11/examples/log_module`-directory contains a
+fully functioning example, including an MPC base project and a small
+test program. +
+Please take a look at the
+link:../../taox11/examples/log_module/my_log_module.h[example logging module]
+for a fully implemented logging module. This module also contains
+optimizations regarding the usage of the singleton. +
+ You can, off course, create more than one logging module within your
+application/system. +
+ Also have a look at the link:../../taox11/tao/x11/log.h[TAOX11 core
+logger header] which will show you the use of another set of logger
+macros, the `X11_LOG_xxx(<log type>, <log expression>)` macros. These
+macros offer early evaluation of log priority preventing execution of
+the log expressions in case the loggers priority setting would exclude
+the log from output.
+
+=== Controlling the logging output of a user defined log module
+
+You can control the output of your log module in the same way as you can
+control the output of the TAOX11 default log module. The names of the
+logger type and logging macros are known (you've defined them yourself).
+So to control the verbosity in code you would do something like this:
+
+[source,c++]
+-------------------------------------------------------------------------
+  MY_CATEGORY_DEBUG::priority_mask (x11_logger::X11_LogMask::LP_DEBUG |
+                                    x11_logger::X11_LogMask::LP_WARNING);
+-------------------------------------------------------------------------
+
+The names of the environment variables depend on the category
+("MY_LOG_CATEGORY" in the above example). The format of the environment
+variable for priority mask is `<name_of_logging_category>_LOG_MASK`
+("MY_LOG_CATEGORY_LOG_MASK" in the above example). The format of the
+environment variable for the verbosity mask will be
+`<name_of_logging_category>_VERBOSE` ("MY_LOG_CATEGORY_VERBOSE" in the
+above example).
+
+== Examples
+
+The stub code, generated by the RIDL compiler, contains helper methods
+which makes it very easy to log values of various IDL types in your
+code. Below some examples on how to log them in your code. +
+ Be aware that the the TAOX11 default logging framework has been used
+and that all messages were logged (priority mask was set to `LP_ALL`)
+and that the verbosity mask was set to `0` (no verbosity).
+
+=== Date/Time
+
+[source,c++]
+--------------------------------------------------------------------
+taox11_debug << "Current time is: " << x11_logger::now << std::endl;
+--------------------------------------------------------------------
+
+Output :
+
+--------------------------------
+Current time is: 13:42:59.926971
+--------------------------------
+
+[source,c++]
+---------------------------------------------------------------------
+taox11_debug << "Current time is: " << x11_logger::date << std::endl;
+---------------------------------------------------------------------
+
+Output :
+
+-------------------------------------------
+Current time is: 2013-10-15 13:42:59.927232
+-------------------------------------------
+
+=== Thread/Process ID
+
+[source,c++]
+---------------------------------------------------------------------------
+taox11_debug << "My process ID is: " << x11_logger::processid << std::endl;
+---------------------------------------------------------------------------
+
+Output :
+
+-----------------------
+My process ID is: 11366
+-----------------------
+
+[source,c++]
+-------------------------------------------------------------------------
+taox11_debug << "My thread ID is: " << x11_logger::threadid << std::endl;
+-------------------------------------------------------------------------
+
+Output :
+
+--------------------------------
+My thread ID is: 140682971969344
+--------------------------------
+
+=== Basic streaming
+
+All basic types can be streamed to one of the above mentioned operators.
+
+[source,c++]
+-------------------------------------------------------------------------
+ std::string hello ("Hello");
+ std::string world ("world");
+ taox11_debug << "The answer is: " << hello << " " << world << std::endl;
+-------------------------------------------------------------------------
+
+Output
+
+--------------------------
+The answer is: Hello world
+--------------------------
+
+[source,c++]
+----------------------------------------------------------
+ long number = 1234;
+ taox11_debug << "The number is: " << number << std::endl;
+----------------------------------------------------------
+
+Output :
+
+-------------------
+The number is: 1234
+-------------------
+
+=== CORBA exceptions
+
+[source,c++]
+-----------------------------------------------------------
+ catch (const CORBA::Exception& ex)
+ {
+   taox11_error << "exception caught: " << ex << std::endl;
+ }
+-----------------------------------------------------------
+
+Output :
+
+------------------------------------------------------------------
+exception caught: NO_IMPLEMENT { Minor code : 8 , Completed : NO }
+------------------------------------------------------------------
+
+=== User defined exceptions
+
+In IDL
+
+---------------------------
+ exception MessageException
+ {
+   long id;
+   string message;
+ };
+---------------------------
+
+In {cxx11}
+
+[source,c++]
+-----------------------------------------------------------
+ catch (const MessageException& ex)
+ {
+   taox11_error << "exception caught: " << ex << std::endl;
+ }
+-----------------------------------------------------------
+
+Output :
+
+-------------------------------------------------------------------
+exception caught: MessageException{ id=42 - message="Hello world" }
+-------------------------------------------------------------------
+
+=== Arrays
+
+In IDL
+
+-------------------
+ typedef long F[5];
+-------------------
+
+In {cxx11}
+
+[source,c++]
+---------------------------------------------------
+ F f = { { 1, 2, 3, 4, 5} };
+ taox11_debug << "Values of f: " << f << std::endl;
+---------------------------------------------------
+
+Output :
+
+----------------------------------------------
+Values of f: std::array<int32_t, 5>[1,2,3,4,5]
+----------------------------------------------
+
+=== Enums
+
+In IDL
+
+--------------
+ enum enumType
+ {
+   a,
+   b,
+   c
+ };
+--------------
+
+In {cxx11}
+
+[source,c++]
+--------------------------------------------------
+ enumType e = enumType::b;
+ taox11_debug << "Value of e: " << e << std::endl;
+--------------------------------------------------
+
+Output :
+
+-----------------------
+Value of e: enumType::b
+-----------------------
+
+=== Sequences
+
+In IDL
+
+------------------------------------------
+ typedef sequence<short, 10> ShortBounded;
+------------------------------------------
+
+In {cxx11}
+
+[source,c++]
+-------------------------------------------------------------
+ ShortBounded sb_seq;
+ for (int16_t i = 0; i < 10; ++i)
+   sb_seq.push_back (i);
+ taox11_debug << "Values of sb_seq: " << sb_seq << std::endl;
+-------------------------------------------------------------
+
+Output :
+
+-----------------------------------------------------------
+Values of sb_seq: std::vector<int16_t>[0,1,2,3,4,5,6,7,8,9]
+-----------------------------------------------------------
+
+=== Structs
+
+In IDL
+
+------------------
+ struct MyStruct
+ {
+   string message;
+   long   len;
+ };
+------------------
+
+In {cxx11}
+
+[source,c++]
+-----------------------------------------------------------
+ MyStruct st {"Hello World", 11};
+ taox11_debug << "Values of MyStruct: " << st << std::endl;
+-----------------------------------------------------------
+
+Output :
+
+-----------------------------------------------------------
+Values of MyStruct: MyStruct {message="Hello World",len=11}
+-----------------------------------------------------------
+
+=== Unions
+
+In IDL
+
+----------------------------------------
+ enum DataType
+ {
+   dtPoint,
+   dtTrack
+ };
+ struct Point
+ {
+   long x;
+   long y;
+ };
+ struct Track
+ {
+   long id;
+   Point p;
+ };
+ union Data switch (DataType)
+ {
+   case dtPoint: Point pointData;
+   case dtTrack: Track trackData;
+   // by default (implicit), empty union
+ };
+----------------------------------------
+
+In {cxx11}
+
+[source,c++]
+---------------------------------------------------------
+ Data data;
+ data._default ();
+ data.trackData (Track (99, Point (23, 77)));
+ taox11_debug << "Values of Data: " << data << std::endl;
+---------------------------------------------------------
+
+Output :
+
+------------------------------------------------------------------
+Values of Data: Data {trackData=Track {id=99,p=Point {x=23,y=77}}}
+------------------------------------------------------------------
+
+=== Valuetypes
+
+In IDL
+
+--------------------------------------
+ valuetype Event
+ {
+   void do_print (in string loc);
+   attribute double amount;
+   public long value_;
+   public long value2_;
+   private string id_;
+   factory create_val (in long value);
+ };
+--------------------------------------
+
+In {cxx11}
+
+[source,c++]
+-------------------------------------------------------------------------------------------------
+ IDL::traits<Event>::ref_type ev = CORBA::make_reference<Event_impl> (123, 254, "Event#1", 1.66);
+ taox11_debug << "Values of Event: " << ev << std::endl;
+-------------------------------------------------------------------------------------------------
+
+Output :
+
+------------------------------------------------------------
+Values of Event: Event{value_=123, value2_=254, amount=1.66}
+------------------------------------------------------------
+
+== TAOX11 core logging
+
+Since TAOX11 is based on TAO, the TAO log semantics are still in use.
+Passing `-ORBDebugLevel x` as a command line option to your TAOX11
+application makes sure that the TAO libraries will log output messages
+according to the given log level.
+
+The TAOX11 core logging is based on the TAOX11 default log module. This
+means that only panic log messages are logged and that the verbosity
+mask is set to 'all'. You can, off course, control the output of the
+TAOX11 core by either using the `TAOX11_LOGGER` singleton in code
+or by setting the `TAOX11_LOG_MASK ` and/or `TAOX11_VERBOSE` environment
+variables.

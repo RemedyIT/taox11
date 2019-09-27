@@ -1,0 +1,52 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+#include "orb.idl"
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  typedef string<5> bounded_bar;
+
+  /// A very simple interface
+  interface Hello
+  {
+    /// Return a simple string
+    string get_string ();
+    /// Set a simple string
+    void set_string (in string text);
+    /// Out a simple string
+    void out_string (out string text);
+    /// InOut a simple string
+    void inout_string (inout string text);
+
+    /// Return a large string
+    string get_lstring ();
+    /// Set a large string
+    void set_lstring (in string text);
+    /// Out a large string
+    void out_lstring (out string text);
+    /// InOut a large string
+    void inout_lstring (inout string text);
+
+    /// Return a string-sequence
+    CORBA::StringSeq get_stringSeq ();
+    /// Set a string-sequence
+    void set_stringSeq (in CORBA::StringSeq text);
+    /// Out a string-sequence
+    void out_stringSeq (out CORBA::StringSeq text);
+    /// InOut a string-sequence
+    void inout_stringSeq (inout CORBA::StringSeq text);
+
+    void bounded_string (in bounded_bar text);
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};

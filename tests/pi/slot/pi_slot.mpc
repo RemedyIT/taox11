@@ -1,0 +1,6 @@
+project(*driver): taox11_client, taox11_pi_server {
+  exename = driver
+  Source_Files {
+    driver.cpp
+  }
+}

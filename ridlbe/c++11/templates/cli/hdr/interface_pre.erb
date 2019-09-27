@@ -1,0 +1,68 @@
+
+// generated from <%= ridl_template_path %>
+/// @copydoc <%= doc_scoped_name %>
+class <%= stub_export_macro %><%= cxxname %>
+% if is_derived?
+%   if (is_local? && !has_local_base?) || !has_concrete_base?
+  : public virtual <%= root_base %>
+%     _first = false
+%   else
+%     _first = true
+%   end
+%   bases.each do |_base|
+  <%= _first ? ': ' : ', ' %>public virtual <%= _base.scoped_cxxtype %>
+%     _first = false
+%   end
+% else
+  : public virtual <%= root_base %>
+% end
+{
+public:
+% if is_abstract?
+  /// @name Member types
+  //@{
+  typedef <%= cxx_traits_type %>           _traits_type;
+  /// Strong reference type
+  typedef <%= cxx_traits_type %>::ref_type _ref_type;
+  //@}
+
+  static bool _abs_unmarshal (TAO_InputCDR&, _ref_type&);
+% else
+  template <typename T> friend struct TAOX11_CORBA::object_traits;
+
+  /// @name Member types
+  //@{
+  typedef <%= cxx_traits_type %>           _traits_type;
+  /// Strong reference type
+  typedef <%= cxx_traits_type %>::ref_type _ref_type;
+  //@}
+%   unless is_remote? && !has_abstract_base?
+
+  /// Determine if we are of the type specified by the @a logical_type_id.
+  virtual bool _is_a (const std::string& local_type_id) override;
+%   end
+%   if has_abstract_base?
+
+  virtual std::string _interface_repository_id () override;
+%     unless abstractbase_operations.empty?
+
+  /** @name Inherited abstract interface operations */
+  //@{
+%       abstractbase_operations.each do |_op|
+%         nest { _op.visit_operation }
+%       end
+  //@}
+
+%     end
+%     unless abstractbase_attributes.empty?
+
+  /** @name Inherited abstract interface attributes */
+  //@{
+%       abstractbase_attributes.each do |_att|
+%         nest { _att.visit_attribute }
+%       end
+
+  //@}
+%     end
+%   end
+% end

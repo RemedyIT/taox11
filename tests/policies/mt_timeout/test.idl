@@ -1,0 +1,23 @@
+/**
+ * @file    test.idl
+ * @author  Marcel Smit
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module Test
+{
+  /// A very simple interface
+  interface Sleep_Service
+  {
+    /// Sleep for @c microseconds
+    void go_to_sleep (in unsigned long microseconds);
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+};

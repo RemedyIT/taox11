@@ -1,0 +1,12 @@
+// -*- MPC -*-
+
+project {
+  Define_Custom(PIDLC) {
+    automatic_in     = 0
+    automatic_out    = 0
+    command          = $(TAOX11_BASE_ROOT)/bin/ridlc
+    inputext         = .idl
+    resource_outputext = .pidlc
+    commandflags     = --preprocess --include=$(TAO_ROOT) --output <%output_noext%>.pidlc
+  }
+}

@@ -1,0 +1,22 @@
+
+// generated from <%= ridl_template_path %>
+<%= amic_cxxname %>::<%= amic_cxxname %> (<%=  proxy_cxxname %>_ptr p, bool inherited) :
+% unless has_concrete_base?
+  Object (),
+  <%= cxxname %> (p, true),
+% end
+% if is_derived?
+%   ancestors.each do |_ancestor|
+%    unless _ancestor.is_abstract?
+  <%= _ancestor.amic_scoped_cxxname %> (p, true),
+%     end
+%   end
+  <%= scoped_cxxname %> (p, true),
+% end
+  <%=  proxy_cxxname.downcase %>_ (p)
+{
+  if (!inherited)
+    {
+      this->set_proxy (new TAOX11_NAMESPACE::Object_proxy (p));
+    }
+}

@@ -1,0 +1,178 @@
+% unless interface.is_local?
+
+// generated from <%= ridl_template_path %>
+<%= scoped_cxx_return_type %>
+<%= interface.cxxname %>::<%= cxxname %> ()
+{
+%   if interface.is_abstract?
+  if (!this->_is_object ())
+    throw TAOX11_CORBA::NO_IMPLEMENT ();
+
+  TAOX11_CORBA::Object::_ref_type _objref = this->_to_object ();
+  TAO_CORBA::Object_ptr const _objptr = _objref->get_proxy ()->get ();
+%   end
+  TAOX11_NAMESPACE::Arg_Traits< <%= scoped_cxx_arg_type %>>::ret_val _taox11_retval;
+
+  try {
+
+%   if interface.is_abstract?
+    if (!_objptr->is_evaluated ())
+    {
+      TAO_CORBA::Object::tao_object_initialize (_objptr);
+    }
+%   else
+    if (!this-><%= interface.proxy_cxxname.downcase %>_->is_evaluated ())
+    {
+      TAO_CORBA::Object::tao_object_initialize (this-><%= interface.proxy_cxxname.downcase %>_);
+    }
+%   end
+
+    TAO_TAO::Argument *_tao_args [] =
+    {
+      std::addressof(_taox11_retval)
+    };
+%   if has_get_raises?
+
+    static TAO_TAO::Exception_Data const _tao_exceptiondata [] =
+    {
+%     _member_count = get_raises.size
+%     get_raises.each_with_index do |_ex, _index|
+      {
+        "<%= _ex.repository_id %>",
+        TAOX11_NAMESPACE::UserExceptionProxy::in< <%= _ex.scoped_cxxname %>>::_alloc,
+#if TAO_HAS_INTERCEPTORS == 1
+%       if generate_typecode_support?
+        TC_helper::get_tao_tc(<%= _ex.scoped_cxx_typecode %>)
+%       else
+        nullptr
+%       end
+#endif /* TAO_HAS_INTERCEPTORS */
+      }<% if _index < (_member_count-1) %>,<% end %>
+%     end
+    };
+%   end
+
+    TAO_TAO::Invocation_Adapter _tao_call (
+%   if interface.is_abstract?
+      _objptr,
+%   else
+      this-><%= interface.proxy_cxxname.downcase %>_,
+%   end
+      _tao_args,
+      1, // Number of arguments in the _tao_args array
+      "_get_<%= name %>", // Operation to be called
+      <%= name.size + 5 %>, // Number of characters in the operation name
+% if generate_thrupoa_collocation?
+      TAO_TAO::TAO_CO_NONE | TAO_TAO::TAO_CO_THRU_POA_STRATEGY,
+% else
+      TAO_TAO::TAO_CO_NONE,
+% end
+      TAO_TAO::TAO_TWOWAY_INVOCATION,
+      TAO_TAO::TAO_SYNCHRONOUS_INVOCATION,
+      false);
+
+    // Invoke the target passing in the array of exception data and
+    // the size of this array
+%   if has_get_raises?
+    _tao_call.invoke (_tao_exceptiondata, <%= get_raises_count %>);
+%   else
+    _tao_call.invoke (nullptr, 0);
+%   end
+  }
+  catch_tao_system_ex(_ex)
+%   if has_get_raises?
+  catch (const TAOX11_NAMESPACE::UserExceptionProxy::out& _ex) {
+    _ex._raise_x11 ();
+  }
+%   end
+  return _taox11_retval.retn ();
+}
+
+%   unless is_readonly?
+void
+<%= interface.cxxname %>::<%= cxxname %>(
+    <%= scoped_cxx_in_type %> _att_val)
+{
+%   if interface.is_abstract?
+  if (!this->_is_object ())
+    throw TAOX11_CORBA::NO_IMPLEMENT ();
+
+  TAOX11_CORBA::Object::_ref_type _objref = this->_to_object ();
+  TAO_CORBA::Object_ptr const _objptr = _objref->get_proxy ()->get ();
+
+%   end
+  try {
+%   if interface.is_abstract?
+    if (!_objptr->is_evaluated ())
+    {
+      TAO_CORBA::Object::tao_object_initialize (_objptr);
+    }
+%   else
+    if (!this-><%= interface.proxy_cxxname.downcase %>_->is_evaluated ())
+    {
+      TAO_CORBA::Object::tao_object_initialize (this-><%= interface.proxy_cxxname.downcase %>_);
+    }
+%   end
+
+    TAOX11_NAMESPACE::Arg_Traits<void>::ret_val _taox11_retval;
+    TAOX11_NAMESPACE::Arg_Traits< <%= scoped_cxx_arg_type %>>::in_arg_val _taox11_att_val {_att_val};
+
+    TAO_TAO::Argument *_tao_args [] =
+    {
+      std::addressof(_taox11_retval),
+      std::addressof(_taox11_att_val)
+    };
+%   if has_set_raises?
+
+    static TAO_TAO::Exception_Data const _tao_exceptiondata [] =
+    {
+%     _member_count = set_raises.size
+%     set_raises.each_with_index do |_ex, _index|
+      {
+        "<%= _ex.repository_id %>",
+        TAOX11_NAMESPACE::UserExceptionProxy::in< <%= _ex.scoped_cxxname %>>::_alloc,
+#if TAO_HAS_INTERCEPTORS == 1
+%       if generate_typecode_support?
+        TC_helper::get_tao_tc(<%= _ex.scoped_cxx_typecode %>)
+%       else
+        nullptr
+%       end
+#endif /* TAO_HAS_INTERCEPTORS */
+      }<% if _index < (_member_count-1) %>,<% end %>
+%     end
+    };
+%   end
+
+    TAO_TAO::Invocation_Adapter _tao_call (
+%   if interface.is_abstract?
+      _objptr,
+%   else
+      this-><%= interface.proxy_cxxname.downcase %>_,
+%   end
+      _tao_args,
+      2, // Number of arguments in the _tao_args array
+      "_set_<%= name %>", // Operation to be called
+      <%= name.size + 5 %>, // Number of characters in the operation name
+% if generate_thrupoa_collocation?
+      TAO_TAO::TAO_CO_NONE | TAO_TAO::TAO_CO_THRU_POA_STRATEGY);
+% else
+      TAO_TAO::TAO_CO_NONE);
+% end
+
+    // Invoke the target passing in the array of exception data and
+    // the size of this array
+%   if has_set_raises?
+    _tao_call.invoke (_tao_exceptiondata, <%= set_raises_count %>);
+%   else
+    _tao_call.invoke (nullptr, 0);
+%   end
+  }
+  catch_tao_system_ex(_ex)
+%   if has_set_raises?
+  catch (const TAOX11_NAMESPACE::UserExceptionProxy::out& _ex) {
+    _ex._raise_x11 ();
+  }
+%   end
+}
+%   end
+% end

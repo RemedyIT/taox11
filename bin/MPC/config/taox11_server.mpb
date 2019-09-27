@@ -1,0 +1,4 @@
+// -*- MPC -*-
+
+project : taox11_exe, taoserver, taox11_portableserver {
+}

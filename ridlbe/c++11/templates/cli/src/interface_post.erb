@@ -1,0 +1,90 @@
+// generated from <%= ridl_template_path %>
+% if is_abstract?
+%##### Abstract interfaces #####
+%#
+bool <%= cxxname %>::_abs_unmarshal (TAO_InputCDR& cdr, _ref_type& abref)
+{
+  TAOX11_CORBA::AbstractBase::_ref_type _baseref;
+  if (!TAOX11_CORBA::AbstractBase::_abs_unmarshal (cdr, _baseref))
+    return false;
+
+  abref = TAOX11_IDL::traits<<%= cxxname %>>::narrow (std::move(_baseref));
+  return true;
+}
+
+<%= cxxname %>::<%= cxxname %> (TAOX11_NAMESPACE::Abstractbase_proxy_ptr prx)
+  : TAOX11_CORBA::AbstractBase (prx)
+% if is_derived?
+%   ancestors.each do |_ancestor|
+  , <%= _ancestor.scoped_cxxname %> ()
+%   end
+% end
+{
+}
+% elsif is_remote?
+%##### Remote interfaces #####
+%#
+%   if needs_abstract_base_overrides?
+TAOX11_IDL::traits<TAOX11_CORBA::Object>::ref_type
+<%= cxxname %>::_to_object ()
+{
+  return this->TAOX11_CORBA::Object::_lock ();
+}
+
+TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
+<%= cxxname %>::_to_value ()
+{
+  return {};
+}
+
+bool
+<%= cxxname %>::_is_object ()
+{
+  return true;
+}
+
+TAOX11_CORBA::Object::_shared_ptr_type
+<%= cxxname %>::_lock_shared ()
+{
+  if (!this->TAOX11_CORBA::AbstractBase::_is_locked ())
+  {
+    _shared_ptr_type const _spsrv =
+        std::dynamic_pointer_cast<<%= skel_cxxname %>> (this->TAOX11_CORBA::Object::_lock_shared ());
+    this->TAOX11_CORBA::AbstractBase::_initialize_shared (_spsrv);
+    return _spsrv;
+  }
+  else
+    return this->TAOX11_CORBA::Object::_lock_shared ();
+}
+
+%   end
+<%= cxxname %>::<%= cxxname %> (<%= proxy_cxxname %>_ptr p, bool inherited) :
+% unless has_concrete_base?
+  Object (),
+% end
+% if is_derived?
+%   ancestors.each do |_ancestor|
+%     if _ancestor.is_abstract?
+  <%= _ancestor.scoped_cxxname %> (),
+%     else
+  <%= _ancestor.scoped_cxxname %> (p, true),
+%     end
+%   end
+% end
+  <%= proxy_cxxname.downcase %>_ (p)
+{
+  if (!inherited)
+    {
+      this->set_proxy (new TAOX11_NAMESPACE::Object_proxy (p));
+    }
+}
+% else
+%##### non-remote interfaces (local or pseudo) #####
+%#
+<%= scoped_cxx_return_type %>
+<%= cxxname %>::_this ()
+{
+  return IDL::traits < <%= cxxname %>>::narrow (std::move(this->Object::_lock ()));
+}
+% end
+

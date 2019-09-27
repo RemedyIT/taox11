@@ -1,0 +1,47 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  struct Simple
+  {
+    octet   o;
+    long    l;
+    string  s;
+    double  d;
+    boolean b;
+    char    c;
+  };
+
+  typedef sequence<Simple>  SimpleSeq;
+
+  typedef sequence<long> LongSeq;
+
+  typedef sequence<boolean> BoolSeq;
+
+  typedef sequence<string> StringSeq;
+
+  /// A very simple interface
+  interface Foo
+  {
+    LongSeq test_long_seq (in LongSeq sin, inout LongSeq sinout, out LongSeq sout);
+
+    BoolSeq test_bool_seq (in BoolSeq sin, inout BoolSeq sinout, out BoolSeq sout);
+
+    StringSeq test_string_seq (in StringSeq sin, inout StringSeq sinout, out StringSeq sout);
+
+    SimpleSeq test_struct_seq (in SimpleSeq sin, inout SimpleSeq sinout, out SimpleSeq sout);
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+};

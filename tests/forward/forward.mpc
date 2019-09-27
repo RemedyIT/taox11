@@ -1,0 +1,32 @@
+// -*- MPC -*-
+
+project(*forward_gen_Idl): ridl_ostream_defaults {
+ // idlflags += -SS
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*forward_gen_Server): taox11_server {
+  after += *forward_gen_Idl
+  Source_Files {
+    hello.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*forward_gen_Client): taox11_client {
+  after += *forward_gen_Idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}
+

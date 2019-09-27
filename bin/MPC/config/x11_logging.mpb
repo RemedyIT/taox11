@@ -1,0 +1,16 @@
+// -*- MPC -*-
+
+// feature project for x11_logging
+// active by default; turn off by 'x11_logging=0'
+feature(x11_logging) {
+  verbatim(gnuace,macros,1) {
+    x11_logging=1
+  }
+}
+
+// feature project for x11_logging disabling
+// inactive by default; turn on by 'x11_logging=0'
+feature(!x11_logging) {
+  macros += X11_NLOGGING
+}
+

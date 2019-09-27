@@ -1,0 +1,8 @@
+// -*- MPC -*-
+
+project : taox11_lib_with_idl {
+  after += taox11_cosnaming_stub
+  includes += $(TAOX11_ROOT)/orbsvcs
+  libpaths += $(TAOX11_BASE_ROOT)/../lib
+  libs += taox11_cosnaming_stub
+}

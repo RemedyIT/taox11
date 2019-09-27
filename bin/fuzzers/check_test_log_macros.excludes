@@ -1,0 +1,8 @@
+public\/.*
+examples\/.*
+brix11\/.*
+tao\/x11\/log.h
+(ciaox11|dancex11|dds4ccm)\/logger\/log.h
+(ciao|dance)x11\/example\/.*
+.*(C|S|P|SP)\.(h|inl|cpp)
+.*\.(html|htm)

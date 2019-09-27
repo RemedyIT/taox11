@@ -1,0 +1,30 @@
+
+// generated from <%= ridl_template_path %>
+TAO_CORBA::Boolean operator<< (
+    TAO_OutputCDR &strm,
+    const <%= scoped_cxxname %> &_tao_aggregate)
+{
+% if member_count > 0
+  return
+%   _n = member_count-1
+%   members.each_with_index do |_m, _i|
+    (strm << <%= _m.cdr_from_fmt % "_tao_aggregate.#{_m.cxxname} ()" %>)<%= ((_i < _n ) ? ' &&' : ';') %>
+%   end
+% else
+  return true;
+% end
+}
+
+TAO_CORBA::Boolean operator>> (
+    TAO_InputCDR &strm,
+    <%= scoped_cxxname %> &_tao_aggregate)
+{
+% if member_count > 0
+  return
+%   members.each_with_index do |_m, _i|
+    (strm >> <%= _m.cdr_to_fmt % "_tao_aggregate.#{_m.cxxname} ()" %>)<%= ((_i < _n) ? ' &&' : ';') %>
+%   end
+% else
+  return true;
+% end
+}

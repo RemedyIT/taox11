@@ -1,0 +1,50 @@
+
+# configure setup for TAOX11
+#
+
+configure :taox11 do
+
+  dependencies do
+
+    require :acetaompc do
+      environment :aceroot do
+        name 'ACE_ROOT'
+        description 'ACE root folder'
+        default '../../ACE/ACE'
+      end
+      environment :taoroot do
+        name 'TAO_ROOT'
+        description 'TAO root folder'
+        default '../../ACE/TAO'
+      end
+      environment :mpcroot do
+        name 'MPC_ROOT'
+        description 'MPC root folder'
+        default '../../ACE/MPC'
+      end
+      file '${ACE_ROOT}/ace/ACE.h'
+      file '${TAO_ROOT}/tao/ORB.h'
+      file '${MPC_ROOT}/modules/Creator.pm'
+    end
+
+  end
+
+  ridl do
+    backend :'c++11'
+    include '..'
+  end
+
+  brix11 do
+    include '..'
+  end
+
+  mpc do
+    include '$TAOX11_ROOT/bin/MPC/config'
+
+    mwc_include %w{
+      $(TAOX11_ROOT)/tao/x11
+      $(TAOX11_ROOT)/orbsvcs/orbsvcs
+    }
+  end
+
+end

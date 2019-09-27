@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project : taox11_lib, taox11_anytypecode, taox11_valuetype, taox11_avoids_corba_e {
+  after   += taox11_dynamicany
+  libs    += taox11_dynamicany
+}

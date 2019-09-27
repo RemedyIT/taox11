@@ -1,0 +1,168 @@
+# This is the list of run_test.pl's that need to be run by
+# auto_run_tests.pl.
+# Each line has its own test, and a test can be followed by a
+# list of configurations it does _not_ run on.
+#
+# Example: taox11/examples/foo/run_test.pl: !MINIMUM !CORBA_E_COMPACT !CORBA_E_MICRO !ST
+#
+
+taox11/examples/ami/run_test.pl: !CORBA_E_MICRO
+taox11/examples/ccs/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/examples/log_module/run_test.pl:
+taox11/orbsvcs/tests/naming/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/ami/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/ami/run_cross_tao_server.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/ami/run_cross_tao_client.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/ami_collocation/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/ami_in_out_inout/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/ami_naming/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/annotations/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/attr_raises/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/derived/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/exceptions/collocation/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/exceptions/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/keywords/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/mix_ami_noami/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/mix_annotation_pragma/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/multi_idl_mix_2client/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/multiple_idl_ami/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/multiple_idl_derived/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/multiple_idl_derived_gca/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/multiple_idl_mix/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/multiple_idl_mix_gca/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/multiple_inherit/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/no_module/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/no_use_of_ami/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/ostream/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/replyhandler/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/use_of_gca/run_test.pl: !CORBA_E_MICRO
+taox11/tests/ami_test/weak_ref/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/annotations/run_test.pl:
+taox11/tests/any/anynonstandardtc/run_test.pl:
+taox11/tests/any/basic/run_test.pl:
+taox11/tests/any/corbaseq/run_test.pl:
+taox11/tests/any/corbaseq/run_cross_tao_server.pl:
+taox11/tests/array/run_test.pl:
+taox11/tests/attribute/run_test.pl:
+taox11/tests/basictypes/run_cross_tao_client.pl:
+taox11/tests/basictypes/run_cross_tao_server.pl:
+taox11/tests/basictypes/run_test.pl:
+taox11/tests/codecfactory/run_test.pl:
+taox11/tests/collocation/run_test.pl:
+taox11/tests/complexincomplex/run_test.pl:
+taox11/tests/const/run_test.pl:
+taox11/tests/corbaarray/run_test.pl:
+taox11/tests/corbasequence/run_test.pl:
+taox11/tests/custom_format/run_test.pl:
+taox11/tests/customsequence/run_test.pl:
+taox11/tests/customstruct/run_test.pl:
+taox11/tests/customunion/run_test.pl:
+taox11/tests/dynany/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/dynvalue_test/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/enum/run_test.pl:
+taox11/tests/enum/run_test_cross_tao_client.pl:
+taox11/tests/enum/run_test_cross_tao_server.pl:
+taox11/tests/exceptions/collocated/run_test.pl:
+taox11/tests/exceptions/extended/run_test.pl: !CORBA_E_MICRO
+taox11/tests/factory/run_test.pl:
+taox11/tests/factory/run_cross_tao_server.pl:
+taox11/tests/fixed/run_test.pl:
+taox11/tests/forward/run_test.pl:
+taox11/tests/forwardarray/run_test.pl:
+taox11/tests/forwardsequence/run_test.pl:
+taox11/tests/hello/run_cross_tao_server.pl:
+taox11/tests/hello/run_test.pl:
+taox11/tests/hello_regen/run_test.pl:
+taox11/tests/idl_test/run_test.pl: !CORBA_E_MICRO
+taox11/tests/illegal_idl/run_test.pl: !CROSS
+taox11/tests/interface/run_cross_tao_client.pl:
+taox11/tests/interface/run_cross_tao_server.pl:
+taox11/tests/interface/run_test.pl:
+taox11/tests/interfacei/run_cross_tao_client.pl:
+taox11/tests/interfacei/run_cross_tao_server.pl:
+taox11/tests/interfacei/run_test.pl:
+taox11/tests/invalidname/run_test.pl:
+taox11/tests/ior_table/forwarding/run_test.pl:
+taox11/tests/ior_table/forwarding/run_cross_tao_server.pl:
+taox11/tests/ior_table/forwarding/run_cross_tao_client.pl:
+taox11/tests/ior_table/ior_table/run_test.pl:
+taox11/tests/ior_table/locator/run_test.pl:
+taox11/tests/ior_table/locator/run_test.pl -test_exception:
+taox11/tests/ior_table/locator/run_test.pl -test_null_locator:
+taox11/tests/ior_table/locator/run_cross_tao_server.pl:
+taox11/tests/ior_table/locator/run_cross_tao_client.pl:
+taox11/tests/is_equivalent/run_test.pl: !CORBA_E_MICRO
+taox11/tests/keyword/run_test.pl:
+taox11/tests/localinterface/run_test.pl:
+taox11/tests/log_test/run_test.pl:
+taox11/tests/log_test_backend/run_test.pl:
+taox11/tests/log_test_env/run_test.pl:
+taox11/tests/move/run_test.pl:
+taox11/tests/mt/mt_server/run_test.pl:
+taox11/tests/mt/mt_client/run_test.pl:
+taox11/tests/mt/mt_bidir/run_test.pl: !CORBA_E_MICRO
+taox11/tests/narrow/run_test.pl: !CORBA_E_MICRO
+taox11/tests/objectreference/run_test.pl:
+taox11/tests/obv/abstract_interface/run_test.pl: !CORBA_E_MICRO
+taox11/tests/obv/any/run_test.pl: !CORBA_E_MICRO
+taox11/tests/obv/custom_factory/run_test.pl: !CORBA_E_MICRO
+taox11/tests/obv/factory/run_test.pl: !CORBA_E_MICRO
+taox11/tests/obv/forward/run_test.pl: !CORBA_E_MICRO
+taox11/tests/obv/simple/run_test.pl: !CORBA_E_MICRO
+taox11/tests/obv/supports/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/obv/valuebox/run_test.pl: !CORBA_E_MICRO
+taox11/tests/orb/services/run_test.pl:
+taox11/tests/orb/register_initial_references/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/ostreamnamespace/run_test.pl:
+taox11/tests/out/run_test.pl:
+taox11/tests/pi/current/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO !DISABLE_INTERCEPTORS
+taox11/tests/pi/forward_request/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO !DISABLE_INTERCEPTORS
+taox11/tests/pi/ior_interceptor/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO !DISABLE_INTERCEPTORS !GIOP10
+taox11/tests/pi/register_initial_references/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO !DISABLE_INTERCEPTORS
+taox11/tests/pi/slot/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO !DISABLE_INTERCEPTORS
+taox11/tests/poa/adapter_activator/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/children/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/current/run_test.pl:
+taox11/tests/poa/currentservant/run_test.pl:
+taox11/tests/poa/default_servant/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/excessive_object_deactivations/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/findpoa/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/forwarding/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/identity/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/implicitactivation/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/loader/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/manager_factory/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/nested_non_servant_upcalls/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/newpoa/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/persistent_id/run_test.pl: !CORBA_E_MICRO
+taox11/tests/poa/poa_basics/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/poamanager/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/poa/rootpoa/run_test.pl:
+taox11/tests/poa/this/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/policies/bidirectional/run_test.pl: !CORBA_E_MICRO
+taox11/tests/policies/manipulation/run_test.pl: !CORBA_E_MICRO
+taox11/tests/policies/oneway_timeouts/run_test.pl: !CORBA_E_MICRO
+taox11/tests/policies/mt_timeout/run_test.pl: !CORBA_E_MICRO
+taox11/tests/policies/reliable_oneways/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/pt_throughput/run_test.pl:
+taox11/tests/reactor/run_test.pl:
+taox11/tests/sequence/run_test.pl:
+taox11/tests/sequence/run_cross_tao_server.pl:
+taox11/tests/specialbasictypes/run_cross_tao_client.pl:
+taox11/tests/specialbasictypes/run_cross_tao_server.pl:
+taox11/tests/specialbasictypes/run_test.pl:
+taox11/tests/string/run_cross_tao_client.pl:
+taox11/tests/string/run_cross_tao_server.pl:
+taox11/tests/string/run_test.pl:
+taox11/tests/struct/run_test.pl:
+taox11/tests/struct/run_cross_tao_server.pl:
+taox11/tests/timebase/run_test.pl:
+taox11/tests/typecode/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/typecode_adapter/orb_create/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/typecode_adapter/resolve_ref/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+taox11/tests/union/run_test.pl:
+taox11/tests/union/run_cross_tao_server.pl:
+taox11/tests/write_traits/run_test.pl:
+taox11/tests/wstring/run_cross_tao_client.pl:
+taox11/tests/wstring/run_cross_tao_server.pl:
+taox11/tests/wstring/run_test.pl:

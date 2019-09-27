@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project : taox11_lib, taox11_portableserver, taox11_valuetype, tao_objreftemplate {
+  after   += object_reference_template
+  libs    += taox11_ort
+}

@@ -1,0 +1,142 @@
+
+project(taox11_anytypecode_idl) : ridl_core_defaults, install, pidl_install {
+  custom_only = 1
+  idlflags += -Gp -Gd -SS -Sorb -o . --namespace TAOX11_NAMESPACE \
+              -I $(TAO_ROOT) \
+              -Wb,export_macro=TAOX11_AnyTypeCode_Export \
+              -Wb,export_include=tao/x11/anytypecode/taox11_anytypecode_export.h
+
+  idlflags += --namespace TAOX11_NAMESPACE
+  idlflags -= -Sa -St
+
+  IDL_Files {
+    idlflags += -Sorb
+    gendir = .
+    $(TAO_ROOT)/tao/AnyTypeCode/AnySeq.pidl
+    $(TAO_ROOT)/tao/AnyTypeCode/Dynamic_Parameter.pidl
+    $(TAO_ROOT)/tao/AnyTypeCode/ValueModifier.pidl
+    $(TAO_ROOT)/tao/AnyTypeCode/Visibility.pidl
+  }
+
+  IDL_Files {
+    idlflags += -Sorb -Wb,safe_include=tao/x11/anytypecode/dynamic_safe.h
+    gendir = .
+    $(TAO_ROOT)/tao/AnyTypeCode/Dynamic.pidl
+  }
+
+  IDL_Files {
+    gendir = .
+    $(TAO_ROOT)/tao/AnyTypeCode/Bounds.pidl
+  }
+
+  specific {
+    //install_dir = tao/AnyTypeCode
+  }
+}
+
+project(taox11_anytypecode) : taox11_lib, taox11_defaults, anytypecode  {
+  after += taox11_anytypecode_idl
+  sharedname = taox11_anytypecode
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags += TAOX11_ANYTYPECODE_BUILD_DLL
+
+  Source_Files {
+    any.cpp
+    any_impl.cpp
+    any_arg_traits.cpp
+    any_basic_impl.cpp
+    any_unknown_type.cpp
+    any_util.cpp
+    typecode_impl.cpp
+    typecode_constants.cpp
+    exceptionA.cpp
+    system_exceptionA.cpp
+    anyinsert.cpp
+  }
+
+  Source_Files {
+    VisibilityC.cpp
+    ValueModifierC.cpp
+    Dynamic_ParameterC.cpp
+    DynamicC.cpp
+    BoundsC.cpp
+    AnySeqC.cpp
+  }
+
+  Source_Files {
+    ../Typecode_typesC.cpp
+    ../CurrentA.cpp
+    ../orb_typesA.cpp
+    ../Policy_ForwardA.cpp
+    ../Policy_ManagerA.cpp
+    ../Policy_CurrentA.cpp
+    ../PolicyA.cpp
+    ../ServicesA.cpp
+    ../BooleanSeqA.cpp
+    ../CharSeqA.cpp
+    ../DoubleSeqA.cpp
+    ../FloatSeqA.cpp
+    ../Typecode_typesA.cpp
+    ../CONV_FRAMEA.cpp
+    ../ParameterModeA.cpp
+    ../LongDoubleSeqA.cpp
+    ../LongLongSeqA.cpp
+    ../LongSeqA.cpp
+    ../OctetSeqA.cpp
+    ../ShortSeqA.cpp
+    ../StringSeqA.cpp
+    ../ULongLongSeqA.cpp
+    ../ULongSeqA.cpp
+    ../UShortSeqA.cpp
+    ../WCharSeqA.cpp
+    ../WStringSeqA.cpp
+    ../IOPA.cpp
+    ../Messaging_PolicyValueA.cpp
+    ../Messaging_SyncScopeA.cpp
+//    ../PI_ForwardA.cpp
+//    ../PortableInterceptorA.cpp
+    ../TimeBaseA.cpp
+    ../PolicyA.cpp
+  }
+
+  Header_Files {
+    any.h
+    any_impl.h
+    any_arg_traits.h
+    any_basic_impl.h
+    any_unknown_type.h
+    any_sarg_traits.h
+    any_util.h
+    dynamic_safe.h
+    typecode_impl.h
+    typecode_constants.h
+    typecode_ref.h
+    anyinsert.h
+  }
+
+  Header_Files {
+    VisibilityC.h
+    ValueModifierC.h
+    Dynamic_ParameterC.h
+    DynamicC.h
+    BoundsC.h
+    AnySeqC.h
+    any_basic_impl_t.h
+    any_dual_impl_t.h
+    marshal_policy_t.h
+    typecode_case_t.h
+  }
+
+  Inline_Files {
+  }
+
+  Template_Files {
+    any_basic_impl_t.cpp
+    any_dual_impl_t.cpp
+    typecode_case_t.cpp
+  }
+
+  specific {
+    //install_dir = tao/AnyTypeCode
+  }
+}

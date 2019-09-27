@@ -1,0 +1,48 @@
+// -*- MPC -*-
+
+project(taox11_cosnaming_idl) : ridl_defaults {
+  custom_only = 1
+  idlflags   += -o . --namespace TAOX11_NAMESPACE \
+                -Wb,stub_export_macro=TAOX11_CosNaming_Export \
+                -Wb,stub_export_include=orbsvcs/naming_server/taox11_cosnaming_export.h
+
+  IDL_Files {
+    gendir = .
+    $(TAO_ROOT)/orbsvcs/orbsvcs/CosNaming.idl
+    gendir = .
+  }
+}
+
+project(taox11_cosnaming_stub) : taox11_orbsvcslib {
+  sharedname   = taox11_cosnaming_stub
+  dynamicflags+= TAOX11_COSNAMING_BUILD_DLL
+  after       += taox11_cosnaming_idl
+
+  libout = $(TAOX11_ROOT)/../lib
+
+  Source_Files {
+    CosNamingC.cpp
+  }
+
+  Header_Files {
+    CosNamingC.h
+    CosNaming_export.h
+  }
+}
+
+project(taox11_cosnaming_skel) : taox11_orbsvcslib, taox11_portableserver, taox11_cosnaming_stub {
+  sharedname   = taox11_cosnaming_skel
+  dynamicflags+= TAOX11_COSNAMING_BUILD_DLL
+  after       += taox11_cosnaming_idl
+
+  libout = $(TAOX11_ROOT)/../lib
+
+  Source_Files {
+    CosNamingS.cpp
+  }
+
+  Header_Files {
+    CosNamingS.h
+    CosNaming_export.h
+  }
+}

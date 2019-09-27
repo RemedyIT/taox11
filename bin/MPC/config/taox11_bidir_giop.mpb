@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project : taox11_lib, taox11_pi, bidir_giop, avoids_corba_e_micro {
+  after   += taox11_bidir_giop
+  libs    += taox11_bidir_giop
+}

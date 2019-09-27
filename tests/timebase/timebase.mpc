@@ -1,0 +1,36 @@
+// -*- MPC -*-
+// timebase.mpc
+
+project(*hello_gen_Idl): ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*hello_gen_Server): taox11_server {
+  after += *hello_gen_Idl
+  Source_Files {
+    hello.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+// NOTE : using TimeBase pulls in a dependency on taox11_anytypecode
+//        as the Any insertion policy for this (core) type in unconditional.
+//        The taox11_core_anytypecode base project adds the anytypecode lib
+//        without activating full typecode/Any op generation.
+project(*hello_gen_Client): taox11_client, taox11_core_anytypecode {
+  after += *hello_gen_Idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}
+

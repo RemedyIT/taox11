@@ -1,0 +1,59 @@
+
+project(taox11_codecfactory_idl) : ridl_core_defaults, install {
+  custom_only = 1
+  idlflags += -o . -I $(TAO_ROOT) --namespace TAOX11_NAMESPACE \
+              -Wb,export_macro=TAOX11_CODECFACTORY_Export \
+              -Wb,export_include=tao/x11/codecfactory/taox11_codecfactory_export.h \
+
+  IDL_Files {
+    gendir = .
+    idlflags += -Gp -Gd -Sci -SS -Sorb -Sal -Glons \
+                -Wb,include_guard=TAOX11_CODECFACTORY_SAFE_INCLUDE \
+                -Wb,safe_include=tao/x11/codecfactory/codecfactory.h
+
+    idlflags -= -Sa -St
+    $(TAO_ROOT)/tao/CodecFactory/IOP_Codec.pidl
+  }
+
+  IDL_Files {
+    gendir = .
+    idlflags += -Sci -SS -Sorb -Sa \
+                -Wb,unique_include=tao/x11/codecfactory/codecfactory.h
+    $(TAO_ROOT)/tao/CodecFactory/IOP_Codec_include.pidl
+  }
+
+  specific {
+    install_dir = tao/x11/codecfactory
+  }
+}
+
+project(taox11_codecfactory) : taox11_lib, install, taox11_anytypecode, codecfactory {
+  after        += taox11_codecfactory_idl
+  sharedname    = taox11_codecfactory
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags  = TAOX11_CODECFACTORY_BUILD_DLL
+
+  Source_Files {
+    codec_impl.cpp
+    codecfactory.cpp
+    codecfactory_impl.cpp
+    IOP_CodecC.cpp
+    IOP_Codec_includeC.cpp
+  }
+
+  Header_Files {
+    codec_impl.h
+    codecfactory.h
+    codecfactory_impl.h
+    tao_codecfactory.h
+    taox11_codecfactory_export.h
+    IOP_CodecC.h
+    IOP_CodecS.h
+    IOP_Codec_includeC.h
+    IOP_Codec_includeS.h
+  }
+
+  specific {
+    install_dir = tao/x11/codecfactory
+  }
+}

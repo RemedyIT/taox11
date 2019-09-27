@@ -1,0 +1,27 @@
+
+  // generated from <%= ridl_template_path %>
+%##### Remote interface #####
+%#
+
+protected:
+  typedef std::shared_ptr<<%= cxxname %>> _shared_ptr_type;
+
+  template <typename _Tp1, typename, typename ...Args>
+  friend TAOX11_CORBA::object_reference<_Tp1> TAOX11_CORBA::make_reference(Args&& ...args);
+
+  explicit <%= amic_cxxname %> (<%= proxy_cxxname %>_ptr p, bool inherited = false);
+  <%= amic_cxxname %> () = default;
+  ~<%= amic_cxxname %> () = default;
+
+private:
+  /** @name Illegal to be called. Deleted explicitly to let the compiler detect any violation */
+  //@{
+  <%= amic_cxxname %>(const <%= amic_cxxname %>&) = delete;
+  <%= amic_cxxname %>(<%= amic_cxxname %>&&) = delete;
+  <%= amic_cxxname %>& operator=(const <%= amic_cxxname %>&) = delete;
+  <%= amic_cxxname %>& operator=(<%= amic_cxxname %>&&) = delete;
+  <%= proxy_cxxname %>_ptr <%= proxy_cxxname.downcase %>_{};
+  //@}
+}; // class <%= amic_cxxname %>
+%#
+% visit_template('typecode') if generate_typecode_support?

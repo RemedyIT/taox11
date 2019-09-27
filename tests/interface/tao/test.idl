@@ -1,0 +1,99 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+#include "orb.idl"
+
+interface Global {
+  void do();
+};
+
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  interface Foo
+  {
+    Object return_base ();
+
+    attribute string att_1;
+    readonly attribute string att_2;
+
+    const long n = 10;
+    const string Str = "string";
+    typedef long V[n];
+    const float pi = 3.14159;
+    typedef sequence<long> LongSeq;
+
+    struct S
+    {
+      string  id;
+
+      struct NS
+      {
+        long  nr;
+
+      }       n;
+    };
+
+    enum E
+    {
+      e_1,
+      e_2
+    };
+
+  };
+
+  interface iA {
+    void do_something_A ();
+  };
+
+  interface iB : iA {
+    void do_something_B ();
+  };
+
+  interface iC : iB {
+    void do_something_C ();
+  };
+
+  interface iD {
+    void do_something_D ();
+  };
+
+  interface iE : iC, iD {
+    void do_something_E ();
+  };
+
+  interface iF : Global {
+    void do_something_F ();
+  };
+
+  interface iFactory
+  {
+    iA get_iA ();
+    iB get_iB ();
+    iC get_iC ();
+    iD get_iD ();
+    iE get_iE ();
+    iF get_iF ();
+
+    iA get_iA_from_iE ();
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+
+  interface x {
+    struct y {
+      x member;
+    };
+    y do_something (in y a, out y b, inout y c);
+  };
+};
+
+

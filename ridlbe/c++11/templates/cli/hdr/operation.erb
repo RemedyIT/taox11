@@ -1,0 +1,15 @@
+
+// generated from <%= ridl_template_path %>
+% _op_end = ')'
+% _op_end << ' override' if is_override?
+% _op_end << ' = 0' if (interface.is_local? || in_valuetype?)
+% _op_end << ';'
+% _args = arguments.dup
+/// @copydoc <%= doc_scoped_name %>
+virtual
+<%= scoped_cxx_return_type %>
+<%= cxxname %> (<% if _args.empty? %><%= _op_end %><% end %>
+% while !_args.empty?
+%   _arg = _args.shift
+    <%= _arg.stub_arg_type %> <%= _arg.cxxname %><%= _args.empty? ? _op_end : ',' %>
+% end

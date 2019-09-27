@@ -1,0 +1,18 @@
+
+  // generated from {brix/taox11/}corba_servant/impl/hdr/interface_post.erb
+% nest(1) { write_regen_section("#{scoped_impl_cxxname}[User Public]", default_content: '// Your public definitions') }
+
+private:
+% write_regen_section("#{scoped_impl_cxxname}[User Private]", indent: 2) do
+  // your private definitions
+%   if interface_wants_shutdown?(scoped_name)
+  IDL::traits< CORBA::ORB >::ref_type orb_;
+%   end
+% end
+
+
+  <%= impl_cxxname %> (const <%= impl_cxxname %>&) = delete;
+  <%= impl_cxxname %> (<%= impl_cxxname %>&&) = delete;
+  <%= impl_cxxname %>& operator= (const <%= impl_cxxname %>&) = delete;
+  <%= impl_cxxname %>& operator= (<%= impl_cxxname %>&&) = delete;
+};

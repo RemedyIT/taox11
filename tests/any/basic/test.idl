@@ -1,0 +1,68 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module Test
+{
+    exception SomeException
+    {
+      string name;
+      string message;
+    };
+
+    struct Point
+    {
+      long x;
+      long y;
+    };
+
+    local interface Foo
+    {
+    };
+
+    interface Hello
+    {
+       any TestAny( in any a, out any b, inout any c );
+
+       //test forcopying
+       any TestAny2( in any a, out any b, inout any c, in any d );
+
+       //test for non-copying
+       any TestAny3( in any a, out any b, inout any c );
+
+       //test for nil object ref
+       any TestAny4( in any a, out any b, inout any c );
+
+       //test for TypeCodes
+       any TestAnyTypeCodes (in any a, out any b);
+
+       //test for TCKind
+       CORBA::TCKind TestAnyTypeCodes2 (in CORBA::TCKind a, out CORBA::TCKind b);
+
+       //test for TypeCodes
+       CORBA::TypeCode TestAnyTypeCodes3 (in CORBA::TypeCode a, out CORBA::TypeCode b);
+
+       //test for TypeCode sequence
+       typedef sequence<CORBA::TypeCode> Tc_seq;
+       Tc_seq TestTypeCodeSeq (in Tc_seq a, out Tc_seq b);
+
+       /// A method to shutdown the ORB
+       /**
+        * This method is used to simplify the test shutdown process
+        */
+       oneway void shutdown ();
+    };
+
+    typedef sequence<long> LongSeq;
+
+    typedef long MyLong;
+
+    typedef sequence<MyLong> MyLongSeq;
+
+    typedef string<5> bounded_str;
+
+};

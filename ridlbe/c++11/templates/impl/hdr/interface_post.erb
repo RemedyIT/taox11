@@ -1,0 +1,15 @@
+
+% dec_nest
+    // generated from <%= ridl_template_path %>
+% nest(2) { write_regen_section("#{scoped_cxxname}"+'[User Public]', default_content: '// your public definitions') }
+
+  private:
+% nest(2) { write_regen_section("#{scoped_cxxname}"+'[User Private]', default_content: '// your private definitions') }
+
+    <%= skel_cxxname %> (const <%= skel_cxxname %>&) = delete;
+    <%= skel_cxxname %> (<%= skel_cxxname %>&&) = delete;
+    <%= skel_cxxname %>& operator= (const <%= skel_cxxname %>&) = delete;
+    <%= skel_cxxname %>& operator= (<%= skel_cxxname %>&&) = delete;
+  };
+
+}; // _impl

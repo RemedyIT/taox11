@@ -1,0 +1,363 @@
+include::_{backend}_settings.adoc[]
+
+= Asynchronous Method Invocation with TAOX11
+
+This document describes how to use the CORBA Asynchronous Method
+Invocation (AMI) with TAOX11. Knowledge of AMI and CORBA is assumed.
+
+== Defining the IDL interfaces
+
+To be able to generate asynchronous invocations with TAOX11 you have to
+add annotations to the IDL file. At this moment TAOX11 supports two different
+options to indicate the asynchronous code generation for interfaces:
+
+. Using the pragma `corba_ami`. +
+Example: if we have an interface Test::A use the following pragma
+definition
+
+-----------------------------
+  #pragma corba_ami "Test::A"
+  module Test
+  {
+    interface A
+      {
+        ...
+      };
+  };
+-----------------------------
+
+[start=2]
+. Use an IDL annotation (not part of the CORBA specification): +
+ Example: if we have an interface Test::A use the following annotation
+
+----------------------------
+  module Test
+  {
+    interface A
+      {
+        ...
+      }; //@CORBA (ami=true)
+  };
+----------------------------
+
+The annotation can also be used in it's uncommented form (without the
+preceding `//`) but that makes the IDL file incompatible with IDL
+compilers not supporting IDL annotations yet.
+
+In compliance with annotation syntax from the OMG DDS XTypes
+specification the following applies:
+
+- When using the uncommented form the annotation should *precede* the
+IDL declaration possibly separated by whitespaces and/or empty and/or
+commented lines.
+- When using the commented form the annotation should *follow* the IDL
+declaration on the *same line* as the declaration ends.
+
+If no `corba_ami` pragma, no annotation or the annotation
+`//@CORBA (ami=false)` is used for an interface than no CORBA AMI
+support is generated for that interface.
+
+== Generating AMI support
+
+With TAOX11 the way AMI support code is generated has changed as
+compared to TAO. The TAOX11 RIDL compiler generates the AMI code in
+separate stub files with postfix `AmiC`. No AMI support will be
+generated in the normal stub files which makes it possible for clients
+that don't want to use AMI to link without any AMI support libraries.
+
+There will be no AMI code generated inside the skeleton files as the
+implicitly generated AMI reply handler class will be generated in the new
+AMI stub files. This makes a server implementing the interface
+completely unaware of AMI.
+
+For the application's client code a dependency exists when implementing
+AMI code where an explicit include of the new `*AmiC.h` file(s) is
+required to use the generated AMI code. This offers the opportunity to
+cleanly separate code only using synchronous calls from code using
+asynchronous calls (as well).
+
+In order to generate the AMI stub and skeleton functionality the RIDL
+compiler must be invoked with the `-GC` flag. When the `-GC` flag is
+used, but the IDL file does not contain any `corba_ami` pragma's or AMI
+annotations, the AMI stub files are generated empty. Otherwise the
+`*AmiC.{h,cpp}` files will contain a class definition for the AMI
+reply handler stub, a class definition for the skeleton of the AMI
+reply handler and a derived client stub class containing the asynchronous
+`sendc_`-operations for each AMI enabled interface in the IDL file.
+
+== Use of CORBA::amic_traits<>
+
+In style with the new IDL to {cxx11} language mapping specifications the
+TAOX11 AMI support provides new CORBA traits for AMI,
+`CORBA::amic_traits<>` with which a developer can reference the
+generated AMI types without having to remember a specific naming
+convention or use the type in template programming. +
+ As with other reference type traits you can simply use the new traits
+combined with the interface name you declared in IDL (for example
+`interface Test {}`) as follows:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Trait |Description
+|`CORBA::amic_traits<Test>::replyhandler_base_type`
+|Trait from which the user implemented CORBA ami reply handler class
+has to be derived from.
+
+|`CORBA::amic_traits<Test>::replyhandler_servant_ref_type`
+|Reference type for the reply handler servant.
+
+|`CORBA::amic_traits<Test>::replyhandler_ref_type`
+|Reference type for the reply handler. For retrieving this from an object
+reference `y` narrow `y` using
+`CORBA::amic_traits<Test>::replyhandler_traits::narrow (y)`.
+
+|`CORBA::amic_traits<Test>::ref_type`
+|Reference to the AMI stub class that contains all the implied `sendc_`
+operations. This can be obtained by narrow the retrieved object reference
+`z` using `CORBA::amic_traits<Test>::narrow (z)`.
+|=======================================================================
+
+As with all other reference type traits `CORBA::amic_traits<>` also
+defines weak reference types for all references:
+
+- `CORBA::amic_traits<Test>::replyhandler_weak_ref_type`,
+- `CORBA::amic_traits<Test>::replyhandler_weak_servant_ref_type` and
+- `CORBA::amic_traits<Test>::weak_ref_type`.
+
+== Export header files
+
+With TAOX11 it is possible to generate and/or use a separate export
+header file for the generated AMI code. With the RIDL option `-Gxhsta`,
+an AmiC export header is generated which must be specified with the
+`-Wb` option like this:
+`-Wb, amic_export_include=/path/to/export_header`. Additionally the RIDL
+compiler also needs the `-Wb, amic_export_macro=MACRO_NAME` option.
+
+== Clients with and without AMI
+
+As pointed out before, the advantage of generating the AMI stub and
+skeleton code in separate files from the regular (synchronous) stub and
+skeleton files together with the possibility to generate and use
+separate AmiC export headers is that a client not using AMI does not
+have to include and link in the AMI code.
+
+== Example
+
+The example in `$TAOX11_ROOT/examples/ami` illustrates how to use the
+CORBA asynchronous method invocation (AMI) with TAOX11. The
+link:{docs_root}/../../taox11/examples/ami/client.cpp[client] in this test invokes some
+asynchronous methods. The client doesn't block waiting for the responses
+but instead gives the ORB a reference to a reply handler that will
+receive the response asynchronously.
+
+=== Example: Defining the IDL interface
+
+To use asynchronous invocations with TAOX11 you have to annotate this in
+the link:{docs_root}/../../taox11/examples/ami/test.idl[IDL file].
+As mentioned before we have 2 possibilities to indicate the
+asynchronous code generation for interfaces.
+
+---------------------------------------------------------------------
+#pragma corba_ami "Test::A"
+
+module Test
+  {
+    interface A
+      {
+        long foo (in long in_l);
+        attribute long yadda;
+        /// A method to shutdown the ORB
+        /// This method is used to simplify the test shutdown process
+        oneway void shutdown ();
+      };
+
+/* An alternative of using ' #pragma corba_ami "Test::A"' is:
+
+   //@CORBA (ami=true)
+    interface A
+      {
+        long foo (in long in_l);
+        attribute long yadda;
+        /// A method to shutdown the ORB
+        /// This method is used to simplify the test shutdown process
+        oneway void shutdown ();
+      };
+*/
+  };
+---------------------------------------------------------------------
+
+=== Example: Generated AMI support
+
+To generate the stub and skeleton code for AMI support invoke the RIDL
+compiler using the `-GC` flag. In the example we use an
+link:{docs_root}/../../taox11/examples/ami/ami_test.mpc[MPC file] to generate the
+makefile containing the right IDL invocations. +
+ The IDL compiler automatically generates the so-called _implied IDL_
+constructed from your original IDL. +
+ From this _implied IDL_ the RIDL compiler for TAOX11 generates for
+link:{docs_root}/../../taox11/examples/ami/test.idl[test.idl] 3 additional AMI stub
+files:
+
+1.  testAmiC.h
+2.  testAmiC.cpp
+3.  testAmiCP.h
+
+=== Example: Servant implementation interface
+
+In this example the files
+link:{docs_root}/../../taox11/examples/ami/test_i.cpp[test_i.cpp] and
+link:{docs_root}/../../taox11/examples/ami/test_i.h[test_i.h] contain the user servant
+implementation of the interface `Test::A`.
+
+=== Example: Client
+
+In order to use the AMI specific interfaces generated by the RIDL
+compiler the only extra file the
+link:{docs_root}/../../taox11/examples/ami/client.cpp[client] has to include for using
+AMI support is the `*AmiC.h` file, in our example `testAmiC.h`.
+
+==== Client: Implementing the reply handler
+
+The user has to implement a servant for the reply handler interface so
+the client can act upon the replies. +
+This reply handler class has to be derived from the reply handler
+skeleton class using the `CORBA::amic_traits` of interface `Test::A`.
+
+[source,c++]
+---------------------------------------------------------------------------------------------------------
+  class Handler final : public virtual CORBA::amic_traits<Test::A>::replyhandler_base_type
+  {
+    public:
+    /// Constructor.
+    Handler () = default;
+
+    /// Destructor.
+    ~Handler () = default;
+
+    virtual void foo (int32_t ami_return_val) override
+    {
+      // Do something
+    };
+
+    virtual void foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+    {
+      // Do something
+    }
+....
+---------------------------------------------------------------------------------------------------------
+
+==== Client: sending asynchronous method invocations
+
+The reply handler servant is activated using the `CORBA::amic_traits`
+for the reply hander.
+
+[source,c++]
+---------------------------------------------------------------------------------------
+  // Instantiate the Handler and register that with the POA.
+  // Retrieve RootPOA object reference
+  IDL::traits<CORBA::Object>::ref_type poa_obj =
+    _orb->resolve_initial_references ("RootPOA");
+
+  // Narrow POA interface
+  IDL::traits<PortableServer::POA>::ref_type root_poa =
+     IDL::traits<PortableServer::POA>::narrow (poa_obj);
+  if (!root_poa)
+    {
+      // Error
+      return 1;
+    }
+
+  IDL::traits<PortableServer::POAManager>::ref_type poaman =
+    root_poa->the_POAManager ();
+  if (!poaman)
+    {
+      // Error
+      return 1;
+    }
+
+  // Create reply handler servant
+  CORBA::amic_traits<Test::A>::replyhandler_servant_ref_type test_handler_impl =
+    CORBA::make_reference<Handler> ();
+
+  // Activate reply handler servant object to the poa
+  PortableServer::ObjectId id = root_poa->activate_object (test_handler_impl);
+
+  // Get reference from poa
+  IDL::traits<CORBA::Object>::ref_type test_handler_obj =
+    root_poa->id_to_reference (id);
+
+  if (!test_handler_obj)
+    {
+      return 1;
+    }
+
+  // Narrow to reply handler ref type using amic_traits
+  CORBA::amic_traits<Test::A>::replyhandler_ref_type test_handler =
+       CORBA::amic_traits<Test::A>::replyhandler_traits::narrow (test_handler_obj);
+  if (!test_handler)
+    {
+      return 1;
+    }
+
+  // Activate the poa
+  poaman->activate ();
+---------------------------------------------------------------------------------------
+
+Now we have to retrieve the references to the synchronous and
+asynchronous interfaces. First we initialize the ORB and retrieve an
+object reference using an IOR. Then we use narrow to get the reference
+of the specified type. For retrieving the synchronous interface we use
+the following code fragment
+
+[source,c++]
+---------------------------------------------
+  IDL::traits<Test::A>::ref_type a_sync =
+    IDL::traits<Test::A>::narrow (obj);
+  if (!a_sync)
+    {
+      // Error: do something
+      return 1;
+    }
+---------------------------------------------
+
+For retrieving the asynchronous interface we use the following code
+fragment
+
+[source,c++]
+-----------------------------------------------------
+  CORBA::amic_traits<Test::A>::ref_type a_async =
+    CORBA::amic_traits<Test::A>::narrow (obj);
+  if (!a_async)
+    {
+      // Error do something
+      return 1;
+    }
+-----------------------------------------------------
+
+Now we can invoke synchronous messages using the synchronous or
+asynchronous interface reference and asynchronous messages using the
+asynchronous interface reference.
+
+[source,c++]
+--------------------------------------------------------------------
+  // Invoke a synchronous operation using the synchronous interface
+  int32_t res = a_sync->foo(22);
+
+  // Invoke a synchronous operation using the asynchronous interface
+  int32_t res = a_async->foo(22);
+
+  // Invoke an asynchronous message, directly returns
+  a_async->sendc_foo (test_handler,12);
+--------------------------------------------------------------------
+
+After invoking the asynchronous operations we have to wait until all the
+responses have arrived before we shutdown the ORB.
+
+[source,c++]
+-------------------------------
+  while (!received_all_replies)
+    {
+      _orb->perform_work ();
+    }
+  a_sync->shutdown ();
+-------------------------------

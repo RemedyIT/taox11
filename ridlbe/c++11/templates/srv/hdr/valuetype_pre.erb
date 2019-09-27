@@ -1,0 +1,27 @@
+
+// generated from <%= ridl_template_path %>
+namespace POA
+{
+  class <%= skel_export_macro %><%= skel_cxxname %>
+    : public virtual <%= concrete_interface.scoped_skel_cxxtype %>
+    , public virtual TAOX11_CORBA::valuetype_traits< <%= scoped_cxxname%>>::base_type
+  {
+  public:
+    /// @name Member types
+    //@{
+    typedef TAOX11_CORBA::servant_traits< <%= skel_cxxname %>>    _traits_type;
+    typedef TAOX11_CORBA::servant_reference< <%= skel_cxxname %>> _ref_type;
+    //@}
+
+  protected:
+    typedef std::shared_ptr<<%= skel_cxxname %>> _shared_ptr_type;
+    /// Constructor
+    <%= skel_cxxname %> ();
+    /// Destructor
+    virtual ~<%= skel_cxxname %> () = default;
+
+    template <typename T> friend class TAOX11_CORBA::servant_reference;
+
+    TAOX11_NAMESPACE::PortableServer::Servant::_shared_ptr_type _lock_shared ();
+  };
+} // namespace POA

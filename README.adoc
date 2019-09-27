@@ -1,0 +1,33 @@
+= TAOX11
+
+https://taox11.remedy.nl[TAOX11] is the CORBA implementation supporting the
+https://www.omg.org/spec/CPP11[IDL to C++11] Language Mapping.
+TAOX11 uses the core of
+https://www.remedy.nl/opensource/tao.html[TAO] to provide you as
+user with a large set of features and capabilities. TAO is a well
+known and stable CORBA implementation with a rich set of features and
+capabilities.
+
+== Install TAOX11
+
+For installing TAOX11 you *must* use the https://github.com/RemedyIT/axcioma[AXCIOMA] bootstrap
+repository. The brix11 tooling will clone this repository as part of the bootstrap step.
+
+== Supported features
+
+TAOX11 has the following major features:
+
+. Compliant with the IDL to C++11 v1.3 language mapping
+. CORBA v3.3 compliant
+. Full support of the IDL type system (basic types, constant, enum,
+string, wide string, sequence, array, struct, union, typedef, exception)
+. Full support for local and remote CORBA interfaces
+. Full POA support
+. Full support for valuetype and abstract interfaces
+. Full support for Any
+. Through POA Collocation optimization
+. CORBA AMI support
+. Messaging and BiDirection GIOP Policies support
+. IOR Table support
+. CodecFactory support
+. DynamicAny and TypeCodeFactory support

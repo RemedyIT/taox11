@@ -1,0 +1,131 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  typedef char  charArray[2][2];
+  typedef wchar wcharArray[2][2];
+
+  valuetype VT
+  {
+    public unsigned long id ;
+  };
+
+  struct MessageStruct
+  {
+    long id;
+    string msg;
+  };
+
+  typedef sequence<MessageStruct> Messages;
+
+  exception StructEx
+  {
+    MessageStruct struct_i;
+  };
+
+  exception StructsEx
+  {
+    Messages structs;
+  };
+
+  interface Bar
+  {
+    void do_something () raises (StructEx);
+
+    attribute long a_bar;
+  };
+
+  enum Reason
+  {
+     one,
+     two,
+     three
+  };
+
+  enum DataType
+  {
+    dtEmpty,
+    dtLong,
+    dtShort,
+    dtString
+  };
+
+  union Data switch (DataType)
+  {
+    case dtLong: long longData;
+    case dtShort: short shortData;
+    case dtString: string stringData;
+    // by default (implicit), empty union
+  };
+
+  exception ReasonEx
+  {
+    Reason why;
+    boolean reason_bool;
+    Data union_data;
+  };
+
+  exception FooEx
+  {
+    string message;
+    wstring message_w;
+    Data union_data;
+  };
+
+  exception BooEx
+  {
+    long       id;
+    float      value;
+    wcharArray wc_array;
+    charArray  c_array;
+  };
+
+  exception FooBooEx
+  {
+    long id;
+    string message;
+    any x;
+  };
+
+  exception BarEx
+  {
+    Bar   bar_i;
+    octet bar_octet;
+    VT    bar_valuetype;
+  };
+
+  /// A very simple interface
+  interface Foo
+  {
+    void do_it () raises (FooEx);
+
+    readonly attribute long a_number raises (BooEx);
+
+    readonly attribute long a_number_and_message raises (FooBooEx);
+
+    attribute string a_string setraises (FooEx, BooEx);
+
+    void do_reason () raises (ReasonEx);
+
+    void do_throw_system ();
+
+    void do_throw_object () raises (BarEx);
+
+    void do_throw_struct () raises (StructEx);
+
+    void do_throw_structs () raises (StructsEx);
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+};

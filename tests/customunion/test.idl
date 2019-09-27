@@ -1,0 +1,68 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  /// An interface for testing IDL primitive types
+  union specialType_union switch (char)
+  {
+    case 'c': char charData;
+    case 'b': boolean boolData;
+    case 'u':
+    case 'w': wchar wcharData;
+    case 'i':
+    case 'o': octet octetData;
+    // by default (implicit), empty union
+  };
+
+  union basicType_union switch (short)
+  {
+    case 0: short shortData;
+    case 1: unsigned short ushortData;
+    case 2: long longData;
+    case 3: unsigned long ulongData;
+    case 4: long long llongData;
+    case 5: unsigned long long ullongData;
+    case 6: float floatData;
+    case 7: double doubleData;
+    case 8: long double ldoubleData;
+    case 9: string stringData;
+    case 10: wstring wstringData;
+    default: float defaultData;
+  };
+
+  union U switch(boolean)
+  {
+    case TRUE: short s;
+    default: float defaultData;
+  };
+
+  union Z switch(boolean)
+  {
+    case TRUE: short s;
+  };
+
+  /// The only interface
+  interface Hello
+  {
+    // Get a union of special-datatypes.
+    specialType_union get_special_union();
+    // Transfer a union of special-datatypes.
+    specialType_union inout_special_union (in specialType_union pin, out specialType_union pout, inout specialType_union pinout);
+
+    // Get a union of basic-datatypes.
+    basicType_union get_basic_union();
+    // Transfer a union of basic-datatypes.
+    basicType_union inout_basic_union (in basicType_union pin, out basicType_union pout, inout basicType_union pinout);
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process.
+    oneway void shutdown ();
+  };
+};

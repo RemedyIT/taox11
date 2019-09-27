@@ -1,0 +1,58 @@
+
+// generated from <%= ridl_template_path %>
+const std::string <%= scoped_cxxname %>::__<%= cxxname.downcase %>_repository_id {"<%= repository_id %>"};
+
+TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
+<%= scoped_cxxname %>::_copy_value () const
+{
+  return TAOX11_CORBA::make_reference< <%= scoped_cxxtype %>> (*this);
+}
+
+bool <%= scoped_cxxname %>::_obv_unmarshal (
+    TAO_InputCDR &strm,
+    <%= scoped_cxxtype %>::_ref_type &vbox)
+{
+  TAO_CORBA::Boolean is_null_object {};
+  TAO_CORBA::Boolean is_indirected {};
+  TAO_InputCDR indrected_strm ((size_t) 0);
+  if (!(TAO_CORBA::ValueBase::_tao_validate_box_type (
+        strm, indrected_strm,
+        __<%= cxxname.downcase %>_repository_id.c_str (),
+        is_null_object, is_indirected)))
+    {
+      return false;
+    }
+
+  vbox = nullptr;
+  if (is_null_object)
+    {
+      return true;
+    }
+
+  if (is_indirected)
+    {
+      return <%= scoped_cxxname %>::_obv_unmarshal (indrected_strm, vbox);
+    }
+
+  vbox = TAOX11_CORBA::make_reference< <%= scoped_cxxtype %>> ();
+
+  return(strm >> <%= boxed_cdr_to_fmt % "vbox->_value ()" %>);
+}
+
+const std::string& <%= scoped_cxxname %>::_obv_repository_id () const
+{
+  return __<%= cxxname.downcase %>_repository_id;
+}
+
+bool <%= scoped_cxxname %>::_obv_marshal_v (TAO_OutputCDR &strm) const
+{
+  return (strm << <%= boxed_cdr_from_fmt % "this->_value ()" %>);
+}
+% if generate_typecode_support?
+
+TAOX11_CORBA::typecode_reference
+<%= cxxname %>::_obv_typecode () const
+{
+  return <%= scoped_cxx_typecode %>;
+}
+% end

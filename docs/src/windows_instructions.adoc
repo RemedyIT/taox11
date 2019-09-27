@@ -1,0 +1,136 @@
+include::_{backend}_settings.adoc[]
+
+= Development on Windows
+
+== Setting up the Development Environment
+
+=== Requirements
+
+Currently for development on the Windows platform
+the MinGW-w64 toolchain (a GNU compiler toolchain variant for the
+Windows platform), Visual Studio 2015 Update 2 or newer,
+Visual Studio 2017 Update 3 or newer, and Intel C++ 2016 are supported.
+
+A development environment requires the following software
+installed on the computer hosting the
+Windows environment in which our product is installed:
+
+1.  Perl implementation for Windows
+2.  Ruby implementation for Windows
+
+For a development environment using MinGW-w64 also the following software
+has to be installed
+
+1.  Collection of build tools supporting GNU make based development
+2.  MinGW-w64 toolchain for the targeted environment (i686 or x86_64)
+
+==== Installing ruby
+
+The development environment requires ruby. Please download the latest version
+of ruby from "ruby-lang.org":https://www.ruby-lang.org and install it on your system.
+The `ruby` executable must be available through the `PATH`.
+
+==== Installing Perl
+
+The development environment requires a Perl interpreter
+supporting native Windows file paths (i.e. using drive letters, colons
+and backward slashes; not mapped file paths like used in Cygwin or MSYS
+environments).
+
+We advise to install "ActiveState Perl":http://www.activestate.com/activeperl
+which can be downloaded "here":http://www.activestate.com/activeperl/downloads.
+We advise to install the 32bit version of the software in all cases as
+this matches most of the other tools from the development environment for
+both the i686 and x86_64 targeted environments. Using the installer you can
+install the software at an appropriate location. The only requirement is that
+the `perl` interpreter (executable) must be available through the `PATH`.
+We advise to install one of the following implementations:
+
+==== Installing build tools for MinGW-w64
+
+The development for the MinGW-w64 toolchains uses GNU make based
+build tooling as is common for GNU compilers.
+
+The required tools can all be downloaded from the
+http://www.mingw.org[MinGW project]. As this can be a daunting task,
+especially since the required tools are a carefully selected subset of a
+the full MinGW toolset (we do not use the compiler toolchain of
+the MinGW project itself, nor does it use the MSYS environment), Remedy
+IT has prepared a pre-selected package of these tools and made it
+available for download through their open source portal website
+https://osportal.remedy.nl[OSPortal].
+
+Follow these steps to install the build tools:
+
+* Download the ZIP file from
+http://download.remedy.nl/idl2c++11/MingW.zip[Remedy IT download server]
+* Unpack the ZIP archive in the root of the drive where also our product is
+installed (f.i. `C:\`); this should create a directory MinGW in the root
+folder of the drive, f.i. `C:\MinGW`
+* Add the location of the tool executables to the `PATH` by adding the
+path string `C:\MinGW\msys\1.0\bin;C:\MinGW\bin` (mind the order of the
+directories) to the PATH variable for your user environment (replace
+`C:` by the drive where you installed the product is different)
+
+==== Installing the MinGW-w64 compiler toolchain
+
+The development environment for Windows requires native compiler
+toolchain executables from the
+http://mingw-w64.sourceforge.net/[MinGW-w64 project]
+
+We currently support the 8.1.0 versions of the toolchain. Higher
+versions may also work but have not been tested. In addition we only
+support the toolchains providing the Win32 threading API (not the POSIX
+API) and the structured exception handling model (SEH) on win64 (x86_64)
+or the DWARF exception handling model on win32 (i686).
+
+Follow these steps to install the compiler toolchain for the targeted
+environment:
+
+* Download the toolchain package for x86_64 (win64) targets
+http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-win32/seh/[here]
+or for i686 (win32)
+http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-win32/dwarf/[here]
+; select the latest revision of the package
+* Unpack the archive in the root folder of the drive where also TAOX11
+is installed; this should create a directory `mingw64` (for
+win64/x86_64) or `mingw32` (for win32/i686) in the root folder of the
+drive
+* Add the location of the toolchain executables to the `PATH` by adding
+the path string `C:\mingw64\bin;C:\mingw64\x86_64-w64-mingw32\lib` or
+`C:\mingw32\bin;C:\mingw32\i686-w64-mingw32\lib` (mind the order of the
+directories) to the PATH variable for your user environment *before the
+path string for the MinGW build tool executables* (replace `C:` by the
+drive where you installed the product is different)
+
+****
+The MinGW-w64 toolchain packages are 7Zip compressed archives.
+You can find installer downloads for Windows
+http://www.7-zip.org/[here].
+****
+
+== Using Windows
+
+=== Visual Studio 2015 and 2017
+
+We support development using Visual Studio 2015 and 2017. When you use
+<<{parent_dir}/brix11/brix11.adoc#,BRIX11>> to compile the project, the project type will be set
+to _solution_ files by default and the _msbuild_ tool will
+be used to compile your application.
+
+Due to the way Microsoft pass:[C++] compilers and linkers on Windows (including the Intel pass:[C++] compiler for Windows)
+handle symbol exports from DLLs it is important that for a debug build of your application you link the
+shipped debug libraries and for a release build of your application the shipped release libraries.
+With <<{parent_dir}/brix11/brix11.adoc#,BRIX11>> building for debug or release can be specified by
+adding the `--debug` or `--release` (default) switch to the `make` command.
+
+=== MinGW-w64
+
+After you have installed the necessary requirements you can
+use MinGW-w64 to compile your application.
+
+=== Testing
+
+When you have installed the required development support software as
+described above you can go on to test building examples and tests
+as described <<{parent_dir}/brix11/brix11.adoc#,here>>.

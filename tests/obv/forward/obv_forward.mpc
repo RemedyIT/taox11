@@ -1,0 +1,41 @@
+// -*- MPC -*-
+
+project(*idl) : ridl_ostream_defaults {
+  custom_only = 1
+
+  IDL_Files {
+    treebase.idl
+    treecontroller.idl
+    treenode.idl
+  }
+}
+
+project(*client): taox11_client, taox11_valuetype {
+  after += *idl
+
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    treebaseC.cpp
+    treecontrollerC.cpp
+    treenodeC.cpp
+  }
+}
+
+project(*server): taox11_server, taox11_valuetype  {
+  after += *idl
+
+  Source_Files {
+    test_impl.cpp
+    server.cpp
+  }
+  Source_Files {
+    treebaseC.cpp
+    treebaseS.cpp
+    treecontrollerC.cpp
+    treecontrollerS.cpp
+    treenodeC.cpp
+    treenodeS.cpp
+  }
+}

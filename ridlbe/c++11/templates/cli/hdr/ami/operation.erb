@@ -1,0 +1,16 @@
+// generated from <%= ridl_template_path %>
+%   _args = out_arguments.dup
+/// @copydoc <%= doc_scoped_name %>
+void
+<%= cxxname %> (<% if is_void? && _args.empty? %>);<% end %>
+%   unless is_void?
+    <%= scoped_cxx_in_type %> ami_return_val<%= _args.empty? ? ');' : ',' %>
+%   end
+%   while !_args.empty?
+%     _arg = _args.shift
+    <%= _arg.direction == :out ? _arg.scoped_cxx_in_type : _arg.scoped_cxx_inout_type%> <%= _arg.cxxname %><%= _args.empty? ? ');' : ',' %>
+%   end
+
+void
+<%= cxxname %>_excep (
+    IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder);

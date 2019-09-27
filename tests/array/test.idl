@@ -1,0 +1,44 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  typedef sequence<char,20> c20;
+  typedef sequence<c20,23> cc23;
+  interface x {
+    void do ();
+  };
+  typedef long F[5];
+  typedef long G[5];
+  typedef string V[5];
+  typedef string M[1][2][3];
+  typedef Object o[4];
+  typedef x a[5];
+
+  struct FooStruct {
+    F my_f;
+  };
+
+  exception SomeException
+  {
+    F my_f;
+  };
+
+  interface Foo {
+    boolean pass_array(in F p1, out V p2, inout M p3);
+
+    F return_array ();
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+};

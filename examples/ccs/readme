@@ -1,0 +1,29 @@
+
+This example has been taken from the book "Advanced CORBA
+Programming with C++" by Michi Henning and Steve Vinoski.
+The code from the TAO repository has been added to the TAOX11 repository.
+This directory contains the IDL from chapter 18 and has been ported C++11.
+
+The original C++ code can be found in the TAO repository at
+$TAO_ROOT/examples/Advanced/ch_18.
+
+Some more information about the book, can be found here:
+
+http://www.informit.com/store/advanced-corba-programming-with-c-plus-plus-9780201379273
+
+server:
+    The server takes no parameters nor command line options and registers the
+    controller object with the naming service.  The server then waits
+    infinitely for clients requests.
+
+client:
+    The client gets reference to the controller through the naming service,
+    makes several remote calls on this controller, and terminates.
+
+run_test.pl:
+    The script starts up a new Naming Service, starts thc server and client,
+    and when the client has completed terminates the server and NamingService.
+
+Running:
+    Please run the Naming Service first, then run the server program and
+    finally run the client program.

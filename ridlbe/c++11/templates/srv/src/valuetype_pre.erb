@@ -1,0 +1,24 @@
+
+// generated from <%= ridl_template_path %>
+namespace POA
+{
+    <%= skel_cxxname %>::<%= skel_cxxname %> ()
+    : <%= concrete_interface.scoped_skel_cxxtype %> ()
+    , TAOX11_CORBA::valuetype_traits< <%= scoped_cxxname%>>::base_type ()
+    {
+    }
+
+    TAOX11_NAMESPACE::PortableServer::Servant::_shared_ptr_type
+    <%= skel_cxxname %>::_lock_shared ()
+    {
+      if (!this->TAOX11_CORBA::ValueBase::_is_locked ())
+      {
+        _shared_ptr_type const _spsrv =
+            std::dynamic_pointer_cast<<%= skel_cxxname %>> (this->TAOX11_NAMESPACE::PortableServer::Servant::_lock_shared ());
+        this->TAOX11_CORBA::ValueBase::_initialize_shared (_spsrv);
+        return _spsrv;
+      }
+      else
+        return this->TAOX11_NAMESPACE::PortableServer::Servant::_lock_shared ();
+    }
+} // namespace POA

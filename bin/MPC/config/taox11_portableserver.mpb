@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project : taox11_lib, taox11_core_anytypecode, tao_portableserver {
+  after += taox11_portableserver
+  libs += taox11_portable_server
+}

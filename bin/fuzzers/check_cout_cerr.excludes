@@ -1,0 +1,5 @@
+taox11\/util\/.*
+taox11\/orbsvcs\/tests\/.*
+public\/.*
+taox11\/tests\/.*\/tao\/.*
+.*(C|S|P|SP)\.(h|inl|cpp)

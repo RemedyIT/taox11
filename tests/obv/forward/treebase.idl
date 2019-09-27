@@ -1,0 +1,23 @@
+/**
+ * @file    treebase.idl
+ * @author  Marcel Smit
+ *
+ * @brief   Testing forward declarations of valuetypes
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+// Forward declaration to make recursive construct.
+
+valuetype BaseNode;
+typedef sequence<BaseNode> BaseNodeSeq;
+
+valuetype BaseNode
+{
+  public BaseNode left;
+  public BaseNode right;
+  private BaseNode centre;
+
+  public BaseNodeSeq node_seq;
+};

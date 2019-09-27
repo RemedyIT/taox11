@@ -1,0 +1,11 @@
+// -*- MPC -*-
+
+project : taox11_lib_with_idl {
+  tagname     = TAOX11_ORBSVCS
+  includes += $(TAOX11_ROOT)/orbsvcs
+  idlflags += -I$(TAOX11_ROOT)/orbsvcs
+
+  specific(automake) {
+    includes += $(TAOX11_ROOT)/orbsvcs
+  }
+}

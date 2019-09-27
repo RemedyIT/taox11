@@ -1,0 +1,150 @@
+include::_{backend}_settings.adoc[]
+
+= TAOX11 Frequently Asked Questions
+
+== General FAQs
+
+[cols="<a,<a",options="header",]
+|=======================================================================
+|Question |Solution
+|I am manually generating the GNUmakefiles, using mwc.pl. When doing so,
+I get an error that the project ridl_defaults can't be found |
+
+Be sure to set all environment variables first.
+Then you should invoke
+`$TAOX11_ROOT/bin/mwc.pl` (and *not* `$ACE_ROOT/bin/mwc.pl`).
+This'll make sure that all TAOX11 MPC projects can be found. You can
+validate which _mwc.pl_ you are invoking by running `which mwc.pl`
+
+|Besides the environment variables like `ACE_ROOT` and
+`TAO_ROOT`, I see some `xxxX11_xxx` environment variables. Where do these
+variables point to? |
+
+`TAOX11_BASE_ROOT` points to the package root
+directory (typically `<package_root>`). +
+ `TAOX11_ROOT` point to the root directory of TAOX11 (typically
+`<package_root>/taox11`). +
+ `BRIX11_ROOT` point to the root directory of BRIX11 (typically
+`<package_root>/brix11`)
+
+|I have a huge existing application using IDL to {cpp} and I want to
+convert it to {cxx11}. Is there anything that can help me with this? |
+
+Not yet, we have been thinking about an automatic conversion script, but
+that is not a trivial task. Contact Remedy IT sales to discuss this
+further.
+
+|I want to use TAOX11 on a platform that isn't supported. |
+
+Contact Remedy IT sales, our team can do the port of TAOX11 to your
+platform.
+
+|I am using a CORBA feature that is not supported by TAOX11. |
+
+Please contact Remedy IT sales to get a quote to support the missing
+CORBA feature.
+
+|I am creating LwCCM components using CIAO. Can I also use TAOX11?|
+
+TAOX11 is a CORBA only product. For LwCCM using IDL to {cxx11}, Remedy IT
+provides the *AXCIOMA* suite. +
+Please contact Remedy IT sales for more details.
+
+|I am using DDS? Can I also use TAOX11?|
+
+TAOX11 is a CORBA only product. Remedy IT has developed a {cxx11} binding
+for DDS as part of AXCIOMA. +
+Please contact Remedy IT sales for more details.
+
+|When I use TAOX11, do I need to update all my code to use {cxx11}
+features like range-based for loops |
+
+When using TAOX11 you need to use the IDL to {cxx11} defined type and
+operation mapping. You are not forced to update your application code
+to use {cxx11} features for anything else.
+
+|When I'm running brix11, I get an error that brix11 cannot be found.|
+
+Please use the path to brix11 (typically `$TAOX11_ROOT/bin/brix11`) to
+run or add the path to the bin directory to your PATH.
+
+|I've created a TAOX11 application with the aid of BRIX11 but nothing is
+written to the console. It appears that the `taox11_xxx` logging
+operators are used. |
+
+Be aware that the TAOX11 default logging framework outputs nothing except
+panic messages. For information on how to control the output of the logging
+framework, please have a look at the documentation regarding the
+<<x11_logging.adoc#,X11 logging framework>>.
+|=======================================================================
+
+== Compilation related FAQs
+
+[width="100%",cols="<50%a,<50%a",options="header",]
+|=======================================================================
+|Question |Solution
+|I get a lot of ambiguity errors when compiling my application.
+[subs="quotes"]
+------------------------------------------------------------------------------
+In file included from ...,
+  from ...,
+  from ...,
+  from ...:
+_some_header_file.h:xx:yy: error: reference to 'CORBA' is ambiguous_
+In file included from ...,
+  from ...,
+  from ...:
+_some_header_file.h:xx:yy: error: candidates are: namespace taox11::CORBA { }_
+In file included from ...,
+  from ...,
+  from ...,
+  from ...:
+_some_header_file.h:xx:yy: error: namespace TAO_2_2_1::CORBA { }_
+------------------------------------------------------------------------------
+
+|
+
+You probably included a TAO header file in
+your application code. Instead of including for example `tao/ORB.h`,
+include `tao/x11/orb.h`. +
+_Hint: All file names in TAOX11 are lower case while file names in TAO
+are mixed case._
+
+|I get the following compile errors when I forward declare an ACE class: +
+------------------------------------------------------------------------------------
+file.cpp:xx:yy: error: expected type-specifier before '<forward_declared_ace_class>'
+------------------------------------------------------------------------------------
+
+|
+
+Be sure to surround your forward declared ACE classes with the
+versioned namespace macros, like this:
+----------------------------------
+ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+class ACE_Reactor;
+ACE_END_VERSIONED_NAMESPACE_DECL
+----------------------------------
+
+|I got the following error when I generate the makefiles, using MPC
+-----------------------------------------------------------------------------------------------------
+Can't locate Data/Dumper.pm in @INC (you may need to install the Data::Dumper module)
+....
+BEGIN failed --compilation aborted at <package_install_dir>/ACE/MPC/modules/ProjectCreator.pm line 25.
+...
+...
+-----------------------------------------------------------------------------------------------------
+
+|
+
+This error may occur in case a minimal
+install is used to setup a development machine. This error can be fixed
+by installing the `perl-Data-Dumper` package.
+
+|Our company policies forbid me to use {cxx11} but I want to have
+something easier to use than IDL to {cpp}. Can you help? |At the OMG June
+2013 meeting in Berlin it was discussed that we are allowed to extend
+IDL to {cxx11} to also support {cpp}03. This could than be supported as part
+of a new TAOX03 product. Please contact Remedy IT sales to discuss this
+further.
+|=======================================================================
+

@@ -1,0 +1,30 @@
+project(*idl) : ridl_ostream_defaults {
+  custom_only = 1
+  idlflags += -Wb,export_macro=GENERIC_SERVANT_Export -Wb,export_include=generic_servant_export.h
+  IDL_Files {
+    test.idl
+  }
+}
+
+project(POA_Generic_Servant_Lib): taox11_portableserver, avoids_minimum_corba, avoids_corba_e_compact, avoids_corba_e_micro {
+  after += *idl
+  sharedname = Generic_Servant
+  dynamicflags += GENERIC_SERVANT_BUILD_DLL
+
+  Source_Files {
+    test_i.cpp
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*client): taox11_client, taox11_portableserver, avoids_minimum_corba, avoids_corba_e_compact, avoids_corba_e_micro {
+  exename = client
+  avoids += ace_for_tao
+  after  += POA_Generic_Servant_Lib
+  libs   += Generic_Servant
+
+   Source_Files {
+    client.cpp
+  }
+}

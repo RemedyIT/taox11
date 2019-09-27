@@ -1,0 +1,114 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  enum enumType
+  {
+    a, b, c
+  };
+
+  typedef float arrayType[5];
+
+  typedef sequence<float> sequenceType;
+
+  struct structType
+  {
+    char c;
+    short si;
+    wstring ws;
+  };
+
+  //union
+  union unionType switch(char)
+  {
+    case 'l': long longData;
+    case 'w': wchar wchar_tData;
+    case 'b': boolean boolData;
+    case 'd': double doubleData;
+  };
+
+  // Complex containers:
+
+  // enum  (can not contain types.)
+
+  // array
+  typedef enumType enum_array[5];
+  typedef arrayType array_array[5];
+  typedef sequenceType sequence_array[5];
+  typedef structType struct_array[5];
+  typedef unionType union_array[5];
+
+  // sequence
+  typedef sequence<enumType> enum_sequence;
+  typedef sequence<arrayType> array_sequence;
+  typedef sequence<sequenceType> sequence_sequence;
+  typedef sequence<structType> struct_sequence;
+  typedef sequence<unionType> union_sequence;
+
+  //struct
+  struct union_struct
+  {
+    unionType unio;
+  };
+  struct all_struct
+  {
+    enumType enu;
+    arrayType arr;
+    sequenceType seq;
+    structType struc;
+    unionType unio;
+  };
+
+  //union
+  union union_union switch(long)
+  {
+    case 4: unionType unio;
+  };
+  union all_union switch(long)
+  {
+    case 0: enumType enu;
+    case 1: arrayType arr;
+    case 2: sequenceType seq;
+    case 3: structType struc;
+    case 4: unionType unio;
+  };
+
+  /// An interface for testing IDL primitive types
+  interface Hello
+  {
+    /// array of complex type.
+    enum_array inout_enum_array(in enum_array v_in, out enum_array v_out, inout enum_array v_inout);
+    attribute enum_array at_enum_array;
+    array_array inout_array_array(in array_array v_in, out array_array v_out, inout array_array v_inout);
+    attribute array_array at_array_array;
+    sequence_array inout_sequence_array(in sequence_array v_in, out sequence_array v_out, inout sequence_array v_inout);
+    struct_array inout_struct_array(in struct_array v_in, out struct_array v_out, inout struct_array v_inout);
+    union_array inout_union_array(in union_array v_in, out union_array v_out, inout union_array v_inout);
+
+    // sequence of complex type.
+    enum_sequence inout_enum_sequence(in enum_sequence v_in, out enum_sequence v_out, inout enum_sequence v_inout);
+    array_sequence inout_array_sequence(in array_sequence v_in, out array_sequence v_out, inout array_sequence v_inout);
+    sequence_sequence inout_sequence_sequence(in sequence_sequence v_in, out sequence_sequence v_out, inout sequence_sequence v_inout);
+    struct_sequence inout_struct_sequence(in struct_sequence v_in, out struct_sequence v_out, inout struct_sequence v_inout);
+    union_sequence inout_union_sequence(in union_sequence v_in, out union_sequence v_out, inout union_sequence v_inout);
+
+    // struct of complex type.
+    all_struct inout_all_struct(in all_struct v_in, out all_struct v_out, inout all_struct v_inout);
+    union_struct inout_union_struct(in union_struct v_in, out union_struct v_out, inout union_struct v_inout);
+
+    // union of complex type.
+    all_union inout_all_union(in all_union v_in, out all_union v_out, inout all_union v_inout);
+    union_union inout_union_union(in union_union v_in, out union_union v_out, inout union_union v_inout);
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};

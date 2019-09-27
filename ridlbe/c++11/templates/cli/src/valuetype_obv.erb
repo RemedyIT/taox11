@@ -1,0 +1,123 @@
+
+// generated from <%= ridl_template_path %>
+namespace obv
+{
+% if is_concrete?
+  TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
+  <%= cxxname %>::_copy_value () const
+  {
+    return TAOX11_CORBA::make_reference< <%= scoped_cxx_traits_type %>::obv_type> (*this);
+  }
+
+% end
+% members.each do |_m|
+  void <%= cxxname %>::<%= _m.cxxname %> (<%= _m.scoped_cxx_in_type %> _x11_<%= _m.cxxname %>)
+  {
+%   if _m.is_reference?
+    this-><%= _m.cxxname %>_ = std::move(_x11_<%= _m.cxxname %>);
+%   else
+    this-><%= _m.cxxname %>_ = _x11_<%= _m.cxxname %>;
+%   end
+  }
+%   unless _m.is_pod? || _m.is_reference?
+  void <%= cxxname %>::<%= _m.cxxname %> (<%= _m.scoped_cxx_move_type %> _x11_<%= _m.cxxname %>)
+  {
+    this-><%= _m.cxxname %>_ = std::move (_x11_<%= _m.cxxname %>);
+  }
+%   end
+  <%= _m.scoped_cxx_in_type %> <%= cxxname %>::<%= _m.cxxname %> () const
+  {
+    return this-><%= _m.cxxname %>_;
+  }
+  <%= _m.scoped_cxx_out_type %> <%= cxxname %>::<%= _m.cxxname %> ()
+  {
+    return this-><%= _m.cxxname %>_;
+  }
+
+% end
+  // marshaling & demarshaling support
+  bool
+  <%= cxxname %>::_obv_marshal_<%= scoped_cxxname.scope_to_cxxname %>_v (TAO_OutputCDR &strm, TAO_ChunkInfo &ci) const
+  {
+    return this->_obv_marshal_state (strm, ci);
+  }
+
+  bool
+  <%= cxxname %>::_obv_unmarshal_<%= scoped_cxxname.scope_to_cxxname %>_v (TAO_InputCDR &strm, TAO_ChunkInfo &ci)
+  {
+    return this->_obv_unmarshal_state (strm, ci);
+  }
+
+  bool
+  <%= cxxname %>::_obv_marshal_state (TAO_OutputCDR &strm, TAO_ChunkInfo &ci) const
+  {
+    if (! ci.start_chunk (strm))
+      return false;
+
+% if has_concrete_base?
+%   bases.each do |_base|
+%     unless _base.is_abstract?
+    if (! this->_obv_marshal_<%= _base.scoped_cxxname.scope_to_cxxname %>_v (strm, ci))
+      return false;
+
+%     end
+%   end
+    if (! ci.start_chunk (strm))
+      return false;
+
+% end
+% if member_count > 0
+    TAO_CORBA::Boolean const ret =
+%   _n = member_count-1
+%   members.each_with_index do |_m, _i|
+      (strm << <%= _m.cdr_from_fmt % "this->#{_m.cxxname} ()" %>)<%= ((_i < _n ) ? ' &&' : ';') %>
+%   end
+    if ( ! ret)
+      return false;
+% end
+
+% if has_concrete_base?
+    if (! ci.end_chunk (strm))
+      return false;
+
+% end
+    if (! ci.end_chunk (strm))
+      return false;
+
+    return true;
+  }
+
+  bool
+  <%= cxxname %>::_obv_unmarshal_state (TAO_InputCDR &strm, TAO_ChunkInfo &ci)
+  {
+    if (!ci.handle_chunking (strm))
+      return false;
+
+% if has_concrete_base?
+%   bases.each do |_base|
+%     unless _base.is_abstract?
+    if (! this->_obv_unmarshal_<%= _base.scoped_cxxname.scope_to_cxxname %>_v (strm, ci))
+      return false;
+
+%     end
+%   end
+    if (!ci.handle_chunking (strm))
+      return false;
+
+% end
+% if member_count > 0
+    TAO_CORBA::Boolean const ret =
+%   _n = member_count-1
+%   members.each_with_index do |_m, _i|
+      (strm >> <%= _m.cdr_to_fmt % "this->#{_m.cxxname} ()" %>)<%= ((_i < _n) ? ' &&' : ';') %>
+%   end
+    if (!ret)
+      return false;
+% end
+
+    if (this->_get_proxy ()->needs_truncation ())
+      return ci.skip_chunks (strm);
+    else
+      return ci.handle_chunking (strm);
+  }
+} // namespace obv

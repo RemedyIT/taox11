@@ -1,0 +1,30 @@
+// -*- MPC -*-
+
+project(*x11_idl): ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*x11_server): taox11_server, taox11_ior_table {
+  after += *x11_idl
+  Source_Files {
+    test_i.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*x11_client): taox11_client, taox11_anytypecode {
+  after += *x11_idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}

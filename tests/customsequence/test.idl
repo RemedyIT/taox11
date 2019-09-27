@@ -1,0 +1,128 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  typedef sequence<long long> myint64_tSeq;
+  typedef sequence<unsigned long long> myuint64_tSeq;
+  typedef sequence<float> myfloatSeq;
+  typedef sequence<double> mydoubleSeq;
+  typedef sequence<long double> myldoubleSeq;
+
+  /// An interface for testing IDL primitive types
+  interface Hello
+  {
+    // Defining types on both module and interface is part of this test.
+    typedef sequence<char> mycharSeq;
+    typedef sequence<wchar> mywchar_tSeq;
+    typedef sequence<octet> myuint8_tSeq;
+    typedef sequence<boolean> myboolSeq;
+    typedef sequence<short> myint16_tSeq;
+    typedef sequence<unsigned short> myuint16_tSeq;
+    typedef sequence<long> myint32_tSeq;
+    typedef sequence<unsigned long> myuint32_tSeq;
+
+    /// Get and set a char-sequence
+    mycharSeq get_charSeq (in mycharSeq seq);
+    /// Get a char-sequence by out
+    void out_charSeq (out mycharSeq seq);
+    /// Transfer a char-sequence by inout
+    void inout_charSeq (inout mycharSeq seq);
+
+   /// Get and set a wchar_t-sequence
+    mywchar_tSeq get_wchar_tSeq (in mywchar_tSeq seq);
+    /// Get a wchar_t-sequence by out
+    void out_wchar_tSeq (out mywchar_tSeq seq);
+    /// Transfer a wchar_t-sequence by inout
+    void inout_wchar_tSeq (inout mywchar_tSeq seq);
+
+    /// Get and set a int8_t-sequence
+    myuint8_tSeq get_uint8_tSeq (in myuint8_tSeq seq);
+    /// Get a int8_t-sequence by out
+    void out_uint8_tSeq (out myuint8_tSeq seq);
+    /// Transfer a int8_t-sequence by inout
+    void inout_uint8_tSeq (inout myuint8_tSeq seq);
+
+    /// Get and set a bool-sequence
+    myboolSeq get_boolSeq (in myboolSeq seq);
+    /// Get a bool-sequence by out
+    void out_boolSeq (out myboolSeq seq);
+    /// Transfer a bool-sequence by inout
+    void inout_boolSeq (inout myboolSeq seq);
+
+    /// Get and set a int16_t-sequence
+    myint16_tSeq get_int16_tSeq (in myint16_tSeq seq);
+    /// Get a int16_t-sequence by out
+    void out_int16_tSeq (out myint16_tSeq seq);
+    /// Transfer a int16_t-sequence by inout
+    void inout_int16_tSeq (inout myint16_tSeq seq);
+
+    /// Get and set a uint16_t-sequence
+    myuint16_tSeq get_uint16_tSeq (in myuint16_tSeq seq);
+    /// Get a uint16_t-sequence by out
+    void out_uint16_tSeq (out myuint16_tSeq seq);
+    /// Transfer a uint16_t-sequence by inout
+    void inout_uint16_tSeq (inout myuint16_tSeq seq);
+
+    /// Get and set a int32_t-sequence
+    myint32_tSeq get_int32_tSeq (in myint32_tSeq seq);
+    /// Get a int32_t-sequence by out
+    void out_int32_tSeq (out myint32_tSeq seq);
+    /// Transfer a int32_t-sequence by inout
+    void inout_int32_tSeq (inout myint32_tSeq seq);
+
+    /// Get and set a uint32_t-sequence
+    myuint32_tSeq get_uint32_tSeq (in myuint32_tSeq seq);
+    /// Get a uint32_t-sequence by out
+    void out_uint32_tSeq (out myuint32_tSeq seq);
+    /// Transfer a uint32_t-sequence by inout
+    void inout_uint32_tSeq (inout myuint32_tSeq seq);
+
+    /// Get and set a int64_t-sequence
+    myint64_tSeq get_int64_tSeq (in myint64_tSeq seq);
+    /// Get a int64_t-sequence by out
+    void out_int64_tSeq (out myint64_tSeq seq);
+    /// Transfer a int64_t-sequence by inout
+    void inout_int64_tSeq (inout myint64_tSeq seq);
+
+    /// Get and set a uint64_t-sequence
+    myuint64_tSeq get_uint64_tSeq (in myuint64_tSeq seq);
+    /// Get a uint64_t-sequence by out
+    void out_uint64_tSeq (out myuint64_tSeq seq);
+    /// Transfer a uint64_t-sequence by inout
+    void inout_uint64_tSeq (inout myuint64_tSeq seq);
+
+    /// Get and set a float-sequence
+    myfloatSeq get_floatSeq (in myfloatSeq seq);
+    /// Get a float-sequence by out
+    void out_floatSeq (out myfloatSeq seq);
+    /// Transfer a float-sequence by inout
+    void inout_floatSeq (inout myfloatSeq seq);
+
+    /// Get and set a double-sequence
+    mydoubleSeq get_doubleSeq (in mydoubleSeq seq);
+    /// Get a double-sequence by out
+    void out_doubleSeq (out mydoubleSeq seq);
+    /// Transfer a double-sequence by inout
+    void inout_doubleSeq (inout mydoubleSeq seq);
+
+    /// Get and set a long double-sequence
+    myldoubleSeq get_ldoubleSeq (in myldoubleSeq seq);
+    /// Get a long double-sequence by out
+    void out_ldoubleSeq (out myldoubleSeq seq);
+    /// Transfer a long double-sequence by inout
+    void inout_ldoubleSeq (inout myldoubleSeq seq);
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+};

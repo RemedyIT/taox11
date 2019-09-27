@@ -1,0 +1,31 @@
+// -*- MPC -*-
+
+project(*ostrnsp_gen_Idl): ridl_ostream_defaults, taox11_anytypecode {
+   idlflags   +=--namespace TAOX11_NAMESPACE
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*ostrnsp_gen_Server): taox11_server, taox11_anytypecode {
+  after += *ostrnsp_gen_Idl
+  Source_Files {
+    foo.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*ostrnsp_gen_Client): taox11_client, taox11_anytypecode {
+  after += *ostrnsp_gen_Idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}

@@ -1,0 +1,47 @@
+// -*- MPC -*-
+// Test also use of existing stub_export file, without creating it.
+project(*idl): ridl_ostream_defaults {
+  idlflags += -GC
+  custom_only = 1
+  idlflags += -Wb,stub_export_macro=AMI_TEST_AMI_STUB_Export \
+              -Wb,stub_export_include=ami_test_ami_stub_export.h \
+              -o .
+
+  IDL_Files {
+    ami_test.idl
+  }
+}
+
+project(*stub): taox11_messaging, taox11_portableserver {
+  after += *idl
+  sharedname   = ami_test_stub
+  dynamicflags += AMI_TEST_AMI_STUB_BUILD_DLL
+  Source_Files {
+    ami_testAmiC.cpp
+    ami_testC.cpp
+  }
+}
+
+project(*tst_server): taox11_messaging, taox11_server {
+  after += *idl *stub
+  exename = server
+  libs  += ami_test_stub
+
+  Source_Files {
+    server.cpp
+    ami_test_i.cpp
+  }
+  Source_Files {
+    ami_testS.cpp
+  }
+}
+
+project(*tst_client):taox11_ami_client {
+  exename = client
+  after += *idl *stub
+  libs  += ami_test_stub
+
+  Source_Files {
+    client.cpp
+  }
+}

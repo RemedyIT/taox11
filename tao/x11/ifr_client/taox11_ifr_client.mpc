@@ -1,0 +1,78 @@
+project(taox11_ifr_client_idl) : ridl_core_defaults, install, pidl_install {
+  custom_only = 1
+  idlflags += -Gp -Gd -Sorb -o . --namespace TAOX11_NAMESPACE \
+              -I $(TAO_ROOT) \
+              -Wb,stub_export_macro=TAOX11_IFR_CLIENT_STUB_Export \
+              -Wb,stub_export_include=taox11_ifr_client_stub_export.h \
+              -Wb,skel_export_macro=TAOX11_IFR_CLIENT_SKEL_Export \
+              -Wb,skel_export_include=taox11_ifr_client_skel_export.h
+
+  idlflags -= -Sa -St
+
+  IDL_Files {
+    idlflags += -Gxhst -Gxhsk
+    gendir = .
+    $(TAO_ROOT)/tao/IFR_Client/IFR_Basic.pidl
+  }
+
+  IDL_Files {
+    gendir = .
+    $(TAO_ROOT)/tao/IFR_Client/IFR_Components.pidl
+    $(TAO_ROOT)/tao/IFR_Client/IFR_Extended.pidl
+    $(TAO_ROOT)/tao/IFR_Client/IFR_Base.pidl
+  }
+}
+
+project(taox11_ifr_client_stub) : taox11_lib, taox11_anytypecode, taox11_avoids_corba_e, avoids_minimum_corba {
+  after       += taox11_ifr_client_idl
+  sharedname   = taox11_ifr_client_stub
+  dynamicflags += TAOX11_IFR_CLIENT_STUB_BUILD_DLL
+  libout = $(TAOX11_ROOT)/../lib
+
+  Source_Files {
+    IFR_BaseC.cpp
+    IFR_BasicC.cpp
+    IFR_ComponentsC.cpp
+    IFR_ExtendedC.cpp
+  }
+
+  Header_Files {
+    *.h
+    IFR_BaseC.h
+    IFR_BaseS.h
+    IFR_BaseA.h
+    IFR_BasicC.h
+    IFR_BasicS.h
+    IFR_BasicA.h
+    IFR_ComponentsC.h
+    IFR_ComponentsS.h
+    IFR_ComponentsA.h
+    IFR_ExtendedC.h
+    IFR_ExtendedS.h
+    IFR_ExtendedA.h
+  }
+
+}
+
+project(taox11_ifr_client_skel) : taox11_lib, taox11_portableserver, taox11_ifr_client {
+  sharedname   = taox11_ifr_client_skel
+  dynamicflags += TAOX11_IFR_CLIENT_SKEL_BUILD_DLL
+  libout = $(TAOX11_ROOT)/../lib
+
+  Source_Files {
+    IFR_BaseS.cpp
+    IFR_BasicS.cpp
+    IFR_ComponentsS.cpp
+    IFR_ExtendedS.cpp
+  }
+
+  Header_Files {
+    IFR_BaseS.h
+    IFR_BasicS.h
+    IFR_ComponentsS.h
+    IFR_ExtendedS.h
+  }
+
+  Inline_Files {
+  }
+}

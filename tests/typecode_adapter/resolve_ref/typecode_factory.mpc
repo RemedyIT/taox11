@@ -1,0 +1,7 @@
+// -*- MPC -*-
+
+project(*): taox11_client, taox11_typecodefactory{
+ Source_Files {
+   test.cpp
+ }
+}

@@ -1,0 +1,45 @@
+// -*- MPC -*-
+
+project(taox11_bidir_giop_idl) : ridl_core_defaults, install {
+  custom_only = 1
+  IDL_Files {
+    idlflags += -Gp -Gd -SS -Sorb -Glons -St \
+                -Wb,stub_export_macro=TAOX11_BIDIRGIOP_Export \
+                -Wb,stub_export_include=tao/x11/bidir_giop/taox11_bidir_giop_export.h \
+                -Wb,stub_export_file=taox11_bidir_giop_export.h  \
+                -Wb,include_guard=TAOX11_BIDIRGIOP_SAFE_INCLUDE \
+                -Wb,safe_include=tao/x11/bidir_giop/bidir_giop.h \
+                -I $(TAO_ROOT) -o . --namespace TAOX11_NAMESPACE
+    gendir = .
+    $(TAO_ROOT)/tao/BiDir_GIOP/BiDirPolicy.pidl
+  }
+
+  specific {
+    install_dir = tao/x11/bidir_giop
+  }
+}
+
+project(taox11_bidir_giop) : taox11_lib, install, taox11_pi, bidir_giop {
+  after       += taox11_bidir_giop_idl
+  sharedname   = taox11_bidir_giop
+  dynamicflags += TAOX11_BIDIRGIOP_BUILD_DLL
+  libout = $(TAOX11_ROOT)/../lib
+
+  Source_Files {
+    bidir_giop.cpp
+    bidir_giop_impl.cpp
+    BiDirPolicyC.cpp
+  }
+
+  Header_Files {
+    bidir_giop_impl.h
+    taox11_bidir_giop_export.h
+    bidir_giop.h
+    BiDirPolicyC.h
+    BiDirPolicyS.h
+  }
+
+  specific {
+    install_dir = tao/x11/bidir_giop
+  }
+}

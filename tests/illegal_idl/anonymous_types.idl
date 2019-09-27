@@ -1,0 +1,26 @@
+/**
+ * @file    anonymous_types.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module Test
+{
+  union complexType switch (char)
+  {
+    case 'c': char c;
+    case 's': sequence<char> charseq;
+    // by default (implicit), empty union
+  };
+
+  /// A dummy  interface for testing IDL compiler
+  interface Hello
+  {
+    complexType get_something();
+
+    // A method to shutdown the ORB
+    oneway void shutdown ();
+  };
+};

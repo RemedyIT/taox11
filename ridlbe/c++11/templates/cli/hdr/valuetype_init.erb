@@ -1,0 +1,40 @@
+
+// generated from <%= ridl_template_path %>
+class <%= stub_export_macro %><%= factory_cxxname %>
+  : public TAOX11_CORBA::ValueFactoryBase
+{
+public:
+  typedef <%= factory_traits_type %>           _traits_type;
+  typedef <%= factory_traits_type %>::ref_type _ref_type;
+
+  template <typename T> friend struct TAOX11_CORBA::object_traits;
+% if is_concrete?
+  template <typename _Tp1, typename, typename ...Args>
+  friend TAOX11_CORBA::object_reference<_Tp1> TAOX11_CORBA::make_reference(Args&& ...args);
+
+  virtual TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
+  create_for_unmarshal () override;
+% else
+%   initializers.each do |_ini|
+%     _parms = _ini.parameters.dup
+%     _parm = _parms.shift
+%     _s = _parm ? (_parm.cxx_in_type+' '+_parm.cxxname) : 'void'
+%     _s += (_parms.empty? ? ') = 0;' : ',')
+%     _op_start = "#{_ini.cxxname} ("
+  virtual <%= scoped_cxx_return_type %>
+  <%= _op_start %><%= _s %>
+%     while !_parms.empty?
+%   _parm = _parms.shift
+  <%= ' ' * _op_start.size %><%= _parm.cxx_in_type %> <%= _parm.cxxname %><%= _parms.empty? ? ') = 0;' : ',' %>
+%     end
+%   end
+% end
+
+  virtual const std::string& _obv_repository_id () const override;
+
+protected:
+  <%= factory_cxxname %> () = default;
+  ~<%= factory_cxxname %> () = default;
+  <%= factory_cxxname %> (const <%= factory_cxxname %>&) = default;
+  <%= factory_cxxname %> (<%= factory_cxxname %>&&) = default;
+}; // class <%= factory_cxxname %>

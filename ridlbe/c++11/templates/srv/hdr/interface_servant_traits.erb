@@ -1,0 +1,25 @@
+
+// generated from <%= ridl_template_path %>
+template <>
+struct <%= skel_export_macro %>servant_traits< <%= scoped_cxxtype %>>
+{
+  /// Base trait type from which the servant implementations has to be derived
+  /// from
+  typedef <%= scoped_skel_cxxtype %>
+      base_type;
+  /// Strong reference type
+  typedef TAOX11_CORBA::servant_reference< <%= scoped_skel_cxxtype %>>
+      ref_type;
+  /// Weak reference type
+  typedef TAOX11_CORBA::weak_servant_reference< <%= scoped_skel_cxxtype %>>
+      weak_ref_type;
+  /// Try to narrow the provided reference @a base to a <%= scoped_cxxtype %>
+  /// reference. Returns a new reference when this succeeds, a nil reference
+  /// when this fails. Narrowing a nil reference will return a nil reference.
+  template <typename _Tp1, typename = typename
+      std::enable_if<std::is_convertible< <%= scoped_skel_cxxtype %>*, _Tp1*>::value>::type>
+  static ref_type narrow (servant_reference<_Tp1> base)
+  {
+    return ref_type::_narrow (std::move(base));
+  }
+};

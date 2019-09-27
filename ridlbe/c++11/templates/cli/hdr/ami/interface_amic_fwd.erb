@@ -1,0 +1,11 @@
+
+// generated from <%= ridl_template_path %>
+% _intf_fwd_incl_guard_ = scoped_cxxname.to_include_guard
+#if !defined (_INTF_AMI_<%= _intf_fwd_incl_guard_ %>_AMIC_FWD_)
+#define _INTF_AMI_<%= _intf_fwd_incl_guard_ %>_AMIC_FWD_
+class <%= amic_cxxname %>;
+typedef <%= amic_cxxname %> <%= amic_cxxname %>_idl_t; // IDL traits typename
+class <%= proxy_cxxname %>;
+typedef <%= proxy_cxxname %>* <%= proxy_cxxname %>_ptr;
+#endif // !_INTF_AMI<%= _intf_fwd_incl_guard_ %>_AMIC_FWD_
+%#

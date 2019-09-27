@@ -1,0 +1,33 @@
+/**
+ * @file    test.idl
+ * @author  Martin Corino
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+typedef fixed<10,3> fixed_type;
+typedef fixed<20,3> large_type;
+typedef fixed<10,2> second_fixed_type;
+
+// TODO: create a typedef for an array
+
+typedef fixed<7,6> pi_type;
+
+// Fixed as double
+const pi_type pi_double = 3.142857;
+
+module V
+{
+  typedef fixed<7,6> pi_type;
+  const pi_type pi = 3.142857;
+
+  interface F
+  {
+    const large_type large = 3.142857;
+    const pi_type pi = 3.142857;
+
+    typedef fixed<5,5> f_type;
+    const f_type five = 12345;
+  };
+};

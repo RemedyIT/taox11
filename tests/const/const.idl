@@ -1,0 +1,45 @@
+/**
+ * @file    const.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  const char ch_val = 'a';
+  const char ch_val_1 = '\\';
+  const wchar wch_val = L'X';
+  const wchar wch_val_1 = L'\\';
+  const octet oct_val = 123;
+  const short sh_val = -1023;
+  const unsigned short ush_val = 1023;
+  const long l_val = -81234;
+  const unsigned long ul_val = 81234;
+  const long long ll_val = -12345678;
+  const unsigned long long ull_val = 12345678;
+  const float f_val = 1.23;
+  const double d_val = 454.23;
+  const long double ld_val = 678.91;
+  const boolean b_val = TRUE;
+  const string s_val = "text";
+  const wstring ws_val = L"widestring\n \xbf \ufe0e";
+  typedef long TCounter;
+  typedef string<30> TName;
+  const TCounter count = 99;
+  const TName name = "wilco";
+  const TCounter double_count = count * 2;
+  const long ALG_NONE = 0;
+  const long ALG_LPC = ALG_NONE + 3;
+};
+
+interface A
+{
+  const float pi = 3.14159;
+
+  typedef string<5> bounded_string;
+  const bounded_string bstr = "12345";
+};
+

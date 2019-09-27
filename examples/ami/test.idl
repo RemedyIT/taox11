@@ -1,0 +1,32 @@
+/**
+ * @file    test.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+#pragma corba_ami "Test::A"
+
+module Test
+  {
+    interface A
+      {
+        long foo (in long in_l);
+        attribute long yadda;
+        /// A method to shutdown the ORB
+        /// This method is used to simplify the test shutdown process
+        oneway void shutdown ();
+      };
+
+/* An alternative of using ' #pragma corba_ami "Test::A"' is:
+
+    interface A
+      {
+        long foo (in long in_l);
+        attribute long yadda;
+        /// A method to shutdown the ORB
+        /// This method is used to simplify the test shutdown process
+        oneway void shutdown ();
+      }; //@CORBA (ami=true)
+*/
+  };

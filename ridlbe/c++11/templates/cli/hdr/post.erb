@@ -1,0 +1,21 @@
+
+// generated from <%= ridl_template_path %>
+% unless no_client_proxy?
+#if defined (__TAOX11_INCLUDE_STUB_PROXY__)
+#include "<%= client_proxy %>"
+#endif
+% end
+
+% if additional_post_includes?
+%   additional_post_includes.each do |inc|
+#include "<%= inc %>"
+
+%   end
+% end
+% if post_include?
+#include /**/ "<%= post_include %>"
+
+% end
+<%= include_guard_end %>
+
+// -*- END -*-

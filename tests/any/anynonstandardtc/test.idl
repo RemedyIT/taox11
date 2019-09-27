@@ -1,0 +1,106 @@
+/**
+ * @file    test.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+struct Global
+{
+  long x;
+};
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+
+  enum DataType
+   {
+     dtEmpty,
+     dtLong1,
+     dtPoint,
+     dtGlobal,
+     dtString
+   };
+
+   struct Point
+   {
+     long x;
+     long y;
+   };
+
+  union Data switch (DataType)
+  {
+    case dtLong1: long LongData;
+    case dtPoint: Point pointData;
+    case dtGlobal: Global globalData;
+    case dtString: string stringData;
+    // by default, empty union
+  };
+
+  enum DefinitionKind
+  {
+    dk_none
+  };
+
+  struct Description
+  {
+    DefinitionKind kind;
+    any value;
+  };
+
+  enum EEnum
+  {
+    A,
+    B,
+    C
+  };
+  struct Simple
+  {
+    octet   o;
+    long    l;
+    string  s;
+    double  d;
+    boolean b;
+    char    c;
+    EEnum   e;
+  };
+
+  struct AllBasicTypes
+  {
+    short a;
+    long b;
+    long long c;
+    unsigned short d;
+    unsigned long e;
+    unsigned long long f;
+    float g;
+    double h;
+    long double i;
+    char j;
+    wchar k;
+    boolean l;
+    octet m;
+  };
+
+  /// A very simple interface
+  interface Foo
+  {
+    boolean pass_data (in any s);
+
+    any return_data (in boolean str);
+
+    boolean get_data (out any s, in boolean str);
+
+    boolean update_struct (inout any s);
+
+    boolean update_union (inout any s);
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+};

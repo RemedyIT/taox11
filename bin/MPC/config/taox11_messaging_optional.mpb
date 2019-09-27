@@ -1,0 +1,10 @@
+// -*- MPC -*-
+
+feature(corba_messaging) : taox11_valuetype, taox11_pi, \
+                           messaging_optional {
+  libs  += taox11_messaging
+  after += taox11_messaging
+
+  IDL_Files {
+  }
+}

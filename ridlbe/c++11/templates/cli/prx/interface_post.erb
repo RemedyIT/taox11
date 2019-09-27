@@ -1,0 +1,20 @@
+
+  // generated from <%= ridl_template_path %>
+protected:
+  explicit <%= proxy_cxxname %> (
+    TAO_Stub *objref,
+    TAO_CORBA::Boolean _tao_collocated = false,
+    TAO_Abstract_ServantBase *servant = nullptr,
+    TAO_ORB_Core *orb_core = nullptr);
+
+  explicit <%= proxy_cxxname %> (
+    TAO_IOP::IOR *ior,
+    TAO_ORB_Core *orb_core);
+
+private:
+  <%= proxy_cxxname %> () = delete;
+  <%= proxy_cxxname %> (const <%= proxy_cxxname %> &) = delete;
+  <%= proxy_cxxname %> (<%= proxy_cxxname %> &&) = delete;
+  <%= proxy_cxxname %>& operator= (const <%= proxy_cxxname %> &) = delete;
+  <%= proxy_cxxname %>& operator= (<%= proxy_cxxname %> &&) = delete;
+}; // <%= proxy_cxxname %>

@@ -1,0 +1,16 @@
+ChangeLog
+README
+\/MPC$
+MPC\/modules\/*.*pm$
+tao\/x11\/Policy.*
+tao\/x11\/.*A\.cpp
+GNUmakefile
+public\/.*(C|S|P|SP)\.(h|inl|cpp)
+ridl\/.*
+test\/.*(C|S)_impl\.(h|cpp)
+Components.idl
+.*PS\.idl
+USER_QOS_PROFILES
+opendds_dcps_all_ddsC.h
+opendds_dcps_types_ddsC.h
+ServerRequestInterceptor.*\.pidl

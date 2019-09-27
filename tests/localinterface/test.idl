@@ -1,0 +1,63 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module Test
+{
+  local interface Foo;
+
+  local interface FooFactory
+  {
+    Foo get_foo ();
+    string factory_name ();
+  };
+
+  local interface Foo
+  {
+    string get_foo ();
+    FooFactory get_factory ();
+  };
+
+  local interface iLocal
+  {
+    string do_something();
+  };
+
+  interface iA
+  {
+    string do_A(inout long result);
+  };
+
+  local interface iLocal_A : iA // Inherits from unconstrained interface.
+  {
+    string do_local();
+    attribute iLocal loc;
+  };
+
+  interface iB
+  {
+    string do_B(inout long result);
+  };
+
+  local interface iLocal_B : iB // Inherits from unconstrained interface.
+  {
+    string do_localB();
+  };
+
+  interface Hello
+  {
+    iA get_iA();
+    iA get_localnull();
+    iA get_local();
+    iA inout_local(in iA in_v, out iA out_v, inout iA inout_v);
+    attribute iA attrIa;
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};

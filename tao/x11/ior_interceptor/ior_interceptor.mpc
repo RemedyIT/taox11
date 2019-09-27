@@ -1,0 +1,54 @@
+// -*- MPC -*-
+
+project(ior_interceptor_idl) : ridl_core_defaults, install, pidl_install {
+  custom_only = 1
+  idlflags += -SS -Ssh -Sci -Gp -Gd -Sorb -Sal \
+              -Wb,export_macro=TAOX11_IOR_Interceptor_Export \
+              -Wb,export_include=tao/x11/ior_interceptor/taox11_ior_interceptor_export.h \
+              -Wb,include_guard=TAOX11_IOR_INTERCEPTOR_SAFE_INCLUDE \
+              -Wb,safe_include=tao/x11/ior_interceptor/ior_interceptor.h \
+              -I $(TAO_ROOT) -o . --namespace TAOX11_NAMESPACE
+  idlflags -= -Sa -St
+  IDL_Files {
+    gendir = .
+    idlflags += -Glons
+    $(TAO_ROOT)/tao/IORInterceptor/IORInfo.pidl
+  }
+  IDL_Files {
+    gendir = .
+    $(TAO_ROOT)/tao/IORInterceptor/IORInterceptor.pidl
+  }
+
+  specific {
+    install_dir = tao/x11/ior_interceptor
+  }
+}
+
+project(ior_interceptor) : taox11_lib, install, taox11_pi, taox11_ort, tao_iorinterceptor {
+  after       += ior_interceptor_idl
+  sharedname   = taox11_ior_interceptor
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags += TAOX11_IOR_INTERCEPTOR_BUILD_DLL
+
+  Source_Files {
+    ior_info.cpp
+    ior_interceptor_proxy.cpp
+    ior_interceptor_proxy_factory.cpp
+    ior_interceptor.cpp
+    IORInterceptorC.cpp
+    IORInfoC.cpp
+  }
+
+  Header_Files {
+    ior_info.h
+    ior_interceptor_proxy.h
+    ior_interceptor_proxy_factory.h
+    ior_interceptor.h
+    IORInfoC.h
+    IORInterceptorC.h
+  }
+
+  specific {
+    install_dir = tao/x11/ior_interceptor
+  }
+}

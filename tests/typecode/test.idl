@@ -1,0 +1,54 @@
+/**
+ * @file    test.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module Test
+{
+  struct Point
+  {
+    long x;
+    long y;
+  };
+
+  enum DataType
+  {
+    dtLong1,
+    dtString,
+    dtEmpty
+  };
+
+  union Data switch (DataType)
+  {
+    case dtLong1: long LongData;
+    case dtString: string stringData;
+    default: boolean boolData;
+  };
+
+  typedef string<4> s_val;
+
+  typedef long LongArray[3];
+  valuetype VBlongarray LongArray;
+
+  valuetype VTbase {};
+
+  valuetype VType : VTbase
+  {
+    public long num;
+  };
+
+  local interface Foo
+  {
+  };
+
+  interface Hello
+  {
+    oneway void shutdown ();
+  };
+
+  typedef sequence<long> LongSeq;
+
+};

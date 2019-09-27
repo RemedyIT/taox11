@@ -1,0 +1,20 @@
+
+// generated from <%= ridl_template_path %>
+% _args = arguments.dup
+<%= implementation_return_type %>
+<%= interface.cxxname %>::<%= cxxname %> (<% if _args.empty? %>)<% end %>
+% while !_args.empty?
+%   _arg = _args.shift
+    <%= _arg.implementation_arg_type %> <%= _arg.cxxname %><%= _args.empty? ? ')' : ',' %>
+% end
+{
+% write_regen_section("#{interface.scoped_cxxname}::#{cxxname}"+'[Body]', indent: 1) do
+  // your code here
+%   arguments.each do |a|
+  X11_UNUSED_ARG (<%= a.cxxname %>);
+%   end
+%   if has_return?
+  return {};
+%   end
+% end
+}

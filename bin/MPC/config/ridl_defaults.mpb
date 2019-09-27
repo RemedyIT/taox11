@@ -1,0 +1,8 @@
+// -*- MPC -*-
+
+project: ridl_base_defaults, taoidldefaults {
+  after += ridl_orb_idl
+
+  IDL_Files {
+  }
+}

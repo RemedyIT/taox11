@@ -1,0 +1,45 @@
+// -*- MPC -*-
+project(*idl): ridl_ostream_defaults, taox11_anytypecode, avoids_corba_e_compact {
+  IDL_Files {
+    test.idl
+  }
+  IDL_Files {
+    idlflags += -I $(TAO_ROOT) -Ssh -SS
+    sri_test.idl
+  }
+  custom_only = 1
+}
+
+project(*server): taox11_server, taox11_valuetype, taox11_pi_server, avoids_corba_e_compact {
+  after += *idl
+
+  Source_Files {
+    test_i.cpp
+    server_orbinitializer.cpp
+    server_request_interceptor.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+    sri_testC.cpp
+  }
+  IDL_Files {
+  }
+}
+
+project(*client): taox11_client, taox11_valuetype, taox11_pi_server, avoids_corba_e_compact {
+  after += *idl
+
+  Source_Files {
+    client_orbinitializer.cpp
+    client_request_interceptor.cpp
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+  IDL_Files {
+  }
+}
+

@@ -1,0 +1,49 @@
+// -*- MPC -*-
+//Test setting of stub_export_macro only , in that case also the ami stub uses this stub_export_macro
+
+project(*idl) : ridl_ostream_defaults {
+  idlflags += -GC
+  custom_only = 1
+  idlflags += -Wb,stub_export_macro=AMI_IOIO_TEST_STUB_Export \
+              -Wb,stub_export_include=ami_ioio_test_stub_export.h \
+              -o .
+
+  idlflags += -Gxhst
+
+  IDL_Files {
+    ami_test.idl
+  }
+}
+
+project(*stub): taox11_messaging, taox11_portableserver {
+  after += *idl
+  sharedname   = ami_test_stub
+  dynamicflags += AMI_IOIO_TEST_STUB_BUILD_DLL
+  Source_Files {
+    ami_testAmiC.cpp
+    ami_testC.cpp
+  }
+}
+
+project(*server):  taox11_messaging, taox11_server {
+  after += *idl *stub
+  exename = server
+  libs  += ami_test_stub
+
+  Source_Files {
+    server.cpp
+    ami_test_i.cpp
+  }
+  Source_Files {
+    ami_testS.cpp
+  }
+}
+
+project(*client) : taox11_ami_client {
+  exename = client
+  after += *idl *stub
+  libs  += ami_test_stub
+  Source_Files {
+    client.cpp
+  }
+}

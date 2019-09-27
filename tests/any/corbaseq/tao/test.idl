@@ -1,0 +1,25 @@
+/**
+ * @file    test.idl
+ * @author  Martin Corino
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+#include "orb.idl"
+
+module Test
+{
+  interface Hello
+  {
+    any test (in any input);
+
+    any test_wcharseq (in any input);
+
+    /// A method to shutdown the ORB
+    /**
+      * This method is used to simplify the test shutdown process
+      */
+    oneway void shutdown ();
+  };
+};

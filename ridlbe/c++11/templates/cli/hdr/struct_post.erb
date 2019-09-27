@@ -1,0 +1,54 @@
+
+  // generated from <%= ridl_template_path %>
+  /// Default constructor
+  <%= cxxname %> () = default;
+  /// Destructor
+  ~<%= cxxname %> () = default;
+  /// Copy constructor
+  <%= cxxname %> (<%= cxx_in_type %>) = default;
+  /// Move constructor
+  <%= cxxname %> (<%= cxx_move_type %>) = default;
+% if member_count > 0
+%   _ms = members.dup
+  /// Constructor which accepts value for all members
+  explicit inline <%= cxxname %> (
+%   unless _ms.empty?
+%     while !_ms.empty?
+%       _m = _ms.shift
+%       if _m.is_array?
+    <%= "#{_m.cxx_in_type} #{_m.cxxname}" %><%= _ms.empty? ? ');' : ',' %>
+%       else
+    <%= "#{_m.cxx_byval_type} #{_m.cxxname}" %><%= _ms.empty? ? ');' : ',' %>
+%       end
+%     end
+%   end
+% end
+  /// Copy assignment operator
+  <%= cxx_out_type %> operator= (<%= cxx_in_type %>) = default;
+  /// Move assignment operator
+  <%= cxx_out_type %> operator= (<%= cxx_move_type %>) = default;
+% members.each do |_m|
+
+  /// @copydoc <%= _m.doc_scoped_name %>
+  //@{
+  inline void <%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11_<%= _m.cxxname %>) { this-><%= _m.cxxname %>_ = _x11_<%= _m.cxxname %>; }
+%   unless _m.is_pod? || _m.is_reference?
+  inline void <%= _m.cxxname %> (<%= _m.cxx_move_type %> _x11_<%= _m.cxxname %>) { this-><%= _m.cxxname %>_ = std::move (_x11_<%= _m.cxxname %>); }
+%   end
+  inline <%= _m.cxx_in_type %> <%= _m.cxxname %> () const { return this-><%= _m.cxxname %>_; }
+  inline <%= _m.cxx_out_type %> <%= _m.cxxname %> () { return this-><%= _m.cxxname %>_; }
+  //@}
+% end
+
+  /// Exchange the value of two structs in an efficient matter
+  inline void swap (<%= cxx_inout_type %> s);
+
+private:
+% members.each do |_m|
+  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if _m.is_pod? %> {}<% end %><% if _m.is_array_of_pod? %> {{}}<% end %>;
+% end
+};// <%= cxxname %>
+
+inline void swap (<%= scoped_cxx_out_type %> m1, <%= scoped_cxx_out_type %> m2) { m1.swap (m2); }
+
+% visit_template('typecode') if generate_typecode_support?

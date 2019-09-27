@@ -1,0 +1,14 @@
+% write_regen_section(implementation_header+'[Header]', default_content: ['/*', ' * Your header here.', ' */'], header: true)
+
+<%= include_guard_start %>
+
+% if generate_servant_implementation?
+#include "<%= servant_header %>"
+
+% end
+#pragma once
+
+%   if implementation_export_include?
+#include /**/ "<%= implementation_export_include %>"
+%   end
+% write_regen_section(implementation_header+'[User Includes]', default_content: '// your includes here')

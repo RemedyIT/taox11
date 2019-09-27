@@ -1,0 +1,24 @@
+
+// generated from <%= ridl_template_path %>
+class <%= amic_export_macro %><%= amic_cxxname %>
+% if is_derived?
+%     _first = true
+%   bases.each do |_base|
+%     if !_base.is_abstract?
+  <%= _first ? ': ' : ', ' %>public virtual <%= _base.amic_scoped_cxxname %>
+%     _first = false
+%     end
+%   end
+  , public virtual <%= cxxname %>
+% else
+  : public virtual <%= cxxname %>
+% end
+{
+public:
+  template <typename T> friend struct TAOX11_CORBA::object_traits;
+
+  /// @name Member types
+  //@{
+  typedef TAOX11_NAMESPACE::CORBA::amic_traits< <%= cxxname %>> _traits_type;
+  typedef TAOX11_NAMESPACE::CORBA::amic_traits< <%= cxxname %>>::ref_type _ref_type;
+  //@}

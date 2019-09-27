@@ -1,0 +1,77 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  enum BlockState
+  {
+    InUse, BS_average, BS_locked , BS_dirty, BS_removed, BS_unknown
+  };
+
+  struct Time_t
+  {
+    long sec;
+    unsigned long nanosec;
+  };
+
+  struct DateTime
+  {
+    Time_t time;
+    boolean valid;
+    boolean utc;
+  };
+
+  typedef sequence<double> Measurement;
+  struct Block
+  {
+    unsigned long id;
+    BlockState state;
+    DateTime block_modified;
+    DateTime block_created;
+    Measurement meas;
+  };
+
+  typedef sequence<Block> BlockSeq;
+  typedef sequence<string> StringSeq;
+  struct BlockFile
+  {
+    unsigned long id;
+    unsigned long location_id;
+    unsigned long long touch_count;
+    StringSeq messages;
+    DateTime created;
+    Measurement header;
+    BlockSeq blocks;
+  };
+
+  typedef sequence<BlockFile> BlockFileSeq;
+  struct FileStore
+  {
+    wstring owner;
+    unsigned long user_count;
+    StringSeq connections;
+    StringSeq error_log;
+    DateTime cleaned;
+    BlockFileSeq files;
+    DateTime tb;
+  };
+
+  /// An interface for testing IDL primitive types
+  interface Hello
+  {
+    FileStore create(in wstring owner);
+    boolean validate(in wstring owner, in FileStore store);
+    unsigned long update_content(inout Block bl, in double change_request);
+    unsigned long convert_content(inout Measurement ct);
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};

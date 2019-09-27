@@ -1,0 +1,170 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+
+struct Global
+{
+  long x;
+};
+
+module Test
+{
+  typedef string<25> first_name_t;
+  typedef string<10> middle_name_t;
+  typedef string<40> last_name_t;
+
+  enum NameType
+  {
+    ntFirst,
+    ntMiddle,
+    ntLast
+  };
+
+  enum DataType
+  {
+    dtEmpty,
+    dtLong,
+    dtShort,
+    dtString,
+    dtPoint,
+    dtTrack,
+    dtGlobal
+  };
+
+  struct Point
+  {
+    long x;
+    long y;
+  };
+
+  struct Track
+  {
+    long id;
+    Point p;
+  };
+
+  union BoolUnion1 switch (boolean)
+  {
+    case TRUE:
+    case FALSE: long dummyVal;
+  };
+
+  union BoolUnion2 switch (boolean)
+  {
+    case TRUE:
+    default: long dummyVal;
+  };
+
+  union BoolUnion3 switch (boolean)
+  {
+    default: long dummyVal;
+  };
+
+  union BoolUnion4 switch (boolean)
+  {
+    case TRUE: long dummyVal;
+  };
+
+  union BoolUnion5 switch (boolean)
+  {
+    case FALSE: long dummyVal;
+  };
+
+  union BoolUnion6 switch (boolean)
+  {
+    case TRUE: long dummyVal;
+    case FALSE: string dummyStr;
+  };
+
+  union BoolUnion7 switch (boolean)
+  {
+    case FALSE: long dummyVal;
+    default: string dummyStr;
+  };
+
+  union Name switch (NameType)
+  {
+    case ntFirst: first_name_t firstName;
+    case ntMiddle: middle_name_t middleName;
+    case ntLast: last_name_t lastName;
+  };
+
+  union Data switch (DataType)
+    {
+      case dtLong: long longData;
+      case dtShort: short shortData;
+      case dtString: string stringData;
+      case dtPoint: Point pointData;
+      case dtTrack: Track trackData;
+      case dtGlobal: Global globalData;
+      // by default (implicit), empty union
+    };
+
+  union DefaultData switch (short)
+    {
+      case 1: long longData;
+      case 2: short shortData;
+      default: long defData;
+    };
+
+  // Union, with implicit default, default
+  // becomes first member of union. This will test
+  // the fix for order of members, with a, to allocate, type
+  // as first member.
+  union X_Union switch (short)
+    {
+      case 0: string x_test;
+      case 1: long   x_long;
+    };
+
+  // Union, with implicit default, default
+  // becomes first member of union. This will test
+  // the fix for order of members, with a numeric type
+  // as first member.
+  union Y_Union switch (short)
+    {
+      case 0: long   y_long;
+      case 1: string y_test;
+    };
+
+  // Union with several cases
+  union Z_Union switch (short)
+    {
+      case 0: long z_long;
+      case 1:
+      case 2:
+      case 3: string z_string;
+      case 4: boolean z_bool;
+    };
+
+  /// A very simple interface
+  interface Foo
+  {
+    boolean pass_union (in Data s);
+    boolean pass_default_union (in DefaultData s);
+
+    Data return_union ();
+    DefaultData return_default_union ();
+    X_Union return_x_union ();
+    Y_Union return_y_union ();
+    Z_Union return_z_union (in Z_Union z);
+
+    boolean get_union (out Data s);
+    boolean get_default_union (out DefaultData dd);
+
+    boolean update_union (inout Data s);
+    boolean update_default_union (inout DefaultData dd);
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+};

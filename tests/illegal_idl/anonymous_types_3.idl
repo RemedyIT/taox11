@@ -1,0 +1,26 @@
+/**
+ * @file    anonymous_types_3.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module Test
+{
+  struct complexType
+  {
+    char c;
+    // Anonymous type:
+    string<100> text;
+  };
+
+  /// A dummy  interface for testing IDL compiler
+  interface Hello
+  {
+    complexType get_something();
+
+    // A method to shutdown the ORB
+    oneway void shutdown ();
+  };
+};

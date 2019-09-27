@@ -1,0 +1,5 @@
+// -*- MPC -*-
+
+project: ridl_defaults {
+  idlflags += -Gos
+}

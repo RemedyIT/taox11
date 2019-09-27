@@ -1,0 +1,158 @@
+Description:
+
+This directory contains the following tests for ami.
+
+ami:
+Base test for ami . Testing in,out and inout arguments. Test bool attribute.
+Test struct and enum. Test oneway.
+Test also creating and use of different export files for stub, skel and ami-stubs.
+
+ami_in_out_inout:
+Test with several datatypes: char, wchar, octet, bool, enum, struct, sequence, array, union
+wstring, string, unsigned long long, float, long double. Each datatype is used as  in, out and inout argument.
+The order of the in, out and inout arguments also varies.
+Also  a set of void operations with 1 in- or 1 out- or 1 inout- or no-arguments is tested.
+Test also creation and use  of stub_export file only, no ami or skel export files,
+in that case also the ami stub uses this stub_export_macro
+
+ami_naming:
+The interface's operations and attributes are mapped to implied-IDL operations with names prefixed by "sendc_". If this
+implied-IDL operation name conflicts with existing operations on the interface or any of the interface's base interfaces,
+"ami_" strings are inserted between "sendc_" and the original operation name until the implied-IDL operation name is
+unique.
+In this test the operations foo, sendc_foo and sendc_ami_foo ,and the attributes
+sendc_ami_get_yadda,sendc_get_yadda and yadda are used.
+The associated 'sendc' names should be
+sendc_ami_ami_foo, sendc_sendc_foo, sendc_sendc_ami_foo,
+sendc_get_sendc_ami_get_yadda,sendc_get_sendc_get_yadda and sendc_ami_ami_get_yadda,
+sendc_set_sendc_ami_get_yadda, sendc_set_sendc_get_yadda, sendc_set_yadda .
+Tested is if the right callbacks are used.
+Test also the unique naming of the replyhandler of interface Test:
+If the interface name AMI_<ifaceName>Handler conflicts with an existing identifier,
+uniqueness is obtained by inserting additional "AMI_" prefixes before the ifaceName until the generated identifier is
+unique.
+Idl in this test contains identifiers AMI_TestHandler and AMI_AMI_TestHandler, generated replyhandler should have
+then the name AMI_AMI_AMI_TestHandler.
+Also test a case where AMI_TwoHandler and AMI_AMI_TwoHandler are in a different module than interface Two,
+than the name of the replyhandler should just be AMI_TwoHandler
+Also in this test an attribute name and an operation name ('do') are used in idl, which is a c++11 keyname. So
+the idl compiler should add the prefix '_cxx_' to 'do' .
+
+annotations:
+Test ami annotations. Use an ami annotations between different
+other nonsense annotations.
+Test also creating and use of general export file.
+
+attr_raises:
+This test is for testing the getraises, setraises and raises for attributes.
+The following combinations are tested:
+1. getraises
+2. setraises
+3. getraises and setraises
+4. without getraises and setraises
+5. readonly attribute with raises
+6. readonly attribute without raises
+Test also use of existing stub_export file, without creating it.
+
+derived:
+This test is for testing derived interfaces.
+Interface MyBar is derived from MyDerived, which is derived from MyFoo.
+Sendc calls for MyBar operations and attributes, which
+are inherited from MyFoo are called.
+After this there is tested if the right callbacks (incl. exceptions) are used.
+
+exceptions:
+This test is for testing exceptions and the exception_holder
+The following is tested:
+operation which raises an userexception
+operation which raises an other userexception with a wstring. (bugzilla 2356)
+operation which raises no userexception
+
+exceptions/collocation:
+This test contains a client, which invokes a method on the server (without the
+use of AMI).
+The server implements two interfaces:
+one which the client uses (foo) and one which the server itself uses (bar).
+
+'bar' provides the AMI implementation. The server creates an internal AMI client
+and a callback handler for 'bar'. The references of these are passed to the
+implementation of 'foo'. Once the client invokes the method on 'foo', 'foo' in
+turn invokes the methods on 'bar' synchronously as well as asynchronously.
+
+mix_ami_nonami:
+Two interfaces, one with corba_ami pragma, one with no corb_ami pragma
+or annotation.
+
+mix_annotation_pragma:
+test with interfaces and derived interfaces using combination of corba_ami pragma's and
+annotations //@CORBA(ami = true), //@CORBA(ami = false).
+
+multi_idl_mix_2client:
+Test with interfaces A  and Hello (in hello1.idl) and B (in hello2.idl). Interface Hello is using interfaces A and B.
+hello1.idl includes hello2.idl . Only for interface B, AMI is enabled.
+The server creates a servant of type Hello and puts the IOR on disk,
+Client1 gets this and invokes a method that returns an object reference for a new servant for A.
+Than invoke a method on A. This first client executable doesn't do anything with AMI,
+so doesn't link any AMI files.
+Client2 executable also gets the object reference for Hello,
+invokes a method to get a reference to B and than does the additional narrow to CORBA::amic_traits<B>::ref_type
+and invokes a sendc_method. Client2 executable include the AMI files.
+
+multiple_idl_ami:
+Test with interfaces using each other,divided over 2 idl files and build
+both with ami.
+
+multiple_idl_derived:
+Test with 2 interfaces, one derived from the other,divided over 2 idl files and
+build both with ami through the use of corbas_ami pragma's.
+
+multiple_idl_derived_gca:
+Test with 2 interfaces, one derived from the other,divided over 2 idl files and
+build both with ami through option -GCa
+
+multiple_idl_mix:
+Test with interfaces A (in hello1.idl) and B (in hello2.idl). Interface A is using interface B.
+In hello2.idl there is a forward declaration of interface A.
+Interface A is build with ami through the corba_ami pragma , interface B is not. So the Ami files of  hello1 shouldn't include
+the non existing Ami files of hello2.
+
+multiple_idl_mix_gca:
+Test with interfaces A (in hello1.idl) and B (in hello2.idl). Interface A is using interface B.
+In hello2.idl there is a forward declaration of interface A.
+Interface A is build with ami through the option -GCa, so interface B has to be build with -GCa also.
+It isn't possible when using -GCa to build included idl files one with -GCa and another without -GCa,
+this isn't supported!
+
+
+multiple_inherit:
+Test for derived interfaces operations and exceptions.
+Interface A with operation op_A
+Interface B, derived from A, with own operation op_B
+Interface C, derived from A, with own operation op_C
+Interface D, derived from C, with own operation op_D
+For interface D, for the operations op_A,op_B,op_C and op_D , it is tested if the right callbacks
+and the right callback exceptions are received.
+For interface C, fr the operations op_A and op_C , it is tested if the right callbacks
+and the right callback exceptions are received.
+
+no_use_of_ami
+Test where -GC option is set, but  no corba_ami pragma's or annotation are used.
+Empty ami files should be generated.
+
+no_module
+Test with interface MyFoo not in a module and an interface MyDerived in module A, derived from MyFoo (thus not in A).
+
+ostream:
+Test ostream support for amic reftype (*AmiC class with sendc operations and attributes) and replyhandler reftype.
+
+replyhandler:
+Test nullptr for replyhandler, this shouldn't throw an exception.
+Test also 3 different replyhandlers.
+
+use_of_gcA:
+Test option -GCa, which is added for backwards compatibility: generate always
+ami although no #pragma corba_ami or annotation ///@CORBA(:ami=true) is set.
+
+weak_ref:
+Testing use of CORBA::amic_traits<>::replyhandler_weak_ref_type and
+CORBA::amic_traits<>::replyhandler_weak_servant_ref_type

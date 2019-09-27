@@ -1,0 +1,45 @@
+project(taox11_typecodefactory_idl) : ridl_core_defaults, install {
+  custom_only = 1
+  idlflags += -SS -Sci -Sorb -o . --namespace TAOX11_NAMESPACE \
+              -I $(TAO_ROOT) \
+              -Wb,export_macro=TAOX11_TYPECODEFACTORY_Export \
+              -Wb,export_include=tao/x11/typecodefactory/taox11_typecodefactory_export.h
+
+  IDL_Files {
+    idlflags -= -Sa -St
+    idlflags += -Glons \
+                -Wb,include_guard=TAOX11_TYPECODEFACTORY_SAFE_INCLUDE \
+                -Wb,safe_include=tao/x11/typecodefactory/typecodefactory.h
+    gendir = .
+    $(TAO_ROOT)/tao/TypeCodeFactory/TypeCodeFactory.pidl
+  }
+
+  specific {
+    install_dir = tao/x11/typecodefactory
+  }
+}
+
+project(taox11_typecodefactory) : taox11_lib, taox11_ifr_client , install, typecodefactory {
+  after += taox11_typecodefactory_idl
+  sharedname    = taox11_typecodefactory
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags  = TAOX11_TYPECODEFACTORY_BUILD_DLL
+
+  Source_Files {
+    typecodefactory_adapter_impl.cpp
+    typecodefactory_i.cpp
+    TypeCodeFactoryC.cpp
+    typecodefactory.cpp
+  }
+
+  Header_Files {
+    typecodefactory_adapter_impl.h
+    TypeCodeFactoryC.h
+    typecodefactory_i.h
+    taox11_typecodefactory_export.h
+  }
+
+  specific {
+    install_dir = tao/x11/typecodefactory
+  }
+}

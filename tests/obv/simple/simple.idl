@@ -1,0 +1,51 @@
+/**
+ * @file    simple.idl
+ * @author  Martin Corino
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+#include "base.idl"
+
+module Test
+{
+
+  valuetype ext_base : Test::base_vt
+  {
+    public string dummy;
+  };
+
+  valuetype Event
+  {
+    void do_print (in string loc);
+
+    attribute double amount;
+
+    public long value_;
+    public long value2_;
+    private string id_;
+
+    factory create_val (in long value);
+  };
+
+  typedef sequence<Event>   EventSeq;
+
+  valuetype StringBox string;
+
+  typedef sequence<StringBox> StringBoxSeq;
+
+  interface Client
+  {
+    void send_string (in StringBox sb);
+
+    StringBox get_string ();
+
+    void get_event (out Event evt);
+
+    void do_nothing (in Test::base_vt bvt);
+
+    oneway void shutdown ();
+  };
+
+};

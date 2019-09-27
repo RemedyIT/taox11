@@ -1,0 +1,71 @@
+% unless is_local?
+
+// generated from <%= ridl_template_path %>
+namespace POA
+{
+  class <%= srvproxy_cxxname %>;
+  typedef <%= srvproxy_cxxname %>* <%= srvproxy_cxxname %>_ptr;
+
+  class <%= skel_export_macro %><%= skel_cxxname %>
+% if is_derived?
+%   if !has_concrete_base?
+  : public virtual TAOX11_NAMESPACE::PortableServer::Servant
+%     _first = false
+%   else
+%     _first = true
+%   end
+%   bases.find_all {|_b| !_b.is_abstract? }.each do |_base|
+    <%= _first ? ': ' : ', ' %>public virtual ::<%= _base.scoped_skel_cxxname %>
+%     _first = false
+%   end
+% else
+    : public virtual TAOX11_NAMESPACE::PortableServer::Servant
+% end
+  {
+  public:
+    /// @name Member types
+    //@{
+    typedef TAOX11_CORBA::servant_traits< <%= skel_cxxname %>>    _traits_type;
+    typedef TAOX11_CORBA::servant_reference< <%= skel_cxxname %>> _ref_type;
+    //@}
+
+  protected:
+    /// Constructor
+    explicit <%= skel_cxxname %> (bool inherited = false);
+
+    /// Destructor
+    virtual ~<%= skel_cxxname %> ();
+
+    virtual Servant_proxy_ptr get_proxy () const override;
+
+    template <typename T> friend class TAOX11_CORBA::servant_reference;
+  public:
+
+    /// Determine if we are of the type specified by the @a logical_type_id.
+    virtual bool _is_a (const std::string& logical_type_id) override;
+
+    /// Returns a strong client reference for the servant you are calling
+    <%= scoped_cxx_return_type %> _this ();
+
+    virtual const std::string &_interface_repository_id () const override;
+%   if has_abstract_base?
+%     unless abstractbase_operations.empty?
+
+    /** @name Inherited abstract interface operations */
+    //@{
+%       abstractbase_operations.each do |_op|
+%         nest(2) { _op.visit_operation }
+%       end
+    //@}
+%     end
+%     unless abstractbase_attributes.empty?
+
+    /** @name Inherited abstract interface attributes */
+    //@{
+%       abstractbase_attributes.each do |_att|
+%         nest(2) { _att.visit_attribute }
+%       end
+    //@}
+%     end
+%   end
+% end

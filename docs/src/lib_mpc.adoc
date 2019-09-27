@@ -1,0 +1,113 @@
+include::_{backend}_settings.adoc[]
+
+= TAOX11 libraries
+
+== Overview
+
+The TAOX11 package also delivers the MPC base projects for several
+TAOX11 CORBA features. When using MPC and you want to use a certain
+feature, all you have to do is to derive your project from that specific
+MPC base project.
+
+The base projects are located in the
+`<package_root>/taox11/bin/MPC/config` directory.
+
+This overview shows the available TAOX11 libraries, their TAO dependent
+libraries, and the MPC base project which your MPC projects have to
+derive from when you want to use the specific feature in your TAOX11
+applications.
+
+[cols="<,<,<,<",options="header",]
+|=======================================================================
+|TAOX11 library |Description |TAO dependency |MPC base project
+|libtaox11_anytypecode.so |Library with all the TypeCode and Any
+support. |TAO AnyTypeCode |taox11_anytypecode.mpb
+
+|libtaox11_bidir_giop.so |Support for BiDirectional GIOP as outlined by
+the CORBA spec. Please see `$TAOX11_ROOT/tests/policies/bidirectional`
+for a simple test case of this feature. +
+ Applications need to `#include "tao/x11/bidir_giop/bidir_giop.h"`
+within their code to get this feature. |TAO BiDirGiop
+|taox11_bidir_giop.mpb
+
+|libtaox11_codecfactory.so |Stubs for the CodecFactory as outlined by
+the CORBA spec but not implemented. |TAO CodecFactory
+|taox11_codecfactory.mpb
+
+|libtaox11_cosnaming_skel.so |Contains the TAOX11 skeletons for the
+Naming Server. For users who are interested in implementing their own
+naming service in {cxx11} |None |taox11_cosnaming_skel.mpb
+
+|libtaox11_cosnaming_stub.so |Contains the TAOX11 stub for the Naming
+Server. For users who are interested in using the naming service. The
+naming server itself has not been ported to TAOX11. +
+See `$TAOX11_ROOT/examples/ccs` for an example how to
+use this stub library. |None |taox11_cosnaming_stub.mpb
+
+|libtaox11_dynamicany.so |Contains the TAOX11 DynamicAny implementation
+|None |taox11_dynamicany.mpb
+
+|libtaox11_ifr_client_skel.so |Contains the TAOX11 skeletons for the
+Interface Repository. For users who are interested in implementing their
+own Interface Repository in {cxx11} |None |taox11_ifr_client_skel.mpb
+
+|libtaox11_ifr_client_stub.so |Contains the TAOX11 stubs for the
+Interface Repository. |None |taox11_ifr_client.mpb
+
+|libtaox11_ior_table.so |Any TAO server can be configured as an corbaloc
+agent. Such agents forward requests generated using a simple ObjectKey
+in a corbaloc specification to the real location of the object. This
+feature is implemented in TAO by dynamically (or statically) adding a
+new Object Adapter to the ORB, that handles any sort of request. TAOX11
+makes use of this functionality. Applications have to
+`#include "tao/x11/ior_table/ior_table.h"` to get the right symbols.
+|TAO IORTable |taox11_ior_table.mpb
+
+|libtaox11_logger.so |Embeds the TAOX11 logging framework. Applications
+need to `\#include "tao/x11/log.h"` within their code to get this
+feature. More information can be found <<x11_logging.adoc#,here>>.
+|None |taox11_logger.mpb
+
+|libtaox11_messaging.so |Support for AMI and CORBA messaging policies
+such as RoundtripTimeout and ConnectionTimeout are placed in this
+library. Applications have to `#include "tao/x11/messaging.h"` to get
+the right symbols |TAO Messaging |taox11_messaging.mpb
+
+|libtaox11_pi.so |Stubs for the Portable Interceptors as outlined by the
+CORBA spec but not implemented. |NA
+|taox11_pi.mpb
+
+|libtaox11_portable_server.so |Support for POA. This library is loaded
+by the ORB when the application calls
+`resolve_initial_references               ("RootPOA");`. Linking this
+library is sufficient to get all the features that are required to
+compile a CORBA server. |TAO PortableServer |taox11_portableserver.mpb
+
+|libtaox11.so |Contains the ORB and basic CORBA support, like exceptions
+|TAO |taox11_lib.mpb
+
+|libtaox11_typecodefactory.so |Contains the TypeCodeFactory support |TAO
+TypeCodeFactory |taox11_typecodefactory.mpb
+
+|libtaox11_valuetype.so |Support for valuetypes and abstract interfaces.
+Messaging depends on this library |TAO valuetype |taox11_valuetype.mpb
+|=======================================================================
+
+== Standard MPC projects
+
+There are two MPC base projects which can be used for a TAOX11 client or
+server application:
+
+. taox11_server.mpb
+. taox11_client.mpb
+
+These MPC base projects will include all other TAO(X11) base projects
+which are needed to either create a TAOX11 client or a TAOX11 server
+application.
+
+=== AMI
+
+The MPC `taox11_ami_client` base project is there to use whenever a
+TAOX11 client uses <<ami/index.adoc#,AMI>>. There is no need to
+include `taox11_client` as an MPC base project when this project is
+used.

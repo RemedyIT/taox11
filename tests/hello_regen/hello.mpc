@@ -1,0 +1,32 @@
+// -*- MPC -*-
+
+project(*regen_Idl): ridl_ostream_defaults {
+  idlflags += -Sp -Gisrv
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*regen_Server): taox11_server {
+  after += *regen_Idl
+  Source_Files {
+    test_impl.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*regen_Client): taox11_client {
+  after += *regen_Idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}
+

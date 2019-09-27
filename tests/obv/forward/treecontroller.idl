@@ -1,0 +1,29 @@
+/**
+ * @file    treecontroller.idl
+ * @author  Marcel Smit
+ *
+ * @brief   Testing forward declarations of valuetypes
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+valuetype BaseNode;
+
+// This TreeController is probably a silly idea.
+// All I want from it is a valutype forward declared
+// in one file and fully defined in another.
+
+valuetype TreeController
+{
+  public BaseNode root;
+};
+
+interface Test
+{
+  // Returnes the reflected copy of its argument.
+  TreeController reflect (in TreeController tc);
+
+  // Shutdown the romote ORB
+  oneway void shutdown ();
+};

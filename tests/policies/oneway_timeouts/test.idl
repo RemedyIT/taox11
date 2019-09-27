@@ -1,0 +1,15 @@
+/**
+ * @file    test.idl
+ * @author  Marcel Smit
+ *
+ * @brief   CORBA C++11 Policies test
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+interface Tester
+{
+  oneway void test (in long id);
+  long test2 (in long id);
+};

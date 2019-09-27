@@ -1,0 +1,13 @@
+
+
+Normally, a typecode is created at compile time by the
+IDL compiler for each declaration in an IDL file, or at
+runtime by the  Interface Repository. However, in some
+situations, such as a bridge between ORBs, a typecode may
+have to be  created without any knowledge of the IDL and outside
+any Interface Repository. In such cases, the typecode
+creation methods of the pseudo-object CORBA::ORB are used.
+
+This program is a simple example of the use of the
+TypeCodeFactory create_*_tc methods.
+The TypeCodeFactory reference is retrieved from the orb.

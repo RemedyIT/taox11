@@ -1,0 +1,27 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module Test
+{
+  interface Bar;
+
+  interface Hello
+  {
+    Bar get_bar ();
+    void with_bar (in Bar bar_in, out Bar bar_out, inout Bar bar_inout);
+    oneway void shutdown ();
+  };
+
+  interface Bar
+  {
+  };
+
+  interface S : Hello
+  {
+  };
+};

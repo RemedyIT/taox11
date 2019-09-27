@@ -1,0 +1,21 @@
+
+// generated from {brix/taox11/}corba_servant/impl/src/attribute.erb
+<%= implementation_return_type %>
+<%= interface.impl_cxxname %>::<%= cxxname %> ()
+{
+% write_regen_section("#{interface.scoped_impl_cxxname}::#{cxxname}[Getter Body]", indent: 1) do
+  // Your code here
+  return <%= default_value %>;
+% end
+}
+% unless is_readonly?
+void
+<%= interface.cxxname %>::<%= cxxname %> (
+    <%= implementation_in_type %> _v)
+{
+% write_regen_section("#{interface.scoped_impl_cxxname}::#{cxxname}[Setter Body]", indent: 1) do
+  // Your code here
+  X11_UNUSED_ARG (_v);
+% end
+}
+% end

@@ -1,0 +1,19 @@
+
+// generated from <%= ridl_template_path %>
+% _intf_fwd_incl_guard_ = scoped_cxxname.to_include_guard
+#if !defined (_INTF_<%= _intf_fwd_incl_guard_ %>_FWD_)
+#define _INTF_<%= _intf_fwd_incl_guard_ %>_FWD_
+class <%= cxxname %>;
+% if is_remote? && !is_abstract?
+class <%= proxy_cxxname %>;
+typedef <%= proxy_cxxname %>* <%= proxy_cxxname %>_ptr;
+%   if generate_ami_support?
+namespace POA
+{
+  class <%= skel_cxxname %>;
+} // namespace POA
+%   end
+% end
+#endif // !_INTF_<%= _intf_fwd_incl_guard_ %>_FWD_
+%#
+% visit_template('typecode') if generate_typecode_support?

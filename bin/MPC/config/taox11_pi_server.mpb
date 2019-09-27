@@ -1,0 +1,6 @@
+// -*- MPC -*-
+
+project : taox11_lib, taox11_pi, taox11_portableserver, tao_pi_server {
+  after   += portable_interceptor_server
+  libs    += taox11_pi_server
+}

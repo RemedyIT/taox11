@@ -1,0 +1,47 @@
+
+// generated from {brix/taox11/}corba_servant/impl/hdr/interface_pre.erb
+class <%= implementation_export_macro %><%= impl_cxxname %>
+  : public CORBA::servant_traits< <%= scoped_cxxtype %>>::base_type
+% write_regen_section("#{scoped_impl_cxxname}[Base List]", default_content: '// Your base classes')
+{
+protected:
+% write_regen_section("#{scoped_impl_cxxname}[Constructors]", indent: 1) do
+  /// Constructor(s)'
+%   if interface_wants_shutdown?(scoped_name)
+  <%= impl_cxxname %> (IDL::traits< CORBA::ORB >::ref_type orb);
+%   else
+  <%= impl_cxxname %> ();
+%   end
+% end
+
+  /// Destructor
+  virtual ~<%= impl_cxxname %> ();
+
+  template <typename T> friend class CORBA::servant_reference;
+
+  template <typename _Tp1, typename, typename ...Args>
+  friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+
+% nest(1) { write_regen_section("#{scoped_impl_cxxname}[User Protected]", default_content: '// Your protected definitions') }
+public:
+%   if has_abstract_base?
+%     unless abstractbase_operations.empty?
+
+  /** @name Inherited abstract interface operations */
+  //@{
+  // ++ inherited abstract interface operations
+%       abstractbase_operations.each do |_op|
+%         nest(1) { _op.visit_operation }
+%       end
+  //@}
+%     end
+%     unless abstractbase_attributes.empty?
+
+  /** @name Inherited abstract interface attributes */
+  //@{
+%       abstractbase_attributes.each do |_att|
+%         nest(1) { _att.visit_attribute }
+%       end
+  //@}
+%     end
+%   end

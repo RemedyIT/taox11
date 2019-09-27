@@ -1,0 +1,48 @@
+/**
+ * @file    ami_coll.idl
+ * @author  Marcel Smit
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+#pragma corba_ami "Test::Bar"
+
+module Test
+{
+  struct MessageStruct
+  {
+    long   id;
+    string message;
+  };
+
+  exception StructEx
+  {
+    MessageStruct struct_i;
+  };
+
+  exception SomeException
+  {
+    long   id;
+    string message;
+  };
+
+  interface Bar
+  {
+    void do_something (in string message)
+      raises (StructEx);
+
+    attribute long something
+      getraises (SomeException)
+      setraises (SomeException);
+  };
+
+
+  /// A very simple interface
+  interface Foo
+  {
+    void do_throw_struct ()
+      raises (StructEx);
+
+    oneway void shutdown ();
+  };
+};

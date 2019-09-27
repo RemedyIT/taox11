@@ -1,0 +1,27 @@
+/**
+ * @file    sri_test.idl
+ * @author  Martin Corino
+ *
+ * @brief   IDL file test ServerRequestInterceptor
+ *          support.
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+#include "tao/PI_Server/PI_Server_include.pidl"
+
+module ForwardRequestTest
+{
+
+  local interface ServerRequestInterceptor
+    : PortableInterceptor::ServerRequestInterceptor
+  {
+
+    /// Set the references to which requests will be forwarded.
+    void forward_references (in Object obj1,
+                             in Object obj2);
+
+  };
+
+};

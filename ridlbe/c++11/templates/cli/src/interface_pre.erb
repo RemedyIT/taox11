@@ -1,0 +1,38 @@
+% unless is_remote? && !has_abstract_base?
+// generated from <%= ridl_template_path %>
+bool
+<%= cxxname %>::_is_a (const std::string& local_type_id)
+{
+%   if has_abstract_base?
+  return this->Object::_is_a (local_type_id);
+%   else
+  return (
+%     supported_interface_ids.each do |_repo_id|
+    local_type_id == "<%= _repo_id %>" ||
+%     end
+    TAOX11_NAMESPACE::CORBA::LocalObject::_is_a (local_type_id));
+%   end
+}
+% end
+% if has_abstract_base?
+
+std::string
+<%= cxxname %>::_interface_repository_id ()
+{
+  return "<%= repository_id %>";
+}
+%   unless abstractbase_operations.empty?
+
+// inherited abstract interface operations
+%     abstractbase_operations.each do |_op|
+%       _op.visit_operation
+%     end
+%   end
+%   unless abstractbase_attributes.empty?
+
+// inherited abstract interface attributes
+%     abstractbase_attributes.each do |_att|
+%       _att.visit_attribute
+%     end
+%   end
+% end

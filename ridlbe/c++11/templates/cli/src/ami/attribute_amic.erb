@@ -1,0 +1,132 @@
+% unless interface.is_local?
+
+// generated from <%= ridl_template_path %>
+void
+<%= interface.amic_scoped_cxxname %>::<%= sendc_prefix_get %><%= cxxname %>(
+    <%= interface.handler_scoped_cxx_in_type %> ami_handler)
+{
+%   if interface.is_abstract?
+  if (!this->_is_object ())
+    throw TAOX11_CORBA::NO_IMPLEMENT ();
+
+  TAOX11_CORBA::Object::_ref_type _objref = this->_to_object ();
+  TAO_CORBA::Object_ptr const _objptr = _objref->get_proxy ()->get ();
+
+%   end
+  try
+  {
+%   if interface.is_abstract?
+    if (!_objptr->is_evaluated ())
+    {
+      TAO_CORBA::Object::tao_object_initialize (_objptr);
+    }
+%   else
+    if (!this-><%= interface.proxy_cxxname.downcase %>_->is_evaluated ())
+    {
+      TAO_CORBA::Object::tao_object_initialize (this-><%= interface.proxy_cxxname.downcase %>_);
+    }
+%   end
+
+    TAO_TAO::Asynch_Invocation_Adapter _tao_call (
+%   if interface.is_abstract?
+      _objptr,
+%   else
+      this-><%= interface.proxy_cxxname.downcase %>_,
+%   end
+      nullptr, // The _tao_args array, which in this case is nullptr because there are no args
+      0, // Number of arguments in the _tao_args array
+      "_get_<%= name %>", // Operation to be called
+      <%= name.size + 5 %>, // Number of characters in the operation name
+      TAO_TAO::TAO_CO_NONE | TAO_TAO::TAO_CO_THRU_POA_STRATEGY);
+
+    <%= interface.handler_proxy_cxxname %>_var _tao_ami_handler;
+    if (ami_handler)
+    {
+      TAO_CORBA::Object_ptr _tao_ami_handler_obj = ami_handler->get_proxy ()->get ();
+
+      _tao_ami_handler =
+        <%= interface.handler_proxy_cxxname %>::_narrow (_tao_ami_handler_obj);
+
+      if (TAO_CORBA::is_nil (_tao_ami_handler))
+      {
+        TAOX11_LOG_ERROR ("<%= interface.scoped_cxxname %>::<%= sendc_prefix_get %><%= cxxname %> ERROR.");
+      }
+    }
+    _tao_call.invoke (
+      _tao_ami_handler,
+      <%= interface.handler_proxy_cxxname %>::get_<%= cxxname %>_reply_stub);
+  }
+  catch_tao_system_ex(_ex)
+}
+
+%   unless is_readonly?
+void
+<%= interface.amic_scoped_cxxname %>::<%= sendc_prefix_set %><%= cxxname %>(
+    <%= interface.handler_scoped_cxx_in_type %> ami_handler,
+    <%= cxx_in_type %> _x11_<%= cxxname %>)
+{
+%   if interface.is_abstract?
+  if (!this->_is_object ())
+    throw TAOX11_CORBA::NO_IMPLEMENT ();
+
+  TAOX11_CORBA::Object::_ref_type _objref = this->_to_object ();
+  TAO_CORBA::Object_ptr const _objptr = _objref->get_proxy ()->get ();
+
+%   end
+  try
+  {
+%   if interface.is_abstract?
+    if (!_objptr->is_evaluated ())
+    {
+      TAO_CORBA::Object::tao_object_initialize (_objptr);
+    }
+%   else
+    if (!this-><%= interface.proxy_cxxname.downcase %>_->is_evaluated ())
+    {
+      TAO_CORBA::Object::tao_object_initialize (this-><%= interface.proxy_cxxname.downcase %>_);
+    }
+%   end
+
+    TAOX11_NAMESPACE::Arg_Traits<void>::ret_val _taox11_retval;
+    TAOX11_NAMESPACE::Arg_Traits< <%= scoped_cxx_arg_type %>>::in_arg_val _taox11_att_val {_x11_<%= cxxname %>};
+
+    TAO_TAO::Argument *_tao_args [] =
+    {
+      std::addressof(_taox11_retval),
+      std::addressof(_taox11_att_val)
+    };
+
+    TAO_TAO::Asynch_Invocation_Adapter _tao_call (
+%   if interface.is_abstract?
+      _objptr,
+%   else
+      this-><%= interface.proxy_cxxname.downcase %>_,
+%   end
+      _tao_args,
+      2, // Number of arguments in the _tao_args array
+      "_set_<%= name %>", // Operation to be called
+      <%= name.size + 5 %>, // Number of characters in the operation name
+      TAO_TAO::TAO_CO_NONE | TAO_TAO::TAO_CO_THRU_POA_STRATEGY);
+
+    <%= interface.handler_proxy_cxxname %>_var _tao_ami_handler;
+    if (ami_handler)
+    {
+      TAO_CORBA::Object_ptr _tao_ami_handler_obj = ami_handler->get_proxy ()->get ();
+
+      _tao_ami_handler =
+        <%= interface.handler_proxy_cxxname %>::_narrow (_tao_ami_handler_obj);
+
+      if (TAO_CORBA::is_nil (_tao_ami_handler))
+      {
+        TAOX11_LOG_ERROR ("<%= interface.scoped_cxxname %>::<%= sendc_prefix_set %><%= cxxname %> ERROR.");
+      }
+    }
+
+    _tao_call.invoke (
+      _tao_ami_handler,
+      <%= interface.handler_proxy_cxxname %>::set_<%= cxxname %>_reply_stub);
+  }
+  catch_tao_system_ex(_ex)
+}
+%   end
+% end

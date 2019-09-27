@@ -1,0 +1,45 @@
+/**
+ * @file    any.idl
+ * @author  Marcel Smit
+ *
+ * @brief   CORBA C++11 servant implementation
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module OBV_AnyTest
+{
+
+  valuetype VZ
+  {
+  };
+
+  valuetype VA : VZ
+  {
+    public unsigned long id;
+  };
+
+  valuetype VB : VA
+  {
+  };
+
+  //
+  // Interface to pass valuetypes.
+  //
+  interface Test
+  {
+    // Returns VA or VB inserted into any
+    any get_something (in boolean need_vb);
+
+    VB get_vb ();
+
+    // Returns a any, containing the VA as
+    // CORBA::ValueBase.
+    any get_base ();
+
+    // Shutdown the romote ORB
+    oneway void shutdown ();
+  };
+
+};

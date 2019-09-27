@@ -1,0 +1,123 @@
+// -*- MPC -*-
+
+project(portable_interceptor_idl) : ridl_core_defaults, install, pidl_install {
+  custom_only = 1
+  idlflags += -SS -Ssh -Sci -Gp -Gd \
+              -Wb,export_macro=TAOX11_PortableInterceptor_Export \
+              -Wb,export_include=tao/x11/pi/taox11_pi_export.h \
+              -I $(TAO_ROOT) -o . --namespace TAOX11_NAMESPACE
+  IDL_Files {
+    gendir = .
+    idlflags += -Sorb \
+                -Wb,unique_include=tao/x11/pi/pi.h
+    $(TAO_ROOT)/tao/PI/PI_include.pidl
+  }
+
+  IDL_Files {
+    gendir = .
+    idlflags += -Sorb -Sal -Glons \
+                -Wb,include_guard=TAOX11_PI_SAFE_INCLUDE \
+                -Wb,safe_include=tao/x11/pi/pi.h
+    idlflags -= -Sa -St
+    $(TAO_ROOT)/tao/PI/PICurrent.pidl
+    $(TAO_ROOT)/tao/PI/ProcessingModePolicy.pidl
+    $(TAO_ROOT)/tao/PI/ORBInitInfo.pidl
+    $(TAO_ROOT)/tao/PI/ClientRequestInfo.pidl
+    $(TAO_ROOT)/tao/PI/RequestInfo.pidl
+    $(TAO_ROOT)/tao/PI/ClientRequestInterceptor.pidl
+    $(TAO_ROOT)/tao/PI/PolicyFactory.pidl
+  }
+
+  IDL_Files {
+    gendir = .
+    idlflags += -Sorb -Sal \
+                -Wb,include_guard=TAOX11_PI_SAFE_INCLUDE \
+                -Wb,safe_include=tao/x11/pi/pi.h
+    idlflags -= -Sa -St
+    $(TAO_ROOT)/tao/PI/ORBInitializer.pidl
+    $(TAO_ROOT)/tao/PI/PIForwardRequest.pidl
+  }
+
+  IDL_Files {
+    gendir = .
+    idlflags += -Sorb -Sal
+    idlflags -= -Sa -St
+    $(TAO_ROOT)/tao/PI/Interceptor.pidl
+  }
+
+  IDL_Files {
+    gendir = .
+    idlflags += -Sal \
+                -Wb,include_guard=TAOX11_PI_SAFE_INCLUDE \
+                -Wb,safe_include=tao/x11/pi/pi.h
+    idlflags -= -Sa -St
+    $(TAO_ROOT)/tao/PI/InvalidSlot.pidl
+  }
+
+  specific {
+    install_dir = tao/x11/pi
+  }
+}
+
+project(portable_interceptor) : taox11_lib, taox11_anytypecode, install, taox11_codecfactory, tao_pi {
+  after       += portable_interceptor_idl
+  sharedname   = taox11_pi
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags += TAOX11_PI_BUILD_DLL
+
+  Source_Files {
+    policyfactory_manager.cpp
+    pi_policy_impl.cpp
+    orb_init_info.cpp
+    orb_initializer_registry.cpp
+    pi_current.cpp
+    request_info.cpp
+    client_request_info.cpp
+    interceptor_proxy.cpp
+    client_request_interceptor_proxy.cpp
+    server_request_interceptor_proxy_adapter.cpp
+    ior_interceptor_proxy_adapter.cpp
+    PI_includeC.cpp
+    ORBInitInfoC.cpp
+    ORBInitializerC.cpp
+    ClientRequestInterceptorC.cpp
+    ClientRequestInfoC.cpp
+    RequestInfoC.cpp
+    PIForwardRequestC.cpp
+    PICurrentC.cpp
+    ProcessingModePolicyC.cpp
+    InterceptorC.cpp
+    InvalidSlotC.cpp
+    PolicyFactoryC.cpp
+  }
+
+  Header_Files {
+    pi.h
+    policyfactory_manager.h
+    pi_policy_impl.h
+    orb_init_info.h
+    orb_initializer_registry.h
+    pi_current.h
+    request_info.h
+    client_request_info.h
+    interceptor_proxy.h
+    client_request_interceptor_proxy.h
+    server_request_interceptor_proxy_adapter.h
+    ior_interceptor_proxy_adapter.h
+    ClientRequestInfoC.h
+    ClientRequestInterceptorC.h
+    InterceptorC.h
+    InvalidSlotC.h
+    ORBInitializerC.h
+    ORBInitInfoC.h
+    PICurrentC.h
+    PIForwardRequestC.h
+    PI_includeC.h
+    ProcessingModePolicyC.h
+    RequestInfoC.h
+  }
+
+  specific {
+    install_dir = tao/x11/pi
+  }
+}

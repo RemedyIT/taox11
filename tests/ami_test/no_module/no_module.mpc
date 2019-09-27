@@ -1,0 +1,74 @@
+// -*- MPC -*-
+//Test also creating and use of different export files for stub, skel and ami-stubs.
+
+
+project(*idl) : ridl_ostream_defaults {
+  idlflags += -GC
+  custom_only = 1
+
+  idlflags += -Wb,stub_export_macro=AMI_TEST_STUB_Export \
+              -Wb,stub_export_include=ami_test_stub_export.h \
+              -Wb,skel_export_macro=AMI_TEST_SKEL_Export \
+              -Wb,skel_export_include=ami_test_skel_export.h \
+              -Wb,amic_export_macro=AMI_TEST_AMIC_Export \
+              -Wb,amic_export_include=ami_test_amic_export.h \
+              -o .
+
+  idlflags += -Gxhst -Gxhsk -Gxhsta
+
+  IDL_Files {
+    ami_test.idl
+  }
+
+}
+
+project(*stub): taox11_lib {
+  after += *idl
+  sharedname   = ami_test_stub
+  dynamicflags += AMI_TEST_STUB_BUILD_DLL
+
+  Source_Files {
+    ami_testC.cpp
+  }
+}
+
+project(*ami_stub): taox11_messaging, taox11_portableserver {
+  after += *idl *stub
+  sharedname   = ami_test_ami_stub
+  dynamicflags += AMI_TEST_AMIC_BUILD_DLL
+  libs         += ami_test_stub
+  Source_Files {
+    ami_testAmiC.cpp
+  }
+}
+
+project(*skel): taox11_portableserver {
+  after += *idl *stub
+  sharedname   = ami_test_skel
+  dynamicflags += AMI_TEST_SKEL_BUILD_DLL
+  libs         += ami_test_stub
+
+  Source_Files {
+    ami_test_i.cpp
+    ami_testS.cpp
+  }
+}
+
+project(*server):  taox11_server {
+  after += *idl *stub *skel
+  libs  += ami_test_skel ami_test_stub
+  exename = server
+
+  Source_Files {
+    server.cpp
+  }
+}
+
+project(*client) : taox11_ami_client {
+  exename = client
+  after += *idl *stub *ami_stub
+  libs  += ami_test_stub ami_test_ami_stub
+  Source_Files {
+    client.cpp
+  }
+}

@@ -1,0 +1,20 @@
+// -*- MPC -*-
+
+project(policies_manipulation_idl): ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1;
+}
+
+project(policies_manipulation): taox11_messaging, taox11_server {
+  after += policies_manipulation_idl
+
+  exename   = manipulation
+
+  Source_Files {
+    manipulation.cpp
+    testC.cpp
+    testS.cpp
+  }
+}

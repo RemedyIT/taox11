@@ -1,0 +1,9 @@
+// -*- MPC -*-
+
+project(*x11_Server): taox11_client {
+  exename = reactor
+  Source_Files {
+    reactor.cpp
+  }
+}
+

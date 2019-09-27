@@ -1,0 +1,269 @@
+// -*- MPC -*-
+
+project(*IDL): ridl_ostream_defaults, taox11_messaging {
+  custom_only=1
+  //Use of -GCa i.o. -GC, because -GC expects with taox11 ami pragma's or annotations
+  //and we don't want to change all idl files of this test, so use
+  //-GCa wich is added to taox11 for backwards compatibility.
+  idlflags += -GCa -Gd
+  //-GH
+  //-GT
+
+  idlflags += -Wb,stub_export_macro=TAO_IDL_TEST_STUB_Export \
+              -Wb,stub_export_include=tao_idl_test_stub_export.h \
+              -Wb,skel_export_macro=TAO_IDL_TEST_SKEL_Export \
+              -Wb,skel_export_include=tao_idl_test_skel_export.h \
+              -Wb,amic_export_macro=TAO_IDL_TEST_AMIC_Export \
+              -Wb,amic_export_include=tao_idl_test_amic_export.h \
+              -o .
+
+  IDL_Files {
+    gendir = .
+    idlflags += -Gxhst -Gxhsk -Gxhsta
+    $(TAO_ROOT)/tests/IDL_Test/attribute.idl
+  }
+
+  IDL_Files {
+    gendir = .
+    $(TAO_ROOT)/tests/IDL_Test/Bug_2350_Regression.idl
+    $(TAO_ROOT)/tests/IDL_Test/Bug_2577_Regression.idl
+    $(TAO_ROOT)/tests/IDL_Test/Bug_2582_Regression.idl
+    $(TAO_ROOT)/tests/IDL_Test/Bug_2583_Regression.idl
+    $(TAO_ROOT)/tests/IDL_Test/Bug_2616_Regression.idl
+    $(TAO_ROOT)/tests/IDL_Test/Bug_2619_Regression.idl
+    $(TAO_ROOT)/tests/IDL_Test/Bug_3243_Regression.idl
+    $(TAO_ROOT)/tests/IDL_Test/Bug_3312_Regression.idl
+    // Disabled because it uses component
+    //$(TAO_ROOT)/tests/IDL_Test/Bug_3819_Regression.idl
+    $(TAO_ROOT)/tests/IDL_Test/Bug_3821_Regression.idl
+    $(TAO_ROOT)/tests/IDL_Test/full.idl
+    $(TAO_ROOT)/tests/IDL_Test/fwd.idl
+    $(TAO_ROOT)/tests/IDL_Test/gperf.idl
+    $(TAO_ROOT)/tests/IDL_Test/interface.idl
+    $(TAO_ROOT)/tests/IDL_Test/nested_scope.idl
+
+    $(TAO_ROOT)/tests/IDL_Test/old_constants.idl
+    $(TAO_ROOT)/tests/IDL_Test/simple.idl
+    $(TAO_ROOT)/tests/IDL_Test/simple2.idl
+    $(TAO_ROOT)/tests/IDL_Test/old_array.idl
+    // Disabled because it uses anonymous types
+    //$(TAO_ROOT)/tests/IDL_Test/old_sequence.idl
+    $(TAO_ROOT)/tests/IDL_Test/old_struct.idl
+    $(TAO_ROOT)/tests/IDL_Test/old_union.idl
+    $(TAO_ROOT)/tests/IDL_Test/old_union2.idl
+
+    $(TAO_ROOT)/tests/IDL_Test/params.idl
+    $(TAO_ROOT)/tests/IDL_Test/reopened_modules.idl
+    $(TAO_ROOT)/tests/IDL_Test/struct.idl
+    $(TAO_ROOT)/tests/IDL_Test/reopen_include1.idl
+    $(TAO_ROOT)/tests/IDL_Test/reopen_include2.idl
+    $(TAO_ROOT)/tests/IDL_Test/typeprefix.idl
+  }
+
+  IDL_Files {
+    gendir = .
+    // Disabled because they use anonymous types
+    //idlflags += -as
+    //$(TAO_ROOT)/tests/IDL_Test/enum_in_struct.idl
+    //$(TAO_ROOT)/tests/IDL_Test/array.idl
+    //$(TAO_ROOT)/tests/IDL_Test/array_anon_nested.idl
+    //$(TAO_ROOT)/tests/IDL_Test/included.idl
+    //$(TAO_ROOT)/tests/IDL_Test/including.idl
+    //$(TAO_ROOT)/tests/IDL_Test/sequence.idl
+    //$(TAO_ROOT)/tests/IDL_Test/union.idl
+    //$(TAO_ROOT)/tests/IDL_Test/anyunion.idl
+    //$(TAO_ROOT)/tests/IDL_Test/valuetype.idl
+  }
+
+  IDL_Files {
+    gendir = .
+    // Disabled because they use anonymous types
+    //idlflags += -GA -as
+    //$(TAO_ROOT)/tests/IDL_Test/anonymous.idl
+    //$(TAO_ROOT)/tests/IDL_Test/dif2.idl
+  }
+
+  IDL_Files {
+    gendir = .
+    //idlflags += -GA
+    $(TAO_ROOT)/tests/IDL_Test/array_only.idl
+    $(TAO_ROOT)/tests/IDL_Test/constants.idl
+    $(TAO_ROOT)/tests/IDL_Test/generic_object.idl
+    $(TAO_ROOT)/tests/IDL_Test/keywords.idl
+
+    $(TAO_ROOT)/tests/IDL_Test/inherit.idl
+    $(TAO_ROOT)/tests/IDL_Test/module.idl
+    $(TAO_ROOT)/tests/IDL_Test/primtypes.idl
+
+    $(TAO_ROOT)/tests/IDL_Test/pragma.idl
+    $(TAO_ROOT)/tests/IDL_Test/repo_id_mod.idl
+    $(TAO_ROOT)/tests/IDL_Test/typedef.idl
+    $(TAO_ROOT)/tests/IDL_Test/typecode.idl
+  }
+}
+
+project(*DLL): ridl_ostream_defaults, taox11_lib, taox11_messaging, taox11_portableserver {
+  after += *IDL
+  dynamicflags += TAO_IDL_TEST_STUB_BUILD_DLL \
+                  TAO_IDL_TEST_SKEL_BUILD_DLL \
+                  TAO_IDL_TEST_AMIC_BUILD_DLL
+  sharedname = IDL_Test_DLL
+
+  Source_Files {
+    attributeC.cpp
+    attributeS.cpp
+    //array_onlyA.cpp
+    array_onlyC.cpp
+    array_onlyS.cpp
+    Bug_2350_RegressionC.cpp
+    Bug_2350_RegressionS.cpp
+    Bug_2577_RegressionC.cpp
+    Bug_2577_RegressionS.cpp
+    Bug_2582_RegressionC.cpp
+    Bug_2582_RegressionS.cpp
+    Bug_2583_RegressionC.cpp
+    Bug_2583_RegressionS.cpp
+    Bug_2616_RegressionC.cpp
+    Bug_2616_RegressionS.cpp
+    Bug_2619_RegressionC.cpp
+    Bug_2619_RegressionS.cpp
+    Bug_3243_RegressionC.cpp
+    Bug_3243_RegressionS.cpp
+    Bug_3312_RegressionC.cpp
+    Bug_3312_RegressionS.cpp
+    // Disabled because it uses component
+    //Bug_3819_RegressionC.cpp
+    //Bug_3819_RegressionS.cpp
+    Bug_3821_RegressionC.cpp
+    Bug_3821_RegressionS.cpp
+    constantsC.cpp
+    constantsS.cpp
+    fullC.cpp
+    fullS.cpp
+    fwdC.cpp
+    fwdS.cpp
+    generic_objectC.cpp
+    generic_objectS.cpp
+    gperfC.cpp
+    gperfS.cpp
+    inheritC.cpp
+    inheritS.cpp
+    interfaceC.cpp
+    interfaceS.cpp
+    keywordsC.cpp
+    keywordsS.cpp
+    moduleC.cpp
+    moduleS.cpp
+    nested_scopeC.cpp
+    nested_scopeS.cpp
+    old_arrayC.cpp
+    old_arrayS.cpp
+    old_constantsC.cpp
+    old_constantsS.cpp
+    // Disabled because it uses anonymous types
+    //old_sequenceC.cpp
+    //old_sequenceS.cpp
+    old_structC.cpp
+    old_structS.cpp
+    old_union2C.cpp
+    old_union2S.cpp
+    old_unionC.cpp
+    old_unionS.cpp
+    paramsC.cpp
+    paramsS.cpp
+    pragmaC.cpp
+    pragmaS.cpp
+    primtypesC.cpp
+    primtypesS.cpp
+    reopened_modulesC.cpp
+    reopened_modulesS.cpp
+    reopen_include1C.cpp
+    reopen_include1S.cpp
+    reopen_include2C.cpp
+    reopen_include2S.cpp
+    repo_id_modC.cpp
+    repo_id_modS.cpp
+    simple2C.cpp
+    simple2S.cpp
+    simpleC.cpp
+    simpleS.cpp
+    structC.cpp
+    structS.cpp
+    typecodeC.cpp
+    typecodeS.cpp
+    typedefC.cpp
+    typedefS.cpp
+    typeprefixC.cpp
+    typeprefixS.cpp
+    attributeAmiC.cpp
+    //array_onlyA.cpp
+    array_onlyAmiC.cpp
+    Bug_2350_RegressionAmiC.cpp
+    Bug_2577_RegressionAmiC.cpp
+    Bug_2582_RegressionAmiC.cpp
+    Bug_2583_RegressionAmiC.cpp
+    Bug_2616_RegressionAmiC.cpp
+    Bug_2619_RegressionAmiC.cpp
+    Bug_3243_RegressionAmiC.cpp
+    Bug_3312_RegressionAmiC.cpp
+    // Disabled because it uses component
+    //Bug_3819_RegressionC.cpp
+    //Bug_3819_RegressionS.cpp
+    Bug_3821_RegressionAmiC.cpp
+    constantsAmiC.cpp
+    fullAmiC.cpp
+    fwdAmiC.cpp
+    generic_objectAmiC.cpp
+    gperfAmiC.cpp
+    inheritAmiC.cpp
+    interfaceAmiC.cpp
+    keywordsAmiC.cpp
+    moduleAmiC.cpp
+    nested_scopeAmiC.cpp
+    old_arrayAmiC.cpp
+    old_constantsAmiC.cpp
+    // Disabled because it uses anonymous types
+    //old_sequenceC.cpp
+    //old_sequenceS.cpp
+    old_structAmiC.cpp
+    old_union2AmiC.cpp
+    old_unionAmiC.cpp
+    paramsAmiC.cpp
+    pragmaAmiC.cpp
+    primtypesAmiC.cpp
+    reopened_modulesAmiC.cpp
+    reopen_include1AmiC.cpp
+    reopen_include2AmiC.cpp
+    repo_id_modAmiC.cpp
+    simple2AmiC.cpp
+    simpleAmiC.cpp
+    structAmiC.cpp
+    typecodeAmiC.cpp
+    typedefAmiC.cpp
+    typeprefixAmiC.cpp
+
+  }
+
+  Template_Files {
+    *S_T.cpp
+  }
+}
+
+project(*Main): taox11_server, taox11_messaging {
+  exename = main
+  after += *DLL
+  libs += IDL_Test_DLL
+
+  Source_Files {
+    main.cpp
+  }
+
+  Header_Files {
+  }
+
+  Inline_Files {
+  }
+
+  Template_Files {
+  }
+}

@@ -1,0 +1,30 @@
+// -*- IDL -*-
+/**
+ * @file default_ort.pidl
+ * @author  Martin Corino
+ *
+ * @brief Pre-compiled IDL source for the default ORT
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+#ifndef TAOX11_DEFAULT_ORT_PIDL
+#define TAOX11_DEFAULT_ORT_PIDL
+
+#include "tao/ObjRefTemplate/ObjectReferenceTemplate_include.pidl"
+
+module PortableInterceptor_impl
+{
+  valuetype ObjectReferenceFactory
+    : PortableInterceptor::ObjectReferenceFactory
+  {
+  };
+
+  valuetype ObjectReferenceTemplate
+    : PortableInterceptor::ObjectReferenceTemplate
+  {
+  };
+};
+
+#endif /* TAO_DEFAULT_ORT_PIDL */

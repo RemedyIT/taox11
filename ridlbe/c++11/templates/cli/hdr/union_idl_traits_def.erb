@@ -1,0 +1,80 @@
+
+// generated from <%= ridl_template_path %>
+template <typename OStrm_>
+struct formatter< <%= scoped_cxxtype %>, OStrm_>
+{
+  inline OStrm_& operator ()(
+      OStrm_& os_,
+      <%= scoped_cxx_in_type %> val_)
+  {
+    os_ << "<%= formatted_cxxname %> {";
+% if switchtype_boolean?
+%   _defmem = default_member
+%   _ndefmem = non_default_members
+%   if (_defmem && _ndefmem.empty?) || (!_ndefmem.empty? && _ndefmem.first.labels.size>1)
+%     # in these cases there is only a single member mapping all labels
+%     _m = _defmem || _ndefmem.shift
+    os_ << "<%= _m.cxxname %>=" << IDL::traits< <%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ());
+%   else
+%     # here we have 1 or 2 nondef members with or without a default
+%     _m = _ndefmem.shift # get first non-default member
+%     _lbl = _m.labels.first
+    if (<%= _lbl == 'false' ? '!' : '' %>val_._d ())
+    {
+      os_ << "<%= _m.cxxname %>=" << IDL::traits< <%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ());
+    }
+%     if _defmem || !_ndefmem.empty?
+    else
+    {
+%     _m = _defmem || _ndefmem.shift # get other (non-)default member
+      os_ << "<%= _m.cxxname %>=" << IDL::traits< <%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ());
+    }
+%     end
+%   end
+% else
+    switch (val_._d ())
+    {
+%   members.each do |_m|
+%     unless _m.is_default?
+%       _m.nondefault_labels.each do |_lbl|
+      case <%= _lbl %>:
+%       end
+      {
+        os_ << "<%= _m.cxxname %>=" << IDL::traits< <%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ());
+      }
+      break;
+%     end
+%   end
+%   if needs_switch_default?
+      default:
+%     if has_default?
+%       _m_def = default_member
+      {
+        os_ << "<%= _m_def.cxxname %>=" << IDL::traits< <%= _m_def.scoped_cxxtype %>>::write (val_.<%= _m_def.cxxname %> ());
+      }
+%     end
+      break;
+%   end
+    }
+% end
+    os_ << '}';
+    return os_;
+  }
+};
+
+template <typename OStrm_, typename Fmt>
+inline OStrm_& operator <<(
+    OStrm_& os,
+    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> w)
+{
+  typedef IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> writer_t;
+  typedef typename std::conditional<
+                      std::is_same<
+                        typename writer_t::formatter_t,
+                        std::false_type>::value,
+                      formatter< <%= scoped_cxxtype %>, OStrm_>,
+                      typename writer_t::formatter_t>::type formatter_t;
+  return IDL::traits< <%= scoped_cxxtype %>>::write_on (
+      os, w.val_,
+      formatter_t ());
+}

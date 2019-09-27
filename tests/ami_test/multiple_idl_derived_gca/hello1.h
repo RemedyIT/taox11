@@ -1,0 +1,25 @@
+/**
+ * @file    hello1.h
+ * @author  Marijke Hengstmengel
+ *
+ * @brief   CORBA C++11 interface ami test
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+#ifndef TAOX11_HELLO1_H
+#define TAOX11_HELLO1_H
+
+#include "testlib/taox11_testlog.h"
+
+#include "hello1S.h"
+
+class A_i
+: public virtual CORBA::servant_traits< Test::A>::base_type
+{
+public:
+  virtual int32_t op_A (int32_t) override;
+  virtual int32_t op_B (int32_t) override;
+};
+
+#endif /* TAOX11_HELLO1_H */

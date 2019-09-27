@@ -1,0 +1,4 @@
+// -*- MPC -*-
+
+project : taox11_basedefaults, acelib, install, x11_logging {
+}

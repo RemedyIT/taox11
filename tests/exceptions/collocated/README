@@ -1,0 +1,12 @@
+Collocated exception test.
+
+This test specifically tests exception which should be treated as 'collocated'.
+
+The client invokes a method ('do_throw_struct') on object 'foo' in the server.
+The server implements two interfaces:
+one which the client uses ('foo') and one which the server itself uses ('bar').
+
+'bar' contains one method and one attribute. The method raises an exception;
+the getter and the setter of the attribute both raises exceptions as well. Since
+this method and attribute are invoked from within the server, the invocations and
+exceptions should be treated as 'collocated'.

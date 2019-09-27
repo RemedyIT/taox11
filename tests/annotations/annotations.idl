@@ -1,0 +1,48 @@
+/**
+ * @file    annotations.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+module test
+{
+  @unit("deg")
+  @range(min=0.0, max=360.0)
+  typedef float angle_t;
+
+  @unit("degC") @min(-60) @max(100) typedef short temperature_t;
+
+  struct structure {
+    @key unsigned long key;
+    angle_t degrees;
+    temperature_t celsius;
+  };
+
+  // some comment
+  //@range(min=-99,max=99)
+  typedef long some_value_t;
+
+  // some comment
+  typedef long distance_t; //@unit("meter") @optional(true)
+  // some comment
+
+  // some comment
+  typedef string name_t; //@required
+  // some comment
+
+  // some comment
+  typedef string uppercase_name_t; //@required @uppercase()
+  // some comment
+
+  struct position
+  {
+    long x;
+    long y;
+  }; //@definition(
+  //      unit="mm",
+  //      offset={10,10}
+  //   )
+  // some comment
+};

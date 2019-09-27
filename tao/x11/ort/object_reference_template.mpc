@@ -1,0 +1,57 @@
+// -*- MPC -*-
+
+project(*_idl) : ridl_core_defaults, install, pidl_install {
+  custom_only = 1
+  idlflags += -SS -Ssh -Sci -Gp -Gd -Sorb -Sal \
+              -Wb,export_macro=TAOX11_ObjRef_Template_Export \
+              -Wb,export_include=tao/x11/ort/taox11_ort_export.h \
+              -I $(TAO_ROOT) -o . --namespace TAOX11_NAMESPACE
+  IDL_Files {
+    gendir = .
+    idlflags += -Wb,include_guard=TAOX11_OBJREF_TEMPLATE_SAFE_INCLUDE \
+                -Wb,safe_include=tao/x11/ort/object_reference_template.h
+    $(TAO_ROOT)/tao/ObjRefTemplate/ObjectReferenceTemplate.pidl
+  }
+  IDL_Files {
+    gendir = .
+    idlflags += -Wb,unique_include=tao/x11/ort/object_reference_template.h
+    $(TAO_ROOT)/tao/ObjRefTemplate/ObjectReferenceTemplate_include.pidl
+  }
+  IDL_Files {
+    gendir = .
+    idlflags -= -Sa -St
+    default_ort.pidl
+  }
+
+  specific {
+    install_dir = tao/x11/ort
+  }
+}
+
+project(object_reference_template) : taox11_lib, taox11_portableserver, taox11_valuetype, tao_objreftemplate, install {
+  after       += *_idl
+  sharedname   = taox11_ort
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags += TAOX11_OBJREF_TEMPLATE_BUILD_DLL
+
+  Source_Files {
+    object_reference_template.cpp
+    object_reference_template_impl.cpp
+    default_ortC.cpp
+    ObjectReferenceTemplateC.cpp
+    ObjectReferenceTemplate_includeC.cpp
+  }
+
+  Header_Files {
+    object_reference_template.h
+    object_reference_template_impl.h
+    taox11_ort_export.h
+    default_ortC.h
+    ObjectReferenceTemplate_includeC.h
+    ObjectReferenceTemplateC.h
+  }
+
+  specific {
+    install_dir = tao/x11/ort
+  }
+}

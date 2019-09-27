@@ -1,0 +1,63 @@
+// -*- MPC -*-
+
+project(taox11_valuetype_idl) : ridl_core_defaults, install, pidl_install {
+  custom_only = 1
+  idlflags += -Gp -Gd -SS -Sorb -o . --namespace TAOX11_NAMESPACE \
+              -I $(TAO_ROOT) \
+              -Wb,export_macro=TAOX11_Valuetype_Export \
+              -Wb,export_include=tao/x11/valuetype/taox11_valuetype_export.h
+
+  IDL_Files {
+    idlflags -= -St
+    gendir = .
+    $(TAO_ROOT)/tao/Valuetype/StringValue.pidl
+  }
+}
+
+project(taox11_valuetype) : taox11_lib, taox11_anytypecode, valuetype {
+  after += taox11_valuetype_idl
+  sharedname = taox11_valuetype
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags += TAOX11_VALUETYPE_BUILD_DLL
+
+  Source_Files {
+    StringValueC.cpp
+  }
+
+  Source_Files {
+    value_base.cpp
+    abstract_base.cpp
+    value_factory_base.cpp
+    valuetype_proxies.cpp
+    abstractbase_proxy.cpp
+    valuefactory_manager.cpp
+    valuetype_adapter_impl.cpp
+  }
+
+  Header_Files {
+    StringValueC.h
+  }
+
+  Header_Files {
+    taox11_valuetype_export.h
+    value_base.h
+    abstract_base.h
+    value_factory_base.h
+    valuetype_proxies.h
+    abstractbase_proxy.h
+    valuefactory_manager.h
+    valuetype_adapter_impl.h
+    valuetype_traits_t.h
+    abstractbase_traits_t.h
+    value_box_t.h
+  }
+
+  Inline_Files {
+  }
+
+  Template_Files {
+  }
+
+  PIDL_Files {
+  }
+}

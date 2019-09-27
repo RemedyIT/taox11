@@ -1,0 +1,105 @@
+% unless interface.is_local?
+
+// generated from <%= ridl_template_path %>
+%     _args = in_arguments.dup
+void
+<%= interface.amic_scoped_cxxname %>::<%= sendc_prefix %><%= cxxname %> (
+    <%= interface.handler_scoped_cxx_in_type %> ami_handler<%= _args.empty? ? ')' : ',' %>
+%     while !_args.empty?
+%       _arg = _args.shift
+    <%= _arg.stub_arg_type %> <%= _arg.cxxname %><%= _args.empty? ? ')' : ',' %>
+%     end
+{
+%     if interface.is_abstract?
+  if (!this->_is_object ())
+    throw TAOX11_CORBA::NO_IMPLEMENT ();
+
+  TAOX11_CORBA::Object::_ref_type _objref = this->_to_object ();
+  TAO_CORBA::Object_ptr const _objptr = _objref->get_proxy ()->get ();
+
+%     end
+  try
+  {
+%     if interface.is_abstract?
+    if (!_objptr->is_evaluated ())
+    {
+      TAO_CORBA::Object::tao_object_initialize (_objptr);
+    }
+%     else
+    if (!this-><%= interface.proxy_cxxname.downcase %>_->is_evaluated ())
+    {
+      TAO_CORBA::Object::tao_object_initialize (this-><%= interface.proxy_cxxname.downcase %>_);
+    }
+%     end
+
+%     nr_arguments = in_arguments.size
+%     if nr_arguments > 0
+    TAOX11_NAMESPACE::Arg_Traits<void>::ret_val _taox11_retval;
+%       nr_arguments += 1
+%     end
+%     in_arguments.each do |_arg|
+%       case _arg.direction
+%       when :in
+    TAOX11_NAMESPACE::Arg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
+%       when :inout
+    TAOX11_NAMESPACE::Arg_Traits< <%= _arg.scoped_cxx_arg_type %>>::inout_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
+%       end
+%     end
+%     if nr_arguments > 0
+
+    TAO_TAO::Argument *_tao_args [] =
+    {
+%       _sep = ""
+%       if in_arguments.size > 0
+      std::addressof(_taox11_retval)
+%         _sep = ", "
+%       end
+%       in_arguments.each do |_arg|
+      <%= _sep %>std::addressof(_taox11_<%= _arg.cxxname %>)
+%         _sep = ", "
+%       end
+    };
+%     end
+
+    TAO_TAO::Asynch_Invocation_Adapter _tao_call (
+%     if interface.is_abstract?
+      _objptr,
+%     else
+      this-><%= interface.proxy_cxxname.downcase %>_,
+%     end
+%     if nr_arguments > 0
+      _tao_args,
+%     else
+      nullptr,
+%     end
+      <%= nr_arguments %>, // Number of arguments in the _tao_args array
+      "<%= name %>", // Operation to be called
+      <%= name.size %>, // Number of characters in the operation name
+%     if generate_thrupoa_collocation?
+      TAO_TAO::TAO_CO_NONE | TAO_TAO::TAO_CO_THRU_POA_STRATEGY
+%     else
+      TAO_TAO::TAO_CO_NONE
+%     end
+    );
+
+    <%= interface.handler_proxy_cxxname %>_var _tao_ami_handler;
+    if (ami_handler)
+    {
+      TAO_CORBA::Object_ptr _tao_ami_handler_obj = ami_handler->get_proxy ()->get ();
+      _tao_ami_handler =
+        <%= interface.handler_proxy_cxxname %>::_narrow (_tao_ami_handler_obj);
+
+      if (TAO_CORBA::is_nil (_tao_ami_handler))
+      {
+        TAOX11_LOG_ERROR ("<%= interface.scoped_cxxname %>::<%= sendc_prefix %><%= cxxname %> ERROR.");
+      }
+    }
+%#  else _tao_ami_handler is a nullptr
+
+    _tao_call.invoke (
+      _tao_ami_handler,
+      <%= interface.handler_proxy_cxxname %>::<%= cxxname %>_reply_stub);
+  }
+  catch_tao_system_ex(_ex)
+}
+% end # unless interface.is_local?

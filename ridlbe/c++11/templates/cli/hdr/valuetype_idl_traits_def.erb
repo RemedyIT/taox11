@@ -1,0 +1,49 @@
+
+// generated from <%= ridl_template_path %>
+template <typename OStrm_>
+struct formatter< <%= scoped_cxxtype %>, OStrm_>
+{
+  inline OStrm_& operator ()(
+      OStrm_& os_,
+% if members.any? {|_m| _m.is_public? } || attributes.size>0
+      <%= scoped_cxx_in_type %> val_)
+% else
+      <%= scoped_cxx_in_type %>)
+% end
+  {
+    os_ << "<%= formatted_cxxname %>"
+% _sep = nil
+% if members.any? {|_m| _m.is_public? } || attributes.size>0
+        << '{'
+%   members.select {|_m| _m.is_public? }.each do |_m|
+        << "<%= _sep %><%= _m.cxxname %>=" << IDL::traits< <%= _m.scoped_cxxtype %>>::write(val_-><%= _m.cxxname %> ())
+%     _sep = ',' unless _sep
+%   end
+%   attributes.each do |_a|
+        << "<%= _sep %><%= _a.cxxname %>=" << IDL::traits< <%= _a.scoped_cxxtype %>>::write(val_-><%= _a.cxxname %> ())
+%     _sep = ',' unless _sep
+%   end
+        << '}';
+% else
+        ;
+% end
+    return os_;
+  }
+};
+
+template <typename OStrm_, typename Fmt>
+inline OStrm_& operator <<(
+    OStrm_& os,
+    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> w)
+{
+  typedef IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> writer_t;
+  typedef typename std::conditional<
+                      std::is_same<
+                        typename writer_t::formatter_t,
+                        std::false_type>::value,
+                      formatter< <%= scoped_cxxtype %>, OStrm_>,
+                      typename writer_t::formatter_t>::type formatter_t;
+  return IDL::traits< <%= scoped_cxxtype %>>::write_on (
+      os, w.val_,
+      formatter_t ());
+}

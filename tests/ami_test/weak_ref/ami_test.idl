@@ -1,0 +1,19 @@
+/**
+ * @file    ami_test.idl
+ * @author  Marijke Hengstmengel
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+#pragma corba_ami "A::AMI_Test"
+
+
+module A
+  {
+    interface AMI_Test
+      {
+        long foo (in long in_l);
+        oneway void shutdown ();
+      };
+
+  };

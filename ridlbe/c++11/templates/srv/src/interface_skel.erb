@@ -1,0 +1,46 @@
+
+// generated from <%= ridl_template_path %>
+<%= skel_cxxname %>::<%= skel_cxxname %> (bool inherited)
+  : Servant ()
+% if is_derived?
+%   ancestors.find_all {|_a| !_a.is_abstract? }.each do |_ancestor|
+  , <%= _ancestor.scoped_skel_cxxtype %> (true)
+%   end
+% end
+{
+  if (!inherited)
+    {
+      this-><%= srvproxy_cxxname.downcase %>_ = new <%= scoped_srvproxy_cxxtype %> (this);
+    }
+}
+
+Servant_proxy_ptr <%= skel_cxxname %>::get_proxy () const
+{
+  return this-><%= srvproxy_cxxname.downcase %>_;
+}
+
+<%= skel_cxxname %>::~<%= skel_cxxname %> ()
+{
+  this-><%= srvproxy_cxxname.downcase %>_->_remove_ref ();
+}
+
+bool <%= skel_cxxname %>::_is_a (const std::string& logical_type_id)
+{
+  return (
+%  supported_interface_ids.each do |_repo_id|
+    logical_type_id == "<%= _repo_id %>" ||
+%  end
+    logical_type_id == "IDL:omg.org/CORBA/Object:1.0");
+}
+
+<%= scoped_cxx_return_type %> <%= skel_cxxname %>::_this ()
+{
+  return TAOX11_CORBA::make_reference< <%= scoped_cxxtype %>> (
+    this-><%= srvproxy_cxxname.downcase %>_->_this ());
+}
+
+const std::string &<%= skel_cxxname %>::_interface_repository_id () const
+{
+  static const std::string repo_id {"<%= repository_id %>"};
+  return repo_id;
+}

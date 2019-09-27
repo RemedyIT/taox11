@@ -1,0 +1,4 @@
+// -*- MPC -*-
+
+project : avoids_corba_e_compact, avoids_corba_e_micro {
+}

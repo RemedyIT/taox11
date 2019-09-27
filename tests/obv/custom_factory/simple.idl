@@ -1,0 +1,21 @@
+/**
+ * @file    simple.idl
+ * @author  Martin Corino
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+valuetype Bundle
+{
+  public long iInteger;
+  void Display ();
+};
+
+interface Simple
+{
+  void Display (in Bundle oBundle);
+
+  // Shutdown the remote ORB
+  oneway void shutdown ();
+};

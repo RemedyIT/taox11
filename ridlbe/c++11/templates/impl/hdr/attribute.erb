@@ -1,0 +1,12 @@
+
+// generated from <%= ridl_template_path %>
+virtual
+<%= implementation_return_type %>
+<%= cxxname %> () override;
+% unless is_readonly?
+
+virtual
+void
+<%= cxxname %> (
+    <%= implementation_in_type %> _v) override;
+% end

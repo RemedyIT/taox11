@@ -1,0 +1,23 @@
+// -*- MPC -*-
+
+project(*gen_iDL): ridl_ostream_defaults, taox11_dynamicany  {
+  IDL_Files {
+    dynvalue_test.idl
+    idlflags += -SS
+  }
+  custom_only = 1
+}
+
+project(*Test): taox11_server, taox11_dynamicany {
+  exename = dynvalue_test
+  after += *gen_iDL
+  Source_Files {
+    dynvalue_test.cpp
+    analyzer.cpp
+    dynvalue_testC.cpp
+  }
+  Header_Files {
+    analyzer.h
+    dynvalue_testC.h
+  }
+}

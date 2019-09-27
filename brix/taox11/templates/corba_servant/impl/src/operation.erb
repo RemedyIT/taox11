@@ -1,0 +1,34 @@
+
+// generated from {brix/taox11/}corba_servant/impl/src/operation.erb
+% if interface_wants_shutdown?(scoped_name) && cxxname == 'shutdown' && !has_return? && arguments.empty?
+void
+<%= interface.impl_cxxname %>::<%= cxxname %> ()
+{
+%   write_regen_section("#{interface.scoped_impl_cxxname}::#{cxxname}[Body]", indent: 1) do
+  this->orb_->shutdown ();
+%   end
+}
+% else
+%   if has_return?
+<%= implementation_return_type %>
+%   else
+void
+%   end
+<%= interface.impl_cxxname %>::<%= cxxname %> (<% if arguments.empty? %>)<% end %>
+%   _args = arguments.dup
+%   while !_args.empty?
+%     _arg = _args.shift
+    <%= _arg.implementation_arg_type %> <%= _arg.cxxname %><%= _args.empty? ? ')' : ',' %>
+%   end
+{
+%   write_regen_section("#{interface.scoped_impl_cxxname}::#{cxxname}[Body]", indent: 1) do
+  // Your code here
+%     arguments.each do |a|
+  X11_UNUSED_ARG (<%= a.cxxname %>);
+%     end
+%     if has_return?
+  return <%= default_value %>;
+%     end
+%   end
+}
+% end

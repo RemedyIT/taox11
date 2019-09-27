@@ -1,0 +1,35 @@
+// -*- MPC -*-
+
+project(*tao_any_gen_Idl): taoidldefaults, anytypecode {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*tao_any_gen_Server): taoserver, anytypecode {
+  after += *tao_any_gen_Idl
+  Source_Files {
+    hello.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+  IDL_Files {
+  }
+}
+
+project(*tao_any_gen_Client): taoclient, anytypecode {
+  after += *tao_any_gen_Idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+  IDL_Files {
+  }
+}
+

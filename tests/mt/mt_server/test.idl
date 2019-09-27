@@ -1,0 +1,15 @@
+/**
+ * @file    test.idl
+ * @author  Marcel Smit
+ *
+ * @brief   CORBA C++11 Multi Threaded test application
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+interface Simple_Server
+{
+  long test_method (in long x);
+
+  oneway void shutdown ();
+};

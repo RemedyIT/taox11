@@ -1,0 +1,41 @@
+// -*- MPC -*-
+project(*idl) : ridl_ostream_defaults {
+  idlflags += -GC
+  custom_only = 1
+
+  idlflags += -Wb,export_macro=AMI_TEST_Export \
+              -Wb,export_include=ami_test_export.h \
+              -o .
+
+  idlflags += -Gxh
+
+  IDL_Files {
+    ami_test.idl
+  }
+}
+
+project(*ami_test_lib): taox11_messaging, taox11_portableserver {
+  after += *idl
+  sharedname   = ami_test_lib
+  dynamicflags += AMI_TEST_BUILD_DLL
+
+  Source_Files {
+    ami_testC.cpp
+    ami_testS.cpp
+    ami_test_i.cpp
+    ami_testAmiC.cpp
+  }
+}
+project(*tst_server): taox11_messaging, taox11_server {
+  after += *idl *ami_test_lib
+  exename = collocation_test
+  libs  += ami_test_lib
+  Source_Files {
+    collocation.cpp
+    collocation_tester.cpp
+
+  }
+}
+
+
+

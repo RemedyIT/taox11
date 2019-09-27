@@ -1,0 +1,55 @@
+/**
+ * @file    test.idl
+ * @author  Martin Corino
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+exception BadInput
+{
+  string message;
+};
+
+abstract interface base
+{
+  typedef long my_base_type;
+
+  string base_op (in string inarg)
+    raises (BadInput);
+
+  attribute long rw_foo;
+  readonly attribute long r_foo;
+};
+
+interface foo : base
+{
+  string foo_op (in string inarg)
+    raises (BadInput);
+};
+
+interface passer
+{
+  void pass_ops (out base outarg);
+  void pass_state (out base outarg);
+  void pass_nil (out base outarg);
+  oneway void shutdown ();
+};
+
+valuetype BaseNode
+{
+  public BaseNode left;
+  public BaseNode right;
+};
+
+valuetype StringNode : BaseNode
+{
+  public string name;
+};
+
+valuetype TreeController supports base
+{
+  public BaseNode root;
+};
+
+

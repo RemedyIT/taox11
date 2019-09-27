@@ -1,0 +1,17 @@
+
+// generated from <%= ridl_template_path %>
+class <%= skel_export_macro %><%= srvproxy_cxxname %> final
+  : public TAOX11_NAMESPACE::Servant_proxy
+{
+public:
+  typedef <%= scoped_skel_cxxtype %> skel_type;
+  typedef skel_type *skel_ptr;
+
+  explicit <%= srvproxy_cxxname %> (<%= srvproxy_cxxname %>::skel_ptr skel);
+  virtual ~<%= srvproxy_cxxname %> () = default;
+
+  virtual void _dispatch (
+      TAO_ServerRequest & req,
+      TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall) override;
+
+  <%= scoped_proxy_cxxtype %> *_this ();

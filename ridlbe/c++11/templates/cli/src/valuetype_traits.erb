@@ -1,0 +1,9 @@
+
+// generated from <%= ridl_template_path %>
+template<>
+object_traits< <%= scoped_factory_cxx_type %>>::shared_ptr_type
+object_traits< <%= scoped_factory_cxx_type %>>::lock_shared (
+    <%= scoped_factory_cxx_type %>* p)
+{
+  return std::dynamic_pointer_cast< <%= scoped_factory_cxx_type %>> (p->_lock_shared ());
+}

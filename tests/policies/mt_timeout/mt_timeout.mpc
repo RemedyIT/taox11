@@ -1,0 +1,32 @@
+
+project(*idl): ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*server): taox11_messaging, taox11_server {
+  after += *idl
+  Source_Files {
+    sleep_service.cpp
+    server_task.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*client): taox11_messaging, taox11_server {
+  exename = client
+  after += *idl
+  Source_Files {
+    client_task.cpp
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}

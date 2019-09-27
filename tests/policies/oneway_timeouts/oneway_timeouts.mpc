@@ -1,0 +1,33 @@
+// -*- MPC -*-
+
+project(*idl): ridl_ostream_defaults {
+  idlflags += -Sp
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*server): taox11_server, taox11_messaging, strategies {
+  after += *idl
+  Source_Files {
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
+project(*client): taox11_server, taox11_messaging, strategies {
+  exename = client
+  after += *idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}
+
+

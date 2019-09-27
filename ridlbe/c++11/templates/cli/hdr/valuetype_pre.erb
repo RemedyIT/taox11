@@ -1,0 +1,86 @@
+
+// generated from <%= ridl_template_path %>
+class <%= stub_export_macro %><%= cxxname %>
+% if is_derived?
+%   _first = true
+%   bases.each do |_base|
+  <%= _first ? ':' : ',' %> public virtual <%= _base.scoped_cxxname %>
+%     _first = false
+%   end
+% else
+  : public virtual TAOX11_CORBA::ValueBase
+% end
+% abstract_interfaces.each do |_if|
+  , public virtual <%= _if.scoped_cxxname %>
+% end
+{
+public:
+  /// @name Member types
+  //@{
+  typedef <%= cxx_traits_type %>               _traits_type;
+  /// Strong reference type
+  typedef <%= cxx_traits_type %>::ref_type     _ref_type;
+% if has_factory?
+  typedef <%= cxx_traits_type %>::factory_type _factory_type;
+% end
+% unless is_abstract?
+  typedef <%= cxx_traits_type %>::obv_type     _obv_type;
+% end
+  //@}
+
+  static bool _obv_unmarshal (
+      TAO_InputCDR &strm,
+      _ref_type &vbox);
+
+% if generate_typecode_support? && !is_abstract?
+  virtual TAOX11_CORBA::typecode_reference _obv_typecode () const override;
+% end
+
+% if supports_abstract_interfaces?
+  // from CORBA::AbstractBase
+  virtual TAOX11_IDL::traits<TAOX11_CORBA::Object>::ref_type _to_object () override;
+  virtual TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type _to_value () override;
+
+% end
+protected:
+% if has_factory?
+  friend class <%= factory_cxxname %>;
+
+% end
+  typedef std::shared_ptr<<%= cxxname %>> _shared_ptr_type;
+
+  static const std::string __<%= cxxname.downcase %>_repository_id;
+
+% if is_truncatable?
+  <%= cxxname %> ();
+% else
+  <%= cxxname %> () = default;
+% end
+  ~<%= cxxname %> () = default;
+  <%= cxxname %> (const <%= cxxname %>&) = default;
+  <%= cxxname %> (<%= cxxname %>&&) = default;
+  <%= cxxname %>& operator= (const <%= cxxname %>&) = delete;
+  <%= cxxname %>& operator= (<%= cxxname %>&&) = delete;
+
+  virtual const std::string& _obv_repository_id () const override;
+  virtual void _obv_get_truncatable_repo_ids (std::vector<std::string const*>&) const override;
+
+% unless is_abstract?
+  virtual bool _obv_match_formal_type (ptrdiff_t ) const override;
+
+  virtual bool _obv_marshal_v (TAO_OutputCDR &) const override;
+  virtual bool _obv_unmarshal_v (TAO_InputCDR &) override;
+% end
+% if supports_abstract_interfaces?
+
+  template <typename T>
+  friend class TAOX11_CORBA::valuetype_reference;
+
+  // from CORBA::ValueBase
+  virtual TAOX11_IDL::traits<TAOX11_CORBA::AbstractBase>::ref_type _obv_abstract_base () override;
+
+  // from CORBA::AbstractBase
+  virtual bool _is_object () override;
+  TAOX11_CORBA::ValueBase::_shared_ptr_type _lock_shared ();
+% end
+public:

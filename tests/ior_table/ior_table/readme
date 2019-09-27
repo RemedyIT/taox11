@@ -1,0 +1,13 @@
+
+This test is there to test the methods on the IORTable (bind/rebind/unbind). 
+It'll also test whether the exceptions are thrown in a correct manner.
+
+There are two servants created. The ior of the first is binded to "Hello"; the ior
+of the second is rebinded to "Hello". Therefor the client should end up in the
+second servant. This is tested.
+
+The first ior is binded twice with the same name. This should throw an AlreadyBound
+exception
+
+Unbind will be invoked with a fake name and with "Hello". The first must throw a 
+NotFound exception, the latter should succeed. 

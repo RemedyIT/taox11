@@ -1,0 +1,48 @@
+
+void
+<%= scoped_cxxname %>::_info (std::ostream& user_exception_info) const
+{
+  TAOX11_IDL::traits< <%= scoped_cxxtype %>>::write_on(user_exception_info, *this);
+}
+
+void <%= scoped_cxxname %>::_raise () const
+{
+  throw *this;
+}
+
+% if generate_cdr_streaming?
+void <%= scoped_cxxname %>::_tao_encode (TAO_OutputCDR &cdr) const
+{
+  if (!(cdr << *this))
+  {
+    throw TAO_CORBA::MARSHAL ();
+  }
+}
+
+void <%= scoped_cxxname %>::_tao_decode (TAO_InputCDR &cdr)
+{
+  if (!(cdr >> *this))
+  {
+    throw TAO_CORBA::MARSHAL ();
+  }
+}
+% end
+% if generate_any_support?
+void <%= scoped_cxxname %>::_any_insert (TAOX11_CORBA::Any &any) const
+{
+  any <<= *this;
+}
+
+void <%= scoped_cxxname %>::_any_insert (TAOX11_CORBA::Any &any)
+{
+  any <<= *this;
+}
+% end
+
+TAOX11_NAMESPACE::CORBA::Exception *<%= scoped_cxxname %>::_tao_duplicate () const
+{
+  TAOX11_NAMESPACE::CORBA::Exception * result = new (std::nothrow) <%= cxxname %> (*this);
+  if (!result)
+    throw TAO_CORBA::NO_MEMORY ();
+  return result;
+}

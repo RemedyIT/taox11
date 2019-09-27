@@ -1,0 +1,15 @@
+.*(C|S|P)\.(h|inl|cpp)
+taox11\/tests\/.*\/tao\/.*
+.*\.conf
+ridl\/.*
+.*\.erb
+.*\.cmd
+.*\.(mpc|mpb|mwc|mpt|mpd)
+ChangeLogs/*
+README
+.*\.(html|htm)
+.*\.cdp
+.*\.aprc
+aprc
+.*schema\/xsc-banner\.(cpp|h)
+json.hpp

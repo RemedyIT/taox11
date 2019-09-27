@@ -1,0 +1,120 @@
+// -*- MPC -*-
+
+project(taox11_messaging_idl) : ridl_core_defaults, install, taox11_anytypecode, pidl_install {
+
+  custom_only = 1
+
+  idlflags += -I $(TAO_ROOT) \
+              -o . --namespace TAOX11_NAMESPACE
+
+  IDL_Files {
+    gendir = .
+    idlflags += -SS -Gp -Gd -Sorb -Sal \
+                -Wb,export_macro=TAOX11_MESSAGING_Export \
+                -Wb,export_include=tao/x11/messaging/taox11_messaging_export.h
+    idlflags -= -Sa -St
+    $(TAO_ROOT)/tao/Messaging/ExceptionHolder.pidl
+  }
+
+
+  IDL_Files {
+    gendir = .
+    idlflags += -SS -Gp -Gd -Sorb -Sal \
+                -Wb,export_macro=TAOX11_MESSAGING_Export \
+                -Wb,export_include=tao/x11/messaging/taox11_messaging_export.h
+    idlflags -= -Sa -St
+    $(TAO_ROOT)/tao/Messaging/Pollable.pidl
+  }
+
+  IDL_Files {
+    gendir = .
+    idlflags += -SS -Gp -Gd -Sorb -Sal \
+                -Wb,export_macro=TAOX11_MESSAGING_Export \
+                -Wb,export_include=tao/x11/messaging/taox11_messaging_export.h
+    idlflags -= -Sa -St
+    $(TAO_ROOT)/tao/Messaging/Messaging_Types.pidl
+  }
+
+  IDL_Files {
+    gendir = .
+    idlflags += -SS -Gp -Gd -Glons -Sorb -Sal \
+                -Wb,export_macro=TAOX11_MESSAGING_Export \
+                -Wb,export_include=tao/x11/messaging/taox11_messaging_export.h
+    idlflags -= -Sa -St
+    $(TAO_ROOT)/tao/Messaging/TAO_Ext.pidl
+    $(TAO_ROOT)/tao/Messaging/Messaging_RT_Policy.pidl
+    $(TAO_ROOT)/tao/Messaging/Messaging_SyncScope_Policy.pidl
+  }
+
+  IDL_Files {
+    gendir = .
+    idlflags += -SS -Gp -Gd -Sorb -Sal \
+                -Wb,export_macro=TAOX11_MESSAGING_Export \
+                -Wb,export_include=tao/x11/messaging/taox11_messaging_export.h \
+                -Wb,add_pre_include=tao/x11/messaging/transparent_undef.h
+    idlflags -= -Sa -St
+    $(TAO_ROOT)/tao/Messaging/Messaging_No_Impl.pidl
+  }
+
+  IDL_Files {
+    gendir = .
+    idlflags += -Gp -Gd -Sorb -Sal \
+                -Wb,export_macro=TAOX11_MESSAGING_Export \
+                -Wb,export_include=tao/x11/messaging/taox11_messaging_export.h
+    idlflags -= -Sa -St
+    $(TAO_ROOT)/tao/Messaging/Messaging.pidl
+  }
+
+  specific {
+    install_dir = tao/x11/messaging
+  }
+}
+
+project(taox11_messaging) : taox11_lib, install, taox11_portableserver, \
+                            taox11_valuetype, taox11_pi, messaging {
+
+  after       += taox11_messaging_idl
+  sharedname   = taox11_messaging
+  libout = $(TAOX11_ROOT)/../lib
+  dynamicflags += TAOX11_MESSAGING_BUILD_DLL
+
+  Source_Files {
+    messaging.cpp
+    messaging_policy_impl.cpp
+    exception_holder_i.cpp
+    ExceptionHolderC.cpp
+    PollableC.cpp
+    Messaging_TypesC.cpp
+    TAO_ExtC.cpp
+    Messaging_RT_PolicyC.cpp
+    Messaging_SyncScope_PolicyC.cpp
+    Messaging_No_ImplC.cpp
+    MessagingC.cpp
+    MessagingS.cpp
+  }
+
+  Header_Files {
+    messaging.h
+    exception_holder_i.h
+    ExceptionHolderC.h
+    ExceptionHolderS.h
+    MessagingC.h
+    Messaging_No_ImplC.h
+    Messaging_No_ImplS.h
+    Messaging_RT_PolicyC.h
+    Messaging_RT_PolicyS.h
+    MessagingS.h
+    Messaging_SyncScope_PolicyC.h
+    Messaging_SyncScope_PolicyS.h
+    Messaging_TypesC.h
+    Messaging_TypesS.h
+    PollableC.h
+    PollableS.h
+    TAO_ExtC.h
+    TAO_ExtS.h
+  }
+
+  specific {
+    install_dir = tao/x11/messaging
+  }
+}
