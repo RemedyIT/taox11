@@ -1,0 +1,12 @@
+---
+:follow_symlink: true
+:exts:
+- aprc
+:filenames:
+- aprc
+:add_files: true
+:fzzr_paths:
+- ./bin/fuzzers
+:fzzr_opts:
+  :check_whitespace: {}
+:fzzr_excludes: []
