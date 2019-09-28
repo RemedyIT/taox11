@@ -8,6 +8,6 @@
  * Chamber of commerce Rotterdam nr.276339, The Netherlands
  * -------------------------------------------------------------------*/
 #define TAOX11_MAJOR_VERSION 1
-#define TAOX11_MINOR_VERSION 7
-#define TAOX11_MICRO_VERSION 1
-#define TAOX11_VERSION "1.7.1"
+#define TAOX11_MINOR_VERSION 8
+#define TAOX11_MICRO_VERSION 0
+#define TAOX11_VERSION "1.8.0"
