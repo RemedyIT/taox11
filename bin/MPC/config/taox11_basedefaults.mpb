@@ -11,6 +11,6 @@ project {
     no_deprecated=0
   }
   verbatim(gnuace, extension, 1) {
-    include $(TAOX11_ROOT)/rules.taox11.GNU
+    include $(TAOX11_ROOT)/tao/rules.taox11.GNU
   }
 }
