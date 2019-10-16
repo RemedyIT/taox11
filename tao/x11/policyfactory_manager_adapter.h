@@ -5,7 +5,6 @@
  * @brief   PolicyFactory manager header
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_POLICYFACTORY_MANAGER_ADAPTER_INCLUDED

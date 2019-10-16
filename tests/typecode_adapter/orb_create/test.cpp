@@ -3,7 +3,6 @@
  * @author  Marijke Hengstmengel
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "tao/x11/typecodefactory/typecodefactory.h"
 #include "tao/x11/ifr_client/IFR_BaseC.h"

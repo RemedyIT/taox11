@@ -5,7 +5,6 @@
  * @brief   Assign values to specialization members in basic_type_traits_t.h.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/x11/dynamic_any/basic_type_traits.h"

@@ -5,7 +5,6 @@
  * @brief   Specializations of template traits in basic_type_traits_t.h.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_BASIC_TYPE_TRAITS_H
 #define TAOX11_BASIC_TYPE_TRAITS_H

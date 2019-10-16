@@ -3,7 +3,6 @@
  * @author  Marijke Hengstmengel
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #pragma corba_ami "Test::B"
 module Test

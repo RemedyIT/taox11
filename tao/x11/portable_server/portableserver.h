@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 core POA classes
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_PORTABLESERVER_H_INCLUDED

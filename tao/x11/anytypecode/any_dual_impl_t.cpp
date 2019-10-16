@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 Any_impl class for data with copying
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_ANY_DUAL_IMPL_T_CPP

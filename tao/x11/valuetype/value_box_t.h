@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 Valuebox template class
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_VALUETYPE_VALUE_BOX_T_H_INCLUDED

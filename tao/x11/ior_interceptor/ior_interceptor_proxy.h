@@ -5,7 +5,6 @@
  * @brief   TAO PI IORInterceptor proxy
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_PI_IORINTERCEPTOR_PROXY_H_INCLUDED
 #define TAOX11_PI_IORINTERCEPTOR_PROXY_H_INCLUDED

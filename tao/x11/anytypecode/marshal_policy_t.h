@@ -5,7 +5,6 @@
  * @brief   TAOX11 marshaling policy templates for
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_MARSHAL_POLICY_T_H

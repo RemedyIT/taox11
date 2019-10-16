@@ -5,7 +5,6 @@
  * @brief   Implementation file for test driver
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "driver.h"

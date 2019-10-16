@@ -5,7 +5,6 @@
  * @brief   header file for test DynValue and DynValueBox
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #if !defined (TEST_X11_DYNVALUE_H)

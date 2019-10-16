@@ -5,7 +5,6 @@
  * @brief   CORBA C++11x client ami test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "ace/Get_Opt.h"

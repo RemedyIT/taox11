@@ -5,7 +5,6 @@
  * @brief   CORBA basic ORB test.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "test_i.h"
 #include "testlib/taox11_testlog.h"

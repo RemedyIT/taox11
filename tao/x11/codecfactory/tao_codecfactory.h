@@ -5,7 +5,6 @@
  * @brief   TAO CodecFactory declarations
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_TAO_CODECFACTORY_H_INCLUDE
 #define TAOX11_TAO_CODECFACTORY_H_INCLUDE

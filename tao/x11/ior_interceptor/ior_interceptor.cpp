@@ -5,7 +5,6 @@
  * @brief   TAOX11 IOR Interceptor
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/x11/ior_interceptor/ior_interceptor_proxy_factory.h"

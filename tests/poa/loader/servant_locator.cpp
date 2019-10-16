@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 POA tests
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "servant_locator.h"
 #include "tao/x11/portable_server/portableserver_functions.h"

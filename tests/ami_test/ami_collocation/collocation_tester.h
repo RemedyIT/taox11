@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 AMI Collocation Test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_AMI_COLLOCATION_TEST_H
 #define TAOX11_AMI_COLLOCATION_TEST_H

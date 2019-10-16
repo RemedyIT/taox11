@@ -6,7 +6,6 @@
  *          interceptor.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef FOO_CLIENT_REQUEST_INTERCEPTOR_H
 #define FOO_CLIENT_REQUEST_INTERCEPTOR_H

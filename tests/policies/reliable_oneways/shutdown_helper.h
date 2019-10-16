@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 Policies test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef SHUTDOWN_HELPER_H
 #define SHUTDOWN_HELPER_H

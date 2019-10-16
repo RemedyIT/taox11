@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 ORB services test module
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "hello.h"
 #include "orbsvcs/orbsvcs/naming_server/CosNamingC.h"

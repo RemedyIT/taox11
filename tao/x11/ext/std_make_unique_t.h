@@ -5,7 +5,6 @@
  * @brief   Adds 'make_unique' functionality for MINGW32 and ANDROID builds
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_MAKE_UNIQUE_H_INCLUDED
 #define TAOX11_MAKE_UNIQUE_H_INCLUDED

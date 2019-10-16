@@ -5,7 +5,6 @@
  * @brief Adapter for ifr_client library
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_IFR_CLIENT_ADAPTER_INCLUDED

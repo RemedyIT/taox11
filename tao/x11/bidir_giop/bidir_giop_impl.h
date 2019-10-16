@@ -5,7 +5,6 @@
  * @brief   x11 CORBA BiDir GIOP Policy
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_BIDIR_GIOP_IMPL_H
 #define TAOX11_BIDIR_GIOP_IMPL_H

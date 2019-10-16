@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 Collocation Test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_DIAMOND_I_H
 #define TAOX11_DIAMOND_I_H

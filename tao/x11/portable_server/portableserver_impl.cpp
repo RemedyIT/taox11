@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 POA implementations
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "tao/x11/objproxy.h"
 #include "tao/x11/exception_macros.h"

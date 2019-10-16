@@ -5,7 +5,6 @@
  * @brief   test implementation
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "supports_test_impl.h"

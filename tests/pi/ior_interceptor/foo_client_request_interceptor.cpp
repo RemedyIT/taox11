@@ -6,7 +6,6 @@
  *          interceptor.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "foo_client_request_interceptor.h"
 #include "testC.h"

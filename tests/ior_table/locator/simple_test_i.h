@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 IORTable application
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef SIMPLE_TEST_I_H
 #define SIMPLE_TEST_I_H

@@ -5,7 +5,6 @@
  * @brief   Default implementation of the valuetype adapter
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/x11/valuetype_adapter.h"

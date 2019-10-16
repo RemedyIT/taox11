@@ -5,7 +5,6 @@
  * @brief   Test move between id, reference, and servants.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "testS.h"

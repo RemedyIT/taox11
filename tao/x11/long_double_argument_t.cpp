@@ -5,7 +5,6 @@
  * @brief   TAOX11 CORE
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  * -------------------------------------------------------------------*/
 #ifndef TAOX11_LONG_DOUBLE_ARGUMENT_T_CPP_INCLUDED
 #define TAOX11_LONG_DOUBLE_ARGUMENT_T_CPP_INCLUDED

@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 Multi Threaded test application
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_MT_CLIENT_TEST_I_H
 #define TAOX11_MT_CLIENT_TEST_I_H

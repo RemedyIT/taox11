@@ -5,7 +5,6 @@
  * @brief   TAOX11 logger stream buffer
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_LOGGER_LOGSTREAM_T_H

@@ -5,7 +5,6 @@
 # @brief   Generate a complete CORBA test project
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #--------------------------------------------------------------------
 require 'brix11/command'
 

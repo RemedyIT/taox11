@@ -5,7 +5,6 @@
  * @brief   Adds 'std::mutex' and 'std::recursive_mutex' for MingW platforms.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_STD_MUTEX_T_H_INCLUDED

@@ -5,7 +5,6 @@
  * @brief   Implementation of the anytypecode adapter
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/x11/anytypecode/any_util.h"

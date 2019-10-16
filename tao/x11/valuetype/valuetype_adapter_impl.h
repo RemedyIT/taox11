@@ -5,7 +5,6 @@
  * @brief   Concrete valuetype adapter
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_VALUETYPE_ADAPTER_IMPL_INCLUDED

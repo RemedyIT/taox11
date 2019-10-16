@@ -5,7 +5,6 @@
  * @brief Adapter for typecode creation
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_TYPECODE_FACTORY_ADAPTER_INCLUDED

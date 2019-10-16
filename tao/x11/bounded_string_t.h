@@ -6,7 +6,6 @@
  * @brief template derivative of std::basic_string for bounded strings
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #if !defined (__IDL_BOUNDED_STRING_T_H_INCLUDED__)

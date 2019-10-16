@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 valuetype factory application
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAO_FACTORY_FACTORY_C_IMPL_H

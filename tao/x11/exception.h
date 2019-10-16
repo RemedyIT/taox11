@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 core exception classes
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_EXCEPTION_H_INCLUDED

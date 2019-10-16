@@ -5,7 +5,6 @@
  * @brief   test servant implementations
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_TEST_I_H

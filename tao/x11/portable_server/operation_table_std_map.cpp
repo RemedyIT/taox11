@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 POA CORE
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "tao/x11/portable_server/operation_table_std_map.h"
 #include "tao/Timeprobe.h"

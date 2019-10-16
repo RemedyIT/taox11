@@ -6,7 +6,6 @@
  *          exception test server side ORB initializer.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAO_SERVER_ORB_INITIALIZER_H
 #define TAO_SERVER_ORB_INITIALIZER_H

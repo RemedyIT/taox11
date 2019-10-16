@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 Application test data and utils
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 static const std::string stringArr[] = { "Abcdef", "Def", "0123456789", "4", "5", "6", "7", "8" };

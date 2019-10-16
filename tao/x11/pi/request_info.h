@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 PI RequestInfo implementation
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_PI_REQUESTINFO_H_INCLUDED
 #define TAOX11_PI_REQUESTINFO_H_INCLUDED

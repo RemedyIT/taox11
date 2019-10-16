@@ -5,7 +5,6 @@
  * @brief   Placeholder for all ORB specific constants.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_ORB_CONSTANTS_H_INCLUDED
 #define TAOX11_ORB_CONSTANTS_H_INCLUDED

@@ -5,7 +5,6 @@
  * @brief   Adapter Activator callback class
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_ADAPTER_ACTIVATOR_CALLBACK_H

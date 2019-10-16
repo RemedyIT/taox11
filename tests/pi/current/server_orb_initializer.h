@@ -5,7 +5,6 @@
  * @brief   PICurrentTest server-side ORB initializer
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef SERVER_ORB_INITIALIZER_H

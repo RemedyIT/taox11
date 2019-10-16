@@ -5,7 +5,6 @@
  * @brief   TAOX11 default ORT implementation
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 // TAO dependencies
 #include "tao/x11/objproxy.h"

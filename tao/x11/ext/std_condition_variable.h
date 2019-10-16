@@ -5,7 +5,6 @@
  * @brief   Adds 'std::condition_variable' for MingW platforms.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_STD_CONDITION_VAR_T_H_INCLUDED

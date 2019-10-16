@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 client application
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "client_orb_initializer.h"

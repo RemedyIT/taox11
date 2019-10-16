@@ -5,7 +5,6 @@
  * @brief   IORInterceptor_proxy factory adapter
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/x11/pi/ior_interceptor_proxy_adapter.h"

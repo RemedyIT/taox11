@@ -5,7 +5,6 @@
  * @brief   TAOX11 argument traits for client stubs
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "tao/x11/stub_arg_traits.h"
 #include "tao/x11/objproxy.h"

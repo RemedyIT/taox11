@@ -6,7 +6,6 @@
 # @brief   Checks whether a file ends with a newline
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 # -------------------------------------------------------------------
 
 module Fuzzers

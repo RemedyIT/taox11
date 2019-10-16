@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 typecodefactory library
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_TYPECODEFACTORY_IMPL_H
 #define TAOX11_TYPECODEFACTORY_IMPL_H

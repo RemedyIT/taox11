@@ -5,7 +5,6 @@
 # @brief   Support for backend plugins aka Facets
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #--------------------------------------------------------------------
 require 'ridlbe/base/config/core'
 require 'ridlbe/base/config/concern'

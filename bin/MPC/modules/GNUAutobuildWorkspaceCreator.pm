@@ -6,7 +6,6 @@ package GNUAutobuildWorkspaceCreator;
 # @brief  TAOX11 AutobuildWorkspaceCreator
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 # -------------------------------------------------------------------
 
 use strict;

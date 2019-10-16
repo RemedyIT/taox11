@@ -5,7 +5,6 @@
  * @brief   ServerRequestInterceptor_proxy factory adapter
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/x11/pi/server_request_interceptor_proxy_adapter.h"

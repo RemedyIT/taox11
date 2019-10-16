@@ -3,7 +3,6 @@
  * @author  Marijke Hengstmengel
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 /**
  * Test whether list_initial_services returns an ObjectURL or an ObjectId as

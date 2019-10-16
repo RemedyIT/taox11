@@ -5,7 +5,6 @@
  * @brief   valuetype implementations
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef __OBV_CUSTOM_FACTORY_BUNDLE_H_INCLUDED__

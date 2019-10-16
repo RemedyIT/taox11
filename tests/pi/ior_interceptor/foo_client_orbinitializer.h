@@ -6,7 +6,6 @@
  *          initializer.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef FOO_CLIENT_ORB_INITIALIZER_H
 #define FOO_CLIENT_ORB_INITIALIZER_H

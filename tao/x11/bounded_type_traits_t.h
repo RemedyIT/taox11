@@ -5,7 +5,6 @@
  * @brief   Helper traits templates for IDL typedefs of possibly bounded types (string, wstring or sequence)
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_BOUNDED_TYPE_TRAITS_T_H_INCLUDED
 #define TAOX11_BOUNDED_TYPE_TRAITS_T_H_INCLUDED

@@ -5,7 +5,6 @@
  * @brief   helper macros to catch and propagate exceptions
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_EXCEPTION_MACROS_H_INCLUDED

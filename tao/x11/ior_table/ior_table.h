@@ -5,7 +5,6 @@
  * @brief   Loader of the IORTable library
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_IOR_TABLE_H_INCLUDE
 #define TAOX11_IOR_TABLE_H_INCLUDE

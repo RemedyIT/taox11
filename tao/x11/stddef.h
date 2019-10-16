@@ -5,7 +5,6 @@
  * @brief   TAOX11 standard includes
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_STDDEF_H_INCLUDED

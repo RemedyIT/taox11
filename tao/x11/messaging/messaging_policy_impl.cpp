@@ -5,7 +5,6 @@
  * @brief   x11 CORBA Messaging RT Policy
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "tao/x11/messaging/messaging_policy_impl.h"
 

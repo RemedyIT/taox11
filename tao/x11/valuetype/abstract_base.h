@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 Abstract interface base class
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_VALUETYPE_ABSTRACT_BASE_H_INCLUDED
