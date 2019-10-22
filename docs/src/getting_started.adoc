@@ -51,7 +51,7 @@ Have a look at the
 CORBA Programming with TAOX11
 and Comparing IDL to
 {cpp} with IDL to {cxx11} tutorials on the
-https://taox11.remedy.nl/documents/presentations.html[TAOX11] website for
+https://www.taox11.org/documents/presentations.html[TAOX11] website for
 more details.
 
 Simplified memory management::
@@ -67,7 +67,7 @@ any need for developer controlled reference counting, `new` or `delete`.
 Other ('old style') pointer types have been replaced by implementations
 relying on the new {cxx11} _move semantics_ completely foregoing reference
 counting requirements. +
- As you can see in the https://taox11.remedy.nl/documents/presentations.html[IDL2C++11
+ As you can see in the https://www.taox11.org/documents/presentations.html[IDL2C++11
 tutorial], memory management has become much easier and far less error
 prone.
 
@@ -86,8 +86,8 @@ curves but also ultimately leading to software with significantly fewer
 _source lines of code_ (SLOCs) or in other words; cheaper and better
 maintainable software. +
 
-On the Remedy IT https://taox11.remedy.nl/documents/presentations.html[TAOX11]
-product website you can find the
+On the Remedy IT https://www.taox11.org/documents/presentations.html[TAOX11]
+website you can find the
 Programming with IDL to {cxx11} tutorial and the
 Comparing IDL to {cpp} with IDL to
 {cxx11} tutorial.
@@ -357,10 +357,10 @@ package, please follow the directions in the PRF.
 
 A basic tutorial about the IDL to {cxx11} language mapping is available at
 the Remedy IT
-https://taox11.remedy.nl/documents/presentations.html[TAOX11 product website]. There
+https://www.taox11.org/documents/presentations.html[TAOX11 website]. There
 you can also find a comparison between the IDL to C++ and IDL to {cxx11}
 language mapping. +
  +
  Remedy IT offers a
-https://taox11.remedy.nl/services/training.html[CORBA
+https://www.taox11.org/services/training.html[CORBA
 Programming with {cxx11}] course.

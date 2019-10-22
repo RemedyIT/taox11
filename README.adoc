@@ -1,7 +1,7 @@
 = TAOX11
 
-https://taox11.remedy.nl[TAOX11] is the CORBA implementation supporting the
-https://www.omg.org/spec/CPP11[IDL to C++11] Language Mapping created by 
+https://www.taox11.orgl[TAOX11] is the CORBA implementation supporting the
+https://www.omg.org/spec/CPP11[IDL to C++11] Language Mapping created by
 https://www.remedy.nl[Remedy IT]. TAOX11 uses the core of
 https://www.remedy.nl/opensource/tao.html[TAO] to provide you as
 user with a large set of features and capabilities. TAO is a well
