@@ -1,3 +1,5 @@
+image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboard, link=http://scoreboard.taox11.org]
+
 = TAOX11
 
 https://www.taox11.org[TAOX11] is the CORBA implementation supporting the
