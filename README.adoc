@@ -19,8 +19,8 @@ repository. The brix11 tooling will clone this repository as part of the bootstr
 
 TAOX11 has the following major features:
 
-. Compliant with the IDL to C++11 v1.3 language mapping
-. CORBA v3.3 compliant
+. Compliant with the https://www.omg.org/spec/CPP11/1.3[IDL to C++11 v1.3] language mapping
+. https://www.omg.org/spec/CORBA/3.3[CORBA v3.3] compliant
 . Full support of the IDL type system (basic types, constant, enum,
 string, wide string, sequence, array, struct, union, typedef, exception)
 . Full support for local and remote CORBA interfaces
