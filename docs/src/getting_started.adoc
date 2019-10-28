@@ -340,16 +340,16 @@ background information about the GCC options used.
 
 == Support
 
-TAOX11 and BRIX11 are supported by Remedy IT. Please read the
+TAOX11 and BRIX11 are supported by the user community and Remedy IT. Please read the
 <<taox11_faq.adoc#,FAQ-section>> first before asking a
-question. +
- If your problem was not listed in the FAQ, you can submit your issue
-online through our https://swsupport.remedy.nl[Software Support Portal]
-or by sending an email with a detailed description using our
-PROBLEM-REPORT-FORM to
-mailto:taox11support@remedy.nl[taox11support@remedy.nl]. The
-PROBLEM-REPORT-FORM is available in the root directory of the TAOX11
-package, please follow the directions in the PRF.
+question.
+
+Open source best effort support for TAOX11 is provided through
+https://github.com/RemedyIT/taox11/issues[github issues].
+
+Commercial support services are provided by Remedy IT. For more
+details about the services Remedy IT provides check
+the https://www.taox11.org/services/overview.html[TAOX11 website].
 
 === Training material
 
