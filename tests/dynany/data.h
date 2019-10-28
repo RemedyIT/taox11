@@ -5,7 +5,6 @@
  * @brief   Header file for the class containing test constants
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "tao/x11/basic_traits.h"
 #include "tao/x11/orb.h"

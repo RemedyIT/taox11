@@ -6,7 +6,6 @@ package IDLHelper;
 # @brief  TAOX11 IDLHelper
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 # ------------------------------------------------------------------
 use strict;
 use File::Spec;

@@ -5,7 +5,6 @@
  * @brief Adapter for dynamic_interface library
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_DYNAMIC_ADAPTER_INCLUDED

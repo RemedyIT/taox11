@@ -5,7 +5,6 @@
  * @brief   TAOX11 argument traits for client stubs
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_STUB_ARG_TRAITS_H

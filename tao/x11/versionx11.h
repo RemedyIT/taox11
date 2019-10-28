@@ -5,7 +5,6 @@
  * @brief   TAOX11 Version information file
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  * -------------------------------------------------------------------*/
 #define TAOX11_MAJOR_VERSION 1
 #define TAOX11_MINOR_VERSION 8

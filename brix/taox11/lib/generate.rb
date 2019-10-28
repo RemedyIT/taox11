@@ -5,7 +5,6 @@
 # @brief   BRIX11 Output generator classes
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #--------------------------------------------------------------------
 require 'erb'
 require 'delegate'

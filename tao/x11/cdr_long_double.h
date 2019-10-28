@@ -5,7 +5,6 @@
  * @brief   long double stream ops
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_CDR_LONG_DOUBLE_H_INCLUDED

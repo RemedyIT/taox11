@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 Test Logging module
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_TESTLOG_H
 #define TAOX11_TESTLOG_H

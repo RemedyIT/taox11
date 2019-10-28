@@ -5,7 +5,6 @@
  * @brief   Export file for the TAOX11 IORInterceptor library
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_IOR_INTERCEPTOR_EXPORT_H
 #define TAOX11_IOR_INTERCEPTOR_EXPORT_H

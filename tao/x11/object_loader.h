@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 ORB core
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_OBJECT_LOADER_H
 #define TAOX11_OBJECT_LOADER_H

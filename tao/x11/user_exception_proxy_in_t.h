@@ -5,7 +5,6 @@
  * @brief   TAOX11 wrapper for TAO user exceptions
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_USER_EXCEPTION_PROXY_IN_T_H

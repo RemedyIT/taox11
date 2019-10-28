@@ -5,7 +5,6 @@
  * @brief   PICurrentTest server-side ClientRequestInterceptor
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef CLIENT_REQUEST_INTERCEPTOR2_H
 #define CLIENT_REQUEST_INTERCEPTOR2_H

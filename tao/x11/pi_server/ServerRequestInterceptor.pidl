@@ -8,7 +8,6 @@
  * components in the ORB.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef _TAOX11_SERVER_REQUEST_INTERCEPTOR_IDL_

@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 ExceptionHolder implementation
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_MESSAGING_EXCEPTION_HOLDER_I_H

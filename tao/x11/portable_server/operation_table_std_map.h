@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 core Object classes
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_OPERATION_TABLE_STD_HASH_H_INCLUDED

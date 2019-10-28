@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 corba sequence test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 static const char CharArr[] = {'a', 'b', 'c', 'd'};
 std::vector<char> CharVec (CharArr, CharArr + sizeof(CharArr) / sizeof(CharArr[0]) );

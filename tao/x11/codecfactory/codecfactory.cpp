@@ -5,7 +5,6 @@
  * @brief   Loader of the TAOX11 CodecFactory library
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/CodecFactory/CodecFactory.h"

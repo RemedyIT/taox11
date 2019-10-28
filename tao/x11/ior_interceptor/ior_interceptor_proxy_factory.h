@@ -5,7 +5,6 @@
  * @brief   IORInterceptor_proxy factory implementation
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_IORINTERCEPTOR_PROXY_FACTORY_INCLUDED
 #define TAOX11_IORINTERCEPTOR_PROXY_FACTORY_INCLUDED

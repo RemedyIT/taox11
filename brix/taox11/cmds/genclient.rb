@@ -5,7 +5,6 @@
 # @brief   Generate C++ source code for CORBA client main.
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #--------------------------------------------------------------------
 require 'brix11/command'
 

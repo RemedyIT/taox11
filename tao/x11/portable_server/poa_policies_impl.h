@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 POA Policy implementation classes
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_POA_POLICIES_IMPL_H_INCLUDED

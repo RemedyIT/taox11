@@ -5,7 +5,6 @@
  * @brief   Any insertion adapter base class
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_ANYINSERT_ADAPTER_INCLUDED

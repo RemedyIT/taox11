@@ -5,7 +5,6 @@
  * @brief   taox11 CORBA core servant classes
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_SERVANTBASE_H_INCLUDED

@@ -6,7 +6,6 @@
  * @brief templated for IDL fixed type
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #if !defined (__IDL_FIXED_T_H_INCLUDED__)

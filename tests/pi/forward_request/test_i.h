@@ -6,7 +6,6 @@
  *          PortableInterceptor::ForwardRequest test.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TEST_I_H
 #define TEST_I_H

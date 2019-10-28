@@ -5,7 +5,6 @@
 # @brief   Generate C++ source+header for CORBA servant implementation.
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #--------------------------------------------------------------------
 require 'brix11/command'
 

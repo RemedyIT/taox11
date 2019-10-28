@@ -5,7 +5,6 @@
  * @brief   Adds 'std::strtoXX' and 'std::wcstoXX' functionality for ANDROID builds
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_STD_STR_TO_H_INCLUDED
 #define TAOX11_STD_STR_TO_H_INCLUDED

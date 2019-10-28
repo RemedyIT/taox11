@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 core ORB class
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 // TAO namespace dependencies
 #include "tao/x11/objproxy.h"

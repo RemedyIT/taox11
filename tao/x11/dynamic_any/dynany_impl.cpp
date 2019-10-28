@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 TAOX11 wrapper for the TAO DynamicAny::DynAny implementation
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/CDR.h"

@@ -5,7 +5,6 @@
  * @brief   TAOX11 CORBA Any implementation base class
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/x11/anytypecode/typecode_impl.h"

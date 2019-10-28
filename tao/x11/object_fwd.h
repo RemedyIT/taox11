@@ -5,7 +5,6 @@
  * @brief   TAOX11 forward decls CORBA core Object classes
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_OBJECT_FWD_H_INCLUDED

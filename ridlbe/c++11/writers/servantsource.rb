@@ -5,7 +5,6 @@
 # @brief   walker class for servant source
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #--------------------------------------------------------------------
 require 'ridlbe/c++11/writerbase'
 

@@ -5,7 +5,6 @@
  * @brief   Header file for the DynAny basic test manager
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #if !defined (X11_TEST_WRAPPER_H)
 #define X11_TEST_WRAPPER_H

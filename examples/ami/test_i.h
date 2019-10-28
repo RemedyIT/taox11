@@ -5,7 +5,6 @@
  * @brief   CORBA C++11x interface ami test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_TEST_I_H
 #define TAOX11_TEST_I_H

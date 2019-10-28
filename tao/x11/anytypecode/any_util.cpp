@@ -5,7 +5,6 @@
  * @brief   TAOX11 CORBA Any utility methods
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/CDR.h"

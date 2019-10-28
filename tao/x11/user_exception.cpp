@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 User exception base class
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/x11/user_exception.h"

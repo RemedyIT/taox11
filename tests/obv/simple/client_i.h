@@ -5,7 +5,6 @@
  * @brief   test servant implementation
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef __OBV_CLIENT_I_H_INCLUDED__

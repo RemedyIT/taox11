@@ -5,7 +5,6 @@
 # @brief   base class for visitors
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #--------------------------------------------------------------------
 require 'ridlbe/base/visitorbase'
 

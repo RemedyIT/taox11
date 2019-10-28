@@ -5,7 +5,6 @@
  * @brief   TAOX11 IOR Interceptor
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_IOR_INTERCEPTOR_H
 #define TAOX11_IOR_INTERCEPTOR_H

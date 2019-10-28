@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 POA tests
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef SERVER_MANAGER_H
 #define SERVER_MANAGER_H

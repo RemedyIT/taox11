@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 Policies test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef ONEWAY_RECEIVER_H
 #define ONEWAY_RECEIVER_H

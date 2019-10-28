@@ -5,7 +5,6 @@
  * @brief   TAOX11 CORBA Any implementation class for
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/AnyTypeCode/Marshal.h"

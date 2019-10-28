@@ -6,7 +6,6 @@
 # @brief  Check for the use of rand and rand_r in the tests.
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 # -------------------------------------------------------------------
 module Fuzzers
   class TAOX11RandChecker

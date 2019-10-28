@@ -5,7 +5,6 @@
  * @brief   TAOX11 upcall command base class
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/x11/portable_server/upcall_command.h"

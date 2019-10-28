@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 ValueType TAO proxy classes
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_VALUETYPE_VALUETYPE_PROXIES_H_INCLUDED

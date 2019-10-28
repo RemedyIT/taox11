@@ -4,7 +4,6 @@
 # @brief   CORBA test runnner script
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #---------------------------------------------------------------------
 eval '(exit $?0)' && eval 'exec perl -S $0 ${1+"$@"}'
      & eval 'exec perl -S $0 $argv:q'

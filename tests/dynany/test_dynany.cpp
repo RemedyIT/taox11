@@ -5,7 +5,6 @@
  * @brief   Implementation of the basic test for simple DynAnys
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/x11/anytypecode/any.h"

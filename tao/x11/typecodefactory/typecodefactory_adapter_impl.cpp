@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 typecodefactory library
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The  Netherlands
  */
 
 //This file is needed to link and load  the TAO TypeCodeFactory library

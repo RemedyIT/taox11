@@ -6,7 +6,6 @@
  * @brief template derivative of std::vector for bounded sequences
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #if !defined (__IDL__BOUNDED_VECTOR_T_H_INCLUDED__)

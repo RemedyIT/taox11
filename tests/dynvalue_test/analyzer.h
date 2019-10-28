@@ -6,7 +6,6 @@
  *          with TAOX11_TEST_LOG
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef DYNVALUE_T_INCLUDE_ANALYZER_H

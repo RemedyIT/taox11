@@ -5,7 +5,6 @@
  * @brief   Loader of the TAOX11 TypeCodeFactory library
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_TYPECODEFACTORY_LOADER_H_INCLUDE
 #define TAOX11_TYPECODEFACTORY_LOADER_H_INCLUDE

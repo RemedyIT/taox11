@@ -51,7 +51,7 @@ Have a look at the
 CORBA Programming with TAOX11
 and Comparing IDL to
 {cpp} with IDL to {cxx11} tutorials on the
-https://taox11.remedy.nl/documents/presentations.html[TAOX11] website for
+https://www.taox11.org/documents/presentations.html[TAOX11] website for
 more details.
 
 Simplified memory management::
@@ -67,7 +67,7 @@ any need for developer controlled reference counting, `new` or `delete`.
 Other ('old style') pointer types have been replaced by implementations
 relying on the new {cxx11} _move semantics_ completely foregoing reference
 counting requirements. +
- As you can see in the https://taox11.remedy.nl/documents/presentations.html[IDL2C++11
+ As you can see in the https://www.taox11.org/documents/presentations.html[IDL2C++11
 tutorial], memory management has become much easier and far less error
 prone.
 
@@ -86,8 +86,8 @@ curves but also ultimately leading to software with significantly fewer
 _source lines of code_ (SLOCs) or in other words; cheaper and better
 maintainable software. +
 
-On the Remedy IT https://taox11.remedy.nl/documents/presentations.html[TAOX11]
-product website you can find the
+On the Remedy IT https://www.taox11.org/documents/presentations.html[TAOX11]
+website you can find the
 Programming with IDL to {cxx11} tutorial and the
 Comparing IDL to {cpp} with IDL to
 {cxx11} tutorial.
@@ -201,8 +201,6 @@ setup +
 |ACE | The ACE+TAO+MPC source code which is used by TAOX11
 |bin | Contains the <<ridlc#,ridlc>> and <<BRIX11,brix11>> start scripts
 |brix11 | The <<BRIX11,brix11>> toolset
-|ciaox11 | The headers, templates, libraries, tests and examples for the CIAOX11 LwCCM framework
-|dancex11 | The DnCX11 deployment tooling runtime components
 |docs | Common documentation resources
 |etc | Miscellaneous configuration files
 |lib | Precompiled libraries
@@ -342,25 +340,25 @@ background information about the GCC options used.
 
 == Support
 
-TAOX11 and BRIX11 are supported by Remedy IT. Please read the
+TAOX11 and BRIX11 are supported by the user community and Remedy IT. Please read the
 <<taox11_faq.adoc#,FAQ-section>> first before asking a
-question. +
- If your problem was not listed in the FAQ, you can submit your issue
-online through our https://swsupport.remedy.nl[Software Support Portal]
-or by sending an email with a detailed description using our
-PROBLEM-REPORT-FORM to
-mailto:taox11support@remedy.nl[taox11support@remedy.nl]. The
-PROBLEM-REPORT-FORM is available in the root directory of the TAOX11
-package, please follow the directions in the PRF.
+question.
+
+Open source best effort support for TAOX11 is provided through
+https://github.com/RemedyIT/taox11/issues[github issues].
+
+Commercial support services are provided by Remedy IT. For more
+details about the services Remedy IT provides check
+the https://www.taox11.org/services/overview.html[TAOX11 website].
 
 === Training material
 
 A basic tutorial about the IDL to {cxx11} language mapping is available at
 the Remedy IT
-https://taox11.remedy.nl/documents/presentations.html[TAOX11 product website]. There
+https://www.taox11.org/documents/presentations.html[TAOX11 website]. There
 you can also find a comparison between the IDL to C++ and IDL to {cxx11}
 language mapping. +
  +
  Remedy IT offers a
-https://taox11.remedy.nl/services/training.html[CORBA
+https://www.taox11.org/services/training.html[CORBA
 Programming with {cxx11}] course.

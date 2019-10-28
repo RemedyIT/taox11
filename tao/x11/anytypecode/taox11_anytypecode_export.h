@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 TypeCode class
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_ANYTYPECODE_EXPORT_H
 #define TAOX11_ANYTYPECODE_EXPORT_H

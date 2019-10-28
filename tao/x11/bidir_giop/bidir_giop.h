@@ -5,7 +5,6 @@
  * @brief   Loader of the BiDIR library
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_BIDIR_GIOP_H
 #define TAOX11_BIDIR_GIOP_H

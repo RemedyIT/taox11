@@ -4,7 +4,6 @@
 // Author: Mark Drijver
 //
 // Copyright (c) Remedy IT Expertise BV
-// Chamber of commerce Rotterdam nr.276339, The Netherlands
 //--------------------------------------------------------------------
 
 project(*idl): ridl_ostream_defaults, taox11_valuetype {

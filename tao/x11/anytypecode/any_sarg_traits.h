@@ -5,7 +5,6 @@
  * @brief   x11 skeleton argument traits template
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_ANYTYPECODE_ANY_SARG_TRAITS_H

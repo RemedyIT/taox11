@@ -5,7 +5,6 @@
  * @brief   Export file for the TAOX11 PI_Server library
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_PI_SERVER_EXPORT_H
 #define TAOX11_PI_SERVER_EXPORT_H

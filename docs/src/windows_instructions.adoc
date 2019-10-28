@@ -57,8 +57,7 @@ especially since the required tools are a carefully selected subset of a
 the full MinGW toolset (we do not use the compiler toolchain of
 the MinGW project itself, nor does it use the MSYS environment), Remedy
 IT has prepared a pre-selected package of these tools and made it
-available for download through their open source portal website
-https://osportal.remedy.nl[OSPortal].
+available for download through their website.
 
 Follow these steps to install the build tools:
 

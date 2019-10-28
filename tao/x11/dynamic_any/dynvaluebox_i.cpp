@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 TAOX11 DynamicAny::DynValueBox implementation
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "tao/Valuetype/ValueBase.h"
 #include "tao/AnyTypeCode/Marshal.h"

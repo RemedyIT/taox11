@@ -5,7 +5,6 @@
  * @brief   IORInterceptor_proxy factory implementation
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 // pull in TAO dependencies first

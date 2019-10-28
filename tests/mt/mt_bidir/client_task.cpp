@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 Multi Threaded test application
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "client_task.h"
 

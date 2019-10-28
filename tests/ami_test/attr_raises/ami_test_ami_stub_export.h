@@ -5,7 +5,6 @@
  * @brief  CORBA C++11 ami test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef __RIDL_AMI_TEST_AMI_STUB_EXPORT_H_EXPORT_INCLUDED__
 #define __RIDL_AMI_TEST_AMI_STUB_EXPORT_H_EXPORT_INCLUDED__

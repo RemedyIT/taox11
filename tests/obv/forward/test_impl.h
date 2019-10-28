@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 servant implementation
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAO_TEST_IMPL_H

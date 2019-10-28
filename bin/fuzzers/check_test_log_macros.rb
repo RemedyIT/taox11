@@ -7,7 +7,6 @@
 #          streaming operators
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 # -------------------------------------------------------------------
 
 module Fuzzers

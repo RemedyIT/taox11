@@ -5,7 +5,7 @@ include::_{backend}_settings.adoc[]
 The TAOX11 package contains its own developed IDL compiler. This IDL
 compiler is written in the https://www.ruby-lang.org[Ruby] programming
 language and uses the Open Source
-https://www.remedy.nl/products/ridl.html[RIDL] compiler
+https://www.remedy.nl/opensource/ridl.html[RIDL] compiler
 framework developed by Remedy IT.
 RIDL supports the implementation of different pluggable code generator
 backends for various IDL language mappings using a single frontend. The

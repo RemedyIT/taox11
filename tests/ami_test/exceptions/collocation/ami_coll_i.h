@@ -3,7 +3,6 @@
  * @author  Marcel Smit
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef AMI_COLL_I_H_
 #define AMI_COLL_I_H_

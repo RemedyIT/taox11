@@ -5,7 +5,6 @@
  * @brief   Main of DynValue test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "testlib/taox11_testlog.h"
 #include "analyzer.h"

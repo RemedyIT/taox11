@@ -7,7 +7,6 @@
  * This file is generated automatically by generate_export_file.pl TAOX11_Logger
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef X11_LOGGER_EXPORT_H
 #define X11_LOGGER_EXPORT_H

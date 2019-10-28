@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 TAO servant proxy base class
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/PortableServer/Upcall_Wrapper.h"

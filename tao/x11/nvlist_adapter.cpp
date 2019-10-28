@@ -5,7 +5,6 @@
  * @brief   Default VNList adapter
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/x11/nvlist_adapter.h"

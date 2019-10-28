@@ -5,7 +5,6 @@
 # @brief   IDL frontend integration of AMI pragma/annotation handling
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #--------------------------------------------------------------------
 require 'ridlbe/c++11/config/core'
 

@@ -5,7 +5,6 @@
  * @brief   include basic TAO CORBA definitions
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_TAO_CORBA_H_INCLUDED

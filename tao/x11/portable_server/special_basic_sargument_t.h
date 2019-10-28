@@ -5,7 +5,6 @@
  * @brief   x11 argument traits for special types (w)char/boolean/octet.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_SPECIAL_BASIC_SARGUMENT_T_H

@@ -6,7 +6,6 @@
  *
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/AnyTypeCode/TypeCode_Constants.h"

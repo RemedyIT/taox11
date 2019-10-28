@@ -5,7 +5,6 @@
  * @brief   Implementation for the "FOO" IOR test interceptor.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "foo_iorinterceptor.h"
 #include "testS.h"

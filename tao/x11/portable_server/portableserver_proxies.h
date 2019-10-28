@@ -5,7 +5,6 @@
  * @brief   TAOX11 POA proxy class
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef TAOX11_POA_PROXY_H_INCLUDED

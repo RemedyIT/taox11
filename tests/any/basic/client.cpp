@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 client Any test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 // Test of ANY operators with int32_t, long, double, float, long double,
 // wchar_t, char, bool, std::string, std::wstring, Object,

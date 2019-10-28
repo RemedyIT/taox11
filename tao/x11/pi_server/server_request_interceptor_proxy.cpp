@@ -5,7 +5,6 @@
  * @brief   TAO PI ServerRequestInterceptor proxy
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/x11/pi_server/server_request_interceptor_proxy.h"

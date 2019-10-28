@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 POA forwarding test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef SERVANT_ACTIVATOR_H

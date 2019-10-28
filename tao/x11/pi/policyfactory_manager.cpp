@@ -5,7 +5,6 @@
  * @brief   Implementation of the PolicyFactory manager
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #include "tao/AnyTypeCode/Any_Unknown_IDL_Type.h"

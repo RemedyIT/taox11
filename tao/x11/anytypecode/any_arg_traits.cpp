@@ -5,7 +5,6 @@
  * @brief   TAOX11 argument traits for CORBA::Any
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #include "tao/x11/anytypecode/typecode_impl.h"
 #include "tao/x11/anytypecode/any_arg_traits.h"

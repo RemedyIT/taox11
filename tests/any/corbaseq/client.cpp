@@ -5,7 +5,6 @@
  * @brief   CORBA C++11 client CORBA sequences Any test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 // Test of ANY insertion/extraction for all standard CORBA sequences
 

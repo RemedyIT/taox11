@@ -5,7 +5,6 @@
  * @brief   X11 logger flags
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 #ifndef LOGGER_LOG_BITS_H

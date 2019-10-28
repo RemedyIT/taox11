@@ -5,7 +5,6 @@
  * @brief   Template traits useful for programming with predefined types.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 #ifndef TAOX11_BASIC_TYPE_TRAITS_T_H
 #define TAOX11_BASIC_TYPE_TRAITS_T_H
