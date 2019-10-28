@@ -201,8 +201,6 @@ setup +
 |ACE | The ACE+TAO+MPC source code which is used by TAOX11
 |bin | Contains the <<ridlc#,ridlc>> and <<BRIX11,brix11>> start scripts
 |brix11 | The <<BRIX11,brix11>> toolset
-|ciaox11 | The headers, templates, libraries, tests and examples for the CIAOX11 LwCCM framework
-|dancex11 | The DnCX11 deployment tooling runtime components
 |docs | Common documentation resources
 |etc | Miscellaneous configuration files
 |lib | Precompiled libraries
