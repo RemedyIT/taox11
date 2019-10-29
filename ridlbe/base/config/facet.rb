@@ -191,7 +191,7 @@ module IDL
           set[fct] = fctdeps
           set
         end
-        IDL.log(2, "[#{@be.name}] > Identified the following facet dependecies: #{@sortset}")
+        IDL.log(2, "[#{@be.name}] > Identified the following facet dependencies: #{@sortset}")
       end
 
       def order_facets
