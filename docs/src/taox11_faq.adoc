@@ -47,14 +47,12 @@ CORBA feature.
 |I am creating LwCCM components using CIAO. Can I also use TAOX11?|
 
 TAOX11 is a CORBA only product. For LwCCM using IDL to {cxx11}, Remedy IT
-provides the *AXCIOMA* suite. +
-Please contact Remedy IT sales for more details.
+created https://www.axcioma.org[AXCIOMA].
 
 |I am using DDS? Can I also use TAOX11?|
 
 TAOX11 is a CORBA only product. Remedy IT has developed a {cxx11} binding
-for DDS as part of AXCIOMA. +
-Please contact Remedy IT sales for more details.
+for DDS as part of AXCIOMA.
 
 |When I use TAOX11, do I need to update all my code to use {cxx11}
 features like range-based for loops |
