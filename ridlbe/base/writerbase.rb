@@ -337,7 +337,7 @@ module IDL
 
     ###
     # Extension module for sourcecode writers.
-    # Implements scope tracking including the possiblity
+    # Implements scope tracking including the possibility
     # to (temporarily) pop out of scope (to global scope).
     # This will only work for languages and scopes that
     # support re-opening (like c++ namespaces).
