@@ -234,8 +234,8 @@ There are two ways to develop your application with TAOX11:
 
 === BRIX11
 
-<<{parent_dir}/brix11/brix11.adoc#,BRIX11>> is a toolset provided by Remedy
-IT to help you start up your TAOX11 development and to simplify building
+<<{parent_dir}/brix11/brix11.adoc#,BRIX11>> is a toolset provided to
+help you start up your TAOX11 development and to simplify building
 and running your TAOX11 applications.
 
 BRIX11 provides a common, integrated interface simplifying the execution
