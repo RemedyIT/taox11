@@ -131,17 +131,17 @@ control your logging output and format.
 
 === Supported compilers
 
-TAOX11 is currently supported using the following compilers
+TAOX11 has been tested with the following compilers
 
 * GCC version 4.8 or newer
-
-At this moment these are the only supported compilers. Remedy IT is
-working with various compiler vendors to get the needed {cxx11} features
-supported in their respective products.
+* Microsoft Visual Studio 2015
+* Microsoft Visual Studio 2017
+* Clang C++ version 5 or newer
+* Intel C++ 2016
 
 === Supported platforms
 
-TAOX11 is currently supported on
+TAOX11 is currently actively supported on
 
 * CentOS 7.3 x86_64 using GCC 4.8.5
 

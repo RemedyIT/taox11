@@ -2,6 +2,11 @@ include::_{backend}_settings.adoc[]
 
 = TAOX11 Development for Android
 
+[NOTE]
+====
+Android platform support has been tested but is currently not actively supported.
+====
+
 == Setting up the TAOX11 Android Development Environment
 
 === Requirements

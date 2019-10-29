@@ -36,12 +36,16 @@ further.
 
 |I want to use TAOX11 on a platform that isn't supported. |
 
-Contact Remedy IT sales, our team can do the port of TAOX11 to your
-platform.
+You can fork repositories, test and make changes to the code as required for your
+platform and submit PR's to have the changes integrated into the main code baseline
+or you can contact Remedy IT sales, our team can verify the port of TAOX11 for your
+platform and make sure it is actively supported.
 
 |I am using a CORBA feature that is not supported by TAOX11. |
 
-Please contact Remedy IT sales to get a quote to support the missing
+You can fork repositories, test and make changes to the code as required to add the
+missing feature and submit PR's to have the changes integrated into the main code baseline
+or you can contact Remedy IT sales to get a quote to support the missing
 CORBA feature.
 
 |I am creating LwCCM components using CIAO. Can I also use TAOX11?|
@@ -63,14 +67,14 @@ to use {cxx11} features for anything else.
 
 |When I'm running brix11, I get an error that brix11 cannot be found.|
 
-Please use the path to brix11 (typically `$TAOX11_ROOT/bin/brix11`) to
+Please use the path to brix11 (typically `<package_root>/bin/brix11`) to
 run or add the path to the bin directory to your PATH.
 
 |I've created a TAOX11 application with the aid of BRIX11 but nothing is
 written to the console. It appears that the `taox11_xxx` logging
 operators are used. |
 
-Be aware that the TAOX11 default logging framework outputs nothing except
+Be aware that the TAOX11 logging framework by default outputs nothing except
 panic messages. For information on how to control the output of the logging
 framework, please have a look at the documentation regarding the
 <<x11_logging.adoc#,X11 logging framework>>.
@@ -108,7 +112,7 @@ include `tao/x11/orb.h`. +
 _Hint: All file names in TAOX11 are lower case while file names in TAO
 are mixed case._
 
-|I get the following compile errors when I forward declare an ACE class: +
+|I get the following compile errors when I forward declare an ACE class:
 ------------------------------------------------------------------------------------
 file.cpp:xx:yy: error: expected type-specifier before '<forward_declared_ace_class>'
 ------------------------------------------------------------------------------------
@@ -139,7 +143,11 @@ install is used to setup a development machine. This error can be fixed
 by installing the `perl-Data-Dumper` package.
 
 |Our company policies forbid me to use {cxx11} but I want to have
-something easier to use than IDL to {cpp}. Can you help? |At the OMG June
+something easier to use than IDL to {cpp}. Can you help?
+
+|
+
+At the OMG June
 2013 meeting in Berlin it was discussed that we are allowed to extend
 IDL to {cxx11} to also support {cpp}03. This could than be supported as part
 of a new TAOX03 product. Please contact Remedy IT sales to discuss this
