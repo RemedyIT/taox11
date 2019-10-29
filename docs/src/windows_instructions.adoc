@@ -6,23 +6,27 @@ include::_{backend}_settings.adoc[]
 
 === Requirements
 
-Currently for development on the Windows platform
-the MinGW-w64 toolchain (a GNU compiler toolchain variant for the
-Windows platform), Visual Studio 2015 Update 2 or newer,
-Visual Studio 2017 Update 3 or newer, and Intel C++ 2016 are supported.
+Currently for development on the Windows platform the following
+compilers have been used:
+
+* MinGW-w64 toolchain (a GNU compiler toolchain variant for the
+Windows platform)
+* Visual Studio 2015 Update 2 or newer
+* Visual Studio 2017 Update 3 or newer
+* Intel C++ 2016 are supported.
 
 A development environment requires the following software
 installed on the computer hosting the
 Windows environment in which our product is installed:
 
-1.  Perl implementation for Windows
-2.  Ruby implementation for Windows
+* Perl implementation for Windows
+* Ruby implementation for Windows
 
 For a development environment using MinGW-w64 also the following software
 has to be installed
 
-1.  Collection of build tools supporting GNU make based development
-2.  MinGW-w64 toolchain for the targeted environment (i686 or x86_64)
+* Collection of build tools supporting GNU make based development
+* MinGW-w64 toolchain for the targeted environment (i686 or x86_64)
 
 ==== Installing ruby
 
