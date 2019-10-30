@@ -4,9 +4,9 @@ image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboa
 
 https://www.taox11.org[TAOX11] is the https://www.omg.org/spec/CORBA[CORBA] implementation supporting the
 https://www.omg.org/spec/CPP11[IDL to C++11] Language Mapping created by
-https://www.remedy.nl[Remedy IT]. TAOX11 uses the core of
-https://www.remedy.nl/opensource/tao.html[TAO] to provide you as
-user with a large set of features and capabilities. TAO is a well
+https://www.remedy.nl[Remedy IT]. TAOX11 builds on the core of
+https://www.remedy.nl/opensource/tao.html[TAO] to provide you with a
+large set of features and capabilities. TAO is a well
 known and stable CORBA implementation with a rich set of features and
 capabilities.
 
@@ -33,3 +33,5 @@ string, wide string, sequence, array, struct, union, typedef, exception)
 . IOR Table support
 . CodecFactory support
 . DynamicAny and TypeCodeFactory support
+. Portable Interceptors
+
