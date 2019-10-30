@@ -6,7 +6,7 @@ include::_{backend}_settings.adoc[]
 
 TAOX11 is the CORBA implementation supporting the
 https://www.omg.org/spec/CPP11[IDL to C++11] Language Mapping.
-TAOX11 uses the core of
+TAOX11 builds on the core of
 https://www.remedy.nl/opensource/tao.html[TAO] to provide you as
 user with a large set of features and capabilities. TAO is a well
 known and stable CORBA implementation with a rich set of features and
@@ -30,6 +30,7 @@ string, wide string, sequence, array, struct, union, typedef, exception)
 . IOR Table support
 . CodecFactory support
 . DynamicAny and TypeCodeFactory support
+. Portable Interceptors
 
 === The IDL to {cxx11} language mapping
 
