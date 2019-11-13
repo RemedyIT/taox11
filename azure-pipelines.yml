@@ -50,8 +50,8 @@ jobs:
     displayName: Run brix11 configure
   - powershell: |
       pushd $(TAOX11_BASE_ROOT)
-      bin/brix11 env
-      bin/brix11 configure -w workspace -P
+      bin/brix11 env --config=$(TAOX11_BASE_ROOT)/.brix11rc
+      bin/brix11 configure -w workspace -P --config=$(TAOX11_BASE_ROOT)/.brix11rc
       popd
     displayName: Print brix11 configuration
   - powershell: |
