@@ -44,19 +44,27 @@ jobs:
       git clone --depth 1 git://github.com/RemedyIT/axcioma.git $(TAOX11_BASE_ROOT)
     displayName: git clone dependent repositories
   - powershell: |
-      $(TAOX11_BASE_ROOT)/bin/brix11 -t gnuace -E configure -w workspace -b 64
+      pushd $(TAOX11_BASE_ROOT)
+      bin/brix11 -t gnuace -E configure -w workspace -b 64
+      popd
     displayName: Run brix11 configure
   - powershell: |
-      $(TAOX11_BASE_ROOT)/bin/brix11 env
-      $(TAOX11_BASE_ROOT)/bin/brix11 configure -w workspace -P
+      pushd $(TAOX11_BASE_ROOT)
+      bin/brix11 env
+      bin/brix11 configure -w workspace -P
+      popd
     displayName: Print brix11 configuration
   - powershell: |
-      $(TAOX11_BASE_ROOT)/bin/brix11 gen build workspace.mwc
-      $(TAOX11_BASE_ROOT)/bin/brix11 gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
+      pushd $(TAOX11_BASE_ROOT)
+      bin/brix11 gen build workspace.mwc
+      bin/brix11 gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
+      popd
     displayName: Run brix11 gen build
   - powershell: |
-      $(TAOX11_BASE_ROOT)/bin/brix11 make -N -d
-      $(TAOX11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/examples
-      $(TAOX11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/orbsvcs/tests
-      $(TAOX11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/tests
+      pushd $(TAOX11_BASE_ROOT)
+      bin/brix11 make -N -d
+      bin/brix11 make -N -d $(TAOX11_ROOT)/examples
+      bin/brix11 make -N -d $(TAOX11_ROOT)/orbsvcs/tests
+      bin/brix11 make -N -d $(TAOX11_ROOT)/tests
+      popd
     displayName: Run brix11 make
