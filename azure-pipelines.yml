@@ -56,15 +56,15 @@ jobs:
     displayName: Print brix11 configuration
   - powershell: |
       pushd $(TAOX11_BASE_ROOT)
-      bin/brix11 gen build workspace.mwc
-      bin/brix11 gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
+      bin/brix11 -E gen build workspace.mwc
+      bin/brix11 -E gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
       popd
     displayName: Run brix11 gen build
   - powershell: |
       pushd $(TAOX11_BASE_ROOT)
-      bin/brix11 make -N -d
-      bin/brix11 make -N -d $(TAOX11_ROOT)/examples
-      bin/brix11 make -N -d $(TAOX11_ROOT)/orbsvcs/tests
-      bin/brix11 make -N -d $(TAOX11_ROOT)/tests
+      bin/brix11 -E make -N -d
+      bin/brix11 -E make -N -d $(TAOX11_ROOT)/examples
+      bin/brix11 -E make -N -d $(TAOX11_ROOT)/orbsvcs/tests
+      bin/brix11 -E make -N -d $(TAOX11_ROOT)/tests
       popd
     displayName: Run brix11 make
