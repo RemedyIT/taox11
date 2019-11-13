@@ -41,7 +41,7 @@ jobs:
       git clone --depth 1 git://github.com/DOCGroup/ACE_TAO.git $(DOC_ROOT)
       git clone --depth 1 git://github.com/DOCGroup/MPC.git $(MPC_ROOT)
       git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
-      git clone --depth 1 --branch jwi-mpccfgpath git://github.com/RemedyIT/axcioma.git $(TAOX11_BASE_ROOT)
+      git clone --depth 1 --branch jwi-mpccfgpath git://github.com/jwillemsen/axcioma.git $(TAOX11_BASE_ROOT)
     displayName: git clone dependent repositories
   - powershell: |
       pushd $(TAOX11_BASE_ROOT)
