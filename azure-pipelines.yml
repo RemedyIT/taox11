@@ -45,7 +45,7 @@ jobs:
     displayName: git clone dependent repositories
   - powershell: |
       pushd $(TAOX11_BASE_ROOT)
-      bin/brix11 -t gnuace -E configure -w workspace -b 64
+      bin/brix11 -t gnuace -E configure -w workspace -b 64 -I $(TAOX11_ROOT)
       popd
     displayName: Run brix11 configure
   - powershell: |
