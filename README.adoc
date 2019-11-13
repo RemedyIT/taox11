@@ -1,4 +1,4 @@
-image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboard, link=http://scoreboard.taox11.org]
+image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboard, link=https://www.taox11.org/scoreboard.html]
 
 = TAOX11
 
