@@ -1,0 +1,62 @@
+variables:
+   DOC_ROOT: $(Build.SourcesDirectory)/ACE
+   ACE_ROOT: $(Build.SourcesDirectory)/ACE/ACE
+   MPC_ROOT: $(Build.SourcesDirectory)/ACE/MPC
+   TAO_ROOT: $(Build.SourcesDirectory)/ACE/TAO
+   RIDL_ROOT: $(Build.SourcesDirectory)/ridl
+   TAOX11_BASE_ROOT: $(Build.SourcesDirectory)/axcioma
+   TAOX11_ROOT: $(Build.SourcesDirectory)
+   system.prefergit: true
+
+resources:
+- repo: self
+  fetchDepth: 1
+
+jobs:
+- job: Linux
+  pool:
+    vmImage: ubuntu-18.04
+  strategy:
+    matrix:
+      GCC8:
+        CC: gcc-8
+        CXX: g++-8
+        PackageDeps: g++-8
+  steps:
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '>= 2.4'
+      addToPath: true
+    displayName: Install ruby
+  - script: |
+      wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+      sudo apt-add-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ $(Repo) main"
+    displayName: Add repository ($(Repo))
+    condition: and(succeeded(), ne(variables['Repo'], ''))
+  - script: |
+      sudo apt-get --yes update
+      sudo apt-get --yes install libxerces-c-dev libssl-dev $(PackageDeps)
+    displayName: install system package dependencies
+  - powershell: |
+      git clone --depth 1 git://github.com/DOCGroup/ACE_TAO.git $(DOC_ROOT)
+      git clone --depth 1 git://github.com/DOCGroup/MPC.git $(MPC_ROOT)
+      git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
+      git clone --depth 1 git://github.com/RemedyIT/axcioma.git $(TAOX11_BASE_ROOT)
+    displayName: git clone dependent repositories
+  - powershell: |
+      $(TAOX11_BASE_ROOT)/bin/brix11 -t gnuace -E configure -w workspace -b 64
+    displayName: Run brix11 configure
+  - powershell: |
+      $(TAOX11_BASE_ROOT)/bin/brix11 env
+      $(TAOX11_BASE_ROOT)/bin/brix11 configure -w workspace -P
+    displayName: Print brix11 configuration
+  - powershell: |
+      $(TAOX11_BASE_ROOT)/bin/brix11 gen build workspace.mwc
+      $(TAOX11_BASE_ROOT)/bin/brix11 gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
+    displayName: Run brix11 gen build
+  - powershell: |
+      $(TAOX11_BASE_ROOT)/bin/brix11 make -N -d
+      $(TAOX11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/examples
+      $(TAOX11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/orbsvcs/tests
+      $(TAOX11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/tests
+    displayName: Run brix11 make
