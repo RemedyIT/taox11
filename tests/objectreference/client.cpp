@@ -29,7 +29,7 @@ bool test_equal(T exp, U a)
 class Foo final
 {
 public:
-  Foo (IDL::traits<Test::iA>::weak_ref_type ref) : ref_(std::move(ref))
+  explicit Foo (IDL::traits<Test::iA>::weak_ref_type ref) : ref_(std::move(ref))
   {
   }
 

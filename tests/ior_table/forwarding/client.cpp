@@ -52,7 +52,7 @@ class Worker final
   : public ACE_Task_Base
 {
 public:
-  Worker (IDL::traits<CORBA::ORB>::ref_type orb);
+  explicit Worker (IDL::traits<CORBA::ORB>::ref_type orb);
 
   virtual int svc () override;
 
@@ -64,7 +64,7 @@ private:
 
 
 Worker::Worker (IDL::traits<CORBA::ORB>::ref_type orb)
-  :  orb_ (orb)
+  :  orb_ (std::move(orb))
 {
 }
 
