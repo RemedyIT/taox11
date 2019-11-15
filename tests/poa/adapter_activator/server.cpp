@@ -137,7 +137,7 @@ parse_args (int argc, ACE_TCHAR **argv)
   return true;
 }
 
-static int
+static bool
 write_iors_to_file (const std::string& first_ior,
                     const std::string& second_ior,
                     const std::string& third_ior)
@@ -163,7 +163,7 @@ write_iors_to_file (const std::string& first_ior,
               << ior_output_file_1 << ", "
               << ior_output_file_2 << ", "
               << ior_output_file_3 << std::endl;
-    return 1;
+    return false;
   }
 
   output_file_1 << first_ior;
@@ -173,7 +173,7 @@ write_iors_to_file (const std::string& first_ior,
     TAOX11_TEST_ERROR << "failed to write "
               << first_ior << " to "
               <<ior_output_file_1 << std::endl;
-    return 1;
+    return false;
   }
   fb1.close ();
 
@@ -183,7 +183,7 @@ write_iors_to_file (const std::string& first_ior,
     TAOX11_TEST_ERROR << "failed to write "
               << second_ior << " to "
               << ior_output_file_2 << std::endl;
-    return 1;
+    return false;
   }
   fb2.close ();
 
@@ -193,11 +193,11 @@ write_iors_to_file (const std::string& first_ior,
     TAOX11_TEST_ERROR << "failed to write "
               << third_ior << " to "
               << ior_output_file_3 << std::endl;
-    return 1;
+    return false;
   }
   fb3.close ();
 
-  return 0;
+  return true;
 }
 
 int
@@ -310,24 +310,24 @@ main (int argc, char *argv[])
                                               "IDL:test:1.0");
 
       // Stringify all the object references and print them out.
-      std::string first_ior =
+      std::string const first_ior =
         orb->object_to_string (first_test);
 
-      std::string second_ior =
+      std::string const second_ior =
         orb->object_to_string (second_test);
 
-      std::string third_ior =
+      std::string const third_ior =
         orb->object_to_string (third_test);
 
       TAOX11_TEST_DEBUG << first_ior << std::endl
                 << second_ior << std::endl
                 << third_ior << std::endl;
 
-      int write_result = write_iors_to_file (first_ior.c_str(),
-                                             second_ior.c_str(),
-                                             third_ior.c_str());
-      if (write_result != 0)
-        return write_result;
+      bool const write_result = write_iors_to_file (first_ior,
+                                                    second_ior,
+                                                   third_ior);
+      if (!write_result)
+        return 1;
 
       first_poa->destroy (true, true);
 

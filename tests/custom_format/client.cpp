@@ -21,7 +21,7 @@ namespace TAOX11_NAMESPACE
     struct formatter<std::vector<int32_t>, OS>
     {
       formatter () {}
-      formatter (const char*) {}
+      explicit formatter (const char*) {}
 
       inline OS& operator ()(
           OS& os_,
@@ -76,7 +76,7 @@ parse_args (int argc, ACE_TCHAR *argv[])
 struct my_matrix_formatter
 {
   my_matrix_formatter () {}
-  my_matrix_formatter (const char*) {}
+  explicit my_matrix_formatter (const char*) {}
 
   inline void print_hline(std::ostream& os_, std::size_t len) {
     os_ << '+'; for (std::size_t i=0; i<len ;++i) os_ << "---"; os_ << '+' << std::endl;

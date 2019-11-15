@@ -98,7 +98,6 @@ check_bad_param (
       case 2: d.shortData (); break;
       default:
         d.defData (); break;
-        break;
     }
     if (t != discriminator)
     {
@@ -133,7 +132,7 @@ uint16_t
 check_default_union (const Test::DefaultData & d, int16_t discriminator,
   const std::string & test)
 {
-  uint16_t retval = 0;
+  uint16_t retval {};
   TAOX11_TEST_DEBUG << test << ": Testing BAD_PARAM exceptions except for <"
     << discriminator << ">" << std::endl;
 

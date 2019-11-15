@@ -9,7 +9,7 @@
 
 template<class T>
 int
-TestEqual(std::string name, T exp, T a) {
+TestEqual(const std::string& name, T exp, T a) {
   if (a != exp) {
     TAOX11_TEST_ERROR << "ERROR: value for " << name << " received " << exp
         << " , expected " << a << std::endl;
@@ -19,7 +19,7 @@ TestEqual(std::string name, T exp, T a) {
 }
 
 int
-TestEqual(const std::string name, std::wstring exp, std::wstring a) {
+TestEqual(const std::string& name, std::wstring exp, std::wstring a) {
   if (a != exp) {
     TAOX11_TEST_ERROR << "ERROR: value for " << name << " expected ";
     TAOX11_TEST_DEBUG_W << exp << L", received " << a << std::endl;
@@ -29,7 +29,7 @@ TestEqual(const std::string name, std::wstring exp, std::wstring a) {
 }
 
 Hello::Hello(IDL::traits<CORBA::ORB>::ref_type orb, int& result) :
-  orb_(orb), result_(result)
+  orb_(std::move(orb)), result_(result)
 {
 }
 

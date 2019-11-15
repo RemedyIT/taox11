@@ -16,7 +16,7 @@ class Task
     public virtual CORBA::LocalObject
 {
 public:
-  Task (CORBA::ORB_ptr orb);
+  explicit Task (CORBA::ORB_ptr orb);
 
   char * locate (const char *);
 

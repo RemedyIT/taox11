@@ -32,7 +32,7 @@ void rotate_string(std::string& s)
   }
 }
 
-std::string rotate_string2(const std::string s_in)
+std::string rotate_string2(const std::string& s_in)
 {
   std::string s(s_in);
   rotate_string (s);
