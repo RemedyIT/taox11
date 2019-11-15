@@ -15,7 +15,7 @@
 int result_ = 0;
 
 template<class T>
-bool TestEqual(std::string name, T exp, T a)
+bool TestEqual(const std::string& name, T exp, T a)
 {
   if (a != exp)
     {
@@ -46,7 +46,7 @@ bool eqVector(const std::vector<T>& v1, std::vector<T> v2)
 
 // Test if array content is equal.
 template<typename T, size_t N>
-bool eqArray(std::string name, std::array<T, N> v1, std::array<T, N> v2)
+bool eqArray(const std::string& name, std::array<T, N> v1, std::array<T, N> v2)
 {
   typename std::array<T, N>::iterator first2 = v2.begin();
   for (const T &el : v1)
@@ -73,7 +73,7 @@ bool eq_structType(Test::structType s1, Test::structType s2)
   return true;
 }
 
-bool eq_structType(std::string name, Test::structType s1, Test::structType s2)
+bool eq_structType(const std::string& name, Test::structType s1, Test::structType s2)
 {
   if (!TestEqual("eq_structType " + name + ".c", s1.c(), s2.c()))
     return false;
@@ -84,7 +84,7 @@ bool eq_structType(std::string name, Test::structType s1, Test::structType s2)
   return true;
 }
 
-bool eq_unionType(std::string name, Test::unionType s1, Test::unionType s2)
+bool eq_unionType(const std::string& name, Test::unionType s1, Test::unionType s2)
 {
   if (!TestEqual("eq_unionType " + name + "._d", s1._d(), s2._d()))
     return false;

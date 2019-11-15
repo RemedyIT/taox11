@@ -92,6 +92,6 @@ ACE_TMAIN (int argc, ACE_TCHAR *argv[])
       return 1;
     }
 
-  return 0;
+  return result;
 }
 

@@ -69,7 +69,7 @@ class Tester_i final
   : public virtual CORBA::servant_traits<Tester>::base_type
 {
 public:
-  Tester_i (IDL::traits<CORBA::ORB>::ref_type orb);
+  explicit Tester_i (IDL::traits<CORBA::ORB>::ref_type orb);
   virtual ~Tester_i ();
 
   virtual void test (int32_t id) override;
