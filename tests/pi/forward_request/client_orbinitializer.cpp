@@ -13,7 +13,7 @@
 
 #include "client_request_interceptor.h"
 
-Client_ORBInitializer::Client_ORBInitializer (std::string forward_str)
+Client_ORBInitializer::Client_ORBInitializer (const std::string& forward_str)
   : forward_str_ (forward_str)
 {}
 
@@ -27,13 +27,12 @@ void
 Client_ORBInitializer::post_init (
     IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info)
 {
-  std::string orb_id = info->orb_id ();
+  std::string const orb_id = info->orb_id ();
 
   IDL::traits<PortableInterceptor::ClientRequestInterceptor>::ref_type client_interceptor =
     CORBA::make_reference<Client_Request_Interceptor> (orb_id, this->forward_str_);
 
   info->add_client_request_interceptor (client_interceptor);
-
 }
 
 #endif  /* TAO_HAS_INTERCEPTORS == 1 */

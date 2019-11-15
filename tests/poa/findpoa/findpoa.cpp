@@ -35,14 +35,12 @@ bool find_non_existant_POA(IDL::traits<PortableServer::POA>::ref_type parent,
 class MyAdapterActivator: public PortableServer::AdapterActivator
 {
 public:
-  MyAdapterActivator (IDL::traits<PortableServer::POAManager>::ref_type manager) :
-    poa_manager_ (manager)
+  explicit MyAdapterActivator (IDL::traits<PortableServer::POAManager>::ref_type manager) :
+    poa_manager_ (std::move(manager))
   {
   }
 
-  virtual ~MyAdapterActivator()
-  {
-  }
+  virtual ~MyAdapterActivator() = default;
 
   virtual bool unknown_adapter (
     IDL::traits<PortableServer::POA>::ref_type parent,
@@ -107,7 +105,7 @@ int main (int argc, char *argv[])
         root_poa->the_POAManager();
       poa_manager->activate();
 
-      // Try to find a non-existant POA.  Since the Adapter Activator
+      // Try to find a non-existent POA.  Since the Adapter Activator
       // has not been installed yet, this call should fail.
       if (!find_non_existant_POA (root_poa, "firstPOA", true) )
         return 1;
