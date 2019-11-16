@@ -22,7 +22,7 @@
 namespace Test
 {
 
-  // generated from c++11/templates/impl/hdr/interface_pre.erb
+  // generated from c++11/templates/impl/hdr/interface_pre
   namespace _impl
   {
     class Foo
@@ -50,7 +50,7 @@ namespace Test
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo[User Protected]
     public:
 
-      // generated from c++11/templates/impl/hdr/interface_post.erb
+      // generated from c++11/templates/impl/hdr/interface_post
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[User Public]
       // your public definitions
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo[User Public]
@@ -68,7 +68,7 @@ namespace Test
 
   }; // _impl
 
-  // generated from c++11/templates/impl/hdr/interface_pre.erb
+  // generated from c++11/templates/impl/hdr/interface_pre
   namespace _impl
   {
     class Hello
@@ -96,7 +96,7 @@ namespace Test
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[User Protected]
     public:
 
-      // generated from c++11/templates/impl/hdr/attribute.erb
+      // generated from c++11/templates/impl/hdr/attribute
       virtual
       int32_t
       int_prop () override;
@@ -106,33 +106,33 @@ namespace Test
       int_prop (
           int32_t _v) override;
 
-      // generated from c++11/templates/impl/hdr/operation.erb
+      // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::get_string
       virtual
       std::string
       get_string () override;
 
-      // generated from c++11/templates/impl/hdr/operation.erb
+      // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::create_foo
       virtual
       void
       create_foo (
           IDL::traits< ::Test::Foo>::ref_type& foo_inst) override;
 
-      // generated from c++11/templates/impl/hdr/operation.erb
+      // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::update
       virtual
       ::Test::Foo::S
       update (
           const ::Test::Foo::S& s) override;
 
-      // generated from c++11/templates/impl/hdr/operation.erb
+      // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::shutdown
       virtual
       void
       shutdown () override;
 
-      // generated from c++11/templates/impl/hdr/interface_post.erb
+      // generated from c++11/templates/impl/hdr/interface_post
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[User Public]
       // your public definitions
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[User Public]

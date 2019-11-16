@@ -30,7 +30,7 @@ project(taox11_codecfactory_idl) : ridl_core_defaults, install {
 project(taox11_codecfactory) : taox11_lib, install, taox11_anytypecode, codecfactory {
   after        += taox11_codecfactory_idl
   sharedname    = taox11_codecfactory
-  libout = $(TAOX11_ROOT)/../lib
+  libout = $(X11_BASE_ROOT)/lib
   dynamicflags  = TAOX11_CODECFACTORY_BUILD_DLL
 
   Source_Files {

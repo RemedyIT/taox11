@@ -3,7 +3,7 @@
 project {
   requires += taox11_build
   includes += $(TAOX11_ROOT)
-  libpaths += $(TAOX11_ROOT)/../lib
+  libpaths += $(X11_BASE_ROOT)/lib
 
   verbatim(gnuace,macros,1) {
     c++11=1

@@ -23,7 +23,7 @@ project(taox11_ior_table) : taox11_lib, taox11_portableserver, \
   after        += taox11_ior_table_idl
   sharedname    = taox11_ior_table
   dynamicflags += TAOX11_IOR_TABLE_BUILD_DLL
-  libout = $(TAOX11_ROOT)/../lib
+  libout = $(X11_BASE_ROOT)/lib
 
   Source_Files {
     ior_table.cpp

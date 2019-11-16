@@ -75,7 +75,7 @@ follows:
 * `TAO_ROOT=<target_dir><taox11>/ACE/TAO`
 * `MPC_ROOT=<target_dir><taox11>/ACE/MPC`
 * `MPC_BASE=<target_dir><taox11>/taox11/bin/MPC`
-* `TAOX11_BASE_ROOT=<target_dir><taox11>`
+* `X11_BASE_ROOT=<target_dir><taox11>`
 * `TAOX11_ROOT=<target_dir><taox11>/taox11`
 
 When using <<{parent_dir}/brix11/brix11.adoc#,BRIX11>> this is handled automatically
@@ -101,7 +101,7 @@ requires at least the following:
 
 * Availability of all required TAOX11 binaries on the Android system
 including all required TAOX11 libraries from
-** `$TAOX11_BASE_ROOT/lib` and
+** `$X11_BASE_ROOT/lib` and
 ** `$ACE_ROOT/lib`
 +
 required by the application(s) as well as the application binary(-ies)

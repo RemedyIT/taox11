@@ -14,7 +14,7 @@ project: taox11_basedefaults, taobaseidldefaults {
     automatic_out        = 1
     dependent            =
     dependent_libs       =
-    command              = $(TAOX11_BASE_ROOT)/bin/ridlc
+    command              = $(X11_BASE_ROOT)/bin/ridlc
     inputext             = .idl
 
     optional(source_outputext) {

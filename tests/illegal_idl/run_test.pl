@@ -18,7 +18,7 @@ my $status =0;
 my $server = PerlACE::TestTarget::create_target(2) || die "Create target 2 failed\n";
 
 # The location of the ridl utility
-my $ridl = "$ENV{TAOX11_BASE_ROOT}/bin/ridlc";
+my $ridl = "$ENV{X11_BASE_ROOT}/bin/ridlc";
 
 unless (-e $ridl) {
   die "ERROR: Cannot find " . $ridl;

@@ -62,7 +62,7 @@ project(portable_interceptor_idl) : ridl_core_defaults, install, pidl_install {
 project(portable_interceptor) : taox11_lib, taox11_anytypecode, install, taox11_codecfactory, tao_pi {
   after       += portable_interceptor_idl
   sharedname   = taox11_pi
-  libout = $(TAOX11_ROOT)/../lib
+  libout = $(X11_BASE_ROOT)/lib
   dynamicflags += TAOX11_PI_BUILD_DLL
 
   Source_Files {
