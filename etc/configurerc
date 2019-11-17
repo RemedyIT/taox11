@@ -39,6 +39,8 @@ configure :taox11 do
   end
 
   mpc do
+    base '../bin/MPC'
+
     include '$TAOX11_ROOT/bin/MPC/config'
 
     mwc_include %w{
