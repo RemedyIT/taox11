@@ -44,24 +44,24 @@ jobs:
       git clone --depth 1 --branch jwi-mpccfgpath git://github.com/jwillemsen/axcioma.git $(X11_BASE_ROOT)
     displayName: git clone dependent repositories
   - powershell: |
-      pushd $(TAOX11_BASE_ROOT)
+      pushd $(X11_BASE_ROOT)
       bin/brix11 -t gnuace -E configure -w workspace -b 64
       popd
     displayName: Run brix11 configure
   - powershell: |
-      pushd $(TAOX11_BASE_ROOT)
+      pushd $(X11_BASE_ROOT)
       bin/brix11 -E env
       bin/brix11 -E configure -w workspace -P
       popd
     displayName: Print brix11 configuration
   - powershell: |
-      pushd $(TAOX11_BASE_ROOT)
+      pushd $(X11_BASE_ROOT)
       bin/brix11 -E gen build workspace.mwc
       bin/brix11 -E gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
       popd
     displayName: Run brix11 gen build
   - powershell: |
-      pushd $(TAOX11_BASE_ROOT)
+      pushd $(X11_BASE_ROOT)
       bin/brix11 -E make -N -d
       bin/brix11 -E make -N -d $(TAOX11_ROOT)/examples
       bin/brix11 -E make -N -d $(TAOX11_ROOT)/orbsvcs/tests
