@@ -44,8 +44,12 @@ jobs:
       git clone --depth 1 git://github.com/RemedyIT/axcioma.git $(X11_BASE_ROOT)
     displayName: git clone dependent repositories
   - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 -t gnuace -E configure -w workspace -b 64
+      $(X11_BASE_ROOT)/bin/brix11 -t gnuace -E configure -b 64
     displayName: Run brix11 configure
+  - powershell: |
+      $(X11_BASE_ROOT)/bin/brix11 -E env
+      $(X11_BASE_ROOT)/bin/brix11 -E configure -P
+    displayName: Print brix11 configuration
   - powershell: |
       $(X11_BASE_ROOT)/bin/brix11 -E gen build workspace.mwc
       $(X11_BASE_ROOT)/bin/brix11 -E gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
@@ -56,8 +60,3 @@ jobs:
       $(X11_BASE_ROOT)/bin/brix11 -E make -N -d $(TAOX11_ROOT)/orbsvcs/tests
       $(X11_BASE_ROOT)/bin/brix11 -E make -N -d $(TAOX11_ROOT)/tests
     displayName: Run brix11 make
-  - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 -E env
-      $(X11_BASE_ROOT)/bin/brix11 -E configure -w workspace -P
-    displayName: Print brix11 configuration
-
