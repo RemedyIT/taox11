@@ -72,7 +72,7 @@ jobs:
       $(X11_BASE_ROOT)/bin/brix11 configure -P
     displayName: Print brix11 configuration
   - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 gen build $(X11_BASE_ROOT)/workspace.mwc
+      $(X11_BASE_ROOT)/bin/brix11 gen build axcioma/workspace.mwc
       $(X11_BASE_ROOT)/bin/brix11 gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
     displayName: Run brix11 gen build
   - powershell: |
