@@ -1,4 +1,5 @@
 image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboard, link=https://www.taox11.org/scoreboard.html]
+image:https://dev.azure.com/remedyit/axcioma/_apis/build/status/taox11?branchName=master[Azure pipeline, link=https://dev.azure.com/remedyit/axcioma/_build?definitionId=4&_a=summary]
 
 = TAOX11
 
