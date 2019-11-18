@@ -3,8 +3,8 @@ variables:
    ACE_ROOT: $(Build.SourcesDirectory)/ACE/ACE
    MPC_ROOT: $(Build.SourcesDirectory)/ACE/MPC
    TAO_ROOT: $(Build.SourcesDirectory)/ACE/TAO
-   RIDL_ROOT: $(Build.SourcesDirectory)/ridl
    X11_BASE_ROOT: $(Build.SourcesDirectory)/axcioma
+   RIDL_ROOT: $(Build.SourcesDirectory)/axcioma/ridl
    TAOX11_ROOT: $(Build.SourcesDirectory)
    system.prefergit: true
 
@@ -40,11 +40,11 @@ jobs:
   - powershell: |
       git clone --depth 1 --branch ACE+TAO-6_5_6 git://github.com/DOCGroup/ACE_TAO.git $(DOC_ROOT)
       git clone --depth 1 --branch ACE+TAO-6_5_6 git://github.com/DOCGroup/MPC.git $(MPC_ROOT)
-      git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
       git clone --depth 1 git://github.com/RemedyIT/axcioma.git $(X11_BASE_ROOT)
+      git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
     displayName: git clone dependent repositories
   - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 -t gnuace -E configure -b 64
+      $(X11_BASE_ROOT)/bin/brix11 -t gnuace configure
     displayName: Run brix11 configure
   - powershell: |
       $(X11_BASE_ROOT)/bin/brix11 -E env
