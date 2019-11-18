@@ -14,7 +14,7 @@
 int result_ = 0;
 
 template<class T>
-void TestEqual(std::string name, T exp, T a)
+void TestEqual(const std::string& name, T exp, T a)
 {
   if (a != exp)
   {
@@ -25,7 +25,7 @@ void TestEqual(std::string name, T exp, T a)
 }
 
 void
-TestEqual(const std::string name, std::wstring exp, std::wstring a) {
+TestEqual(const std::string& name, std::wstring exp, std::wstring a) {
   if (a != exp) {
     TAOX11_TEST_ERROR << "ERROR: value for " << name << " expected ";
     TAOX11_TEST_DEBUG_W << exp << L", received " << a << std::endl;
@@ -34,11 +34,11 @@ TestEqual(const std::string name, std::wstring exp, std::wstring a) {
 }
 
 template<>
-void TestEqual(std::string name, Test::unionType exp, Test::unionType a)
+void TestEqual(const std::string& name, Test::unionType exp, Test::unionType a)
 {
   if (exp._d() != a._d())
   {
-    TAOX11_TEST_ERROR << "Different descriminator , expected " << exp._d() << " found "
+    TAOX11_TEST_ERROR << "Different discriminator , expected " << exp._d() << " found "
         << a._d() << std::endl;
     ++result_;
   }

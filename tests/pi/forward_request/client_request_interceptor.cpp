@@ -14,11 +14,9 @@
 #include "testlib/taox11_testlog.h"
 
 Client_Request_Interceptor::Client_Request_Interceptor (
-  std::string orb_id,
-  std::string forward_str)
+  const std::string& orb_id,
+  const std::string& forward_str)
   : orb_id_ (orb_id),
-    orb_ (),
-    request_count_ (0),
     forward_str_ (forward_str)
 {
 }

@@ -22,7 +22,7 @@ std::string ior_file = "server.ior";
 class SimpleServant : public CORBA::servant_traits<Simple>::base_type
 {
   public:
-    SimpleServant (IDL::traits<CORBA::ORB>::ref_type orb)
+    explicit SimpleServant (IDL::traits<CORBA::ORB>::ref_type orb)
       : orb_ (std::move(orb)) {}
 
     void Display (IDL::traits<Bundle>::ref_type vBundle) override

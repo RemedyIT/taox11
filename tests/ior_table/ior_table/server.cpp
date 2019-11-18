@@ -74,7 +74,7 @@ create_servant (IDL::traits<CORBA::ORB>::ref_type orb,
 int
 main (int argc, ACE_TCHAR *argv[])
 {
-  int16_t errors = 0;
+  int errors {};
   try
     {
       IDL::traits<CORBA::ORB>::ref_type orb = CORBA::ORB_init (argc, argv);
@@ -253,5 +253,5 @@ main (int argc, ACE_TCHAR *argv[])
       return 1;
     }
 
-  return 0;
+  return errors;
 }

@@ -418,7 +418,6 @@ namespace TAOX11_NAMESPACE
         this->get_element_type ();
 
       IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type val_type;
-      bool equivalent;
 
       DynamicAny::DynAnySeq &nc_values = const_cast<DynamicAny::DynAnySeq &> (values);
 
@@ -426,7 +425,7 @@ namespace TAOX11_NAMESPACE
       {
         val_type = nc_values[i]->type ();
 
-        equivalent = val_type->equivalent (element_type);
+        bool const equivalent = val_type->equivalent (element_type);
 
         if (equivalent)
         {

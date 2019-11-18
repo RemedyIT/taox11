@@ -31,8 +31,8 @@ class Client_Request_Interceptor final
 public:
 
   /// Constructor.
-  Client_Request_Interceptor (std::string orb_id,
-                              std::string forward_str);
+  Client_Request_Interceptor (const std::string& orb_id,
+                              const std::string& forward_str);
 
   /**
    * @name Methods Required by the Client Request Interceptor
@@ -65,8 +65,7 @@ public:
   //@}
 
 private:
-
-  ///The ID of the ORB this interceptor is registered with.
+  /// The ID of the ORB this interceptor is registered with.
   std::string orb_id_;
 
   /// Pseudo-reference to the ORB this interceptor is registered
@@ -74,7 +73,7 @@ private:
   IDL::traits<CORBA::ORB>::ref_type orb_;
 
   /// The number of requests intercepted by this interceptor.
-  uint32_t request_count_;
+  uint32_t request_count_ {};
 
   /// Stringified reference to the object the initial request will be
   /// forwarded to by this interceptor.

@@ -20,7 +20,7 @@ validate which _mwc.pl_ you are invoking by running `which mwc.pl`
 `TAO_ROOT`, I see some `xxxX11_xxx` environment variables. Where do these
 variables point to? |
 
-`TAOX11_BASE_ROOT` points to the package root
+`X11_BASE_ROOT` points to the package root
 directory (typically `<package_root>`). +
  `TAOX11_ROOT` point to the root directory of TAOX11 (typically
 `<package_root>/taox11`). +

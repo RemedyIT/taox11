@@ -35,7 +35,7 @@ project(portable_interceptor_server_idl) : ridl_core_defaults, install, pidl_ins
 project(portable_interceptor_server) : taox11_lib, install, taox11_pi, tao_pi_server {
   after       += portable_interceptor_server_idl
   sharedname   = taox11_pi_server
-  libout = $(TAOX11_ROOT)/../lib
+  libout = $(X11_BASE_ROOT)/lib
   dynamicflags += TAOX11_PI_SERVER_BUILD_DLL
 
   Source_Files {

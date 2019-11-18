@@ -21,7 +21,7 @@ project(taox11_dynamicany_idl) : ridl_defaults, taox11_valuetype,  install {
 project(taox11_dynamicany) : taox11_lib, install, taox11_valuetype, taox11_avoids_corba_e {
   after       += taox11_dynamicany_idl
   sharedname    = taox11_dynamicany
-  libout = $(TAOX11_ROOT)/../lib
+  libout = $(X11_BASE_ROOT)/lib
   dynamicflags  = TAOX11_DYNAMICANY_BUILD_DLL
 
   Source_Files {

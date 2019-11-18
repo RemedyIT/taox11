@@ -159,13 +159,13 @@ namespace TAOX11_NAMESPACE
       {
       public:
         /// Constructor
-        ObjectReferenceFactory_proxy (
+        explicit ObjectReferenceFactory_proxy (
             IDL::traits<PortableInterceptor::ObjectReferenceFactory>::ref_type x11_orf)
           : x11_orf_ (std::move (x11_orf))
         {}
         virtual TAO_CORBA::ValueBase *_copy_value () override
         {
-          TAO_CORBA::ValueBase *ret_val = nullptr;
+          TAO_CORBA::ValueBase *ret_val {};
           ACE_NEW_THROW_EX (
             ret_val,
             ObjectReferenceFactory_proxy (

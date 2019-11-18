@@ -378,7 +378,6 @@ namespace TAOX11_NAMESPACE
 
       IDL::traits< CORBA::TypeCode>::ref_type value_tc;
       IDL::traits< CORBA::TypeCode>::ref_type my_tc;
-      bool equivalent;
 
       // member_type() does not work with aliased type codes.
       IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
@@ -391,7 +390,7 @@ namespace TAOX11_NAMESPACE
 
         value_tc = values[i].value()->type ();
 
-        equivalent = my_tc->equivalent (value_tc);
+        bool const equivalent = my_tc->equivalent (value_tc);
 
         if (!equivalent)
         {
@@ -585,7 +584,6 @@ namespace TAOX11_NAMESPACE
       }
 
       IDL::traits<DynamicAny::DynAny>::ref_type tmp;
-      bool member_equal;
 
       for (uint32_t i = 0; i < this->component_count_; ++i)
       {
@@ -594,7 +592,7 @@ namespace TAOX11_NAMESPACE
         tmp = rhs->current_component ();
 
         // Recursive step.
-        member_equal = tmp->equal (this->da_members_[i]);
+        bool const member_equal = tmp->equal (this->da_members_[i]);
 
         if (!member_equal)
         {

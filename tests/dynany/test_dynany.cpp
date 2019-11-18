@@ -197,7 +197,7 @@ Test_DynAny::run_test ()
         IDL::traits<DynamicAny::DynAny>::ref_type fa1 =
             dynany_factory->create_dyn_any (in2);
 
-        int16_t data_short;
+        int16_t data_short {};
         in3 = fa1->get_any ();
         in3>>= data_short;
 

@@ -64,7 +64,7 @@ project(taox11_portableserver_idl) : ridl_core_defaults, install, pidl_install {
 project(taox11_portableserver) : taox11_lib, portableserver, taox11_anytypecode {
   after += taox11_portableserver_idl
   sharedname = taox11_portable_server
-  libout = $(TAOX11_ROOT)/../lib
+  libout = $(X11_BASE_ROOT)/lib
   dynamicflags += TAOX11_PORTABLESERVER_BUILD_DLL
 
   Source_Files {

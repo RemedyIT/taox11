@@ -29,18 +29,28 @@ module BRIX11
           Exec.update_run_environment('LD_LIBRARY_PATH', ENV['LD_LIBRARY_PATH']) unless Exec.has_run_environment?('LD_LIBRARY_PATH')
         end
 
+        # standard
+        taox11_root = Exec.get_run_environment('TAOX11_ROOT')
+        taox11_root ||= Exec.update_run_environment('TAOX11_ROOT', File.expand_path(File.join(ROOT, '..', '..')))
+        base_root = Exec.get_run_environment('X11_BASE_ROOT')
+        base_root ||= Exec.update_run_environment('X11_BASE_ROOT', File.dirname(BRIX11_BASE_ROOT))
+        ace_root = Exec.get_run_environment('ACE_ROOT')
+        unless ace_root
+          # in case of alternative dir layout (for Github CI builds)
+          ace_root = Exec.update_run_environment('ACE_ROOT', File.join(taox11_root, 'ACE', 'ACE')) if File.directory?(File.join(taox11_root, 'ACE', 'ACE'))
+          # regular layout
+          ace_root ||= Exec.update_run_environment('ACE_ROOT', File.join(base_root, 'ACE', 'ACE'))
+        end
+        Exec.update_run_environment('MPC_ROOT', File.expand_path(File.join(ace_root, '..', 'MPC'))) unless Exec.has_run_environment?('MPC_ROOT')
+        Exec.update_run_environment('MPC_BASE', File.join(taox11_root, 'bin', 'MPC')) unless Exec.has_run_environment?('MPC_BASE')
+        Exec.update_run_environment('TAO_ROOT', File.expand_path(File.join(ace_root, '..', 'TAO'))) unless Exec.has_run_environment?('TAO_ROOT')
+
         # should we prepare for crossbuilds?
         if BRIX11.options.config.crossbuild
           x11_host_root = Exec.get_run_environment('X11_HOST_ROOT', true)
           BRIX11.log_fatal('Crossbuild configuration REQUIRES a X11_HOST_ROOT variable defined!') unless x11_host_root
           Exec.update_run_environment('X11_HOST_ROOT', x11_host_root)
-          target_root = Exec.get_run_environment('X11_TARGET_ROOT', true)
-          BRIX11.log_fatal('Crossbuild configuration REQUIRES a X11_TARGET_ROOT variable defined!') unless target_root
-          Exec.update_run_environment('X11_TARGET_ROOT', target_root)
-          base_root = Exec.get_run_environment('TAOX11_BASE_ROOT')
-          base_root ||= Exec.update_run_environment('TAOX11_BASE_ROOT', target_root)
-          Exec.update_run_environment('ACE_ROOT', File.join(base_root, 'ACE', 'ACE')) unless Exec.has_run_environment?('ACE_ROOT')
-          # define HOST_ROOT for possible crossbuild tao_idl invocations
+          # define HOST_ROOT for possible crossbuild tao_idl invocations (requires reguler layout)
           Exec.update_run_environment('HOST_ROOT', File.join(x11_host_root, 'ACE', 'ACE')) unless Exec.has_run_environment?('HOST_ROOT')
           # and update library search paths for host (tool) libs
           if Exec.mswin?
@@ -49,10 +59,6 @@ module BRIX11
             Exec.update_run_environment('LD_LIBRARY_PATH', [File.join(x11_host_root, 'lib'), File.join(Exec.get_run_environment('HOST_ROOT'), 'lib')], :prepend)
           end
         else # or regular build environment
-          base_root = Exec.get_run_environment('TAOX11_BASE_ROOT')
-          base_root ||= Exec.update_run_environment('TAOX11_BASE_ROOT', File.dirname(BRIX11_BASE_ROOT))
-          ace_root = Exec.get_run_environment('ACE_ROOT')
-          ace_root ||= Exec.update_run_environment('ACE_ROOT', File.join(base_root, 'ACE', 'ACE'))
           # and update library search paths for (tool) libs
           if Exec.mswin?
             Exec.update_run_environment('PATH', [File.join(base_root, 'lib'), File.join(ace_root, 'lib')], :prepend)
@@ -61,11 +67,7 @@ module BRIX11
           end
         end
 
-        # common for all
-        Exec.update_run_environment('MPC_ROOT', File.join(base_root, 'ACE', 'MPC')) unless Exec.has_run_environment?('MPC_ROOT')
-        Exec.update_run_environment('MPC_BASE', File.join(base_root, 'taox11', 'bin', 'MPC')) unless Exec.has_run_environment?('MPC_BASE')
-        Exec.update_run_environment('TAO_ROOT', File.join(base_root, 'ACE', 'TAO')) unless Exec.has_run_environment?('TAO_ROOT')
-        Exec.update_run_environment('TAOX11_ROOT', File.join(base_root, 'taox11')) unless Exec.has_run_environment?('TAOX11_ROOT')
+        # ridl
         Exec.update_run_environment('RIDL_BE_SELECT', 'c++11') unless Exec.has_run_environment?('RIDL_BE_SELECT')
         ridl_be_path = Exec.get_run_environment('RIDL_BE_PATH')
         # if not set yet update taking crossbuild setting into account
@@ -75,8 +77,8 @@ module BRIX11
                               :append)
         ridl_be_path.split(/:|;/).each { |p| $: << p unless $:.include?(p) }
         # update executable search path for MPC scripts (mwc.pl/mpc.pl)
-        Exec.update_run_environment('PATH', File.join(base_root, 'taox11', 'bin'), :prepend)
-        Project.mpc_path = File.join(base_root, 'taox11', 'bin')
+        Exec.update_run_environment('PATH', File.join(taox11_root, 'bin'), :prepend)
+        Project.mpc_path = File.join(taox11_root, 'bin')
 
         # load collection
         Dir.glob(File.join(ROOT, 'lib', '*.rb')).each { |p| require "brix/taox11/lib/#{File.basename(p)}"}

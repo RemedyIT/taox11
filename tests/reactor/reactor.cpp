@@ -17,7 +17,7 @@ class TestHandler final
   : public ACE_Event_Handler
 {
 public:
-  TestHandler (IDL::traits<CORBA::ORB>::ref_type orb)
+  explicit TestHandler (IDL::traits<CORBA::ORB>::ref_type orb)
     : orb_ (std::move(orb)),
       timeout_triggered_ (false)
   {}

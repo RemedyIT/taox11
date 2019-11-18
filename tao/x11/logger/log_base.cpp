@@ -109,7 +109,7 @@ namespace x11_logger
   class ACE_Log_Guard
   {
   public:
-    ACE_Log_Guard (ACE_Log_Msg* ace_log)
+    explicit ACE_Log_Guard (ACE_Log_Msg* ace_log)
       : logger_ (ace_log)
     {
       this->logger_->acquire ();
