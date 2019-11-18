@@ -47,22 +47,16 @@ jobs:
       $(X11_BASE_ROOT)/bin/brix11 -t gnuace -E configure -w workspace -b 64
     displayName: Run brix11 configure
   - powershell: |
-      pushd $(X11_BASE_ROOT)
-      bin/brix11 -E env
-      bin/brix11 -E configure -w workspace -P
-      popd
+      $(X11_BASE_ROOT)/bin/brix11 -E env
+      $(X11_BASE_ROOT)/bin/brix11 -E configure -w workspace -P
     displayName: Print brix11 configuration
   - powershell: |
-      pushd $(X11_BASE_ROOT)
-      bin/brix11 -E gen build workspace.mwc
-      bin/brix11 -E gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
-      popd
+      $(X11_BASE_ROOT)/bin/brix11 -E gen build workspace.mwc
+      $(X11_BASE_ROOT)/bin/brix11 -E gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
     displayName: Run brix11 gen build
   - powershell: |
-      pushd $(X11_BASE_ROOT)
-      bin/brix11 -E make -N -d
-      bin/brix11 -E make -N -d $(TAOX11_ROOT)/examples
-      bin/brix11 -E make -N -d $(TAOX11_ROOT)/orbsvcs/tests
-      bin/brix11 -E make -N -d $(TAOX11_ROOT)/tests
-      popd
+      $(X11_BASE_ROOT)/bin/brix11 -E make -N -d
+      $(X11_BASE_ROOT)/bin/brix11 -E make -N -d $(TAOX11_ROOT)/examples
+      $(X11_BASE_ROOT)/bin/brix11 -E make -N -d $(TAOX11_ROOT)/orbsvcs/tests
+      $(X11_BASE_ROOT)/bin/brix11 -E make -N -d $(TAOX11_ROOT)/tests
     displayName: Run brix11 make
