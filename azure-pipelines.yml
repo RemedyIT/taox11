@@ -48,7 +48,6 @@ jobs:
     displayName: Run brix11 configure
   - powershell: |
       $(X11_BASE_ROOT)/bin/brix11 -E env
-      $(X11_BASE_ROOT)/bin/brix11 -E configure -w workspace -P
     displayName: Print brix11 configuration
   - powershell: |
       $(X11_BASE_ROOT)/bin/brix11 -E gen build workspace.mwc
@@ -60,3 +59,5 @@ jobs:
       $(X11_BASE_ROOT)/bin/brix11 -E make -N -d $(TAOX11_ROOT)/orbsvcs/tests
       $(X11_BASE_ROOT)/bin/brix11 -E make -N -d $(TAOX11_ROOT)/tests
     displayName: Run brix11 make
+
+    #      $(X11_BASE_ROOT)/bin/brix11 -E configure -w workspace -P
