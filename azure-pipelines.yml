@@ -1,0 +1,84 @@
+variables:
+   DOC_ROOT: $(Build.SourcesDirectory)/ACE
+   ACE_ROOT: $(Build.SourcesDirectory)/ACE/ACE
+   MPC_ROOT: $(Build.SourcesDirectory)/ACE/MPC
+   TAO_ROOT: $(Build.SourcesDirectory)/ACE/TAO
+   X11_BASE_ROOT: $(Build.SourcesDirectory)/axcioma
+   RIDL_ROOT: $(Build.SourcesDirectory)/ridl
+   TAOX11_ROOT: $(Build.SourcesDirectory)
+   system.prefergit: true
+
+resources:
+- repo: self
+  fetchDepth: 1
+
+jobs:
+- job: Linux
+  timeoutInMinutes: 120
+  pool:
+    vmImage: ubuntu-18.04
+  strategy:
+    matrix:
+      GCC48:
+        CC: gcc-4.8
+        CXX: g++-4.8
+        PackageDeps: g++-4.8
+        platform_file: include $(ACE_ROOT)/include/makeinclude/platform_linux.GNU
+      GCC6:
+        CC: gcc-6
+        CXX: g++-6
+        PackageDeps: g++-6
+        platform_file: include $(ACE_ROOT)/include/makeinclude/platform_linux.GNU
+      GCC7:
+        CC: gcc-7
+        CXX: g++-7
+        PackageDeps: g++-7
+        platform_file: include $(ACE_ROOT)/include/makeinclude/platform_linux.GNU
+      GCC8:
+        CC: gcc-8
+        CXX: g++-8
+        PackageDeps: g++-8
+        platform_file: include $(ACE_ROOT)/include/makeinclude/platform_linux.GNU
+      GCC9:
+        CC: gcc-9
+        CXX: g++-9
+        PackageDeps: g++-9
+        platform_file: include $(ACE_ROOT)/include/makeinclude/platform_linux.GNU
+  steps:
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '>= 2.4'
+      addToPath: true
+    displayName: Install ruby
+  - script: |
+      wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+      sudo apt-add-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ $(Repo) main"
+    displayName: Add repository ($(Repo))
+    condition: and(succeeded(), ne(variables['Repo'], ''))
+  - script: |
+      sudo apt-get --yes update
+      sudo apt-get --yes install libxerces-c-dev libssl-dev $(PackageDeps)
+    displayName: install system package dependencies
+  - powershell: |
+      git clone --depth 1 --branch ACE+TAO-6_5_6 git://github.com/DOCGroup/ACE_TAO.git $(DOC_ROOT)
+      git clone --depth 1 --branch ACE+TAO-6_5_6 git://github.com/DOCGroup/MPC.git $(MPC_ROOT)
+      git clone --depth 1 git://github.com/RemedyIT/axcioma.git $(X11_BASE_ROOT)
+      git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
+    displayName: git clone dependent repositories
+  - powershell: |
+      $(X11_BASE_ROOT)/bin/brix11 -t gnuace configure -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
+    displayName: Run brix11 configure
+  - powershell: |
+      $(X11_BASE_ROOT)/bin/brix11 env
+      $(X11_BASE_ROOT)/bin/brix11 configure -P
+    displayName: Print brix11 configuration
+  - powershell: |
+      $(X11_BASE_ROOT)/bin/brix11 gen build axcioma/workspace.mwc
+      $(X11_BASE_ROOT)/bin/brix11 gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
+    displayName: Run brix11 gen build
+  - powershell: |
+      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(X11_BASE_ROOT)
+      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/examples
+      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/orbsvcs/tests
+      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/tests
+    displayName: Run brix11 make
