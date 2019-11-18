@@ -2,6 +2,7 @@ variables:
    DOC_ROOT: $(Build.SourcesDirectory)/ACE
    ACE_ROOT: $(Build.SourcesDirectory)/ACE/ACE
    MPC_ROOT: $(Build.SourcesDirectory)/ACE/MPC
+   MPC_BASE: $(Build.SourcesDirectory)/bin/MPC
    TAO_ROOT: $(Build.SourcesDirectory)/ACE/TAO
    RIDL_ROOT: $(Build.SourcesDirectory)/ridl
    X11_BASE_ROOT: $(Build.SourcesDirectory)/axcioma
