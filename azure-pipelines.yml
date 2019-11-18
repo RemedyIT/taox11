@@ -44,10 +44,7 @@ jobs:
       git clone --depth 1 git://github.com/RemedyIT/axcioma.git $(X11_BASE_ROOT)
     displayName: git clone dependent repositories
   - powershell: |
-      pushd $(X11_BASE_ROOT)
-      bin/brix11 -E env
-      bin/brix11 -t gnuace -E configure -w workspace -b 64
-      popd
+      $(X11_BASE_ROOT)/bin/brix11 -t gnuace -E configure -w workspace -b 64
     displayName: Run brix11 configure
   - powershell: |
       pushd $(X11_BASE_ROOT)
