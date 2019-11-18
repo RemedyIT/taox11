@@ -4,7 +4,7 @@ variables:
    MPC_ROOT: $(Build.SourcesDirectory)/ACE/MPC
    TAO_ROOT: $(Build.SourcesDirectory)/ACE/TAO
    RIDL_ROOT: $(Build.SourcesDirectory)/ridl
-   TAOX11_BASE_ROOT: $(Build.SourcesDirectory)/axcioma
+   X11_BASE_ROOT: $(Build.SourcesDirectory)/axcioma
    TAOX11_ROOT: $(Build.SourcesDirectory)
    system.prefergit: true
 
