@@ -4,7 +4,7 @@ variables:
    MPC_ROOT: $(Build.SourcesDirectory)/ACE/MPC
    TAO_ROOT: $(Build.SourcesDirectory)/ACE/TAO
    X11_BASE_ROOT: $(Build.SourcesDirectory)/axcioma
-   RIDL_ROOT: $(Build.SourcesDirectory)/axcioma/ridl
+   RIDL_ROOT: $(Build.SourcesDirectory)/ridl
    TAOX11_ROOT: $(Build.SourcesDirectory)
    system.prefergit: true
 
@@ -44,7 +44,7 @@ jobs:
       git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
     displayName: git clone dependent repositories
   - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 -t gnuace configure
+      $(X11_BASE_ROOT)/bin/brix11 -t gnuace configure -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
     displayName: Run brix11 configure
   - powershell: |
       $(X11_BASE_ROOT)/bin/brix11 env
