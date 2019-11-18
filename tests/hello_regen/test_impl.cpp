@@ -18,7 +18,7 @@ namespace Test
 
   // generated from ImplSourceWriter#enter_interface
 
-  // generated from c++11/templates/impl/src/interface_pre.erb
+  // generated from c++11/templates/impl/src/interface_pre
 
   namespace _impl {
 
@@ -37,7 +37,7 @@ namespace Test
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo[Dtor Body]
     }
 
-    // generated from c++11/templates/impl/src/interface_post.erb
+    // generated from c++11/templates/impl/src/interface_post
 
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[User Public]
     // your public implementations
@@ -56,7 +56,7 @@ namespace Test
 
   // generated from ImplSourceWriter#enter_interface
 
-  // generated from c++11/templates/impl/src/interface_pre.erb
+  // generated from c++11/templates/impl/src/interface_pre
 
   namespace _impl {
 
@@ -75,7 +75,7 @@ namespace Test
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[Dtor Body]
     }
 
-  // generated from c++11/templates/impl/src/operation.erb
+  // generated from c++11/templates/impl/src/operation
   std::string
   Hello::get_string ()
   {
@@ -85,7 +85,7 @@ namespace Test
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello::get_string[Body]
   }
 
-  // generated from c++11/templates/impl/src/operation.erb
+  // generated from c++11/templates/impl/src/operation
   void
   Hello::create_foo (
       IDL::traits< ::Test::Foo>::ref_type& foo_inst)
@@ -96,7 +96,7 @@ namespace Test
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello::create_foo[Body]
   }
 
-  // generated from c++11/templates/impl/src/operation.erb
+  // generated from c++11/templates/impl/src/operation
   ::Test::Foo::S
   Hello::update (
       const ::Test::Foo::S& s)
@@ -108,7 +108,7 @@ namespace Test
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello::update[Body]
   }
 
-  // generated from c++11/templates/impl/src/operation.erb
+  // generated from c++11/templates/impl/src/operation
   void
   Hello::shutdown ()
   {
@@ -117,7 +117,7 @@ namespace Test
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello::shutdown[Body]
   }
 
-  // generated from c++11/templates/impl/src/attribute.erb
+  // generated from c++11/templates/impl/src/attribute
   int32_t
   Hello::int_prop ()
   {
@@ -136,7 +136,7 @@ namespace Test
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello::int_prop[Setter Body]
   }
 
-    // generated from c++11/templates/impl/src/interface_post.erb
+    // generated from c++11/templates/impl/src/interface_post
 
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[User Public]
     // your public implementations

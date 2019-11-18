@@ -2,7 +2,7 @@
 project(x11_logger) : x11_logger_base {
   requires += x11_logging
   sharedname    = x11_logger
-  libout = $(TAOX11_ROOT)/../lib
+  libout = $(X11_BASE_ROOT)/lib
   dynamicflags  = X11_LOGGER_BUILD_DLL
 
   Source_Files {

@@ -18,7 +18,7 @@ project(taox11_cosnaming_stub) : taox11_orbsvcslib {
   dynamicflags+= TAOX11_COSNAMING_BUILD_DLL
   after       += taox11_cosnaming_idl
 
-  libout = $(TAOX11_ROOT)/../lib
+  libout = $(X11_BASE_ROOT)/lib
 
   Source_Files {
     CosNamingC.cpp
@@ -35,7 +35,7 @@ project(taox11_cosnaming_skel) : taox11_orbsvcslib, taox11_portableserver, taox1
   dynamicflags+= TAOX11_COSNAMING_BUILD_DLL
   after       += taox11_cosnaming_idl
 
-  libout = $(TAOX11_ROOT)/../lib
+  libout = $(X11_BASE_ROOT)/lib
 
   Source_Files {
     CosNamingS.cpp

@@ -23,7 +23,7 @@ project(taox11_bidir_giop) : taox11_lib, install, taox11_pi, bidir_giop {
   after       += taox11_bidir_giop_idl
   sharedname   = taox11_bidir_giop
   dynamicflags += TAOX11_BIDIRGIOP_BUILD_DLL
-  libout = $(TAOX11_ROOT)/../lib
+  libout = $(X11_BASE_ROOT)/lib
 
   Source_Files {
     bidir_giop.cpp

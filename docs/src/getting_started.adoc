@@ -278,7 +278,7 @@ Another way to run all tests is to use the output of the BRIX11
 _environment_ command to create a 'setenv' script and use it to update
 your environment with `source /path/of/setenv` (or use the _environment_
 command directly see `brix11 help env`) and then execute
-`perl $ACE_ROOT/bin/auto_run_tests.pl -r $TAOX11_BASE_ROOT -l $TAOX11_BASE_ROOT/bin/taox11_tests.lst`
+`perl $ACE_ROOT/bin/auto_run_tests.pl -r $TAOX11_ROOT -l $TAOX11_ROOT/bin/taox11_tests.lst`
 to run the tests.
 
 More information about BRIX11 can be found

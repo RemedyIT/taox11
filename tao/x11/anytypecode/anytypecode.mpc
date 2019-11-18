@@ -37,7 +37,7 @@ project(taox11_anytypecode_idl) : ridl_core_defaults, install, pidl_install {
 project(taox11_anytypecode) : taox11_lib, taox11_defaults, anytypecode  {
   after += taox11_anytypecode_idl
   sharedname = taox11_anytypecode
-  libout = $(TAOX11_ROOT)/../lib
+  libout = $(X11_BASE_ROOT)/lib
   dynamicflags += TAOX11_ANYTYPECODE_BUILD_DLL
 
   Source_Files {
