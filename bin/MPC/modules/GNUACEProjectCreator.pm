@@ -63,17 +63,17 @@ sub fill_value {
     return ((defined $incs && $incs =~ /tao/i) ||
             (defined $libs && $libs =~ /tao/i));
   }
-  elsif ($name eq 'ciao') {
+  elsif ($name eq 'ciaox11') {
     my($incs) = $self->get_assignment('includes');
     my($libs) = $self->get_assignment('libpaths');
-    return ((defined $incs && $incs =~ /ciao/i) ||
-            (defined $libs && $libs =~ /ciao/i));
+    return ((defined $incs && $incs =~ /ciaox11/i) ||
+            (defined $libs && $libs =~ /ciaox11/i));
   }
-  elsif ($name eq 'dance') {
+  elsif ($name eq 'dancex11') {
     my($incs) = $self->get_assignment('includes');
     my($libs) = $self->get_assignment('libpaths');
-    return ((defined $incs && $incs =~ /DAnCE/i) ||
-            (defined $libs && $libs =~ /DAnCE/i));
+    return ((defined $incs && $incs =~ /dancex11/i) ||
+            (defined $libs && $libs =~ /dancex11/i));
   }
   elsif ($name eq 'genins') {
     my $ins = '';
