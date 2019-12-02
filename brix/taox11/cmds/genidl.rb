@@ -49,7 +49,7 @@ module BRIX11
           options[:genidl][:interface] = options[:genidl][:name].sub(/\A(.)/) { $1.upcase }
         end
         # run file creation task for IDL file
-        unless File.exists?("#{options[:genidl][:name]}.idl") && !options[:force]
+        unless File.exist?("#{options[:genidl][:name]}.idl") && !options[:force]
           w = IDLWriter.new(GenFile.new("#{options[:genidl][:name]}.idl"), options[:genidl])
           w.visit_corba_idl
         end

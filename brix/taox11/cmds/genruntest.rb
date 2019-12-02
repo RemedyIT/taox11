@@ -42,7 +42,7 @@ module BRIX11
           options[:genruntest][:name] = argv.shift
         end
         # run file creation task for test runner
-        unless File.exists?("#{options[:genruntest][:name]}.pl") && !options[:force]
+        unless File.exist?("#{options[:genruntest][:name]}.pl") && !options[:force]
           w = RunTestWriter.new(GenFile.new("#{options[:genruntest][:name]}.pl"), options[:genruntest])
           w.visit_corba_run_test
         end

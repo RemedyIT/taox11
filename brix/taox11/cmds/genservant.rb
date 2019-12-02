@@ -84,7 +84,7 @@ module BRIX11
         # run servant source file generation from IDL files
         idl_files.each do |idl|
           svt = File.join(File.dirname(idl), "#{File.basename(idl, '.idl')}#{ridl_pfx}.cpp")
-          unless File.exists?(svt) && !options[:force]
+          unless File.exist?(svt) && !options[:force]
             ERIDL.run('c++11', ridl_argv + ['-o', File.dirname(idl), idl]) do
               IDL::Cxx11::ImplHeaderWriter.helper ImplHelper
               IDL::Cxx11::ImplSourceWriter.helper ImplHelper

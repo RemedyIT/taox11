@@ -69,7 +69,7 @@ module BRIX11
           options[:genmpc][:server].concat(options[:genmpc][:idl].collect {|i| "#{i}_impl" }) unless options[:genmpc][:idl] == true
         end
         # run file creation task for MPC file
-        unless File.exists?("#{options[:genmpc][:name]}.mpc") && !options[:force]
+        unless File.exist?("#{options[:genmpc][:name]}.mpc") && !options[:force]
           w = MPCWriter.new(GenFile.new("#{options[:genmpc][:name]}.mpc"), options[:genmpc])
           w.visit_corba_mpc
         end
