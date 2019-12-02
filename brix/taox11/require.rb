@@ -70,10 +70,10 @@ module BRIX11
         # ridl
         Exec.update_run_environment('RIDL_BE_SELECT', 'c++11') unless Exec.has_run_environment?('RIDL_BE_SELECT')
         ridl_be_path = Exec.get_run_environment('RIDL_BE_PATH')
-        # if not set yet update taking crossbuild setting into account
+        # if not set yet update
         ridl_be_path ||= Exec.update_run_environment(
                               'RIDL_BE_PATH',
-                              (BRIX11.options.config.crossbuild ? x11_host_root : base_root),
+                              taox11_root,
                               :append)
         ridl_be_path.split(/:|;/).each { |p| $: << p unless $:.include?(p) }
         # update executable search path for MPC scripts (mwc.pl/mpc.pl)
