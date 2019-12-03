@@ -60,7 +60,7 @@ module BRIX11
         end
 
         # run file creation task for client main
-        unless File.exists?("#{options[:gencli][:name]}.cpp") && !options[:force]
+        unless File.exist?("#{options[:gencli][:name]}.cpp") && !options[:force]
           w = ClientWriter.new(GenFile.new("#{options[:gencli][:name]}.cpp", regenerate: true), options[:gencli])
           w.visit_corba_client
         end

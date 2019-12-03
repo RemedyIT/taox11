@@ -72,7 +72,7 @@ module BRIX11
         options[:gensrv][:impl] = options[:gensrv][:idl].collect {|i| "#{i}_impl" } if options[:gensrv][:impl] == true
 
         # run file creation task for server main
-        unless File.exists?("#{options[:gensrv][:name]}.cpp") && !options[:force]
+        unless File.exist?("#{options[:gensrv][:name]}.cpp") && !options[:force]
           w = ServerWriter.new(GenFile.new("#{options[:gensrv][:name]}.cpp", regenerate: true), options[:gensrv])
           w.visit_corba_server
         end
