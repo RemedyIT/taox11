@@ -40,8 +40,15 @@ namespace std
     // Thread safe conversion
     std::string mb(MB_CUR_MAX, '\0');
     std::mbstate_t state = std::mbstate_t ();
-    std::wcrtomb(std::addressof(mb[0]), _v, &state);
-    return _os << "'" << mb << "'";
+    std::size_t const ret = std::wcrtomb(std::addressof(mb[0]), _v, std::addressof(state));
+    if (ret > 0)
+      {
+        return _os << "'" << mb << "'";
+      }
+    else
+      {
+        return _os << "''";
+      }
   }
 }
 
