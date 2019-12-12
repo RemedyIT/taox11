@@ -24,7 +24,7 @@ module IDL
         when Expression::Enumerator
           ((scope && (scope == exp.node.enclosure)) ? exp.node.enum.cxxname : '::'+exp.node.enum.scoped_cxxname) +'::'+exp.node.cxxname
         else
-          raise RuntimeError, "unknown expression type: #{exp.class.name}"
+          raise "unknown expression type: #{exp.class.name}"
         end
       end
 
@@ -57,7 +57,7 @@ module IDL
         when Expression::Operation::Mod
           s = expression_to_s(op[0], scope) + " % " + expression_to_s(op[1], scope)
         else
-          raise RuntimeError, "unknown operation: #{exp.type.name}"
+          raise "unknown operation: #{exp.type.name}"
         end
         "(" + s + ")"
       end

@@ -346,11 +346,11 @@ module IDL
       protected
 
       def write_open_scope(scope)
-        raise RuntimeError, "class including Base::CodeWriterMethods needs to implement #_open_scope and #_close_scope"
+        raise "class including Base::CodeWriterMethods needs to implement #_open_scope and #_close_scope"
       end
 
       def write_close_scope(scope)
-        raise RuntimeError, "class including Base::CodeWriterMethods needs to implement #_open_scope and #_close_scope"
+        raise "class including Base::CodeWriterMethods needs to implement #_open_scope and #_close_scope"
       end
 
       public
@@ -367,7 +367,7 @@ module IDL
 
       def at_global_scope(&block)
         _cur_scope = @properties[:_context][:cur_scope]
-        raise RuntimeError, "cannot break out scope for #{_cur_scope.typename}" unless _cur_scope.nil? || _cur_scope.is_a?(IDL::AST::Module)
+        raise "cannot break out scope for #{_cur_scope.typename}" unless _cur_scope.nil? || _cur_scope.is_a?(IDL::AST::Module)
         if _cur_scope
           printiln('// generated from Base::CodeWriter#at_global_scope')
           @properties[:_context][:scopes].each do |_scope|
