@@ -7,6 +7,7 @@
  */
 #include "testlib/taox11_testlog.h"
 #include "hello.h"
+#include "testC.h"
 
 Hello_impl::Hello_impl (IDL::traits<CORBA::ORB>::ref_type orb)
   : orb_ (std::move(orb))
@@ -29,7 +30,7 @@ std::string
 Hello_impl::get_string2 ()
 {
   TAOX11_TEST_INFO << "Hello_impl::get_string2()" << std::endl;
-  return "Foo";
+  return Test::foo;
 }
 
 void

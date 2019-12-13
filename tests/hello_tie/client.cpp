@@ -78,8 +78,16 @@ int main(int argc, char* argv[])
 
       TAOX11_TEST_INFO << "narrowed Hello interface" << std::endl;
 
-      TAOX11_TEST_INFO << "hello->get_string () returned " << hello->get_string ()
-        << std::endl;
+      std::string const hello_string = hello->get_string ();
+      TAOX11_TEST_INFO << "hello->get_string () returned <" << hello_string
+        << ">" << std::endl;
+
+      if (hello_string != Test::foo)
+      {
+        TAOX11_TEST_ERROR << "ERROR: get_string returned <" << hello_string
+                          << "> but should have returned <" << Test::foo << ">"
+                          << std::endl;
+      }
 
       TAOX11_TEST_INFO << "shutting down...";
 

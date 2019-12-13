@@ -9,6 +9,9 @@
 /// Put the interfaces in a module, to avoid global namespace pollution
 module Test
 {
+  /// String to be returned by get_string specialization
+  const string foo = "Foo";
+
   /// A very simple interface
   interface Hello
   {
