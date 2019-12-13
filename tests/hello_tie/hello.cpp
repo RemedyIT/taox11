@@ -25,6 +25,13 @@ Hello_impl::get_string ()
   return "Hello_impl there!";
 }
 
+std::string
+Hello_impl::get_string2 ()
+{
+  TAOX11_TEST_INFO << "Hello_impl::get_string2()" << std::endl;
+  return "Foo";
+}
+
 void
 Hello_impl::shutdown ()
 {

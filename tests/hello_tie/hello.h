@@ -20,7 +20,7 @@ public:
   virtual ~Hello_impl ();
 
   std::string get_string ();
-  std::string get_string2 () {return "Foo";};
+  std::string get_string2 ();
 
   void shutdown ();
 
