@@ -193,6 +193,12 @@ module IDL
       def scoped_skel_cxxname
         scoped_skel_cxxnamespace+'::'+cxxname
       end
+      def tie_cxxname
+        cxxname+'_tie'
+      end
+      def scoped_tie_cxxname
+        scoped_skel_cxxnamespace+'::'+cxxname+'_tie'
+      end
     end
 
     IDL::AST::Interface.class_eval do

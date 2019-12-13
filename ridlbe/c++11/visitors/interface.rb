@@ -193,12 +193,24 @@ module IDL
         node.skel_cxxname
       end
 
+      def tie_cxxname
+        node.tie_cxxname
+      end
+
       def scoped_skel_cxxname
         node.scoped_skel_cxxname
       end
 
+      def scoped_tie_cxxname
+        node.scoped_tie_cxxname
+      end
+
       def scoped_skel_cxxtype
         '::'+node.scoped_skel_cxxname
+      end
+
+      def scoped_tie_cxxtype
+        '::'+node.scoped_tie_cxxname
       end
 
       def proxy_cxxname
@@ -233,7 +245,6 @@ module IDL
 
       map_template :typecode, :typecode
       map_template :tao_typecode, :interface_typecode
-
     end
 
   end

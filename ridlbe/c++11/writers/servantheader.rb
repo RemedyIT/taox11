@@ -39,8 +39,13 @@ module IDL
       end
 
       def post_visit(parser)
+        if params[:gen_tie]
+          visit_servant_tie(parser)
+        end
+
         # Servant traits specializations
         visit_servant_traits_specializations(parser)
+
         super
         visitor(PostVisitor).visit
       end
@@ -103,6 +108,10 @@ module IDL
         writer(ServantHeaderSrvTraitsWriter).visit_nodes(parser)
       end
 
+      def visit_servant_tie(parser)
+        writer(ServantHeaderTieWriter).visit_nodes(parser)
+      end
+
       def visit_includes(parser)
         writer(ServantHeaderIncludeWriter) do |w|
           w.include_guard = @include_guard
@@ -163,6 +172,48 @@ module IDL
         super
         return if node.is_local? || !node.supports_concrete_interface?
         visitor(ValuetypeVisitor).visit_servant_traits(node)
+      end
+    end
+
+    class ServantHeaderTieWriter < ServantHeaderBaseWriter
+      def initialize(output = STDOUT, opts = {})
+        super
+      end
+
+      def enter_module(node)
+        super
+        println()
+        printiln('// generated from ServantHeaderTieWriter#pre_visit')
+        printiln('namespace ' + node.cxxname)
+        printiln('{')
+        inc_nest
+      end
+
+      def leave_module(node)
+        dec_nest
+        printiln("} // namespace #{node.cxxname}")
+        println()
+        super
+      end
+
+      def enter_interface(node)
+        super
+        return if node.is_local? || node.is_abstract?
+        visitor(InterfaceVisitor).visit_tie_pre(node)
+        inc_nest  # POA
+        inc_nest  # servant tie template
+      end
+      def leave_interface(node)
+        return if node.is_local? || node.is_abstract?
+        dec_nest
+        dec_nest
+        visitor(InterfaceVisitor).visit_tie_post(node)
+        super
+      end
+
+      def visit_operation(node)
+        return if node.enclosure.is_local? || node.enclosure.is_abstract?
+        visitor(OperationVisitor).visit_tie_operation(node)
       end
     end
 

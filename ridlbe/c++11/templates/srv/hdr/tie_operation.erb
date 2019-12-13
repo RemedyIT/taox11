@@ -1,0 +1,13 @@
+
+// generated from <%= ridl_template_path %>
+% _args = arguments.dup
+/// @copydoc <%= doc_scoped_name %>
+<%= scoped_cxx_return_type %> <%= cxxname %> (<% if _args.empty? %>) override<% end %>
+% while !_args.empty?
+%   _arg = _args.shift
+    <%= _arg.scoped_stub_arg_type %> <%= _arg.cxxname %><%= _args.empty? ? ') override' : ',' %>
+% end
+{
+% _args = arguments.dup
+  <% unless is_void? %>return <% end %>tied_object_-><%= cxxname %>(<% while !_args.empty? %><% _arg = _args.shift %><% if _arg.direction == :in && _arg.is_reference? %>std::move(<% end %><%= _arg.cxxname %><% if _arg.direction == :in && _arg.is_reference? %>)<% end %><% unless _args.empty? %>, <% end %><% end %>);
+}
