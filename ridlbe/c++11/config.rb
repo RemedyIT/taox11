@@ -356,13 +356,13 @@ module IDL
       # determine output file path for client stub code
       idl_ext = (options[:idlext] ||= File.extname(options[:idlfile]))
       unless options[:idlfile].nil?
-        options[:output]  = options[:outputdir]+'/'+File.basename(options[:idlfile], idl_ext)+options[:stub_pfx]
-        options[:output_ami_incl] = options[:outputdir]+'/'+File.basename(options[:idlfile], idl_ext)+options[:ami_pfx]+options[:stub_pfx]+options[:hdr_ext]
+        options[:output]  = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:stub_pfx])
+        options[:output_ami_incl] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:ami_pfx]+options[:stub_pfx]+options[:hdr_ext])
         options[:output_src] = options[:output] + options[:src_ext]
-        options[:output_prx] = options[:outputdir]+'/'+File.basename(options[:idlfile], idl_ext)+options[:stub_pfx]+options[:proxy_pfx]+options[:hdr_ext]
+        options[:output_prx] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:stub_pfx]+options[:proxy_pfx]+options[:hdr_ext])
         options[:output] << options[:hdr_ext]
         if options[:gen_typecodes] && options[:gen_anytypecode_source]
-          options[:output_atc]  = options[:outputdir]+'/'+File.basename(options[:idlfile], idl_ext)+options[:anytypecode_pfx]+options[:src_ext]
+          options[:output_atc]  = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:anytypecode_pfx]+options[:src_ext])
         end
       end
     end
@@ -433,43 +433,35 @@ module IDL
       options[:ami] = false
       # schedule productions
       unless options[:no_client_header]
-        co_hdr = if options[:output].nil?
-                   GenFile.new(nil, :output_file => $stdout)
-                 else
-                   GenFile.new(options[:output])
-                 end
-        IDL.push_production(:stub_header, ::IDL::Cxx11::StubHeaderWriter.new(co_hdr, options))
+        if options[:output]
+          co_hdr = GenFile.new(options[:output])
+          IDL.push_production(:stub_header, ::IDL::Cxx11::StubHeaderWriter.new(co_hdr, options))
+        end
       end
       unless options[:no_client_source]
-        co_src = if options[:output_src].nil?
-                   GenFile.new(nil, :output_file => $stdout)
-                 else
-                   GenFile.new(options[:output_src])
-                 end
-        IDL.push_production(:stub_source, ::IDL::Cxx11::StubSourceWriter.new(co_src, options))
+        if options[:output_src]
+          co_src = GenFile.new(options[:output_src])
+          IDL.push_production(:stub_source, ::IDL::Cxx11::StubSourceWriter.new(co_src, options))
+        end
       end
       unless options[:no_client_proxy]
-        co_prx = if options[:output_prx].nil?
-                   GenFile.new(nil, :output_file => $stdout)
-                 else
-                   GenFile.new(options[:output_prx])
-                 end
-        IDL.push_production(:stub_proxy, ::IDL::Cxx11::StubProxyWriter.new(co_prx, options))
+        if options[:output_prx]
+          co_prx = GenFile.new(options[:output_prx])
+          IDL.push_production(:stub_proxy, ::IDL::Cxx11::StubProxyWriter.new(co_prx, options))
+        end
       end
       unless !((options[:gen_anytypecode_source] || false) && options[:gen_typecodes])
-        co_atc = if options[:output_atc].nil?
-                   GenFile.new(nil, :output_file => $stdout)
-                 else
-                   GenFile.new(options[:output_atc])
-                 end
-        IDL.push_production(:any_typecode, ::IDL::Cxx11::AnyTypeCodeWriter.new(co_atc, options))
+        if options[:output_atc]
+          co_atc = GenFile.new(options[:output_atc])
+          IDL.push_production(:any_typecode, ::IDL::Cxx11::AnyTypeCodeWriter.new(co_atc, options))
+        end
       end
     end
 
     def self.generate_servant_skeletons(options)
       options[:skel_outputdir] = options[:outputdir] unless options[:skel_outputdir]
       unless options[:idlfile].nil?
-        options[:srv_output_hdr] = options[:skel_outputdir]+'/'+File.basename(options[:idlfile], options[:idlext])+options[:srv_pfx]
+        options[:srv_output_hdr] = File.join(options[:skel_outputdir], File.basename(options[:idlfile], options[:idlext])+options[:srv_pfx])
         options[:srv_output_src] = options[:srv_output_hdr] + options[:src_ext]
         options[:srv_output_prx] = options[:srv_output_hdr] + options[:proxy_pfx] + options[:hdr_ext]
         options[:srv_output_hdr] += options[:hdr_ext]
@@ -477,52 +469,40 @@ module IDL
         options[:srv_output_hdr] = options[:output]
       end
       unless options[:no_servant_header]
-        so_hdr = if options[:srv_output_hdr].nil?
-                   GenFile.new(nil, :output_file => $stdout)
-                 else
-                   GenFile.new(options[:srv_output_hdr])
-                 end
-        IDL.push_production(:skel_header, ::IDL::Cxx11::ServantHeaderWriter.new(so_hdr, options))
+        if options[:srv_output_hdr]
+          so_hdr = GenFile.new(options[:srv_output_hdr])
+          IDL.push_production(:skel_header, ::IDL::Cxx11::ServantHeaderWriter.new(so_hdr, options))
+        end
       end
       unless options[:no_servant_header]
-        so_prx = if options[:srv_output_hdr].nil?
-                   GenFile.new(nil, :output_file => $stdout)
-                 else
-                   GenFile.new(options[:srv_output_prx])
-                 end
-        IDL.push_production(:skel_proxy, ::IDL::Cxx11::ServantProxyWriter.new(so_prx, options))
+        if options[:srv_output_hdr]
+          so_prx = GenFile.new(options[:srv_output_prx])
+          IDL.push_production(:skel_proxy, ::IDL::Cxx11::ServantProxyWriter.new(so_prx, options))
+        end
       end
       unless options[:no_servant_code]
-        so_src = if options[:srv_output_hdr].nil?
-                   GenFile.new(nil, :output_file => $stdout)
-                 else
-                   GenFile.new(options[:srv_output_src])
-                 end
-        IDL.push_production(:skel_source, ::IDL::Cxx11::ServantSourceWriter.new(so_src, options))
+        if options[:srv_output_hdr]
+          so_src = GenFile.new(options[:srv_output_src])
+          IDL.push_production(:skel_source, ::IDL::Cxx11::ServantSourceWriter.new(so_src, options))
+        end
       end
     end
 
     def self.generate_implementations(options)
       options[:impl_outputdir] = options[:outputdir] unless options[:impl_outputdir]
       unless options[:idlfile].nil?
-        options[:impl_output] = options[:impl_outputdir]+'/'+File.basename(options[:idlfile], options[:idlext])+options[:impl_pfx]
+        options[:impl_output] = File.join(options[:impl_outputdir], File.basename(options[:idlfile], options[:idlext])+options[:impl_pfx])
         options[:impl_output_src] = options[:impl_output] + options[:src_ext]
         options[:impl_output] += options[:hdr_ext]
       else
         options[:impl_output] = options[:output]
       end
-      so = if options[:impl_output].nil?
-          GenFile.new(nil, :output_file => $stdout)
-        else
-          GenFile.new(options[:impl_output], :regenerate => true, :regen_keep_header => true)
-        end
-      IDL.push_production(:impl_header, ::IDL::Cxx11::ImplHeaderWriter.new(so, options))
-      so_src = if options[:impl_output].nil?
-          GenFile.new(nil, :output_file => $stdout)
-        else
-          GenFile.new(options[:impl_output_src], :regenerate => true, :regen_keep_header => true)
-        end
-      IDL.push_production(:impl_source, ::IDL::Cxx11::ImplSourceWriter.new(so_src, options))
+      if options[:impl_output]
+        so = GenFile.new(options[:impl_output], :regenerate => true, :regen_keep_header => true)
+        IDL.push_production(:impl_header, ::IDL::Cxx11::ImplHeaderWriter.new(so, options))
+        so_src = GenFile.new(options[:impl_output_src], :regenerate => true, :regen_keep_header => true)
+        IDL.push_production(:impl_source, ::IDL::Cxx11::ImplSourceWriter.new(so_src, options))
+      end
     end
 
     def self.generate_ami_support(options)
@@ -530,30 +510,24 @@ module IDL
         options[:ami] = true
         options[:ami_stub_outputdir] = options[:outputdir] unless options[:ami_stub_outputdir]
         unless options[:idlfile].nil?
-          options[:ami_stub_output] = options[:ami_stub_outputdir]+'/'+File.basename(options[:idlfile], options[:idlext])+options[:ami_pfx]+options[:stub_pfx]
+          options[:ami_stub_output] = File.join(options[:ami_stub_outputdir], File.basename(options[:idlfile], options[:idlext])+options[:ami_pfx]+options[:stub_pfx])
             options[:ami_stub_output_src] = options[:ami_stub_output] + options[:src_ext]
             options[:ami_stub_output_prx] = options[:ami_stub_output] + options[:proxy_pfx] + options[:hdr_ext]
             options[:ami_stub_output] += options[:hdr_ext]
         end
         # open output file(s)
-        co = if options[:ami_stub_output].nil?
-            GenFile.new(nil, :output_file => $stdout)
-          else
-            GenFile.new(options[:ami_stub_output])
-          end
-        IDL.push_production(:ami_stub_header, ::IDL::Cxx11::AmiStubHeaderWriter.new(co, options))
-        co_src = if options[:ami_stub_output_src].nil?
-            GenFile.new(nil, :output_file => $stdout)
-          else
-            GenFile.new(options[:ami_stub_output_src])
-          end
-        IDL.push_production(:ami_stub_source, ::IDL::Cxx11::AmiStubSourceWriter.new(co_src, options))
-        co_prx = if options[:ami_stub_output_prx].nil?
-            GenFile.new(nil, :output_file => $stdout)
-          else
-            GenFile.new(options[:ami_stub_output_prx])
-          end
-        IDL.push_production(:ami_stub_proxy, ::IDL::Cxx11::AmiStubProxyWriter.new(co_prx, options))
+        if options[:ami_stub_output]
+          co = GenFile.new(options[:ami_stub_output])
+          IDL.push_production(:ami_stub_header, ::IDL::Cxx11::AmiStubHeaderWriter.new(co, options))
+        end
+        if options[:ami_stub_output_src]
+          co_src = GenFile.new(options[:ami_stub_output_src])
+          IDL.push_production(:ami_stub_source, ::IDL::Cxx11::AmiStubSourceWriter.new(co_src, options))
+        end
+        if options[:ami_stub_output_prx]
+          co_prx = GenFile.new(options[:ami_stub_output_prx])
+          IDL.push_production(:ami_stub_proxy, ::IDL::Cxx11::AmiStubProxyWriter.new(co_prx, options))
+        end
       end
     end
 
@@ -568,7 +542,7 @@ module IDL
       end
       export_file = options.export_file || options.export_include
       if export_file
-        so = GenFile.new(options.outputdir+'/'+export_file)
+        so = GenFile.new(File.join(options.outputdir, export_file))
         IDL.push_production(
             :export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.export_macro, export_file, so, options))
@@ -582,7 +556,7 @@ module IDL
       return if IDL.has_production?(:stub_export_header)
       export_file = options.stub_export_file || options.stub_export_include
       if export_file
-        so = GenFile.new(options.outputdir+'/'+export_file)
+        so = GenFile.new(File.join(options.outputdir, export_file))
         IDL.push_production(
             :stub_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.stub_export_macro, export_file, so, options))
@@ -597,7 +571,7 @@ module IDL
       return if IDL.has_production?(:skel_export_header)
       export_file = options.skel_export_file || options.skel_export_include
       if export_file
-        so = GenFile.new(options.outputdir+'/'+export_file)
+        so = GenFile.new(File.join(options.outputdir, export_file))
         IDL.push_production(
             :skel_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.skel_export_macro, export_file, so, options))
@@ -612,7 +586,7 @@ module IDL
       return if IDL.has_production?(:amic_export_header)
       export_file = options.amic_export_file || options.amic_export_include
       if export_file
-        so = GenFile.new(options.outputdir+'/'+export_file)
+        so = GenFile.new(File.join(options.outputdir, export_file))
         IDL.push_production(
             :amic_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.amic_export_macro, export_file, so, options))
@@ -627,7 +601,7 @@ module IDL
       return if IDL.has_production?(:impl_export_header)
       export_file = options.impl_export_file || options.impl_export_include
       if export_file
-        so = GenFile.new(options.outputdir+'/'+export_file)
+        so = GenFile.new(File.join(options.outputdir, export_file))
         IDL.push_production(
             :impl_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.impl_export_macro, export_file, so, options))
