@@ -74,7 +74,7 @@ switch is specified the configuration process will look for a file named `<NAME>
 build configuration. See <<Target specification files,below>> for details on specifying a target file. +
 Target specification files are not mandatory. If `--target=NAME` is specified and no target file exists
 the configuration process will only add `NAME` in uppercase to the test configuration list. +
-Currently TAOX11 (AXCIOMA) provide the following standard target speficiation file:
+Currently TAOX11 (AXCIOMA) provides the following standard target specification file:
 
 * `yocto.json`
 
