@@ -1,0 +1,188 @@
+include::_{backend}_settings.adoc[]
+
+= Cross Building
+
+== Setting up a cross build environment
+
+=== Requirements
+
+Setting up a cross build development environment requires a suitable host environment to
+install and run all tooling. Currently TAOX11 (AXCIOMA) only supports mainstream Linux desktop
+environments (OpenSuSE, Debian, Fedora, CentOS, RHEL) as host environment for cross building.
+
+All development tool prerequisites that apply for building TAOX11 (AXCIOMA) for the host platform
+itself also apply for cross building.
+In addition a cross build toolchain for the intended target environment needs to be installed. Typically
+such toolchain packages include host compiler, linker, librarian etc. binaries as well as a target system
+root (sysroot) SDK providing target versions of libraries etc.
+
+=== Installing
+
+Installing the TAOX11 (AXCIOMA) source code for the cross build is identical to the process for a host
+build. Simply use Git to clone the base axcioma.git repository and use the `bin/brix11 bootstrap` command
+to finish the installation.
+Optionally a second code tree can be installed to provide a complete host build of TAOX11 (AXCIOMA). See
+the information on <<Configuration,configuration>> for more details.
+
+In addition it might be necessary to install target versions of required libraries that are not included
+in the cross build toolchain's sysroot like the RTI NDDS version for your target, a Xerces-C library version
+for your target and such.
+
+=== Configuration
+
+As for a host build the cross build can be configured by using the `bin/brix11 configure` command.
+
+There are 4 specific variables that can be specified for configuring cross builds:
+
+* `targetsysroot` - specifies the location where the target sysroot is installed
+* `crosscompile_prefix` - specifies a prefix to the standard platform development tools
+(compiler, linker etc.); when specified `configure` expects `<crosscompile_prefix>gcc` to
+exist
+* `x11_host_root` - specifies the location of an optional TAOX11 (AXCIOMA) host installation
+* `host_root` - specifies the location of an optional ACE host installation
+
+Of these 4 variables only `targetsysroot` is mandatory.
+
+The `configure` command expects to find the `<crosscompile_prefix>gcc` binary in the system's searchpath.
+This can be achieved by adding the appropriate location(s) to the system's default PATH *or* by specifying
+the appropriate location(s) as value for the `path` variable to `configure` like `-W path=<location>[:<location>]`.
+
+Although it is not mandatory to use target toolchains with prefixed host binaries and to specify a
+`crosscompile_prefix` for `configure` it is highly recommended as without prefix it is only all too easy to get
+mixups with the host's native binaries.
+
+Cross building TAOX11 (AXCIOMA) requires a minimal set of host binaries built from TAOX11 (AXCIOMA) code
+itself. In case the intention is to perform cross tests as well (running tests distributed over host and
+target devices) a full set of host binaries built is required. +
+These binaries can be provided by a separate host installation of TAOX11 (AXCIOMA) of which the
+location is specified as `x11_host_root` variable value. In case the TAOX11 (AXCIOMA) host installation is
+set up as a standard installation (using `brix11 bootstrap`) there is no need to specify the `host_root`
+variable since the default will match. If however the installation is non-standard the location of the
+host ACE installation needs to be specified as well. +
+In case cross testing support is not required specifying the `x11_host_root` (and `host_root`) variable is
+not required. In this case the `configure` command will set up a minimal host environment in the folder
+located at `$X11_BASE_ROOT/HOST` where the minimal required set of host binaries can be built.
+In such TAOX11 (AXCIOMA) installations an additional BRIX11 command is enabled with which the host binaries
+can be built after configuration has finished: `bin/brix11 host build`.
+
+By default the `configure` command will set up the build configuration assuming a Linux compatible target
+system.
+To tune the configuration process the `configure` command provides the `--target=NAME` switch. In case this
+switch is specified the configuration process will look for a file named `<NAME>.json` located in
+`$X11_BASE_ROOT/etc` and load the file if it exists. The settings in this file are than used to tune the
+build configuration. See <<Target specification files,below>> for details on specifying a target file. +
+Target specification files are not mandatory. If `--target=NAME` is specified and no target file exists
+the configuration process will only add `NAME` in uppercase to the test configuration list. +
+Currently TAOX11 (AXCIOMA) provide the following standard target speficiation file:
+
+* `yocto.json`
+
+=== Building
+
+Building a cross build installation is no different from a native host build with the exception of
+building the required TAOX11 (AXCIOMA) host binaries. +
+In case a separate host installation is specified through `x11_host_root` this host installation
+should be built before the building the cross build installation using the regular build instructions. +
+In case a minimal host installation is set up by the `configure` command that installation should be
+built using the `host build` command *before* building the actual cross build installation.
+
+If the host installation has been built the cross build installation can be build by issuing the regular
+commands:
+
+* `bin/brix11 gen build workspace`
+* `bin/brix11 make`
+
+[NOTE]
+====
+Note that when a cross build configuration has been set up by the `configure` command there is no need
+to add the `-x` or `--crossbuild` switch to any BRIX11 command.
+The `configure` command includes this setting in the BRIX11 configuration by default. +
+The `-x` or `--crossbuild` switch is only required in very special circumstances when manually configured
+crossbuilds are attempted.
+====
+
+=== Example
+
+Installing, configuring and cross building for a Yocto linux ARM64 target device is possible with the
+following commands (assuming the YOCTO crossbuild toochain has been installed in a `YOCTO` folder under
+`/install/root`).
+
+[source,cmd]
+-------------------------------------------------------------------------------------------------
+$ cd /install/root
+$ git clone https://github.com/RemedyIT/axcioma.git
+$ cd axcioma
+$ bin/brix11 bootstrap
+$ bin/brix11 configure --target yocto \
+-W targetsysroot=/install/root/YOCTO/sysroots/aarch64-poky-linux \
+-W crosscompile_prefix=aarch64-poky-linux-
+$ bin/brix11 host build
+$ bin/brix11 gen build workspace
+$ bin/brix11 make
+-------------------------------------------------------------------------------------------------
+
+== Details
+
+=== Target specification files
+
+A target specification is a JSON file with the basename *identical* to the name specified with the
+`--target=NAME` switch followed by the extension `.json`.
+
+A fully specified target specification file looks like this:
+
+[source,json]
+-------------------------------------------------------------------------------------------------
+{
+  "os": "linux",
+  "bits": 0,
+  "libroot":  "${SDKTARGETSYSROOT}/usr",
+  "dll_dir": "lib",
+  "library_path_var": "LD_LIBRARY_PATH",
+  "test_configs": ["LINUX", "Linux"],
+  "project_type": "gnuautobuild",
+  "project_cc": "gnu",
+  "config_include": "config-linux.h",
+  "config_prelude": [
+    "#define ACE_HAS_VERSIONED_NAMESPACE 1",
+    "#define ACE_MONITOR_FRAMEWORK 0"
+  ],
+  "config_post": [],
+  "gnumake_include": "platform_linux.GNU",
+  "gnumake_prelude": [
+    "debug=0",
+    "c++11=1",
+    "no_deprecated=0",
+    "inline=1",
+    "optimize=1",
+    "boost=0"
+  ],
+  "gnumake_post": []
+}
+-------------------------------------------------------------------------------------------------
+
+All fields are optional. The values shown are the defaults for any cross build target.
+The following table describes the purpose of the fields.
+
+[cols="<,<",options="header",]
+|=========================================
+|Field |Description
+|os|The OS name. Used to determin the config and gnumake includes if none specified.
+|bits|The default target bitsize. This controls bitsize compiler switches which are
+      often not appropriate for cross targets.
+      Setting this to 0 instead of 32 or 64 disables these switches.
+|libroot|The location where the root for system libraries is expected.
+|dll_dir|The name of the folder where shared libraries are expected to be found.
+|library_path_var|The name of the shared library searchpath environment variable.
+|test_configs|Default list of test config values. Will be supplemented with target name in uppercase.
+|project_type|Default BRIX11 project type to use. Rarely (if ever) needed to specify.
+|project_cc|Default BRIX11 compiler type to use. Rarely (if ever) needed to specify.
+|config_include|The ACE configuration header file to include in `config.h`.
+                By default the name will be defined as "config-<os>.h".
+|config_prelude|Macro definitions to insert *before* the config_include.
+|config_post|Macro definitions to add *after* the config_include.
+|gnumake_include|The ACE GNU make include to include in `platform_macros.GNU`.
+                 By default the name will be defined as "platform_<os>.GNU".
+|gnumake_prelude|Make definitions to insert *before* the gnumake_include.
+|gnumake_post|Make definitions to add *after* the gnumake_include.
+|=========================================
+

@@ -186,10 +186,11 @@ See the
 information for more details on the TAOX11 prerequisites, compilation, and setting up a
 development environment for TAOX11.
 
-==== Android
+==== Crossbuild targets
 
-For the prerequisites, installation, and usage of TAOX11 on Android read our
-<<taox11_on_android.adoc#,Android>> instructions.
+For the prerequisites, configuration and building of TAOX11 on crossbuild targets like embedded Linux
+or Android read our
+<<cross_building.adoc#,Cross Building>> instructions.
 
 === Directory structure
 
