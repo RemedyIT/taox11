@@ -46,6 +46,7 @@ Of these 4 variables only `targetsysroot` is mandatory.
 The `configure` command expects to find the `<crosscompile_prefix>gcc` binary in the system's searchpath.
 This can be achieved by adding the appropriate location(s) to the system's default PATH *or* by specifying
 the appropriate location(s) as value for the `path` variable to `configure` like `-W path=<location>[:<location>]`.
+Locations specified using `-W path=<location>` are prepended to the PATH by BRIX11.
 
 Although it is not mandatory to use target toolchains with prefixed host binaries and to specify a
 `crosscompile_prefix` for `configure` it is highly recommended as without prefix it is only all too easy to get
@@ -115,7 +116,8 @@ $ cd axcioma
 $ bin/brix11 bootstrap
 $ bin/brix11 configure --target yocto \
 -W targetsysroot=/install/root/YOCTO/sysroots/aarch64-poky-linux \
--W crosscompile_prefix=aarch64-poky-linux-
+-W crosscompile_prefix=aarch64-poky-linux- \
+-W path=/install/root/sysroots/x86_64-pokysdk-linux/usr/bin/aarch64-poky-linux
 $ bin/brix11 host build
 $ bin/brix11 gen build workspace
 $ bin/brix11 make
