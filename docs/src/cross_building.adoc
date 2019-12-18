@@ -7,8 +7,9 @@ include::_{backend}_settings.adoc[]
 === Requirements
 
 Setting up a cross build development environment requires a suitable host environment to
-install and run all tooling. Currently TAOX11 (AXCIOMA) only supports mainstream Linux desktop
-environments (OpenSuSE, Debian, Fedora, CentOS, RHEL) as host environment for cross building.
+install and run all tooling. Currently TAOX11 (AXCIOMA) supports mainstream Linux desktop
+environments (OpenSuSE, Fedora, CentOS, RHEL and possibly others) as host environment for
+cross building.
 
 All development tool prerequisites that apply for building TAOX11 (AXCIOMA) for the host platform
 itself also apply for cross building.
@@ -25,7 +26,7 @@ Optionally a second code tree can be installed to provide a complete host build 
 the information on <<Configuration,configuration>> for more details.
 
 In addition it might be necessary to install target versions of required libraries that are not included
-in the cross build toolchain's sysroot like the RTI NDDS version for your target, a Xerces-C library version
+in the cross build toolchain's sysroot like the RTI Connext DDS version for your target, a Xerces-C library version
 for your target and such.
 
 === Configuration
