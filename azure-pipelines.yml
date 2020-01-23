@@ -19,30 +19,35 @@ jobs:
     vmImage: ubuntu-18.04
   strategy:
     matrix:
-      GCC48:
+      GCC48Ruby23:
         CC: gcc-4.8
         CXX: g++-4.8
         PackageDeps: g++-4.8
-      GCC6:
+        RubyVersion: 2.3
+      GCC6Ruby24:
         CC: gcc-6
         CXX: g++-6
         PackageDeps: g++-6
-      GCC7:
+        RubyVersion: 2.4
+      GCC7Ruby25:
         CC: gcc-7
         CXX: g++-7
         PackageDeps: g++-7
-      GCC8:
+        RubyVersion: 2.5
+      GCC8Ruby26:
         CC: gcc-8
         CXX: g++-8
         PackageDeps: g++-8
-      GCC9:
+        RubyVersion: 2.6
+      GCC9Ruby27:
         CC: gcc-9
         CXX: g++-9
         PackageDeps: g++-9
+        RubyVersion: 2.7
   steps:
   - task: UseRubyVersion@0
     inputs:
-      versionSpec: '2.5'
+      versionSpec: $(RubyVersion)
       addToPath: true
     displayName: Install ruby
   - script: |
