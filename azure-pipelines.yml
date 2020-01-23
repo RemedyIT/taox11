@@ -42,7 +42,7 @@ jobs:
   steps:
   - task: UseRubyVersion@0
     inputs:
-      versionSpec: '>= 2.4'
+      versionSpec: '2.5'
       addToPath: true
     displayName: Install ruby
   - script: |
