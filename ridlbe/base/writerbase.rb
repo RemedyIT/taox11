@@ -277,8 +277,8 @@ module IDL
         @output.dec_nest(in_)
       end
 
-      def write_regen_section(sectionid, options = nil)
-        @output.write_regen_section(sectionid, options, block_given? ? Proc.new : nil)
+      def write_regen_section(sectionid, options = nil, &_block)
+        @output.write_regen_section(sectionid, options, block_given? ? _block : nil)
       end
 
       def idl_file
