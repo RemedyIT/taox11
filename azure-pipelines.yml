@@ -19,26 +19,26 @@ jobs:
     vmImage: ubuntu-18.04
   strategy:
     matrix:
-      GCC48Ruby23:
+      GCC48Ruby24:
         CC: gcc-4.8
         CXX: g++-4.8
         PackageDeps: g++-4.8
-        RubyVersion: 2.3
-      GCC6Ruby24:
+        RubyVersion: 2.4
+      GCC6Ruby25:
         CC: gcc-6
         CXX: g++-6
         PackageDeps: g++-6
-        RubyVersion: 2.4
-      GCC7Ruby25:
+        RubyVersion: 2.5
+      GCC7Ruby26:
         CC: gcc-7
         CXX: g++-7
         PackageDeps: g++-7
-        RubyVersion: 2.5
-      GCC8Ruby26:
+        RubyVersion: 2.6
+      GCC8Ruby27:
         CC: gcc-8
         CXX: g++-8
         PackageDeps: g++-8
-        RubyVersion: 2.6
+        RubyVersion: 2.7
       GCC9Ruby27:
         CC: gcc-9
         CXX: g++-9
