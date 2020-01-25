@@ -17,7 +17,7 @@ namespace obv
 #else
     <%= cxxname %> () = default;
 #endif /* _MSC_VER < 1920 */
-    ~<%= cxxname %> () = default;
+    virtual ~<%= cxxname %> () = default;
     <%= cxxname %> (const <%= cxxname %>&) = default;
     <%= cxxname %> (<%= cxxname %>&&) = default;
 % if member_count > 0
