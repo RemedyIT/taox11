@@ -47,7 +47,7 @@ sub write_project_targets {
             ($chdir ? "cd $dname && " : ''),
             "\$(MAKE) -f ",
             $output_project,
-            " $target &> $output_project.log) ; then rc__=0; else rc__=1; fi; cat $dname/$output_project.log ; rm $dname/$output_project.log ; if [ \$\$rc__ -eq 1 ]; then /bin/false; fi $crlf";
+            " $target &> $output_project.log) ; then rc__=0; else rc__=1; fi; cat $dname/$output_project.log ; rm $dname/$output_project.log ; if [ \$\$rc__ -eq 1 ]; then false; fi $crlf";
   }
 }
 
