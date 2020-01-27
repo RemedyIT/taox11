@@ -43,7 +43,7 @@ sub write_project_targets {
       my($chdir) = ($dname ne '.');
       my($output_project) = ($chdir ? $self->mpc_basename($project) : $project);
 
-      print $fh "\t\@if (",
+      print $fh "\t\$(KEEP_GOING)\@if (",
             ($chdir ? "cd $dname && " : ''),
             "\$(MAKE) -f ",
             $output_project,
