@@ -69,7 +69,7 @@ jobs:
       git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
     displayName: git clone dependent repositories
   - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 -t gnuace configure -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
+      $(X11_BASE_ROOT)/bin/brix11 configure -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
     displayName: Run brix11 configure
   - powershell: |
       $(X11_BASE_ROOT)/bin/brix11 env
