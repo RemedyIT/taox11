@@ -149,17 +149,17 @@ module IDL
         @output.dec_nest(_inc)
       end
 
-      def write_regen_section(sectionid, options = nil)
+      def write_regen_section(sectionid, options = nil, &_block)
         #@output.erbout.flush
-        @output.write_regen_section(sectionid, options, block_given? ? Proc.new : nil)
+        @output.write_regen_section(sectionid, options, block_given? ? _block : nil)
       end
 
-      def visit_template(template, extra_props = {})
+      def visit_template(template, extra_props = {}, &_block)
         tpl, tpl_bases = resolve_template(template)
         # fail unless a template path has been found or the template was optional
         Kernel.raise "Fatal: cannot resolve RIDL template #{template}" unless tpl || optional_template?(template)
         if block_given?
-          exec_template_visit(tpl, template, extra_props, tpl_bases, &Proc.new)
+          exec_template_visit(tpl, template, extra_props, tpl_bases, &_block)
         else
           exec_template_visit(tpl, template, extra_props, tpl_bases)
         end
