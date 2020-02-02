@@ -137,6 +137,19 @@ module IDL
             }
       end
 
+      ol.for_switch '-X{export options}', :type => String, :separator => true do |swcfg|
+        swcfg.define_group :export_flags, :params => {
+              'st' => { :option_name => :export_st,
+                       :description => "-Xst\t\t\tExport stub code (not exported by default)" },
+              'sk' => { :option_name => :export_sk,
+                       :description => "-Xsk\t\t\tExport skeleton code (not exported by default)" },
+              'sta' => { :option_name => :export_sta,
+                       :description => "-Xsta\t\t\tExport ami stub code (not exported by default)" },
+              'impl' => { :option_name => :export_impl,
+                       :description => "-Ximpl\t\t\tExport implementation code (not exported by default)" },
+            }
+      end
+
       ol.for_switch '-S{suppression options}', :type => String, :separator => true do |swcfg|
         swcfg.define_group :suppress_flags, :params => {
               'na' => { :option_name => :no_gen_native,
@@ -374,9 +387,9 @@ module IDL
       #   exit 1
       # end
 
-      if options.gen_export_sta
+      if options.gen_export_sta || options.export_sta
         unless options.amic_export_macro || options.base_export_macro
-          IDL.error("ERROR: it isn't allowed to use -Gxhsta without specifying the macro with -Wb,amic_export_macro=MACRO "+
+          IDL.error("ERROR: it isn't allowed to use -Gxhsta or -Xsta without specifying the macro with -Wb,amic_export_macro=MACRO "+
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
           exit 1
         end
@@ -388,9 +401,9 @@ module IDL
     end
 
     def self.check_stub_export_params(options)
-      if options.gen_export_st
+      if options.gen_export_st || options.export_st
         unless options.stub_export_macro || options.base_export_macro
-          IDL.error("ERROR: it isn't allowed to use -Gxhst without specifying the macro with -Wb,stub_export_macro=MACRO "+
+          IDL.error("ERROR: it isn't allowed to use -Gxhst or -Xst without specifying the macro with -Wb,stub_export_macro=MACRO "+
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
           exit 1
         end
@@ -402,9 +415,9 @@ module IDL
     end
 
     def self.check_skel_export_params(options)
-      if options.gen_export_sk
+      if options.gen_export_sk || options.export_sk
         unless options.skel_export_macro || options.base_export_macro
-          IDL.error("ERROR: it isn't allowed to use -Gxhsk without specifying the macro with -Wb,skel_export_macro=MACRO "+
+          IDL.error("ERROR: it isn't allowed to use -Gxhsk or -Xsk without specifying the macro with -Wb,skel_export_macro=MACRO "+
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
           exit 1
         end
@@ -416,9 +429,9 @@ module IDL
     end
 
     def self.check_impl_export_params(options)
-      if options.gen_export_impl
+      if options.gen_export_impl || options.export_impl
         unless options.impl_export_macro || options.base_export_macro
-          IDL.error("ERROR: it isn't allowed to use -Gxhimpl without specifying the macro with -Wb,impl_export_macro=MACRO "+
+          IDL.error("ERROR: it isn't allowed to use -Gxhimpl or -Ximpl without specifying the macro with -Wb,impl_export_macro=MACRO "+
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
           exit 1
         end
