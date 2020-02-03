@@ -249,15 +249,13 @@ module IDL
         when :before
           # fct should be ordered before dfct so fct should be inserted at dix at a maximum
           unless range.min <= dix
-            IDL.error("Conflicting ordering dependency for facet #{fct} : #{dpos}:#{dfct}")
-            exit 1
+            IDL.fatal("Conflicting ordering dependency for facet #{fct} : #{dpos}:#{dfct}")
           end
           return (range.min..(range.max < dix ? range.max : dix))
         when :after
           # fct should be ordered after ofct so fct should be inserted at dix+1 at a minimum
           unless range.include?(dix+1)   # dix+1 should be in possible range
-            IDL.error("Conflicting ordering dependency for facet #{fct} : #{dpos}:#{dfct}")
-            exit 1
+            IDL.fatal("Conflicting ordering dependency for facet #{fct} : #{dpos}:#{dfct}")
           end
           # just return the original (maximum range)
           return range #(range.min..dix+1)
@@ -292,8 +290,7 @@ module IDL
         def _create_facet(fctnm)
           constnm = Backend::Facet.make_facet_constant(name, fctnm).to_sym
           unless Backend::Facet.const_defined?(constnm)
-            IDL.error "ERROR: Cannot find RIDL :#{name} backend facet [#{fctnm}]"
-            exit 1
+            IDL.fatal "ERROR: Cannot find RIDL :#{name} backend facet [#{fctnm}]"
           end
           _facets[fctnm] = Backend::Facet.const_get(constnm).new(self)
         end
