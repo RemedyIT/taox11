@@ -383,15 +383,13 @@ module IDL
     def self.check_ami_export_params(options)
       # TODO : MCO : I do not think this is a useful check AmiC files are not always generated together with stubs
       # if options.amic_export_macro && !options.stub_export_macro
-      #   IDL.error("ERROR: it isn't allowed to use amic_export_macro without using stub_export_macro")
-      #   exit 1
+      #   IDL.fatal("ERROR: it isn't allowed to use amic_export_macro without using stub_export_macro")
       # end
 
       if options.gen_export_sta || options.export_sta
         unless options.amic_export_macro || options.base_export_macro
-          IDL.error("ERROR: it isn't allowed to use -Gxhsta or -Xsta without specifying the macro with -Wb,amic_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhsta or -Xsta without specifying the macro with -Wb,amic_export_macro=MACRO "+
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
-          exit 1
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
@@ -403,9 +401,8 @@ module IDL
     def self.check_stub_export_params(options)
       if options.gen_export_st || options.export_st
         unless options.stub_export_macro || options.base_export_macro
-          IDL.error("ERROR: it isn't allowed to use -Gxhst or -Xst without specifying the macro with -Wb,stub_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhst or -Xst without specifying the macro with -Wb,stub_export_macro=MACRO "+
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
-          exit 1
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
@@ -417,9 +414,8 @@ module IDL
     def self.check_skel_export_params(options)
       if options.gen_export_sk || options.export_sk
         unless options.skel_export_macro || options.base_export_macro
-          IDL.error("ERROR: it isn't allowed to use -Gxhsk or -Xsk without specifying the macro with -Wb,skel_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhsk or -Xsk without specifying the macro with -Wb,skel_export_macro=MACRO "+
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
-          exit 1
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
@@ -431,9 +427,8 @@ module IDL
     def self.check_impl_export_params(options)
       if options.gen_export_impl || options.export_impl
         unless options.impl_export_macro || options.base_export_macro
-          IDL.error("ERROR: it isn't allowed to use -Gxhimpl or -Ximpl without specifying the macro with -Wb,impl_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhimpl or -Ximpl without specifying the macro with -Wb,impl_export_macro=MACRO "+
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
-          exit 1
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
@@ -550,8 +545,7 @@ module IDL
     def self.gen_export_header(options)
       return if IDL.has_production?(:export_header)
       unless options.export_macro
-        IDL.error('ERROR: it is not allowed to use -Gxh without specifying the macro with -Wb,export_macro=MACRO')
-        exit 1
+        IDL.fatal('ERROR: it is not allowed to use -Gxh without specifying the macro with -Wb,export_macro=MACRO')
       end
       export_file = options.export_file || options.export_include
       if export_file
@@ -560,8 +554,7 @@ module IDL
             :export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.export_macro, export_file, so, options))
       else
-        IDL.error('ERROR: it is not allowed to use -Gxh without specifying the file with -Wb,export_include=FILE or -Wb,export_file=FILE')
-        exit 1
+        IDL.fatal('ERROR: it is not allowed to use -Gxh without specifying the file with -Wb,export_include=FILE or -Wb,export_file=FILE')
       end
     end
 
@@ -574,9 +567,8 @@ module IDL
             :stub_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.stub_export_macro, export_file, so, options))
       else
-        IDL.error('ERROR: it is not allowed to use -Gxhst without specifying the file with -Wb,stub_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhst without specifying the file with -Wb,stub_export_file=FILE, '+
                       '-Wb,stub_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
-        exit 1
       end
     end
 
@@ -589,9 +581,8 @@ module IDL
             :skel_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.skel_export_macro, export_file, so, options))
       else
-        IDL.error('ERROR: it is not allowed to use -Gxhsk without specifying the file with -Wb,skel_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhsk without specifying the file with -Wb,skel_export_file=FILE, '+
                       '-Wb,skel_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
-        exit 1
       end
     end
 
@@ -604,9 +595,8 @@ module IDL
             :amic_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.amic_export_macro, export_file, so, options))
       else
-        IDL.error('ERROR: it is not allowed to use -Gxhsta without specifying the file with -Wb,amic_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhsta without specifying the file with -Wb,amic_export_file=FILE, '+
                       '-Wb,amic_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
-        exit 1
       end
     end
 
@@ -619,9 +609,8 @@ module IDL
             :impl_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.impl_export_macro, export_file, so, options))
       else
-        IDL.error('ERROR: it is not allowed to use -Gxhimpl without specifying the file with -Wb,impl_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhimpl without specifying the file with -Wb,impl_export_file=FILE, '+
                       '-Wb,impl_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
-        exit 1
       end
     end
 
