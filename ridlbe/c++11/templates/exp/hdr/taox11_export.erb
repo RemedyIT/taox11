@@ -11,15 +11,15 @@
 
 <%= taox11_version_check %>
 
-#if defined (ACE_AS_STATIC_LIBS) && !defined (<%= macro_base %>_HAS_DLL)
-#  define <%= macro_base %>_HAS_DLL 0
-#endif /* ACE_AS_STATIC_LIBS && <%= macro_base %>_HAS_DLL */
-
 #if !defined (<%= macro_base %>_HAS_DLL)
+# if defined (ACE_AS_STATIC_LIBS)
+#  define <%= macro_base %>_HAS_DLL 0
+# else
 #  define <%= macro_base %>_HAS_DLL 1
-#endif /* ! <%= macro_base %>_HAS_DLL */
+# endif /* ACE_AS_STATIC_LIBS */
+#endif /* !<%= macro_base %>_HAS_DLL */
 
-#if defined (<%= macro_base %>_HAS_DLL) && (<%= macro_base %>_HAS_DLL == 1)
+#if <%= macro_base %>_HAS_DLL == 1
 #  if defined (<%= macro_base %>_BUILD_DLL)
 #    define <%= macro_base %>_Export ACE_Proper_Export_Flag
 #    define <%= macro_base %>_SINGLETON_DECLARATION(T) ACE_EXPORT_SINGLETON_DECLARATION (T)
