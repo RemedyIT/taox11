@@ -19,7 +19,7 @@
 # endif /* ACE_AS_STATIC_LIBS */
 #endif /* !<%= macro_base %>_HAS_DLL */
 
-#if (<%= macro_base %>_HAS_DLL == 1)
+#if <%= macro_base %>_HAS_DLL == 1
 #  if defined (<%= macro_base %>_BUILD_DLL)
 #    define <%= macro_base %>_Export ACE_Proper_Export_Flag
 #    define <%= macro_base %>_SINGLETON_DECLARATION(T) ACE_EXPORT_SINGLETON_DECLARATION (T)
