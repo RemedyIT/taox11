@@ -33,7 +33,7 @@ Handler::inout_bool (::Test::_cxx_bool ami_return_val,
   ::Test::_cxx_bool v_inout)
 {
   ++received_replies_;
-  TestEqual("hello->inout_bool v_out", Test::_cxx_bool::_long, v_out);
+  TestEqual("hello->inout_bool v_out", Test::_cxx_bool::_cxx_long, v_out);
   TestEqual("hello->inout_bool v_inout", Test::_cxx_bool::someenum, v_inout);
   TestEqual("hello->inout_bool v_result", Test::_cxx_bool::_cxx_asm, ami_return_val);
 }
@@ -125,11 +125,11 @@ Handler::get_attr_bool (
   ::Test::_cxx_bool ami_return_val)
 {
   ++received_replies_;
-  if (ami_return_val != Test::_cxx_bool::_char)
+  if (ami_return_val != Test::_cxx_bool::_cxx_char)
     {
       ++result_;
       TAOX11_TEST_ERROR << "ERROR : Unexpected value for 'attr_bool' received : "
-        << "expected <" << Test::_cxx_bool::_char << "> - received <"
+        << "expected <" << Test::_cxx_bool::_cxx_char << "> - received <"
         << ami_return_val << ">" << std::endl;
     }
 }
@@ -273,9 +273,8 @@ Handler::get_attr_int_keyword_struct (
   const ::Test::int_keyword_struct& ami_return_val)
 {
   ++received_replies_;
-  const Test::int_keyword_struct val_int_keyword_struct (12345, 12346, 12347);
-  if (ami_return_val._cxx_int () != 12345 || ami_return_val.int_ () != 12346 ||
-    ami_return_val._int () != 12347)
+  const Test::int_keyword_struct val_int_keyword_struct (12345, 12346);
+  if (ami_return_val._cxx_int () != 12345 || ami_return_val.int_ () != 12346)
     {
       ++result_;
       TAOX11_TEST_ERROR << "ERROR : Unexpected value for 'attr_int_keyword_struct' received : "
@@ -502,20 +501,20 @@ int main(int argc, char* argv[])
       TAOX11_TEST_DEBUG << "Invoke methods asynchronously." << std::endl;
 
       Test::_cxx_bool bool_inout;
-      hello->sendc_inout_bool(test_handler, Test::_cxx_bool::_char,  bool_inout);
+      hello->sendc_inout_bool(test_handler, Test::_cxx_bool::_cxx_char,  bool_inout);
       Test::_cxx_int16_t int16_t_inout;
       hello->sendc_inout_int16_t(test_handler, Test::_cxx_int16_t::double_, int16_t_inout);
       hello->sendc__cxx_uint32_t (test_handler, 10);
 
       TAOX11_TEST_DEBUG << "Setting the attributes asynchronously." << std::endl;
-      hello->sendc_set_attr_bool (test_handler, Test::_cxx_bool::_char);
+      hello->sendc_set_attr_bool (test_handler, Test::_cxx_bool::_cxx_char);
       hello->sendc_set_attr_int16_t (test_handler, Test::_cxx_int16_t::float_);
       hello->sendc_set_attr_int32_t (test_handler, 1234);
       hello->sendc_set_attr_least8_t (test_handler, Test::_cxx_int_least8_t::floa8t_);
       const Test::cpplib_keyword_struct val_cpplib_keyword_struct (L'^', 54321, 54322,
         54323, 54324, 54325, 54326);
       hello->sendc_set_attr_cpplib_keyword_struct (test_handler, val_cpplib_keyword_struct);
-      const Test::int_keyword_struct val_int_keyword_struct (12345, 12346, 12347);
+      const Test::int_keyword_struct val_int_keyword_struct (12345, 12346);
       hello->sendc_set_attr_int_keyword_struct (test_handler, val_int_keyword_struct);
       const Test::cpp_keyword_struct val_cpp_keyword_struct (123456, 123457, 123458,
         123459, 123460, 123461, 123462, 123463, 123464, 123465, 123466, 123467, 123468,
