@@ -15,7 +15,7 @@ protected:
   friend typename TAOX11_CORBA::abstractbase_traits<T>::ref_type
     TAOX11_CORBA::abstractbase_traits<T>::narrow (
       TAOX11_CORBA::abstractbase_reference<TAOX11_CORBA::AbstractBase>);
-#endif /* _MSC_VER < 1910 || clang <= 6 */
+#endif /* _MSC_VER < 1910 || clang <= 8 */
 
 #if defined (_MSC_VER) && (_MSC_VER < 1920)
     // msvc 14.(0|1) have a problem with defaulted constructors, issue #4005
