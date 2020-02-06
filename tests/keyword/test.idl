@@ -75,10 +75,10 @@ module Test
      * The doxygen documentation should refer to the names below.
      */
     // doxygen start group generates a compile error. //@{
-    /// Underscore allowed (will be '_char' in code)
-    __char,
-    /// Underscore allowed (will be '_long' in code)
-    __long,
+    /// Underscore allowed (will be '_cxx_char' in code)
+    _char,
+    /// Underscore allowed (will be '_cxx_long' in code)
+    _long,
     /// Underscore allowed (will be 'someenum' in code)
     _someenum
     // //@}
@@ -133,8 +133,8 @@ module Test
     long int;
     /// Allowed
     long int_;
-    /// Allowed, but will not compile: becomes 'long _int' but doxygen documentation should refer to '__int'
-    long __int;
+    /// Allowed, but would clash with long int; after escape removal
+    // long _int;
   };
 
   // Allowed, but will not compile:
