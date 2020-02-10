@@ -84,8 +84,15 @@ module IDL
     end
 
     module ModuleMixin
-      def lm_name_for_scope
-        @lm_name_for_scope ||= (self.scopes.size == 1 && Cxx11::REMAPPED_ROOT_SCOPES.include?(self.lm_name.to_sym)) ? Cxx11::CXX_ROOT_SCOPE + self.lm_name : self.lm_name
+      def scoped_cxx_name
+        unless @scoped_lm_name
+          if self.scopes.size == 1
+            @scoped_lm_name = (Cxx11::REMAPPED_ROOT_SCOPES.include?(self.lm_name.to_sym) ? Cxx11::CXX_ROOT_SCOPE + self.lm_name : self.lm_name).freeze
+          else
+            @scoped_lm_name = (@enclosure ? [@enclosure.scoped_lm_name, self.lm_name].join('::') : '').freeze
+          end
+        end
+        @scoped_lm_name
       end
       def scoped_proxy_cxxname
         unless @scoped_proxy_cxxname
@@ -155,6 +162,9 @@ module IDL
 
     IDL::AST::Module.class_eval do
       include ModuleMixin
+
+      alias :orig_scoped_lm_name :scoped_lm_name
+      alias :scoped_lm_name :scoped_cxx_name
     end
 
     IDL::AST::Leaf.class_eval do
