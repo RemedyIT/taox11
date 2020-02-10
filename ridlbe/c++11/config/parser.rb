@@ -50,10 +50,6 @@ module IDL
     CXX_ROOT_SCOPE = 'TAOX11_NAMESPACE::'
 
     module LeafMixin
-      def self.included(klass)
-        klass.extend ClassMethods
-      end
-
       def cxxname
         lm_name
       end
@@ -84,12 +80,6 @@ module IDL
           @scoped_srvproxy_cxxname += srvproxy_cxxname
         end
         @scoped_srvproxy_cxxname
-      end
-
-      module ClassMethods
-        def mk_name(nm, is_scoped)
-          nm.dup
-        end
       end
     end
 
