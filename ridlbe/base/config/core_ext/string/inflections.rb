@@ -32,22 +32,19 @@ module RIDL
 
       # Converts a string containing an IDL or programming language type expression into an identifier string.
       #
-      # +identify+ replaces several tokens ('::', whitespace, '<>' brackets, punctuations, separators etc.)
+      # +identify+ strips whitespace and replaces several tokens ('::', '<>' brackets, punctuations, separators etc.)
       # by underscores ('_').
-      # Any sequences of multiple underscores are stripped to a single underscore. Trailing underscores are
-      # removed.
       #
       #   "MyObject::Exception".identifier        # => 'MyObject_Exception'
-      #   "CORBA::object_reference < MyObject >"  # => 'CORBA_object_reference_MyObject'
+      #   "CORBA::object_reference < MyObject >"  # => 'CORBA_object_reference_MyObject_'
       #
       def identify
         self.dup.identify!
       end
 
       def identify!
-        self.gsub!(/::|\s|<|>|,|\./, '_')
-        self.gsub!(/__+/,'_')
-        self.gsub!(/_+^/, '')
+        self.gsub!(/\s/, '')
+        self.gsub!(/::|<|>|,|\./, '_')
         self
       end
 
