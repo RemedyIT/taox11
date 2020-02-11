@@ -13,6 +13,8 @@ const string name = "testing";
 module Test
 {
   typedef string<5> bounded_bar;
+  typedef string<5> bounded__bar;
+
   /// A very simple interface
   interface Hello
   {
