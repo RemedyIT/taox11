@@ -91,7 +91,7 @@ void
 {
   // Retrieve Reply Handler object.
   ::TAOX11_NAMESPACE::CORBA::object_traits< ::TAOX11_NAMESPACE::CORBA::Object >::ref_type _reply_handler_obj =
-    ::TAOX11_NAMESPACE::CORBA::make_reference< TAOX11_CORBA::Object > (
+    ::TAOX11_NAMESPACE::CORBA::make_reference<TAOX11_CORBA::Object> (
       new ::TAOX11_NAMESPACE::Object_proxy (TAO_MESSAGING::ReplyHandler::_duplicate (_tao_reply_handler)));
 
   <%= interface.scoped_cxx_traits_type %>::ref_type _reply_handler =
@@ -320,7 +320,7 @@ void
 {
   // Retrieve Reply Handler object.
   ::TAOX11_NAMESPACE::CORBA::object_traits< ::TAOX11_NAMESPACE::CORBA::Object >::ref_type _reply_handler_obj =
-    ::TAOX11_NAMESPACE::CORBA::make_reference< TAOX11_CORBA::Object > (
+    ::TAOX11_NAMESPACE::CORBA::make_reference<TAOX11_CORBA::Object> (
       new ::TAOX11_NAMESPACE::Object_proxy (TAO_MESSAGING::ReplyHandler::_duplicate (_tao_reply_handler)));
 
   <%= interface.scoped_cxx_traits_type %>::ref_type _reply_handler =
