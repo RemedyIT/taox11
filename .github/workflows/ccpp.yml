@@ -28,30 +28,32 @@ jobs:
             os: ubuntu-latest
             CC: gcc-4.8
             CXX: g++-4.8
-            PackageDeps: g++-4.8
             RubyVersion: 2.4
+            PackageDeps: g++-4.8
           - name: GCC6Ruby25
             os: ubuntu-latest
             CC: gcc-6
             CXX: g++-6
-            PackageDeps: g++-6
             RubyVersion: 2.5
+            PackageDeps: g++-6
           - name: GCC7Ruby26
             os: ubuntu-latest
             CC: gcc-7
             CXX: g++-7
-            PackageDeps: g++-7
             RubyVersion: 2.6
+            PackageDeps: g++-7
           - name: GCC8Ruby27
             os: ubuntu-latest
             CC: gcc-8
             CXX: g++-8
             RubyVersion: 2.7
+            PackageDeps: g++-8
           - name: GCC9Ruby27
             os: ubuntu-latest
             CC: gcc-9
             CXX: g++-9
             RubyVersion: 2.7
+            PackageDeps: g++-9
     env:
       CC: ${{ matrix.CC }}
       CXX: ${{ matrix.CXX }}
@@ -65,6 +67,9 @@ jobs:
       run:
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
         sudo apt-add-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ $Repo main"
+    - name: Add packages
+        sudo apt-get --yes update
+        sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
     - name: git clone dependent repositories
       run: |
         git clone --depth 1 --branch Latest_Micro  git://github.com/DOCGroup/ACE_TAO.git $DOC_ROOT
