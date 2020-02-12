@@ -71,11 +71,12 @@ jobs:
       with:
         ruby-version: ${{ matrix.RubyVersion }}
     - name: Add repository $Repo
-      if: matrix.Repo != ''
+      if: startsWith(matrix.os,'ubuntu') && matrix.Repo != ''
       run:
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
         sudo apt-add-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ ${{ matrix.Repo }} main"
     - name: Add packages
+      if: startsWith(matrix.os,'ubuntu')
       run: |
         sudo apt-get --yes update
         sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
