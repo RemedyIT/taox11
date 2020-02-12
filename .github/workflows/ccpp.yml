@@ -21,6 +21,24 @@ jobs:
           GCC9Ruby27
         ]
         include:
+          - GCC48Ruby24:
+            os: ubuntu-latest
+            CC: gcc-4.8
+            CXX: g++-4.8
+            PackageDeps: g++-4.8
+            RubyVersion: 2.4
+          - GCC6Ruby25:
+            os: ubuntu-latest
+            CC: gcc-6
+            CXX: g++-6
+            PackageDeps: g++-6
+            RubyVersion: 2.5
+          - GCC7Ruby26:
+            os: ubuntu-latest
+            CC: gcc-7
+            CXX: g++-7
+            PackageDeps: g++-7
+            RubyVersion: 2.6
           - name: GCC8Ruby27
             os: ubuntu-latest
             CC: gcc-8
@@ -35,7 +53,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-ruby@v1
       with:
-        ruby-version: $RubyVersion
+        ruby-version: ${{ matrix.RubyVersion }}
     - name: Add repository $Repo
       if: matrix.Repo != ''
       run:
