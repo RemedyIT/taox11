@@ -37,7 +37,7 @@ jobs:
       with:
         ruby-version: $RubyVersion
     - name: Add repository $Repo
-      if: $Repo != ''
+      if: matrix.Repo != ''
       run:
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
         sudo apt-add-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ $Repo main"
