@@ -17,6 +17,9 @@ jobs:
     strategy:
       matrix:
         name: [
+          GCC48Ruby24,
+          GCC6Ruby25,
+          GCC7Ruby26,
           GCC8Ruby27,
           GCC9Ruby27
         ]
@@ -50,6 +53,9 @@ jobs:
             CXX: g++-9
             RubyVersion: 2.7
     steps:
+    - env:
+        CC: ${{ matrix.CC }}
+        CXX: ${{ matrix.CXX }}
     - uses: actions/checkout@v2
     - uses: actions/setup-ruby@v1
       with:
