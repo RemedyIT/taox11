@@ -14,10 +14,10 @@
 
 #include /**/ "ace/config-all.h"
 
-#ifndef _INTF_TAOX11_NAMESPACE_CORBA_TYPECODE_CDR_OPS_
+#ifndef _INTF_TAOX11_NAMESPACE__CORBA__TYPECODE_CDR_OPS_
 // Prevent visibility of CDR ops for TypeCode declared in Typecode_typesP.h
 // since these have the wrong export flags (being defined in taox11 core lib).
-#define _INTF_TAOX11_NAMESPACE_CORBA_TYPECODE_CDR_OPS_
+#define _INTF_TAOX11_NAMESPACE__CORBA__TYPECODE_CDR_OPS_
 
 #include "tao/x11/anytypecode/DynamicC.h"
 
