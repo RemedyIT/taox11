@@ -68,6 +68,7 @@ jobs:
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
         sudo apt-add-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ $Repo main"
     - name: Add packages
+      run: |
         sudo apt-get --yes update
         sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
     - name: git clone dependent repositories
