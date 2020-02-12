@@ -68,8 +68,8 @@ jobs:
       sudo apt-get --yes install libxerces-c-dev libssl-dev $(PackageDeps)
     displayName: install system package dependencies
   - powershell: |
-      git clone --depth 1 --branch ACE+TAO-6_5_7 git://github.com/DOCGroup/ACE_TAO.git $(DOC_ROOT)
-      git clone --depth 1 --branch ACE+TAO-6_5_7 git://github.com/DOCGroup/MPC.git $(MPC_ROOT)
+      git clone --depth 1 --branch Latest_Micro  git://github.com/DOCGroup/ACE_TAO.git $(DOC_ROOT)
+      git clone --depth 1 --branch Latest_ACETAO_Micro  git://github.com/DOCGroup/MPC.git $(MPC_ROOT)
       git clone --depth 1 git://github.com/RemedyIT/axcioma.git $(X11_BASE_ROOT)
       git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
     displayName: git clone dependent repositories

@@ -11,13 +11,19 @@ require 'ridlbe/c++11/config/core'
 module IDL
 
   class Delegator
+    # Derive CXX11 specific AST Module class to mark explicit root namespaces
+    class Cxx11RootModule < IDL::AST::Module
+      def typename
+        super
+      end
+    end
     # chain pre_parse method for user defined root namespace handling
     def pre_parse_with_root_namespace
       ret = pre_parse_without_root_namespace
       # insert explicitly defined root namespace as root of AST tree
       if @root_namespace
         IDL.log(2, "inserting root namespace #{@root_namespace.name}")
-        @root_namespace = @cur = @cur.define(IDL::AST::Module, @root_namespace.name, {:not_in_repo_id => true})
+        @root_namespace = @cur = @cur.define(Cxx11RootModule, @root_namespace.name)
       end
       ret
     end
@@ -47,11 +53,21 @@ module IDL
       :BiDirPolicy,
       :DynamicAny
     ]
+    CXX_ROOT_NS = 'TAOX11_NAMESPACE'
     CXX_ROOT_SCOPE = 'TAOX11_NAMESPACE::'
 
     module LeafMixin
-      def self.included(klass)
-        klass.extend ClassMethods
+      def cxx_repository_id
+        if @repo_id.nil?
+          @repo_ver = "1.0" unless @repo_ver
+          format("IDL:%s%s:%s",
+                  if @prefix.empty? then "" else @prefix+"/" end,
+                  # filter out the inserted root_namespace if any
+                  self.scopes.select{|s| !s.is_a?(IDL::Delegator::Cxx11RootModule) }.collect{|s| s.name}.join("/"),
+                  @repo_ver)
+        else
+          @repo_id
+        end
       end
 
       def cxxname
@@ -85,17 +101,18 @@ module IDL
         end
         @scoped_srvproxy_cxxname
       end
-
-      module ClassMethods
-        def mk_name(nm, is_scoped)
-          nm.dup
-        end
-      end
     end
 
     module ModuleMixin
-      def lm_name_for_scope
-        @lm_name_for_scope ||= (self.scopes.size == 1 && Cxx11::REMAPPED_ROOT_SCOPES.include?(self.lm_name.to_sym)) ? Cxx11::CXX_ROOT_SCOPE + self.lm_name : self.lm_name
+      def lm_scopes
+        unless @lm_scopes
+          if self.scopes.size == 1
+            @lm_scopes = Cxx11::REMAPPED_ROOT_SCOPES.include?(self.lm_name.to_sym) ? [Cxx11::CXX_ROOT_NS, self.lm_name] : [self.lm_name]
+          else
+            super
+          end
+        end
+        @lm_scopes
       end
       def scoped_proxy_cxxname
         unless @scoped_proxy_cxxname
@@ -169,6 +186,9 @@ module IDL
 
     IDL::AST::Leaf.class_eval do
       include LeafMixin
+
+      alias :orig_repository_id :repository_id
+      alias :repository_id :cxx_repository_id
     end
 
     module InterfaceMixin
