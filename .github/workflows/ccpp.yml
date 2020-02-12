@@ -3,36 +3,36 @@ name: C/C++ CI
 on: [push]
 
 env:
-  DOC_ROOT: $(GITHUB_WORKSPACE)/ACE
-  ACE_ROOT: $(GITHUB_WORKSPACE)/ACE/ACE
-  MPC_ROOT: $(GITHUB_WORKSPACE)/ACE/MPC
-  TAO_ROOT: $(GITHUB_WORKSPACE)/ACE/TAO
-  X11_BASE_ROOT: $(GITHUB_WORKSPACE)/axcioma
-  RIDL_ROOT: $(GITHUB_WORKSPACE)/ridl
-  TAOX11_ROOT: $(GITHUB_WORKSPACE)
+  DOC_ROOT: $GITHUB_WORKSPACE/ACE
+  ACE_ROOT: $GITHUB_WORKSPACE/ACE/ACE
+  MPC_ROOT: $GITHUB_WORKSPACE/ACE/MPC
+  TAO_ROOT: $GITHUB_WORKSPACE/ACE/TAO
+  X11_BASE_ROOT: $GITHUB_WORKSPACE/axcioma
+  RIDL_ROOT: $GITHUB_WORKSPACE/ridl
+  TAOX11_ROOT: $GITHUB_WORKSPACE
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v2
     - name: git clone dependent repositoryes
       run: |
-        git clone --depth 1 --branch Latest_Micro  git://github.com/DOCGroup/ACE_TAO.git $(DOC_ROOT)
-        git clone --depth 1 --branch Latest_ACETAO_Micro  git://github.com/DOCGroup/MPC.git $(MPC_ROOT)
-        git clone --depth 1 git://github.com/RemedyIT/axcioma.git $(X11_BASE_ROOT)
-        git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
+        git clone --depth 1 --branch Latest_Micro  git://github.com/DOCGroup/ACE_TAO.git $DOC_ROOT
+        git clone --depth 1 --branch Latest_ACETAO_Micro  git://github.com/DOCGroup/MPC.git $MPC_ROOT
+        git clone --depth 1 git://github.com/RemedyIT/axcioma.git $X11_BASE_ROOT
+        git clone --depth 1 git://github.com/RemedyIT/ridl.git $RIDL_ROOT
     - name: Run brix11 configure
       run: |
-        $(X11_BASE_ROOT)/bin/brix11 configure -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
+        $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT
     - name: Print brix11 configuration
       run: |
-        $(X11_BASE_ROOT)/bin/brix11 env -- configure -P
+        $X11_BASE_ROOT/bin/brix11 env -- configure -P
     - name: Run brix11 gen build
       run: |
-        $(X11_BASE_ROOT)/bin/brix11 gen build axcioma/workspace.mwc -- gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
+        $X11_BASE_ROOT/bin/brix11 gen build axcioma/workspace.mwc -- gen build $TAOX11_ROOT/examples -- gen build $TAOX11_ROOT/orbsvcs/tests -- gen build $TAOX11_ROOT/tests
     - name: Run brix11 make
       run: |
-        $(X11_BASE_ROOT)/bin/brix11 make -N -d $(X11_BASE_ROOT) -- make -N -d $(TAOX11_ROOT)/examples -- make -N -d $(TAOX11_ROOT)/orbsvcs/tests -- make -N -d $(TAOX11_ROOT)/tests
+        $X11_BASE_ROOT/bin/brix11 make -N -d $X11_BASE_ROOT -- make -N -d $TAOX11_ROOT/examples -- make -N -d $TAOX11_ROOT/orbsvcs/tests -- make -N -d $TAOX11_ROOT/tests
