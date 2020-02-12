@@ -3,13 +3,13 @@ name: C/C++ CI
 on: [push]
 
 env:
-  DOC_ROOT: $GITHUB_WORKSPACE/ACE
-  ACE_ROOT: $GITHUB_WORKSPACE/ACE/ACE
-  MPC_ROOT: $GITHUB_WORKSPACE/ACE/MPC
-  TAO_ROOT: $GITHUB_WORKSPACE/ACE/TAO
-  X11_BASE_ROOT: $GITHUB_WORKSPACE/axcioma
-  RIDL_ROOT: $GITHUB_WORKSPACE/ridl
-  TAOX11_ROOT: $GITHUB_WORKSPACE
+  DOC_ROOT: ${{ github.workspace }}/ACE
+  ACE_ROOT: ${{ github.workspace }}/ACE/ACE
+  MPC_ROOT: ${{ github.workspace }}/ACE/MPC
+  TAO_ROOT: ${{ github.workspace }}/ACE/TAO
+  X11_BASE_ROOT: ${{ github.workspace }}/axcioma
+  RIDL_ROOT: ${{ github.workspace }}/ridl
+  TAOX11_ROOT: ${{ github.workspace }}
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: git clone dependent repositoryes
+    - name: git clone dependent repositories
       run: |
         git clone --depth 1 --branch Latest_Micro  git://github.com/DOCGroup/ACE_TAO.git $DOC_ROOT
         git clone --depth 1 --branch Latest_ACETAO_Micro  git://github.com/DOCGroup/MPC.git $MPC_ROOT
@@ -26,7 +26,7 @@ jobs:
         git clone --depth 1 git://github.com/RemedyIT/ridl.git $RIDL_ROOT
     - name: Run brix11 configure
       run: |
-        $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
+        $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT
     - name: Print brix11 configuration
       run: |
         $X11_BASE_ROOT/bin/brix11 env -- configure -P
