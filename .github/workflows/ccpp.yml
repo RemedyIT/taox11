@@ -52,10 +52,10 @@ jobs:
             CC: gcc-9
             CXX: g++-9
             RubyVersion: 2.7
+    env:
+      CC: ${{ matrix.CC }}
+      CXX: ${{ matrix.CXX }}
     steps:
-    - env:
-        CC: ${{ matrix.CC }}
-        CXX: ${{ matrix.CXX }}
     - uses: actions/checkout@v2
     - uses: actions/setup-ruby@v1
       with:
