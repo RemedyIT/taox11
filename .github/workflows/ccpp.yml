@@ -16,8 +16,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        name: [GCC8Ruby27,
-               GCC9Ruby27]
+        name: [
+          GCC8Ruby27,
+          GCC9Ruby27
+        ]
         include:
           - name: GCC8Ruby27
             os: ubuntu-latest
@@ -35,10 +37,10 @@ jobs:
       with:
       ruby-version: $RubyVersion
     - name: Add repository $Repo
-      if: $Repo != '' then
+      if: $Repo != ''
+      run:
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
         sudo apt-add-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ $Repo main"
-      fi
     - name: git clone dependent repositories
       run: |
         git clone --depth 1 --branch Latest_Micro  git://github.com/DOCGroup/ACE_TAO.git $DOC_ROOT
