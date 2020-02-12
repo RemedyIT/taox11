@@ -21,19 +21,19 @@ jobs:
           GCC9Ruby27
         ]
         include:
-          - GCC48Ruby24:
+          - name: GCC48Ruby24
             os: ubuntu-latest
             CC: gcc-4.8
             CXX: g++-4.8
             PackageDeps: g++-4.8
             RubyVersion: 2.4
-          - GCC6Ruby25:
+          - name: GCC6Ruby25
             os: ubuntu-latest
             CC: gcc-6
             CXX: g++-6
             PackageDeps: g++-6
             RubyVersion: 2.5
-          - GCC7Ruby26:
+          - name: GCC7Ruby26
             os: ubuntu-latest
             CC: gcc-7
             CXX: g++-7
