@@ -77,16 +77,11 @@ jobs:
       $(X11_BASE_ROOT)/bin/brix11 configure -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
     displayName: Run brix11 configure
   - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 env
-      $(X11_BASE_ROOT)/bin/brix11 configure -P
+      $(X11_BASE_ROOT)/bin/brix11 env -- configure -P
     displayName: Print brix11 configuration
   - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 gen build axcioma/workspace.mwc
-      $(X11_BASE_ROOT)/bin/brix11 gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
+      $(X11_BASE_ROOT)/bin/brix11 gen build axcioma/workspace.mwc -- gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
     displayName: Run brix11 gen build
   - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(X11_BASE_ROOT)
-      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/examples
-      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/orbsvcs/tests
-      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/tests
+      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(X11_BASE_ROOT) -- make -N -d $(TAOX11_ROOT)/examples -- make -N -d $(TAOX11_ROOT)/orbsvcs/tests -- make -N -d $(TAOX11_ROOT)/tests
     displayName: Run brix11 make
