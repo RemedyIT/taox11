@@ -5,6 +5,7 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 #pragma corba_ami "Test::Hello"
+#pragma corba_ami "Test::Hello_"
 
 /// Put the interfaces in a module, to avoid global namespace pollution
 module Test
@@ -465,6 +466,12 @@ module Test
     /**
      * This method is used to simplify the test shutdown process
      */
+    oneway void shutdown ();
+  };
+
+  // Test interface with underscore postfix
+  interface Hello_
+  {
     oneway void shutdown ();
   };
 };

@@ -24,7 +24,7 @@ TAO_CORBA::Boolean operator<< (
   TAO_OutputCDR &strm,
   <%= scoped_cxx_in_type %> _tao_objref)
 {
-  TAOX11_IDL::traits< TAOX11_CORBA::Object>::ref_type _x11_obj { std::move(_tao_objref) };
+  TAOX11_IDL::traits<TAOX11_CORBA::Object>::ref_type _x11_obj { std::move(_tao_objref) };
   return (strm << _x11_obj);
 }
 

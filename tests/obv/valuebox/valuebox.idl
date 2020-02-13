@@ -20,6 +20,7 @@ valuetype VBwstring wstring;
 //
 typedef sequence<long> TDseqlong;
 valuetype VBseqlong TDseqlong;
+valuetype VBseqlong_ TDseqlong;
 
 //
 // Boxed array ("fixed")

@@ -33,6 +33,15 @@ module Test
   {
     long len;
   };
+  // test names with embedded undercores
+  struct S_S
+  {
+    long len;
+  };
+  struct S__S
+  {
+    long len;
+  };
   struct AllBasicTypes
   {
     short a;
