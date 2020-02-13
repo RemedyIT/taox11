@@ -90,8 +90,8 @@ void
     uint32_t reply_status)
 {
   // Retrieve Reply Handler object.
-  ::TAOX11_NAMESPACE::CORBA::object_traits< ::TAOX11_NAMESPACE::CORBA::Object >::ref_type _reply_handler_obj =
-    ::TAOX11_NAMESPACE::CORBA::make_reference<TAOX11_CORBA::Object> (
+  ::TAOX11_NAMESPACE::CORBA::object_traits< ::TAOX11_NAMESPACE::CORBA::Object>::ref_type _reply_handler_obj =
+    ::TAOX11_NAMESPACE::CORBA::make_reference< TAOX11_CORBA::Object> (
       new ::TAOX11_NAMESPACE::Object_proxy (TAO_MESSAGING::ReplyHandler::_duplicate (_tao_reply_handler)));
 
   <%= interface.scoped_cxx_traits_type %>::ref_type _reply_handler =
@@ -146,7 +146,7 @@ void
         seq_to_x11<TAOX11_NAMESPACE::CORBA::OctetSeq> (_tao_marshaled_exception);
 
       IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type _exception_holder =
-        TAOX11_NAMESPACE::CORBA::make_reference< ::TAOX11_NAMESPACE::ExceptionHolder_i > (
+        TAOX11_NAMESPACE::CORBA::make_reference< ::TAOX11_NAMESPACE::ExceptionHolder_i> (
           reply_status == TAO_AMI_REPLY_SYSTEM_EXCEPTION,
           _tao_in.byte_order (),
           _marshaled_exception,
@@ -319,8 +319,8 @@ void
     TAO_CORBA::ULong reply_status)
 {
   // Retrieve Reply Handler object.
-  ::TAOX11_NAMESPACE::CORBA::object_traits< ::TAOX11_NAMESPACE::CORBA::Object >::ref_type _reply_handler_obj =
-    ::TAOX11_NAMESPACE::CORBA::make_reference<TAOX11_CORBA::Object> (
+  ::TAOX11_NAMESPACE::CORBA::object_traits< ::TAOX11_NAMESPACE::CORBA::Object>::ref_type _reply_handler_obj =
+    ::TAOX11_NAMESPACE::CORBA::make_reference< TAOX11_CORBA::Object> (
       new ::TAOX11_NAMESPACE::Object_proxy (TAO_MESSAGING::ReplyHandler::_duplicate (_tao_reply_handler)));
 
   <%= interface.scoped_cxx_traits_type %>::ref_type _reply_handler =
@@ -369,7 +369,7 @@ void
         seq_to_x11<TAOX11_NAMESPACE::CORBA::OctetSeq> (_tao_marshaled_exception);
 
       IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type _exception_holder =
-        TAOX11_NAMESPACE::CORBA::make_reference< ::TAOX11_NAMESPACE::ExceptionHolder_i > (
+        TAOX11_NAMESPACE::CORBA::make_reference< ::TAOX11_NAMESPACE::ExceptionHolder_i> (
           reply_status == TAO_AMI_REPLY_SYSTEM_EXCEPTION,
           _tao_in.byte_order (),
           _marshaled_exception,
