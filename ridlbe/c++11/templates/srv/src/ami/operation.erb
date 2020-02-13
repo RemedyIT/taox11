@@ -144,7 +144,7 @@ void <%= interface.scoped_srvproxy_cxxname %>::<%= name %>_excep_skel (
   TAOX11_NAMESPACE::Upcall_Command command (
     [&]() {
       PS::SArg_Traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder >::in_arg_type arg_1 =
-        std::move (PS::get_in_arg< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder > (server_request.operation_details (), args, 1));
+        std::move (PS::get_in_arg< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder> (server_request.operation_details (), args, 1));
       servant.<%= cxxname %>_excep (arg_1);
     } );
 

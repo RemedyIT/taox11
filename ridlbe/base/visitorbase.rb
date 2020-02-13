@@ -325,6 +325,10 @@ module IDL
         self._idltype.idltype_name(cur_scope)
       end
 
+      def idltype_unescaped_name
+        self._idltype.idltype_unescaped_name(cur_scope)
+      end
+
       def scoped_idltype_name
         self._idltype.idltype_name
       end

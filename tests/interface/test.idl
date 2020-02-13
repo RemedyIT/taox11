@@ -70,6 +70,10 @@ module Test
     void do_something_F ();
   };
 
+  interface iF_ {
+    void do_something_F ();
+  };
+
   interface iFactory
   {
     iA get_iA ();
