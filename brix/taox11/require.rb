@@ -80,6 +80,8 @@ module BRIX11
         # update executable search path for MPC scripts (mwc.pl/mpc.pl)
         Exec.update_run_environment('PATH', File.join(taox11_root, 'bin'), :prepend)
         Project.mpc_path = File.join(taox11_root, 'bin')
+        # update executable search path for ridlc script
+        Exec.update_run_environment('PATH', File.join(base_root, 'bin'), :prepend)
 
         # load collection
         Dir.glob(File.join(ROOT, 'lib', '*.rb')).each { |p| require "brix/taox11/lib/#{File.basename(p)}"}
