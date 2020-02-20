@@ -66,9 +66,9 @@ int main(int argc, char* argv[])
       TAOX11_TEST_DEBUG << "Test generated code for enum Test::_cxx_bool" << std::endl;
       Test::_cxx_bool v_out;
       Test::_cxx_bool v_inout;
-      Test::_cxx_bool v_result = hello->inout_bool(Test::_cxx_bool::_char,
+      Test::_cxx_bool v_result = hello->inout_bool(Test::_cxx_bool::_cxx_char,
           v_out, v_inout);
-      TestEqual("hello->inout_bool v_out", Test::_cxx_bool::_long, v_out);
+      TestEqual("hello->inout_bool v_out", Test::_cxx_bool::_cxx_long, v_out);
       TestEqual("hello->inout_bool v_inout", Test::_cxx_bool::someenum, v_inout);
       TestEqual("hello->inout_bool v_result", Test::_cxx_bool::_cxx_asm,
           v_result);

@@ -21,13 +21,13 @@ Test::_cxx_bool
 Hello::inout_bool(Test::_cxx_bool v_in,
   Test::_cxx_bool& v_out, Test::_cxx_bool& v_inout)
 {
-  if (v_in != Test::_cxx_bool::_char)
+  if (v_in != Test::_cxx_bool::_cxx_char)
   {
     TAOX11_TEST_ERROR << "ERROR: inout_bool expected _cxx_bool::_char, received "
         << (int) v_in << std::endl;
     ++result_;
   }
-  v_out = Test::_cxx_bool::_long;
+  v_out = Test::_cxx_bool::_cxx_long;
   v_inout = Test::_cxx_bool::someenum;
   return Test::_cxx_bool::_cxx_asm;
 }

@@ -19,6 +19,10 @@ module IDL
       "#{typename.split('::').last.downcase}"
     end
 
+    def idltype_unescaped_name(scope = nil)
+      idltype_name(scope)
+    end
+
     # user space type names
 
     def cxx_type(scope = nil)
@@ -456,6 +460,9 @@ module IDL
     module IdlType_Mixin
      def idltype_name(scope = nil)
        a = (scope && (scope == node)) ? node.name : ('::'+node.scoped_name)
+     end
+     def idltype_unescaped_name(scope = nil)
+       a = (scope && (scope == node)) ? node.unescaped_name : ('::'+node.scoped_unescaped_name)
      end
    end
 

@@ -301,7 +301,7 @@ module IDL
       end
 
       def cxx_traits_type
-        "TAOX11_IDL::traits< #{cxxtype}>"
+        "TAOX11_IDL::traits<#{cxxtype}>"
       end
 
       def cxx_in_type

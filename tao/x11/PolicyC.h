@@ -146,8 +146,8 @@ namespace TAOX11_NAMESPACE {
     // generated from StubHeaderWriter#enter_interface
 
      // generated from c++/cli_hdr/interface_fwd.erb
-#if !defined (_INTF_TAOX11_NAMESPACE_CORBA_POLICY_FWD_)
-#define _INTF_TAOX11_NAMESPACE_CORBA_POLICY_FWD_
+#if !defined (_INTF_TAOX11_NAMESPACE__CORBA__POLICY_FWD_)
+#define _INTF_TAOX11_NAMESPACE__CORBA__POLICY_FWD_
     class TAOX11_Export Policy;
     class TAOX11_Export Policy_proxy;
     typedef Policy_proxy* Policy_proxy_ptr;
@@ -155,15 +155,15 @@ namespace TAOX11_NAMESPACE {
     {
       class TAOX11_Export Policy;
     }
-#endif // !_INTF_TAOX11_NAMESPACE_CORBA_POLICY_FWD_
+#endif // !_INTF_TAOX11_NAMESPACE__CORBA__POLICY_FWD_
      // generated from CxxWriterBase#at_global_scope
   } // namespace TAOX11_NAMESPACE
 } // namespace CORBA
  // entering CxxWriterBase#at_global_scope
 
  // generated from c++/cli_hdr/interface_object_traits.erb
-#if !defined (_INTF_TAOX11_NAMESPACE_CORBA_POLICY_TRAITS_DECL_)
-#define _INTF_TAOX11_NAMESPACE_CORBA_POLICY_TRAITS_DECL_
+#if !defined (_INTF_TAOX11_NAMESPACE__CORBA__POLICY_TRAITS_DECL_)
+#define _INTF_TAOX11_NAMESPACE__CORBA__POLICY_TRAITS_DECL_
 namespace TAOX11_NAMESPACE
 {
   namespace CORBA
@@ -200,7 +200,7 @@ namespace TAOX11_NAMESPACE
     };
   } // namespace IDL
 } // namespace TAOX11_NAMESPACE
-#endif // !_INTF_TAOX11_NAMESPACE_CORBA_POLICY_TRAITS_DECL_
+#endif // !_INTF_TAOX11_NAMESPACE__CORBA__POLICY_TRAITS_DECL_
 
  // leaving CxxWriterBase#at_global_scope
 namespace TAOX11_NAMESPACE
@@ -257,8 +257,8 @@ namespace TAOX11_NAMESPACE
 namespace TAOX11_NAMESPACE {
   namespace IDL {
 
-#if !defined (_INTF_FMT_TAOX11_NAMESPACE_CORBA_POLICY_TRAITS_DECL_)
-#define _INTF_FMT_TAOX11_NAMESPACE_CORBA_POLICY_TRAITS_DECL_
+#if !defined (_INTF_FMT_TAOX11_NAMESPACE__CORBA__POLICY_TRAITS_DECL_)
+#define _INTF_FMT_TAOX11_NAMESPACE__CORBA__POLICY_TRAITS_DECL_
     template <typename OStrm_>
     struct formatter< CORBA::Policy, OStrm_>
     {
@@ -271,11 +271,11 @@ namespace TAOX11_NAMESPACE {
     inline OStrm_& operator <<(
         OStrm_&,
         IDL::traits<CORBA::Policy>::__Writer<Fmt>);
-#endif // !_INTF_FMT_TAOX11_NAMESPACE_CORBA_POLICY_TRAITS_DECL_
+#endif // !_INTF_FMT_TAOX11_NAMESPACE__CORBA__POLICY_TRAITS_DECL_
 
      // generated from c++/cli_hdr/struct_idl_traits.erb
-#if !defined (_STRUCT_TAOX11_NAMESPACE_CORBA_POLICYERROR_TRAITS_)
-#define _STRUCT_TAOX11_NAMESPACE_CORBA_POLICYERROR_TRAITS_
+#if !defined (_STRUCT_TAOX11_NAMESPACE__CORBA__POLICYERROR_TRAITS_)
+#define _STRUCT_TAOX11_NAMESPACE__CORBA__POLICYERROR_TRAITS_
      template<>
      struct traits < TAOX11_CORBA::PolicyError>
        : IDL::common_traits< TAOX11_CORBA::PolicyError>
@@ -319,11 +319,11 @@ namespace TAOX11_NAMESPACE {
            os, w.val_,
            formatter_t ());
      }
-#endif // _STRUCT_TAOX11_NAMESPACE_CORBA_POLICYERROR_TRAITS_
+#endif // _STRUCT_TAOX11_NAMESPACE__CORBA__POLICYERROR_TRAITS_
 
    // generated from c++/cli_hdr/struct_idl_traits.erb
-#if !defined (_STRUCT_TAOX11_NAMESPACE_CORBA_INVALIDPOLICIES_TRAITS_)
-#define _STRUCT_TAOX11_NAMESPACE_CORBA_INVALIDPOLICIES_TRAITS_
+#if !defined (_STRUCT_TAOX11_NAMESPACE__CORBA__INVALIDPOLICIES_TRAITS_)
+#define _STRUCT_TAOX11_NAMESPACE__CORBA__INVALIDPOLICIES_TRAITS_
      template<>
      struct traits < TAOX11_CORBA::InvalidPolicies>
        : IDL::common_traits< TAOX11_CORBA::InvalidPolicies>
@@ -367,7 +367,7 @@ namespace TAOX11_NAMESPACE {
            os, w.val_,
            formatter_t ());
      }
-#endif // _STRUCT_TAOX11_NAMESPACE_CORBA_INVALIDPOLICIES_TRAITS_
+#endif // _STRUCT_TAOX11_NAMESPACE__CORBA__INVALIDPOLICIES_TRAITS_
   } // namespace IDL
 } // namespace TAOX11_NAMESPACE
 
@@ -407,23 +407,23 @@ namespace TAOX11_NAMESPACE {
 namespace TAOX11_NAMESPACE
 {
    // generated from c++/cli_hdr/anyop.erb
-#if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE_CORBA_POLICYERROR_DECL__)
-#define __TAOX11_ANYOP_TAOX11_NAMESPACE_CORBA_POLICYERROR_DECL__
+#if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICYERROR_DECL__)
+#define __TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICYERROR_DECL__
   TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::PolicyError&);
   TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&&);
   TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&);
 #endif
 
-#if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE_CORBA_INVALIDPOLICIES_DECL__)
-#define __TAOX11_ANYOP_TAOX11_NAMESPACE_CORBA_INVALIDPOLICIES_DECL__
+#if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__INVALIDPOLICIES_DECL__)
+#define __TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__INVALIDPOLICIES_DECL__
   TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::InvalidPolicies&);
   TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&&);
   TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&);
 #endif
 
    // generated from c++/cli_hdr/anyop.erb
-#if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE_CORBA_POLICY_DECL__)
-#define __TAOX11_ANYOP_TAOX11_NAMESPACE_CORBA_POLICY_DECL__
+#if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICY_DECL__)
+#define __TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICY_DECL__
   TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::ref_type);
   TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::_ref_type&);
 #endif

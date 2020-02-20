@@ -59,27 +59,27 @@ module IDL
           end
           grpcfg.for_params :strings,
             :params => {
-              'export_macro' => {:description => "-Wb,export_macro=MACRO\t\tsets export macro for all files"},
-              'export_include' => {:description => "-Wb,export_include=FILE\t\tsets export include file for all files"},
-              'export_file' => {:description => "-Wb,export_file=FILE\t\tsets export file to generate for -Gxh"},
-              'pre_include' => {:description => "-Wb,pre_include=FILE\t\tsets include file generated before any other include"},
-              'post_include' => {:description => "-Wb,post_include=FILE\t\tsets include file generated at the end of the file"},
-              'base_export_macro' => {:description => "-Wb,base_export_macro=MACRO\tsets base of export macro's"},
-              'base_export_include' => {:description => "-Wb,base_export_include=FILE\tsets base of export include files"},
-              'stub_export_macro' => {:description => "-Wb,stub_export_macro=MACRO\tsets export macro for client files"},
-              'stub_export_include' => {:description => "-Wb,stub_export_include=FILE\tsets export include file for client files"},
-              'stub_export_file' => {:description => "-Wb,stub_export_file=FILE\t\tsets stub export file to generate for -Gxhst"},
-              'amic_export_macro' => {:description => "-Wb,amic_export_macro=MACRO\tsets export macro for ami client files"},
-              'amic_export_include' => {:description => "-Wb,amic_export_include=FILE\tsets export include file for ami client files"},
-              'amic_export_file' => {:description => "-Wb,amic_export_file=FILE\t\tsets ami export file to generate for -Gxhsta"},
-              'skel_export_macro' => {:description => "-Wb,skel_export_macro=MACRO\tsets export macro for servant files"},
-              'skel_export_include' => {:description => "-Wb,skel_export_include=FILE\tsets export include file for servant files"},
-              'skel_export_file' => {:description => "-Wb,skel_export_file=FILE\t\tsets skeleton export file to generate for -Gxhsk"},
-              'impl_export_macro' => {:description => "-Wb,impl_export_macro=MACRO\tsets export macro for implementation files"},
-              'impl_export_include' => {:description => "-Wb,impl_export_include=FILE\tsets export include file for implementation files"},
-              'impl_export_file' => {:description => "-Wb,impl_export_file=FILE\t\tsets implementation export file to generate for -Gxhimpl"},
-              'anytypecode_export_macro' => {:description => "-Wb,anytypecode_export_macro=MACRO\tsets export macro for Any ops en TypeCode"},
-              'anytypecode_export_include' => {:description => "-Wb,anytypecode_export_include=FILE\tsets export include file for Any ops en TypeCode"},
+              'export_macro' => {:description => "-Wb,export_macro=MACRO\t\tSet export macro for all files"},
+              'export_include' => {:description => "-Wb,export_include=FILE\t\tSet export include file for all files"},
+              'export_file' => {:description => "-Wb,export_file=FILE\t\tSet export file to generate for -Gxh"},
+              'pre_include' => {:description => "-Wb,pre_include=FILE\t\tSet include file generated before any other include"},
+              'post_include' => {:description => "-Wb,post_include=FILE\t\tSet include file generated at the end of the file"},
+              'base_export_macro' => {:description => "-Wb,base_export_macro=MACRO\tSet base of export macro's"},
+              'base_export_include' => {:description => "-Wb,base_export_include=FILE\tSet base of export include files"},
+              'stub_export_macro' => {:description => "-Wb,stub_export_macro=MACRO\tSet export macro for client files"},
+              'stub_export_include' => {:description => "-Wb,stub_export_include=FILE\tSet export include file for client files"},
+              'stub_export_file' => {:description => "-Wb,stub_export_file=FILE\t\tSet stub export file to generate for -Gxhst"},
+              'amic_export_macro' => {:description => "-Wb,amic_export_macro=MACRO\tSet export macro for ami client files"},
+              'amic_export_include' => {:description => "-Wb,amic_export_include=FILE\tSet export include file for ami client files"},
+              'amic_export_file' => {:description => "-Wb,amic_export_file=FILE\t\tSet ami export file to generate for -Gxhsta"},
+              'skel_export_macro' => {:description => "-Wb,skel_export_macro=MACRO\tSet export macro for servant files"},
+              'skel_export_include' => {:description => "-Wb,skel_export_include=FILE\tSet export include file for servant files"},
+              'skel_export_file' => {:description => "-Wb,skel_export_file=FILE\t\tSet skeleton export file to generate for -Gxhsk"},
+              'impl_export_macro' => {:description => "-Wb,impl_export_macro=MACRO\tSet export macro for implementation files"},
+              'impl_export_include' => {:description => "-Wb,impl_export_include=FILE\tSet export include file for implementation files"},
+              'impl_export_file' => {:description => "-Wb,impl_export_file=FILE\t\tSet implementation export file to generate for -Gxhimpl"},
+              'anytypecode_export_macro' => {:description => "-Wb,anytypecode_export_macro=MACRO\tSet export macro for Any ops en TypeCode"},
+              'anytypecode_export_include' => {:description => "-Wb,anytypecode_export_include=FILE\tSet export include file for Any ops en TypeCode"},
               'include_guard' => {:description => "-Wb,include_guard=MACRO\t\tguard to prevent the generated client header file to be included"},
               'safe_include' => {:description => "-Wb,safe_include=FILE\t\tinclude that should be used instead of the own generated client header file"},
               'unique_include' => {:description => "-Wb,unique_include=FILE\t\tinclude that should be generated as only contents of the generated client header file"}
@@ -139,42 +139,55 @@ module IDL
             }
       end
 
+      ol.for_switch '-X{export options}', :type => String, :separator => true do |swcfg|
+        swcfg.define_group :export_flags, :params => {
+              'st' => { :option_name => :export_st,
+                       :description => "-Xst\t\t\tExport stub code (not exported by default)" },
+              'sk' => { :option_name => :export_sk,
+                       :description => "-Xsk\t\t\tExport skeleton code (not exported by default)" },
+              'sta' => { :option_name => :export_sta,
+                       :description => "-Xsta\t\t\tExport ami stub code (not exported by default)" },
+              'impl' => { :option_name => :export_impl,
+                       :description => "-Ximpl\t\t\tExport implementation code (not exported by default)" },
+            }
+      end
+
       ol.for_switch '-S{suppression options}', :type => String, :separator => true do |swcfg|
         swcfg.define_group :suppress_flags, :params => {
               'na' => { :option_name => :no_gen_native,
-                       :description => "-Sna\t\t\tSuppress generating for native types (generated by default)" },
+                       :description => "-Sna\t\t\tSuppress generation of native types (generated by default)" },
               'S' => { :option_name => :no_servant_code,
-                       :description => "-SS\t\t\tSuppress generating skeleton implementation and inline file (generated by default)" },
+                       :description => "-SS\t\t\tSuppress generation of skeleton implementation and inline file (generated by default)" },
               'sh' => { :option_name => :no_servant_header,
-                       :description => "-Ssh\t\t\tSuppress generating skeleton header file (generated by default)" },
+                       :description => "-Ssh\t\t\tSuppress generation of skeleton header file (generated by default)" },
               'orb' => { :option_name => :no_orb_include,
-                       :description => "-Sorb\t\t\tSuppress generating include of orb.h (generated by default)" },
+                       :description => "-Sorb\t\t\tSuppress generation of include of orb.h (generated by default)" },
               'ots' => { :option_name => :no_object_traits,
-                       :description => "-Sots\t\t\tSuppress generating interface traits specializations (generated by default)" },
+                       :description => "-Sots\t\t\tSuppress generation of interface traits specializations (generated by default)" },
               'cc' => { :option_name => :no_client_source,
-                       :description => "-Scc\t\t\tSuppress generating client source file (generated by default)" },
+                       :description => "-Scc\t\t\tSuppress generation of client source file (generated by default)" },
               'ch' => { :option_name => :no_client_header,
-                       :description => "-Sch\t\t\tSuppress generating client header file (generated by default)" },
+                       :description => "-Sch\t\t\tSuppress generation of client header file (generated by default)" },
               'cp' => { :option_name => :no_client_proxy,
-                       :description => "-Scp\t\t\tSuppress generating client proxy header file (generated by default)" },
+                       :description => "-Scp\t\t\tSuppress generation of client proxy header file (generated by default)" },
               'cdr' => { :option_name => :no_cdr_streaming,
-                       :description => "-Scdr\t\t\tSuppress generating CDR streaming operators (generated by default)" },
+                       :description => "-Scdr\t\t\tSuppress generation of CDR streaming operators (generated by default)" },
             }
         swcfg.define_group :suppress_flags_false, :params => {
               'a' => { :option_name => :gen_any_ops, :value => false,
-                       :description => "-Sa\t\t\tSuppress Any support (generated by default)" },
+                       :description => "-Sa\t\t\tSuppress generation of Any support (generated by default)" },
               'al' => { :option_name => :gen_localintf_any_ops, :value => false,
-                       :description => "-Sal\t\t\tSuppress Any support for local interfaces (generated by default)" },
+                       :description => "-Sal\t\t\tSuppress generation of Any support for local interfaces (generated by default)" },
               'p' => { :option_name => :gen_thru_poa_collocation, :value => false,
-                       :description => "-Sp\t\t\tSuppress generating Thru POA collocated stubs (generated by default)" },
+                       :description => "-Sp\t\t\tSuppress generation of through POA collocated stubs (generated by default)" },
               't' => { :option_name => :gen_typecodes, :value => false,
-                       :description => "-St\t\t\tSuppress TypeCode support (generated by default)" }
+                       :description => "-St\t\t\tSuppress generation of TypeCode support (generated by default)" }
             }
         swcfg.define_group :noop, :params => {
               'ci' => { :type => :noop,
-                       :description => "-Sci\t\t\tSuppress generating client inline file (always suppressed)" },
+                       :description => "-Sci\t\t\tSuppress generation of client inline file (always suppressed)" },
               'si' => { :type => :noop,
-                       :description => "-Ssi\t\t\tSuppress generating skeleton inline file (always suppressed)" },
+                       :description => "-Ssi\t\t\tSuppress generation of skeleton inline file (always suppressed)" },
             }
       end
     end # add_extended_options
@@ -373,15 +386,13 @@ module IDL
     def self.check_ami_export_params(options)
       # TODO : MCO : I do not think this is a useful check AmiC files are not always generated together with stubs
       # if options.amic_export_macro && !options.stub_export_macro
-      #   IDL.error("ERROR: it isn't allowed to use amic_export_macro without using stub_export_macro")
-      #   exit 1
+      #   IDL.fatal("ERROR: it isn't allowed to use amic_export_macro without using stub_export_macro")
       # end
 
-      if options.gen_export_sta
+      if options.gen_export_sta || options.export_sta
         unless options.amic_export_macro || options.base_export_macro
-          IDL.error("ERROR: it isn't allowed to use -Gxhsta without specifying the macro with -Wb,amic_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhsta or -Xsta without specifying the macro with -Wb,amic_export_macro=MACRO "+
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
-          exit 1
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
@@ -391,11 +402,10 @@ module IDL
     end
 
     def self.check_stub_export_params(options)
-      if options.gen_export_st
+      if options.gen_export_st || options.export_st
         unless options.stub_export_macro || options.base_export_macro
-          IDL.error("ERROR: it isn't allowed to use -Gxhst without specifying the macro with -Wb,stub_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhst or -Xst without specifying the macro with -Wb,stub_export_macro=MACRO "+
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
-          exit 1
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
@@ -405,11 +415,10 @@ module IDL
     end
 
     def self.check_skel_export_params(options)
-      if options.gen_export_sk
+      if options.gen_export_sk || options.export_sk
         unless options.skel_export_macro || options.base_export_macro
-          IDL.error("ERROR: it isn't allowed to use -Gxhsk without specifying the macro with -Wb,skel_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhsk or -Xsk without specifying the macro with -Wb,skel_export_macro=MACRO "+
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
-          exit 1
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
@@ -419,11 +428,10 @@ module IDL
     end
 
     def self.check_impl_export_params(options)
-      if options.gen_export_impl
+      if options.gen_export_impl || options.export_impl
         unless options.impl_export_macro || options.base_export_macro
-          IDL.error("ERROR: it isn't allowed to use -Gxhimpl without specifying the macro with -Wb,impl_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhimpl or -Ximpl without specifying the macro with -Wb,impl_export_macro=MACRO "+
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
-          exit 1
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
@@ -540,8 +548,7 @@ module IDL
     def self.gen_export_header(options)
       return if IDL.has_production?(:export_header)
       unless options.export_macro
-        IDL.error('ERROR: it is not allowed to use -Gxh without specifying the macro with -Wb,export_macro=MACRO')
-        exit 1
+        IDL.fatal('ERROR: it is not allowed to use -Gxh without specifying the macro with -Wb,export_macro=MACRO')
       end
       export_file = options.export_file || options.export_include
       if export_file
@@ -550,8 +557,7 @@ module IDL
             :export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.export_macro, export_file, so, options))
       else
-        IDL.error('ERROR: it is not allowed to use -Gxh without specifying the file with -Wb,export_include=FILE or -Wb,export_file=FILE')
-        exit 1
+        IDL.fatal('ERROR: it is not allowed to use -Gxh without specifying the file with -Wb,export_include=FILE or -Wb,export_file=FILE')
       end
     end
 
@@ -564,9 +570,8 @@ module IDL
             :stub_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.stub_export_macro, export_file, so, options))
       else
-        IDL.error('ERROR: it is not allowed to use -Gxhst without specifying the file with -Wb,stub_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhst without specifying the file with -Wb,stub_export_file=FILE, '+
                       '-Wb,stub_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
-        exit 1
       end
     end
 
@@ -579,9 +584,8 @@ module IDL
             :skel_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.skel_export_macro, export_file, so, options))
       else
-        IDL.error('ERROR: it is not allowed to use -Gxhsk without specifying the file with -Wb,skel_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhsk without specifying the file with -Wb,skel_export_file=FILE, '+
                       '-Wb,skel_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
-        exit 1
       end
     end
 
@@ -594,9 +598,8 @@ module IDL
             :amic_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.amic_export_macro, export_file, so, options))
       else
-        IDL.error('ERROR: it is not allowed to use -Gxhsta without specifying the file with -Wb,amic_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhsta without specifying the file with -Wb,amic_export_file=FILE, '+
                       '-Wb,amic_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
-        exit 1
       end
     end
 
@@ -609,9 +612,8 @@ module IDL
             :impl_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.impl_export_macro, export_file, so, options))
       else
-        IDL.error('ERROR: it is not allowed to use -Gxhimpl without specifying the file with -Wb,impl_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhimpl without specifying the file with -Wb,impl_export_file=FILE, '+
                       '-Wb,impl_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
-        exit 1
       end
     end
 

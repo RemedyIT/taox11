@@ -34,7 +34,7 @@ public:
 
 protected:
   <%= factory_cxxname %> () = default;
-  ~<%= factory_cxxname %> () = default;
+  virtual ~<%= factory_cxxname %> () = default;
   <%= factory_cxxname %> (const <%= factory_cxxname %>&) = default;
   <%= factory_cxxname %> (<%= factory_cxxname %>&&) = default;
 }; // class <%= factory_cxxname %>

@@ -15,7 +15,7 @@ protected:
   friend typename TAOX11_CORBA::abstractbase_traits<T>::ref_type
     TAOX11_CORBA::abstractbase_traits<T>::narrow (
       TAOX11_CORBA::abstractbase_reference<TAOX11_CORBA::AbstractBase>);
-#endif /* _MSC_VER < 1910 || clang <= 6 */
+#endif /* _MSC_VER < 1910 || clang <= 8 */
 
 #if defined (_MSC_VER) && (_MSC_VER < 1920)
     // msvc 14.(0|1) have a problem with defaulted constructors, issue #4005
@@ -24,7 +24,7 @@ protected:
   <%= cxxname %> () = default;
 #endif /* _MSC_VER < 1920 */
   <%= cxxname %> (TAOX11_NAMESPACE::Abstractbase_proxy_ptr prx);
-  ~<%= cxxname %> () = default;
+  virtual ~<%= cxxname %> () = default;
   /// Required for derived value types
   <%= cxxname %>(const <%= cxxname %>&) = default;
   <%= cxxname %>(<%= cxxname %>&&) = default;
@@ -50,7 +50,7 @@ protected:
   /// Default constructor
   <%= cxxname %> () = default;
   /// Destructor
-  ~<%= cxxname %> () = default;
+  virtual ~<%= cxxname %> () = default;
 
 %   if needs_abstract_base_overrides?
   // from CORBA::AbstractBase
@@ -83,7 +83,7 @@ protected:
   <%= cxxname %> () = default;
 #endif /* _MSC_VER < 1920 */
   /// Destructor
-  ~<%= cxxname %> () = default;
+  virtual ~<%= cxxname %> () = default;
 
   /// Returns a strong client reference for the local object you are calling
   <%= scoped_cxx_return_type %> _this ();

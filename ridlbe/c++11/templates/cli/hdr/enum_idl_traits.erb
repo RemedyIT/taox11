@@ -2,7 +2,7 @@
 // generated from <%= ridl_template_path %>
 template<>
 struct traits < <%= scoped_cxxtype %>>
-  : IDL::common_traits< <%= scoped_cxxtype %>>
+  : IDL::common_byval_traits< <%= scoped_cxxtype %>>
 {
   template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
   static inline OStrm_& write_on(

@@ -4,6 +4,8 @@
 
 configure :taox11 do
 
+  depends_on :acetao
+
   dependencies do
 
     require :acetaompc do

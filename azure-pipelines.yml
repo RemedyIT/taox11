@@ -8,6 +8,14 @@ variables:
    TAOX11_ROOT: $(Build.SourcesDirectory)
    system.prefergit: true
 
+schedules:
+- cron: "0 7 * * SUN"
+  displayName: Weekly Sunday
+  branches:
+    include:
+    - master
+  always: true
+
 resources:
 - repo: self
   fetchDepth: 1
@@ -19,30 +27,35 @@ jobs:
     vmImage: ubuntu-18.04
   strategy:
     matrix:
-      GCC48:
+      GCC48Ruby24:
         CC: gcc-4.8
         CXX: g++-4.8
         PackageDeps: g++-4.8
-      GCC6:
+        RubyVersion: 2.4
+      GCC6Ruby25:
         CC: gcc-6
         CXX: g++-6
         PackageDeps: g++-6
-      GCC7:
+        RubyVersion: 2.5
+      GCC7Ruby26:
         CC: gcc-7
         CXX: g++-7
         PackageDeps: g++-7
-      GCC8:
+        RubyVersion: 2.6
+      GCC8Ruby27:
         CC: gcc-8
         CXX: g++-8
         PackageDeps: g++-8
-      GCC9:
+        RubyVersion: 2.7
+      GCC9Ruby27:
         CC: gcc-9
         CXX: g++-9
         PackageDeps: g++-9
+        RubyVersion: 2.7
   steps:
   - task: UseRubyVersion@0
     inputs:
-      versionSpec: '>= 2.4'
+      versionSpec: $(RubyVersion)
       addToPath: true
     displayName: Install ruby
   - script: |
@@ -55,25 +68,20 @@ jobs:
       sudo apt-get --yes install libxerces-c-dev libssl-dev $(PackageDeps)
     displayName: install system package dependencies
   - powershell: |
-      git clone --depth 1 --branch ACE+TAO-6_5_7 git://github.com/DOCGroup/ACE_TAO.git $(DOC_ROOT)
-      git clone --depth 1 --branch ACE+TAO-6_5_7 git://github.com/DOCGroup/MPC.git $(MPC_ROOT)
+      git clone --depth 1 --branch Latest_Micro  git://github.com/DOCGroup/ACE_TAO.git $(DOC_ROOT)
+      git clone --depth 1 --branch Latest_ACETAO_Micro  git://github.com/DOCGroup/MPC.git $(MPC_ROOT)
       git clone --depth 1 git://github.com/RemedyIT/axcioma.git $(X11_BASE_ROOT)
       git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
     displayName: git clone dependent repositories
   - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 -t gnuace configure -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
+      $(X11_BASE_ROOT)/bin/brix11 configure -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
     displayName: Run brix11 configure
   - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 env
-      $(X11_BASE_ROOT)/bin/brix11 configure -P
+      $(X11_BASE_ROOT)/bin/brix11 env -- configure -P
     displayName: Print brix11 configuration
   - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 gen build axcioma/workspace.mwc
-      $(X11_BASE_ROOT)/bin/brix11 gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
+      $(X11_BASE_ROOT)/bin/brix11 gen build axcioma/workspace.mwc -- gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
     displayName: Run brix11 gen build
   - powershell: |
-      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(X11_BASE_ROOT)
-      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/examples
-      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/orbsvcs/tests
-      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(TAOX11_ROOT)/tests
+      $(X11_BASE_ROOT)/bin/brix11 make -N -d $(X11_BASE_ROOT) -- make -N -d $(TAOX11_ROOT)/examples -- make -N -d $(TAOX11_ROOT)/orbsvcs/tests -- make -N -d $(TAOX11_ROOT)/tests
     displayName: Run brix11 make

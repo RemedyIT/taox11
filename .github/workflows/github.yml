@@ -1,0 +1,100 @@
+name: GitHub CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  schedule:
+    - cron: '0 7 * * SUN'
+
+env:
+  DOC_ROOT: ${{ github.workspace }}/ACE
+  ACE_ROOT: ${{ github.workspace }}/ACE/ACE
+  MPC_ROOT: ${{ github.workspace }}/ACE/MPC
+  TAO_ROOT: ${{ github.workspace }}/ACE/TAO
+  X11_BASE_ROOT: ${{ github.workspace }}/axcioma
+  RIDL_ROOT: ${{ github.workspace }}/ridl
+  TAOX11_ROOT: ${{ github.workspace }}
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        name: [
+          GCC48Ruby24,
+          GCC6Ruby25,
+          GCC7Ruby26,
+          GCC8Ruby27,
+          GCC9Ruby27
+        ]
+        include:
+          - name: GCC48Ruby24
+            os: ubuntu-latest
+            CC: gcc-4.8
+            CXX: g++-4.8
+            RubyVersion: 2.4
+            PackageDeps: g++-4.8
+          - name: GCC6Ruby25
+            os: ubuntu-latest
+            CC: gcc-6
+            CXX: g++-6
+            RubyVersion: 2.5
+            PackageDeps: g++-6
+          - name: GCC7Ruby26
+            os: ubuntu-latest
+            CC: gcc-7
+            CXX: g++-7
+            RubyVersion: 2.6
+            PackageDeps: g++-7
+          - name: GCC8Ruby27
+            os: ubuntu-latest
+            CC: gcc-8
+            CXX: g++-8
+            RubyVersion: 2.7
+            PackageDeps: g++-8
+          - name: GCC9Ruby27
+            os: ubuntu-latest
+            CC: gcc-9
+            CXX: g++-9
+            RubyVersion: 2.7
+            PackageDeps: g++-9
+    env:
+      CC: ${{ matrix.CC }}
+      CXX: ${{ matrix.CXX }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.RubyVersion }}
+    - name: Add repository $Repo
+      if: startsWith(matrix.os,'ubuntu') && matrix.Repo != ''
+      run:
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+        sudo apt-add-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ ${{ matrix.Repo }} main"
+    - name: Add packages
+      if: startsWith(matrix.os,'ubuntu')
+      run: |
+        sudo apt-get --yes update
+        sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
+    - name: git clone dependent repositories
+      run: |
+        git clone --depth 1 --branch Latest_Micro  git://github.com/DOCGroup/ACE_TAO.git $DOC_ROOT
+        git clone --depth 1 --branch Latest_ACETAO_Micro  git://github.com/DOCGroup/MPC.git $MPC_ROOT
+        git clone --depth 1 git://github.com/RemedyIT/axcioma.git $X11_BASE_ROOT
+        git clone --depth 1 git://github.com/RemedyIT/ridl.git $RIDL_ROOT
+    - name: Run brix11 configure
+      run: |
+        $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT
+    - name: Print brix11 configuration
+      run: |
+        $X11_BASE_ROOT/bin/brix11 env -- configure -P
+    - name: Run brix11 gen build
+      run: |
+        $X11_BASE_ROOT/bin/brix11 gen build axcioma/workspace.mwc -- gen build $TAOX11_ROOT/examples -- gen build $TAOX11_ROOT/orbsvcs/tests -- gen build $TAOX11_ROOT/tests
+    - name: Run brix11 make
+      run: |
+        $X11_BASE_ROOT/bin/brix11 make -N -d $X11_BASE_ROOT -- make -N -d $TAOX11_ROOT/examples -- make -N -d $TAOX11_ROOT/orbsvcs/tests -- make -N -d $TAOX11_ROOT/tests

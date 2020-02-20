@@ -5,7 +5,6 @@ class <%= stub_export_macro %><%= cxxname %> final
  : public TAOX11_NAMESPACE::CORBA::UserException
 {
 public:
-
   virtual void _raise () const override;
 
 % if generate_cdr_streaming?

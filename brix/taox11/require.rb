@@ -29,11 +29,12 @@ module BRIX11
           Exec.update_run_environment('LD_LIBRARY_PATH', ENV['LD_LIBRARY_PATH']) unless Exec.has_run_environment?('LD_LIBRARY_PATH')
         end
 
+        # base
+        base_root = Exec.get_run_environment('X11_BASE_ROOT')
+
         # standard
         taox11_root = Exec.get_run_environment('TAOX11_ROOT')
         taox11_root ||= Exec.update_run_environment('TAOX11_ROOT', File.expand_path(File.join(ROOT, '..', '..')))
-        base_root = Exec.get_run_environment('X11_BASE_ROOT')
-        base_root ||= Exec.update_run_environment('X11_BASE_ROOT', File.dirname(BRIX11_BASE_ROOT))
         ace_root = Exec.get_run_environment('ACE_ROOT')
         unless ace_root
           # in case of alternative dir layout (for Github CI builds)
@@ -70,15 +71,17 @@ module BRIX11
         # ridl
         Exec.update_run_environment('RIDL_BE_SELECT', 'c++11') unless Exec.has_run_environment?('RIDL_BE_SELECT')
         ridl_be_path = Exec.get_run_environment('RIDL_BE_PATH')
-        # if not set yet update taking crossbuild setting into account
+        # if not set yet update
         ridl_be_path ||= Exec.update_run_environment(
                               'RIDL_BE_PATH',
-                              (BRIX11.options.config.crossbuild ? x11_host_root : base_root),
+                              taox11_root,
                               :append)
         ridl_be_path.split(/:|;/).each { |p| $: << p unless $:.include?(p) }
         # update executable search path for MPC scripts (mwc.pl/mpc.pl)
         Exec.update_run_environment('PATH', File.join(taox11_root, 'bin'), :prepend)
         Project.mpc_path = File.join(taox11_root, 'bin')
+        # update executable search path for ridlc script
+        Exec.update_run_environment('PATH', File.join(base_root, 'bin'), :prepend)
 
         # load collection
         Dir.glob(File.join(ROOT, 'lib', '*.rb')).each { |p| require "brix/taox11/lib/#{File.basename(p)}"}
