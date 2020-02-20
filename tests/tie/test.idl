@@ -31,4 +31,10 @@ module Test
 
   /// A simple typedef
   typedef Hello Hello2;
+
+  /// Local interface for which no TIE should be generated
+  local interface Bar
+  {
+    string get_string ();
+  };
 };
