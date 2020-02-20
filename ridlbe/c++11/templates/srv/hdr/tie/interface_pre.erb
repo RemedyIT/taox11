@@ -1,4 +1,3 @@
-% unless is_local?
 // generated from <%= ridl_template_path %>
 namespace POA
 {
@@ -14,4 +13,3 @@ namespace POA
     std::shared_ptr<T> _tied_object () { return tied_object_; };
     void _tied_object (std::shared_ptr<T> t) { tied_object_ = std::move(t); };
     IDL::traits<TAOX11_NAMESPACE::PortableServer::POA>::ref_type _default_POA () { if (poa_) return poa_; else return TAOX11_NAMESPACE::PortableServer::Servant::_default_POA(); }
-% end
