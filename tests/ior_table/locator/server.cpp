@@ -59,7 +59,7 @@ test_narrow (IDL::traits<CORBA::Object>::ref_type object)
   }
   catch (const CORBA::Exception &)
   {
-    TAOX11_TEST_ERROR << "ERROR: Caught unexpected CORBA exception whilst "
+    TAOX11_TEST_ERROR << "ERROR: Caught unexpected CORBA exception while "
       << "narrowing a CORBA::Object to a IORTable::Locator." << std::endl;
   }
 
