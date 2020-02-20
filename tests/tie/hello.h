@@ -24,6 +24,10 @@ public:
 
   void shutdown ();
 
+  char readonly_char ();
+  char at_char ();
+  void at_char (char _v);
+
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
   /// the application.

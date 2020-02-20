@@ -89,6 +89,15 @@ int main(int argc, char* argv[])
                           << std::endl;
       }
 
+      char const at_char_ = hello->at_char();
+
+      if (at_char_ != 'b')
+      {
+        TAOX11_TEST_ERROR << "ERROR: at_char returned <" << at_char_ << "> but should "
+                          << "have returned <b>"
+                          << std::endl;
+      }
+
       TAOX11_TEST_INFO << "shutting down...";
 
       hello->shutdown ();

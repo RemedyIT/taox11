@@ -18,6 +18,10 @@ module Test
     /// Return a simple string
     string get_string ();
 
+    /// Some attributes to test
+    readonly attribute char readonly_char;
+    attribute char at_char;
+
     /// A method to shutdown the ORB
     /**
      * This method is used to simplify the test shutdown process

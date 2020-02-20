@@ -178,6 +178,7 @@ module IDL
     class ServantHeaderTieWriter < ServantHeaderBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
+        self.template_root = File.join('srv', 'hdr', 'tie')
       end
 
       def enter_module(node)
@@ -199,7 +200,7 @@ module IDL
       def enter_interface(node)
         super
         return if node.is_local? || node.is_abstract?
-        visitor(InterfaceVisitor).visit_tie_pre(node)
+        visitor(InterfaceVisitor).visit_pre(node)
         inc_nest  # POA
         inc_nest  # servant tie template
       end
@@ -207,13 +208,18 @@ module IDL
         return if node.is_local? || node.is_abstract?
         dec_nest
         dec_nest
-        visitor(InterfaceVisitor).visit_tie_post(node)
+        visitor(InterfaceVisitor).visit_post(node)
         super
       end
 
       def visit_operation(node)
         return if node.enclosure.is_local? || node.enclosure.is_abstract?
-        visitor(OperationVisitor).visit_tie_operation(node)
+        visitor(OperationVisitor).visit_operation(node)
+      end
+
+      def visit_attribute(node)
+        return if node.enclosure.is_local? || node.enclosure.is_abstract?
+        visitor(AttributeVisitor).visit_attribute(node)
       end
     end
 

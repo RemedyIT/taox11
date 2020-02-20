@@ -38,3 +38,17 @@ Hello_impl::shutdown ()
 {
   this->orb_->shutdown (false);
 }
+
+char
+Hello_impl::readonly_char ()
+{
+  return 'a';
+}
+char
+Hello_impl::at_char ()
+{
+  return 'b';
+}
+void at_char (char)
+{
+}
