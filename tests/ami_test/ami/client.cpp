@@ -112,10 +112,10 @@ public:
               result = 1;
             }
         }
-      catch (const CORBA::Exception&)
+      catch (const CORBA::Exception& ex)
         {
           TAOX11_TEST_ERROR << "Callback method <foo_excep> "
-                       << "caught the wrong exception -> ERROR" << std::endl;
+                       << "caught the wrong exception -> ERROR" << ex << std::endl;
           result = 1;
         }
     }
@@ -229,10 +229,10 @@ public:
              result = 1;
            }
        }
-     catch (const CORBA::Exception&)
+     catch (const CORBA::Exception& ex)
        {
          TAOX11_TEST_ERROR << "Callback method <get_bool_attr_excep> "
-                      << "caught the wrong exception -> ERROR" << std::endl;
+                      << "caught the wrong exception -> ERROR" << ex << std::endl;
        }
     }
 
