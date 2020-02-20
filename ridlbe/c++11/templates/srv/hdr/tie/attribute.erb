@@ -9,6 +9,6 @@
 /// @copydoc <%= doc_scoped_name %>
 void <%= cxxname %> (<%= scoped_cxx_in_type %> _v) override
 {
-  tied_object_-><%= cxxname %>(_v);
+  tied_object_-><%= cxxname %>(std::move(_v));
 }
 % end
