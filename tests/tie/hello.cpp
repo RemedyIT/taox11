@@ -44,11 +44,14 @@ Hello_impl::readonly_char ()
 {
   return 'a';
 }
+
 char
 Hello_impl::at_char ()
 {
   return 'b';
 }
-void at_char (char)
+
+void
+Hello_impl::at_char (char)
 {
 }
