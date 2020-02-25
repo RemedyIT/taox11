@@ -12,6 +12,5 @@ README
 .*\.aprc
 aprc
 .*schema\/xsc-banner\.(cpp|h)
-json.hpp
 .*\.adoc
 .*\.asc
