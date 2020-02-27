@@ -1,4 +1,0 @@
-.*(C|S|P|SP)\.(h|inl|cpp)
-taox11\/tests\/.*\/tao\/.*
-ridl\/.*
-taox11/bin/MPC/templates/gnu
