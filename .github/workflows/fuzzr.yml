@@ -23,7 +23,9 @@ jobs:
     - name: git clone dependent repositories
       run: |
         git clone --depth 1 git://github.com/RemedyIT/axcioma.git $AXCIOMA_ROOT
-        git clone --depth 1 git://github.com/RemedyIT/fuzzr.git $FUZZR_ROOT
+    - name: install fuzzr gem
+      run: |
+        gem install fuzzr
     - name: Run fuzzr
       run: |
-        $FUZZR_ROOT/bin/fuzz -P $AXCIOMA_ROOT/bin/fuzzers
+        fuzz -P $AXCIOMA_ROOT/bin/fuzzers
