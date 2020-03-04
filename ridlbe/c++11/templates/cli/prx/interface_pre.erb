@@ -30,6 +30,6 @@ public:
   static _ptr_type _nil ();
 
   /// Determine if we are of the type specified by the @a type_id.
-  virtual TAO_CORBA::Boolean _is_a (const char *type_id) override;
-  virtual TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
-  virtual const char* _interface_repository_id () const override;
+  TAO_CORBA::Boolean _is_a (const char *type_id) override;
+  TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
+  const char* _interface_repository_id () const override;

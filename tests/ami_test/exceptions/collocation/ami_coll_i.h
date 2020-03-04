@@ -25,21 +25,21 @@ public:
 
   virtual void
   do_something_excep (
-    IDL::traits< Messaging::ExceptionHolder >::ref_type excep_holder) override;
+    >::ref_type >::ref_type excep_holder) override;
 
   virtual void
   get_something (int32_t ami_return_val) override;
 
   virtual void
   get_something_excep (
-    IDL::traits< Messaging::ExceptionHolder >::ref_type excep_holder) override;
+    >::ref_type >::ref_type excep_holder) override;
 
   virtual void
   set_something () override;
 
   virtual void
   set_something_excep (
-    IDL::traits< Messaging::ExceptionHolder >::ref_type excep_holder) override;
+    >::ref_type >::ref_type excep_holder) override;
 };
 
 

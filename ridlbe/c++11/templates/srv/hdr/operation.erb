@@ -2,8 +2,7 @@
 // generated from <%= ridl_template_path %>
 % _args = arguments.dup
 /// @copydoc <%= doc_scoped_name %>
-virtual
-<%= scoped_cxx_return_type %>
+virtual <%= scoped_cxx_return_type %>
 <%= cxxname %> (<% if _args.empty? %>) = 0;<% end %>
 % while !_args.empty?
 %   _arg = _args.shift

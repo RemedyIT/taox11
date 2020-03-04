@@ -27,7 +27,7 @@ BarHandler::do_something ()
 
 void
 BarHandler::do_something_excep (
-  IDL::traits< Messaging::ExceptionHolder >::ref_type excep_holder)
+  >::ref_type >::ref_type excep_holder)
 {
   TAOX11_TEST_INFO << "Callback method <do_something_excep> called: "
               << "Testing proper exception handling."<< std::endl;
@@ -77,7 +77,7 @@ BarHandler::get_something (int32_t )
 
 void
 BarHandler::get_something_excep (
-  IDL::traits< Messaging::ExceptionHolder >::ref_type excep_holder)
+  >::ref_type >::ref_type excep_holder)
 {
   TAOX11_TEST_INFO << "Callback method <get_something_excep> called: "
               << "Testing proper exception handling."<< std::endl;
@@ -131,7 +131,7 @@ BarHandler::set_something ()
 
 void
 BarHandler::set_something_excep (
-  IDL::traits< Messaging::ExceptionHolder >::ref_type excep_holder)
+  >::ref_type >::ref_type excep_holder)
 {
   TAOX11_TEST_INFO << "Callback method <set_something_excep> called: "
               << "Testing proper exception handling."<< std::endl;

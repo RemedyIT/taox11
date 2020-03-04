@@ -6,8 +6,7 @@
 % _op_end << ';'
 % _args = arguments.dup
 /// @copydoc <%= doc_scoped_name %>
-virtual
-<%= scoped_cxx_return_type %>
+virtual <%= scoped_cxx_return_type %>
 <%= cxxname %> (<% if _args.empty? %><%= _op_end %><% end %>
 % while !_args.empty?
 %   _arg = _args.shift

@@ -39,11 +39,11 @@ public:
 %   unless is_remote? && !has_abstract_base?
 
   /// Determine if we are of the type specified by the @a logical_type_id.
-  virtual bool _is_a (const std::string& local_type_id) override;
+  bool _is_a (const std::string& local_type_id) override;
 %   end
 %   if has_abstract_base?
 
-  virtual std::string _interface_repository_id () override;
+  std::string _interface_repository_id () override;
 %     unless abstractbase_operations.empty?
 
   /** @name Inherited abstract interface operations */
