@@ -20,19 +20,13 @@ public:
   virtual ~Hello ();
 
   // = The skeleton methods
-  virtual
   ::CORBA::Any *
-  test (
-    const CORBA::Any& input);
+  test (const CORBA::Any& input) override;
 
-  virtual
   ::CORBA::Any *
-  test_wcharseq (
-    const ::CORBA::Any & input);
+  test_wcharseq (const ::CORBA::Any & input) override;
 
-  virtual
-  void
-  shutdown ();
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

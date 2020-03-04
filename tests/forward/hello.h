@@ -20,12 +20,12 @@ public:
   /// Constructor
   Hello(IDL::traits<CORBA::ORB>::ref_type orb);
 
-  virtual IDL::traits<Test::Bar>::ref_type get_bar () override;
-  virtual void with_bar (IDL::traits<Test::Bar>::ref_type bar_in,
+  IDL::traits<Test::Bar>::ref_type get_bar () override;
+  void with_bar (IDL::traits<Test::Bar>::ref_type bar_in,
       IDL::traits<Test::Bar>::ref_type& bar_out,
       IDL::traits<Test::Bar>::ref_type& bar_inout) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;
 };

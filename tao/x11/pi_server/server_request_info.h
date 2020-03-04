@@ -29,55 +29,33 @@ namespace TAOX11_NAMESPACE
 
       virtual ~ServerRequestInfo () = default;
 
-      virtual
-      bool
-      _is_a (const std::string& local_type_id) override;
+      bool _is_a (const std::string& local_type_id) override;
 
-      virtual
-      TAOX11_NAMESPACE::CORBA::Any
-      sending_exception () override;
+      TAOX11_NAMESPACE::CORBA::Any sending_exception () override;
 
-      virtual
-      ::TAOX11_NAMESPACE::PortableInterceptor::ServerId
-      server_id () override;
+      ::TAOX11_NAMESPACE::PortableInterceptor::ServerId server_id () override;
 
-      virtual
-      ::TAOX11_NAMESPACE::PortableInterceptor::ORBId
-      orb_id () override;
+      ::TAOX11_NAMESPACE::PortableInterceptor::ORBId orb_id () override;
 
-      virtual
-      ::TAOX11_NAMESPACE::PortableInterceptor::AdapterName
-      adapter_name () override;
+      ::TAOX11_NAMESPACE::PortableInterceptor::AdapterName adapter_name () override;
 
-      virtual
-      ::TAOX11_NAMESPACE::PortableInterceptor::ObjectId
-      object_id () override;
+      ::TAOX11_NAMESPACE::PortableInterceptor::ObjectId object_id () override;
 
-      virtual
-      ::TAOX11_NAMESPACE::CORBA::OctetSeq
-      adapter_id () override;
+      ::TAOX11_NAMESPACE::CORBA::OctetSeq adapter_id () override;
 
-      virtual
-      ::TAOX11_NAMESPACE::CORBA::RepositoryId
-      target_most_derived_interface () override;
+      ::TAOX11_NAMESPACE::CORBA::RepositoryId target_most_derived_interface () override;
 
-      virtual
-      IDL::traits< ::TAOX11_NAMESPACE::CORBA::Policy>::ref_type
-      get_server_policy (
+      IDL::traits< ::TAOX11_NAMESPACE::CORBA::Policy>::ref_type get_server_policy (
           ::TAOX11_NAMESPACE::CORBA::PolicyType type) override;
 
-      virtual
       void
       set_slot (
           ::TAOX11_NAMESPACE::PortableInterceptor::SlotId id,
           const TAOX11_NAMESPACE::CORBA::Any& data) override;
 
-      virtual
       bool
-      target_is_a (
-          const ::TAOX11_NAMESPACE::CORBA::RepositoryId& id) override;
+      target_is_a (const ::TAOX11_NAMESPACE::CORBA::RepositoryId& id) override;
 
-      virtual
       void
       add_reply_service_context (
           const ::TAOX11_NAMESPACE::IOP::ServiceContext& service_context,

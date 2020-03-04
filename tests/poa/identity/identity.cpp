@@ -23,8 +23,7 @@ public:
   {
   }
 
-  virtual IDL::traits<PortableServer::POA>::ref_type
-  _default_POA() override
+  IDL::traits<PortableServer::POA>::ref_type _default_POA() override
   {
     return poa_;
   }

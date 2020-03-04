@@ -26,11 +26,11 @@ public:
   /// ctor
   Factory_impl (IDL::traits<CORBA::ORB>::ref_type orb);
 
-  virtual IDL::traits<OBV_Test::BasValue>::ref_type get_base_value() override;
-  virtual IDL::traits<OBV_Test::Value1>::ref_type get_value1() override;
-  virtual IDL::traits<OBV_Test::Value2>::ref_type get_value2() override;
+  IDL::traits<OBV_Test::BasValue>::ref_type get_base_value() override;
+  IDL::traits<OBV_Test::Value1>::ref_type get_value1() override;
+  IDL::traits<OBV_Test::Value2>::ref_type get_value2() override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   /// The ORB

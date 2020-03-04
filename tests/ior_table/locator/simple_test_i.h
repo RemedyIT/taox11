@@ -18,7 +18,7 @@ public:
   /// Constructor
   Simple_Test_i (IDL::traits<CORBA::ORB>::ref_type orb);
 
-  virtual void shutdown ();
+  void shutdown ();
 
 private:
   Simple_Test_i (const Simple_Test_i&) = delete;

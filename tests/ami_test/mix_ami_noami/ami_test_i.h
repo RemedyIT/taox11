@@ -18,9 +18,9 @@ class AmiMyFoo_i
 {
 public:
   // The AMI_Test methods.
-  virtual int32_t amifoo (int32_t) override;
-  virtual int32_t my_amifoo_attrib () override;
-  virtual void my_amifoo_attrib (int32_t) override;
+  int32_t amifoo (int32_t) override;
+  int32_t my_amifoo_attrib () override;
+  void my_amifoo_attrib (int32_t) override;
 };
 
 
@@ -28,9 +28,9 @@ class MyFoo_i
 : public virtual CORBA::servant_traits< A::MyFoo>::base_type
 {
 public:
-  virtual int32_t foo (int32_t) override;
-  virtual int32_t my_foo_attrib () override;
-  virtual void my_foo_attrib (int32_t) override;
+  int32_t foo (int32_t) override;
+  int32_t my_foo_attrib () override;
+  void my_foo_attrib (int32_t) override;
 };
 
 
@@ -44,10 +44,10 @@ public:
       IDL::traits<PortableServer::POA>::ref_type poa);
 
   // = The skeleton methods
-  virtual IDL::traits<A::AmiMyFoo>::ref_type get_iAmiMyFoo() override;
-  virtual IDL::traits<A::MyFoo>::ref_type get_iMyFoo() override;
+  IDL::traits<A::AmiMyFoo>::ref_type get_iAmiMyFoo() override;
+  IDL::traits<A::MyFoo>::ref_type get_iMyFoo() override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
   /// the application.

@@ -17,9 +17,9 @@ class Sleep_Service final
 public:
   Sleep_Service (IDL::traits<CORBA::ORB>::ref_type orb);
 
-  virtual void go_to_sleep (uint32_t microseconds) override;
+  void go_to_sleep (uint32_t microseconds) override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;

@@ -51,25 +51,25 @@ namespace TAOX11_NAMESPACE
 
        // = Functions specific to DynArray.
 
-      virtual DynamicAny::AnySeq get_elements () override;
+      DynamicAny::AnySeq get_elements () override;
 
-      virtual void set_elements (const DynamicAny::AnySeq & value) override;
+      void set_elements (const DynamicAny::AnySeq & value) override;
 
-      virtual DynamicAny::DynAnySeq get_elements_as_dyn_any () override;
+      DynamicAny::DynAnySeq get_elements_as_dyn_any () override;
 
-      virtual void set_elements_as_dyn_any (const DynamicAny::DynAnySeq & value) override;
+      void set_elements_as_dyn_any (const DynamicAny::DynAnySeq & value) override;
 
       // = DynAny common functions not implemented in class TAOX11_DynCommon.
 
-      virtual void from_any (const CORBA::Any & value) override;
+      void from_any (const CORBA::Any & value) override;
 
-      virtual CORBA::Any to_any () override;
+      CORBA::Any to_any () override;
 
-      virtual bool equal (IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type dyn_any) override;
+      bool equal (IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type dyn_any) override;
 
-      virtual void destroy () override;
+      void destroy () override;
 
-      virtual IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type current_component () override;
+      IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type current_component () override;
 
     private:
       /// Returns the type of elements contained in the array.

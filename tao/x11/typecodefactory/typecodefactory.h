@@ -26,7 +26,7 @@ namespace TAOX11_NAMESPACE
 
     ~TypeCodeFactory_Loader () = default;
 
-    virtual TAOX11_CORBA::object_reference<TAOX11_CORBA::Object> create_object (
+    TAOX11_CORBA::object_reference<TAOX11_CORBA::Object> create_object (
       TAOX11_CORBA::object_reference<TAOX11_CORBA::ORB> orb,
       int argc,
       char* argv []) override;

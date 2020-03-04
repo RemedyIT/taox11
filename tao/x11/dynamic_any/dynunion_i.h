@@ -54,37 +54,37 @@ namespace TAOX11_NAMESPACE
 
       // = Functions specific to DynUnion.
 
-      virtual IDL::traits< DynamicAny::DynAny>::ref_type
+      IDL::traits< DynamicAny::DynAny>::ref_type
       get_discriminator () override;
 
-      virtual void
+      void
       set_discriminator (IDL::traits< DynamicAny::DynAny>::ref_type d) override;
 
-      virtual void set_to_default_member () override;
+      void set_to_default_member () override;
 
-      virtual void set_to_no_active_member () override;
+      void set_to_no_active_member () override;
 
-      virtual bool has_no_active_member () override;
+      bool has_no_active_member () override;
 
-      virtual CORBA::TCKind discriminator_kind () override;
+      CORBA::TCKind discriminator_kind () override;
 
-      virtual IDL::traits< DynamicAny::DynAny>::ref_type member () override;
+      IDL::traits< DynamicAny::DynAny>::ref_type member () override;
 
-      virtual std::string member_name () override;
+      std::string member_name () override;
 
-      virtual CORBA::TCKind member_kind () override;
+      CORBA::TCKind member_kind () override;
 
       // = DynAny common functions not implemented in class TAOX11_DynCommon.
 
-      virtual void from_any (const CORBA::Any & value) override;
+      void from_any (const CORBA::Any & value) override;
 
-      virtual CORBA::Any to_any () override;
+      CORBA::Any to_any () override;
 
-      virtual bool equal (IDL::traits< DynamicAny::DynAny>::ref_type dyn_any) override;
+      bool equal (IDL::traits< DynamicAny::DynAny>::ref_type dyn_any) override;
 
-      virtual void destroy () override;
+      void destroy () override;
 
-      virtual IDL::traits< DynamicAny::DynAny>::ref_type current_component () override;
+      IDL::traits< DynamicAny::DynAny>::ref_type current_component () override;
 
     private:
       /// Code common to the constructor from an Any arg and the member

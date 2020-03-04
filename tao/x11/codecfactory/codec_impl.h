@@ -32,16 +32,16 @@ namespace TAOX11_NAMESPACE
       Codec (TAO_IOP::Codec_ptr codec_ptr);
       ~Codec () = default;
 
-      virtual ::TAOX11_NAMESPACE::CORBA::OctetSeq
+      ::TAOX11_NAMESPACE::CORBA::OctetSeq
       encode (const TAOX11_NAMESPACE::CORBA::Any& data) override;
 
-      virtual TAOX11_NAMESPACE::CORBA::Any
+      TAOX11_NAMESPACE::CORBA::Any
       decode (const ::TAOX11_NAMESPACE::CORBA::OctetSeq& data) override;
 
-      virtual ::TAOX11_NAMESPACE::CORBA::OctetSeq
+      ::TAOX11_NAMESPACE::CORBA::OctetSeq
       encode_value (const TAOX11_NAMESPACE::CORBA::Any& data) override;
 
-      virtual TAOX11_NAMESPACE::CORBA::Any
+      TAOX11_NAMESPACE::CORBA::Any
       decode_value (const ::TAOX11_NAMESPACE::CORBA::OctetSeq& data,
         TAOX11_IDL::traits< ::TAOX11_NAMESPACE::CORBA::TypeCode >::ref_type tc) override;
 

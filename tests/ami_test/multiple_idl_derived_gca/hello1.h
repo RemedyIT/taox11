@@ -17,8 +17,8 @@ class A_i
 : public virtual CORBA::servant_traits< Test::A>::base_type
 {
 public:
-  virtual int32_t op_A (int32_t) override;
-  virtual int32_t op_B (int32_t) override;
+  int32_t op_A (int32_t) override;
+  int32_t op_B (int32_t) override;
 };
 
 #endif /* TAOX11_HELLO1_H */

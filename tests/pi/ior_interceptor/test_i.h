@@ -22,15 +22,13 @@ class test_i final :
   public CORBA::servant_traits<FOO::test>::base_type
 {
 public:
-
   /// Constructor.
   test_i (IDL::traits<CORBA::ORB>::ref_type orb);
 
   /// Shutdown the ORB.
-  virtual void shutdown ();
+  void shutdown ();
 
 private:
-
   /// Reference to the ORB.
   IDL::traits<CORBA::ORB>::ref_type orb_;
 

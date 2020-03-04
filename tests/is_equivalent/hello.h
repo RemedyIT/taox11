@@ -22,11 +22,11 @@ public:
   virtual ~Hello_Factory ();
 
   // = The skeleton methods
-  virtual IDL::traits<Test::Hello>::ref_type get_hello () override;
+  IDL::traits<Test::Hello>::ref_type get_hello () override;
 
-  virtual void get_hello_2 (IDL::traits<Test::Hello>::ref_type& hello_obj) override;
+  void get_hello_2 (IDL::traits<Test::Hello>::ref_type& hello_obj) override;
 
-  virtual bool equivalent (IDL::traits<Test::Hello_Factory>::ref_type f) override;
+  bool equivalent (IDL::traits<Test::Hello_Factory>::ref_type f) override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
@@ -50,13 +50,13 @@ public:
   virtual ~Hello ();
 
   // = The skeleton methods
-  virtual std::string get_string () override;
-  virtual IDL::traits<Test::Hello_Factory>::ref_type get_factory () override;
-  virtual void shutdown () override;
+  std::string get_string () override;
+  IDL::traits<Test::Hello_Factory>::ref_type get_factory () override;
+  void shutdown () override;
 
-  virtual bool equivalent_factory (IDL::traits<Test::Hello_Factory>::ref_type f) override;
+  bool equivalent_factory (IDL::traits<Test::Hello_Factory>::ref_type f) override;
 
-  virtual bool equivalent_hello (IDL::traits<Test::Hello>::ref_type h) override;
+  bool equivalent_hello (IDL::traits<Test::Hello>::ref_type h) override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

@@ -47,18 +47,18 @@ parse_args (int argc, ACE_TCHAR *argv[])
 class Worker : public ACE_Task_Base
 {
 public:
-  Worker (CORBA::ORB_ptr orb);
   // Constructor
-
-  virtual void run_test (void);
-  // The actual implementation of the test
+  Worker (CORBA::ORB_ptr orb);
 
   // = The Task_Base methods
-  virtual int svc (void);
+  int svc () override;
+
+  // The actual implementation of the test
+  void run_test ();
 
 private:
-  CORBA::ORB_var orb_;
   // The ORB reference
+  CORBA::ORB_var orb_;
 };
 
 int
@@ -120,7 +120,7 @@ Worker::Worker (CORBA::ORB_ptr orb)
 }
 
 int
-Worker::svc (void)
+Worker::svc ()
 {
   try
     {

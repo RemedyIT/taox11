@@ -30,19 +30,19 @@ public:
   {}
 
 public:
-  virtual IDL::traits<CORBA::ValueBase>::ref_type _copy_value () const override;
+  IDL::traits<CORBA::ValueBase>::ref_type _copy_value () const override;
 
   // Operations
 
   // generated from c++/cli_hdr/operation.erb
   /// @copybrief Test::Event::do_print
-  virtual void do_print (const std::string& loc) override;
+  void do_print (const std::string& loc) override;
 
   // Attributes
 
   // generated from c++/cli_hdr/attribute.erb
-  virtual double amount() override;
-  virtual void amount(double _v) override;
+  double amount() override;
+  void amount(double _v) override;
 
 private:
   double amount_ {};
@@ -58,10 +58,10 @@ public:
   Event_init_impl () = default;
   ~Event_init_impl () = default;
 
-  virtual IDL::traits<Test::Event>::ref_type
+  IDL::traits<Test::Event>::ref_type
   create_val (int32_t value) override;
 
-  virtual IDL::traits<CORBA::ValueBase>::ref_type create_for_unmarshal () override;
+  IDL::traits<CORBA::ValueBase>::ref_type create_for_unmarshal () override;
 
 private:
   Event_init_impl (const Event_init_impl&) = delete;

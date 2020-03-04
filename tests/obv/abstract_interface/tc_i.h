@@ -17,13 +17,13 @@ class tree_controller_i : public virtual IDL::traits<TreeController>::obv_type
 public:
   tree_controller_i () = default;
 
-  virtual std::string base_op (const std::string& inarg) override;
+  std::string base_op (const std::string& inarg) override;
 
-  virtual int32_t rw_foo () override;
+  int32_t rw_foo () override;
 
-  virtual void rw_foo (int32_t a) override;
+  void rw_foo (int32_t a) override;
 
-  virtual int32_t r_foo () override;
+  int32_t r_foo () override;
 private:
   int32_t rw_foo_ {};
 };
@@ -32,7 +32,7 @@ class tree_controller_init
   : public IDL::traits<TreeController>::factory_type
 {
 public:
-  virtual IDL::traits<CORBA::ValueBase>::ref_type
+  IDL::traits<CORBA::ValueBase>::ref_type
   create_for_unmarshal () override;
 
   tree_controller_init () = default;

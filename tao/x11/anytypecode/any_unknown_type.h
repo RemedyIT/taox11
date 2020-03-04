@@ -39,17 +39,17 @@ namespace TAOX11_NAMESPACE
 
     virtual ~Unknown_IDL_Type ();
 
-    virtual bool marshal_value (TAO_OutputCDR &);
+    bool marshal_value (TAO_OutputCDR &) override;
 //    virtual const void *value () const;
 
     virtual TAO_InputCDR &_tao_get_cdr ();
-    virtual int _tao_byte_order () const;
+    int _tao_byte_order () const override;
 
-    virtual void _tao_decode (TAO_InputCDR &);
+    void _tao_decode (TAO_InputCDR &) override;
 
-    virtual bool to_object (IDL::traits<CORBA::Object>::ref_type &) const;
-    virtual bool to_value (CORBA::valuetype_reference<CORBA::ValueBase> &) const;
-    virtual bool to_abstract_base (CORBA::abstractbase_reference<CORBA::AbstractBase> &) const;
+    bool to_object (IDL::traits<CORBA::Object>::ref_type &) const override;
+    bool to_value (CORBA::valuetype_reference<CORBA::ValueBase> &) const override;
+    bool to_abstract_base (CORBA::abstractbase_reference<CORBA::AbstractBase> &) const override;
 
   private:
     // We make the lock global, so that it won't be deleted when shared.

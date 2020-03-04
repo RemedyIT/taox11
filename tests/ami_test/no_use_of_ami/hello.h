@@ -20,9 +20,9 @@ public:
   /// ctor
   B_i (IDL::traits<CORBA::ORB>::ref_type orb);
 
-  virtual int32_t op_B (int32_t) override;
+  int32_t op_B (int32_t) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

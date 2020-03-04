@@ -33,18 +33,18 @@ namespace TAOX11_NAMESPACE
 
       ~Table () = default;
 
-      virtual void
+      void
       bind (const std::string& object_key,
         const std::string& IOR) override;
 
-      virtual void
+      void
       rebind (const std::string& object_key,
         const std::string& IOR) override;
 
-      virtual void
+      void
       unbind (const std::string& object_key) override;
 
-      virtual void
+      void
       set_locator (
         TAOX11_IDL::traits<IORTable::Locator>::ref_type the_locator) override;
 

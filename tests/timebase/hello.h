@@ -22,22 +22,22 @@ public:
   Hello(IDL::traits<CORBA::ORB>::ref_type orb, int& result);
 
   // = The skeleton methods
-  virtual TimeBase::UtcT get_UtcT() override;
-  virtual void set_UtcT(const TimeBase::UtcT& utc) override;
-  virtual void out_UtcT(TimeBase::UtcT& utc) override;
-  virtual void inout_UtcT(TimeBase::UtcT& utc) override;
-  virtual TimeBase::UtcT utc() override;
-  virtual void utc(const TimeBase::UtcT& _v) override;
+  TimeBase::UtcT get_UtcT() override;
+  void set_UtcT(const TimeBase::UtcT& utc) override;
+  void out_UtcT(TimeBase::UtcT& utc) override;
+  void inout_UtcT(TimeBase::UtcT& utc) override;
+  TimeBase::UtcT utc() override;
+  void utc(const TimeBase::UtcT& _v) override;
 
   // = The skeleton methods
-  virtual TimeBase::IntervalT get_IntervalT() override;
-  virtual void set_IntervalT(const TimeBase::IntervalT& itv) override;
-  virtual void out_IntervalT(TimeBase::IntervalT& itv) override;
-  virtual void inout_IntervalT(TimeBase::IntervalT& itv) override;
-  virtual TimeBase::IntervalT itv() override;
-  virtual void itv(const TimeBase::IntervalT& _v) override;
+  TimeBase::IntervalT get_IntervalT() override;
+  void set_IntervalT(const TimeBase::IntervalT& itv) override;
+  void out_IntervalT(TimeBase::IntervalT& itv) override;
+  void inout_IntervalT(TimeBase::IntervalT& itv) override;
+  TimeBase::IntervalT itv() override;
+  void itv(const TimeBase::IntervalT& _v) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   bool equal_const(const TimeBase::IntervalT & itv, const TimeBase::IntervalT & itv2) const;

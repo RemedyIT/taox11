@@ -27,7 +27,7 @@ namespace TAOX11_NAMESPACE
   public:
     ~PolicyFactoryManager_impl() = default;
 
-    virtual IDL::traits<CORBA::Policy>::ref_type
+    IDL::traits<CORBA::Policy>::ref_type
     create_policy (
           ORB_Proxy& orb,
           CORBA::PolicyType policy_type,

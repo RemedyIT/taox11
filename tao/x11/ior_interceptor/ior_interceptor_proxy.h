@@ -33,23 +33,19 @@ namespace TAOX11_NAMESPACE
       explicit IORInterceptor_proxy (
           IDL::traits<PortableInterceptor::IORInterceptor>::ref_type x11_interceptor);
 
-      virtual
       void
       establish_components (
           TAO_PI::IORInfo_ptr info) override;
 
-      virtual
       void
       components_established (
           TAO_PI::IORInfo_ptr info) override;
 
-      virtual
       void
       adapter_manager_state_changed (
           const char * id,
           TAO_PI::AdapterState state) override;
 
-      virtual
       void
       adapter_state_changed (
           const TAO_PI::ObjectReferenceTemplateSeq& templates,

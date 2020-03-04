@@ -29,30 +29,15 @@ namespace TAOX11_NAMESPACE
       explicit ServerRequestInterceptor_proxy (
           IDL::traits<PortableInterceptor::ServerRequestInterceptor>::ref_type x11_interceptor);
 
-      virtual
-      void
-      receive_request_service_contexts (
-          TAO_PI::ServerRequestInfo_ptr ri) override;
+      void receive_request_service_contexts (TAO_PI::ServerRequestInfo_ptr ri) override;
 
-      virtual
-      void
-      receive_request (
-          TAO_PI::ServerRequestInfo_ptr ri) override;
+      void receive_request (TAO_PI::ServerRequestInfo_ptr ri) override;
 
-      virtual
-      void
-      send_reply (
-          TAO_PI::ServerRequestInfo_ptr ri) override;
+      void send_reply (TAO_PI::ServerRequestInfo_ptr ri) override;
 
-      virtual
-      void
-      send_exception (
-          TAO_PI::ServerRequestInfo_ptr ri) override;
+      void send_exception (TAO_PI::ServerRequestInfo_ptr ri) override;
 
-      virtual
-      void
-      send_other (
-          TAO_PI::ServerRequestInfo_ptr ri) override;
+      void send_other (TAO_PI::ServerRequestInfo_ptr ri) override;
 
     private:
       IDL::traits<PortableInterceptor::ServerRequestInterceptor>::ref_type x11_interceptor_;

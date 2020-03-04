@@ -27,11 +27,10 @@ public:
   /// ctor
   Test_impl (IDL::traits<CORBA::ORB>::ref_type orb);
 
-  virtual IDL::traits<TreeController>::ref_type
+  IDL::traits<TreeController>::ref_type
   reflect (IDL::traits<TreeController>::ref_type tc) override;
 
-  virtual void
-  shutdown () override;
+  void shutdown () override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;

@@ -23,9 +23,9 @@ public:
   AMI_Test_i ();
 
   // The AMI_Test methods.
-  virtual int32_t foo (int32_t& out_l,
-                       int32_t in_l,
-                       const std::string& in_str) override;
+  int32_t foo (int32_t& out_l,
+               int32_t in_l,
+               const std::string& in_str) override;
 
 private:
   int32_t in_l_last_;

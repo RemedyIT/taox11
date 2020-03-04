@@ -18,17 +18,17 @@ public:
   Hello(IDL::traits<CORBA::ORB>::ref_type orb, int& result);
 
   /// The skeleton methods for union of special basic types.
-  virtual Test::specialType_union get_special_union () override;
-  virtual Test::specialType_union inout_special_union(
+  Test::specialType_union get_special_union () override;
+  Test::specialType_union inout_special_union(
       const Test::specialType_union& pin, Test::specialType_union& pout,
       Test::specialType_union& pinout) override;
   /// The skeleton methods for union of basic types.
-  virtual Test::basicType_union get_basic_union () override;
-  virtual Test::basicType_union inout_basic_union(
+  Test::basicType_union get_basic_union () override;
+  Test::basicType_union inout_basic_union(
       const Test::basicType_union& pin, Test::basicType_union& pout,
       Test::basicType_union& pinout) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

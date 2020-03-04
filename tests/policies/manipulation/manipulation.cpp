@@ -86,7 +86,7 @@ public:
                 IDL::traits<Test>::ref_type test,
                 uint16_t niterations);
 
-  virtual int svc ();
+  int svc () override;
 
 private:
   void perform_iteration (OPERATIONS operation,

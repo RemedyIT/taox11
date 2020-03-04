@@ -39,14 +39,14 @@ class Value2_init_impl : public IDL::traits<OBV_Test::Value2>::factory_type
 public:
   Value2_init_impl ()  = default;
   virtual ~Value2_init_impl () {}
-  virtual IDL::traits< OBV_Test::Value2>::ref_type create_default (
+  IDL::traits< OBV_Test::Value2>::ref_type create_default (
       uint32_t id) override;
 
-  virtual IDL::traits< OBV_Test::Value2>::ref_type create (
+  IDL::traits< OBV_Test::Value2>::ref_type create (
       uint32_t id,
       const OBV_Test::BasValue::BV_Data& data) override;
 
-  virtual IDL::traits<CORBA::ValueBase>::ref_type create_for_unmarshal () override;
+  IDL::traits<CORBA::ValueBase>::ref_type create_for_unmarshal () override;
 };
 
 #endif /* TAO_FACTORY_FACTORY_C_IMPL_H */

@@ -55,44 +55,44 @@ namespace TAOX11_NAMESPACE
       { this->u_.tcref_ = const_cast<TAO_CORBA::TypeCode_ptr*> (std::addressof(tc)); }
       virtual ~TypeCode_impl ();
 
-      virtual bool _is_a (const std::string& local_type_id) override;
+      bool _is_a (const std::string& local_type_id) override;
 
-      virtual bool equal (typecode_reference tc) const override;
+      bool equal (typecode_reference tc) const override;
 
-      virtual bool equivalent (typecode_reference tc) const override;
+      bool equivalent (typecode_reference tc) const override;
 
-      virtual TAOX11_CORBA::TCKind kind () const override;
+      TAOX11_CORBA::TCKind kind () const override;
 
-      virtual typecode_reference get_compact_typecode () const override;
+      typecode_reference get_compact_typecode () const override;
 
-      virtual std::string id () const override;
+      std::string id () const override;
 
-      virtual std::string name () const override;
+      std::string name () const override;
 
-      virtual uint32_t member_count () const override;
+      uint32_t member_count () const override;
 
-      virtual std::string member_name (uint32_t index) const override;
+      std::string member_name (uint32_t index) const override;
 
-      virtual typecode_reference member_type (uint32_t index) const override;
-      virtual CORBA::Any member_label (uint32_t index) const override;
+      typecode_reference member_type (uint32_t index) const override;
+      CORBA::Any member_label (uint32_t index) const override;
 
-      virtual typecode_reference discriminator_type () const override;
+      typecode_reference discriminator_type () const override;
 
-      virtual int32_t default_index () const override;
+      int32_t default_index () const override;
 
-      virtual uint32_t length () const override;
+      uint32_t length () const override;
 
-      virtual typecode_reference content_type () const override;
+      typecode_reference content_type () const override;
 
-      virtual uint16_t fixed_digits () const override;
+      uint16_t fixed_digits () const override;
 
-      virtual uint16_t fixed_scale () const override;
+      uint16_t fixed_scale () const override;
 
-      virtual Visibility member_visibility (uint32_t index) const override;
+      Visibility member_visibility (uint32_t index) const override;
 
-      virtual ValueModifier type_modifier () const override;
+      ValueModifier type_modifier () const override;
 
-      virtual typecode_reference concrete_base_type () const override;
+      typecode_reference concrete_base_type () const override;
 
       static bool _marshal (TAO_OutputCDR&, _ref_type);
       static bool _unmarshal (TAO_InputCDR&, _ref_type&);
@@ -107,10 +107,10 @@ namespace TAOX11_NAMESPACE
     protected:
       friend struct object_traits<TypeCode_impl>;
 
-      virtual bool _tc_marshal (TAO_OutputCDR&)  override;
-      virtual bool _tc_unmarshal (TAO_InputCDR&) override;
+      bool _tc_marshal (TAO_OutputCDR&)  override;
+      bool _tc_unmarshal (TAO_InputCDR&) override;
 
-      virtual TypeCode_impl* _impl () override;
+      TypeCode_impl* _impl () override;
 
     private:
 

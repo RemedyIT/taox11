@@ -8,45 +8,45 @@ class iA_impl:
     public virtual POA_Test::iA
 {
 public:
-  virtual void do_something_A();
+  void do_something_A() override;
 };
 
 class iB_impl:
     public virtual POA_Test::iB
 {
-  virtual void do_something_A();
-  virtual void do_something_B();
+  void do_something_A() override;
+  void do_something_B() override;
 };
 
 class iC_impl:
     public virtual POA_Test::iC
 {
-  virtual void do_something_A();
-  virtual void do_something_B();
-  virtual void do_something_C();
+  void do_something_A() override;
+  void do_something_B() override;
+  void do_something_C() override;
 };
 
 class iD_impl:
     public virtual POA_Test::iD
 {
-  virtual void do_something_D();
+  void do_something_D() override;
 };
 
 class iE_impl:
     public virtual POA_Test::iE
 {
-  virtual void do_something_A();
-  virtual void do_something_B();
-  virtual void do_something_C();
-  virtual void do_something_D();
-  virtual void do_something_E();
+  void do_something_A() override;
+  void do_something_B() override;
+  void do_something_C() override;
+  void do_something_D() override;
+  void do_something_E() override;
 };
 
 class iF_impl:
     public virtual POA_Test::iF
 {
-  virtual void _cxx_do();
-  virtual void do_something_F();
+  void _cxx_do() override;
+  void do_something_F() override;
 };
 
 class iFactory_impl:
@@ -57,14 +57,14 @@ public:
       iFactory_impl(CORBA::ORB_ptr orb, PortableServer::POA_ptr poa, int& result);
 
   // = The skeleton methods
-  virtual Test::iA_ptr get_iA();
-  virtual Test::iB_ptr get_iB();
-  virtual Test::iC_ptr get_iC();
-  virtual Test::iD_ptr get_iD();
-  virtual Test::iE_ptr get_iE();
-  virtual Test::iF_ptr get_iF();
-  virtual Test::iA_ptr get_iA_from_iE();
-  virtual void shutdown();
+  Test::iA_ptr get_iA() override;
+  Test::iB_ptr get_iB() override;
+  Test::iC_ptr get_iC() override;
+  Test::iD_ptr get_iD() override;
+  Test::iE_ptr get_iE() override;
+  Test::iF_ptr get_iF() override;
+  Test::iA_ptr get_iA_from_iE() override;
+  void shutdown() override;
 private:
   CORBA::ORB_var orb_;
   PortableServer::POA_var poa_;

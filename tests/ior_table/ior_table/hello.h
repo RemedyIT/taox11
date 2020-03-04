@@ -20,9 +20,9 @@ public:
   Hello (IDL::traits<CORBA::ORB>::ref_type orb,
     bool rebinded);
 
-  virtual std::string get_string () override;
+  std::string get_string () override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   Hello (const Hello&) = delete;

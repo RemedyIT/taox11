@@ -20,81 +20,81 @@ public:
   Hello(IDL::traits<CORBA::ORB>::ref_type orb, int& result);
 
   // = The skeleton methods for Char-Sequence
-  virtual CORBA::CharSeq get_CharSeq(const CORBA::CharSeq& c) override;
-  virtual void out_CharSeq(CORBA::CharSeq& c) override;
-  virtual void inout_CharSeq(CORBA::CharSeq& c) override;
+  CORBA::CharSeq get_CharSeq(const CORBA::CharSeq& c) override;
+  void out_CharSeq(CORBA::CharSeq& c) override;
+  void inout_CharSeq(CORBA::CharSeq& c) override;
 
   // = The skeleton methods for WChar-Sequence
-  virtual CORBA::WCharSeq get_WCharSeq(const CORBA::WCharSeq& c) override;
-  virtual void out_WCharSeq(CORBA::WCharSeq& c) override;
-  virtual void inout_WCharSeq(CORBA::WCharSeq& c) override;
+  CORBA::WCharSeq get_WCharSeq(const CORBA::WCharSeq& c) override;
+  void out_WCharSeq(CORBA::WCharSeq& c) override;
+  void inout_WCharSeq(CORBA::WCharSeq& c) override;
 
   // = The skeleton methods for String-Sequence
-  virtual CORBA::StringSeq get_StringSeq(const CORBA::StringSeq& c) override;
-  virtual void out_StringSeq(CORBA::StringSeq& c) override;
-  virtual void inout_StringSeq(CORBA::StringSeq& c) override;
+  CORBA::StringSeq get_StringSeq(const CORBA::StringSeq& c) override;
+  void out_StringSeq(CORBA::StringSeq& c) override;
+  void inout_StringSeq(CORBA::StringSeq& c) override;
 
   // = The skeleton methods for WString-Sequence
-  virtual CORBA::WStringSeq get_WStringSeq(const CORBA::WStringSeq& c) override;
-  virtual void out_WStringSeq(CORBA::WStringSeq& c) override;
-  virtual void inout_WStringSeq(CORBA::WStringSeq& c) override;
+  CORBA::WStringSeq get_WStringSeq(const CORBA::WStringSeq& c) override;
+  void out_WStringSeq(CORBA::WStringSeq& c) override;
+  void inout_WStringSeq(CORBA::WStringSeq& c) override;
 
   // = The skeleton methods for Octet-Sequence
-  virtual CORBA::OctetSeq get_OctetSeq(const CORBA::OctetSeq& c) override;
-  virtual void out_OctetSeq(CORBA::OctetSeq& c) override;
-  virtual void inout_OctetSeq(CORBA::OctetSeq& c) override;
+  CORBA::OctetSeq get_OctetSeq(const CORBA::OctetSeq& c) override;
+  void out_OctetSeq(CORBA::OctetSeq& c) override;
+  void inout_OctetSeq(CORBA::OctetSeq& c) override;
 
   // = The skeleton methods for Boolean-Sequence
-  virtual CORBA::BooleanSeq get_BooleanSeq(const CORBA::BooleanSeq& c) override;
-  virtual void out_BooleanSeq(CORBA::BooleanSeq& c) override;
-  virtual void inout_BooleanSeq(CORBA::BooleanSeq& c) override;
+  CORBA::BooleanSeq get_BooleanSeq(const CORBA::BooleanSeq& c) override;
+  void out_BooleanSeq(CORBA::BooleanSeq& c) override;
+  void inout_BooleanSeq(CORBA::BooleanSeq& c) override;
 
   // = The skeleton methods for Short-Sequence
-  virtual CORBA::ShortSeq get_ShortSeq(const CORBA::ShortSeq& c) override;
-  virtual void out_ShortSeq(CORBA::ShortSeq& c) override;
-  virtual void inout_ShortSeq(CORBA::ShortSeq& c) override;
+  CORBA::ShortSeq get_ShortSeq(const CORBA::ShortSeq& c) override;
+  void out_ShortSeq(CORBA::ShortSeq& c) override;
+  void inout_ShortSeq(CORBA::ShortSeq& c) override;
 
   // = The skeleton methods for UShort-Sequence
-  virtual CORBA::UShortSeq get_UShortSeq(const CORBA::UShortSeq& c) override;
-  virtual void out_UShortSeq(CORBA::UShortSeq& c) override;
-  virtual void inout_UShortSeq(CORBA::UShortSeq& c) override;
+  CORBA::UShortSeq get_UShortSeq(const CORBA::UShortSeq& c) override;
+  void out_UShortSeq(CORBA::UShortSeq& c) override;
+  void inout_UShortSeq(CORBA::UShortSeq& c) override;
 
   // = The skeleton methods for Long-Sequence
-  virtual CORBA::LongSeq get_LongSeq(const CORBA::LongSeq& c) override;
-  virtual void out_LongSeq(CORBA::LongSeq& c) override;
-  virtual void inout_LongSeq(CORBA::LongSeq& c) override;
+  CORBA::LongSeq get_LongSeq(const CORBA::LongSeq& c) override;
+  void out_LongSeq(CORBA::LongSeq& c) override;
+  void inout_LongSeq(CORBA::LongSeq& c) override;
 
   // = The skeleton methods for ULong-Sequence
-  virtual CORBA::ULongSeq get_ULongSeq(const CORBA::ULongSeq& c) override;
-  virtual void out_ULongSeq(CORBA::ULongSeq& c) override;
-  virtual void inout_ULongSeq(CORBA::ULongSeq& c) override;
+  CORBA::ULongSeq get_ULongSeq(const CORBA::ULongSeq& c) override;
+  void out_ULongSeq(CORBA::ULongSeq& c) override;
+  void inout_ULongSeq(CORBA::ULongSeq& c) override;
 
   // = The skeleton methods for LongLong-Sequence
-  virtual CORBA::LongLongSeq get_LongLongSeq(const CORBA::LongLongSeq& c) override;
-  virtual void out_LongLongSeq(CORBA::LongLongSeq& c) override;
-  virtual void inout_LongLongSeq(CORBA::LongLongSeq& c) override;
+  CORBA::LongLongSeq get_LongLongSeq(const CORBA::LongLongSeq& c) override;
+  void out_LongLongSeq(CORBA::LongLongSeq& c) override;
+  void inout_LongLongSeq(CORBA::LongLongSeq& c) override;
 
   // = The skeleton methods for ULongLong-Sequence
-  virtual CORBA::ULongLongSeq get_ULongLongSeq(const CORBA::ULongLongSeq& c) override;
-  virtual void out_ULongLongSeq(CORBA::ULongLongSeq& c) override;
-  virtual void inout_ULongLongSeq(CORBA::ULongLongSeq& c) override;
+  CORBA::ULongLongSeq get_ULongLongSeq(const CORBA::ULongLongSeq& c) override;
+  void out_ULongLongSeq(CORBA::ULongLongSeq& c) override;
+  void inout_ULongLongSeq(CORBA::ULongLongSeq& c) override;
 
   // = The skeleton methods for Float-Sequence
-  virtual CORBA::FloatSeq get_FloatSeq(const CORBA::FloatSeq& c) override;
-  virtual void out_FloatSeq(CORBA::FloatSeq& c) override;
-  virtual void inout_FloatSeq(CORBA::FloatSeq& c) override;
+  CORBA::FloatSeq get_FloatSeq(const CORBA::FloatSeq& c) override;
+  void out_FloatSeq(CORBA::FloatSeq& c) override;
+  void inout_FloatSeq(CORBA::FloatSeq& c) override;
 
   // = The skeleton methods for Double-Sequence
-  virtual CORBA::DoubleSeq get_DoubleSeq(const CORBA::DoubleSeq& c) override;
-  virtual void out_DoubleSeq(CORBA::DoubleSeq& c) override;
-  virtual void inout_DoubleSeq(CORBA::DoubleSeq& c) override;
+  CORBA::DoubleSeq get_DoubleSeq(const CORBA::DoubleSeq& c) override;
+  void out_DoubleSeq(CORBA::DoubleSeq& c) override;
+  void inout_DoubleSeq(CORBA::DoubleSeq& c) override;
 
   // = The skeleton methods for LongDouble-Sequence
-  virtual CORBA::LongDoubleSeq get_LongDoubleSeq(const CORBA::LongDoubleSeq& c) override;
-  virtual void out_LongDoubleSeq(CORBA::LongDoubleSeq& c) override;
-  virtual void inout_LongDoubleSeq(CORBA::LongDoubleSeq& c) override;
+  CORBA::LongDoubleSeq get_LongDoubleSeq(const CORBA::LongDoubleSeq& c) override;
+  void out_LongDoubleSeq(CORBA::LongDoubleSeq& c) override;
+  void inout_LongDoubleSeq(CORBA::LongDoubleSeq& c) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

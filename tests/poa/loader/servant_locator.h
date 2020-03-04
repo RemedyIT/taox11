@@ -54,11 +54,11 @@ public:
    * servant. The cookie helps in marking the servant. This marking is
    * useful while destroying the servant.
    */
-  virtual CORBA::servant_reference<PortableServer::Servant>
-    preinvoke (const PortableServer::ObjectId &oid,
-              IDL::traits<PortableServer::POA>::ref_type adapter,
-              const CORBA::Identifier& operation,
-              PortableServer::ServantLocator::Cookie &the_cookie) override;
+  CORBA::servant_reference<PortableServer::Servant>
+  preinvoke (const PortableServer::ObjectId &oid,
+            IDL::traits<PortableServer::POA>::ref_type adapter,
+            const CORBA::Identifier& operation,
+            PortableServer::ServantLocator::Cookie &the_cookie) override;
 
   /**
    * This method is invoked whenever a test servant completes a
@@ -68,11 +68,11 @@ public:
    * appropriate servant is destroyed by verifying the cookie.Again
    * this method is invoked per client request.
    */
-  virtual void postinvoke (const PortableServer::ObjectId &oid,
-                           IDL::traits<PortableServer::POA>::ref_type adapter,
-                           const CORBA::Identifier& operation,
-                           PortableServer::ServantLocator::Cookie the_cookie,
-                           CORBA::servant_reference<PortableServer::Servant> the_servant) override;
+  void postinvoke (const PortableServer::ObjectId &oid,
+                   IDL::traits<PortableServer::POA>::ref_type adapter,
+                   const CORBA::Identifier& operation,
+                   PortableServer::ServantLocator::Cookie the_cookie,
+                   CORBA::servant_reference<PortableServer::Servant> the_servant) override;
 
 private:
   /// The name of the dll containing the servant.

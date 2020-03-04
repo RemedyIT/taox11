@@ -22,9 +22,9 @@ public:
       IDL::traits<PortableServer::POA>::ref_type poa);
 
   // = The skeleton methods
-  virtual IDL::traits<Test::Receiver>::ref_type create_receiver () override;
+  IDL::traits<Test::Receiver>::ref_type create_receiver () override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   /// Keep a reference to the ORB in order to shutdown the app

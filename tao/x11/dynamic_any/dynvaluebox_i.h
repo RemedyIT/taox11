@@ -47,27 +47,27 @@ namespace TAOX11_NAMESPACE
       IDL::traits< DynamicAny::DynAny>::ref_type init (const CORBA::Any& any);
 
       // = Functions specific to DynValueBox.
-      virtual CORBA::Any get_boxed_value () override;
+      CORBA::Any get_boxed_value () override;
 
-      virtual void set_boxed_value (const CORBA::Any & boxed) override;
+      void set_boxed_value (const CORBA::Any & boxed) override;
 
-      virtual IDL::traits< DynAny>::ref_type get_boxed_value_as_dyn_any () override;
+      IDL::traits< DynAny>::ref_type get_boxed_value_as_dyn_any () override;
 
-      virtual void set_boxed_value_as_dyn_any (IDL::traits< DynAny>::ref_type boxed) override;
+      void set_boxed_value_as_dyn_any (IDL::traits< DynAny>::ref_type boxed) override;
 
       // = DynAny common functions not implemented in class TAO_DynCommon.
-      virtual void from_any (const CORBA::Any & value) override;
+      void from_any (const CORBA::Any & value) override;
 
-      virtual CORBA::Any to_any () override;
+      CORBA::Any to_any () override;
 
-      virtual bool equal (IDL::traits< DynAny>::ref_type dyn_any) override;
+      bool equal (IDL::traits< DynAny>::ref_type dyn_any) override;
 
-      virtual void destroy () override;
+      void destroy () override;
 
-      virtual IDL::traits< DynAny>::ref_type current_component () override;
+      IDL::traits< DynAny>::ref_type current_component () override;
 
       // = DynValueCommon needed to be provided here
-      virtual void set_to_value () override;
+      void set_to_value () override;
 
     private:
       /// Check if the typecode is acceptable.

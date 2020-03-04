@@ -45,7 +45,7 @@ parse_args (int argc, ACE_TCHAR *argv[])
 }
 
 class Handler
-:public virtual CORBA::amic_traits<A::AMI_Test>::replyhandler_base_type
+: public virtual CORBA::amic_traits<A::AMI_Test>::replyhandler_base_type
 {
 public:
   /// Constructor.
@@ -53,7 +53,6 @@ public:
 
   /// Destructor.
   ~Handler () = default;
-
 
   void foo_char (char ami_return_val,
                  char out_c,

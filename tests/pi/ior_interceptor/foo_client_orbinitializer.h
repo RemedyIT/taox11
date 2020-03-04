@@ -24,7 +24,6 @@ class FOO_Client_ORBInitializer :
   public IDL::traits<PortableInterceptor::ORBInitializer>::base_type
 {
 public:
-
   /**
    * @name Methods Required by the ORBInitializer Interface
    *
@@ -34,14 +33,13 @@ public:
    */
   //@{
   /// The pre-initialization hook.
-  virtual void pre_init (
-      IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info);
+  void pre_init (
+      IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
 
   /// The post-initialization hook.
-  virtual void post_init (
-      IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info);
+  void post_init (
+      IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
   //@}
-
 };
 
 #endif  /* FOO_CLIENT_ORB_INITIALIZER_H */

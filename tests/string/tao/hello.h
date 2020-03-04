@@ -21,23 +21,23 @@ public:
   Hello (CORBA::ORB_ptr orb, int& result);
 
   // = The skeleton methods
-  virtual char * get_string ();
-  virtual void set_string(const char * text);
-  virtual void out_string(CORBA::String_out text);
-  virtual void inout_string(char *& text);
-  virtual char * get_lstring();
-  virtual void set_lstring(const char * text);
-  virtual void out_lstring(CORBA::String_out text);
-  virtual void inout_lstring(char *& text);
+  char * get_string () override;
+  void set_string(const char * text) override;
+  void out_string(CORBA::String_out text) override;
+  void inout_string(char *& text) override;
+  char * get_lstring() override;
+  void set_lstring(const char * text) override;
+  void out_lstring(CORBA::String_out text) override;
+  void inout_lstring(char *& text) override;
 
-  virtual CORBA::StringSeq * get_stringSeq();
-  virtual void set_stringSeq(const CORBA::StringSeq& text);
-  virtual void out_stringSeq(CORBA::StringSeq_out text);
-  virtual void inout_stringSeq(CORBA::StringSeq& text);
+  CORBA::StringSeq * get_stringSeq() override;
+  void set_stringSeq(const CORBA::StringSeq& text) override;
+  void out_stringSeq(CORBA::StringSeq_out text) override;
+  void inout_stringSeq(CORBA::StringSeq& text) override;
 
-  virtual void bounded_string (const char * text);
+  void bounded_string (const char * text) override;
 
-  virtual void shutdown ();
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to conver strings to objects and shutdown

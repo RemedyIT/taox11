@@ -46,7 +46,7 @@ parse_args (int argc, ACE_TCHAR *argv[])
 }
 
 class Handler
-:public virtual CORBA::amic_traits<A::AMI_Test>::replyhandler_base_type
+: public virtual CORBA::amic_traits<A::AMI_Test>::replyhandler_base_type
 {
 public:
   /// Constructor.

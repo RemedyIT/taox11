@@ -20,26 +20,20 @@ public:
   /// Destructor.
   virtual ~BarHandler ();
 
-  virtual void
-  do_something () override;
+  void  do_something () override;
 
-  virtual void
-  do_something_excep (
-    >::ref_type >::ref_type excep_holder) override;
+  void do_something_excep (
+    IDL::traits<Messaging::ExceptionHolder>::ref_type excep_holder) override;
 
-  virtual void
-  get_something (int32_t ami_return_val) override;
+  void get_something (int32_t ami_return_val) override;
 
-  virtual void
-  get_something_excep (
-    >::ref_type >::ref_type excep_holder) override;
+  void get_something_excep (
+    IDL::traits<Messaging::ExceptionHolder>::ref_type excep_holder) override;
 
-  virtual void
-  set_something () override;
+  void set_something () override;
 
-  virtual void
-  set_something_excep (
-    >::ref_type >::ref_type excep_holder) override;
+  void set_something_excep (
+    IDL::traits<Messaging::ExceptionHolder>::ref_type excep_holder) override;
 };
 
 
@@ -49,14 +43,11 @@ class Bar final
 public:
   Bar ();
 
-  virtual void
-  do_something (const std::string &message) override;
+  void do_something (const std::string &message) override;
 
-  virtual int32_t
-  something () override;
+  int32_t something () override;
 
-  virtual void
-  something (int32_t _v) override;
+  void something (int32_t _v) override;
 };
 
 class Foo final
@@ -69,11 +60,9 @@ public:
     CORBA::amic_traits<Test::Bar>::replyhandler_ref_type bar_handler,
     CORBA::amic_traits<Test::Bar>::ref_type ami_bar_client);
 
-  virtual void
-  do_throw_struct () override;
+  void do_throw_struct () override;
 
-  virtual void
-  shutdown () override;
+  void shutdown () override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;

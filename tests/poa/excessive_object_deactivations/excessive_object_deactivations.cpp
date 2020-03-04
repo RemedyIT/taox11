@@ -24,9 +24,9 @@ public:
 
   ~test_i () = default;
 
-  virtual void deactivate_self () override;
+  void deactivate_self () override;
 
-  virtual IDL::traits<PortableServer::POA>::ref_type _default_POA () override;
+  IDL::traits<PortableServer::POA>::ref_type _default_POA () override;
 
   IDL::traits<PortableServer::POA>::ref_type& poa_;
   PortableServer::ObjectId& id_;

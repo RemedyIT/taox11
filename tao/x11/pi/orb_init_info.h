@@ -33,74 +33,56 @@ namespace TAOX11_NAMESPACE
 
       virtual ~ORBInitInfo () = default;
 
-      virtual
-      ::TAOX11_NAMESPACE::CORBA::StringSeq
-      arguments () override;
+      ::TAOX11_NAMESPACE::CORBA::StringSeq arguments () override;
 
-      virtual
-      std::string
-      orb_id () override;
+      std::string orb_id () override;
 
-      virtual
-      IDL::traits<IOP::CodecFactory>::ref_type
-      codec_factory () override;
+      IDL::traits<IOP::CodecFactory>::ref_type codec_factory () override;
 
-      virtual
       void
       register_initial_reference (
           const ObjectId& id,
           IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type obj) override;
 
-      virtual
       IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type
       resolve_initial_references (
           const ObjectId& id) override;
 
-      virtual
       void
       add_client_request_interceptor (
           IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::ClientRequestInterceptor>::ref_type interceptor) override;
 
-      virtual
       void
       add_server_request_interceptor (
           IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::ServerRequestInterceptor>::ref_type interceptor) override;
 
-      virtual
       void
       add_ior_interceptor (
           IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::IORInterceptor>::ref_type interceptor) override;
 
-      virtual
-      ::TAOX11_NAMESPACE::PortableInterceptor::SlotId
-      allocate_slot_id () override;
+      ::TAOX11_NAMESPACE::PortableInterceptor::SlotId allocate_slot_id () override;
 
-      virtual
       void
       register_policy_factory (
           ::TAOX11_NAMESPACE::CORBA::PolicyType type,
           IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::PolicyFactory>::ref_type policy_factory) override;
 
-      virtual
       void
       add_client_request_interceptor_with_policy (
           IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::ClientRequestInterceptor>::ref_type interceptor,
           const CORBA::PolicyList& policies) override;
 
-      virtual
       void
       add_server_request_interceptor_with_policy (
           IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::ServerRequestInterceptor>::ref_type interceptor,
           const CORBA::PolicyList& policies) override;
 
-      virtual
       void
       add_ior_interceptor_with_policy (
           IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::IORInterceptor>::ref_type interceptor,
           const CORBA::PolicyList& policies) override;
 
 
-      virtual
       IDL::traits<CORBA::ORB>::ref_type _get_orb () override;
 
     private:

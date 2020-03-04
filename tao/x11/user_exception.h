@@ -22,11 +22,11 @@ namespace TAOX11_NAMESPACE {
       virtual ~UserException () throw() = default;
 
       /// noop
-      virtual void _tao_encode (TAO_OutputCDR &) const override;
-      virtual void _tao_decode (TAO_InputCDR &) override;
+      void _tao_encode (TAO_OutputCDR &) const override;
+      void _tao_decode (TAO_InputCDR &) override;
 
-      virtual void _any_insert (CORBA::Any &) const override;
-      virtual void _any_insert (CORBA::Any &) override;
+      void _any_insert (CORBA::Any &) const override;
+      void _any_insert (CORBA::Any &) override;
 
     protected:
       UserException () = default;
@@ -43,7 +43,7 @@ namespace TAOX11_NAMESPACE {
       {
       }
 
-      virtual void _info (std::ostream& strm) const override;
+      void _info (std::ostream& strm) const override;
     };
   } // namespace CORBA
 } // namespace TAOX11_NAMESPACE

@@ -17,21 +17,19 @@ class AMI_Test_i
 : public virtual CORBA::servant_traits< A::AMI_Test>::base_type
 {
 public:
-  /// ctor
   AMI_Test_i (IDL::traits<CORBA::ORB>::ref_type orb);
 
   // The AMI_Test methods.
-  virtual int32_t foo (int32_t in_l) override;
+  int32_t foo (int32_t in_l) override;
 
-  virtual int32_t foo_no_raises (int32_t in_l) override;
+  int32_t foo_no_raises (int32_t in_l) override;
 
-  virtual int32_t bar (int32_t in_l) override;
+  int32_t bar (int32_t in_l) override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type  orb_;
-
 };
 
 #endif /* TAOX11_AMI_TEST_I_H */

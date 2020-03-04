@@ -66,8 +66,7 @@ namespace TAOX11_NAMESPACE
     }
 
   protected:
-    Any_Impl (CORBA::typecode_reference tc,
-        bool encoded = false);
+    Any_Impl (CORBA::typecode_reference tc, bool encoded = false);
     virtual ~Any_Impl () = default;
 
     CORBA::typecode_reference type_;

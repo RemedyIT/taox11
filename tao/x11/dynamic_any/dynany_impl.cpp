@@ -29,7 +29,7 @@ namespace TAOX11_NAMESPACE
       class ZeroMem_Allocator : public ACE_New_Allocator
       {
       public:
-        virtual void *malloc (size_t nbytes) override
+        void *malloc (size_t nbytes) override
         {
           // reroute to calloc for zero init
           return this->calloc (nbytes);

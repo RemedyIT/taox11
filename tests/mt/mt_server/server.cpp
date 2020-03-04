@@ -55,7 +55,7 @@ class Worker : public ACE_Task_Base
 public:
   Worker (IDL::traits<CORBA::ORB>::ref_type orb);
 
-  virtual int svc ();
+  int svc () override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;

@@ -58,7 +58,7 @@ public:
   Client (IDL::traits<Simple_Server>::ref_type server,
           int niterations);
 
-  virtual int svc ();
+  int svc () override;
 
 private:
   void validate_connection ();

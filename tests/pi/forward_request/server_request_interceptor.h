@@ -43,7 +43,7 @@ public:
   Server_Request_Interceptor () = default;
 
   /// Set the references to which requests will be forwarded.
-  virtual void forward_references (IDL::traits<CORBA::Object>::ref_type obj1,
+  void forward_references (IDL::traits<CORBA::Object>::ref_type obj1,
                                    IDL::traits<CORBA::Object>::ref_type obj2) override;
 
   /**
@@ -56,33 +56,31 @@ public:
    */
   //@{
   /// Return the name of this ServerRequestinterceptor.
-  virtual std::string name () override;
+  std::string name () override;
 
-  virtual void destroy () override;
+  void destroy () override;
 
-  virtual void receive_request_service_contexts (
+  void receive_request_service_contexts (
       IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
 
-  virtual void receive_request (
+  void receive_request (
       IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
 
-  virtual void send_reply (
+  void send_reply (
       IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
 
-  virtual void send_exception (
+  void send_exception (
       IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
 
-  virtual void send_other (
+  void send_other (
       IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
   //@}
 
 protected:
-
   /// Destructor.
   virtual ~Server_Request_Interceptor () = default;
 
 private:
-
   /// The number of requests intercepted by this interceptor.
   uint32_t request_count_ {};
 

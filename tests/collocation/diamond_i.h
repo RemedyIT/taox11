@@ -20,7 +20,7 @@ public:
   Top_i ();
   ~Top_i ();
 
-  virtual std::string shape () override;
+  std::string shape () override;
 };
 
 class DIAMOND_Export Left_i
@@ -30,9 +30,9 @@ public:
   Left_i ();
   ~Left_i ();
 
-  virtual std::string shape () override;
+  std::string shape () override;
 
-  virtual std::string color () override;
+  std::string color () override;
 };
 
 class DIAMOND_Export Right_i
@@ -42,9 +42,9 @@ public:
   Right_i ();
   ~Right_i ();
 
-  virtual std::string shape () override;
+  std::string shape () override;
 
-  std::string color ();
+  virtual std::string color ();
 
   virtual int32_t width () override;
 };
@@ -55,15 +55,14 @@ class DIAMOND_Export Bottom_i
 public:
   Bottom_i ();
   ~Bottom_i ();
-  // Ctor, dtor.
 
-  virtual std::string shape () override;
+  std::string shape () override;
 
-  virtual std::string color () override;
+  std::string color () override;
 
-  virtual int32_t width () override;
+  int32_t width () override;
 
-  virtual std::string name () override;
+  std::string name () override;
 };
 
 #endif /* TAOX11_DIAMOND_I_H */

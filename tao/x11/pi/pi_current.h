@@ -27,16 +27,13 @@ namespace TAOX11_NAMESPACE
 
       virtual ~PICurrent () = default;
 
-      virtual
       CORBA::Any
       get_slot (PortableInterceptor::SlotId id) override;
 
-      virtual
       void
       set_slot (PortableInterceptor::SlotId identifier,
                              const CORBA::Any & data) override;
 
-      virtual
       IDL::traits<CORBA::ORB>::ref_type
       _get_orb () override;
 

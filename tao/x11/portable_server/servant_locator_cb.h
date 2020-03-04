@@ -35,13 +35,13 @@ namespace TAOX11_NAMESPACE
         IDL::traits< ::TAOX11_NAMESPACE::PortableServer::ServantLocator>::ref_type sl);
       ~Servant_Locator_Callback ();
 
-    virtual TAO_PORTABLE_SERVER::Servant preinvoke (
+    TAO_PORTABLE_SERVER::Servant preinvoke (
       const TAO_PORTABLE_SERVER::ObjectId & oid,
       TAO_PORTABLE_SERVER::POA_ptr adapter,
       const char * operation,
       TAO_PORTABLE_SERVER::ServantLocator::Cookie & the_cookie) override;
 
-    virtual void postinvoke (
+    void postinvoke (
       const TAO_PORTABLE_SERVER::ObjectId & oid,
       TAO_PORTABLE_SERVER::POA_ptr adapter,
       const char * operation,

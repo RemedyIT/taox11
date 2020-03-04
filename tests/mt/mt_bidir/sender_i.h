@@ -25,7 +25,7 @@ public:
 
   virtual ~Sender_i () = default;
 
-  virtual int32_t receiver_object (IDL::traits<Receiver>::ref_type recv) override;
+  int32_t receiver_object (IDL::traits<Receiver>::ref_type recv) override;
 
   void send_message ();
 
