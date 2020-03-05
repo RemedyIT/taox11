@@ -36,7 +36,7 @@ namespace TAOX11_NAMESPACE
 
       ~RelativeRoundtripTimeoutPolicy () = default;
 
-      virtual ::TAOX11_NAMESPACE::TimeBase::TimeT relative_expiry() override;
+      ::TAOX11_NAMESPACE::TimeBase::TimeT relative_expiry() override;
 
     private:
       TAO_MESSAGING::RelativeRoundtripTimeoutPolicy_ptr pol_;
@@ -61,7 +61,7 @@ namespace TAOX11_NAMESPACE
 
       ~SyncScopePolicy () = default;
 
-      virtual ::TAOX11_NAMESPACE::Messaging::SyncScope synchronization () override;
+      ::TAOX11_NAMESPACE::Messaging::SyncScope synchronization () override;
 
     private:
       TAO_MESSAGING::SyncScopePolicy_ptr pol_;
@@ -86,7 +86,7 @@ namespace TAOX11_NAMESPACE
 
       ~ConnectionTimeoutPolicy () = default;
 
-      virtual ::TAOX11_NAMESPACE::TimeBase::TimeT relative_expiry() override;
+      ::TAOX11_NAMESPACE::TimeBase::TimeT relative_expiry() override;
 
     private:
       TAO_TAO::ConnectionTimeoutPolicy_ptr pol_;
@@ -111,7 +111,7 @@ namespace TAOX11_NAMESPACE
 
       ~BufferingConstraintPolicy () = default;
 
-      virtual TAO::BufferingConstraint buffering_constraint() override;
+      TAO::BufferingConstraint buffering_constraint() override;
 
     private:
       TAO_TAO::BufferingConstraintPolicy_ptr pol_;

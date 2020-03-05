@@ -16,13 +16,13 @@ public:
   Backend () = default;
   ~Backend () = default;
 
-  virtual int open (const ACE_TCHAR *logger_key) override;
+  int open (const ACE_TCHAR *logger_key) override;
 
-  virtual int reset (void) override;
+  int reset (void) override;
 
-  virtual int close (void) override;
+  int close (void) override;
 
-  virtual ssize_t log (ACE_Log_Record &log_record) override;
+  ssize_t log (ACE_Log_Record &log_record) override;
 
   // Test probes to see if things worked as specified.
   size_t log_count (void) const { return this->log_count_; }

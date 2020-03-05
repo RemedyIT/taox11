@@ -27,9 +27,9 @@ public:
   Simple_Server_i (CORBA::ORB_ptr orb);
 
   // = The Simple_Server methods.
-  CORBA::Boolean test_is_a (const char * type);
+  CORBA::Boolean test_is_a (const char * type) override;
 
-  void shutdown (void);
+  void shutdown () override;
 
 private:
   /// The ORB

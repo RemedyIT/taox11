@@ -40,13 +40,13 @@ namespace TAOX11_NAMESPACE
                          CORBA::typecode_reference,
                          void *);
 
-    virtual bool marshal_value (TAO_OutputCDR &);
+    bool marshal_value (TAO_OutputCDR &) override;
 
     bool demarshal_value (TAO_InputCDR &);
     bool demarshal_value (TAO_InputCDR &,
                           uint32_t);
 
-    virtual void _tao_decode (TAO_InputCDR &);
+    void _tao_decode (TAO_InputCDR &) override;
 
     static Any_Basic_Impl *create_empty (CORBA::typecode_reference);
 

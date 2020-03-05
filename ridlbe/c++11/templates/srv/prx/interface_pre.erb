@@ -10,7 +10,7 @@ public:
   explicit <%= srvproxy_cxxname %> (<%= srvproxy_cxxname %>::skel_ptr skel);
   virtual ~<%= srvproxy_cxxname %> () = default;
 
-  virtual void _dispatch (
+  void _dispatch (
       TAO_ServerRequest & req,
       TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall) override;
 

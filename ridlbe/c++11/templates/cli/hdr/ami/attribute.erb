@@ -3,19 +3,16 @@
 /// @copydoc <%= doc_scoped_name %>
 //@{
 void
-get_<%= cxxname %> (
-    <%= scoped_cxx_in_type %> ami_return_val);
+get_<%= cxxname %> (<%= scoped_cxx_in_type %> ami_return_val);
 
 void
-get_<%= cxxname %>_excep (
-    IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder);
+get_<%= cxxname %>_excep (IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder);
 % unless is_readonly?
 
 void
 set_<%= cxxname %> ();
 
 void
-set_<%= cxxname %>_excep (
-    IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder);
+set_<%= cxxname %>_excep (IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder);
 % end
 //@}

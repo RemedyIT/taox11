@@ -16,15 +16,15 @@ class Client_i final
   : public CORBA::servant_traits<Test::Client>::base_type
 {
 public:
-  virtual void send_string (IDL::traits<Test::StringBox>::ref_type sb) override;
+  void send_string (IDL::traits<Test::StringBox>::ref_type sb) override;
 
-  virtual IDL::traits<Test::StringBox>::ref_type get_string () override;
+  IDL::traits<Test::StringBox>::ref_type get_string () override;
 
-  virtual void get_event (IDL::traits<Test::Event>::ref_type& evt) override;
+  void get_event (IDL::traits<Test::Event>::ref_type& evt) override;
 
-  virtual void do_nothing (IDL::traits<Test::base_vt>::ref_type) override;
+  void do_nothing (IDL::traits<Test::base_vt>::ref_type) override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
   template <typename _Tp1, typename, typename ...Args>
   friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);

@@ -21,11 +21,11 @@ public:
   Hello(IDL::traits<CORBA::ORB>::ref_type orb, int& result);
 
   // = The skeleton methods for enum
-  virtual Test::enumType get_enum() override;
-  virtual Test::enumType inout_enum(Test::enumType pin,
+  Test::enumType get_enum() override;
+  Test::enumType inout_enum(Test::enumType pin,
       Test::enumType& pout, Test::enumType& pinout) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

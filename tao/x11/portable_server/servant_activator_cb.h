@@ -36,11 +36,11 @@ namespace TAOX11_NAMESPACE
           TAOX11_NAMESPACE::PortableServer::ServantActivator>::ref_type sa);
       ~Servant_Activator_Callback ();
 
-      virtual TAO_PORTABLE_SERVER::Servant incarnate (
+      TAO_PORTABLE_SERVER::Servant incarnate (
         const TAO_PORTABLE_SERVER::ObjectId & oid,
         TAO_PORTABLE_SERVER::POA_ptr adapter) override;
 
-      virtual void etherealize (
+      void etherealize (
         const TAO_PORTABLE_SERVER::ObjectId & oid,
         TAO_PORTABLE_SERVER::POA_ptr adapter,
         TAO_PORTABLE_SERVER::Servant serv,

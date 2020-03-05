@@ -26,7 +26,6 @@ class FOO_IORInterceptor
   : public IDL::traits<PortableInterceptor::IORInterceptor_3_0>::base_type
 {
 public:
-
   /// Constructor
   FOO_IORInterceptor (IDL::traits<IOP::Codec>::ref_type codec);
 
@@ -39,30 +38,28 @@ public:
    */
   //@{
   /// Return the name of this IORInterceptor.
-  virtual std::string name () override;
+  std::string name () override;
 
   /// Cleanup resources acquired by this IORInterceptor.
-  virtual void destroy () override;
+  void destroy () override;
 
   /// Add the tagged components to the IOR.
-  virtual void establish_components (
+  void establish_components (
       IDL::traits<PortableInterceptor::IORInfo>::ref_type info) override;
 
-  virtual void components_established (
+  void components_established (
       IDL::traits<PortableInterceptor::IORInfo>::ref_type info) override;
 
-  virtual void adapter_manager_state_changed (
+  void adapter_manager_state_changed (
       const PortableInterceptor::AdapterManagerId& id,
       PortableInterceptor::AdapterState state) override;
 
-  virtual void adapter_state_changed (
+  void adapter_state_changed (
       const PortableInterceptor::ObjectReferenceTemplateSeq & templates,
       PortableInterceptor::AdapterState state) override;
-
   //@}
 
 private:
-
   /// The CDR encapsulation coder/decoder used to encapsulate data
   /// into a CDR encapsulation.
   IDL::traits<IOP::Codec>::ref_type codec_;

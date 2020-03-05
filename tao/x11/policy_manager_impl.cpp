@@ -22,11 +22,11 @@ namespace TAOX11_NAMESPACE
       Policy_Manager_impl (TAO_CORBA::PolicyManager_ptr polptr);
       ~Policy_Manager_impl () = default;
 
-      virtual ::TAOX11_NAMESPACE::CORBA::PolicyList
+      ::TAOX11_NAMESPACE::CORBA::PolicyList
       get_policy_overrides (
         const ::TAOX11_NAMESPACE::CORBA::PolicyTypeSeq& ts) override;
 
-      virtual void set_policy_overrides (
+      void set_policy_overrides (
         const ::TAOX11_NAMESPACE::CORBA::PolicyList& policies,
         ::TAOX11_NAMESPACE::CORBA::SetOverrideType set_add) override;
 

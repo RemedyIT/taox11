@@ -18,20 +18,20 @@ public:
   Hello(IDL::traits<CORBA::ORB>::ref_type orb, int& result);
 
   // = The skeleton methods
-  virtual std::wstring getset_string(const std::wstring& text) override;
-  virtual void out_string(std::wstring& text) override;
-  virtual void inout_string(std::wstring& text) override;
-  virtual std::wstring getset_lstring(const std::wstring& text) override;
-  virtual void out_lstring(std::wstring& text) override;
-  virtual void inout_lstring(std::wstring& text) override;
+  std::wstring getset_string(const std::wstring& text) override;
+  void out_string(std::wstring& text) override;
+  void inout_string(std::wstring& text) override;
+  std::wstring getset_lstring(const std::wstring& text) override;
+  void out_lstring(std::wstring& text) override;
+  void inout_lstring(std::wstring& text) override;
 
-  virtual CORBA::WStringSeq getset_stringSeq(const CORBA::WStringSeq& text) override;
-  virtual void out_stringSeq(CORBA::WStringSeq& text) override;
-  virtual void inout_stringSeq(CORBA::WStringSeq& text) override;
+  CORBA::WStringSeq getset_stringSeq(const CORBA::WStringSeq& text) override;
+  void out_stringSeq(CORBA::WStringSeq& text) override;
+  void inout_stringSeq(CORBA::WStringSeq& text) override;
 
-  virtual void bounded_string (const ::Test::bounded_bar& text) override;
+  void bounded_string (const ::Test::bounded_bar& text) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

@@ -51,26 +51,26 @@ namespace TAOX11_NAMESPACE
 
       // = Functions specific to DynEnum.
 
-      virtual std::string get_as_string () override;
+      std::string get_as_string () override;
 
-      virtual void set_as_string (const std::string &value) override;
+      void set_as_string (const std::string &value) override;
 
-      virtual uint32_t get_as_ulong () override;
+      uint32_t get_as_ulong () override;
 
-      virtual void set_as_ulong (uint32_t value) override;
+      void set_as_ulong (uint32_t value) override;
 
       // = DynAny common functions not implemented in class TAOX11_DynCommon.
 
-      virtual void from_any (const CORBA::Any & value) override;
+      void from_any (const CORBA::Any & value) override;
 
-      virtual CORBA::Any to_any () override;
+      CORBA::Any to_any () override;
 
-      virtual bool equal (
+      bool equal (
           IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type dyn_any) override;
 
-      virtual void destroy () override;
+      void destroy () override;
 
-      virtual IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
+      IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
       current_component () override;
 
     private:

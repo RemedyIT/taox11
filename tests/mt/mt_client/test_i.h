@@ -17,9 +17,9 @@ class Simple_Server_i
 public:
   Simple_Server_i (IDL::traits<CORBA::ORB>::ref_type orb);
 
-  virtual void test_method () override;
+  void test_method () override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;

@@ -18,12 +18,12 @@ class ORB_Initializer final
   : public IDL::traits<PortableInterceptor::ORBInitializer>::base_type
 {
 public:
-  virtual void
+  void
   pre_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type) override
   {
   }
 
-  virtual void
+  void
   post_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override
   {
     slot_id = info->allocate_slot_id ();

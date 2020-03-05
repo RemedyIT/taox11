@@ -24,26 +24,26 @@ public:
   void TestEq(const char * name, T exp, U a);
 
   // = The skeleton methods for char
-  virtual char getset_char(char min, char max) override;
-  virtual void out_char(char numin, char& num) override;
-  virtual void inout_char(char& min, char& max) override;
+  char getset_char(char min, char max) override;
+  void out_char(char numin, char& num) override;
+  void inout_char(char& min, char& max) override;
 
   // = The skeleton methods for wchar
-  virtual wchar_t getset_wchar(wchar_t min, wchar_t max) override;
-  virtual void out_wchar(wchar_t cin, wchar_t& c) override;
-  virtual void inout_wchar(wchar_t cin, wchar_t& c) override;
+  wchar_t getset_wchar(wchar_t min, wchar_t max) override;
+  void out_wchar(wchar_t cin, wchar_t& c) override;
+  void inout_wchar(wchar_t cin, wchar_t& c) override;
 
   // = The skeleton methods for octet
-  virtual uint8_t getset_octet(uint8_t min, uint8_t max) override;
-  virtual void out_octet(uint8_t cin, uint8_t& c) override;
-  virtual void inout_octet(uint8_t& c) override;
+  uint8_t getset_octet(uint8_t min, uint8_t max) override;
+  void out_octet(uint8_t cin, uint8_t& c) override;
+  void inout_octet(uint8_t& c) override;
 
   // = The skeleton methods for boolean
-  virtual bool getset_boolean(bool min, bool max) override;
-  virtual void out_boolean(bool cin, bool& c) override;
-  virtual void inout_boolean(bool& c) override;
+  bool getset_boolean(bool min, bool max) override;
+  void out_boolean(bool cin, bool& c) override;
+  void inout_boolean(bool& c) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

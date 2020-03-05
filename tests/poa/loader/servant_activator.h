@@ -55,7 +55,7 @@ public:
    * Servant Activator or the Servant Locator interface is invoked
    * respectively.
    */
-  virtual CORBA::servant_reference<PortableServer::Servant>
+  CORBA::servant_reference<PortableServer::Servant>
     incarnate (const PortableServer::ObjectId &oid,
               IDL::traits<PortableServer::POA>::ref_type poa) override;
 
@@ -67,11 +67,11 @@ public:
    * the ServantActivator invokes this method which will destroy the
    * servant associated with the object.
    */
-  virtual void etherealize (const PortableServer::ObjectId &oid,
-                            IDL::traits<PortableServer::POA>::ref_type adapter,
-                            CORBA::servant_reference<PortableServer::Servant> servant,
-                            bool cleanup_in_progress,
-                            bool remaining_activations) override;
+  void etherealize (const PortableServer::ObjectId &oid,
+                    IDL::traits<PortableServer::POA>::ref_type adapter,
+                    CORBA::servant_reference<PortableServer::Servant> servant,
+                    bool cleanup_in_progress,
+                    bool remaining_activations) override;
 
 private:
   /// The ACE_DLL object which performs the task of loading the dll

@@ -34,17 +34,17 @@ namespace POA
     /// Destructor
     virtual ~<%= skel_cxxname %> ();
 
-    virtual Servant_proxy_ptr get_proxy () const override;
+    Servant_proxy_ptr get_proxy () const override;
 
     template <typename T> friend class TAOX11_CORBA::servant_reference;
   public:
     /// Determine if we are of the type specified by the @a logical_type_id.
-    virtual bool _is_a (const std::string& logical_type_id) override;
+    bool _is_a (const std::string& logical_type_id) override;
 
     /// Returns a strong client reference for the servant you are calling
     <%= scoped_cxx_return_type %> _this ();
 
-    virtual const std::string &_interface_repository_id () const override;
+    const std::string &_interface_repository_id () const override;
 %   if has_abstract_base?
 %     unless abstractbase_operations.empty?
 

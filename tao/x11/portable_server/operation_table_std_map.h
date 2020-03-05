@@ -59,17 +59,17 @@ public:
   virtual ~Std_Map_OpTable () = default;
 
   /// See the documentation in the base class for details.
-  virtual int find (const char *opname,
-                    TAO_Skeleton &skelfunc,
-                    const unsigned int length = 0) override;
+  int find (const char *opname,
+            TAO_Skeleton &skelfunc,
+            const unsigned int length = 0) override;
 
-  virtual int find (const char *opname,
-                    TAO_Collocated_Skeleton &skelfunc,
-                    TAO::Collocation_Strategy s,
-                    const unsigned int length = 0) override;
+  int find (const char *opname,
+            TAO_Collocated_Skeleton &skelfunc,
+            TAO::Collocation_Strategy s,
+            const unsigned int length = 0) override;
 
-  virtual int bind (const char *opname,
-                    const TAO::Operation_Skeletons skel_ptr) override;
+  int bind (const char *opname,
+            const TAO::Operation_Skeletons skel_ptr) override;
 
 private:
 #if defined (ACE_HAS_CPP17)

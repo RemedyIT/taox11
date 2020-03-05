@@ -112,10 +112,9 @@ namespace TAOX11_NAMESPACE
        */
       //@{
       TAO_TAO::TypeCode::Case<StringType, TypeCodeType> * clone () const;
-      virtual TAO_CORBA::Any*  label () const;
-      virtual bool marshal_label (TAO_OutputCDR & cdr) const;
-      virtual bool equal_label (uint32_t index,
-                                TAO_CORBA::TypeCode_ptr tc) const;
+      TAO_CORBA::Any*  label () const override;
+      bool marshal_label (TAO_OutputCDR & cdr) const override;
+      bool equal_label (uint32_t index, TAO_CORBA::TypeCode_ptr tc) const override;
       //@}
 
     private:

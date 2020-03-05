@@ -18,22 +18,22 @@ public:
 
   virtual ~test_i();
   /// Returns the Default POA of this servant
-  IDL::traits<PortableServer::POA>::ref_type _default_POA ();
+  IDL::traits<PortableServer::POA>::ref_type _default_POA () override;
 
   /// A twoway operation.
-  void method ();
+  void method () override;
 
   /// A oneway operation.
-  void oneway_method ();
+  void oneway_method () override;
 
   /// A timed twoway operation.
-  void timed_method (uint32_t timeout);
+  void timed_method (uint32_t timeout) override;
 
   /// A timed twoway operation.
-  void timed_oneway_method (uint32_t timeout);
+  void timed_oneway_method (uint32_t timeout) override;
 
   /// Shutdown the ORB
-  void shutdown ();
+  void shutdown () override;
 
   /// Sleep for some time.
   void sleep (unsigned long timeout,

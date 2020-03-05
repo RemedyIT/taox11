@@ -39,22 +39,22 @@ namespace TAOX11_NAMESPACE
       DynAnyFactory_i ();
 
       // = The DynamicAnyFactory methods.
-      virtual IDL::traits< DynAny>::ref_type
+      IDL::traits< DynAny>::ref_type
         create_dyn_any (const CORBA::Any& value) override;
 
-      virtual IDL::traits< DynAny>::ref_type
+      IDL::traits< DynAny>::ref_type
         create_dyn_any_from_type_code (
           CORBA::object_reference<CORBA::TypeCode> type) override;
 
-      virtual IDL::traits< DynAny>::ref_type
+      IDL::traits< DynAny>::ref_type
         create_dyn_any_without_truncation (
             const CORBA::Any& value) override;
 
-      virtual DynAnySeq create_multiple_dyn_anys (
+      DynAnySeq create_multiple_dyn_anys (
           const AnySeq& values,
           bool allow_truncate) override;
 
-      virtual AnySeq create_multiple_anys (
+      AnySeq create_multiple_anys (
           const DynAnySeq& values) override;
 
       /// Obtain the kind of object, after all aliasing has been removed.

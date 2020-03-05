@@ -19,7 +19,7 @@ public:
   iA_impl () = default;
   ~iA_impl () = default;
 
-  virtual std::string do_something_A() override;
+  std::string do_something_A() override;
 
 private:
   iA_impl (const iA_impl&) = delete;
@@ -35,8 +35,8 @@ public:
   iB_impl () = default;
   ~iB_impl () = default;
 
-  virtual std::string do_something_A() override;
-  virtual std::string do_something_B() override;
+  std::string do_something_A() override;
+  std::string do_something_B() override;
 private:
   iB_impl (const iB_impl&) = delete;
   iB_impl (iB_impl&&) = delete;
@@ -51,9 +51,9 @@ public:
   iC_impl () = default;
   ~iC_impl () = default;
 
-  virtual std::string do_something_A() override;
-  virtual std::string do_something_B() override;
-  virtual std::string do_something_C() override;
+  std::string do_something_A() override;
+  std::string do_something_B() override;
+  std::string do_something_C() override;
 private:
   iC_impl (const iC_impl&) = delete;
   iC_impl (iC_impl&&) = delete;
@@ -68,7 +68,7 @@ public:
   iD_impl () = default;
   ~iD_impl () = default;
 
-  virtual std::string do_something_D() override;
+  std::string do_something_D() override;
 private:
   iD_impl (const iD_impl&) = delete;
   iD_impl (iD_impl&&) = delete;
@@ -83,11 +83,11 @@ public:
   iE_impl () = default;
   ~iE_impl () = default;
 
-  virtual std::string do_something_A() override;
-  virtual std::string do_something_B() override;
-  virtual std::string do_something_C() override;
-  virtual std::string do_something_D() override;
-  virtual std::string do_something_E() override;
+  std::string do_something_A() override;
+  std::string do_something_B() override;
+  std::string do_something_C() override;
+  std::string do_something_D() override;
+  std::string do_something_E() override;
 private:
   iE_impl (const iE_impl&) = delete;
   iE_impl (iE_impl&&) = delete;
@@ -105,13 +105,13 @@ public:
     IDL::traits<PortableServer::POA>::ref_type poa);
 
   // = The skeleton methods
-  virtual IDL::traits<Test::iA>::ref_type get_iA() override;
-  virtual IDL::traits<Test::iB>::ref_type get_iB() override;
-  virtual IDL::traits<Test::iC>::ref_type get_iC() override;
-  virtual IDL::traits<Test::iD>::ref_type get_iD() override;
-  virtual IDL::traits<Test::iE>::ref_type get_iE() override;
+  IDL::traits<Test::iA>::ref_type get_iA() override;
+  IDL::traits<Test::iB>::ref_type get_iB() override;
+  IDL::traits<Test::iC>::ref_type get_iC() override;
+  IDL::traits<Test::iD>::ref_type get_iD() override;
+  IDL::traits<Test::iE>::ref_type get_iE() override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
   /// the application.

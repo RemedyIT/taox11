@@ -47,10 +47,10 @@ namespace TAOX11_NAMESPACE
       }
 
       /// Return the repository ID of the Exception.
-      virtual const char * _rep_id () const override;
+      const char * _rep_id () const override;
 
       /// Return the name of the Exception.
-      virtual const char * _name () const override;
+      const char * _name () const override;
 
       static TAO_CORBA::Exception *_alloc ()
       {
@@ -64,12 +64,12 @@ namespace TAOX11_NAMESPACE
 
       // TODO virtual CORBA::TypeCode_ptr _tao_type () const;
 
-      virtual TAO_CORBA::Exception *_tao_duplicate () const override;
+      TAO_CORBA::Exception *_tao_duplicate () const override;
 
-      virtual void _raise () const override;
+      void _raise () const override;
 
-      virtual void _tao_encode (TAO_OutputCDR &cdr) const override;  // noop
-      virtual void _tao_decode (TAO_InputCDR &cdr) override;
+      void _tao_encode (TAO_OutputCDR &cdr) const override;  // noop
+      void _tao_decode (TAO_InputCDR &cdr) override;
 
     private:
       in () = default;

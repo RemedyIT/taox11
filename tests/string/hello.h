@@ -21,23 +21,23 @@ public:
   Hello(IDL::traits<CORBA::ORB>::ref_type orb, int& result);
 
   // = The skeleton methods
-  virtual std::string get_string() override;
-  virtual void set_string(const std::string& text) override;
-  virtual void out_string(std::string& text) override;
-  virtual void inout_string(std::string& text) override;
-  virtual std::string get_lstring() override;
-  virtual void set_lstring(const std::string& text) override;
-  virtual void out_lstring(std::string& text) override;
-  virtual void inout_lstring(std::string& text) override;
+  std::string get_string() override;
+  void set_string(const std::string& text) override;
+  void out_string(std::string& text) override;
+  void inout_string(std::string& text) override;
+  std::string get_lstring() override;
+  void set_lstring(const std::string& text) override;
+  void out_lstring(std::string& text) override;
+  void inout_lstring(std::string& text) override;
 
-  virtual CORBA::StringSeq get_stringSeq() override;
-  virtual void set_stringSeq(const CORBA::StringSeq& text) override;
-  virtual void out_stringSeq(CORBA::StringSeq& text) override;
-  virtual void inout_stringSeq(CORBA::StringSeq& text) override;
+  CORBA::StringSeq get_stringSeq() override;
+  void set_stringSeq(const CORBA::StringSeq& text) override;
+  void out_stringSeq(CORBA::StringSeq& text) override;
+  void inout_stringSeq(CORBA::StringSeq& text) override;
 
-  virtual void bounded_string (const ::Test::bounded_bar& text) override;
+  void bounded_string (const ::Test::bounded_bar& text) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

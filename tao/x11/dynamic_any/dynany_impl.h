@@ -47,16 +47,16 @@ namespace TAOX11_NAMESPACE
       IDL::traits< DynamicAny::DynAny>::ref_type
       init (const CORBA::Any& any) ;
 
-      virtual void from_any (const CORBA::Any& value) override;
+      void from_any (const CORBA::Any& value) override;
 
-      virtual TAOX11_NAMESPACE::CORBA::Any to_any () override;
+      TAOX11_NAMESPACE::CORBA::Any to_any () override;
 
-      virtual bool equal (
+      bool equal (
          TAOX11_IDL::traits< DynAny>::ref_type dyn_any) override;
 
-      virtual void destroy () override;
+      void destroy () override;
 
-      virtual
+
       IDL::traits< DynAny>::ref_type
       current_component () override;
 

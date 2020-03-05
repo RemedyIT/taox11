@@ -15,7 +15,7 @@ class iA_impl
   : public virtual CORBA::servant_traits<Test::iA>::base_type
 {
 public:
-    virtual void do_something () override;
+    void do_something () override;
 };
 
 /// Implement the Test::Hello interface
@@ -27,9 +27,9 @@ public:
   Hello (IDL::traits<CORBA::ORB>::ref_type orb);
   virtual ~Hello ();
 
-  virtual IDL::traits<Test::iA>::ref_type some_function () override;
+  IDL::traits<Test::iA>::ref_type some_function () override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

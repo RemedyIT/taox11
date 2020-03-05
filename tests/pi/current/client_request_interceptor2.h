@@ -39,28 +39,27 @@ public:
    */
   //@{
   /// Return the name of this ClientRequestInterceptor.
-  virtual std::string name () override;
+  std::string name () override;
 
-  virtual void destroy () override;
+  void destroy () override;
 
-  virtual void send_request (
+  void send_request (
       IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  virtual void send_poll (
+  void send_poll (
       IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  virtual void receive_reply (
+  void receive_reply (
       IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  virtual void receive_exception (
+  void receive_exception (
       IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  virtual void receive_other (
+  void receive_other (
       IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
   //@}
 
 private:
-
   /// The PICurrent slot ID allocated to this application during ORB
   /// initialization.
   PortableInterceptor::SlotId slot_id_;

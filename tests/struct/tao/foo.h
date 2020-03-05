@@ -12,15 +12,15 @@ public:
   Foo (CORBA::ORB_ptr orb);
 
   // = The skeleton methods
-  virtual CORBA::Boolean pass_struct (const Test::Simple & s);
+  CORBA::Boolean pass_struct (const Test::Simple & s) override;
 
-  virtual Test::Simple * return_struct ();
+  Test::Simple * return_struct () override;
 
-  virtual CORBA::Boolean get_struct (Test::Simple_out s);
+  CORBA::Boolean get_struct (Test::Simple_out s) override;
 
-  virtual CORBA::Boolean update_struct (Test::Simple & s);
+  CORBA::Boolean update_struct (Test::Simple & s) override;
 
-  virtual void shutdown ();
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

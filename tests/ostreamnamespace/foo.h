@@ -19,13 +19,13 @@ public:
   Foo (IDL::traits<CORBA::ORB>::ref_type orb);
 
   // = The skeleton methods
-  virtual bool pass_data (const CORBA::Any & s) override;
+  bool pass_data (const CORBA::Any & s) override;
 
-  virtual void do_it () override;
+  void do_it () override;
 
-  virtual void do_reason () override;
+  void do_reason () override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

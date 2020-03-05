@@ -49,14 +49,14 @@ namespace TAOX11_NAMESPACE
         : public TAOX11_NAMESPACE::CORBA::UserException
       {
       public:
-        virtual void _raise () const override;
+        void _raise () const override;
 
-        virtual void _tao_encode (TAO_OutputCDR &cdr) const override;
+        void _tao_encode (TAO_OutputCDR &cdr) const override;
 
-        virtual void _tao_decode (TAO_InputCDR &cdr) override;
+        void _tao_decode (TAO_InputCDR &cdr) override;
 
         /// Deep copy
-        virtual TAOX11_NAMESPACE::CORBA::Exception *_tao_duplicate () const override;
+        TAOX11_NAMESPACE::CORBA::Exception *_tao_duplicate () const override;
 
         Bounds ();
         virtual ~Bounds () throw ();
@@ -65,7 +65,7 @@ namespace TAOX11_NAMESPACE
         Bounds& operator= (const Bounds& x);
         Bounds& operator= (Bounds&& x);
       protected:
-        virtual void _info (std::ostream&) const override;
+        void _info (std::ostream&) const override;
       private:
       }; // Bounds
 
@@ -75,14 +75,14 @@ namespace TAOX11_NAMESPACE
         : public TAOX11_NAMESPACE::CORBA::UserException
       {
         public:
-          virtual void _raise () const override;
+          void _raise () const override;
 
-          virtual void _tao_encode (TAO_OutputCDR &cdr) const override;
+          void _tao_encode (TAO_OutputCDR &cdr) const override;
 
-          virtual void _tao_decode (TAO_InputCDR &cdr) override;
+          void _tao_decode (TAO_InputCDR &cdr) override;
 
           /// Deep copy
-          virtual TAOX11_NAMESPACE::CORBA::Exception *_tao_duplicate () const override;
+          TAOX11_NAMESPACE::CORBA::Exception *_tao_duplicate () const override;
 
           BadKind ();
           virtual ~BadKind () throw ();
@@ -91,7 +91,7 @@ namespace TAOX11_NAMESPACE
           BadKind& operator= (const BadKind& x);
           BadKind& operator= (BadKind&& x);
         protected:
-          virtual void _info (std::ostream&) const override;
+          void _info (std::ostream&) const override;
         private:
       }; // BadKind
 

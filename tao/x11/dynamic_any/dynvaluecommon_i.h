@@ -44,9 +44,9 @@ namespace TAOX11_NAMESPACE
       void init_common ();
 
       // = Functions specific to DynValueCommon.
-      virtual bool is_null () override;
+      bool is_null () override;
 
-      virtual void set_to_null () override;
+      void set_to_null () override;
 
     private:
       // = Use copy() or assign() instead of these.

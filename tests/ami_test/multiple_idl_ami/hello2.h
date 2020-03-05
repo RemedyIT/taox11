@@ -21,7 +21,7 @@ class B_i
 : public virtual CORBA::servant_traits< Test::B>::base_type
 {
 public:
-  virtual int32_t op_B (int32_t) override;
+  int32_t op_B (int32_t) override;
 };
 
 /// Implement the Test::Hello interface
@@ -34,10 +34,10 @@ public:
       IDL::traits<PortableServer::POA>::ref_type poa);
 
   // = The skeleton methods
-  virtual IDL::traits<Test::A>::ref_type get_iA() override;
-  virtual IDL::traits<Test::B>::ref_type get_iB() override;
+  IDL::traits<Test::A>::ref_type get_iA() override;
+  IDL::traits<Test::B>::ref_type get_iB() override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
   /// the application.

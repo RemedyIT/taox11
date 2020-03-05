@@ -27,9 +27,9 @@ namespace TAOX11_NAMESPACE
       explicit Interceptor_proxy (
           IDL::traits<PortableInterceptor::Interceptor>::ref_type x11_interceptor);
 
-      virtual char * name () override;
+      char * name () override;
 
-      virtual void destroy () override;
+      void destroy () override;
 
     private:
       IDL::traits<PortableInterceptor::Interceptor>::ref_type x11_interceptor_;

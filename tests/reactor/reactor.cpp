@@ -22,8 +22,8 @@ public:
       timeout_triggered_ (false)
   {}
 
-  virtual int handle_timeout (const ACE_Time_Value &tv,
-                              const void *arg) override;
+  int handle_timeout (const ACE_Time_Value &tv,
+                      const void *arg) override;
 
   bool trigger_in (long seconds);
 

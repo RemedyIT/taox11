@@ -22,7 +22,7 @@ class BundleImpl : public virtual IDL::traits<Bundle>::obv_type
 class BundleFactory : public virtual IDL::traits<Bundle>::factory_type
 {
   private:
-    virtual IDL::traits<CORBA::ValueBase>::ref_type create_for_unmarshal () override
+    IDL::traits<CORBA::ValueBase>::ref_type create_for_unmarshal () override
     {
       return (CORBA::make_reference<BundleImpl> ());
     };

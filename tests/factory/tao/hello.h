@@ -12,9 +12,9 @@ public:
   Hello_Factory (CORBA::ORB_ptr orb, PortableServer::POA_ptr poa);
 
   // = The skeleton methods
-  virtual Test::Hello_ptr get_hello ();
+  Test::Hello_ptr get_hello () override;
 
-  virtual void get_hello_2 (Test::Hello_out hello_obj);
+  void get_hello_2 (Test::Hello_out hello_obj) override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
@@ -33,11 +33,11 @@ public:
   Hello (CORBA::ORB_ptr orb, Test::Hello_Factory_ptr hf);
 
   // = The skeleton methods
-  virtual char * get_string ();
+  char * get_string () override;
 
-  virtual ::Test::Hello_Factory_ptr get_factory ();
+  ::Test::Hello_Factory_ptr get_factory () override;
 
-  virtual void shutdown ();
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

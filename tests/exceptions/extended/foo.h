@@ -16,11 +16,11 @@ public:
   /// Constructor
   Bar () = default;
 
-  virtual void do_something () override;
+  void do_something () override;
 
-  virtual void a_bar (int32_t) override;
+  void a_bar (int32_t) override;
 
-  virtual int32_t a_bar () override;
+  int32_t a_bar () override;
 };
 
 class Foo
@@ -32,26 +32,26 @@ public:
     IDL::traits<Test::Bar>::ref_type bar);
 
   // = The skeleton methods
-  virtual void do_it () override;
+  void do_it () override;
 
-  virtual int32_t a_number () override;
-  virtual int32_t a_number_and_message () override;
+  int32_t a_number () override;
+  int32_t a_number_and_message () override;
 
 
-  virtual std::string a_string () override;
-  virtual void a_string(const std::string& _v) override;
+  std::string a_string () override;
+  void a_string(const std::string& _v) override;
 
-  virtual void do_reason () override;
+  void do_reason () override;
 
-  virtual void do_throw_system () override;
+  void do_throw_system () override;
 
-  virtual void do_throw_object () override;
+  void do_throw_object () override;
 
-  virtual void do_throw_struct () override;
+  void do_throw_struct () override;
 
-  virtual void do_throw_structs () override;
+  void do_throw_structs () override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

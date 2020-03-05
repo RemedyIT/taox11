@@ -38,7 +38,7 @@ public:
   ShutdownDelay () = default;
   ~ShutdownDelay () = default;
 
-  virtual int svc () override;
+  int svc () override;
 
   void set_orb (IDL::traits<CORBA::ORB>::ref_type orb);
 
@@ -72,8 +72,8 @@ public:
   explicit Tester_i (IDL::traits<CORBA::ORB>::ref_type orb);
   virtual ~Tester_i ();
 
-  virtual void test (int32_t id) override;
-  virtual int32_t test2 (int32_t id) override;
+  void test (int32_t id) override;
+  int32_t test2 (int32_t id) override;
 
   void wait_for_sd ();
 

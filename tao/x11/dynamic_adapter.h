@@ -54,7 +54,6 @@ namespace TAOX11_NAMESPACE
     ~DynamicAdapter() = default;
 
     // CORBA::Object::_create_request and CORBA::Object::_request.
-
     virtual void create_request (
         Object_proxy& obj,
         const std::string& operation,

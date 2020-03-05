@@ -58,47 +58,47 @@ public:
   /// Destructor.
   ~Handler () {};
 
-  virtual void foo (
+  void foo (
     ::CORBA::Long ami_return_val,
-    ::CORBA::Long out_l);
+    ::CORBA::Long out_l) override;
 
-  virtual void foo_excep (
-    ::Messaging::ExceptionHolder * excep_holder);
+  void foo_excep (
+    ::Messaging::ExceptionHolder * excep_holder) override;
 
-  virtual void get_yadda (
-    ::CORBA::Long ami_return_val);
+  void get_yadda (
+    ::CORBA::Long ami_return_val) override;
 
-  virtual void get_yadda_excep (
-    ::Messaging::ExceptionHolder * excep_holder);
+  void get_yadda_excep (
+    ::Messaging::ExceptionHolder * excep_holder) override;
 
-  virtual void set_yadda ();
+  void set_yadda () override;
 
-  virtual void set_yadda_excep (
-    ::Messaging::ExceptionHolder * excep_holder);
+  void set_yadda_excep (
+    ::Messaging::ExceptionHolder * excep_holder) override;
 
-  virtual void bar (
-    ::A::enumType out_e);
+  void bar (
+    ::A::enumType out_e) override;
 
-  virtual void bar_excep (
-    ::Messaging::ExceptionHolder * excep_holder);
+  void bar_excep (
+    ::Messaging::ExceptionHolder * excep_holder) override;
 
-  virtual void foo_struct (
+  void foo_struct (
     const char * ami_return_val,
-    const ::A::structType & out_t);
+    const ::A::structType & out_t) override;
 
-  virtual void foo_struct_excep (
-    ::Messaging::ExceptionHolder * excep_holder);
+  void foo_struct_excep (
+    ::Messaging::ExceptionHolder * excep_holder) override;
 
-  virtual void get_bool_attr (
-    ::CORBA::Boolean ami_return_val);
+  void get_bool_attr (
+    ::CORBA::Boolean ami_return_val) override;
 
-  virtual void get_bool_attr_excep (
-    ::Messaging::ExceptionHolder * excep_holder);
+  void get_bool_attr_excep (
+    ::Messaging::ExceptionHolder * excep_holder) override;
 
-  virtual void set_bool_attr ();
+  void set_bool_attr () override;
 
-  virtual void set_bool_attr_excep (
-    ::Messaging::ExceptionHolder * excep_holder);
+  void set_bool_attr_excep (
+    ::Messaging::ExceptionHolder * excep_holder) override;
 };
 
 void Handler::foo (CORBA::Long ami_return_val,

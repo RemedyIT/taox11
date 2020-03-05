@@ -23,8 +23,8 @@ public:
                        CORBA::PolicyList& first_policies,
                        CORBA::PolicyList& second_policies);
 
-  virtual bool unknown_adapter (IDL::traits<PortableServer::POA>::ref_type parent,
-                                const std::string& name) override;
+  bool unknown_adapter (IDL::traits<PortableServer::POA>::ref_type parent,
+                        const std::string& name) override;
 
 private:
   IDL::traits<PortableServer::POAManager>::ref_type poa_manager_;

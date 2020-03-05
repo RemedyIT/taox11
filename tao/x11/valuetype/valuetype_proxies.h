@@ -56,11 +56,11 @@ namespace TAOX11_NAMESPACE
       ~Valuetype_proxy () = default;
 
       // Noop; not used.
-      virtual TAO_CORBA::ValueBase* _copy_value ();
+      TAO_CORBA::ValueBase* _copy_value () override;
 
       /// Used in the implementation of CORBA::Any
       static void _tao_any_destructor (void *);
-      virtual TAO_CORBA::TypeCode_ptr _tao_type () const;
+      TAO_CORBA::TypeCode_ptr _tao_type () const override;
 
       virtual void truncation_hook ();
 
@@ -68,19 +68,19 @@ namespace TAOX11_NAMESPACE
       { return dynamic_cast<Valuetype_proxy*> (v); }
 
       /// Return the repository id of this valuetype.
-      virtual const char * _tao_obv_repository_id () const;
+      const char * _tao_obv_repository_id () const override;
 
       /// Give the list of the RepositoryIds in the valuetype "truncatable"
       /// inheritance hierarchy. List the id of this valuetype as first
       /// RepositoryID and go up the "truncatable" derivation hierarchy.
       /// Note the truncatable repo ids only list the truncatable base types
       /// to which this type is safe to truncate, not all its parents.
-      virtual void _tao_obv_truncatable_repo_ids (Repository_Id_List &) const;
+      void _tao_obv_truncatable_repo_ids (Repository_Id_List &) const override;
 
-      virtual TAO_CORBA::Boolean _tao_marshal_v (TAO_OutputCDR &) const;
-      virtual TAO_CORBA::Boolean _tao_unmarshal_v (TAO_InputCDR &);
+      TAO_CORBA::Boolean _tao_marshal_v (TAO_OutputCDR &) const override;
+      TAO_CORBA::Boolean _tao_unmarshal_v (TAO_InputCDR &) override;
 
-      virtual TAO_CORBA::Boolean _tao_match_formal_type (ptrdiff_t ) const;
+      TAO_CORBA::Boolean _tao_match_formal_type (ptrdiff_t ) const override;
 
       TAOX11_CORBA::ValueBase* get_value () const
       { return this->value_; }
@@ -107,7 +107,7 @@ namespace TAOX11_NAMESPACE
       void lock_value ()
       { this->locked_value_ = this->value_->_lock (); }
 
-      // To unlock the X11 valuetype reference after successfull extraction.
+      // To unlock the X11 valuetype reference after successful extraction.
       TAOX11_CORBA::ValueBase::_ref_type release_value ()
       {
         TAOX11_CORBA::ValueBase::_ref_type retref;
@@ -140,8 +140,8 @@ namespace TAOX11_NAMESPACE
       static ValueFactory_proxy* _downcast ( TAO_CORBA::ValueFactoryBase *vfp)
       { return dynamic_cast<ValueFactory_proxy*> (vfp); }
 
-      virtual TAO_CORBA::ValueBase *
-      create_for_unmarshal ();
+      TAO_CORBA::ValueBase *
+      create_for_unmarshal () override;
 
       // TAO-specific extensions
       virtual const char* tao_repository_id ();

@@ -54,13 +54,13 @@ namespace TAOX11_NAMESPACE
                          CORBA::typecode_reference,
                          value_type&);
 
-    virtual bool marshal_value (TAO_OutputCDR &);
+    bool marshal_value (TAO_OutputCDR &) override;
     bool demarshal_value (TAO_InputCDR &cdr)
     {
       return MARSHAL_POLICY<TRAITS>::demarshal_value (cdr, this->value_);
     }
 
-    virtual void _tao_decode (TAO_InputCDR &);
+    void _tao_decode (TAO_InputCDR &) override;
 
   protected:
     void value (const value_type &);

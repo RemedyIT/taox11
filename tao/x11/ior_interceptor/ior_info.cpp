@@ -163,7 +163,7 @@ namespace TAOX11_NAMESPACE
             IDL::traits<PortableInterceptor::ObjectReferenceFactory>::ref_type x11_orf)
           : x11_orf_ (std::move (x11_orf))
         {}
-        virtual TAO_CORBA::ValueBase *_copy_value () override
+        TAO_CORBA::ValueBase *_copy_value () override
         {
           TAO_CORBA::ValueBase *ret_val {};
           ACE_NEW_THROW_EX (
@@ -178,17 +178,17 @@ namespace TAOX11_NAMESPACE
         /**
          * NOT USED
          */
-        virtual char * server_id () override { return nullptr; }
+        char * server_id () override { return nullptr; }
 
-        virtual char * orb_id () override { return nullptr; }
+        char * orb_id () override { return nullptr; }
 
-        virtual TAO_PI::AdapterName * adapter_name () override { return nullptr; }
+        TAO_PI::AdapterName * adapter_name () override { return nullptr; }
 
         /**
          * Methods required by the
          * PortableInterceptor::ObjectReferenceFactory ValueType.
          */
-        virtual TAO_CORBA::Object_ptr make_object (
+        TAO_CORBA::Object_ptr make_object (
           const char * repository_id,
           const TAO_PI::ObjectId & id) override
         {

@@ -21,14 +21,13 @@ public:
   Hello(IDL::traits<CORBA::ORB>::ref_type orb);
 
   // = The skeleton methods.
-  virtual Test::FileStore create(const std::wstring& owner) override;
-  virtual bool
-      validate(const std::wstring& owner, const Test::FileStore& store) override;
-  virtual uint32_t update_content(Test::Block& bl,
+  Test::FileStore create(const std::wstring& owner) override;
+  bool validate(const std::wstring& owner, const Test::FileStore& store) override;
+  uint32_t update_content(Test::Block& bl,
       double change_request) override;
-  virtual uint32_t convert_content(Test::Measurement& ct) override;
+  uint32_t convert_content(Test::Measurement& ct) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
   /// the application.

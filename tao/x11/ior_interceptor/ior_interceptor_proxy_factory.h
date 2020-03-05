@@ -27,12 +27,10 @@ namespace TAOX11_NAMESPACE
     public:
       ~IORInterceptorProxyFactory() = default;
 
-      virtual
       TAO_PI::IORInterceptor_ptr
       create_ior_interceptor_proxy (
           IDL::traits<PortableInterceptor::IORInterceptor>::ref_type) override;
 
-      virtual
       void
       release_ior_interceptor_proxy (
           TAO_PI::IORInterceptor_ptr) override;

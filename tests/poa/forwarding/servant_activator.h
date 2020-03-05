@@ -21,11 +21,11 @@ public:
 
   ~ServantActivator();
 
-  virtual CORBA::servant_reference<PortableServer::Servant> incarnate (
+  CORBA::servant_reference<PortableServer::Servant> incarnate (
     const PortableServer::ObjectId& oid,
     IDL::traits<PortableServer::POA>::ref_type adapter) override;
 
-  virtual void etherealize (
+  void etherealize (
     const PortableServer::ObjectId& oid,
     IDL::traits<PortableServer::POA>::ref_type adapter,
     CORBA::servant_reference<PortableServer::Servant> serv,

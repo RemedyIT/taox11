@@ -1,8 +1,7 @@
 
 // generated from <%= ridl_template_path %>
 % _args = out_arguments.dup
-virtual
-void
+virtual void
 <%= cxxname %> (<% if is_void? && _args.empty? %>)= 0;<% end %>
 %   unless is_void?
     <%= scoped_cxx_in_type %> ami_return_val<%= _args.empty? ? ') = 0;' : ',' %>
@@ -12,7 +11,5 @@ void
     <%= _arg.scoped_cxx_in_type %> <%= _arg.cxxname %><%= _args.empty? ? ') = 0;' : ',' %>
 %   end
 
-virtual
-void
-<%= cxxname %>_excep (
-    IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder) = 0;
+virtual void
+<%= cxxname %>_excep (IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder) = 0;

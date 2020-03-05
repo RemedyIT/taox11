@@ -71,16 +71,16 @@ namespace TAOX11_NAMESPACE {
      : public TAOX11_CORBA::UserException
     {
     public:
-      virtual const char* what() const noexcept override;
+      const char* what() const noexcept override;
 
-      virtual void _raise () const override;
+      void _raise () const override;
 
-      virtual void _tao_encode (TAO_OutputCDR &cdr) const override;
+      void _tao_encode (TAO_OutputCDR &cdr) const override;
 
-      virtual void _tao_decode (TAO_InputCDR &cdr) override;
+      void _tao_decode (TAO_InputCDR &cdr) override;
 
       /// Deep copy
-      virtual TAOX11_CORBA::Exception *_tao_duplicate () const override;
+      TAOX11_CORBA::Exception *_tao_duplicate () const override;
 
       // generated from c++/cli_hdr/except_post.erb
       PolicyError ();
@@ -96,7 +96,7 @@ namespace TAOX11_NAMESPACE {
       const TAOX11_CORBA::PolicyErrorCode& reason () const;
       TAOX11_CORBA::PolicyErrorCode& reason ();
     protected:
-      virtual void _info (std::ostream& strm) const override;
+      void _info (std::ostream& strm) const override;
     private:
       TAOX11_CORBA::PolicyErrorCode reason_;
     }; // PolicyError
@@ -109,16 +109,16 @@ namespace TAOX11_NAMESPACE {
      : public TAOX11_CORBA::UserException
     {
     public:
-      virtual const char* what() const noexcept override;
+      const char* what() const noexcept override;
 
-      virtual void _raise () const override;
+      void _raise () const override;
 
-      virtual void _tao_encode (TAO_OutputCDR &cdr) const override;
+      void _tao_encode (TAO_OutputCDR &cdr) const override;
 
-      virtual void _tao_decode (TAO_InputCDR &cdr) override;
+      void _tao_decode (TAO_InputCDR &cdr) override;
 
       /// Deep copy
-      virtual TAOX11_CORBA::Exception *_tao_duplicate () const override;
+      TAOX11_CORBA::Exception *_tao_duplicate () const override;
 
       // generated from c++/cli_hdr/except_post.erb
       InvalidPolicies ();
@@ -135,7 +135,7 @@ namespace TAOX11_NAMESPACE {
       TAOX11_CORBA::UShortSeq& indices ();
 
     protected:
-      virtual void _info (std::ostream& strm) const override;
+      void _info (std::ostream& strm) const override;
     private:
       TAOX11_CORBA::UShortSeq indices_;
     }; // InvalidPolicies
@@ -221,13 +221,13 @@ namespace TAOX11_NAMESPACE
       virtual const std::string& _interface_repository_id () const;
 
       // generated from c++/cli_hdr/attribute.erb
-      TAOX11_CORBA::PolicyType policy_type();
+      virtual TAOX11_CORBA::PolicyType policy_type();
 
       // generated from c++/cli_hdr/operation.erb
-      object_traits<Policy>::ref_type copy ();
+      virtual object_traits<Policy>::ref_type copy ();
 
       // generated from c++/cli_hdr/operation.erb
-      void destroy ();
+      virtual void destroy ();
 
       static TAOX11_CORBA::object_traits<Policy>::ref_type _narrow (
           TAOX11_CORBA::object_traits< TAOX11_CORBA::Object>::ref_type);

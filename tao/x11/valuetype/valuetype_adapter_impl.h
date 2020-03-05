@@ -26,22 +26,22 @@ namespace TAOX11_NAMESPACE
   public:
     ~ValueTypeAdapter_impl() = default;
 
-    virtual bool
+    bool
     stream_to_value (
         TAO_InputCDR &,
         CORBA::valuetype_reference<CORBA::ValueBase>&) override;
 
-    virtual bool
+    bool
     stream_to_abstract_base (
         TAO_InputCDR &,
         CORBA::abstractbase_reference<CORBA::AbstractBase> &) override;
 
-    virtual bool
+    bool
     value_to_stream (
         TAO_OutputCDR &,
         CORBA::valuetype_reference<CORBA::ValueBase>) override;
 
-    virtual bool
+    bool
     abstract_base_to_stream (
         TAO_OutputCDR &,
         CORBA::abstractbase_reference<CORBA::AbstractBase>) override;

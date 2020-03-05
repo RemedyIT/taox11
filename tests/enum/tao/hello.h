@@ -15,13 +15,13 @@ public:
   /// = The skeleton methods
 
   /// Get an enum.
-  virtual Test::enumType get_enum();
+  Test::enumType get_enum() override;
   /// Transfer an enum in both directions.
-  virtual Test::enumType inout_enum(Test::enumType pin, Test::enumType& pout, Test::enumType& pinout);
+  Test::enumType inout_enum(Test::enumType pin, Test::enumType& pout, Test::enumType& pinout) override;
 
   /// A method to shutdown the ORB
   /// This method is used to simplify the test shutdown process.
-  virtual void shutdown ();
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

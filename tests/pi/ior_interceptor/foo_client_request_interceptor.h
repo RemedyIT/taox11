@@ -26,7 +26,6 @@ class FOO_ClientRequestInterceptor
   : public IDL::traits<PortableInterceptor::ClientRequestInterceptor>::base_type
 {
 public:
-
   /// Constructor
   FOO_ClientRequestInterceptor (IDL::traits<IOP::Codec>::ref_type codec);
 
@@ -40,28 +39,27 @@ public:
    */
   //@{
   /// Return the name of this ClientRequestInterceptor.
-  virtual std::string name () override;
+  std::string name () override;
 
-  virtual void destroy () override;
+  void destroy () override;
 
-  virtual void send_request (
+  void send_request (
       IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  virtual void send_poll (
+  void send_poll (
       IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  virtual void receive_reply (
+  void receive_reply (
       IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  virtual void receive_exception (
+  void receive_exception (
       IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  virtual void receive_other (
+  void receive_other (
       IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
   //@}
 
 private:
-
   /// The CDR encapsulation coder/decoder used to retrieve data
   /// from the CDR encapsulation in the tagged component.
   IDL::traits<IOP::Codec>::ref_type codec_;

@@ -27,17 +27,13 @@ public:
   /// ctor
   Test_impl (IDL::traits< CORBA::ORB >::ref_type orb);
 
-  virtual CORBA::Any
-  get_something (bool need_vb) override;
+  CORBA::Any get_something (bool need_vb) override;
 
-  virtual IDL::traits< OBV_AnyTest::VB >::ref_type
-  get_vb () override;
+  IDL::traits< OBV_AnyTest::VB >::ref_type get_vb () override;
 
-  virtual CORBA::Any
-  get_base () override;
+  CORBA::Any get_base () override;
 
-  virtual void
-  shutdown () override;
+  void shutdown () override;
 
 private:
   IDL::traits< CORBA::ORB >::ref_type orb_;

@@ -17,14 +17,11 @@ public:
   /// Constructor
   TestBounded ();
 
-  virtual void
-  test_bounded_in (const SEQ &pin) override;
+  void test_bounded_in (const SEQ &pin) override;
 
-  virtual void
-  test_bounded_out (SEQ &pout) override;
+  void test_bounded_out (SEQ &pout) override;
 
-  virtual SEQ
-  test_bounded_ret () override;
+  SEQ test_bounded_ret () override;
 };
 
 class Foo final
@@ -36,87 +33,86 @@ public:
     IDL::traits<PortableServer::POA>::ref_type poa);
 
   // = The skeleton methods
-  virtual Test::LongSeq
+  Test::LongSeq
   test_long_seq (const Test::LongSeq & sin, Test::LongSeq & sinout,
     Test::LongSeq & sout) override;
 
-  virtual Test::BoolSeq
+  Test::BoolSeq
   test_bool_seq (const Test::BoolSeq & sin, Test::BoolSeq & sinout,
     Test::BoolSeq & sout) override;
 
-  virtual Test::StringSeq
+  Test::StringSeq
   test_string_seq (const Test::StringSeq & sin, Test::StringSeq & sinout,
     Test::StringSeq & sout) override;
 
-  virtual Test::SimpleSeq
+  Test::SimpleSeq
   test_struct_seq (const Test::SimpleSeq & sin, Test::SimpleSeq & sinout,
     Test::SimpleSeq & sout) override;
 
-  virtual Test::LongBounded
+  Test::LongBounded
   long_bounded  (const Test::LongBounded & sin, Test::LongBounded & sinout,
     Test::LongBounded & sout) override;
 
-  virtual Test::BoolBounded
+  Test::BoolBounded
   bool_bounded  (const Test::BoolBounded & sin, Test::BoolBounded & sinout,
     Test::BoolBounded & sout) override;
 
-  virtual Test::StringBounded
+  Test::StringBounded
   string_bounded  (const Test::StringBounded & sin, Test::StringBounded & sinout,
     Test::StringBounded & sout) override;
 
-  virtual Test::SimpleBounded
+  Test::SimpleBounded
   struct_bounded  (const Test::SimpleBounded & sin, Test::SimpleBounded & sinout,
     Test::SimpleBounded & sout) override;
 
-  virtual IDL::traits< ::Test::TestOctetBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestOctetBounded::Bounded>::ref_type
   get_octet_bounded () override;
 
-  virtual IDL::traits< ::Test::TestShortBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestShortBounded::Bounded>::ref_type
   get_short_bounded () override;
 
-  virtual IDL::traits< ::Test::TestLongBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestLongBounded::Bounded>::ref_type
   get_long_bounded () override;
 
-  virtual IDL::traits< ::Test::TestLongLongBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestLongLongBounded::Bounded>::ref_type
   get_longlong_bounded () override;
 
-  virtual IDL::traits< ::Test::TestDoubleBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestDoubleBounded::Bounded>::ref_type
   get_double_bounded () override;
 
-  virtual IDL::traits< ::Test::TestLongDoubleBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestLongDoubleBounded::Bounded>::ref_type
   get_long_double_bounded () override;
 
-  virtual IDL::traits< ::Test::TestFloatBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestFloatBounded::Bounded>::ref_type
   get_float_bounded () override;
 
-  virtual IDL::traits< ::Test::TestBoolBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestBoolBounded::Bounded>::ref_type
   get_bool_bounded () override;
 
-  virtual IDL::traits< ::Test::TestUShortBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestUShortBounded::Bounded>::ref_type
   get_ushort_bounded () override;
 
-  virtual IDL::traits< ::Test::TestULongBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestULongBounded::Bounded>::ref_type
   get_ulong_bounded () override;
 
-  virtual IDL::traits< ::Test::TestULongLongBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestULongLongBounded::Bounded>::ref_type
   get_ulonglong_bounded () override;
 
-  virtual IDL::traits< ::Test::TestStringBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestStringBounded::Bounded>::ref_type
   get_string_bounded () override;
 
-  virtual IDL::traits< ::Test::TestCharBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestCharBounded::Bounded>::ref_type
   get_char_bounded () override;
 
-  virtual IDL::traits< ::Test::TestWCharBounded::Bounded>::ref_type
+  IDL::traits< ::Test::TestWCharBounded::Bounded>::ref_type
   get_wchar_bounded () override;
 
-  virtual ::Test::CorbaSequences
+  ::Test::CorbaSequences
   test_corba_sequences (const ::Test::CorbaSequences& cs_in,
     ::Test::CorbaSequences& cs_inout,
     ::Test::CorbaSequences& cs_out) override;
 
-  virtual void
-  shutdown () override;
+  void shutdown () override;
 
 private:
   /// Use an ORB reference shutdown the server.

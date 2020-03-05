@@ -39,158 +39,158 @@ namespace TAOX11_NAMESPACE
       /// Destructor.
       virtual ~TAOX11_DynCommon () = default;
 
-      virtual IDL::traits< CORBA::TypeCode>::ref_type
+      IDL::traits< CORBA::TypeCode>::ref_type
       type () override;
 
-      virtual void assign (IDL::traits< DynAny>::ref_type dyn_any) override;
+      void assign (IDL::traits< DynAny>::ref_type dyn_any) override;
 
-      virtual void insert_boolean (bool value) override;
+      void insert_boolean (bool value) override;
 
-      virtual void insert_octet (uint8_t value) override;
+      void insert_octet (uint8_t value) override;
 
-      virtual void insert_char (char value) override;
+      void insert_char (char value) override;
 
-      virtual void insert_short (int16_t value) override;
+      void insert_short (int16_t value) override;
 
-      virtual void insert_ushort (uint16_t value) override;
+      void insert_ushort (uint16_t value) override;
 
-      virtual void insert_long (int32_t value) override;
+      void insert_long (int32_t value) override;
 
-      virtual void insert_ulong (uint32_t value) override;
+      void insert_ulong (uint32_t value) override;
 
-      virtual void insert_float (float value) override;
+      void insert_float (float value) override;
 
-      virtual void insert_double (double value) override;
+      void insert_double (double value) override;
 
-      virtual void insert_string (const std::string&) override;
+      void insert_string (const std::string&) override;
 
-      virtual void insert_reference (IDL::traits< CORBA::Object>::ref_type) override;
+      void insert_reference (IDL::traits< CORBA::Object>::ref_type) override;
 
-      virtual void insert_typecode (
+      void insert_typecode (
           IDL::traits< CORBA::TypeCode>::ref_type value) override;
 
-      virtual void insert_longlong (int64_t value) override;
+      void insert_longlong (int64_t value) override;
 
-      virtual void insert_ulonglong (uint64_t value) override;
+      void insert_ulonglong (uint64_t value) override;
 
-      virtual void insert_longdouble (long double value) override;
+      void insert_longdouble (long double value) override;
 
-      virtual void insert_wchar (wchar_t value) override;
+      void insert_wchar (wchar_t value) override;
 
-      virtual void insert_wstring (const std::wstring& value) override;
+      void insert_wstring (const std::wstring& value) override;
 
-      virtual void insert_any (const CORBA::Any& value) override;
+      void insert_any (const CORBA::Any& value) override;
 
-      virtual void insert_dyn_any (
+      void insert_dyn_any (
           IDL::traits< DynAny>::ref_type value) override;
 
-      virtual void insert_val (IDL::traits< CORBA::ValueBase>::ref_type value) override;
+      void insert_val (IDL::traits< CORBA::ValueBase>::ref_type value) override;
 
-      virtual bool get_boolean () override;
+      bool get_boolean () override;
 
-      virtual uint8_t get_octet () override;
+      uint8_t get_octet () override;
 
-      virtual char get_char () override;
+      char get_char () override;
 
-      virtual int16_t get_short () override;
+      int16_t get_short () override;
 
-      virtual uint16_t get_ushort () override;
+      uint16_t get_ushort () override;
 
-      virtual int32_t get_long () override;
+      int32_t get_long () override;
 
-      virtual uint32_t get_ulong () override;
+      uint32_t get_ulong () override;
 
-      virtual float get_float () override;
+      float get_float () override;
 
-      virtual double get_double () override;
+      double get_double () override;
 
-      virtual std::string get_string () override;
+      std::string get_string () override;
 
-      virtual IDL::traits< CORBA::Object>::ref_type get_reference () override;
+      IDL::traits< CORBA::Object>::ref_type get_reference () override;
 
-      virtual IDL::traits< CORBA::TypeCode>::ref_type get_typecode () override;
+      IDL::traits< CORBA::TypeCode>::ref_type get_typecode () override;
 
-      virtual int64_t get_longlong () override;
+      int64_t get_longlong () override;
 
-      virtual uint64_t get_ulonglong () override;
+      uint64_t get_ulonglong () override;
 
-      virtual long double get_longdouble () override;
+      long double get_longdouble () override;
 
-      virtual wchar_t get_wchar () override;
+      wchar_t get_wchar () override;
 
-      virtual std::wstring get_wstring () override;
+      std::wstring get_wstring () override;
 
-      virtual CORBA::Any get_any () override;
+      CORBA::Any get_any () override;
 
-      virtual IDL::traits< DynAny>::ref_type get_dyn_any () override;
+      IDL::traits< DynAny>::ref_type get_dyn_any () override;
 
-      virtual IDL::traits< CORBA::ValueBase>::ref_type get_val () override;
+      IDL::traits< CORBA::ValueBase>::ref_type get_val () override;
 
-      virtual bool seek (int32_t index) override;
+      bool seek (int32_t index) override;
 
-      virtual void rewind () override;
+      void rewind () override;
 
-      virtual bool next () override;
+      bool next () override;
 
-      virtual IDL::traits< DynAny>::ref_type copy () override;
+      IDL::traits< DynAny>::ref_type copy () override;
 
-      virtual uint32_t component_count () override;
+      uint32_t component_count () override;
 
-      virtual void insert_abstract (IDL::traits< ::TAOX11_CORBA::AbstractBase>::ref_type value) override;
+      void insert_abstract (IDL::traits< ::TAOX11_CORBA::AbstractBase>::ref_type value) override;
 
-      virtual IDL::traits< ::TAOX11_CORBA::AbstractBase>::ref_type get_abstract () override;
+      IDL::traits< ::TAOX11_CORBA::AbstractBase>::ref_type get_abstract () override;
 
-      virtual void insert_boolean_seq (const CORBA::BooleanSeq& value) override;
+      void insert_boolean_seq (const CORBA::BooleanSeq& value) override;
 
-      virtual void insert_octet_seq (const CORBA::OctetSeq& value) override;
+      void insert_octet_seq (const CORBA::OctetSeq& value) override;
 
-      virtual void insert_char_seq (const CORBA::CharSeq& value) override;
+      void insert_char_seq (const CORBA::CharSeq& value) override;
 
-      virtual void insert_short_seq (const CORBA::ShortSeq& value) override;
+      void insert_short_seq (const CORBA::ShortSeq& value) override;
 
-      virtual void insert_ushort_seq (const CORBA::UShortSeq& value) override;
+      void insert_ushort_seq (const CORBA::UShortSeq& value) override;
 
-      virtual void insert_long_seq (const CORBA::LongSeq& value) override;
+      void insert_long_seq (const CORBA::LongSeq& value) override;
 
-      virtual void insert_ulong_seq (const CORBA::ULongSeq&value) override;
+      void insert_ulong_seq (const CORBA::ULongSeq&value) override;
 
-      virtual void insert_float_seq (const CORBA::FloatSeq& value) override;
+      void insert_float_seq (const CORBA::FloatSeq& value) override;
 
-      virtual void insert_double_seq (const CORBA::DoubleSeq&value) override;
+      void insert_double_seq (const CORBA::DoubleSeq&value) override;
 
-      virtual void insert_longlong_seq (const CORBA::LongLongSeq& value) override;
+      void insert_longlong_seq (const CORBA::LongLongSeq& value) override;
 
-      virtual void insert_ulonglong_seq (const CORBA::ULongLongSeq& value) override;
+      void insert_ulonglong_seq (const CORBA::ULongLongSeq& value) override;
 
-      virtual void insert_longdouble_seq (const CORBA::LongDoubleSeq& value) override;
+      void insert_longdouble_seq (const CORBA::LongDoubleSeq& value) override;
 
-      virtual void insert_wchar_seq (const CORBA::WCharSeq& value) override;
+      void insert_wchar_seq (const CORBA::WCharSeq& value) override;
 
-      virtual CORBA::BooleanSeq get_boolean_seq () override;
+      CORBA::BooleanSeq get_boolean_seq () override;
 
-      virtual CORBA::OctetSeq get_octet_seq () override;
+      CORBA::OctetSeq get_octet_seq () override;
 
-      virtual CORBA::CharSeq get_char_seq () override;
+      CORBA::CharSeq get_char_seq () override;
 
-      virtual CORBA::ShortSeq get_short_seq () override;
+      CORBA::ShortSeq get_short_seq () override;
 
-      virtual CORBA::UShortSeq get_ushort_seq () override;
+      CORBA::UShortSeq get_ushort_seq () override;
 
-      virtual CORBA::LongSeq get_long_seq () override;
+      CORBA::LongSeq get_long_seq () override;
 
-      virtual CORBA::ULongSeq get_ulong_seq () override;
+      CORBA::ULongSeq get_ulong_seq () override;
 
-      virtual CORBA::FloatSeq get_float_seq () override;
+      CORBA::FloatSeq get_float_seq () override;
 
-      virtual CORBA::DoubleSeq get_double_seq () override;
+      CORBA::DoubleSeq get_double_seq () override;
 
-      virtual CORBA::LongLongSeq get_longlong_seq () override;
+      CORBA::LongLongSeq get_longlong_seq () override;
 
-      virtual CORBA::ULongLongSeq get_ulonglong_seq () override;
+      CORBA::ULongLongSeq get_ulonglong_seq () override;
 
-      virtual CORBA::LongDoubleSeq get_longdouble_seq () override;
+      CORBA::LongDoubleSeq get_longdouble_seq () override;
 
-      virtual CORBA::WCharSeq get_wchar_seq () override;
+      CORBA::WCharSeq get_wchar_seq () override;
 
 
       /// This sets one of two flags in this base class. CORBA 3.2

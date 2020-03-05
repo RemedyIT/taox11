@@ -23,7 +23,7 @@ public:
 
   virtual ~MyAdapterActivator() = default;
 
-  virtual bool unknown_adapter(
+  bool unknown_adapter(
       IDL::traits<PortableServer::POA>::ref_type parent,
       const std::string& name) override
   {
