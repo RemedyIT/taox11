@@ -30,14 +30,12 @@ public:
   inout_bool_excep (
     IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
 
-
   void
   _cxx_uint32_t (int16_t ami_return_val) override;
 
   void
-  _cxx_uint32_t_excep (
+  uint32_t_excep (
     IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
-
 
   void
   inout_int16_t (::Test::_cxx_int16_t ami_return_val,
@@ -77,7 +75,6 @@ public:
   void
   set_attr_bool_excep (
     IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
-
 
   void
   get_attr_int16_t (
@@ -167,6 +164,32 @@ public:
   void
   shutdown_excep (
     IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+
+  void
+  _cxx_class () override;
+
+  void
+  class_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override;
+
+  void
+  _cxx_void (
+      const std::string& _cxx_virtual,
+      const std::string& interface) override;
+
+  void
+  void_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override;
+
+  void
+  get_private (::Test::_cxx_bool ami_return_val) override;
+
+  void
+  get_private_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override;
+
+  void
+  set_private () override;
+
+  void
+  set_private_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override;
 
 private:
   Handler (const Handler&) = delete;
