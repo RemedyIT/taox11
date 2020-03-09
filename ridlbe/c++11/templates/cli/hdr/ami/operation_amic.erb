@@ -1,7 +1,7 @@
 // generated from <%= ridl_template_path %>
 %   _args = in_arguments.dup
 void
-<%= sendc_prefix %><%= cxxname %> (
+<%= sendc_prefix %><%= name %> (
     <%= interface.handler_scoped_cxx_in_type %> ami_handler<%= _args.empty? ? ');' : ',' %>
 %   while !_args.empty?
 %     _arg = _args.shift

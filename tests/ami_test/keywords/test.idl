@@ -422,6 +422,10 @@ module Test
     long uintptr_t;
   };
 
+  exception protected
+  {
+  };
+
   /// An interface for testing IDL primitive types
   interface Hello
   {
@@ -444,6 +448,9 @@ module Test
       */
     int16_t inout_int16_t (in int16_t v_in, out int16_t v_out, inout int16_t v_inout);
 
+    void class ();
+
+    void _void (inout string virtual, inout string _interface);
 
     struct shortStruct
     {
@@ -457,6 +464,7 @@ module Test
     attribute cpplib_keyword_struct attr_cpplib_keyword_struct;
     attribute int_keyword_struct attr_int_keyword_struct;
     attribute cpp_keyword_struct attr_cpp_keyword_struct;
+    attribute bool _private setraises (protected);
 
     /// Test a regular oneway method, should appear in the
     /// ami stub

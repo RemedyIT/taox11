@@ -59,7 +59,7 @@ Handler::_cxx_uint32_t (int16_t ami_return_val)
 }
 
 void
-Handler::_cxx_uint32_t_excep (
+Handler::uint32_t_excep (
   IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
@@ -405,6 +405,64 @@ Handler::shutdown_excep (
 {
 }
 
+void
+Handler::_cxx_class ()
+{
+  ++result_;
+  TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of '_cxx_class'" << std::endl;
+}
+
+void
+Handler::class_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+{
+  ++result_;
+  TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'class_excep'" << std::endl;
+}
+
+void
+Handler::_cxx_void (
+    const std::string&,
+    const std::string&)
+{
+  ++result_;
+  TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of '_cxx_void'" << std::endl;
+}
+
+void
+Handler::void_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+{
+  ++result_;
+  TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'void_excep'" << std::endl;
+}
+
+void
+Handler::get_private (::Test::_cxx_bool)
+{
+  ++result_;
+  TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'get_private'" << std::endl;
+}
+
+void
+Handler::get_private_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+{
+  ++result_;
+  TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'get_private_excep'" << std::endl;
+}
+
+void
+Handler::set_private ()
+{
+  ++result_;
+  TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'set_private'" << std::endl;
+}
+
+void
+Handler::set_private_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+{
+  ++result_;
+  TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'set_private_excep'" << std::endl;
+}
+
 int main(int argc, char* argv[])
 {
   try
@@ -504,7 +562,7 @@ int main(int argc, char* argv[])
       hello->sendc_inout_bool(test_handler, Test::_cxx_bool::_cxx_char,  bool_inout);
       Test::_cxx_int16_t int16_t_inout;
       hello->sendc_inout_int16_t(test_handler, Test::_cxx_int16_t::double_, int16_t_inout);
-      hello->sendc__cxx_uint32_t (test_handler, 10);
+      hello->sendc_uint32_t (test_handler, 10);
 
       TAOX11_TEST_DEBUG << "Setting the attributes asynchronously." << std::endl;
       hello->sendc_set_attr_bool (test_handler, Test::_cxx_bool::_cxx_char);

@@ -50,7 +50,7 @@ module IDL
       end
 
       def amic_scoped_cxx_in_type
-         @amic_scoped_cxx_in_type ||= ('TAOX11_CORBA::amic_traits< '+scoped_cxxtype+'>::in_type')
+         @amic_scoped_cxx_in_type ||= ('CORBA::amic_traits< '+scoped_cxxtype+'>::in_type')
       end
 
       def handler_scoped_cxxname
@@ -63,15 +63,15 @@ module IDL
       end
 
       def handler_scoped_cxx_in_type
-         @handler_scoped_cxx_in_type ||= ('TAOX11_IDL::traits<'+handler_scoped_cxxname+'>::ref_type')
+         @handler_scoped_cxx_in_type ||= ('IDL::traits<'+handler_scoped_cxxname+'>::ref_type')
       end
 
       def handler_scoped_cxx_out_type
-         @handler_scoped_cxx_out_type ||= ('TAOX11_IDL::traits<'+handler_scoped_cxxname+'>::ref_type&')
+         @handler_scoped_cxx_out_type ||= ('IDL::traits<'+handler_scoped_cxxname+'>::ref_type&')
       end
 
       def handler_scoped_cxx_move_type
-        @handler_scoped_cxx_move_type ||= ('TAOX11_IDL::traits<'+handler_scoped_cxxname+'>::ref_type&&')
+        @handler_scoped_cxx_move_type ||= ('IDL::traits<'+handler_scoped_cxxname+'>::ref_type&&')
       end
 
       def handler_skel_cxxname

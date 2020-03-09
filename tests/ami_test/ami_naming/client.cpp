@@ -230,37 +230,37 @@ public:
      result = 1;
    }
 
-   void get__cxx_do (int32_t res) override
+   void get_do (int32_t res) override
    {
      callback_attrib++;
-     TAOX11_TEST_INFO << "Callback method <get__cxx_do> called: res " << res
+     TAOX11_TEST_INFO << "Callback method <get_do> called: res " << res
                  << std::endl;
      if (res != 110)
        {
          TAOX11_TEST_ERROR
-            << "ERROR: Callback method <get__cxx_do> ami_return_val not 110: "
+            << "ERROR: Callback method <get_do> ami_return_val not 110: "
             << res << std::endl;
          result = 1;
        }
    }
 
-   void get__cxx_do_excep (
+   void get_do_excep (
        IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
    {
-     TAOX11_TEST_INFO << "Error, Unexpected callback method <get__cxx_do_excep> called."
+     TAOX11_TEST_INFO << "Error, Unexpected callback method <get_do_excep> called."
                  << std::endl;
      result = 1;
    }
 
-   void set__cxx_do () override
+   void set_do () override
    {
      callback_attrib++;
-     TAOX11_TEST_INFO << "Callback method <set__cxx_do> called:"<< std::endl;
+     TAOX11_TEST_INFO << "Callback method <set_do> called:"<< std::endl;
    }
 
-   void set__cxx_do_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+   void set_do_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
    {
-     TAOX11_TEST_INFO << "Error, Unexpected callback method <set__cxx_do_excep> called."
+     TAOX11_TEST_INFO << "Error, Unexpected callback method <set_do_excep> called."
                  << std::endl;
      result = 1;
    }
@@ -309,7 +309,7 @@ public:
       }
   }
 
-  void _cxx_do_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void do_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Unexpected callback method <_cxx_do_excep> called."
                 << std::endl;
@@ -599,7 +599,7 @@ int main(int argc, char* argv[])
       a_async_two->sendc_foo_two (two_handler,9);
 
       TAOX11_TEST_INFO << "Client: Sending asynch message for do." << std::endl;
-      a_async_two->sendc__cxx_do (two_handler,10);
+      a_async_two->sendc_do (two_handler,10);
 
       TAOX11_TEST_INFO << "Client: Sending asynch message for yadda, sendc_get_yadda,sendc_ami_get_yadda." << std::endl;
       //yadda
@@ -615,8 +615,8 @@ int main(int argc, char* argv[])
 
       TAOX11_TEST_INFO << "Client: Sending asynch message for attribute do." << std::endl;
       //do
-      a_async->sendc_set__cxx_do (test_handler, 100);
-      a_async->sendc_get__cxx_do (test_handler);
+      a_async->sendc_set_do (test_handler, 100);
+      a_async->sendc_get_do (test_handler);
 
       TAOX11_TEST_INFO << "Client: Sending the last  asynch message foo." << std::endl;
       a_async->sendc_ami_ami_foo (test_handler, 10);

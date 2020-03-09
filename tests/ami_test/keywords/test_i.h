@@ -54,6 +54,15 @@ public:
   void shutdown() override;
 
   void bar () override;
+
+  void _cxx_class () override;
+
+  void _cxx_void (std::string& _cxx_virtual, std::string& interface) override;
+
+  ::Test::_cxx_bool _cxx_private () override;
+
+  void _cxx_private (::Test::_cxx_bool _v) override;
+
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
   /// the application.
@@ -61,14 +70,15 @@ private:
   int &result_;
 
   // Keep track of the attributes.
-  Test::_cxx_int32_t      int32_t_;      // short
-  Test::_cxx_bool         bool_;         // enum
-  Test::_cxx_int16_t      int16_t_;      // enum
-  Test::_cxx_int_least8_t int_least8_t_; // enum
+  Test::_cxx_int32_t      int32_t_{};      // short
+  Test::_cxx_bool         bool_{};         // enum
+  Test::_cxx_int16_t      int16_t_{};      // enum
+  Test::_cxx_int_least8_t int_least8_t_{}; // enum
 
   Test::cpplib_keyword_struct cpplib_keyword_struct_;
   Test::int_keyword_struct    int_keyword_struct_;
   Test::cpp_keyword_struct    cpp_keyword_struct_;
+  Test::_cxx_bool _cxx_private_ {};
 
   bool bar_called_ { false };
 
