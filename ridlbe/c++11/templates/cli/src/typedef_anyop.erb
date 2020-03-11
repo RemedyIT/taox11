@@ -13,10 +13,7 @@ _any_cp_in_<%= scoped_cxxname.scope_to_cxxname %> (
 % else
       TAOX11_NAMESPACE::CDR_Marshal_Policy
 % end
-        >::insert_copy (
-          any,
-          <%= scoped_cxx_typecode %>,
-          _val);
+        >::insert_copy (any, <%= scoped_cxx_typecode %>, _val);
 }
 void
 _any_mv_in_<%= scoped_cxxname.scope_to_cxxname %> (
@@ -30,10 +27,7 @@ _any_mv_in_<%= scoped_cxxname.scope_to_cxxname %> (
 % else
       TAOX11_NAMESPACE::CDR_Marshal_Policy
 % end
-        >::insert (
-          any,
-          <%= scoped_cxx_typecode %>,
-          std::move(_val));
+        >::insert (any, <%= scoped_cxx_typecode %>, std::move(_val));
 }
 bool
 _any_out_<%= scoped_cxxname.scope_to_cxxname %> (
@@ -47,9 +41,6 @@ _any_out_<%= scoped_cxxname.scope_to_cxxname %> (
 % else
       TAOX11_NAMESPACE::CDR_Marshal_Policy
 % end
-        >::extract (
-          any,
-          <%= scoped_cxx_typecode %>,
-          _val);
+        >::extract (any, <%= scoped_cxx_typecode %>, _val);
 }
 #endif // _ALIAS_ANYOP_<%= scoped_cxxname.scope_to_cxxname %>_IMPL_

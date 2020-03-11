@@ -2,7 +2,7 @@
 // generated from <%= ridl_template_path %>
 
 /// Any insertion operator for <%= scoped_cxxname %>
-void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _union )
+void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _union)
 {
   Any_Dual_Impl_T<
       IDL::traits< <%= scoped_cxxtype %>>,
@@ -11,14 +11,11 @@ void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _union )
 % else
       TAOX11_NAMESPACE::CDR_Marshal_Policy
 % end
-        >::insert_copy (
-          any,
-          <%= scoped_cxx_typecode %>,
-          _union);
+        >::insert_copy (any, <%= scoped_cxx_typecode %>, _union);
 }
 
 /// Any insertion operator for <%= scoped_cxxname %>
-void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_move_type %> _union )
+void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_move_type %> _union)
 {
   Any_Dual_Impl_T<
       IDL::traits< <%= scoped_cxxtype %>>,
@@ -27,10 +24,7 @@ void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_move_type %> _union )
 % else
       TAOX11_NAMESPACE::CDR_Marshal_Policy
 % end
-        >::insert (
-          any,
-          <%= scoped_cxx_typecode %>,
-          std::move(_union));
+        >::insert (any, <%= scoped_cxx_typecode %>, std::move(_union));
 }
 
 /// Any extraction operator for <%= scoped_cxxname %>
@@ -43,8 +37,5 @@ bool operator>>= (const TAOX11_CORBA::Any &any, <%= scoped_cxx_out_type %> _unio
 % else
             TAOX11_NAMESPACE::CDR_Marshal_Policy
 % end
-              >::extract (
-                any,
-                <%= scoped_cxx_typecode %>,
-                _union);
+              >::extract (any, <%= scoped_cxx_typecode %>, _union);
 }
