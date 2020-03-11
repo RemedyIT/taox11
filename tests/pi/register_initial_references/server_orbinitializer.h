@@ -20,10 +20,10 @@ public:
   /// Constructor
   Server_ORBInitializer ();
 
-  virtual void pre_init (
+  void pre_init (
       IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
 
-  virtual void post_init (
+  void post_init (
       IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
 };
 

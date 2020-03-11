@@ -89,7 +89,7 @@ public:
     bool test_not_found);
   ~Task () = default;
 
-  virtual std::string
+  std::string
   locate (const std::string &) override;
 
 private:

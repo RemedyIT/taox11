@@ -33,7 +33,7 @@ namespace TAOX11_NAMESPACE
 
       ~ProcessingModePolicy () = default;
 
-      virtual PortableInterceptor::ProcessingMode processing_mode () override;
+      PortableInterceptor::ProcessingMode processing_mode () override;
 
     private:
       TAO_PI::ProcessingModePolicy_ptr pol_;

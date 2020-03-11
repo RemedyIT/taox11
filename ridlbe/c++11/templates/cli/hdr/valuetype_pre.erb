@@ -28,18 +28,16 @@ public:
 % end
   //@}
 
-  static bool _obv_unmarshal (
-      TAO_InputCDR &strm,
-      _ref_type &vbox);
+  static bool _obv_unmarshal (TAO_InputCDR &strm, _ref_type &vbox);
 
 % if generate_typecode_support? && !is_abstract?
-  virtual TAOX11_CORBA::typecode_reference _obv_typecode () const override;
+  TAOX11_CORBA::typecode_reference _obv_typecode () const override;
 % end
 
 % if supports_abstract_interfaces?
   // from CORBA::AbstractBase
-  virtual TAOX11_IDL::traits<TAOX11_CORBA::Object>::ref_type _to_object () override;
-  virtual TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type _to_value () override;
+  TAOX11_IDL::traits<TAOX11_CORBA::Object>::ref_type _to_object () override;
+  TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type _to_value () override;
 
 % end
 protected:
@@ -62,14 +60,14 @@ protected:
   <%= cxxname %>& operator= (const <%= cxxname %>&) = delete;
   <%= cxxname %>& operator= (<%= cxxname %>&&) = delete;
 
-  virtual const std::string& _obv_repository_id () const override;
-  virtual void _obv_get_truncatable_repo_ids (std::vector<std::string const*>&) const override;
+  const std::string& _obv_repository_id () const override;
+  void _obv_get_truncatable_repo_ids (std::vector<std::string const*>&) const override;
 
 % unless is_abstract?
-  virtual bool _obv_match_formal_type (ptrdiff_t ) const override;
+  bool _obv_match_formal_type (ptrdiff_t ) const override;
 
-  virtual bool _obv_marshal_v (TAO_OutputCDR &) const override;
-  virtual bool _obv_unmarshal_v (TAO_InputCDR &) override;
+  bool _obv_marshal_v (TAO_OutputCDR &) const override;
+  bool _obv_unmarshal_v (TAO_InputCDR &) override;
 % end
 % if supports_abstract_interfaces?
 
@@ -77,10 +75,10 @@ protected:
   friend class TAOX11_CORBA::valuetype_reference;
 
   // from CORBA::ValueBase
-  virtual TAOX11_IDL::traits<TAOX11_CORBA::AbstractBase>::ref_type _obv_abstract_base () override;
+  TAOX11_IDL::traits<TAOX11_CORBA::AbstractBase>::ref_type _obv_abstract_base () override;
 
   // from CORBA::AbstractBase
-  virtual bool _is_object () override;
+  bool _is_object () override;
   TAOX11_CORBA::ValueBase::_shared_ptr_type _lock_shared ();
 % end
 public:

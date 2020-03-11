@@ -21,7 +21,7 @@ public:
   virtual ~Hello_Factory ();
 
   // = The skeleton methods
-  virtual void get_hello (const std::string& log_string,
+  void get_hello (const std::string& log_string,
       IDL::traits<Test::Hello>::ref_type& hello_obj,
       IDL::traits<Test::Hello2>::ref_type& hello2_obj) override;
 
@@ -60,9 +60,9 @@ public:
   virtual ~Hello ();
 
   // = The skeleton methods
-  virtual std::string get_string () override;
+  std::string get_string () override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
@@ -85,7 +85,7 @@ public:
   virtual ~Hello2 ();
 
   // = The skeleton methods
-  virtual void get_string (IDL::traits<Test::StringInterface>::ref_type& si) override;
+  void get_string (IDL::traits<Test::StringInterface>::ref_type& si) override;
 
 private:
   IDL::traits<PortableServer::POA>::ref_type poa_;

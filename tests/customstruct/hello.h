@@ -18,20 +18,20 @@ public:
   Hello(IDL::traits<CORBA::ORB>::ref_type orb, int& result);
 
   // = The skeleton methods for struct
-  virtual Test::simpleStruct get_struct() override;
-  virtual Test::simpleStruct inout_simpleStruct(const Test::simpleStruct& pin,
+  Test::simpleStruct get_struct() override;
+  Test::simpleStruct inout_simpleStruct(const Test::simpleStruct& pin,
       Test::simpleStruct& pout, Test::simpleStruct& pinout) override;
-  virtual Test::basicStruct inout_basicStruct(const Test::basicStruct& pin,
+  Test::basicStruct inout_basicStruct(const Test::basicStruct& pin,
       Test::basicStruct& pout, Test::basicStruct& pinout) override;
-  virtual Test::sequenceStruct get_sequenceStruct2(
+  Test::sequenceStruct get_sequenceStruct2(
       const Test::sequenceStruct& pin, Test::sequenceStruct& pinout) override;
-  virtual Test::sequenceStruct inout_sequenceStruct(
+  Test::sequenceStruct inout_sequenceStruct(
       const Test::sequenceStruct& pin, Test::sequenceStruct& pout,
       Test::sequenceStruct& pinout) override;
-  virtual Test::enumStruct inout_enumStruct(const Test::enumStruct& pin,
+  Test::enumStruct inout_enumStruct(const Test::enumStruct& pin,
       Test::enumStruct& pout, Test::enumStruct& pinout) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

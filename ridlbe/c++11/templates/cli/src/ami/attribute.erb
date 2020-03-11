@@ -1,7 +1,7 @@
 % unless interface.is_local?
 // generated from <%= ridl_template_path %>
 void
-<%= interface.cxxname %>::get_<%= cxxname %> (
+<%= interface.cxxname %>::get_<%= name %> (
     <%= scoped_cxx_in_type %> ami_return_val)
 {
 %   if interface.is_abstract?
@@ -84,15 +84,15 @@ void
 
 
 void
-<%= interface.proxy_cxxname %>::get_<%= cxxname %>_reply_stub (
+<%= interface.proxy_cxxname %>::get_<%= name %>_reply_stub (
     TAO_InputCDR &_tao_in,
     TAO_MESSAGING::ReplyHandler_ptr _tao_reply_handler,
     uint32_t reply_status)
 {
   // Retrieve Reply Handler object.
-  ::TAOX11_NAMESPACE::CORBA::object_traits< ::TAOX11_NAMESPACE::CORBA::Object>::ref_type _reply_handler_obj =
-    ::TAOX11_NAMESPACE::CORBA::make_reference< TAOX11_CORBA::Object> (
-      new ::TAOX11_NAMESPACE::Object_proxy (TAO_MESSAGING::ReplyHandler::_duplicate (_tao_reply_handler)));
+  TAOX11_NAMESPACE::CORBA::object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type _reply_handler_obj =
+    TAOX11_NAMESPACE::CORBA::make_reference<TAOX11_CORBA::Object> (
+      new TAOX11_NAMESPACE::Object_proxy (TAO_MESSAGING::ReplyHandler::_duplicate (_tao_reply_handler)));
 
   <%= interface.scoped_cxx_traits_type %>::ref_type _reply_handler =
     <%= interface.scoped_cxx_traits_type %>::narrow (std::move(_reply_handler_obj));
@@ -105,10 +105,10 @@ void
       // Demarshall all the arguments.
       <%= scoped_cxx_member_type %> _taox11_ami_return_val;
       if (!(_tao_in >> <%= cdr_to_fmt % "_taox11_ami_return_val" %>))
-        throw ::TAOX11_NAMESPACE::CORBA::MARSHAL ();
+        throw TAOX11_NAMESPACE::CORBA::MARSHAL ();
 
       // Invoke the call back method.
-      _reply_handler->get_<%= cxxname %> (_taox11_ami_return_val);
+      _reply_handler->get_<%= name %> (_taox11_ami_return_val);
       break;
     }
     case TAO_AMI_REPLY_USER_EXCEPTION:
@@ -145,8 +145,8 @@ void
       TAOX11_NAMESPACE::CORBA::OctetSeq const _marshaled_exception =
         seq_to_x11<TAOX11_NAMESPACE::CORBA::OctetSeq> (_tao_marshaled_exception);
 
-      IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type _exception_holder =
-        TAOX11_NAMESPACE::CORBA::make_reference< ::TAOX11_NAMESPACE::ExceptionHolder_i> (
+      IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type _exception_holder =
+        TAOX11_NAMESPACE::CORBA::make_reference<TAOX11_NAMESPACE::ExceptionHolder_i> (
           reply_status == TAO_AMI_REPLY_SYSTEM_EXCEPTION,
           _tao_in.byte_order (),
           _marshaled_exception,
@@ -159,7 +159,7 @@ void
           _tao_in.char_translator (),
           _tao_in.wchar_translator ());
 
-      _reply_handler->get_<%= cxxname %>_excep (std::move(_exception_holder));
+      _reply_handler->get_<%= name %>_excep (std::move(_exception_holder));
       break;
     }
     //TODO
@@ -171,8 +171,8 @@ void
 }
 
 void
-<%= interface.cxxname %>::get_<%= cxxname %>_excep (
-    IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder)
+<%= interface.cxxname %>::get_<%= name %>_excep (
+    IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder)
 {
   if (!this-><%= interface.proxy_cxxname.downcase %>_->is_evaluated ())
   {
@@ -232,7 +232,7 @@ void
 
 %   unless is_readonly?
 void
-<%= interface.cxxname %>::set_<%= cxxname %> ()
+<%= interface.cxxname %>::set_<%= name %> ()
 {
 %   if interface.is_abstract?
   if (!this->_is_object ())
@@ -313,15 +313,15 @@ void
 }
 
 void
-<%= interface.proxy_cxxname %>::set_<%= cxxname %>_reply_stub (
+<%= interface.proxy_cxxname %>::set_<%= name %>_reply_stub (
     TAO_InputCDR &_tao_in,
     TAO_MESSAGING::ReplyHandler_ptr _tao_reply_handler,
     TAO_CORBA::ULong reply_status)
 {
   // Retrieve Reply Handler object.
-  ::TAOX11_NAMESPACE::CORBA::object_traits< ::TAOX11_NAMESPACE::CORBA::Object>::ref_type _reply_handler_obj =
-    ::TAOX11_NAMESPACE::CORBA::make_reference< TAOX11_CORBA::Object> (
-      new ::TAOX11_NAMESPACE::Object_proxy (TAO_MESSAGING::ReplyHandler::_duplicate (_tao_reply_handler)));
+  TAOX11_NAMESPACE::CORBA::object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type _reply_handler_obj =
+    TAOX11_NAMESPACE::CORBA::make_reference<TAOX11_CORBA::Object> (
+      new TAOX11_NAMESPACE::Object_proxy (TAO_MESSAGING::ReplyHandler::_duplicate (_tao_reply_handler)));
 
   <%= interface.scoped_cxx_traits_type %>::ref_type _reply_handler =
     <%= interface.scoped_cxx_traits_type %>::narrow (std::move(_reply_handler_obj));
@@ -332,7 +332,7 @@ void
     case TAO_AMI_REPLY_OK:
     {
       // Invoke the call back method.
-      _reply_handler->set_<%= cxxname %> ();
+      _reply_handler->set_<%= name %> ();
       break;
     }
     case TAO_AMI_REPLY_USER_EXCEPTION:
@@ -368,8 +368,8 @@ void
       TAOX11_NAMESPACE::CORBA::OctetSeq const _marshaled_exception =
         seq_to_x11<TAOX11_NAMESPACE::CORBA::OctetSeq> (_tao_marshaled_exception);
 
-      IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type _exception_holder =
-        TAOX11_NAMESPACE::CORBA::make_reference< ::TAOX11_NAMESPACE::ExceptionHolder_i> (
+      IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type _exception_holder =
+        TAOX11_NAMESPACE::CORBA::make_reference<TAOX11_NAMESPACE::ExceptionHolder_i> (
           reply_status == TAO_AMI_REPLY_SYSTEM_EXCEPTION,
           _tao_in.byte_order (),
           _marshaled_exception,
@@ -382,7 +382,7 @@ void
           _tao_in.char_translator (),
           _tao_in.wchar_translator ());
 
-      _reply_handler->set_<%= cxxname %>_excep (std::move(_exception_holder));
+      _reply_handler->set_<%= name %>_excep (std::move(_exception_holder));
       break;
     }
     //TODO
@@ -394,8 +394,8 @@ void
 }
 
 void
-<%= interface.cxxname %>::set_<%= cxxname %>_excep (
-    IDL::traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder)
+<%= interface.cxxname %>::set_<%= name %>_excep (
+    IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder)
 {
   if (!this-><%= interface.proxy_cxxname.downcase %>_->is_evaluated ())
   {

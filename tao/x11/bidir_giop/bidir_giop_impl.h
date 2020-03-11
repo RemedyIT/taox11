@@ -32,7 +32,7 @@ namespace TAOX11_NAMESPACE
 
       ~BidirectionalPolicy () = default;
 
-      virtual ::TAOX11_NAMESPACE::BiDirPolicy::BidirectionalPolicyValue
+      ::TAOX11_NAMESPACE::BiDirPolicy::BidirectionalPolicyValue
       value() override;
 
     private:

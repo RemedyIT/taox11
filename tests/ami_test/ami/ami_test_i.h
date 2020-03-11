@@ -21,23 +21,23 @@ public:
   AMI_Test_i (IDL::traits<CORBA::ORB>::ref_type orb);
 
   // The AMI_Test methods.
-  virtual int32_t foo (int32_t& out_l,
+  int32_t foo (int32_t& out_l,
                int32_t in_l,
                const std::string& in_str) override;
 
-  virtual void bar (A::enumType &out_e) override;
+  void bar (A::enumType &out_e) override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
-  virtual int32_t yadda () override;
+  int32_t yadda () override;
 
-  virtual void yadda (int32_t yadda) override;
+  void yadda (int32_t yadda) override;
 
-  virtual bool bool_attr() override;
+  bool bool_attr() override;
 
-  virtual void bool_attr(bool) override;
+  void bool_attr(bool) override;
 
-  virtual std::string foo_struct (A::structType &out_t) override;
+  std::string foo_struct (A::structType &out_t) override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type  orb_;

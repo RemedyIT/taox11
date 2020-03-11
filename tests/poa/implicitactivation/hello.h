@@ -20,10 +20,9 @@ public:
   virtual ~Hello();
 
   /// Returns the default POA for this servant.
-  virtual IDL::traits<PortableServer::POA>::ref_type _default_POA()
-      override;
+  IDL::traits<PortableServer::POA>::ref_type _default_POA() override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;

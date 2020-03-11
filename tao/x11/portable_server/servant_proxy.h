@@ -39,30 +39,30 @@ namespace TAOX11_NAMESPACE {
 
     virtual ~Servant_proxy () = default;
 
-    virtual void _add_ref () final;
+    void _add_ref () final;
 
-    virtual void _remove_ref () final;
+    void _remove_ref () final;
 
     /// Local implementation of the CORBA::Object::_is_a method.
-    virtual TAO_CORBA::Boolean _is_a (const char *logical_type_id) final;
+    TAO_CORBA::Boolean _is_a (const char *logical_type_id) final;
 
 #if (TAO_HAS_MINIMUM_CORBA == 0)
     /// Default _non_existent: always returns false.
-    virtual TAO_CORBA::Boolean _non_existent () final;
+    TAO_CORBA::Boolean _non_existent () final;
 
 #if !defined (CORBA_E_COMPACT) && !defined (CORBA_E_MICRO)
     /// Query the Interface Repository for the interface definition.
-    virtual TAO_CORBA::InterfaceDef_ptr _get_interface () final;
+    TAO_CORBA::InterfaceDef_ptr _get_interface () final;
 
     /// Default _get_component: always returns CORBA::Object::_nil().
-    virtual TAO_CORBA::Object_ptr _get_component () final;
+    TAO_CORBA::Object_ptr _get_component () final;
 #endif
 
     /// Get the repository id.
-    virtual char * _repository_id () final;
+    char * _repository_id () final;
 #endif /* TAO_HAS_MINIMUM_CORBA */
 
-    virtual TAO_VERSIONED_NAMESPACE_NAME::PortableServer::POA_ptr _default_POA () final;
+    TAO_VERSIONED_NAMESPACE_NAME::PortableServer::POA_ptr _default_POA () final;
 
   protected:
     friend class TAOX11_NAMESPACE::PortableServer::POA_impl;
@@ -74,7 +74,7 @@ namespace TAOX11_NAMESPACE {
 
     virtual TAOX11_NAMESPACE::PortableServer::Servant* _get_skel () const = 0;
 
-    virtual const char* _interface_repository_id () const final;
+    const char* _interface_repository_id () const final;
 
   private:
     skel_ref_type skel_ref_;

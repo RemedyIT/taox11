@@ -35,9 +35,9 @@ namespace TAOX11_NAMESPACE
     In_Special_Basic_Argument_T (S const &x)
       : x_ (x) {}
 
-    virtual TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
+    TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
 #if TAO_HAS_INTERCEPTORS == 1
-    virtual void interceptor_value (TAO_CORBA::Any *any) const override;
+    void interceptor_value (TAO_CORBA::Any *any) const override;
 #endif /* TAO_HAS_INTERCEPTORS == 1 */
     S const & arg () const { return this->x_; }
 
@@ -64,7 +64,7 @@ namespace TAOX11_NAMESPACE
       , is_clone_ (false) {}
     virtual ~In_Special_Basic_Clonable_Argument_T ();
 
-    virtual TAO_TAO::Argument* clone () override;
+    TAO_TAO::Argument* clone () override;
 
   private:
     bool is_clone_;
@@ -86,10 +86,10 @@ namespace TAOX11_NAMESPACE
     Inout_Special_Basic_Argument_T (S & x)
       : x_ (x) {}
 
-    virtual TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
-    virtual TAO_CORBA::Boolean demarshal (TAO_InputCDR &) override;
+    TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
+    TAO_CORBA::Boolean demarshal (TAO_InputCDR &) override;
 #if TAO_HAS_INTERCEPTORS == 1
-    virtual void interceptor_value (TAO_CORBA::Any *any) const override;
+    void interceptor_value (TAO_CORBA::Any *any) const override;
 #endif /* TAO_HAS_INTERCEPTORS == 1 */
     S & arg () { return this->x_; }
 
@@ -113,9 +113,9 @@ namespace TAOX11_NAMESPACE
     Out_Special_Basic_Argument_T (S & x)
       : x_ (x) {}
 
-    virtual TAO_CORBA::Boolean demarshal (TAO_InputCDR &) override;
+    TAO_CORBA::Boolean demarshal (TAO_InputCDR &) override;
 #if TAO_HAS_INTERCEPTORS == 1
-    virtual void interceptor_value (TAO_CORBA::Any *any) const override;
+    void interceptor_value (TAO_CORBA::Any *any) const override;
 #endif /* TAO_HAS_INTERCEPTORS == 1 */
     S & arg () { return this->x_; }
 
@@ -138,9 +138,9 @@ namespace TAOX11_NAMESPACE
   public:
     Ret_Special_Basic_Argument_T () = default;
 
-    virtual TAO_CORBA::Boolean demarshal (TAO_InputCDR &) override;
+    TAO_CORBA::Boolean demarshal (TAO_InputCDR &) override;
 #if TAO_HAS_INTERCEPTORS == 1
-    virtual void interceptor_value (TAO_CORBA::Any *any) const override;
+    void interceptor_value (TAO_CORBA::Any *any) const override;
 #endif /* TAO_HAS_INTERCEPTORS == 1 */
     S & arg () { return this->x_; }
 

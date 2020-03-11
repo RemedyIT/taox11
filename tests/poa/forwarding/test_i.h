@@ -19,15 +19,15 @@ public:
           int32_t value);
   virtual ~test_i ();
 
-  virtual int32_t doit () override;
+  int32_t doit () override;
 
   // Setup forwarding
-  virtual void forward () override;
+  void forward () override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
   /// Returns the default POA for this servant.
-  virtual IDL::traits<PortableServer::POA>::ref_type
+  IDL::traits<PortableServer::POA>::ref_type
     _default_POA () override;
 
 protected:

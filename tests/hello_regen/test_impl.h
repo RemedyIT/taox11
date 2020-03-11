@@ -97,38 +97,31 @@ namespace Test
     public:
 
       // generated from c++11/templates/impl/hdr/attribute
-      virtual
       int32_t
       int_prop () override;
 
-      virtual
       void
-      int_prop (
-          int32_t _v) override;
+      int_prop (int32_t _v) override;
 
       // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::get_string
-      virtual
       std::string
       get_string () override;
 
       // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::create_foo
-      virtual
       void
       create_foo (
           IDL::traits< ::Test::Foo>::ref_type& foo_inst) override;
 
       // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::update
-      virtual
       ::Test::Foo::S
       update (
           const ::Test::Foo::S& s) override;
 
       // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::shutdown
-      virtual
       void
       shutdown () override;
 

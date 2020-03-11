@@ -21,23 +21,23 @@ public:
               bool check_params = false);
 
   // The AMI_Test methods.
-  virtual CORBA::Long foo (CORBA::Long_out out_l,
+  CORBA::Long foo (CORBA::Long_out out_l,
     CORBA::Long in_l,
-    const char* in_str);
+    const char* in_str) override;
 
-  virtual void bar (A::enumType &out_e);
+  void bar (A::enumType &out_e) override;
 
-  virtual void shutdown ();
+  void shutdown () override;
 
-  virtual CORBA::Long yadda ();
+  CORBA::Long yadda () override;
 
-  virtual void yadda (CORBA::Long yadda);
+  void yadda (CORBA::Long yadda) override;
 
-  virtual CORBA::Boolean bool_attr();
+  CORBA::Boolean bool_attr() override;
 
-  virtual void bool_attr(CORBA::Boolean);
+  void bool_attr(CORBA::Boolean) override;
 
-  virtual char * foo_struct (::A::structType_out out_t);
+  char * foo_struct (::A::structType_out out_t) override;
 
 private:
   CORBA::ORB_var orb_;

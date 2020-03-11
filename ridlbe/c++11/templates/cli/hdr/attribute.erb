@@ -8,14 +8,11 @@
 % _op_end << ' override' if is_override?
 % _op_end << ' = 0' if (interface.is_local? || in_valuetype?)
 % _op_end << ';'
-virtual
-<%= cxx_return_type %>
+virtual <%= cxx_return_type %>
 <%= cxxname %> ()<%= _op_end %>
 % unless is_readonly?
 
-virtual
-void
-<%= cxxname %> (
-    <%= cxx_in_type %> _v)<%= _op_end %>
+virtual void
+<%= cxxname %> (<%= cxx_in_type %> _v)<%= _op_end %>
 //@}
 % end

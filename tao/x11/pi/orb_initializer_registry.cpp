@@ -32,12 +32,10 @@ namespace TAOX11_NAMESPACE
       virtual ~ORBInitializer_proxy () = default;
 
       /// The pre-initialization hook.
-      virtual void pre_init (
-          TAO_PI::ORBInitInfo_ptr info) override;
+      void pre_init (TAO_PI::ORBInitInfo_ptr info) override;
 
       /// The post-initialization hook.
-      virtual void post_init (
-          TAO_PI::ORBInitInfo_ptr info) override;
+      void post_init (TAO_PI::ORBInitInfo_ptr info) override;
 
     private:
       IDL::traits<PortableInterceptor_impl::ORBInitInfo>::ref_type to_x11_ (

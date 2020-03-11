@@ -14,7 +14,7 @@
 #include "ami_testAmiC.h"
 
 class Handler
-:public virtual CORBA::amic_traits<A::AMI_Test>::replyhandler_base_type
+: public virtual CORBA::amic_traits<A::AMI_Test>::replyhandler_base_type
 {
 public:
   /// Constructor.
@@ -27,7 +27,6 @@ public:
             int32_t out_l) override;
   void foo_excep (
       IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override;
-
 };
 
 

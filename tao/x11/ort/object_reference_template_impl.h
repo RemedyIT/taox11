@@ -36,7 +36,6 @@ namespace TAOX11_NAMESPACE
        * PortableInterceptor::ObjectReferenceFactory ValueType.
        */
       //@{
-      virtual
       IDL::traits<CORBA::Object>::ref_type
       make_object (
           const std::string& repository_id,
@@ -66,15 +65,12 @@ namespace TAOX11_NAMESPACE
        * PortableInterceptor::ObjectReferenceTemplate ValueType.
        */
       //@{
-      virtual
       PortableInterceptor::ServerId
       server_id () override;
 
-      virtual
       PortableInterceptor::ORBId
       orb_id () override;
 
-      virtual
       PortableInterceptor::AdapterName
       adapter_name () override;
       //@}
@@ -86,7 +82,6 @@ namespace TAOX11_NAMESPACE
        * PortableInterceptor::ObjectReferenceFactory ValueType.
        */
       //@{
-      virtual
       IDL::traits<CORBA::Object>::ref_type
       make_object (
           const std::string& repository_id,

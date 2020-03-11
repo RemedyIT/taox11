@@ -1,0 +1,30 @@
+name: Fuzzr
+
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+  schedule:
+    - cron: '0 7 * * SUN'
+
+env:
+  AXCIOMA_ROOT: ${{ github.workspace }}/axcioma
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.5
+    - name: git clone dependent repositories
+      run: |
+        git clone --depth 1 git://github.com/RemedyIT/axcioma.git $AXCIOMA_ROOT
+    - name: install fuzzr gem
+      run: |
+        gem install fuzzr
+    - name: Run fuzzr
+      run: |
+        fuzz -P $AXCIOMA_ROOT/bin/fuzzers

@@ -17,12 +17,12 @@ public:
   <%= boxed_cxx_in_type %> _value () const { return this->value_; }
   <%= boxed_cxx_out_type %> _value () { return this->value_; }
 
-  virtual TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type _copy_value () const override;
+  TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type _copy_value () const override;
 
   static bool _obv_unmarshal (TAO_InputCDR &strm, _ref_type &vbox);
 % if generate_typecode_support?
 
-  virtual TAOX11_CORBA::typecode_reference _obv_typecode () const override;
+  TAOX11_CORBA::typecode_reference _obv_typecode () const override;
 % end
 
 protected:
@@ -41,9 +41,9 @@ protected:
   <%= cxxname %>& operator= (const <%= cxxname %>&) = delete;
   <%= cxxname %>& operator= (<%= cxxname %>&&) = delete;
 
-  virtual const std::string& _obv_repository_id () const override;
+  const std::string& _obv_repository_id () const override;
 
-  virtual bool _obv_marshal_v (TAO_OutputCDR &) const override;
+  bool _obv_marshal_v (TAO_OutputCDR &) const override;
 };
 %#
 % visit_template('typecode') if generate_typecode_support?

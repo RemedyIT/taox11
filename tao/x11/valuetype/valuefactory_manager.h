@@ -25,17 +25,17 @@ namespace TAOX11_NAMESPACE
   public:
     ~ValueFactoryManager_impl() = default;
     // Value factory operations
-    virtual CORBA::ValueFactory
+    CORBA::ValueFactory
     register_value_factory (
         ORB_Proxy& orb,
         const std::string &repository_id,
         CORBA::ValueFactory factory) override;
-    virtual void
+    void
     unregister_value_factory (
         ORB_Proxy& orb,
         const std::string& repository_id) override;
 
-    virtual CORBA::ValueFactory
+    CORBA::ValueFactory
     lookup_value_factory (
         ORB_Proxy& orb,
         const std::string &repository_id) override;

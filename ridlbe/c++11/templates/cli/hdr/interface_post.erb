@@ -37,8 +37,8 @@ private:
 %#
 %   if needs_abstract_base_overrides?
   // from CORBA::AbstractBase
-  virtual TAOX11_IDL::traits<TAOX11_CORBA::Object>::ref_type _to_object () override;
-  virtual TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type _to_value () override;
+  TAOX11_IDL::traits<TAOX11_CORBA::Object>::ref_type _to_object () override;
+  TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type _to_value () override;
 %   end
 protected:
   typedef std::shared_ptr<<%= cxxname %>> _shared_ptr_type;
@@ -54,7 +54,7 @@ protected:
 
 %   if needs_abstract_base_overrides?
   // from CORBA::AbstractBase
-  virtual bool _is_object () override;
+  bool _is_object () override;
   TAOX11_CORBA::Object::_shared_ptr_type _lock_shared ();
 
 %   end

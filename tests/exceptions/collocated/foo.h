@@ -14,14 +14,12 @@ class Bar final
 {
 public:
   Bar ();
-  virtual void
+  void
   do_something (const std::string &message) override;
 
-  virtual int32_t
-  something () override;
+  int32_t something () override;
 
-  virtual void
-  something (int32_t _v) override;
+  void something (int32_t _v) override;
 };
 
 class Foo final
@@ -32,11 +30,9 @@ public:
   Foo (IDL::traits<CORBA::ORB>::ref_type orb,
     IDL::traits<Test::Bar>::ref_type bar);
 
-  virtual void
-  do_throw_struct () override;
+  void do_throw_struct () override;
 
-  virtual void
-  shutdown () override;
+  void shutdown () override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;

@@ -18,83 +18,83 @@ public:
   Test_impl(IDL::traits<CORBA::ORB>::ref_type orb);
   virtual ~Test_impl();
 
-  virtual IDL::traits<VBlong>::ref_type basic_op1(
+  IDL::traits<VBlong>::ref_type basic_op1(
       IDL::traits<VBlong>::ref_type p1,
       IDL::traits<VBlong>::ref_type& p2,
       IDL::traits<VBlong>::ref_type& p3) override;
 
-  virtual IDL::traits<vb_basic::M_VBlong>::ref_type basic_op2(
+  IDL::traits<vb_basic::M_VBlong>::ref_type basic_op2(
       IDL::traits<vb_basic::M_VBlong>::ref_type p1,
       IDL::traits<vb_basic::M_VBlong>::ref_type& p2,
       IDL::traits<vb_basic::M_VBlong>::ref_type& p3) override;
 
-  virtual int32_t basic_op3(int32_t p1, int32_t& p2, int32_t& p3) override;
+  int32_t basic_op3(int32_t p1, int32_t& p2, int32_t& p3) override;
 
-  virtual IDL::traits<VBstring>::ref_type string_op1(
+  IDL::traits<VBstring>::ref_type string_op1(
       IDL::traits<VBstring>::ref_type p1,
       IDL::traits<VBstring>::ref_type& p2,
       IDL::traits<VBstring>::ref_type& p3) override;
 
-  virtual std::string string_op2(const std::string& p1, std::string& p2,
+  std::string string_op2(const std::string& p1, std::string& p2,
       std::string& p3) override;
 
-  virtual IDL::traits<VBseqlong>::ref_type seq_op1(
+  IDL::traits<VBseqlong>::ref_type seq_op1(
       IDL::traits<VBseqlong>::ref_type p1,
       IDL::traits<VBseqlong>::ref_type& p2,
       IDL::traits<VBseqlong>::ref_type& p3) override;
 
-  virtual void seq_op2(const TDseqlong& p1, TDseqlong& p2,
+  void seq_op2(const TDseqlong& p1, TDseqlong& p2,
       TDseqlong& p3) override;
 
-  virtual IDL::traits<VBfixed_struct1>::ref_type struct_op1(
+  IDL::traits<VBfixed_struct1>::ref_type struct_op1(
       IDL::traits<VBfixed_struct1>::ref_type p1,
       IDL::traits<VBfixed_struct1>::ref_type& p2,
       IDL::traits<VBfixed_struct1>::ref_type& p3) override;
 
-  virtual void struct_op2(const Fixed_Struct1& p1, Fixed_Struct1& p2,
+  void struct_op2(const Fixed_Struct1& p1, Fixed_Struct1& p2,
       Fixed_Struct1& p3) override;
 
-  virtual IDL::traits<VBvariable_struct1>::ref_type struct_op3(
+  IDL::traits<VBvariable_struct1>::ref_type struct_op3(
       IDL::traits<VBvariable_struct1>::ref_type p1,
       IDL::traits<VBvariable_struct1>::ref_type& p2,
       IDL::traits<VBvariable_struct1>::ref_type& p3) override;
 
-  virtual void struct_op4(const Variable_Struct1& p1,
+  void struct_op4(const Variable_Struct1& p1,
       Variable_Struct1& p2, Variable_Struct1& p3) override;
 
-  virtual IDL::traits<VBlongarray>::ref_type array_op1(
+  IDL::traits<VBlongarray>::ref_type array_op1(
       IDL::traits<VBlongarray>::ref_type p1,
       IDL::traits<VBlongarray>::ref_type& p2,
       IDL::traits<VBlongarray>::ref_type& p3) override;
 
-  virtual void array_op2(const LongArray& p1, LongArray& p2,
+  void array_op2(const LongArray& p1, LongArray& p2,
       LongArray& p3) override;
 
-  virtual IDL::traits<VBstringarray>::ref_type array_op3(
+  IDL::traits<VBstringarray>::ref_type array_op3(
       IDL::traits<VBstringarray>::ref_type p1,
       IDL::traits<VBstringarray>::ref_type& p2,
       IDL::traits<VBstringarray>::ref_type& p3) override;
 
-  virtual void array_op4(const StringArray& p1, StringArray& p2,
+  void array_op4(const StringArray& p1, StringArray& p2,
       StringArray& p3) override;
 
-  virtual IDL::traits<VBfixed_union1>::ref_type union_op1(
+  IDL::traits<VBfixed_union1>::ref_type union_op1(
       IDL::traits<VBfixed_union1>::ref_type p1,
       IDL::traits<VBfixed_union1>::ref_type& p2,
       IDL::traits<VBfixed_union1>::ref_type& p3) override;
 
-  virtual void union_op2(const Fixed_Union1& p1, Fixed_Union1& p2,
+  void union_op2(const Fixed_Union1& p1, Fixed_Union1& p2,
       Fixed_Union1& p3) override;
 
-  virtual IDL::traits<VBvariable_union1>::ref_type union_op3(
+  IDL::traits<VBvariable_union1>::ref_type union_op3(
       IDL::traits<VBvariable_union1>::ref_type p1,
       IDL::traits<VBvariable_union1>::ref_type& p2,
       IDL::traits<VBvariable_union1>::ref_type& p3) override;
 
-  virtual void union_op4(const Variable_Union1& p1, Variable_Union1& p2,
+  void union_op4(const Variable_Union1& p1, Variable_Union1& p2,
       Variable_Union1& p3) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   /// The ORB

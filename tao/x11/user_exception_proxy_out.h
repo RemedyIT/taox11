@@ -55,21 +55,21 @@ namespace TAOX11_NAMESPACE
       }
 
       /// Return the repository ID of the Exception.
-      virtual const char * _rep_id () const override;
+      const char * _rep_id () const override;
 
       /// Return the name of the Exception.
-      virtual const char * _name () const override;
+      const char * _name () const override;
 
       // TODO virtual CORBA::TypeCode_ptr _tao_type () const;
 
-      virtual TAO_CORBA::Exception *_tao_duplicate () const override;
+      TAO_CORBA::Exception *_tao_duplicate () const override;
 
-      virtual void _raise () const override;
+      void _raise () const override;
 
       void _raise_x11 () const;
 
-      virtual void _tao_encode (TAO_OutputCDR &cdr) const override;
-      virtual void _tao_decode (TAO_InputCDR &cdr) override; // noop
+      void _tao_encode (TAO_OutputCDR &cdr) const override;
+      void _tao_decode (TAO_InputCDR &cdr) override; // noop
 
     private:
       TAOX11_NAMESPACE::CORBA::UserException *user_exc_;

@@ -20,9 +20,9 @@ public:
   virtual ~Hello ();
 
   // = The skeleton methods
-  virtual std::string writePoaName () override;
+  std::string writePoaName () override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

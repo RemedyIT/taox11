@@ -12,7 +12,7 @@ public:
   template <typename _Tp1, typename, typename ...Args>
   friend TAOX11_CORBA::object_reference<_Tp1> TAOX11_CORBA::make_reference(Args&& ...args);
 
-  virtual TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
+  TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
   create_for_unmarshal () override;
 % else
 %   initializers.each do |_ini|
@@ -30,7 +30,7 @@ public:
 %   end
 % end
 
-  virtual const std::string& _obv_repository_id () const override;
+  const std::string& _obv_repository_id () const override;
 
 protected:
   <%= factory_cxxname %> () = default;

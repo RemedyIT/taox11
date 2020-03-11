@@ -122,14 +122,14 @@ namespace TAOX11_NAMESPACE
       {
       public:
 
-        virtual void _raise () const override;
+        void _raise () const override;
 
-        virtual void _tao_encode (TAO_OutputCDR &cdr) const override;
+        void _tao_encode (TAO_OutputCDR &cdr) const override;
 
-        virtual void _tao_decode (TAO_InputCDR &cdr) override;
+        void _tao_decode (TAO_InputCDR &cdr) override;
 
         /// Deep copy
-        virtual CORBA::Exception *_tao_duplicate () const override;
+        CORBA::Exception *_tao_duplicate () const override;
 
         InvalidName ();
         virtual ~InvalidName () throw ();
@@ -139,7 +139,7 @@ namespace TAOX11_NAMESPACE
         InvalidName& operator= (InvalidName&& x)  = default;
 
       protected:
-        virtual void _info (std::ostream&) const override;
+        void _info (std::ostream&) const override;
       }; // InvalidName
 
       std::string id ();

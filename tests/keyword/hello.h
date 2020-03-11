@@ -21,15 +21,15 @@ public:
 
 
   // = The skeleton methods.
-  virtual Test::_cxx_bool inout_bool(Test::_cxx_bool v_in,
+  Test::_cxx_bool inout_bool(Test::_cxx_bool v_in,
       Test::_cxx_bool& v_out, Test::_cxx_bool& v_inout) override;
 
-  virtual Test::_cxx_int16_t inout_int16_t(Test::_cxx_int16_t v_in,
+  Test::_cxx_int16_t inout_int16_t(Test::_cxx_int16_t v_in,
       Test::_cxx_int16_t& v_out, Test::_cxx_int16_t& v_inout) override;
 
-  virtual int16_t _cxx_uint32_t (int16_t _cxx_uint16_t) override;
+  int16_t _cxx_uint32_t (int16_t _cxx_uint16_t) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
   /// the application.

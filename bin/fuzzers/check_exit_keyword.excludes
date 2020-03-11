@@ -1,2 +1,0 @@
-.*(C|S|P|SP)\.(h|inl|cpp)
-taox11\/tests\/.*\/tao\/.*

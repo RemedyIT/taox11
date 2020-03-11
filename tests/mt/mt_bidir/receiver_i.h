@@ -20,7 +20,7 @@ public:
 
   uint32_t get_event_count ();
 
-  virtual void receive_payload (const ::Receiver::Payload &payload) override;
+  void receive_payload (const ::Receiver::Payload &payload) override;
 
 private:
   std::mutex mutex_;

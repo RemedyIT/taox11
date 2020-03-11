@@ -3,7 +3,7 @@
 // generated from <%= ridl_template_path %>
 %     _args = in_arguments.dup
 void
-<%= interface.amic_scoped_cxxname %>::<%= sendc_prefix %><%= cxxname %> (
+<%= interface.amic_scoped_cxxname %>::<%= sendc_prefix %><%= name %> (
     <%= interface.handler_scoped_cxx_in_type %> ami_handler<%= _args.empty? ? ')' : ',' %>
 %     while !_args.empty?
 %       _arg = _args.shift
@@ -91,14 +91,14 @@ void
 
       if (TAO_CORBA::is_nil (_tao_ami_handler))
       {
-        TAOX11_LOG_ERROR ("<%= interface.scoped_cxxname %>::<%= sendc_prefix %><%= cxxname %> ERROR.");
+        TAOX11_LOG_ERROR ("<%= interface.scoped_cxxname %>::<%= sendc_prefix %><%= name %> ERROR.");
       }
     }
 %#  else _tao_ami_handler is a nullptr
 
     _tao_call.invoke (
       _tao_ami_handler,
-      <%= interface.handler_proxy_cxxname %>::<%= cxxname %>_reply_stub);
+      <%= interface.handler_proxy_cxxname %>::<%= name %>_reply_stub);
   }
   catch_tao_system_ex(_ex)
 }

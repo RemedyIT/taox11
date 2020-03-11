@@ -46,13 +46,13 @@ namespace TAOX11_NAMESPACE
                          CORBA::typecode_reference,
                          value_type &);
 
-    virtual bool marshal_value (TAO_OutputCDR &) override;
+    bool marshal_value (TAO_OutputCDR &) override;
     inline bool demarshal_value (TAO_InputCDR &cdr)
     {
       return MARSHAL_POLICY<TRAITS>::demarshal_value (cdr, this->value_);
     }
 
-    virtual void _tao_decode (TAO_InputCDR &) override;
+    void _tao_decode (TAO_InputCDR &) override;
 
     static Any_Basic_Impl_T<TRAITS, MARSHAL_POLICY> *create_empty (CORBA::typecode_reference);
 
@@ -84,7 +84,7 @@ namespace TAOX11_NAMESPACE
                          CORBA::typecode_reference,
                          value_type &);
 
-    virtual bool to_object (IDL::traits<CORBA::Object>::ref_type&) const override;
+    bool to_object (IDL::traits<CORBA::Object>::ref_type&) const override;
 
     static Any_Object_Impl_T<TRAITS, MARSHAL_POLICY> *create_empty (CORBA::typecode_reference);
   };
@@ -106,7 +106,7 @@ namespace TAOX11_NAMESPACE
                       value_type val);
     virtual ~Any_Value_Impl_T () = default;
 
-    virtual bool marshal_type (TAO_OutputCDR &) override;
+    bool marshal_type (TAO_OutputCDR &) override;
 
     static void insert (CORBA::Any &,
                         CORBA::typecode_reference,
@@ -115,7 +115,7 @@ namespace TAOX11_NAMESPACE
                          CORBA::typecode_reference,
                          value_type &);
 
-    virtual bool to_value (CORBA::valuetype_reference<CORBA::ValueBase>&) const override;
+    bool to_value (CORBA::valuetype_reference<CORBA::ValueBase>&) const override;
 
     static Any_Value_Impl_T<TRAITS, MARSHAL_POLICY> *create_empty (CORBA::typecode_reference);
   };
@@ -144,7 +144,7 @@ namespace TAOX11_NAMESPACE
                          CORBA::typecode_reference,
                          value_type &);
 
-    virtual bool to_abstract_base (CORBA::abstractbase_reference<CORBA::AbstractBase>&) const override;
+    bool to_abstract_base (CORBA::abstractbase_reference<CORBA::AbstractBase>&) const override;
 
     static Any_AbstractBase_Impl_T<TRAITS, MARSHAL_POLICY> *create_empty (CORBA::typecode_reference);
   };

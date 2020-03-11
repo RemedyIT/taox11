@@ -15,38 +15,38 @@ class iA_impl:
     public virtual POA_Test::iA
 {
 public:
-  virtual char * do_something_A();
+  char * do_something_A() override;
 };
 
 class iB_impl:
     public virtual POA_Test::iB
 {
-  virtual char * do_something_A();
-  virtual char * do_something_B();
+  char * do_something_A() override;
+  char * do_something_B() override;
 };
 
 class iC_impl:
     public virtual POA_Test::iC
 {
-  virtual char * do_something_A();
-  virtual char * do_something_B();
-  virtual char * do_something_C();
+  char * do_something_A() override;
+  char * do_something_B() override;
+  char * do_something_C() override;
 };
 
 class iD_impl:
     public virtual POA_Test::iD
 {
-  virtual char * do_something_D();
+  char * do_something_D() override;
 };
 
 class iE_impl:
     public virtual POA_Test::iE
 {
-  virtual char * do_something_A();
-  virtual char * do_something_B();
-  virtual char * do_something_C();
-  virtual char * do_something_D();
-  virtual char * do_something_E();
+  char * do_something_A() override;
+  char * do_something_B() override;
+  char * do_something_C() override;
+  char * do_something_D() override;
+  char * do_something_E() override;
 };
 
 class Hello:
@@ -57,13 +57,13 @@ public:
   Hello(CORBA::ORB_ptr orb, PortableServer::POA_ptr poa, int& result);
 
   // = The skeleton methods
-  virtual Test::iA_ptr get_iA();
-  virtual Test::iB_ptr get_iB();
-  virtual Test::iC_ptr get_iC();
-  virtual Test::iD_ptr get_iD();
-  virtual Test::iE_ptr get_iE();
+  Test::iA_ptr get_iA() override;
+  Test::iB_ptr get_iB() override;
+  Test::iC_ptr get_iC() override;
+  Test::iD_ptr get_iD() override;
+  Test::iE_ptr get_iE() override;
 
-  virtual void shutdown();
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to conver strings to objects and shutdown

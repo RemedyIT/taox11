@@ -18,10 +18,10 @@ class iforward:
 public:
   /// Constructor
   iforward();
-  virtual void dump() override;
-  virtual int32_t uid() override;
+  void dump() override;
+  int32_t uid() override;
 protected:
-  int id;
+  int32_t id;
 private:
   iforward (const iforward&) = delete;
   iforward (iforward&&) = delete;
@@ -35,10 +35,10 @@ class Local final
 public:
   /// Constructor
   Local();
-  virtual void dump() override;
-  virtual int32_t uid() override;
+  void dump() override;
+  int32_t uid() override;
 protected:
-  int id;
+  int32_t id;
 private:
   Local (const Local&) = delete;
   Local (Local&&) = delete;
@@ -56,14 +56,14 @@ public:
         IDL::traits<PortableServer::POA>::ref_type poa);
 
   // = The skeleton methods.
-  virtual IDL::traits<Test::iforward>::ref_type get_forward() override;
-  virtual Test::iforwardSeq inout_forwardSeq(const Test::iforwardSeq& pin,
+  IDL::traits<Test::iforward>::ref_type get_forward() override;
+  Test::iforwardSeq inout_forwardSeq(const Test::iforwardSeq& pin,
       Test::iforwardSeq& pout, Test::iforwardSeq& pinout) override;
-  virtual Test::forwardSeq2 inout_forwardSeq2(const Test::forwardSeq2& pin,
+  Test::forwardSeq2 inout_forwardSeq2(const Test::forwardSeq2& pin,
       Test::forwardSeq2& pout, Test::forwardSeq2& pinout) override;
-  virtual void createLocal() override;
+  void createLocal() override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

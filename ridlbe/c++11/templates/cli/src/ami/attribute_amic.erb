@@ -2,7 +2,7 @@
 
 // generated from <%= ridl_template_path %>
 void
-<%= interface.amic_scoped_cxxname %>::<%= sendc_prefix_get %><%= cxxname %>(
+<%= interface.amic_scoped_cxxname %>::<%= sendc_prefix_get %><%= name %>(
     <%= interface.handler_scoped_cxx_in_type %> ami_handler)
 {
 %   if interface.is_abstract?
@@ -49,19 +49,19 @@ void
 
       if (TAO_CORBA::is_nil (_tao_ami_handler))
       {
-        TAOX11_LOG_ERROR ("<%= interface.scoped_cxxname %>::<%= sendc_prefix_get %><%= cxxname %> ERROR.");
+        TAOX11_LOG_ERROR ("<%= interface.scoped_cxxname %>::<%= sendc_prefix_get %><%= name %> ERROR.");
       }
     }
     _tao_call.invoke (
       _tao_ami_handler,
-      <%= interface.handler_proxy_cxxname %>::get_<%= cxxname %>_reply_stub);
+      <%= interface.handler_proxy_cxxname %>::get_<%= name %>_reply_stub);
   }
   catch_tao_system_ex(_ex)
 }
 
 %   unless is_readonly?
 void
-<%= interface.amic_scoped_cxxname %>::<%= sendc_prefix_set %><%= cxxname %>(
+<%= interface.amic_scoped_cxxname %>::<%= sendc_prefix_set %><%= name %>(
     <%= interface.handler_scoped_cxx_in_type %> ami_handler,
     <%= cxx_in_type %> _x11_<%= cxxname %>)
 {
@@ -118,13 +118,13 @@ void
 
       if (TAO_CORBA::is_nil (_tao_ami_handler))
       {
-        TAOX11_LOG_ERROR ("<%= interface.scoped_cxxname %>::<%= sendc_prefix_set %><%= cxxname %> ERROR.");
+        TAOX11_LOG_ERROR ("<%= interface.scoped_cxxname %>::<%= sendc_prefix_set %><%= name %> ERROR.");
       }
     }
 
     _tao_call.invoke (
       _tao_ami_handler,
-      <%= interface.handler_proxy_cxxname %>::set_<%= cxxname %>_reply_stub);
+      <%= interface.handler_proxy_cxxname %>::set_<%= name %>_reply_stub);
   }
   catch_tao_system_ex(_ex)
 }

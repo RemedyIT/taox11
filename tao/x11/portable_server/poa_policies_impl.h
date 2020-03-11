@@ -24,7 +24,7 @@ namespace TAOX11_NAMESPACE {
     public: \
       friend struct CORBA::object_traits< name>; \
     \
-      virtual TAOX11_NAMESPACE::PortableServer::name ## Value value() override; \
+      TAOX11_NAMESPACE::PortableServer::name ## Value value() override; \
     \
     protected: \
       template <typename _Tp1, typename, typename ...Args> \
@@ -32,7 +32,7 @@ namespace TAOX11_NAMESPACE {
       \
       explicit name ## _impl (TAO_PORTABLE_SERVER::name ## _ptr _pol); \
       ~name ## _impl () = default; \
-      virtual CORBA::object_reference<TAOX11_CORBA::Policy> copy_i () override; \
+      CORBA::object_reference<TAOX11_CORBA::Policy> copy_i () override; \
     \
     private: \
       TAO_PORTABLE_SERVER::name ## _ptr pol_ {}; \

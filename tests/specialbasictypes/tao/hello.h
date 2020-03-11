@@ -16,32 +16,31 @@ public:
 
   // = The skeleton methods
 
-  virtual CORBA::Char getset_char(CORBA::Char min, CORBA::Char max);
+  CORBA::Char getset_char(CORBA::Char min, CORBA::Char max) override;
 
-  virtual void out_char(CORBA::Char numin, CORBA::Char_out num);
+  void out_char(CORBA::Char numin, CORBA::Char_out num) override;
 
-  virtual void inout_char(CORBA::Char & min, CORBA::Char & max);
+  void inout_char(CORBA::Char & min, CORBA::Char & max) override;
 
-  virtual CORBA::WChar getset_wchar(CORBA::WChar min, CORBA::WChar max);
+  CORBA::WChar getset_wchar(CORBA::WChar min, CORBA::WChar max) override;
 
-  virtual void out_wchar(CORBA::WChar cin, CORBA::WChar_out c);
+  void out_wchar(CORBA::WChar cin, CORBA::WChar_out c) override;
 
-  virtual void inout_wchar(CORBA::WChar cin, CORBA::WChar & c);
+  void inout_wchar(CORBA::WChar cin, CORBA::WChar & c) override;
 
-  virtual CORBA::Octet getset_octet(CORBA::Octet min, CORBA::Octet max);
+  CORBA::Octet getset_octet(CORBA::Octet min, CORBA::Octet max) override;
 
-  virtual void out_octet(CORBA::Octet numin, CORBA::Octet_out num);
+  void out_octet(CORBA::Octet numin, CORBA::Octet_out num) override;
 
-  virtual void inout_octet(CORBA::Octet & num);
+  void inout_octet(CORBA::Octet & num) override;
 
-  virtual CORBA::Boolean getset_boolean(CORBA::Boolean min,
-      CORBA::Boolean max);
+  CORBA::Boolean getset_boolean(CORBA::Boolean min, CORBA::Boolean max) override;
 
-  virtual void out_boolean(CORBA::Boolean blin, CORBA::Boolean_out bl);
+  void out_boolean(CORBA::Boolean blin, CORBA::Boolean_out bl) override;
 
-  virtual void inout_boolean(CORBA::Boolean & bl);
+  void inout_boolean(CORBA::Boolean & bl) override;
 
-  virtual void shutdown();
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to conver strings to objects and shutdown

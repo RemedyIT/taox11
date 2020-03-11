@@ -44,7 +44,7 @@ namespace TAOX11_NAMESPACE
       /// Destructor.
       virtual ~Exception () throw () = default;
 
-      virtual const char* what() const noexcept override;
+      const char* what() const noexcept override;
 
       /// Throw the exception (when using the standard mapping).
       virtual void _raise () const = 0;

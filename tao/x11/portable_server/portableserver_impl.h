@@ -51,137 +51,111 @@ namespace TAOX11_NAMESPACE {
       friend class Servant_Activator_Callback;
       friend class Servant_Locator_Callback;
 
-      virtual void destroy (bool etherealize_objects,
-                            bool wait_for_completion) override;
+      void destroy (bool etherealize_objects,
+                    bool wait_for_completion) override;
 
-      virtual PortableServer::ObjectId
+      PortableServer::ObjectId
       activate_object (CORBA::servant_reference<PortableServer::Servant> servant) override;
 
-      virtual void
+      void
       activate_object_with_id (const PortableServer::ObjectId & id,
                                CORBA::servant_reference<PortableServer::Servant> servant) override;
 
-      virtual void
+      void
       deactivate_object (const PortableServer::ObjectId & oid) override;
 
-      virtual IDL::traits<CORBA::Object>::ref_type
+      IDL::traits<CORBA::Object>::ref_type
       id_to_reference (const PortableServer::ObjectId & oid) override;
 
-      virtual IDL::traits<POAManager>::ref_type
+      IDL::traits<POAManager>::ref_type
       the_POAManager () override;
 
 #if ! defined (CORBA_E_MICRO)
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<POA>::ref_type
+      IDL::traits<POA>::ref_type
       create_POA (const std::string& adapter_name,
           IDL::traits<PortableServer::POAManager>::ref_type a_POAManager,
           const TAOX11_NAMESPACE::CORBA::PolicyList& policies) override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<POA>::ref_type
+      IDL::traits<POA>::ref_type
       find_POA (const std::string& adapter_name,
           bool activate_it) override;
 #endif
 
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO) && (TAO_HAS_MINIMUM_POA == 0)
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<PortableServer::ThreadPolicy>::ref_type
+      IDL::traits<PortableServer::ThreadPolicy>::ref_type
       create_thread_policy (TAOX11_NAMESPACE::PortableServer::ThreadPolicyValue value) override;
 #endif
 #if  ! defined (CORBA_E_MICRO)
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<PortableServer::LifespanPolicy>::ref_type
+      IDL::traits<PortableServer::LifespanPolicy>::ref_type
       create_lifespan_policy (TAOX11_NAMESPACE::PortableServer::LifespanPolicyValue value) override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<PortableServer::IdUniquenessPolicy>::ref_type
+      IDL::traits<PortableServer::IdUniquenessPolicy>::ref_type
       create_id_uniqueness_policy (TAOX11_NAMESPACE::PortableServer::IdUniquenessPolicyValue value) override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<PortableServer::IdAssignmentPolicy>::ref_type
+      IDL::traits<PortableServer::IdAssignmentPolicy>::ref_type
       create_id_assignment_policy (TAOX11_NAMESPACE::PortableServer::IdAssignmentPolicyValue value) override;
 #endif
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO) && (TAO_HAS_MINIMUM_POA == 0)
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<PortableServer::ImplicitActivationPolicy>::ref_type
+      IDL::traits<PortableServer::ImplicitActivationPolicy>::ref_type
       create_implicit_activation_policy (TAOX11_NAMESPACE::PortableServer::ImplicitActivationPolicyValue value) override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<PortableServer::ServantRetentionPolicy>::ref_type
+      IDL::traits<PortableServer::ServantRetentionPolicy>::ref_type
       create_servant_retention_policy (TAOX11_NAMESPACE::PortableServer::ServantRetentionPolicyValue value) override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<PortableServer::RequestProcessingPolicy>::ref_type
+      IDL::traits<PortableServer::RequestProcessingPolicy>::ref_type
       create_request_processing_policy (TAOX11_NAMESPACE::PortableServer::RequestProcessingPolicyValue value) override;
 #endif
-      // generated from c++/cli_hdr/attribute.erb
-      virtual std::string the_name() override;
+      std::string the_name() override;
 
-      // generated from c++/cli_hdr/attribute.erb
-      virtual IDL::traits<POA>::ref_type the_parent() override;
+      IDL::traits<POA>::ref_type the_parent() override;
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO)
-      // generated from c++/cli_hdr/attribute.erb
-      virtual TAOX11_NAMESPACE::PortableServer::POAList
+      TAOX11_NAMESPACE::PortableServer::POAList
       the_children() override;
 #endif
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO) && (TAO_HAS_MINIMUM_POA == 0)
-      // generated from c++/cli_hdr/attribute.erb
-      virtual IDL::traits<POAManagerFactory>::ref_type
+      IDL::traits<POAManagerFactory>::ref_type
       the_POAManagerFactory() override;
 
-      // generated from c++/cli_hdr/attribute.erb
-      virtual IDL::traits<AdapterActivator>::ref_type
+      IDL::traits<AdapterActivator>::ref_type
       the_activator() override;
-      virtual void
+      void
       the_activator(IDL::traits<PortableServer::AdapterActivator>::ref_type _v) override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<ServantManager>::ref_type
+      IDL::traits<ServantManager>::ref_type
       get_servant_manager () override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual void
+      void
       set_servant_manager (IDL::traits<PortableServer::ServantManager>::ref_type imgr) override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual CORBA::servant_reference<PortableServer::Servant>
+      CORBA::servant_reference<PortableServer::Servant>
       get_servant () override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual void
+      void
       set_servant (CORBA::servant_reference<PortableServer::Servant> p_servant) override;
 #endif
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<CORBA::Object>::ref_type
+      IDL::traits<CORBA::Object>::ref_type
       create_reference (const TAOX11_NAMESPACE::CORBA::RepositoryId& intf) override;
 #if !defined (CORBA_E_MICRO)
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<CORBA::Object>::ref_type
+      IDL::traits<CORBA::Object>::ref_type
       create_reference_with_id (const TAOX11_NAMESPACE::PortableServer::ObjectId& oid,
                                 const TAOX11_NAMESPACE::CORBA::RepositoryId& intf) override;
 #endif
-      // generated from c++/cli_hdr/operation.erb
-      virtual TAOX11_NAMESPACE::PortableServer::ObjectId
+      TAOX11_NAMESPACE::PortableServer::ObjectId
       servant_to_id (CORBA::servant_reference<PortableServer::Servant> p_servant) override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<CORBA::Object>::ref_type
+      IDL::traits<CORBA::Object>::ref_type
       servant_to_reference (CORBA::servant_reference<PortableServer::Servant> p_servant) override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual CORBA::servant_reference<PortableServer::Servant>
+      CORBA::servant_reference<PortableServer::Servant>
       reference_to_servant (IDL::traits<CORBA::Object>::ref_type reference) override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual TAOX11_NAMESPACE::PortableServer::ObjectId
+      TAOX11_NAMESPACE::PortableServer::ObjectId
       reference_to_id (IDL::traits<CORBA::Object>::ref_type reference) override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual CORBA::servant_reference<PortableServer::Servant>
+      CORBA::servant_reference<PortableServer::Servant>
       id_to_servant (const TAOX11_NAMESPACE::PortableServer::ObjectId& oid) override;
 
-      // generated from c++/cli_hdr/attribute.erb
-      virtual TAOX11_NAMESPACE::CORBA::OctetSeq id() override;
+      TAOX11_NAMESPACE::CORBA::OctetSeq id() override;
 
       POA_proxy& _proxy ();
 

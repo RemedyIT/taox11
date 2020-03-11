@@ -132,8 +132,8 @@ void <%= interface.scoped_srvproxy_cxxname %>::<%= name %>_excep_skel (
 #endif /* TAO_HAS_INTERCEPTORS */
 
 % end
-  PS::SArg_Traits< void >::ret_val retval;
-  PS::SArg_Traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder >::in_arg_val _tao_excep_holder;
+  PS::SArg_Traits<void>::ret_val retval;
+  PS::SArg_Traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::in_arg_val _tao_excep_holder;
 
   TAO_TAO::Argument * const args[] =
   {
@@ -143,9 +143,9 @@ void <%= interface.scoped_srvproxy_cxxname %>::<%= name %>_excep_skel (
 
   TAOX11_NAMESPACE::Upcall_Command command (
     [&]() {
-      PS::SArg_Traits< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder >::in_arg_type arg_1 =
-        std::move (PS::get_in_arg< ::TAOX11_NAMESPACE::Messaging::ExceptionHolder> (server_request.operation_details (), args, 1));
-      servant.<%= cxxname %>_excep (arg_1);
+      PS::SArg_Traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::in_arg_type arg_1 =
+        std::move (PS::get_in_arg<TAOX11_NAMESPACE::Messaging::ExceptionHolder> (server_request.operation_details (), args, 1));
+      servant.<%= name %>_excep (arg_1);
     } );
 
   TAO_TAO::Upcall_Wrapper upcall_wrapper;

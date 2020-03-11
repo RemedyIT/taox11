@@ -27,63 +27,35 @@ namespace TAOX11_NAMESPACE
 
       virtual ~RequestInfo () = default;
 
-      virtual
-      uint32_t
-      request_id () override;
+      uint32_t request_id () override;
 
-      virtual
-      std::string
-      operation () override;
+      std::string operation () override;
 
-      virtual
-      ::TAOX11_NAMESPACE::Dynamic::ParameterList
-      arguments () override;
+      ::TAOX11_NAMESPACE::Dynamic::ParameterList arguments () override;
 
-      virtual
-      ::TAOX11_NAMESPACE::Dynamic::ExceptionList
-      exceptions () override;
+      ::TAOX11_NAMESPACE::Dynamic::ExceptionList exceptions () override;
 
-      virtual
-      ::TAOX11_NAMESPACE::Dynamic::ContextList
-      contexts () override;
+      ::TAOX11_NAMESPACE::Dynamic::ContextList contexts () override;
 
-      virtual
-      ::TAOX11_NAMESPACE::Dynamic::RequestContext
-      operation_context () override;
+      ::TAOX11_NAMESPACE::Dynamic::RequestContext operation_context () override;
 
-      virtual
-      TAOX11_NAMESPACE::CORBA::Any
-      result () override;
+      TAOX11_NAMESPACE::CORBA::Any result () override;
 
-      virtual
-      bool
-      response_expected () override;
+      bool response_expected () override;
 
-      virtual
-      ::TAOX11_NAMESPACE::Messaging::SyncScope
-      sync_scope () override;
+      ::TAOX11_NAMESPACE::Messaging::SyncScope sync_scope () override;
 
-      virtual
-      ::TAOX11_NAMESPACE::PortableInterceptor::ReplyStatus
-      reply_status () override;
+      ::TAOX11_NAMESPACE::PortableInterceptor::ReplyStatus reply_status () override;
 
-      virtual
-      IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type
-      forward_reference () override;
+      IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type forward_reference () override;
 
-      virtual
-      TAOX11_NAMESPACE::CORBA::Any
-      get_slot (
+      TAOX11_NAMESPACE::CORBA::Any get_slot (
           ::TAOX11_NAMESPACE::PortableInterceptor::SlotId id) override;
 
-      virtual
-      ::TAOX11_NAMESPACE::IOP::ServiceContext
-      get_request_service_context (
+      ::TAOX11_NAMESPACE::IOP::ServiceContext get_request_service_context (
           ::TAOX11_NAMESPACE::IOP::ServiceId id) override;
 
-      virtual
-      ::TAOX11_NAMESPACE::IOP::ServiceContext
-      get_reply_service_context (
+      ::TAOX11_NAMESPACE::IOP::ServiceContext get_reply_service_context (
           ::TAOX11_NAMESPACE::IOP::ServiceId id) override;
 
     private:

@@ -26,39 +26,31 @@ namespace TAOX11_NAMESPACE
 
       virtual ~IORInfo () = default;
 
-      virtual
       IDL::traits<CORBA::Policy>::ref_type
       get_effective_policy (
           CORBA::PolicyType type) override;
 
-      virtual
       void
       add_ior_component (
           const IOP::TaggedComponent& a_component) override;
 
-      virtual
       void
       add_ior_component_to_profile (
           const IOP::TaggedComponent& a_component,
           IOP::ProfileId profile_id) override;
 
-      virtual
       PortableInterceptor::AdapterManagerId
       manager_id () override;
 
-      virtual
       PortableInterceptor::AdapterState
       state () override;
 
-      virtual
       IDL::traits<PortableInterceptor::ObjectReferenceTemplate>::ref_type
       adapter_template () override;
 
-      virtual
       IDL::traits<PortableInterceptor::ObjectReferenceFactory>::ref_type
       current_factory () override;
 
-      virtual
       void
       current_factory (
           IDL::traits<PortableInterceptor::ObjectReferenceFactory>::ref_type _v) override;

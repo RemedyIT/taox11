@@ -21,28 +21,28 @@ public:
   AMI_Test_i (IDL::traits<CORBA::ORB>::ref_type orb);
 
   // The AMI_Test methods.
-  virtual int32_t foo (int32_t& inout_l,
+  int32_t foo (int32_t& inout_l,
                int32_t in_l,
                int32_t& out_l) override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
-  virtual int32_t yadda_get_r () override;
-  virtual void yadda_get_r (int32_t yadda) override;
+  int32_t yadda_get_r () override;
+  void yadda_get_r (int32_t yadda) override;
 
-  virtual int32_t yadda_set_r () override;
-  virtual void yadda_set_r (int32_t yadda) override;
+  int32_t yadda_set_r () override;
+  void yadda_set_r (int32_t yadda) override;
 
-  virtual int32_t yadda_get_set_r () override;
-  virtual void yadda_get_set_r (int32_t yadda) override;
+  int32_t yadda_get_set_r () override;
+  void yadda_get_set_r (int32_t yadda) override;
 
-  virtual int32_t yadda_no_r () override;
-  virtual void yadda_no_r (int32_t yadda) override;
+  int32_t yadda_no_r () override;
+  void yadda_no_r (int32_t yadda) override;
 
-  virtual int32_t  yadda_readonly_r() override;
-  virtual int32_t  yadda_readonly_no_r() override;
+  int32_t  yadda_readonly_r() override;
+  int32_t  yadda_readonly_no_r() override;
 
-  virtual int32_t foo_no_arg () override;
+  int32_t foo_no_arg () override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type  orb_;

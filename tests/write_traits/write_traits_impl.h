@@ -53,11 +53,11 @@ namespace Test
 
     // generated from c++11/templates/impl/hdr/operation.erb
     /// @copydoc Test::Foo::write_on_servant
-    virtual void write_on_servant (const ::Test::Person& record) override;
+    void write_on_servant (const ::Test::Person& record) override;
 
     // generated from c++11/templates/impl/hdr/operation.erb
     /// @copydoc Test::Foo::shutdown
-    virtual void shutdown () override;
+    void shutdown () override;
 
     // generated from {brix/taox11/}corba_servant/impl/hdr/interface_post.erb
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo_impl[User Public]

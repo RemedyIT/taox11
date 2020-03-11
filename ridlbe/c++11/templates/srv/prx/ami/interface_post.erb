@@ -38,7 +38,7 @@
   inline skel_type& skel () { return *this->skel_; }
 
 protected:
-  virtual TAOX11_NAMESPACE::PortableServer::Servant* _get_skel () const override;
+  TAOX11_NAMESPACE::PortableServer::Servant* _get_skel () const override;
 
 private:
   /** @name Illegal to be called. Deleted explicitly to let the compiler detect any violation */

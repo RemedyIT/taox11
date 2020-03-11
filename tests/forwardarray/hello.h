@@ -18,8 +18,8 @@ class iforward final
   /// Constructor
 public:
   iforward();
-  virtual void dump();
-  virtual int32_t uid();
+  void dump() override;
+  int32_t uid() override;
   int id;
 private:
   iforward (const iforward&) = delete;
@@ -38,18 +38,18 @@ public:
         IDL::traits<PortableServer::POA>::ref_type poa);
 
   // = The skeleton methods.
-  virtual IDL::traits<Test::iforward>::ref_type get_forward() override;
-  virtual Test::iforwardArray inout_forwardArray(
+  IDL::traits<Test::iforward>::ref_type get_forward() override;
+  Test::iforwardArray inout_forwardArray(
       const Test::iforwardArray& pin, Test::iforwardArray& pout,
       Test::iforwardArray& pinout) override;
-  virtual Test::iforwardArray2 inout_forwardArray2(
+  Test::iforwardArray2 inout_forwardArray2(
       const Test::iforwardArray2& pin, Test::iforwardArray2& pout,
       Test::iforwardArray2& pinout) override;
-  virtual Test::iforwardArray3 inout_forwardArray3(
+  Test::iforwardArray3 inout_forwardArray3(
       const Test::iforwardArray3& pin, Test::iforwardArray3& pout,
       Test::iforwardArray3& pinout) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

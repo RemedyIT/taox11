@@ -13,21 +13,21 @@ public:
   Hello(CORBA::ORB_ptr orb, int& result);
 
   // = The skeleton methods
-  virtual CORBA::WChar * getset_string(const CORBA::WChar * text);
-  virtual void out_string(CORBA::WString_out text);
-  virtual void inout_string(CORBA::WChar *& text);
+  CORBA::WChar * getset_string(const CORBA::WChar * text) override;
+  void out_string(CORBA::WString_out text) override;
+  void inout_string(CORBA::WChar *& text) override;
 
-  virtual CORBA::WChar * getset_lstring(const CORBA::WChar * text);
-  virtual void out_lstring(CORBA::WString_out text);
-  virtual void inout_lstring(CORBA::WChar *& text);
+  CORBA::WChar * getset_lstring(const CORBA::WChar * text) override;
+  void out_lstring(CORBA::WString_out text) override;
+  void inout_lstring(CORBA::WChar *& text) override;
 
-  virtual CORBA::WStringSeq * getset_stringSeq(const CORBA::WStringSeq & seq);
-  virtual void out_stringSeq(CORBA::WStringSeq_out seq);
-  virtual void inout_stringSeq(CORBA::WStringSeq & seq);
+  CORBA::WStringSeq * getset_stringSeq(const CORBA::WStringSeq & seq) override;
+  void out_stringSeq(CORBA::WStringSeq_out seq) override;
+  void inout_stringSeq(CORBA::WStringSeq & seq) override;
 
-  virtual void bounded_string (const CORBA::WChar * text);
+  void bounded_string (const CORBA::WChar * text) override;
 
-  virtual void shutdown();
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to conver strings to objects and shutdown

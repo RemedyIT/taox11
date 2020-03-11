@@ -18,20 +18,19 @@ class Test_i
 {
 public:
   // The Test methods.
-  virtual int32_t foo (int32_t in_l) override;
-  virtual int32_t sendc_foo (int16_t in_s) override;
-  virtual int32_t sendc_ami_foo (bool in_b) override;
+  int32_t foo (int32_t in_l) override;
+  int32_t sendc_foo (int16_t in_s) override;
+  int32_t sendc_ami_foo (bool in_b) override;
 
-  virtual int32_t yadda () override;
-  virtual void yadda (int32_t l) override;
-  virtual int16_t sendc_get_yadda () override;
-  virtual void sendc_get_yadda (int16_t s) override;
-  virtual bool sendc_ami_get_yadda () override;
-  virtual void sendc_ami_get_yadda (bool b) override;
+  int32_t yadda () override;
+  void yadda (int32_t l) override;
+  int16_t sendc_get_yadda () override;
+  void sendc_get_yadda (int16_t s) override;
+  bool sendc_ami_get_yadda () override;
+  void sendc_ami_get_yadda (bool b) override;
 
-  virtual int32_t _cxx_do () override;
-  virtual void _cxx_do (int32_t l) override;
-
+  int32_t _cxx_do () override;
+  void _cxx_do (int32_t l) override;
 
 private:
   int32_t num_l_;
@@ -44,8 +43,8 @@ class Two_i
 {
 public:
    // The Test methods.
-  virtual int32_t foo_two (int32_t in_l) override;
-  virtual int32_t _cxx_do (int32_t in_l) override;
+  int32_t foo_two (int32_t in_l) override;
+  int32_t _cxx_do (int32_t in_l) override;
 };
 /// Implement the A::Hello interface
 class Hello :
@@ -57,10 +56,10 @@ public:
       IDL::traits<PortableServer::POA>::ref_type poa);
 
   // = The skeleton methods
-  virtual IDL::traits<A::Test>::ref_type get_iTest() override;
-  virtual IDL::traits<A::Two>::ref_type get_iTwo() override;
+  IDL::traits<A::Test>::ref_type get_iTest() override;
+  IDL::traits<A::Two>::ref_type get_iTwo() override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
   /// the application.

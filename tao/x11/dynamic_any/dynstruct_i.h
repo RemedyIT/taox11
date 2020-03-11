@@ -51,28 +51,28 @@ namespace TAOX11_NAMESPACE
 
       // = Functions specific to DynStruct.
 
-      virtual DynamicAny::FieldName current_member_name () override;
+      DynamicAny::FieldName current_member_name () override;
 
-      virtual CORBA::TCKind current_member_kind () override;
+      CORBA::TCKind current_member_kind () override;
 
-      virtual DynamicAny::NameValuePairSeq get_members () override;
+      DynamicAny::NameValuePairSeq get_members () override;
 
-      virtual void set_members (const DynamicAny::NameValuePairSeq& value) override;
+      void set_members (const DynamicAny::NameValuePairSeq& value) override;
 
-      virtual DynamicAny::NameDynAnyPairSeq get_members_as_dyn_any () override;
+      DynamicAny::NameDynAnyPairSeq get_members_as_dyn_any () override;
 
-      virtual void set_members_as_dyn_any (
+      void set_members_as_dyn_any (
           const DynamicAny::NameDynAnyPairSeq & value) override;
 
       // = DynAny common functions not implemented in class TAO_DynCommon.
 
-      virtual void from_any (const CORBA::Any & value) override;
+      void from_any (const CORBA::Any & value) override;
 
-      virtual CORBA::Any to_any () override;
+      CORBA::Any to_any () override;
 
-      virtual bool equal (IDL::traits< DynamicAny::DynAny>::ref_type dyn_any) override;
+      bool equal (IDL::traits< DynamicAny::DynAny>::ref_type dyn_any) override;
 
-      virtual void destroy () override;
+      void destroy () override;
 
       virtual IDL::traits< DynamicAny::DynAny>::ref_type current_component () override;
 

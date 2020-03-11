@@ -22,9 +22,9 @@ public:
   Receiver_impl ();
 
   // = The skeleton methods
-  virtual void receive_data (const Test::Message &message) override;
+  void receive_data (const Test::Message &message) override;
 
-  virtual void done () override;
+  void done () override;
 
 private:
   /// The timestamp for the first message

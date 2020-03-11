@@ -18,7 +18,7 @@ class A_i
 {
 public:
   // The AMI_Test methods.
-  virtual int32_t op_A (int32_t) override;
+  int32_t op_A (int32_t) override;
 };
 
 class B_i
@@ -26,8 +26,8 @@ class B_i
 {
 public:
   // The AMI_Test methods.
-  virtual int32_t op_A (int32_t) override;
-  virtual int32_t op_B (int32_t) override;
+  int32_t op_A (int32_t) override;
+  int32_t op_B (int32_t) override;
 };
 
 class C_i
@@ -35,8 +35,8 @@ class C_i
 {
 public:
   // The AMI_Test methods.
-  virtual int32_t op_A (int32_t) override;
-  virtual int32_t op_C (int32_t) override;
+  int32_t op_A (int32_t) override;
+  int32_t op_C (int32_t) override;
 };
 
 class D_i
@@ -44,10 +44,10 @@ class D_i
 {
 public:
   // The AMI_Test methods.
-  virtual int32_t op_A (int32_t) override;
-  virtual int32_t op_B (int32_t) override;
-  virtual int32_t op_C (int32_t) override;
-  virtual int32_t op_D (int32_t) override;
+  int32_t op_A (int32_t) override;
+  int32_t op_B (int32_t) override;
+  int32_t op_C (int32_t) override;
+  int32_t op_D (int32_t) override;
 };
 
 /// Implement the Test::Hello interface
@@ -60,12 +60,12 @@ public:
       IDL::traits<PortableServer::POA>::ref_type poa);
 
   // = The skeleton methods
-  virtual IDL::traits<Test::A>::ref_type get_iA() override;
-  virtual IDL::traits<Test::B>::ref_type get_iB() override;
-  virtual IDL::traits<Test::C>::ref_type get_iC() override;
-  virtual IDL::traits<Test::D>::ref_type get_iD() override;
+  IDL::traits<Test::A>::ref_type get_iA() override;
+  IDL::traits<Test::B>::ref_type get_iB() override;
+  IDL::traits<Test::C>::ref_type get_iC() override;
+  IDL::traits<Test::D>::ref_type get_iD() override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
   /// the application.

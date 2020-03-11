@@ -18,9 +18,9 @@ public:
   Simple_Server_i (IDL::traits<CORBA::ORB>::ref_type orb);
   ~Simple_Server_i() = default;
 
-  virtual bool test_is_a (const std::string& type) override;
+  bool test_is_a (const std::string& type) override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   Simple_Server_i (const Simple_Server_i&) = delete;

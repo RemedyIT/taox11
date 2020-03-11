@@ -54,7 +54,7 @@ class Worker final
 public:
   explicit Worker (IDL::traits<CORBA::ORB>::ref_type orb);
 
-  virtual int svc () override;
+  int svc () override;
 
   void run_test ();
 

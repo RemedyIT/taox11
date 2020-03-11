@@ -18,15 +18,15 @@ public:
   Foo (IDL::traits<CORBA::ORB>::ref_type orb);
 
   // = The skeleton methods
-  virtual bool pass_struct (const Test::Simple & s) override;
+  bool pass_struct (const Test::Simple & s) override;
 
-  virtual Test::Simple return_struct () override;
+  Test::Simple return_struct () override;
 
-  virtual bool get_struct (Test::Simple & s) override;
+  bool get_struct (Test::Simple & s) override;
 
-  virtual bool update_struct (Test::Simple & s) override;
+  bool update_struct (Test::Simple & s) override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

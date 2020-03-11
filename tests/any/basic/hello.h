@@ -20,49 +20,49 @@ public:
   virtual ~Hello ();
 
   // = The skeleton methods
-  virtual CORBA::Any
+  CORBA::Any
   TestAny(
      const CORBA::Any &a,
      CORBA::Any &b,
      CORBA::Any &c) override;
 
   // = The skeleton methods
-  virtual CORBA::Any
+  CORBA::Any
   TestAny2(
      const CORBA::Any &a,
      CORBA::Any &b,
      CORBA::Any &c,
      const CORBA::Any &d) override;
 
-  virtual CORBA::Any
+  CORBA::Any
   TestAny3(
     const CORBA::Any &a,
     CORBA::Any &b,
     CORBA::Any &c) override;
 
   // = The skeleton methods
-  virtual CORBA::Any
+  CORBA::Any
   TestAny4(
      const CORBA::Any &a,
      CORBA::Any &b,
      CORBA::Any &c) override;
 
-  virtual CORBA::Any
+  CORBA::Any
   TestAnyTypeCodes (
     const CORBA::Any &a,
     CORBA::Any &b) override;
 
-  virtual CORBA::TCKind
+  CORBA::TCKind
   TestAnyTypeCodes2 (CORBA::TCKind a, CORBA::TCKind& b) override;
 
-  virtual IDL::traits< CORBA::TypeCode>::ref_type
+  IDL::traits< CORBA::TypeCode>::ref_type
   TestAnyTypeCodes3 (IDL::traits< CORBA::TypeCode>::ref_type a,
     IDL::traits< CORBA::TypeCode>::ref_type& b) override;
 
-  virtual Test::Hello::Tc_seq
+  Test::Hello::Tc_seq
   TestTypeCodeSeq (const Test::Hello::Tc_seq& a, Test::Hello::Tc_seq& b) override;
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

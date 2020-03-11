@@ -62,12 +62,12 @@ namespace TAOX11_NAMESPACE
       }
 
       // = These are TAO-specific extensions.
-      virtual void _tao_encode (TAO_OutputCDR &cdr) const;
+      void _tao_encode (TAO_OutputCDR &cdr) const override;
 
-      virtual void _tao_decode (TAO_InputCDR &cdr);
+      void _tao_decode (TAO_InputCDR &cdr) override;
 
       /// Deep copy
-      virtual CORBA::Exception *_tao_duplicate () const;
+      CORBA::Exception *_tao_duplicate () const override;
 
       // = TAO X11 extension
 
@@ -92,7 +92,7 @@ namespace TAOX11_NAMESPACE
                        uint32_t code,
                        CORBA::CompletionStatus completed);
 
-      virtual void _info (std::ostream& strm) const;
+      void _info (std::ostream& strm) const override;
 
     private:
       /// Minor code.
@@ -206,12 +206,12 @@ namespace TAOX11_NAMESPACE
       name (name &&) = default; \
       name & operator = (const name &) = default; \
       name & operator = (name &&) = default; \
-      virtual const char* what() const noexcept override; \
-      virtual void _raise () const override; \
-      virtual CORBA::Exception *_tao_duplicate () const override; \
-      virtual void _raise_tao () const override; \
-      virtual void _any_insert (CORBA::Any &) const override; \
-      virtual void _any_insert (CORBA::Any &) override; \
+      const char* what() const noexcept override; \
+      void _raise () const override; \
+      CORBA::Exception *_tao_duplicate () const override; \
+      void _raise_tao () const override; \
+      void _any_insert (CORBA::Any &) const override; \
+      void _any_insert (CORBA::Any &) override; \
     };
 
     TAOX11_STANDARD_SYSTEM_EXCEPTION_LIST

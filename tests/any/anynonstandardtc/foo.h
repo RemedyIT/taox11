@@ -21,17 +21,17 @@ public:
   Foo (IDL::traits<CORBA::ORB>::ref_type orb);
 
   // = The skeleton methods
-  virtual bool pass_data (const CORBA::Any & s);
+  bool pass_data (const CORBA::Any & s) override;
 
-  virtual CORBA::Any return_data (bool str);
+  CORBA::Any return_data (bool str) override;
 
-  virtual bool get_data (CORBA::Any & s, bool str);
+  bool get_data (CORBA::Any & s, bool str) override;
 
-  virtual bool update_struct (CORBA::Any & s);
+  bool update_struct (CORBA::Any & s) override;
 
-  virtual bool update_union (CORBA::Any & s);
+  bool update_union (CORBA::Any & s)override;
 
-  virtual void shutdown ();
+  void shutdown () override;
 
 private:
   /// Use an ORB reference to convert strings to objects and shutdown

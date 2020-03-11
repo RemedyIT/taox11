@@ -23,7 +23,6 @@ class ServerRequestInterceptor
   : public IDL::traits<PortableInterceptor::ServerRequestInterceptor>::base_type
 {
 public:
-
   /// Constructor.
   ServerRequestInterceptor (PortableInterceptor::SlotId id,
                             IDL::traits<PortableInterceptor::Current>::ref_type pi_current);
@@ -38,35 +37,33 @@ public:
    */
   //@{
   /// Return the name of this ServerRequestinterceptor.
-  virtual std::string name () override;
+  std::string name () override;
 
-  virtual void destroy () override;
+  void destroy () override;
 
-  virtual void receive_request_service_contexts (
+  void receive_request_service_contexts (
       IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
 
-  virtual void receive_request (
+  void receive_request (
       IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
 
-  virtual void send_reply (
+  void send_reply (
       IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
 
-  virtual void send_exception (
+  void send_exception (
       IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
 
-  virtual void send_other (
+  void send_other (
       IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
   //@}
 
 private:
-
   /// The PICurrent slot ID allocated to this application during ORB
   /// initialization.
   PortableInterceptor::SlotId slot_id_;
 
   /// Reference to the PICurrent object.
   IDL::traits<PortableInterceptor::Current>::ref_type pi_current_;
-
 };
 
 #endif  /* SERVER_REQUEST_INTERCEPTOR_H */

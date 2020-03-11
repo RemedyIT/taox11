@@ -17,11 +17,11 @@ class Oneway_Receiver
 public:
   Oneway_Receiver (IDL::traits<CORBA::ORB>::ref_type orb);
 
-  virtual void raise_no_permission () override;
+  void raise_no_permission () override;
 
-  virtual void destroy () override;
+  void destroy () override;
 
-  virtual IDL::traits<Test::Shutdown_Helper>::ref_type get_shutdown_helper () override;
+  IDL::traits<Test::Shutdown_Helper>::ref_type get_shutdown_helper () override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;

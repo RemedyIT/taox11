@@ -27,12 +27,10 @@ namespace TAOX11_NAMESPACE
     public:
       ~ServerRequestInterceptorProxyFactory() = default;
 
-      virtual
       TAO_PI::ServerRequestInterceptor_ptr
       create_server_request_interceptor_proxy (
           IDL::traits<PortableInterceptor::ServerRequestInterceptor>::ref_type) override;
 
-      virtual
       void
       release_server_request_interceptor_proxy (
           TAO_PI::ServerRequestInterceptor_ptr) override;

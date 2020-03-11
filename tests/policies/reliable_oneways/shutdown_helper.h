@@ -17,7 +17,7 @@ class Shutdown_Helper
 public:
   Shutdown_Helper (IDL::traits<CORBA::ORB>::ref_type orb);
 
-  virtual void shutdown () override;
+  void shutdown () override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;

@@ -37,7 +37,7 @@ namespace TAOX11_NAMESPACE
     virtual ~Upcall_Command () = default;
 
     /// Calls the execute_function catching/wrapping any user exceptions.
-    virtual void execute () override;
+    void execute () override;
   private:
     /** @name Illegal to be called. Deleted explicitly to let the compiler detect any violation */
     //@{

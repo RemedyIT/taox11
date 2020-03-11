@@ -23,59 +23,59 @@ public:
   template<class T, class U>
   void TestEq(const char * name, T exp, U a);
 
-  virtual CORBA::Short getset_short(CORBA::Short numMin,
-      CORBA::Short numMax);
-  virtual void out_short(CORBA::Short numin, CORBA::Short_out num);
-  virtual void inout_short(CORBA::Short & numMin, CORBA::Short & numMax);
+  CORBA::Short getset_short(CORBA::Short numMin,
+      CORBA::Short numMax) override;
+  void out_short(CORBA::Short numin, CORBA::Short_out num) override;
+  void inout_short(CORBA::Short & numMin, CORBA::Short & numMax) override;
 
   // = The skeleton methods for unsigned short
-  virtual CORBA::UShort getset_ushort(CORBA::UShort min,
-      CORBA::UShort max);
-  virtual void out_ushort(CORBA::UShort numin, CORBA::UShort_out num);
-  virtual void inout_ushort(CORBA::UShort & min, CORBA::UShort & max);
+  CORBA::UShort getset_ushort(CORBA::UShort min,
+      CORBA::UShort max) override;
+  void out_ushort(CORBA::UShort numin, CORBA::UShort_out num) override;
+  void inout_ushort(CORBA::UShort & min, CORBA::UShort & max) override;
 
-  virtual CORBA::Long getset_long(CORBA::Long min, CORBA::Long max);
-  virtual void out_long(CORBA::Long numin, CORBA::Long_out num);
-  virtual void inout_long(CORBA::Long & min, CORBA::Long & max);
+  CORBA::Long getset_long(CORBA::Long min, CORBA::Long max) override;
+  void out_long(CORBA::Long numin, CORBA::Long_out num) override;
+  void inout_long(CORBA::Long & min, CORBA::Long & max) override;
 
-  virtual CORBA::ULong
-  getset_ulong(CORBA::ULong min, CORBA::ULong max);
-  virtual void out_ulong(CORBA::ULong numin, CORBA::ULong_out num);
-  virtual void inout_ulong(CORBA::ULong & min, CORBA::ULong & max);
+  CORBA::ULong
+  getset_ulong(CORBA::ULong min, CORBA::ULong max) override;
+  void out_ulong(CORBA::ULong numin, CORBA::ULong_out num) override;
+  void inout_ulong(CORBA::ULong & min, CORBA::ULong & max) override;
 
-  virtual CORBA::LongLong getset_longlong(CORBA::LongLong min,
-      CORBA::LongLong max);
-  virtual void
-  out_longlong(CORBA::LongLong numin, CORBA::LongLong_out num);
-  virtual void
-  inout_longlong(CORBA::LongLong & min, CORBA::LongLong & max);
+  CORBA::LongLong getset_longlong(CORBA::LongLong min,
+      CORBA::LongLong max) override;
+  void
+  out_longlong(CORBA::LongLong numin, CORBA::LongLong_out num) override;
+  void
+  inout_longlong(CORBA::LongLong & min, CORBA::LongLong & max) override;
 
-  virtual CORBA::ULongLong getset_ulonglong(CORBA::ULongLong min,
-      CORBA::ULongLong max);
-  virtual void out_ulonglong(CORBA::ULongLong numin,
-      CORBA::ULongLong_out num);
-  virtual void inout_ulonglong(CORBA::ULongLong & min,
-      CORBA::ULongLong & max);
+  CORBA::ULongLong getset_ulonglong(CORBA::ULongLong min,
+      CORBA::ULongLong max) override;
+  void out_ulonglong(CORBA::ULongLong numin,
+      CORBA::ULongLong_out num) override;
+  void inout_ulonglong(CORBA::ULongLong & min,
+      CORBA::ULongLong & max) override;
 
-  virtual CORBA::Float
-  getset_float(CORBA::Float min, CORBA::Float max);
-  virtual void out_float(CORBA::Float numin, CORBA::Float_out num);
-  virtual void inout_float(CORBA::Float & min, CORBA::Float & max);
+  CORBA::Float
+  getset_float(CORBA::Float min, CORBA::Float max) override;
+  void out_float(CORBA::Float numin, CORBA::Float_out num) override;
+  void inout_float(CORBA::Float & min, CORBA::Float & max) override;
 
-  virtual CORBA::Double getset_double(CORBA::Double min,
-      CORBA::Double max);
-  virtual void out_double(CORBA::Double numin, CORBA::Double_out num);
-  virtual void inout_double(CORBA::Double & min, CORBA::Double & max);
+  CORBA::Double getset_double(CORBA::Double min,
+      CORBA::Double max) override;
+  void out_double(CORBA::Double numin, CORBA::Double_out num) override;
+  void inout_double(CORBA::Double & min, CORBA::Double & max) override;
 
-  virtual CORBA::LongDouble getset_longdouble(CORBA::LongDouble min,
-      CORBA::LongDouble max);
+  CORBA::LongDouble getset_longdouble(CORBA::LongDouble min,
+      CORBA::LongDouble max) override;
 
-  virtual void out_longdouble(CORBA::LongDouble numin,
-      CORBA::LongDouble_out num);
-  virtual void inout_longdouble(CORBA::LongDouble & min,
-      CORBA::LongDouble & max);
+  void out_longdouble(CORBA::LongDouble numin,
+      CORBA::LongDouble_out num) override;
+  void inout_longdouble(CORBA::LongDouble & min,
+      CORBA::LongDouble & max) override;
 
-  virtual void shutdown();
+  void shutdown() override;
 
 private:
   /// Use an ORB reference to conver strings to objects and shutdown

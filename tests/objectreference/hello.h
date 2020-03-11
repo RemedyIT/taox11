@@ -19,7 +19,7 @@ public:
   iA_impl () = default;
   ~iA_impl () = default;
 
-  virtual std::string do_something_A();
+  std::string do_something_A() override;
 private:
   iA_impl (const iA_impl&) = delete;
   iA_impl (iA_impl&&) = delete;
@@ -37,14 +37,14 @@ public:
       IDL::traits<PortableServer::POA>::ref_type poa,
       int& result);
 
-  virtual IDL::traits<Test::iA>::ref_type get_iA() override;
-  virtual IDL::traits<Test::iA>::ref_type get_null() override;
-  virtual IDL::traits<Test::iA>::ref_type inout_null(
+  IDL::traits<Test::iA>::ref_type get_iA() override;
+  IDL::traits<Test::iA>::ref_type get_null() override;
+  IDL::traits<Test::iA>::ref_type inout_null(
       IDL::traits<Test::iA>::ref_type in_v,
       IDL::traits<Test::iA>::ref_type& out_v,
       IDL::traits<Test::iA>::ref_type& inout_v) override;
 
-  virtual void shutdown() override;
+  void shutdown() override;
 private:
   /// Use an ORB reference to convert strings to objects and shutdown
   /// the application.

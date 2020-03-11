@@ -11,7 +11,7 @@
 #include "testlib/taox11_testlog.h"
 
 Hello::Hello(IDL::traits<CORBA::ORB>::ref_type orb, int& result) :
-  orb_(orb), result_(result)
+  orb_(std::move(orb)), result_(result)
 {
 }
 
@@ -147,6 +147,24 @@ Hello::attr_cpp_keyword_struct (const ::Test::cpp_keyword_struct& _v)
 void Hello::bar ()
 {
   this->bar_called_ = true;
+}
+
+void Hello::_cxx_class ()
+{
+}
+
+void Hello::_cxx_void (std::string&, std::string&)
+{
+}
+
+::Test::_cxx_bool Hello::_cxx_private ()
+{
+  return _cxx_private_;
+}
+
+void Hello::_cxx_private (::Test::_cxx_bool _v)
+{
+  _cxx_private_ = _v;
 }
 
 // End

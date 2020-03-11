@@ -6,7 +6,7 @@
 - aprc
 :add_files: true
 :fzzr_paths:
-- ./bin/fuzzers
+- ../bin/fuzzers
 :fzzr_opts:
   :check_whitespace: {}
 :fzzr_excludes: []
