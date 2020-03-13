@@ -31,7 +31,7 @@ namespace x11_logger
     ~NULL_LogType () = default;
 
     /// Get the current output mask.
-    static inline uint32_t output_mask ()    { return 0; }
+    static inline uint32_t output_mask () { return 0; }
 
     /// Set the output mask, returns original mask.
     static inline uint32_t output_mask (uint32_t) { return 0; }

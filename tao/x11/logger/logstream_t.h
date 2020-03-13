@@ -129,7 +129,7 @@ namespace x11_logger
     typedef typename ios_base::logprio_type logprio_type;
 
     explicit log_ostream_t(logprio_type prio);
-    ~log_ostream_t();
+    ~log_ostream_t() = default;
   };
 
 } /* x11_logger */
