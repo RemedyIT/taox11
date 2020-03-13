@@ -25,11 +25,9 @@ GNUmakefile*
 *.ipdb
 *.exp
 *.exe
-ridl
-public
 *.kdev4
 *.so*
 commit.txt
 taox11/html
 taox11/latex
-/package
+*.gcno
