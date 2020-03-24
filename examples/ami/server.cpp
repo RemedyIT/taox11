@@ -2,7 +2,7 @@
  * @file    server.cpp
  * @author  Marijke Hengstmengel
  *
- * @brief   CORBA C++11x server ami test
+ * @brief   CORBA C++11 server ami test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
