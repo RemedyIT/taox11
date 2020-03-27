@@ -33,9 +33,9 @@ namespace TAOX11_NAMESPACE
   public:
     In_Basic_SArgument_T () = default;
 
-    virtual TAO_CORBA::Boolean demarshal (TAO_InputCDR &) override;
+    TAO_CORBA::Boolean demarshal (TAO_InputCDR &) override;
 #if TAO_HAS_INTERCEPTORS == 1
-    virtual void interceptor_value (TAO_CORBA::Any *any) const override;
+    void interceptor_value (TAO_CORBA::Any *any) const override;
 #endif /* TAO_HAS_INTERCEPTORS == 1 */
     long double& arg () { return this->x_; }
 
@@ -56,10 +56,10 @@ namespace TAOX11_NAMESPACE
   public:
     Inout_Basic_SArgument_T () = default;
 
-    virtual TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
-    virtual TAO_CORBA::Boolean demarshal (TAO_InputCDR &) override;
+    TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
+    TAO_CORBA::Boolean demarshal (TAO_InputCDR &) override;
 #if TAO_HAS_INTERCEPTORS == 1
-    virtual void interceptor_value (TAO_CORBA::Any *any) const override;
+    void interceptor_value (TAO_CORBA::Any *any) const override;
 #endif /* TAO_HAS_INTERCEPTORS == 1 */
     long double & arg () { return this->x_; }
 
@@ -80,9 +80,9 @@ namespace TAOX11_NAMESPACE
   public:
     Out_Basic_SArgument_T () = default;
 
-    virtual TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
+    TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
 #if TAO_HAS_INTERCEPTORS == 1
-    virtual void interceptor_value (TAO_CORBA::Any *any) const override;
+    void interceptor_value (TAO_CORBA::Any *any) const override;
 #endif /* TAO_HAS_INTERCEPTORS == 1 */
     long double & arg () { return this->x_; }
 
@@ -103,9 +103,9 @@ namespace TAOX11_NAMESPACE
   public:
     Ret_Basic_SArgument_T () = default;
 
-    virtual TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
+    TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
 #if TAO_HAS_INTERCEPTORS == 1
-    virtual void interceptor_value (TAO_CORBA::Any *any) const override;
+    void interceptor_value (TAO_CORBA::Any *any) const override;
 #endif /* TAO_HAS_INTERCEPTORS == 1 */
     long double & arg () { return this->x_; }
 
