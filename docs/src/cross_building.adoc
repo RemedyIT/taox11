@@ -169,7 +169,7 @@ The following table describes the purpose of the fields.
 [cols="<,<",options="header",]
 |=========================================
 |Field |Description
-|os|The OS name. Used to determin the config and gnumake includes if none specified.
+|os|The OS name. Used to determine the config and gnumake includes if none specified.
 |bits|The default target bitsize. This controls bitsize compiler switches which are
       often not appropriate for cross targets.
       Setting this to 0 instead of 32 or 64 disables these switches.
@@ -188,4 +188,3 @@ The following table describes the purpose of the fields.
 |gnumake_prelude|Make definitions to insert *before* the gnumake_include.
 |gnumake_post|Make definitions to add *after* the gnumake_include.
 |=========================================
-

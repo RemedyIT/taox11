@@ -2,7 +2,7 @@
  * @file    test_i.h
  * @author  Marijke Hengstmengel
  *
- * @brief   CORBA C++11x interface ami test
+ * @brief   CORBA C++11 interface ami test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
@@ -27,7 +27,6 @@ public:
 
   virtual int32_t yadda () override;
   virtual void yadda (int32_t yadda) override;
-
 
 private:
   IDL::traits<CORBA::ORB>::ref_type  orb_;
