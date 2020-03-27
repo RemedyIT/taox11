@@ -195,16 +195,16 @@ namespace TAOX11_NAMESPACE {
 #endif
       friend struct CORBA::object_traits<POAManager>;
 
-      virtual void activate () override;
+      void activate () override;
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO) && (TAO_HAS_MINIMUM_POA == 0)
-      virtual void hold_requests (bool wait_for_completion) override;
-      virtual void discard_requests (bool wait_for_completion) override;
-      virtual void deactivate (bool etherealize_objects,
+      void hold_requests (bool wait_for_completion) override;
+      void discard_requests (bool wait_for_completion) override;
+      void deactivate (bool etherealize_objects,
                                bool wait_for_completion) override;
 #endif
-      virtual State get_state () override;
+      State get_state () override;
 
-      virtual std::string get_id () override;
+      std::string get_id () override;
 
       POAManager_proxy& _proxy ();
 
@@ -238,13 +238,13 @@ namespace TAOX11_NAMESPACE {
       friend class TAOX11_NAMESPACE::PortableServer::POA_impl;
       friend struct CORBA::object_traits<POAManagerFactory>;
 
-      virtual IDL::traits<PortableServer::POAManager>::ref_type
+      IDL::traits<PortableServer::POAManager>::ref_type
       create_POAManager (const std::string& id,
                          const TAOX11_NAMESPACE::CORBA::PolicyList& policies) override;
 
-      virtual POAManagerSeq list () override;
+      POAManagerSeq list () override;
 
-      virtual IDL::traits<PortableServer::POAManager>::ref_type
+      IDL::traits<PortableServer::POAManager>::ref_type
       find (const std::string& id) override;
 
       POAManagerFactory_proxy& _proxy ();
@@ -278,20 +278,13 @@ namespace TAOX11_NAMESPACE {
     public:
       friend struct CORBA::object_traits<Current>;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<PortableServer::POA>::ref_type
-      get_POA () override;
+      IDL::traits<PortableServer::POA>::ref_type get_POA () override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual PortableServer::ObjectId get_object_id () override;
+      PortableServer::ObjectId get_object_id () override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual IDL::traits<CORBA::Object>::ref_type
-      get_reference () override;
+      IDL::traits<CORBA::Object>::ref_type get_reference () override;
 
-      // generated from c++/cli_hdr/operation.erb
-      virtual CORBA::servant_reference<PortableServer::Servant>
-      get_servant () override;
+      CORBA::servant_reference<PortableServer::Servant> get_servant () override;
 
       POA_Current_proxy& _proxy ();
 
