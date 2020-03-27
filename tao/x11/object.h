@@ -242,7 +242,7 @@ namespace TAOX11_NAMESPACE
 #endif
 
 #if (TAO_HAS_CORBA_MESSAGING == 1)
-      // Mot in TAO
+      // Not in TAO
       object_traits<Policy>::ref_type _get_client_policy (
                                     const PolicyType& policy_type) override;
 
