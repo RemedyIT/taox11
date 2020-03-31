@@ -55,10 +55,8 @@
 # define taox11_ios_init(buf) this->init(buf)
 #endif
 
-
 namespace x11_logger
 {
-
   template <typename CH, typename TR>
   log_buffer_t<CH, TR>::log_buffer_t (
       typename log_buffer_t<CH, TR>::logprio_type prio,
@@ -190,12 +188,6 @@ namespace x11_logger
       std::basic_ostream<CH, TR> (log_ios_t<CH, TR>::rdbuf ())
     {
     }
-
-  template <typename CH, typename TR>
-  log_ostream_t<CH, TR>::~log_ostream_t()
-    {
-    }
-
 } /* x11_logger */
 
 #endif /* TAOX11_LOGGER_LOGSTREAM_T_CPP */

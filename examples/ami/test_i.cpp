@@ -2,16 +2,15 @@
  * @file    test_i.cpp
  * @author  Marijke Hengstmengel
  *
- * @brief   CORBA C++11x interface ami test
+ * @brief   CORBA C++11 interface ami test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
 #include "test_i.h"
 
-A_i::A_i (IDL::traits<CORBA::ORB>::ref_type orb
-    )
-  :  orb_ (orb)
+A_i::A_i (IDL::traits<CORBA::ORB>::ref_type orb)
+  :  orb_ (std::move(orb))
 {
 }
 

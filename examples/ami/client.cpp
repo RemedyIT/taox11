@@ -2,7 +2,7 @@
  * @file    client.cpp
  * @author  Marijke Hengstmengel
  *
- * @brief   CORBA C++11x client ami test
+ * @brief   CORBA C++11 client ami test
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
