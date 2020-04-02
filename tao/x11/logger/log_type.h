@@ -195,7 +195,7 @@ namespace x11_logger
     template <typename CH, typename TR>
     friend class log_buffer_t;
 
-    virtual Log_Type * const* get_reference () const override
+    Log_Type * const* get_reference () const override
     {
       return &Log_Type_T<LOG_MODULE>::reference_;
     }
