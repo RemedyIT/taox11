@@ -12,6 +12,12 @@
 #include "ace/Get_Opt.h"
 #include "testlib/taox11_testlog.h"
 
+// GCC 4.x and 6 have a bug which prevents us to use the tie
+// specialization without specifying the namespace explicitly
+#if defined __GNUC__ && (__GNUC__ < 7)
+#define TAOX11_LACKS_TIE_SPECIALIZATION
+#endif
+
 const ACE_TCHAR *ior = ACE_TEXT ("file://test.ior");
 
 bool
@@ -78,6 +84,7 @@ int main(int argc, char* argv[])
 
       TAOX11_TEST_INFO << "narrowed Hello interface" << std::endl;
 
+#if !defined (TAOX11_LACKS_TIE_SPECIALIZATION)
       std::string const hello_string = hello->get_string ();
       TAOX11_TEST_INFO << "hello->get_string () returned <" << hello_string
         << ">" << std::endl;
@@ -88,6 +95,7 @@ int main(int argc, char* argv[])
                           << "> but should have returned <" << Test::foo << ">"
                           << std::endl;
       }
+#endif /* !TAOX11_LACKS_TIE_SPECIALIZATION */
 
       char const at_char_ = hello->at_char();
 
