@@ -24,7 +24,7 @@ test_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
   TAOX11_TEST_DEBUG << std::endl << "Test sequences." << std::endl;
   TAOX11_TEST_DEBUG << "======================================" << std::endl;
 
-  if (IDL::traits< Test::SimpleSeq >::is_bounded ())
+  if (IDL::traits<Test::SimpleSeq >::is_bounded ())
     {
       TAOX11_TEST_ERROR << "test_sequences - ERROR bad is_bounded trait found for "
         << "SimpleSeq" << std::endl;
@@ -35,7 +35,7 @@ test_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
       TAOX11_TEST_DEBUG << "test_sequences - OK, is_bounded trait correctly set for "
         << "SimpleSeq" << std::endl;
     }
-  if (IDL::traits< Test::SimpleSeqSeq>::is_bounded ())
+  if (IDL::traits<Test::SimpleSeqSeq>::is_bounded ())
     {
       TAOX11_TEST_ERROR << "test_sequences - ERROR bad is_bounded trait found for "
         << "SimpleSeqSeq" << std::endl;
@@ -46,7 +46,7 @@ test_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
       TAOX11_TEST_DEBUG << "test_sequences - OK, is_bounded trait correctly set for "
         << "SimpleSeqSeq" << std::endl;
     }
-  if (IDL::traits< Test::AnotherSimpleSeq>::is_bounded ())
+  if (IDL::traits<Test::AnotherSimpleSeq>::is_bounded ())
     {
       TAOX11_TEST_ERROR << "test_sequences - ERROR bad is_bounded trait found for "
         << "AnotherSimpleSeq" << std::endl;
@@ -57,7 +57,7 @@ test_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
       TAOX11_TEST_DEBUG << "test_sequences - OK, is_bounded trait correctly set for "
         << "AnotherSimpleSeq" << std::endl;
     }
-  if (IDL::traits< Test::Simple2Seq>::is_bounded ())
+  if (IDL::traits<Test::Simple2Seq>::is_bounded ())
     {
       TAOX11_TEST_ERROR << "test_sequences - ERROR bad is_bounded trait found for "
         << "Simple2Seq" << std::endl;
@@ -68,7 +68,7 @@ test_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
       TAOX11_TEST_DEBUG << "test_sequences - OK, is_bounded trait correctly set for "
         << "Simple2Seq" << std::endl;
     }
-  if (IDL::traits< Test::AnotherSimple2Seq>::is_bounded ())
+  if (IDL::traits<Test::AnotherSimple2Seq>::is_bounded ())
     {
       TAOX11_TEST_ERROR << "test_sequences - ERROR bad is_bounded trait found for "
         << "AnotherSimple2Seq" << std::endl;
@@ -79,7 +79,7 @@ test_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
       TAOX11_TEST_DEBUG << "test_sequences - OK, is_bounded trait correctly set for "
         << "AnotherSimple2Seq" << std::endl;
     }
-  if (IDL::traits< Test::LongSeq>::is_bounded ())
+  if (IDL::traits<Test::LongSeq>::is_bounded ())
     {
       TAOX11_TEST_ERROR << "test_sequences - ERROR bad is_bounded trait found for "
         << "LongSeq" << std::endl;
@@ -90,7 +90,7 @@ test_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
       TAOX11_TEST_DEBUG << "test_sequences - OK, is_bounded trait correctly set for "
         << "LongSeq" << std::endl;
     }
-  if (IDL::traits< Test::BoolSeq>::is_bounded ())
+  if (IDL::traits<Test::BoolSeq>::is_bounded ())
     {
       TAOX11_TEST_ERROR << "test_sequences - ERROR bad is_bounded trait found for "
         << "BoolSeq" << std::endl;
@@ -101,7 +101,7 @@ test_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
       TAOX11_TEST_DEBUG << "test_sequences - OK, is_bounded trait correctly set for "
         << "BoolSeq" << std::endl;
     }
-  if (IDL::traits< Test::StringSeq>::is_bounded ())
+  if (IDL::traits<Test::StringSeq>::is_bounded ())
     {
       TAOX11_TEST_ERROR << "test_sequences - ERROR bad is_bounded trait found for "
         << "StringSeq" << std::endl;
@@ -538,19 +538,19 @@ test_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         }
     }
   // Check the element traits
-  if (IDL::traits< Test::SimpleSeqSeq >::element_traits::is_bounded ())
+  if (IDL::traits<Test::SimpleSeqSeq >::element_traits::is_bounded ())
     {
       TAOX11_TEST_ERROR << "test_sequences - ERROR : The element_traits of SimpleSeqSeq "
         << "seems to contain a bad value." << std::endl;
       ++error_count;
     }
-  if (IDL::traits< Test::SimpleSeqSeqSeq >::element_traits::is_bounded ())
+  if (IDL::traits<Test::SimpleSeqSeqSeq >::element_traits::is_bounded ())
     {
       TAOX11_TEST_ERROR << "test_sequences - ERROR : The element_traits of SimpleSeqSeqSeq "
         << "seems to contain a bad value." << std::endl;
       ++error_count;
     }
-  if (IDL::traits< Test::SimpleSeqSeqSeq >::element_traits::element_traits::is_bounded ())
+  if (IDL::traits<Test::SimpleSeqSeqSeq >::element_traits::element_traits::is_bounded ())
     {
       TAOX11_TEST_ERROR << "test_sequences - ERROR : The element_traits of SimpleSeqSeq "
         << "seems to contain a bad value." << std::endl;

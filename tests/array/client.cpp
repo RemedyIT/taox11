@@ -88,54 +88,54 @@ int main(int argc, char* argv[])
 
       TAOX11_TEST_DEBUG << "checking array dimensions ..." << std::endl;
 
-      if (IDL::traits< Test::F >::dimensions () == 1)
+      if (IDL::traits<Test::F >::dimensions () == 1)
         {
           TAOX11_TEST_DEBUG << "OK, dimensions for Test::F are correct." << std::endl;
         }
       else
         {
           TAOX11_TEST_ERROR << "ERROR, incorrect dimensions for Test::F found. "
-            << "expected<1> - found <" << IDL::traits< Test::F >::dimensions ()
+            << "expected<1> - found <" << IDL::traits<Test::F >::dimensions ()
             << ">" << std::endl;
         }
-      if (IDL::traits< Test::V >::dimensions () == 1)
+      if (IDL::traits<Test::V >::dimensions () == 1)
         {
           TAOX11_TEST_DEBUG << "OK, dimensions for Test::V are correct." << std::endl;
         }
       else
         {
           TAOX11_TEST_ERROR << "ERROR, incorrect dimensions for Test::V found. "
-            << "expected<1> - found <" << IDL::traits< Test::V >::dimensions ()
+            << "expected<1> - found <" << IDL::traits<Test::V >::dimensions ()
             << ">" << std::endl;
         }
-      if (IDL::traits< Test::M >::dimensions () == 3)
+      if (IDL::traits<Test::M >::dimensions () == 3)
         {
           TAOX11_TEST_DEBUG << "OK, dimensions for Test::M are correct." << std::endl;
         }
       else
         {
           TAOX11_TEST_ERROR << "ERROR, incorrect dimensions for Test::M found. "
-            << "expected<3> - found <" << IDL::traits< Test::M >::dimensions ()
+            << "expected<3> - found <" << IDL::traits<Test::M >::dimensions ()
             << ">" << std::endl;
         }
-      if (IDL::traits< Test::o >::dimensions () == 1)
+      if (IDL::traits<Test::o >::dimensions () == 1)
         {
           TAOX11_TEST_DEBUG << "OK, dimensions for Test::o are correct." << std::endl;
         }
       else
         {
           TAOX11_TEST_ERROR << "ERROR, incorrect dimensions for Test::o found. "
-            << "expected<1> - found <" << IDL::traits< Test::o >::dimensions ()
+            << "expected<1> - found <" << IDL::traits<Test::o >::dimensions ()
             << ">" << std::endl;
         }
-      if (IDL::traits< Test::a >::dimensions () == 1)
+      if (IDL::traits<Test::a >::dimensions () == 1)
         {
           TAOX11_TEST_DEBUG << "OK, dimensions for Test::a are correct." << std::endl;
         }
       else
         {
           TAOX11_TEST_ERROR << "ERROR, incorrect dimensions for Test::a found. "
-            << "expected<1> - found <" << IDL::traits< Test::a >::dimensions ()
+            << "expected<1> - found <" << IDL::traits<Test::a >::dimensions ()
             << ">" << std::endl;
         }
 
