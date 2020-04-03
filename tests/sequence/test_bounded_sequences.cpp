@@ -16,11 +16,11 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
   TAOX11_TEST_DEBUG << std::endl << "Test bounded sequences." << std::endl;
   TAOX11_TEST_DEBUG << "======================================" << std::endl;
 
-  if (IDL::traits< Test::LongBounded >::is_bounded ())
+  if (IDL::traits<Test::LongBounded >::is_bounded ())
     {
       TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, is_bounded trait correctly set for "
         << "LongBounded" << std::endl;
-      if (IDL::traits< Test::LongBounded >::bound () == 10)
+      if (IDL::traits<Test::LongBounded >::bound () == 10)
         {
           TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, Correct bound for "
             << "LongBounded found." << std::endl;
@@ -29,7 +29,7 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         {
           TAOX11_TEST_ERROR << "test_bounded_sequences - ERROR, incorrect bound "
             << "found for LongBounded. expected <10> - found <"
-            << IDL::traits< Test::LongBounded >::bound () << ">."
+            << IDL::traits<Test::LongBounded >::bound () << ">."
             << std::endl;
           ++error_count;
         }
@@ -40,11 +40,11 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         << "LongBounded" << std::endl;
       ++error_count;
     }
-  if (IDL::traits< Test::BoolBounded >::is_bounded ())
+  if (IDL::traits<Test::BoolBounded >::is_bounded ())
     {
       TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, is_bounded trait correctly set for "
         << "BoolBounded" << std::endl;
-      if (IDL::traits< Test::BoolBounded >::bound () == 10)
+      if (IDL::traits<Test::BoolBounded >::bound () == 10)
         {
           TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, Correct bound for "
             << "BoolBounded found." << std::endl;
@@ -53,7 +53,7 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         {
           TAOX11_TEST_ERROR << "test_bounded_sequences - ERROR, incorrect bound "
             << "found for BoolBounded. expected <10> - found <"
-            << IDL::traits< Test::BoolBounded >::bound () << ">."
+            << IDL::traits<Test::BoolBounded >::bound () << ">."
             << std::endl;
           ++error_count;
         }
@@ -64,11 +64,11 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         << "BoolBounded" << std::endl;
       ++error_count;
     }
-  if (IDL::traits< Test::StringBounded >::is_bounded ())
+  if (IDL::traits<Test::StringBounded >::is_bounded ())
     {
       TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, is_bounded trait correctly set for "
         << "StringBounded" << std::endl;
-      if (IDL::traits< Test::StringBounded >::bound () == 10)
+      if (IDL::traits<Test::StringBounded >::bound () == 10)
         {
           TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, Correct bound for "
             << "StringBounded found." << std::endl;
@@ -77,7 +77,7 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         {
           TAOX11_TEST_ERROR << "test_bounded_sequences - ERROR, incorrect bound "
             << "found for StringBounded. expected <10> - found <"
-            << IDL::traits< Test::StringBounded >::bound () << ">."
+            << IDL::traits<Test::StringBounded >::bound () << ">."
             << std::endl;
           ++error_count;
         }
@@ -88,11 +88,11 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         << "StringBounded" << std::endl;
       ++error_count;
     }
-  if (IDL::traits< Test::SimpleBounded >::is_bounded ())
+  if (IDL::traits<Test::SimpleBounded >::is_bounded ())
     {
       TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, is_bounded trait correctly set for "
         << "SimpleBounded" << std::endl;
-      if (IDL::traits< Test::SimpleBounded >::bound () == 10)
+      if (IDL::traits<Test::SimpleBounded >::bound () == 10)
         {
           TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, Correct bound for "
             << "SimpleBounded found." << std::endl;
@@ -101,7 +101,7 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         {
           TAOX11_TEST_ERROR << "test_bounded_sequences - ERROR, incorrect bound "
             << "found for SimpleBounded. expected <10> - found <"
-            << IDL::traits< Test::SimpleBounded >::bound () << ">."
+            << IDL::traits<Test::SimpleBounded >::bound () << ">."
             << std::endl;
           ++error_count;
         }
@@ -113,11 +113,11 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
       ++error_count;
     }
 
-  if (IDL::traits< Test::CharBounded >::is_bounded ())
+  if (IDL::traits<Test::CharBounded >::is_bounded ())
     {
       TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, is_bounded trait correctly set for "
         << "CharBounded" << std::endl;
-      if (IDL::traits< Test::CharBounded >::bound () == 10)
+      if (IDL::traits<Test::CharBounded >::bound () == 10)
         {
           TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, Correct bound for "
             << "CharBounded found." << std::endl;
@@ -126,7 +126,7 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         {
           TAOX11_TEST_ERROR << "test_bounded_sequences - ERROR, incorrect bound "
             << "found for CharBounded. expected <10> - found <"
-            << IDL::traits< Test::CharBounded >::bound () << ">."
+            << IDL::traits<Test::CharBounded >::bound () << ">."
             << std::endl;
           ++error_count;
         }
@@ -137,11 +137,11 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         << "CharBounded" << std::endl;
       ++error_count;
     }
-  if (IDL::traits< Test::cc23 >::is_bounded ())
+  if (IDL::traits<Test::cc23 >::is_bounded ())
     {
       TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, is_bounded trait correctly set for "
         << "cc23" << std::endl;
-      if (IDL::traits< Test::cc23 >::bound () == 23)
+      if (IDL::traits<Test::cc23 >::bound () == 23)
         {
           TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, Correct bound for "
             << "cc23 found." << std::endl;
@@ -150,7 +150,7 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         {
           TAOX11_TEST_ERROR << "test_bounded_sequences - ERROR, incorrect bound "
             << "found for cc23. expected <23> - found <"
-            << IDL::traits< Test::cc23 >::bound () << ">."
+            << IDL::traits<Test::cc23 >::bound () << ">."
             << std::endl;
           ++error_count;
         }
@@ -161,11 +161,11 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         << "cc23" << std::endl;
       ++error_count;
     }
-  if (IDL::traits< Test::ca5_10 >::is_bounded ())
+  if (IDL::traits<Test::ca5_10 >::is_bounded ())
     {
       TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, is_bounded trait correctly set for "
         << "ca5_10" << std::endl;
-      if (IDL::traits< Test::ca5_10 >::bound () == 10)
+      if (IDL::traits<Test::ca5_10 >::bound () == 10)
         {
           TAOX11_TEST_DEBUG << "test_bounded_sequences - OK, Correct bound for "
             << "ca5_10 found." << std::endl;
@@ -174,7 +174,7 @@ test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
         {
           TAOX11_TEST_ERROR << "test_bounded_sequences - ERROR, incorrect bound "
             << "found for ca5_10. expected <10> - found <"
-            << IDL::traits< Test::ca5_10 >::bound () << ">."
+            << IDL::traits<Test::ca5_10 >::bound () << ">."
             << std::endl;
           ++error_count;
         }
