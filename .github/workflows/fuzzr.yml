@@ -1,4 +1,4 @@
-name: Fuzzr
+name: fuzzr
 
 on:
   push:
