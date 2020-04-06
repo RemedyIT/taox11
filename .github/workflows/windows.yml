@@ -1,0 +1,63 @@
+name: windows
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  schedule:
+    - cron: '0 7 * * SUN'
+
+env:
+  DOC_ROOT: ${{ github.workspace }}/ACE_TAO
+  ACE_ROOT: ${{ github.workspace }}/ACE_TAO/ACE
+  TAO_ROOT: ${{ github.workspace }}/ACE_TAO/TAO
+  MPC_ROOT: ${{ github.workspace }}/MPC
+  X11_BASE_ROOT: ${{ github.workspace }}/axcioma
+  RIDL_ROOT: ${{ github.workspace }}/ridl
+  TAOX11_ROOT: ${{ github.workspace }}
+  NUMBER_OF_PROCESSORS: 3
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        name: [
+          VS2017Ruby27
+        ]
+        include:
+          - name: VS2017Ruby27
+            os: windows-2016
+            RubyVersion: 2.7
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ilammy/msvc-dev-cmd@v1
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.RubyVersion }}
+    - name: git clone dependent repositories
+      run: |
+        git clone --depth 1 --branch Latest_Micro git://github.com/DOCGroup/ACE_TAO.git ${env:DOC_ROOT}
+        git clone --depth 1 --branch Latest_ACETAO_Micro  git://github.com/DOCGroup/MPC.git ${env:MPC_ROOT}
+        git clone --depth 1 git://github.com/RemedyIT/axcioma.git ${env:X11_BASE_ROOT}
+        git clone --depth 1 git://github.com/RemedyIT/ridl.git ${env:RIDL_ROOT}
+      shell: pwsh
+    - name: Run brix11 configure
+      run: |
+        %X11_BASE_ROOT%\bin\brix11 configure -W aceroot=%ACE_ROOT% -W taoroot=%TAO_ROOT% -W mpcroot=%MPC_ROOT%
+      shell: cmd
+    - name: Print brix11 configuration
+      run: |
+        %X11_BASE_ROOT%/bin/brix11 env -- configure -P
+      shell: cmd
+    - name: Run brix11 gen build
+      run: |
+        %X11_BASE_ROOT%/bin/brix11 gen build axcioma/workspace.mwc -- gen build %TAOX11_ROOT%/examples -- gen build %TAOX11_ROOT%/orbsvcs/tests -- gen build %TAOX11_ROOT%/tests
+      shell: cmd
+    - name: Run brix11 make
+      run: |
+        %X11_BASE_ROOT%/bin/brix11 make -N -d %X11_BASE_ROOT% -- make -N -d %TAOX11_ROOT%/examples -- make -N -d %TAOX11_ROOT%/orbsvcs/tests -- make -N -d %TAOX11_ROOT%/tests
+      shell: cmd

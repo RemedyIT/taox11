@@ -121,7 +121,6 @@ namespace TAOX11_NAMESPACE
        : public CORBA::UserException
       {
       public:
-
         void _raise () const override;
 
         void _tao_encode (TAO_OutputCDR &cdr) const override;

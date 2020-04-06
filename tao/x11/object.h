@@ -187,25 +187,24 @@ namespace TAOX11_NAMESPACE
       typedef IDL::traits< LocalObject>     _traits_type;
       typedef _traits_type::ref_type        _ref_type;
 
-      virtual bool _is_a (const std::string& local_type_id) override;
-      virtual bool _is_equivalent (
-          object_traits<Object>::ref_type other_obj) override;
-      virtual uint32_t _hash (uint32_t maximum) override;
-      virtual bool _is_local() override;
+      bool _is_a (const std::string& local_type_id) override;
+      bool _is_equivalent (object_traits<Object>::ref_type other_obj) override;
+      uint32_t _hash (uint32_t maximum) override;
+      bool _is_local() override;
 
 #if (TAO_HAS_MINIMUM_CORBA == 0)
-      virtual bool _non_existent () override;
+      bool _non_existent () override;
 
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO)
       /// Get info about the object from the Interface Repository.
-      virtual object_traits<InterfaceDef>::ref_type _get_interface () override;
+      object_traits<InterfaceDef>::ref_type _get_interface () override;
 
       /// Get info about the object from the Interface Repository.
-      virtual object_traits<Object>::ref_type _get_component () override;
+      object_traits<Object>::ref_type _get_component () override;
 #endif
 
       /// Get the repository id.
-      virtual std::string _repository_id () override;
+      std::string _repository_id () override;
 #endif
 
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO)
@@ -214,8 +213,7 @@ namespace TAOX11_NAMESPACE
       // The mapping for create_request is split into two forms,
       // corresponding to the two usage styles described in CORBA
       // section 6.2.1.
-
-      virtual void _create_request (
+      void _create_request (
           object_reference<Context> ctx,
           const std::string& operation,
           object_reference<NVList> arg_list,
@@ -223,7 +221,7 @@ namespace TAOX11_NAMESPACE
           object_reference<Request>& request,
           Flags req_flags) override;
 
-      virtual void _create_request (
+      void _create_request (
           object_reference<Context> ctx,
           const std::string& operation,
           object_reference<NVList> arg_list,
@@ -239,35 +237,34 @@ namespace TAOX11_NAMESPACE
       // implementation.
 
       /// DII operation to create a request.
-      virtual object_reference<Request> _request (
+      object_reference<Request> _request (
           const std::string& operation) override;
 #endif
 
 #if (TAO_HAS_CORBA_MESSAGING == 1)
-
-      //not in TAO
-      virtual object_traits<Policy>::ref_type _get_client_policy (
+      // Not in TAO
+      object_traits<Policy>::ref_type _get_client_policy (
                                     const PolicyType& policy_type) override;
 
-      virtual object_traits<Policy>::ref_type _get_policy (
+      object_traits<Policy>::ref_type _get_policy (
                                     const PolicyType& policy_type) override;
 
-      virtual object_traits<Object>::ref_type _set_policy_overrides (
+      object_traits<Object>::ref_type _set_policy_overrides (
                     const TAOX11_CORBA::PolicyList& policies,
                     const TAOX11_CORBA::SetOverrideType& set_add) override;
 
-      virtual TAOX11_NAMESPACE::CORBA::PolicyList _get_policy_overrides (
+      TAOX11_NAMESPACE::CORBA::PolicyList _get_policy_overrides (
                       const TAOX11_CORBA::PolicyTypeSeq & types) override;
 
-      virtual bool _validate_connection (
+      bool _validate_connection (
                 TAOX11_CORBA::PolicyList& inconsistent_policies) override;
 
 #endif
 
-      virtual object_traits<CORBA::ORB>::ref_type _get_orb () override;
+      object_traits<CORBA::ORB>::ref_type _get_orb () override;
 
       // Not in TAO
-      virtual CORBA::DomainManagerList _get_domain_managers() override;
+      CORBA::DomainManagerList _get_domain_managers() override;
 
     protected:
       friend struct object_traits<LocalObject>;
