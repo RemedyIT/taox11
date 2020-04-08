@@ -18,7 +18,6 @@ env:
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
   RIDL_ROOT: ${{ github.workspace }}/ridl
   TAOX11_ROOT: ${{ github.workspace }}
-  NUMBER_OF_PROCESSORS: 3
 
 jobs:
   build:
