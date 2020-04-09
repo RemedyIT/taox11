@@ -12,6 +12,9 @@ module Test
   /// String to be returned by get_string specialization
   const string foo = "Foo";
 
+  /// String to be returned by the regular get_string implementation
+  const string regular_foo = "Hello_impl there!";
+
   /// A very simple interface
   interface Hello
   {

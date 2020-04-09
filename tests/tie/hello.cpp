@@ -23,7 +23,7 @@ std::string
 Hello_impl::get_string ()
 {
   TAOX11_TEST_INFO << "Hello_impl::get_string()" << std::endl;
-  return "Hello_impl there!";
+  return Test::regular_foo;
 }
 
 std::string

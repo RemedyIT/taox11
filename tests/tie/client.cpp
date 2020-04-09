@@ -84,15 +84,22 @@ int main(int argc, char* argv[])
 
       TAOX11_TEST_INFO << "narrowed Hello interface" << std::endl;
 
-#if !defined (TAOX11_LACKS_TIE_SPECIALIZATION)
       std::string const hello_string = hello->get_string ();
       TAOX11_TEST_INFO << "hello->get_string () returned <" << hello_string
         << ">" << std::endl;
 
+#if !defined (TAOX11_LACKS_TIE_SPECIALIZATION)
       if (hello_string != Test::foo)
       {
         TAOX11_TEST_ERROR << "ERROR: get_string returned <" << hello_string
                           << "> but should have returned <" << Test::foo << ">"
+                          << std::endl;
+      }
+#else
+      if (hello_string != Test::regular_foo)
+      {
+        TAOX11_TEST_ERROR << "ERROR: get_string returned <" << hello_string
+                          << "> but should have returned <" << Test::regular_foo << ">"
                           << std::endl;
       }
 #endif /* !TAOX11_LACKS_TIE_SPECIALIZATION */
