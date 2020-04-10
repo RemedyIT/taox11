@@ -1,0 +1,43 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  /// String to be returned by get_string specialization
+  const string foo = "Foo";
+
+  /// String to be returned by the regular get_string implementation
+  const string regular_foo = "Hello_impl there!";
+
+  /// A very simple interface
+  interface Hello
+  {
+    /// Return a simple string
+    string get_string ();
+
+    /// Some attributes to test
+    readonly attribute char readonly_char;
+    attribute char at_char;
+
+    /// A method to shutdown the ORB
+    /**
+     * This method is used to simplify the test shutdown process
+     */
+    oneway void shutdown ();
+  };
+
+  /// A simple typedef
+  typedef Hello Hello2;
+
+  /// Local interface for which no TIE should be generated
+  local interface Bar
+  {
+    string get_string ();
+  };
+};

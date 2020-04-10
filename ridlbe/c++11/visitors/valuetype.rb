@@ -221,7 +221,6 @@ module IDL
       map_template :cdr, :value_cdr
       map_template :sarg_traits, :value_sarg_traits
       map_template :servant_traits, :interface_servant_traits
-
     end
 
     class ValuetypeMemberVisitor < NodeVisitorBase

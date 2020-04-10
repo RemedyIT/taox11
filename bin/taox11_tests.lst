@@ -156,6 +156,7 @@ tests/string/run_cross_tao_server.pl:
 tests/string/run_test.pl:
 tests/struct/run_test.pl:
 tests/struct/run_cross_tao_server.pl:
+tests/tie/run_test.pl:
 tests/timebase/run_test.pl:
 tests/typecode/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
 tests/typecode_adapter/orb_create/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO

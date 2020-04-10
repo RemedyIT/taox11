@@ -1,0 +1,15 @@
+  private:
+    // generated from <%= ridl_template_path %>
+    /// Member to store our default POA
+    IDL::traits<TAOX11_NAMESPACE::PortableServer::POA>::ref_type poa_;
+
+    /** @name Illegal to be called. Deleted explicitly to let the compiler detect any violation */
+    //@{
+    <%= tie_cxxname %> () = delete;
+    <%= tie_cxxname %> (const <%= tie_cxxname %> &) = delete;
+    <%= tie_cxxname %> (<%= tie_cxxname %> &&) = delete;
+    <%= tie_cxxname %>& operator= (const <%= tie_cxxname %> &) = delete;
+    <%= tie_cxxname %>& operator= (<%= tie_cxxname %> &&) = delete;
+    //@}
+  };
+} // namespace POA

@@ -1,0 +1,15 @@
+// generated from <%= ridl_template_path %>
+namespace POA
+{
+  template <class T>
+  class <%= tie_cxxname %> final
+    : public <%= scoped_skel_cxxtype %>
+  {
+  private:
+    std::shared_ptr<T> tied_object_ {};
+  public:
+    <%= tie_cxxname %> (std::shared_ptr<T> t, IDL::traits<TAOX11_NAMESPACE::PortableServer::POA>::ref_type poa = {}) : tied_object_(std::move(t)), poa_(std::move(poa)) {};
+    virtual ~<%= tie_cxxname %> () = default;
+    std::shared_ptr<T> _tied_object () { return tied_object_; };
+    void _tied_object (std::shared_ptr<T> t) { tied_object_ = std::move(t); };
+    IDL::traits<TAOX11_NAMESPACE::PortableServer::POA>::ref_type _default_POA () { if (poa_) return poa_; else return TAOX11_NAMESPACE::PortableServer::Servant::_default_POA(); }
