@@ -106,7 +106,7 @@ crossbuilds are attempted.
 === Example
 
 Installing, configuring and cross building for a Yocto linux ARM64 target device is possible with the
-following commands (assuming the YOCTO crossbuild toochain has been installed in a `YOCTO` folder under
+following commands (assuming the YOCTO crossbuild toolchain has been installed in a `YOCTO` folder under
 `/install/root`).
 
 [source,cmd]
