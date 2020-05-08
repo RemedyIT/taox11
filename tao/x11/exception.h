@@ -35,7 +35,6 @@ namespace TAOX11_NAMESPACE
 {
   namespace CORBA
   {
-
     class Any; // forward
 
     class TAOX11_Export Exception : public std::exception

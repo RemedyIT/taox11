@@ -20,7 +20,7 @@ root (sysroot) SDK providing target versions of libraries etc.
 === Installing
 
 Installing the TAOX11 (AXCIOMA) source code for the cross build is identical to the process for a host
-build. Simply use Git to clone the base axcioma.git repository and use the `bin/brix11 bootstrap` command
+build. Simply use Git to clone the base `axcioma.git` repository and use the `bin/brix11 bootstrap` command
 to finish the installation.
 Optionally a second code tree can be installed to provide a complete host build of TAOX11 (AXCIOMA). See
 the information on <<Configuration,configuration>> for more details.
@@ -106,7 +106,7 @@ crossbuilds are attempted.
 === Example
 
 Installing, configuring and cross building for a Yocto linux ARM64 target device is possible with the
-following commands (assuming the YOCTO crossbuild toochain has been installed in a `YOCTO` folder under
+following commands (assuming the YOCTO crossbuild toolchain has been installed in a `YOCTO` folder under
 `/install/root`).
 
 [source,cmd]
