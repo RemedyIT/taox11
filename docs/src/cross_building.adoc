@@ -67,6 +67,17 @@ located at `$X11_BASE_ROOT/HOST` where the minimal required set of host binaries
 In such TAOX11 (AXCIOMA) installations an additional BRIX11 command is enabled with which the host binaries
 can be built after configuration has finished: `bin/brix11 host build`.
 
+[NOTE]
+====
+It is *not* recommended to use environment setup scripts from a target cross compilation SDK in
+combination with BRIX11 cross building. BRIX11 `configure` already takes care of setting up the correct
+environment *and* makes sure to keep the setup for host and target building separate. Using SDK specific
+environment setup scripts may well (probably will) interfere in unexpected, nagative, ways with this.
+In case there is a need for special environment settings or macros for cross building for a specific
+target this can be achieved by using additional BRIX11 switches (like `-D`) or by customizing
+<<Target specification files>>.
+====
+
 By default the `configure` command will set up the build configuration assuming a Linux compatible target
 system.
 To tune the configuration process the `configure` command provides the `--target=NAME` switch. In case this
