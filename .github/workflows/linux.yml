@@ -29,7 +29,8 @@ jobs:
           GCC6Ruby25,
           GCC7Ruby26,
           GCC8Ruby27,
-          GCC9Ruby27
+          GCC9Ruby27,
+          GCC10Ruby27
         ]
         include:
           - name: GCC48Ruby24
@@ -62,6 +63,12 @@ jobs:
             CXX: g++-9
             RubyVersion: 2.7
             PackageDeps: g++-9
+          - name: GCC10Ruby27
+            os: ubuntu-latest
+            CC: gcc-10
+            CXX: g++-10
+            RubyVersion: 2.7
+            PackageDeps: g++-10
     env:
       CC: ${{ matrix.CC }}
       CXX: ${{ matrix.CXX }}
