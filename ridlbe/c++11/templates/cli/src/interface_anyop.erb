@@ -8,9 +8,7 @@ void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _val)
   TAOX11_NAMESPACE::Any_AbstractBase_Impl_T<
       IDL::traits< <%= scoped_cxxtype %>>,
       TAOX11_NAMESPACE::CDR_Marshal_Policy
-        >::insert (any,
-                   <%= scoped_cxx_typecode %>,
-                   std::move(_val));
+        >::insert (any, <%= scoped_cxx_typecode %>, std::move(_val));
 % else
   TAOX11_NAMESPACE::Any_Object_Impl_T<
       IDL::traits< <%= scoped_cxxtype %>>,
@@ -19,9 +17,7 @@ void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _val)
 %   else
       TAOX11_NAMESPACE::CDR_Marshal_Policy
 %   end
-        >::insert (any,
-                   <%= scoped_cxx_typecode %>,
-                   std::move(_val));
+        >::insert (any, <%= scoped_cxx_typecode %>, std::move(_val));
 % end
 }
 
@@ -32,9 +28,7 @@ bool operator>>= (const TAOX11_CORBA::Any &any, <%= scoped_cxx_out_type %> _val)
   return TAOX11_NAMESPACE::Any_AbstractBase_Impl_T<
       IDL::traits< <%= scoped_cxxtype %>>,
       TAOX11_NAMESPACE::CDR_Marshal_Policy
-        >::extract (any,
-                    <%= scoped_cxx_typecode %>,
-                    _val);
+        >::extract (any, <%= scoped_cxx_typecode %>, _val);
 % else
   return TAOX11_NAMESPACE::Any_Object_Impl_T<
       IDL::traits< <%= scoped_cxxtype %>>,
@@ -43,8 +37,6 @@ bool operator>>= (const TAOX11_CORBA::Any &any, <%= scoped_cxx_out_type %> _val)
 %   else
       TAOX11_NAMESPACE::CDR_Marshal_Policy
 %   end
-        >::extract (any,
-                    <%= scoped_cxx_typecode %>,
-                    _val);
+        >::extract (any, <%= scoped_cxx_typecode %>, _val);
 % end
 }

@@ -1,14 +1,13 @@
 
 // generated from <%= ridl_template_path %>
 
+/// Any insertion operator for <%= scoped_cxxname %>
 void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _val)
 {
   TAOX11_NAMESPACE::Any_Basic_Impl_T<
       IDL::traits< <%= scoped_cxxtype %>>,
       TAOX11_NAMESPACE::CDR_Marshal_Policy
-        >::insert (any,
-                   <%= scoped_cxx_typecode %>,
-                   _val);
+        >::insert (any, <%= scoped_cxx_typecode %>, _val);
 }
 
 /// Any extraction operator for <%= scoped_cxxname %>
@@ -17,7 +16,5 @@ bool operator>>= (const TAOX11_CORBA::Any &any, <%= scoped_cxx_out_type %> _val)
   return TAOX11_NAMESPACE::Any_Basic_Impl_T<
       IDL::traits< <%= scoped_cxxtype %>>,
       TAOX11_NAMESPACE::CDR_Marshal_Policy
-        >::extract (any,
-                    <%= scoped_cxx_typecode %>,
-                    _val);
+        >::extract (any, <%= scoped_cxx_typecode %>, _val);
 }
