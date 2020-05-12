@@ -19,6 +19,8 @@ namespace POA
         return _spsrv;
       }
       else
+      {
         return this->TAOX11_NAMESPACE::PortableServer::Servant::_lock_shared ();
+      }
     }
 } // namespace POA

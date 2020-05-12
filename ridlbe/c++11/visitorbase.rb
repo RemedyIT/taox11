@@ -103,6 +103,10 @@ module IDL
         params[:ami] || false
       end
 
+      def generate_tie_support?
+        params[:gen_tie] || false
+      end
+
       def amic_export_include?
         (!params[:amic_export_include].nil?) || self.stub_export_include?
       end
