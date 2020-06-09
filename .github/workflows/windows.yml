@@ -27,7 +27,7 @@ jobs:
           - os: windows-2016
             ruby: 2.6
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} ${{ matrix.ruby }}
+    name: ${{ matrix.os }} ruby-${{ matrix.ruby }}
     steps:
     - uses: actions/checkout@v2
     - uses: ilammy/msvc-dev-cmd@v1
