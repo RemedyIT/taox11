@@ -25,12 +25,12 @@ jobs:
     strategy:
       matrix:
         name: [
-          VS2017Ruby27
+          VS2017Ruby26
         ]
         include:
           - name: VS2017Ruby27
             os: windows-2016
-            RubyVersion: 2.7
+            RubyVersion: 2.6
     steps:
     - uses: actions/checkout@v2
     - uses: ilammy/msvc-dev-cmd@v1
