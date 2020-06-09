@@ -55,7 +55,7 @@ jobs:
             ruby: 2.7
             PackageDeps: g++-10
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} ruby-${{ matrix.ruby }}
+    name: ${{ matrix.os }} ${{ matrix.CXX }} ruby-${{ matrix.ruby }}
     env:
       CC: ${{ matrix.CC }}
       CXX: ${{ matrix.CXX }}
