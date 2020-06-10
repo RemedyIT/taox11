@@ -21,62 +21,49 @@ env:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        name: [
-          GCC48Ruby24,
-          GCC6Ruby25,
-          GCC7Ruby26,
-          GCC8Ruby27,
-          GCC9Ruby27,
-          GCC10Ruby27
-        ]
         include:
-          - name: GCC48Ruby24
-            os: ubuntu-latest
+          - os: ubuntu-latest
             CC: gcc-4.8
             CXX: g++-4.8
-            RubyVersion: 2.4
+            ruby: 2.4
             PackageDeps: g++-4.8
-          - name: GCC6Ruby25
-            os: ubuntu-latest
+          - os: ubuntu-latest
             CC: gcc-6
             CXX: g++-6
-            RubyVersion: 2.5
+            ruby: 2.5
             PackageDeps: g++-6
-          - name: GCC7Ruby26
-            os: ubuntu-latest
+          - os: ubuntu-latest
             CC: gcc-7
             CXX: g++-7
-            RubyVersion: 2.6
+            ruby: 2.6
             PackageDeps: g++-7
-          - name: GCC8Ruby27
-            os: ubuntu-latest
+          - os: ubuntu-latest
             CC: gcc-8
             CXX: g++-8
-            RubyVersion: 2.7
+            ruby: 2.7
             PackageDeps: g++-8
-          - name: GCC9Ruby27
-            os: ubuntu-latest
+          - os: ubuntu-latest
             CC: gcc-9
             CXX: g++-9
-            RubyVersion: 2.7
+            ruby: 2.7
             PackageDeps: g++-9
-          - name: GCC10Ruby27
-            os: ubuntu-latest
+          - os: ubuntu-latest
             CC: gcc-10
             CXX: g++-10
-            RubyVersion: 2.7
+            ruby: 2.7
             PackageDeps: g++-10
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} ${{ matrix.CXX }} ruby-${{ matrix.ruby }}
     env:
       CC: ${{ matrix.CC }}
       CXX: ${{ matrix.CXX }}
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.RubyVersion }}
+        ruby-version: ${{ matrix.ruby }}
     - name: Add repository $Repo
       if: matrix.Repo != ''
       run:
