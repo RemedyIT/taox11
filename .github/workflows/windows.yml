@@ -31,7 +31,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ilammy/msvc-dev-cmd@v1
-    - uses: actions/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
     - name: git clone dependent repositories
@@ -51,7 +51,8 @@ jobs:
       shell: cmd
     - name: Run brix11 gen build
       run: |
-        %X11_BASE_ROOT%/bin/brix11 gen build axcioma/workspace.mwc -- gen build %TAOX11_ROOT%/examples -- gen build %TAOX11_ROOT%/orbsvcs/tests -- gen build %TAOX11_ROOT%/tests
+        type axcioma/workspace.mwc
+        %X11_BASE_ROOT%/bin/brix11 -v gen build axcioma/workspace.mwc -- gen build %TAOX11_ROOT%/examples -- gen build %TAOX11_ROOT%/orbsvcs/tests -- gen build %TAOX11_ROOT%/tests
       shell: cmd
     - name: Run brix11 make
       run: |
