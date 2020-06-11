@@ -51,7 +51,7 @@ jobs:
       shell: cmd
     - name: Run brix11 gen build
       run: |
-        type axcioma/workspace.mwc
+        type axcioma\workspace.mwc
         %X11_BASE_ROOT%/bin/brix11 -v gen build axcioma/workspace.mwc -- gen build %TAOX11_ROOT%/examples -- gen build %TAOX11_ROOT%/orbsvcs/tests -- gen build %TAOX11_ROOT%/tests
       shell: cmd
     - name: Run brix11 make
