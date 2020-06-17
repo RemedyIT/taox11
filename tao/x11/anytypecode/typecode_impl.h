@@ -113,10 +113,9 @@ namespace TAOX11_NAMESPACE
       TypeCode_impl* _impl () override;
 
     private:
-
       static const std::string _repository_id;
 
-      bool static_;
+      bool const static_;
       union
       {
         TAO_CORBA::TypeCode_ptr   tc_;

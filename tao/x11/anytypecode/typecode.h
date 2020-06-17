@@ -66,7 +66,6 @@ namespace TAOX11_NAMESPACE
         Bounds& operator= (Bounds&& x);
       protected:
         void _info (std::ostream&) const override;
-      private:
       }; // Bounds
 
       static TAOX11_NAMESPACE::CORBA::typecode_reference const _tc_Bounds;
@@ -92,7 +91,6 @@ namespace TAOX11_NAMESPACE
           BadKind& operator= (BadKind&& x);
         protected:
           void _info (std::ostream&) const override;
-        private:
       }; // BadKind
 
       static TAOX11_NAMESPACE::CORBA::typecode_reference const _tc_BadKind;
