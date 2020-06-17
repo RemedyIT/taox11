@@ -4,12 +4,12 @@ TAO_CORBA::Boolean operator<< (
     TAO_OutputCDR &strm,
     const <%= scoped_cxxname %> &_tao_union)
 {
-  if ( !(strm << <%= switchtype.cdr_from_fmt % "_tao_union._d ()" %>) )
+  if (!(strm << <%= switchtype.cdr_from_fmt % "_tao_union._d ()" %>))
   {
     return false;
   }
 
-  bool result = true;
+  bool result { true };
 % if switchtype_boolean?
 %   _defmem = default_member
 %   _ndefmem = non_default_members
@@ -67,7 +67,7 @@ TAO_CORBA::Boolean operator>> (
     <%= scoped_cxxname %> &_tao_union)
 {
   <%= scoped_switch_cxxtype %> _tao_discriminant;
-  if ( !(strm >> <%= switchtype.cdr_to_fmt % "_tao_discriminant" %>) )
+  if (!(strm >> <%= switchtype.cdr_to_fmt % "_tao_discriminant" %>))
   {
     return false;
   }
