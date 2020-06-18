@@ -24,32 +24,32 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: ubuntu-latest
+          - os: ubuntu-16.04
             CC: gcc-4.8
             CXX: g++-4.8
             ruby: 2.4
             PackageDeps: g++-4.8
-          - os: ubuntu-latest
+          - os: ubuntu-18.04
             CC: gcc-6
             CXX: g++-6
             ruby: 2.5
             PackageDeps: g++-6
-          - os: ubuntu-latest
+          - os: ubuntu-18.04
             CC: gcc-7
             CXX: g++-7
             ruby: 2.6
             PackageDeps: g++-7
-          - os: ubuntu-latest
+          - os: ubuntu-18.04
             CC: gcc-8
             CXX: g++-8
             ruby: 2.7
             PackageDeps: g++-8
-          - os: ubuntu-latest
+          - os: ubuntu-18.04
             CC: gcc-9
             CXX: g++-9
             ruby: 2.7
             PackageDeps: g++-9
-          - os: ubuntu-latest
+          - os: ubuntu-20.04
             CC: gcc-10
             CXX: g++-10
             ruby: 2.7
