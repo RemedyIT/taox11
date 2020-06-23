@@ -17,7 +17,7 @@ class Hello final
 public:
   /// Constructor
   Hello (IDL::traits<CORBA::ORB>::ref_type orb, int & result);
-  virtual ~Hello ();
+  virtual ~Hello () = default;
 
   // = The skeleton methods
   CORBA::Any
