@@ -382,7 +382,7 @@ namespace TAOX11_NAMESPACE
   {
     template<>
     struct traits < CORBA::ORB::InvalidName>
-      : IDL::common_traits< CORBA::ORB::InvalidName>
+      : IDL::common_traits<CORBA::ORB::InvalidName>
     {
       template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
       static inline OStrm_& write_on(

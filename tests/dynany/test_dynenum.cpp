@@ -14,7 +14,7 @@
 #include "testlib/taox11_testlog.h"
 #include "analyzer.h"
 
-Test_DynEnum::Test_DynEnum (IDL::traits< CORBA::ORB>::ref_type orb)
+Test_DynEnum::Test_DynEnum (IDL::traits<CORBA::ORB>::ref_type orb)
   : orb_ (orb),
     test_name_ ("test_dynenum"),
     error_count_ (0)
@@ -38,7 +38,7 @@ Test_DynEnum::run_test ()
 
   try
   {
-    IDL::traits< CORBA::Object>::ref_type factory_obj =
+    IDL::traits<CORBA::Object>::ref_type factory_obj =
           this->orb_->resolve_initial_references ("DynAnyFactory");
 
     if (factory_obj == nullptr)

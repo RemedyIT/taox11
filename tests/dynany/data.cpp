@@ -12,13 +12,13 @@
 #include "tao/x11/portable_server/portableserver.h"
 #include "testlib/taox11_testlog.h"
 
-Data::Data (IDL::traits< CORBA::ORB>::ref_type orb) :
+Data::Data (IDL::traits<CORBA::ORB>::ref_type orb) :
     orb_ (orb)
 {
   try
   {
     // Getting the RootPOA so we can generate object references.
-    IDL::traits< CORBA::Object>::ref_type obj =
+    IDL::traits<CORBA::Object>::ref_type obj =
       this->orb_->resolve_initial_references ("RootPOA");
 
 

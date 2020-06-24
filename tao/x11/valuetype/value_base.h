@@ -133,7 +133,7 @@ namespace TAOX11_NAMESPACE
     }; // ValueBase
 
     template<>
-    struct TAOX11_Valuetype_Export valuetype_traits< CORBA::ValueBase>
+    struct TAOX11_Valuetype_Export valuetype_traits<CORBA::ValueBase>
     {
       typedef valuetype_reference< CORBA::ValueBase>
           ref_type;

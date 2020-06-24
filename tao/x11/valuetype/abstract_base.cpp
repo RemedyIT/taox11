@@ -318,7 +318,7 @@ namespace TAOX11_NAMESPACE
   void
   operator<<= (CORBA::Any& any, TAOX11_CORBA::AbstractBase::_ref_type abs)
   {
-    Any_AbstractBase_Impl_T<IDL::traits< CORBA::AbstractBase>,
+    Any_AbstractBase_Impl_T<IDL::traits<CORBA::AbstractBase>,
                             CDR_Marshal_Policy>::insert (any, CORBA::_tc_AbstractBase, abs);
   }
 

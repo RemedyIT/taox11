@@ -34,7 +34,7 @@ private:
 
   ACE_Manual_Event &event_;
 
-  typedef std::vector<IDL::traits<Receiver>::ref_type > receiver_list;
+  typedef std::vector<IDL::traits<Receiver>::ref_type> receiver_list;
 
   receiver_list receivers_;
 

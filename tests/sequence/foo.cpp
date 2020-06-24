@@ -9,14 +9,14 @@
 #include "testlib/taox11_testlog.h"
 
 template <typename BOUNDED, typename SEQ>
-typename IDL::traits< BOUNDED >::ref_type
+typename IDL::traits<BOUNDED>::ref_type
 make_reference (IDL::traits<PortableServer::POA>::ref_type poa)
 {
-  typename CORBA::servant_traits< BOUNDED >::ref_type impl =
-    CORBA::make_reference< TestBounded< BOUNDED, SEQ > > ();
+  typename CORBA::servant_traits<BOUNDED>::ref_type impl =
+    CORBA::make_reference<TestBounded<BOUNDED, SEQ >> ();
   PortableServer::ObjectId id = poa->activate_object (impl);
   IDL::traits<CORBA::Object>::ref_type obj = poa->id_to_reference (id);
-  return IDL::traits< BOUNDED >::narrow (obj);
+  return IDL::traits<BOUNDED >::narrow (obj);
 }
 
 // Helper template class

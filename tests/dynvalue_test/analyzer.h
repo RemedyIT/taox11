@@ -25,23 +25,23 @@ public:
 
 private:
   /// List of base types.
-  typedef std::vector<IDL::traits< CORBA::TypeCode>::ref_type> BaseTypesList_t;
+  typedef std::vector<IDL::traits<CORBA::TypeCode>::ref_type> BaseTypesList_t;
 
   void tab ();
 
   void analyze_basic_seq (
-    IDL::traits< CORBA::TypeCode>::ref_type tc,
+    IDL::traits<CORBA::TypeCode>::ref_type tc,
     IDL::traits<DynamicAny::DynAny>::ref_type da);
 
   static void get_base_types (
-    IDL::traits< CORBA::TypeCode>::ref_type tc,
+    IDL::traits<CORBA::TypeCode>::ref_type tc,
     BaseTypesList_t &base_types,
     uint32_t total_member_count = 0);
 
   /// Return the unaliased valuetype typecode that corresponds to
   /// index (0..total_members-1) from the given hiarchical list of
   /// the derived type and it basetypes.
-  static IDL::traits< CORBA::TypeCode>::ref_type get_correct_base_type (
+  static IDL::traits<CORBA::TypeCode>::ref_type get_correct_base_type (
     const BaseTypesList_t &base_types,
     uint32_t &index);
 

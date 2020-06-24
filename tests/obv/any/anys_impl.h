@@ -25,18 +25,18 @@ class Test_impl
 {
 public:
   /// ctor
-  Test_impl (IDL::traits< CORBA::ORB >::ref_type orb);
+  Test_impl (IDL::traits<CORBA::ORB>::ref_type orb);
 
   CORBA::Any get_something (bool need_vb) override;
 
-  IDL::traits< OBV_AnyTest::VB >::ref_type get_vb () override;
+  IDL::traits< OBV_AnyTest::VB>::ref_type get_vb () override;
 
   CORBA::Any get_base () override;
 
   void shutdown () override;
 
 private:
-  IDL::traits< CORBA::ORB >::ref_type orb_;
+  IDL::traits<CORBA::ORB>::ref_type orb_;
 };
 
 #endif /* TAOX11_ANY_S_IMPL_H */

@@ -44,7 +44,7 @@ namespace TAOX11_NAMESPACE
     DynUnion_i::init (const CORBA::Any& any)
     {
       TAOX11_LOG_TRACE (" DynUnion_i::init with any");
-      IDL::traits< CORBA::TypeCode>::ref_type tc = any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = any.type ();
 
       CORBA::TCKind kind = DynAnyFactory_i::unalias (tc);
 
@@ -65,7 +65,7 @@ namespace TAOX11_NAMESPACE
     }
 
     IDL::traits< DynamicAny::DynAny>::ref_type
-    DynUnion_i::init (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynUnion_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE (" DynUnion_i::init with typecode");
 
@@ -82,14 +82,14 @@ namespace TAOX11_NAMESPACE
       this->init_common ();
 
       // member_type()/member_label() do not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
       DynAnyFactory_i::strip_alias (this->type_);
 
       CORBA::Any first_label =
         unaliased_tc->member_label (this->current_position_);
 
       // Initialize the discriminator to the label value of the first member.
-      IDL::traits< CORBA::TypeCode>::ref_type disc_tc = unaliased_tc->discriminator_type ();
+      IDL::traits<CORBA::TypeCode>::ref_type disc_tc = unaliased_tc->discriminator_type ();
       CORBA::TCKind disc_kind = DynAnyFactory_i::unalias (disc_tc);
       CORBA::TCKind label_kind = DynAnyFactory_i::unalias (first_label.type ());
       if (disc_kind == CORBA::TCKind::tk_enum &&
@@ -99,7 +99,7 @@ namespace TAOX11_NAMESPACE
         // a slightly more complex path because enum labels are
         // stored as ulong in the union tc
         this->discriminator_ =
-          MakeDynAnyUtils::make_dyn_any_t<IDL::traits< CORBA::TypeCode>::ref_type> (
+          MakeDynAnyUtils::make_dyn_any_t<IDL::traits<CORBA::TypeCode>::ref_type> (
             disc_tc,
             disc_tc,
             this->allow_truncation_ );
@@ -116,12 +116,12 @@ namespace TAOX11_NAMESPACE
             this->allow_truncation_ );
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type first_type =
+      IDL::traits<CORBA::TypeCode>::ref_type first_type =
         unaliased_tc->member_type (this->current_position_);
 
       // Recursively initialize the member to its default value.
       this->member_ =
-        MakeDynAnyUtils::make_dyn_any_t<IDL::traits< CORBA::TypeCode>::ref_type> (
+        MakeDynAnyUtils::make_dyn_any_t<IDL::traits<CORBA::TypeCode>::ref_type> (
           first_type,
           first_type,
           this->allow_truncation_ );
@@ -137,10 +137,10 @@ namespace TAOX11_NAMESPACE
       // discriminator_type () does not work with aliased type codes,
       // only on unions, so strip the alias out of the type code
       //
-      IDL::traits< CORBA::TypeCode>::ref_type tc =
+      IDL::traits<CORBA::TypeCode>::ref_type tc =
        DynAnyFactory_i::strip_alias (any.type ());
 
-      IDL::traits< CORBA::TypeCode>::ref_type disc_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type disc_tc =
         tc->discriminator_type ();
 
       CORBA::Any disc_any;
@@ -196,7 +196,7 @@ namespace TAOX11_NAMESPACE
       // Move to the next field in the CDR stream.
       (void) TAO_Marshal_Object::perform_skip (TC_helper::get_tao_tc (disc_tc), &in);
 
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased =
         DynAnyFactory_i::strip_alias (tc);
 
       uint32_t const count = unaliased->member_count ();
@@ -224,7 +224,7 @@ namespace TAOX11_NAMESPACE
 
       if (match)
       {
-        IDL::traits< CORBA::TypeCode>::ref_type member_tc = tc->member_type (i);
+        IDL::traits<CORBA::TypeCode>::ref_type member_tc = tc->member_type (i);
 
         CORBA::Any member_any;
 
@@ -254,7 +254,7 @@ namespace TAOX11_NAMESPACE
         // type code was bad.
 
         // default_index() does not work with aliased type codes.
-        IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+        IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
           DynAnyFactory_i::strip_alias (this->type_);
 
         int32_t default_index =
@@ -267,7 +267,7 @@ namespace TAOX11_NAMESPACE
         {
           uint32_t index = static_cast<uint32_t> (default_index);
 
-          IDL::traits< CORBA::TypeCode>::ref_type default_tc =
+          IDL::traits<CORBA::TypeCode>::ref_type default_tc =
             tc->member_type (index);
 
           CORBA::Any default_any {};
@@ -322,9 +322,9 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = value->type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = value->type ();
 
-      IDL::traits< CORBA::TypeCode>::ref_type disc_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type disc_tc =
         this->discriminator_->type ();
 
       bool equivalent = disc_tc->equivalent (tc);
@@ -343,7 +343,7 @@ namespace TAOX11_NAMESPACE
       uint32_t i;
 
       // member_label() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
 
       bool match = 0;
@@ -389,13 +389,13 @@ namespace TAOX11_NAMESPACE
         }
 
         // member_type() does not work with aliased type codes.
-        IDL::traits< CORBA::TypeCode>::ref_type member_tc = unaliased_tc->member_type (i);
+        IDL::traits<CORBA::TypeCode>::ref_type member_tc = unaliased_tc->member_type (i);
 
         this->member_->destroy ();
 
         // Initialize member to default value.
         this->member_ =
-          MakeDynAnyUtils::make_dyn_any_t<IDL::traits< CORBA::TypeCode>::ref_type> (
+          MakeDynAnyUtils::make_dyn_any_t<IDL::traits<CORBA::TypeCode>::ref_type> (
             member_tc,
             member_tc,
             this->allow_truncation_ );
@@ -413,7 +413,7 @@ namespace TAOX11_NAMESPACE
       else
       {
         // default_index() does not work with aliased type codes.
-        IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+        IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
           DynAnyFactory_i::strip_alias (this->type_);
 
         // If no match, either the default member or no member is active.
@@ -452,7 +452,7 @@ namespace TAOX11_NAMESPACE
       }
 
       // default_index() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
 
       int32_t default_index =
@@ -467,13 +467,13 @@ namespace TAOX11_NAMESPACE
       {
         uint32_t index = static_cast<uint32_t> (default_index);
 
-        IDL::traits< CORBA::TypeCode>::ref_type default_tc =
+        IDL::traits<CORBA::TypeCode>::ref_type default_tc =
           unaliased_tc->member_type (index);
 
         this->member_->destroy ();
 
         this->member_ =
-          MakeDynAnyUtils::make_dyn_any_t<IDL::traits< CORBA::TypeCode>::ref_type> (
+          MakeDynAnyUtils::make_dyn_any_t<IDL::traits<CORBA::TypeCode>::ref_type> (
             default_tc,
             default_tc,
             this->allow_truncation_ );
@@ -497,7 +497,7 @@ namespace TAOX11_NAMESPACE
       }
 
       // default_index() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
 
       int32_t default_index =
@@ -511,7 +511,7 @@ namespace TAOX11_NAMESPACE
       }
       else
       {
-        IDL::traits< CORBA::TypeCode>::ref_type disc_tc =
+        IDL::traits<CORBA::TypeCode>::ref_type disc_tc =
           this->discriminator_->type ();
 
         CORBA::TCKind kind =
@@ -561,7 +561,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc =
+      IDL::traits<CORBA::TypeCode>::ref_type tc =
         this->discriminator_->type ();
 
       return DynAnyFactory_i::unalias (tc);
@@ -633,7 +633,7 @@ namespace TAOX11_NAMESPACE
         throw DynamicAny::DynAny::InvalidValue ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = this->member_->type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = this->member_->type ();
 
       return DynAnyFactory_i::unalias (tc);
     }
@@ -648,7 +648,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = any.type ();
       bool equivalent =
         this->type_->equivalent (tc);
 
@@ -683,7 +683,7 @@ namespace TAOX11_NAMESPACE
       TAO_OutputCDR out_cdr;
 
       // Add the discriminator to the CDR stream.
-      IDL::traits< CORBA::TypeCode>::ref_type disc_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type disc_tc =
         this->discriminator_->type ();
 
       CORBA::Any disc_any =
@@ -718,7 +718,7 @@ namespace TAOX11_NAMESPACE
       // Add the member to the CDR stream unless it has no active member.
       if (this->has_no_active_member () == 0)
       {
-        IDL::traits< CORBA::TypeCode>::ref_type member_tc =
+        IDL::traits<CORBA::TypeCode>::ref_type member_tc =
           this->member_->type ();
 
         CORBA::Any member_any =
@@ -867,7 +867,7 @@ namespace TAOX11_NAMESPACE
       // Use my_any so we can detect a default case label,
       // if we are iterating through the union type code's
       // member_label() calls.
-      IDL::traits< CORBA::TypeCode>::ref_type tc = my_any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = my_any.type ();
 
       CORBA::TCKind kind = DynAnyFactory_i::unalias (tc);
 
@@ -910,7 +910,7 @@ namespace TAOX11_NAMESPACE
 
             // check whether the discriminator is possibly an enum type
             // since these get stored as ulong label values as well
-            IDL::traits< CORBA::TypeCode>::ref_type other_tc = other_any.type ();
+            IDL::traits<CORBA::TypeCode>::ref_type other_tc = other_any.type ();
             CORBA::TCKind kind = DynAnyFactory_i::unalias (other_tc);
             if (kind == CORBA::TCKind::tk_enum)
             {

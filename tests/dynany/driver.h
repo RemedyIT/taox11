@@ -47,7 +47,7 @@ enum TEST_TYPE
 
 private:
   /// underlying ORB (we do not own it)
-  IDL::traits< CORBA::ORB>::ref_type orb_;
+  IDL::traits<CORBA::ORB>::ref_type orb_;
 
   TEST_TYPE test_type_;
 

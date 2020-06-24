@@ -69,7 +69,7 @@ Test_DynSequence::run_test ()
   try
   {
 
-    IDL::traits< CORBA::Object>::ref_type factory_obj =
+    IDL::traits<CORBA::Object>::ref_type factory_obj =
              this->orb_->resolve_initial_references ("DynAnyFactory");
 
      if (factory_obj == nullptr)

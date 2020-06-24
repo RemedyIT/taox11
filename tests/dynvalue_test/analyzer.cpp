@@ -24,7 +24,7 @@ DynAnyAnalyzer::DynAnyAnalyzer ( IDL::traits< DynamicAny::DynAnyFactory>::ref_ty
 
 void
 DynAnyAnalyzer::get_base_types (
-  IDL::traits< CORBA::TypeCode>::ref_type tc,
+  IDL::traits<CORBA::TypeCode>::ref_type tc,
   BaseTypesList_t &base_types,
   uint32_t total_member_count)
 {
@@ -38,7 +38,7 @@ DynAnyAnalyzer::get_base_types (
 
   // Obtain each derived type's basetype and add this to the list
 
-  IDL::traits< CORBA::TypeCode>::ref_type
+  IDL::traits<CORBA::TypeCode>::ref_type
   base = base_types[0]->concrete_base_type();
   base = DynamicAny::DynAnyFactory_i::strip_alias (base);
   while (base && (CORBA::TCKind::tk_value == base->kind()))
@@ -52,7 +52,7 @@ DynAnyAnalyzer::get_base_types (
   }
 }
 
-IDL::traits< CORBA::TypeCode>::ref_type
+IDL::traits<CORBA::TypeCode>::ref_type
 DynAnyAnalyzer::get_correct_base_type (
   const BaseTypesList_t &base_types,
   uint32_t &index)
@@ -105,9 +105,9 @@ void
 DynAnyAnalyzer::analyze (
     IDL::traits< DynamicAny::DynAny>::ref_type da)
 {
-  IDL::traits< CORBA::TypeCode>::ref_type tc  = da->type ();
+  IDL::traits<CORBA::TypeCode>::ref_type tc  = da->type ();
   CORBA::TCKind kind = tc->kind ();
-  IDL::traits< CORBA::TypeCode>::ref_type dup =tc;
+  IDL::traits<CORBA::TypeCode>::ref_type dup =tc;
 
   // strip aliases
   while (CORBA::TCKind::tk_alias == kind)
@@ -196,7 +196,7 @@ DynAnyAnalyzer::analyze (
           IDL::traits<DynamicAny::DynAny>::ref_type cc = dvt->current_component ();
           DynamicAny::FieldName fn = dvt->current_member_name ();
           uint32_t sub_member_number = member_number;
-          const IDL::traits< CORBA::TypeCode>::ref_type base = get_correct_base_type (
+          const IDL::traits<CORBA::TypeCode>::ref_type base = get_correct_base_type (
                            base_types,
                            sub_member_number);
           const std::string visability =

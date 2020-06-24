@@ -524,9 +524,9 @@ TypeCodeFactory_i::create_event_tc (
  namespace CORBA
  {
    template<>
-   TAOX11_TYPECODEFACTORY_Export object_traits< TAOX11_CORBA::TypeCodeFactory >::ref_type
+   TAOX11_TYPECODEFACTORY_Export object_traits< TAOX11_CORBA::TypeCodeFactory>::ref_type
    object_traits< TypeCodeFactory >::narrow (
-      object_traits< CORBA::Object >::ref_type obj)
+      object_traits<CORBA::Object>::ref_type obj)
    {
      if (obj)
      {

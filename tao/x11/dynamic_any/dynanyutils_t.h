@@ -54,7 +54,7 @@ namespace TAOX11_NAMESPACE
 
     static typename IDL::traits<DA_IMPL>::ref_type
       create_dyn_any_t (
-        IDL::traits< CORBA::TypeCode>::ref_type tc,
+        IDL::traits<CORBA::TypeCode>::ref_type tc,
         ANY_TC any_tc,
         bool allow_truncation= true);
   };
@@ -66,7 +66,7 @@ namespace TAOX11_NAMESPACE
     template<typename ANY_TC>
     IDL::traits< DynamicAny::DynAny>::ref_type
       make_dyn_any_t (
-        IDL::traits< CORBA::TypeCode>::ref_type tc,
+        IDL::traits<CORBA::TypeCode>::ref_type tc,
         ANY_TC any_tc,
         bool allow_truncation= true);
   }

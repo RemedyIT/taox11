@@ -55,9 +55,9 @@ public:
   CORBA::TCKind
   TestAnyTypeCodes2 (CORBA::TCKind a, CORBA::TCKind& b) override;
 
-  IDL::traits< CORBA::TypeCode>::ref_type
-  TestAnyTypeCodes3 (IDL::traits< CORBA::TypeCode>::ref_type a,
-    IDL::traits< CORBA::TypeCode>::ref_type& b) override;
+  IDL::traits<CORBA::TypeCode>::ref_type
+  TestAnyTypeCodes3 (IDL::traits<CORBA::TypeCode>::ref_type a,
+    IDL::traits<CORBA::TypeCode>::ref_type& b) override;
 
   Test::Hello::Tc_seq
   TestTypeCodeSeq (const Test::Hello::Tc_seq& a, Test::Hello::Tc_seq& b) override;

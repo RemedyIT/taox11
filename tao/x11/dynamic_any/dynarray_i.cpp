@@ -40,7 +40,7 @@ namespace TAOX11_NAMESPACE
     DynArray_i::init (const CORBA::Any & any)
     {
       TAOX11_LOG_TRACE ("DynArray_i::init with any");
-      IDL::traits< CORBA::TypeCode>::ref_type tc = any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = any.type ();
       CORBA::TCKind kind = DynAnyFactory_i::unalias (tc);
 
       if (kind != CORBA::TCKind::tk_array)
@@ -77,7 +77,7 @@ namespace TAOX11_NAMESPACE
         TAO_InputCDR tmp_in (out);
         cdr = tmp_in;
       }
-      IDL::traits< CORBA::TypeCode>::ref_type field_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type field_tc =
         this->get_element_type ();
 
       for (uint32_t i = 0; i < numfields; ++i)
@@ -113,7 +113,7 @@ namespace TAOX11_NAMESPACE
     }
 
     IDL::traits< DynamicAny::DynAny>::ref_type
-    DynArray_i::init (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynArray_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynArray_i::init with tc");
 
@@ -130,14 +130,14 @@ namespace TAOX11_NAMESPACE
 
       this->init_common (numfields);
 
-      IDL::traits< CORBA::TypeCode>::ref_type elemtype = this->get_element_type ();
+      IDL::traits<CORBA::TypeCode>::ref_type elemtype = this->get_element_type ();
 
       for (uint32_t i = 0; i < numfields; ++i)
       {
         // Recursively initialize each element.
        // this->da_members_[i] =
         this->da_members_.push_back(
-          MakeDynAnyUtils::make_dyn_any_t<IDL::traits< CORBA::TypeCode>::ref_type> (
+          MakeDynAnyUtils::make_dyn_any_t<IDL::traits<CORBA::TypeCode>::ref_type> (
             elemtype,
             elemtype,
             this->allow_truncation_ ));
@@ -145,12 +145,12 @@ namespace TAOX11_NAMESPACE
       return this->_this();
     }
 
-    IDL::traits< CORBA::TypeCode>::ref_type
+    IDL::traits<CORBA::TypeCode>::ref_type
     DynArray_i::get_element_type ()
     {
       TAOX11_LOG_TRACE ("DynArray_i::get_element_type");
 
-      IDL::traits< CORBA::TypeCode>::ref_type element_type =
+      IDL::traits<CORBA::TypeCode>::ref_type element_type =
         this->type_;
 
       // Strip away aliases (if any) on top of the outer type
@@ -169,9 +169,9 @@ namespace TAOX11_NAMESPACE
 
     // Get the length from the (possibly aliased) typecode.
     uint32_t
-    DynArray_i::get_tc_length (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynArray_i::get_tc_length (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
-      IDL::traits< CORBA::TypeCode>::ref_type tctmp = tc;
+      IDL::traits<CORBA::TypeCode>::ref_type tctmp = tc;
       CORBA::TCKind kind = tctmp->kind ();
 
       while (kind == CORBA::TCKind::tk_alias)
@@ -229,8 +229,8 @@ namespace TAOX11_NAMESPACE
         throw DynamicAny::DynAny::InvalidValue ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type value_tc;
-      IDL::traits< CORBA::TypeCode>::ref_type element_type = this->get_element_type ();
+      IDL::traits<CORBA::TypeCode>::ref_type value_tc;
+      IDL::traits<CORBA::TypeCode>::ref_type element_type = this->get_element_type ();
 
       for (uint32_t i = 0; i < length; i++)
       {
@@ -302,9 +302,9 @@ namespace TAOX11_NAMESPACE
         throw DynamicAny::DynAny::InvalidValue ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type element_type = this->get_element_type ();
+      IDL::traits<CORBA::TypeCode>::ref_type element_type = this->get_element_type ();
 
-      IDL::traits< CORBA::TypeCode>::ref_type val_type;
+      IDL::traits<CORBA::TypeCode>::ref_type val_type;
       bool equivalent;
 
       for (uint32_t i = 0; i < length; ++i)
@@ -334,7 +334,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = any.type ();
       bool equivalent = this->type_->equivalent (tc);
 
       if (equivalent)
@@ -370,7 +370,7 @@ namespace TAOX11_NAMESPACE
           throw DynamicAny::DynAny::TypeMismatch ();
         }
 
-        IDL::traits< CORBA::TypeCode>::ref_type field_tc = this->get_element_type ();
+        IDL::traits<CORBA::TypeCode>::ref_type field_tc = this->get_element_type ();
 
         for (uint32_t i = 0; i < arg_length; ++i)
         {
@@ -419,7 +419,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type field_tc = this->get_element_type ();
+      IDL::traits<CORBA::TypeCode>::ref_type field_tc = this->get_element_type ();
 
       TAO_OutputCDR out_cdr;
       CORBA::Any field_any;
@@ -483,7 +483,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = rhs->type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = rhs->type ();
 
       bool equivalent = tc->equivalent (this->type_);
 

@@ -16,7 +16,7 @@
 #include "tao/x11/dynamic_any/dynanyfactory.h"
 #include "da_testsC.h"
 
-Test_DynAny::Test_DynAny (IDL::traits< CORBA::ORB>::ref_type orb)
+Test_DynAny::Test_DynAny (IDL::traits<CORBA::ORB>::ref_type orb)
   : orb_ (orb),
     test_name_ ("test_dynany"),
     error_count_ (0)
@@ -41,7 +41,7 @@ Test_DynAny::run_test ()
   Data data (this->orb_);
   try
   {
-    IDL::traits< CORBA::Object>::ref_type factory_obj =
+    IDL::traits<CORBA::Object>::ref_type factory_obj =
         this->orb_->resolve_initial_references ("DynAnyFactory");
 
     if (factory_obj == nullptr)
@@ -241,7 +241,7 @@ Test_DynAny::run_test ()
         ++this->error_count_;
       }
 
-      IDL::traits< CORBA::Object>::ref_type d_out1 = fa1->get_reference ();
+      IDL::traits<CORBA::Object>::ref_type d_out1 = fa1->get_reference ();
       if ((d_out1->_interface_repository_id() != data.m_objref1->_interface_repository_id()))
       {
         TAOX11_TEST_ERROR << "++ ERROR get_reference after create_dyn_any++ " << std::endl;
@@ -250,7 +250,7 @@ Test_DynAny::run_test ()
 
       fa1->insert_reference (data.m_objref2);
 
-      IDL::traits< CORBA::Object>::ref_type d_out2 = fa1->get_reference ();
+      IDL::traits<CORBA::Object>::ref_type d_out2 = fa1->get_reference ();
 
       if (d_out2->_interface_repository_id() != data.m_objref2->_interface_repository_id())
       {
@@ -316,7 +316,7 @@ Test_DynAny::run_test ()
       IDL::traits<DynamicAny::DynAny>::ref_type fa2 =
         dynany_factory->create_dyn_any (in);
       fa2->insert_typecode (data.m_typecode1);
-      IDL::traits< CORBA::TypeCode>::ref_type tc_out =
+      IDL::traits<CORBA::TypeCode>::ref_type tc_out =
         fa2->get_typecode ();
       if (tc_out->equal (data.m_typecode1))
       {
@@ -336,7 +336,7 @@ Test_DynAny::run_test ()
       ftc2->from_any (in_any2);
       analyzer.analyze (ftc2);
       CORBA::Any out_any2 = ftc2->to_any ();
-      IDL::traits< CORBA::TypeCode>::ref_type out_tc;
+      IDL::traits<CORBA::TypeCode>::ref_type out_tc;
       out_any2 >>= out_tc;
 
       bool equal = out_tc->equal (data.m_typecode1);
