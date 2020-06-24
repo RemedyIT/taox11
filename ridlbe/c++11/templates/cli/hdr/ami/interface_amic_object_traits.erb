@@ -36,10 +36,10 @@ namespace TAOX11_NAMESPACE
       public CORBA::object_traits < <%= amic_scoped_cxxtype %>>
     {
       typedef <%= handler_scoped_skel_cxxname %> replyhandler_base_type;
-      typedef TAOX11_CORBA::servant_traits< <%= handler_scoped_skel_cxxname %>> replyhandler_servant_traits;
-      typedef TAOX11_CORBA::servant_reference< <%=handler_scoped_skel_cxxname%>> replyhandler_servant_ref_type;
-      typedef TAOX11_CORBA::weak_servant_reference< <%=handler_scoped_skel_cxxname%>> replyhandler_weak_servant_ref_type;
-      typedef IDL::traits< <%= handler_scoped_cxxname %>> replyhandler_traits;
+      typedef TAOX11_CORBA::servant_traits<<%= handler_scoped_skel_cxxname %>> replyhandler_servant_traits;
+      typedef TAOX11_CORBA::servant_reference<<%=handler_scoped_skel_cxxname%>> replyhandler_servant_ref_type;
+      typedef TAOX11_CORBA::weak_servant_reference<<%=handler_scoped_skel_cxxname%>> replyhandler_weak_servant_ref_type;
+      typedef IDL::traits<<%= handler_scoped_cxxname %>> replyhandler_traits;
       typedef replyhandler_traits::ref_type replyhandler_ref_type;
       typedef replyhandler_traits::weak_ref_type replyhandler_weak_ref_type;
 

@@ -44,7 +44,7 @@ TAO_CORBA::Boolean operator>> (
 
   if (!TAO_CORBA::is_nil (_proxy_ptr))
     {
-      _tao_objref = TAOX11_CORBA::make_reference< <%= scoped_cxxname %>> (_proxy_ptr);
+      _tao_objref = TAOX11_CORBA::make_reference<<%= scoped_cxxname %>> (_proxy_ptr);
     }
   else
     {

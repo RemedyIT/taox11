@@ -2,7 +2,7 @@
 // generated from <%= ridl_template_path %>
 inline std::ostream& operator<< (
     std::ostream& strm,
-    TAOX11_NAMESPACE::CORBA::amic_traits< <%= scoped_cxxname %>>::ref_type _o)
+    TAOX11_NAMESPACE::CORBA::amic_traits<<%= scoped_cxxname %>>::ref_type _o)
 {
-  return TAOX11_NAMESPACE::CORBA::amic_traits< <%= scoped_cxxname %>>::write_on (strm, std::move(_o));
+  return TAOX11_NAMESPACE::CORBA::amic_traits<<%= scoped_cxxname %>>::write_on (strm, std::move(_o));
 }
