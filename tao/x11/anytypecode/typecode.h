@@ -327,7 +327,7 @@ namespace TAOX11_NAMESPACE
 
     template<>
     struct traits < CORBA::TypeCode::Bounds>
-      : IDL::common_traits< CORBA::TypeCode::Bounds>
+      : IDL::common_traits<CORBA::TypeCode::Bounds>
     {
       template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
       static inline OStrm_& write_on(
@@ -372,7 +372,7 @@ namespace TAOX11_NAMESPACE
 
     template<>
     struct traits < CORBA::TypeCode::BadKind>
-      : IDL::common_traits< CORBA::TypeCode::BadKind>
+      : IDL::common_traits<CORBA::TypeCode::BadKind>
     {
       template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
       static inline OStrm_& write_on(

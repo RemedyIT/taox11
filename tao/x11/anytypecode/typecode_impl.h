@@ -107,7 +107,7 @@ namespace TAOX11_NAMESPACE
     protected:
       friend struct object_traits<TypeCode_impl>;
 
-      bool _tc_marshal (TAO_OutputCDR&)  override;
+      bool _tc_marshal (TAO_OutputCDR&) override;
       bool _tc_unmarshal (TAO_InputCDR&) override;
 
       TypeCode_impl* _impl () override;

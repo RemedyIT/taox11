@@ -13,14 +13,14 @@
 int main (int argc, ACE_TCHAR *argv[])
 {
   // Retrieve the underlying ORB
-  IDL::traits< CORBA::ORB>::ref_type orb_ = CORBA::ORB_init (argc, argv, "local");
+  IDL::traits<CORBA::ORB>::ref_type orb_ = CORBA::ORB_init (argc, argv, "local");
   if (!orb_)
   {
     TAOX11_TEST_ERROR << "Error: Could not init orb" << std::endl;
     return 1;
   }
 
-  IDL::traits< CORBA::Object>::ref_type factory_obj =
+  IDL::traits<CORBA::Object>::ref_type factory_obj =
      orb_->resolve_initial_references ("DynAnyFactory");
 
   if (factory_obj == nullptr)

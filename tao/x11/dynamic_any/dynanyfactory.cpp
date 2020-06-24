@@ -48,7 +48,7 @@ namespace TAOX11_NAMESPACE
       // Second arg is typed in the template parameter, repeating it
       // this way allows cleaner template code.
       return
-      TAOX11_NAMESPACE::MakeDynAnyUtils::make_dyn_any_t< IDL::traits< CORBA::TypeCode>::ref_type> (
+      TAOX11_NAMESPACE::MakeDynAnyUtils::make_dyn_any_t< IDL::traits<CORBA::TypeCode>::ref_type> (
            type,
            type,
            true );  // Allow truncation
@@ -141,7 +141,7 @@ namespace TAOX11_NAMESPACE
     CORBA::object_reference< CORBA::TypeCode>
     DynAnyFactory_i::strip_alias (CORBA::object_reference<CORBA::TypeCode> tc)
     {
-      IDL::traits< CORBA::TypeCode>::ref_type retval = IDL::traits< CORBA::TypeCode>::narrow(tc);
+      IDL::traits<CORBA::TypeCode>::ref_type retval = IDL::traits<CORBA::TypeCode>::narrow(tc);
       CORBA::TCKind tck = retval->kind ();
 
       while (tck == CORBA::TCKind::tk_alias)

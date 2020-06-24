@@ -250,17 +250,17 @@ main (int argc, char *argv[])
     taox11_debug << "Controller has " << list.size () << " device(s)"
       << std::endl;
 
-    IDL::traits< CCS::Thermometer >::ref_type t =
+    IDL::traits<CCS::Thermometer>::ref_type t =
       ctrl->create_thermometer (27, "Room 1");
-    IDL::traits< CCS::Thermostat >::ref_type ts  =
+    IDL::traits<CCS::Thermostat>::ref_type ts  =
       ctrl->create_thermostat (28, "Room 2", 48);
-    IDL::traits< CCS::Thermostat >::ref_type ts2 =
+    IDL::traits<CCS::Thermostat>::ref_type ts2 =
       ctrl->create_thermostat (30, "Room 3", 48);
-    IDL::traits< CCS::Thermostat >::ref_type ts3 =
+    IDL::traits<CCS::Thermostat>::ref_type ts3 =
       ctrl->create_thermostat (32, "Room 3", 68);
-    IDL::traits< CCS::Thermostat >::ref_type ts4 =
+    IDL::traits<CCS::Thermostat>::ref_type ts4 =
       ctrl->create_thermostat (34, "Room 3", 68);
-    IDL::traits< CCS::Thermostat >::ref_type ts5 =
+    IDL::traits<CCS::Thermostat>::ref_type ts5 =
       ctrl->create_thermostat (36, "Room 3", 48);
 
     taox11_debug << "Three rooms : "
@@ -274,7 +274,7 @@ main (int argc, char *argv[])
 
     list = ctrl->list ();
     taox11_debug << std::endl << "List details : " << std::endl;
-    for (IDL::traits< CCS::Thermometer >::ref_type tm : list)
+    for (IDL::traits<CCS::Thermometer>::ref_type tm : list)
     {
       dump_thermometer (tm);
     }
@@ -291,10 +291,10 @@ main (int argc, char *argv[])
     dump_thermometer (list[0u]);
 
     // Find first thermostat in list.
-    IDL::traits< CCS::Thermostat >::ref_type tmstat;
-    for (IDL::traits< CCS::Thermometer >::ref_type therm :  list)
+    IDL::traits<CCS::Thermostat>::ref_type tmstat;
+    for (IDL::traits<CCS::Thermometer>::ref_type therm :  list)
     {
-      tmstat = IDL::traits< CCS::Thermostat >::narrow (therm);
+      tmstat = IDL::traits<CCS::Thermostat >::narrow (therm);
       if (tmstat)
         break;
     }
@@ -337,9 +337,9 @@ main (int argc, char *argv[])
     taox11_debug << std::endl << "Increasing thermostats by 40 degrees."
       << std::endl;
     CCS::Controller::ThermostatSeq tss;
-    for (IDL::traits< CCS::Thermometer >::ref_type tm : list)
+    for (IDL::traits<CCS::Thermometer>::ref_type tm : list)
     {
-      tmstat = IDL::traits< CCS::Thermostat >::narrow (tm);
+      tmstat = IDL::traits<CCS::Thermostat >::narrow (tm);
       if (!tmstat)
         continue;
       tss.push_back (tmstat);

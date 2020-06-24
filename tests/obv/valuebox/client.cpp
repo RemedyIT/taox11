@@ -102,7 +102,7 @@ box_test1(typename IDL::traits<BoxT>::ref_type valuebox, UT val1, UT val2)
   OBV_Verify("box_test1 ", ACE::is_equal (valuebox_clone->_value (), val1));
 
   // Test _copy_value
-  IDL::traits< CORBA::ValueBase >::ref_type copy =
+  IDL::traits<CORBA::ValueBase>::ref_type copy =
     valuebox->_copy_value();
   OBV_Verify("box_test1 ", copy != nullptr);
   //OBV_Verify("box_test1 ",  copy->_value () != 0);
@@ -309,7 +309,7 @@ test_boxed_string()
   OBV_Verify("test_boxed_string 3", string1 == string1);
 
   // Make some objects, using our data
-  IDL::traits< VBstring >::ref_type temp = CORBA::make_reference
+  IDL::traits< VBstring>::ref_type temp = CORBA::make_reference
     < VBstring > (string1);
   IDL::traits<VBstring>::ref_type vbstring1(temp);
 
@@ -434,7 +434,7 @@ test_boxed_sequence()
       VBseqlong>();
     if (vbseqlong1 == nullptr)
       return 1;
-    IDL::traits< VBseqlong >::ref_type temp = CORBA::make_reference<
+    IDL::traits< VBseqlong>::ref_type temp = CORBA::make_reference<
       VBseqlong>();
     if (temp == nullptr)
       return 1;
@@ -645,7 +645,7 @@ test_boxed_struct()
     fixed_struct_b.abstruct().s2());
 
   // Test _copy_value and narrow
-  IDL::traits< CORBA::ValueBase >::ref_type copy_temp =
+  IDL::traits<CORBA::ValueBase>::ref_type copy_temp =
     valuebox3->_copy_value();
   IDL::traits<VBfixed_struct1>::ref_type valuebox4 =
     IDL::traits<VBfixed_struct1>::narrow (valuebox3->_copy_value());
@@ -1190,7 +1190,7 @@ int ACE_TMAIN(int argc, ACE_TCHAR *argv[])
     if (!parse_args(argc, argv))
       return 1;
     // Obtain reference to the object.
-    IDL::traits< CORBA::Object >::ref_type tmp = orb->string_to_object(ior);
+    IDL::traits<CORBA::Object>::ref_type tmp = orb->string_to_object(ior);
     test_object = IDL::traits<Test>::narrow (tmp);
     if (test_object == nullptr)
       {

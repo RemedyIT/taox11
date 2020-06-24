@@ -58,7 +58,7 @@ namespace TAOX11_NAMESPACE
           const DynAnySeq& values) override;
 
       /// Obtain the kind of object, after all aliasing has been removed.
-      static CORBA::TCKind unalias (IDL::traits< CORBA::TypeCode>::ref_type tc);
+      static CORBA::TCKind unalias (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       /// Same as above, but returns type code instead of TCKind. Caller
       /// must release the return value.

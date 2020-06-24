@@ -15,7 +15,7 @@
 #include "analyzer.h"
 
 
-Test_DynArray::Test_DynArray (IDL::traits< CORBA::ORB>::ref_type orb)
+Test_DynArray::Test_DynArray (IDL::traits<CORBA::ORB>::ref_type orb)
   : orb_ (orb),
     test_name_ ("test_dynarray"),
     error_count_ (0)
@@ -43,7 +43,7 @@ Test_DynArray::run_test ()
   {
     TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[4] << " =*=*=*=*" << std::endl;
 
-    IDL::traits< CORBA::Object>::ref_type factory_obj =
+    IDL::traits<CORBA::Object>::ref_type factory_obj =
                     this->orb_->resolve_initial_references ("DynAnyFactory");
 
     if (factory_obj == nullptr)

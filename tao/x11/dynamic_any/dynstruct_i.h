@@ -43,7 +43,7 @@ namespace TAOX11_NAMESPACE
 
       /// Initialize using just a TypeCode.
       IDL::traits< DynamicAny::DynAny>::ref_type
-      init (IDL::traits< CORBA::TypeCode>::ref_type tc);
+      init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       /// Initialize using an Any.
       IDL::traits< DynamicAny::DynAny>::ref_type
@@ -78,7 +78,7 @@ namespace TAOX11_NAMESPACE
 
     private:
       /// Check if the typecode is acceptable.
-      void check_typecode (IDL::traits< CORBA::TypeCode>::ref_type tc);
+      void check_typecode (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       /// Code common to the constructor from an Any arg and the member
       /// function from_any().

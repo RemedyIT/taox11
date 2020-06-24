@@ -29,9 +29,9 @@ public:
   uint64_t    m_ulonglong1 {654321}, m_ulonglong2 {0};
   std::string        m_string1 {"upchuck"};
   std::string        m_string2 {""};
-  IDL::traits< CORBA::TypeCode>::ref_type   m_typecode1 {CORBA::_tc_long},  m_typecode2 {CORBA::_tc_null};
+  IDL::traits<CORBA::TypeCode>::ref_type   m_typecode1 {CORBA::_tc_long},  m_typecode2 {CORBA::_tc_null};
   wchar_t           m_wchar1 {L'A'},m_wchar2 {'\0'};
-  IDL::traits< CORBA::Object>::ref_type    m_objref1,    m_objref2;
+  IDL::traits<CORBA::Object>::ref_type    m_objref1,    m_objref2;
   CORBA::ShortSeq   m_shortseq1 {0,1,2};
   CORBA::ShortSeq   m_shortseq2;
   long double     m_longdouble1 {88888888888.8888}, m_longdouble2 {99999999999.9999};

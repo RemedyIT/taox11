@@ -16,7 +16,7 @@
 class DynAnyAnalyzer
 {
 public:
-  DynAnyAnalyzer (IDL::traits< CORBA::ORB>::ref_type orb,
+  DynAnyAnalyzer (IDL::traits<CORBA::ORB>::ref_type orb,
                   IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory);
 
   void tab (int t);
@@ -31,7 +31,7 @@ public:
                           IDL::traits<DynamicAny::DynAny>::ref_type da);
 
 private:
- IDL::traits< CORBA::ORB>::ref_type orb_;
+ IDL::traits<CORBA::ORB>::ref_type orb_;
  IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory_;
   int level_;
 };

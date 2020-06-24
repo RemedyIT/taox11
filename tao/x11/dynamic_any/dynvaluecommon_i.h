@@ -56,7 +56,7 @@ namespace TAOX11_NAMESPACE
       DynValueCommon_i& operator= (DynValueCommon_i&&) = delete;
 
       /// Check if the typecode is acceptable. Needs to be provided by DynValue or DynValueBox
-      virtual void check_typecode (IDL::traits< CORBA::TypeCode>::ref_type tc) = 0;
+      virtual void check_typecode (IDL::traits<CORBA::TypeCode>::ref_type tc) = 0;
 
     protected:
       bool is_null_ {true};

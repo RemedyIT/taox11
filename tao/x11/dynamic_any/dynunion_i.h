@@ -47,7 +47,7 @@ namespace TAOX11_NAMESPACE
 
       /// Constructor taking a typecode argument.
       IDL::traits< DynamicAny::DynAny>::ref_type
-      init (IDL::traits< CORBA::TypeCode>::ref_type tc);
+      init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       // = LocalObject methods.
       //static TAO_DynUnion_i *_narrow (CORBA::Object_ptr obj);

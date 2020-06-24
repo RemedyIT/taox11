@@ -35,7 +35,7 @@
   } \
   break;
 
-DynAnyAnalyzer::DynAnyAnalyzer ( IDL::traits< CORBA::ORB>::ref_type orb,
+DynAnyAnalyzer::DynAnyAnalyzer ( IDL::traits<CORBA::ORB>::ref_type orb,
     IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory)
   : orb_ (orb),
     dynany_factory_ (dynany_factory),
@@ -62,11 +62,11 @@ void DynAnyAnalyzer::resetTab ()
 
 void DynAnyAnalyzer::analyze (IDL::traits< DynamicAny::DynAny>::ref_type da)
 {
-  IDL::traits< CORBA::TypeCode>::ref_type tc = da->type ();
+  IDL::traits<CORBA::TypeCode>::ref_type tc = da->type ();
 
   CORBA::TCKind kind = tc->kind ();
 
-  IDL::traits< CORBA::TypeCode>::ref_type dup = tc;
+  IDL::traits<CORBA::TypeCode>::ref_type dup = tc;
 
   // strip aliases
   while (kind == CORBA::TCKind::tk_alias)

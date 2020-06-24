@@ -40,7 +40,7 @@ namespace TAOX11_NAMESPACE
     DynSequence_i::init (const CORBA::Any& any)
     {
       TAOX11_LOG_TRACE ("DynSequence_i::init with any");
-      IDL::traits< CORBA::TypeCode>::ref_type tc = any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = any.type ();
       CORBA::TCKind kind = DynAnyFactory_i::unalias (tc);
 
       if (kind != CORBA::TCKind::tk_sequence)
@@ -83,7 +83,7 @@ namespace TAOX11_NAMESPACE
       this->init_common (length);
 
       // Get the type of the sequence elments.
-      IDL::traits< CORBA::TypeCode>::ref_type field_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type field_tc =
         this->get_element_type ();
 
       for (uint32_t i = 0; i < length; ++i)
@@ -118,7 +118,7 @@ namespace TAOX11_NAMESPACE
     }
 
     IDL::traits< DynamicAny::DynAny>::ref_type
-    DynSequence_i::init (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynSequence_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynSequence_i::init with typecode");
 
@@ -648,7 +648,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = rhs->type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = rhs->type ();
 
       bool equivalent = tc->equivalent (this->type_);
 

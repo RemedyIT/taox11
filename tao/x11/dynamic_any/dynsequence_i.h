@@ -42,7 +42,7 @@ namespace TAOX11_NAMESPACE
 
       /// Initialize using just a TypeCode
        IDL::traits< DynamicAny::DynAny>::ref_type
-       init (IDL::traits< CORBA::TypeCode>::ref_type tc);
+       init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
         /// Initialize using an Any.
        IDL::traits< DynamicAny::DynAny>::ref_type
@@ -77,7 +77,7 @@ namespace TAOX11_NAMESPACE
 
     private:
       // Utility, turns the type of elements contained in the sequence.
-      IDL::traits< CORBA::TypeCode>::ref_type
+      IDL::traits<CORBA::TypeCode>::ref_type
       get_element_type ();
 
       // Called by both versions of init().

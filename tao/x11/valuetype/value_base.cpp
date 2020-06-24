@@ -121,7 +121,7 @@ namespace TAOX11_NAMESPACE
   void
   operator<<= (CORBA::Any& any, TAOX11_CORBA::ValueBase::_ref_type vb)
   {
-    Any_Value_Impl_T<IDL::traits< CORBA::ValueBase>,
+    Any_Value_Impl_T<IDL::traits<CORBA::ValueBase>,
                      CDR_Marshal_Policy>::insert (any, CORBA::_tc_ValueBase, vb);
   }
 

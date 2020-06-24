@@ -448,8 +448,8 @@ Hello::TestAnyTypeCodes2 (CORBA::TCKind a, CORBA::TCKind& b)
 }
 
 IDL::traits<CORBA::TypeCode>::ref_type
-Hello::TestAnyTypeCodes3 (IDL::traits< CORBA::TypeCode>::ref_type a,
-                          IDL::traits< CORBA::TypeCode>::ref_type& b)
+Hello::TestAnyTypeCodes3 (IDL::traits<CORBA::TypeCode>::ref_type a,
+                          IDL::traits<CORBA::TypeCode>::ref_type& b)
 {
   TAOX11_TEST_DEBUG << "OK  Entering Hello::TestAnyTypeCodes3 "<< __FILE__ << std::endl;
   b = a;
