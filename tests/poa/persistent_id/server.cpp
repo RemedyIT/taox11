@@ -112,7 +112,7 @@ IDL::traits< ::Hello>::ref_type hello_i::create_POA()
   CORBA::servant_traits< ::Hello>::ref_type hello_servant =
       CORBA::make_reference<hello_i> (this->orb_, this->child_poa_);;
 
-  if (this->oid_.size() == 0)
+  if (this->oid_.empty ())
   {
     this->oid_ = this->child_poa_->activate_object(hello_servant);
   }

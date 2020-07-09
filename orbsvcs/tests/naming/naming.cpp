@@ -100,7 +100,7 @@ list_context (IDL::traits<CORBA::ORB>::ref_type orb,
 
   nc->list (CHUNK, bl, it);
 
-  if (bl.size () == 0)
+  if (bl.empty ())
     {
       TAOX11_TEST_ERROR << "list_context : "
             << "Error: Returned list seems to have "
