@@ -26,8 +26,9 @@ jobs:
         include:
           - os: windows-2016
             ruby: 2.6
+            project_type: vs2017
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} ruby-${{ matrix.ruby }}
+    name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }}
     steps:
     - uses: actions/checkout@v2
     - uses: ilammy/msvc-dev-cmd@v1
@@ -43,7 +44,7 @@ jobs:
       shell: pwsh
     - name: Run brix11 configure
       run: |
-        %X11_BASE_ROOT%\bin\brix11 configure -W aceroot=%ACE_ROOT% -W taoroot=%TAO_ROOT% -W mpcroot=%MPC_ROOT%
+        %X11_BASE_ROOT%\bin\brix11 -t ${{ matrix.project_type }} configure -W aceroot=%ACE_ROOT% -W taoroot=%TAO_ROOT% -W mpcroot=%MPC_ROOT%
       shell: cmd
     - name: Print brix11 configuration
       run: |
