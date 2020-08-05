@@ -17,8 +17,8 @@ protected:
       TAOX11_CORBA::abstractbase_reference<TAOX11_CORBA::AbstractBase>);
 #endif /* _MSC_VER < 1910 || clang <= 8 */
 
-#if defined (_MSC_VER) && (_MSC_VER < 1920)
-    // msvc 14.(0|1) have a problem with defaulted constructors, issue #4005
+#if defined (_MSC_VER) && (_MSC_VER < 1930)
+    // msvc 14.{0|1|2} have a problem with defaulted constructors, issue #4005
   <%= cxxname %> () {}
 #else
   <%= cxxname %> () = default;
@@ -73,9 +73,9 @@ private:
 protected:
   typedef std::shared_ptr<<%= cxxname %>> _shared_ptr_type;
 
-%# msvc14.(0|1) have a bug that when using a defaulted constructor here we get a crash in the portableserver library
+%# msvc14.{0|1|2} have a bug that when using a defaulted constructor here we get a crash in the portableserver library
 %# for the POA
-#if defined (_MSC_VER) && (_MSC_VER < 1920)
+#if defined (_MSC_VER) && (_MSC_VER < 1930)
   /// Default constructor
   <%= cxxname %> () {};
 #else
