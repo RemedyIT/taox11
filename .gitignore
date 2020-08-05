@@ -31,3 +31,7 @@ commit.txt
 taox11/html
 taox11/latex
 *.gcno
+bin/MPC/config/MPC.cfg*
+tao/x11/ifr_client/taox11_ifr_client_skel_export.h
+tao/x11/ifr_client/taox11_ifr_client_stub_export.h
+ridlbe/c++11/orb.pidlc
