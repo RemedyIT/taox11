@@ -27,6 +27,9 @@ jobs:
           - os: windows-2016
             ruby: 2.6
             project_type: vs2017
+          - os: windows-2019
+            ruby: 2.6
+            project_type: vs2019
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }}
     steps:
