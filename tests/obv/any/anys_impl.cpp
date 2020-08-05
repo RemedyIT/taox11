@@ -33,7 +33,7 @@ Test_impl::get_something (bool need_vb)
   else
     {
       IDL::traits< OBV_AnyTest::VA>::ref_type va =
-        CORBA::make_reference< IDL::traits< OBV_AnyTest::VA >::obv_type > ();
+        CORBA::make_reference< IDL::traits<OBV_AnyTest::VA>::obv_type > ();
       va->id (MAGIC);
 
       ret_val <<= va;
@@ -55,7 +55,7 @@ CORBA::Any
 Test_impl::get_base ()
 {
   IDL::traits< OBV_AnyTest::VA>::ref_type va =
-    CORBA::make_reference< IDL::traits< OBV_AnyTest::VA >::obv_type > ();
+    CORBA::make_reference< IDL::traits<OBV_AnyTest::VA>::obv_type > ();
   va->id (MAGIC);
   IDL::traits<CORBA::ValueBase>::ref_type base = va;
 

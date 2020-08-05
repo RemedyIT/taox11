@@ -66,7 +66,7 @@ ACE_TMAIN (int argc, ACE_TCHAR *argv[])
     }
 
     // Create and register factories.
-    IDL::traits< OBV_AnyTest::VA >::factory_ref_type va_factory =
+    IDL::traits<OBV_AnyTest::VA>::factory_ref_type va_factory =
       CORBA::make_reference< OBV_AnyTest::VA_init > ();
 
     orb->register_value_factory (va_factory->_obv_repository_id (),
@@ -80,9 +80,9 @@ ACE_TMAIN (int argc, ACE_TCHAR *argv[])
 
     // Do local test
     IDL::traits< OBV_AnyTest::VA>::ref_type va1 =
-      CORBA::make_reference< IDL::traits< OBV_AnyTest::VA >::obv_type > ();
+      CORBA::make_reference< IDL::traits<OBV_AnyTest::VA>::obv_type > ();
     IDL::traits< OBV_AnyTest::VA>::ref_type va2 =
-      CORBA::make_reference< IDL::traits< OBV_AnyTest::VA >::obv_type > ();
+      CORBA::make_reference< IDL::traits<OBV_AnyTest::VA>::obv_type > ();
 
     uint32_t magic = 3145;
 
@@ -126,7 +126,7 @@ ACE_TMAIN (int argc, ACE_TCHAR *argv[])
         << std::endl;
       ++errors;
     }
-    dst = IDL::traits< OBV_AnyTest::VA >::narrow (target);
+    dst = IDL::traits<OBV_AnyTest::VA>::narrow (target);
     if (dst == 0 || dst->id () != magic)
     {
       TAOX11_TEST_ERROR << "ERROR - unable to narrow CORBA::ValueBase to its original"
@@ -183,7 +183,7 @@ ACE_TMAIN (int argc, ACE_TCHAR *argv[])
     }
     else
     {
-      dst = IDL::traits< OBV_AnyTest::VA >::narrow (dst_base);
+      dst = IDL::traits<OBV_AnyTest::VA>::narrow (dst_base);
       if (!dst || dst->id () != magic)
       {
         TAOX11_TEST_ERROR << "ERROR - remote test 4 failed: Unable to narrow to the original type"
@@ -208,7 +208,7 @@ ACE_TMAIN (int argc, ACE_TCHAR *argv[])
         TAOX11_TEST_ERROR << "ERROR - remote test 5 extraction failed" << std::endl;
         ++errors;
       }
-    dst_va = IDL::traits< OBV_AnyTest::VA >::narrow (target);
+    dst_va = IDL::traits<OBV_AnyTest::VA>::narrow (target);
     if (dst_va == nullptr || dst_va->id () != magic)
       {
         TAOX11_TEST_ERROR << "ERROR - remote test 5 failed" << std::endl;
