@@ -167,7 +167,7 @@ main(int argc, char* argv[])
     TAOX11_TEST_DEBUG << std::endl;
     {
       // Test if bar is bounded and bounded correctly
-      if (IDL::traits<Test::bounded_bar >::is_bounded ())
+      if (IDL::traits<Test::bounded_bar >::is_bounded::value)
       {
         TAOX11_TEST_DEBUG << "main - OK, is_bounded trait for <bounded_bar> set correctly"
           << std::endl;
