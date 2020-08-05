@@ -28,7 +28,7 @@ jobs:
             ruby: 2.6
             project_type: vs2017
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} ruby-${{ matrix.ruby }}
+    name: ${{ matrix.os }} ruby-${{ matrix.ruby }} brix11-${{ matrix.project_type }}
     steps:
     - uses: actions/checkout@v2
     - uses: ilammy/msvc-dev-cmd@v1
