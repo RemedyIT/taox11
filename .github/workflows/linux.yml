@@ -11,10 +11,10 @@ on:
     - cron: '0 7 * * SUN'
 
 env:
-  DOC_ROOT: ${{ github.workspace }}/ACE
-  ACE_ROOT: ${{ github.workspace }}/ACE/ACE
-  MPC_ROOT: ${{ github.workspace }}/ACE/MPC
-  TAO_ROOT: ${{ github.workspace }}/ACE/TAO
+  DOC_ROOT: ${{ github.workspace }}/ACE_TAO
+  ACE_ROOT: ${{ github.workspace }}/ACE_TAO/ACE
+  MPC_ROOT: ${{ github.workspace }}/ACE_TAO/MPC
+  TAO_ROOT: ${{ github.workspace }}/ACE_TAO/TAO
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
   RIDL_ROOT: ${{ github.workspace }}/ridl
   TAOX11_ROOT: ${{ github.workspace }}
@@ -61,6 +61,28 @@ jobs:
       CXX: ${{ matrix.CXX }}
     steps:
     - uses: actions/checkout@v2
+    - name: checkout ACE_TAO
+      uses: actions/checkout@v2
+      with:
+        repository: DOCGroup/ACE_TAO
+        path: ACE_TAO
+        ref: Latest_Micro
+    - name: checkout MPC
+      uses: actions/checkout@v2
+      with:
+        repository: DOCGroup/MPC
+        path: ACE_TAO/MPC
+        ref: Latest_ACETAO_Micro
+    - name: checkout ridl
+      uses: actions/checkout@v2
+      with:
+        repository: RemedyIT/ridl
+        path: ridl
+    - name: checkout axcioma
+      uses: actions/checkout@v2
+      with:
+        repository: RemedyIT/axcioma
+        path: axcioma
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
@@ -73,12 +95,6 @@ jobs:
       run: |
         sudo apt-get --yes update
         sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
-    - name: git clone dependent repositories
-      run: |
-        git clone --depth 1 --branch Latest_Micro  git://github.com/DOCGroup/ACE_TAO.git $DOC_ROOT
-        git clone --depth 1 --branch Latest_ACETAO_Micro  git://github.com/DOCGroup/MPC.git $MPC_ROOT
-        git clone --depth 1 git://github.com/RemedyIT/axcioma.git $X11_BASE_ROOT
-        git clone --depth 1 git://github.com/RemedyIT/ridl.git $RIDL_ROOT
     - name: Run brix11 configure
       run: |
         $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT
