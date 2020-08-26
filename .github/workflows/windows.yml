@@ -38,24 +38,24 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: DOCGroup/ACE_TAO
-        path: ACE_TAO
+        path: ${{ env.DOC_ROOT }}
         ref: Latest_Micro
     - name: checkout MPC
       uses: actions/checkout@v2
       with:
         repository: DOCGroup/MPC
-        path: ACE_TAO/MPC
+        path: ${{ env.MPC_ROOT }}
         ref: Latest_ACETAO_Micro
     - name: checkout ridl
       uses: actions/checkout@v2
       with:
         repository: RemedyIT/ridl
-        path: ridl
+        path: ${{ env.RIDL_ROOT }}
     - name: checkout axcioma
       uses: actions/checkout@v2
       with:
         repository: RemedyIT/axcioma
-        path: axcioma
+        path: ${{ env.X11_BASE_ROOT }}
     - uses: ilammy/msvc-dev-cmd@v1
     - uses: actions/setup-ruby@v1
       with:
