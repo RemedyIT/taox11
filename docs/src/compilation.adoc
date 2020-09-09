@@ -12,7 +12,7 @@ As first your IDL file should be compiled into {cxx11} stub and skeleton files
 command line options should be used when invoking the RIDL compiler.  +
  +
  Command: +
- `$TAOX11_ROOT/bin/ridlc`  +
+ `$X11_BASE_ROOT/bin/ridlc`  +
  +
  Command line options: +
 
