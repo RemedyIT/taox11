@@ -54,6 +54,12 @@ jobs:
             CXX: g++-10
             ruby: 2.7
             PackageDeps: g++-10
+          - os: ubuntu-20.04
+            CC: gcc-10
+            CXX: g++-10
+            ruby: 2.7
+            PackageDeps: g++-10
+            feature: CodeQL
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} ${{ matrix.CXX }} ruby-${{ matrix.ruby }}
     env:
@@ -95,6 +101,11 @@ jobs:
       run: |
         sudo apt-get --yes update
         sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
+    - name: initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: cpp
+      if: matrix.feature == 'CodeQL'
     - name: Run brix11 configure
       run: |
         $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT
@@ -107,3 +118,6 @@ jobs:
     - name: Run brix11 make
       run: |
         $X11_BASE_ROOT/bin/brix11 make -N -d $X11_BASE_ROOT -- make -N -d $TAOX11_ROOT/examples -- make -N -d $TAOX11_ROOT/orbsvcs/tests -- make -N -d $TAOX11_ROOT/tests
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
+      if: matrix.feature == 'CodeQL'
