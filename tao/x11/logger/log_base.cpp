@@ -138,7 +138,7 @@ namespace x11_logger
   {
     std::basic_stringstream<ACE_TCHAR> logbuf(ACE_TEXT (""));
 
-    uint32_t vmask = _lm->verbosity_mask();
+    uint32_t const vmask = _lm->verbosity_mask();
 
     if (ACE_BIT_ENABLED(vmask, X11_Verbose::V_CATEGORY))
     {
@@ -147,7 +147,7 @@ namespace x11_logger
 
     if (ACE_BIT_ENABLED(vmask, X11_Verbose::V_PRIO))
     {
-      const std::basic_string<ACE_TCHAR> name =
+      std::basic_string<ACE_TCHAR> const name =
         ACE_TEXT ("[") + priority_name(priority) + ACE_TEXT ("]");
       // setw to strlen LM_CRITICAL + 2 brackets.
       logbuf << std::left << std::setw (13) << name << ACE_TEXT (" - ");
@@ -203,8 +203,8 @@ namespace x11_logger
 
   void trim(std::string& str)
   {
-    std::string::size_type pos1 = str.find_first_not_of(' ');
-    std::string::size_type pos2 = str.find_last_not_of(' ');
+    std::string::size_type const pos1 = str.find_first_not_of(' ');
+    std::string::size_type const pos2 = str.find_last_not_of(' ');
     str = str.substr(pos1 == std::string::npos ? 0 : pos1,
                      pos2 == std::string::npos ? str.length() - 1 : pos2 - pos1 + 1);
   }
