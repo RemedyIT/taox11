@@ -37,7 +37,7 @@ has to be installed also:
 ==== Installing ruby
 
 The development environment requires ruby. Please download the latest version
-of ruby from "ruby-lang.org":https://www.ruby-lang.org and install it on your system.
+of ruby from https://www.ruby-lang.org[ruby-lang.org] and install it on your system.
 The `ruby` executable must be available through the `PATH`.
 
 ==== Installing Perl
@@ -47,8 +47,8 @@ supporting native Windows file paths (i.e. using drive letters, colons
 and backward slashes; not mapped file paths like used in Cygwin or MSYS
 environments).
 
-We advise to install "ActiveState Perl":http://www.activestate.com/activeperl
-which can be downloaded "here":http://www.activestate.com/activeperl/downloads.
+We advise to install http://www.activestate.com/activeperl[ActiveState Perl]
+which can be downloaded http://www.activestate.com/activeperl/downloads[here].
 We advise to install the 32bit version of the software in all cases as
 this matches most of the other tools from the development environment for
 both the i686 and x86_64 targeted environments. Using the installer you can
