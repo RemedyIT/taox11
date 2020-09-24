@@ -2,12 +2,6 @@
 // generated from <%= ridl_template_path %>
 namespace POA
 {
-    <%= skel_cxxname %>::<%= skel_cxxname %> ()
-    : <%= concrete_interface.scoped_skel_cxxtype %> ()
-    , TAOX11_CORBA::valuetype_traits< <%= scoped_cxxname%>>::base_type ()
-    {
-    }
-
     TAOX11_NAMESPACE::PortableServer::Servant::_shared_ptr_type
     <%= skel_cxxname %>::_lock_shared ()
     {
