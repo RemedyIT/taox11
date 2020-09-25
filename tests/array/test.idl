@@ -6,10 +6,16 @@
  */
 
 /// Put the interfaces in a module, to avoid global namespace pollution
+module Bar
+{
+  typedef sequence<char, 20> b20;
+};
+
 module Test
 {
   typedef sequence<char,20> c20;
   typedef sequence<c20,23> cc23;
+  typedef sequence<Bar::b20,23> bc23;
   interface x {
     void do ();
   };
