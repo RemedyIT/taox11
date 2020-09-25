@@ -15,7 +15,7 @@ struct traits < <%= scoped_cxxtype %>>
 {
   /// std::false_type or std::true_type type indicating whether
   /// this sequence is declared as bounded
-  using is_bounded     = std::<%= is_bounded? %>_type;
+  using is_bounded = std::<%= is_bounded? %>_type;
   /// IDL::traits<> for the element of the sequence
   using element_traits = IDL::traits< <%= scoped_element_traits_cxx_typename %>>;
 

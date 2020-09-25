@@ -36,7 +36,7 @@ inline OStrm_& operator <<(
     OStrm_& os,
     IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> w)
 {
-  using writer_t    = IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt>;
+  using writer_t = IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt>;
   using formatter_t = typename std::conditional<
                         std::is_same<
                           typename writer_t::formatter_t,

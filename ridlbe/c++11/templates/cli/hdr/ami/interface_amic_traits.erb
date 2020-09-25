@@ -19,7 +19,7 @@ namespace IDL
       OStrm_& os,
       TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::__Writer<Fmt> w)
   {
-    using writer_t    = TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::__Writer<Fmt>;
+    using writer_t = TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::__Writer<Fmt>;
     using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,

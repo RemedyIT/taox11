@@ -28,10 +28,7 @@ namespace POA
     //@}
 
   protected:
-    /// Constructor
     explicit <%= skel_cxxname %> (bool inherited = false);
-
-    /// Destructor
     virtual ~<%= skel_cxxname %> ();
 
     Servant_proxy_ptr get_proxy () const override;

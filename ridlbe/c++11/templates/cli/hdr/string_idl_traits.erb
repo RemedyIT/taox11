@@ -13,7 +13,7 @@ struct traits < <%= scoped_cxxtype %>>
 {
   /// std::false_type or std::true_type type indicating whether
   /// this string is declared as bounded
-  using is_bounded     = std::true_type ;
+  using is_bounded = std::true_type ;
   /// IDL::traits<> for the element of the string
   using element_traits = IDL::traits<<% if is_wstring? %>wchar_t<% else %>char<% end %>>;
 
@@ -34,7 +34,7 @@ inline OStrm_& operator <<(
     OStrm_& os,
     IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> w)
 {
-  using writer_t    = IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt>;
+  using writer_t = IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt>;
   using formatter_t = typename std::conditional<
                         std::is_same<
                           typename writer_t::formatter_t,
