@@ -4,7 +4,7 @@ namespace POA
 {
   class <%= skel_export_macro %><%= skel_cxxname %>
     : public virtual <%= concrete_interface.scoped_skel_cxxtype %>
-    , public virtual TAOX11_CORBA::valuetype_traits< <%= scoped_cxxname%>>::base_type
+    , public virtual TAOX11_CORBA::valuetype_traits<<%= scoped_cxxname%>>::base_type
   {
   public:
     /// @name Member types
@@ -15,13 +15,20 @@ namespace POA
 
   protected:
     using _shared_ptr_type = std::shared_ptr<<%= skel_cxxname %>>;
-    /// Constructor
-    <%= skel_cxxname %> ();
-    /// Destructor
+    <%= skel_cxxname %> () = default;
     virtual ~<%= skel_cxxname %> () = default;
 
     template <typename T> friend class TAOX11_CORBA::servant_reference;
 
     TAOX11_NAMESPACE::PortableServer::Servant::_shared_ptr_type _lock_shared ();
+
+  private:
+    /** @name Illegal to be called. Deleted explicitly to let the compiler detect any violation */
+    //@{
+    <%= skel_cxxname %> (const <%= skel_cxxname %>&) = delete;
+    <%= skel_cxxname %> (<%= skel_cxxname %>&&) = delete;
+    <%= skel_cxxname %>& operator= (const <%= skel_cxxname %>&) = delete;
+    <%= skel_cxxname %>& operator= (<%= skel_cxxname %>&&) = delete;
+    //@}
   };
 } // namespace POA
