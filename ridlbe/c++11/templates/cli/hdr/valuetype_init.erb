@@ -4,8 +4,8 @@ class <%= stub_export_macro %><%= factory_cxxname %>
   : public TAOX11_CORBA::ValueFactoryBase
 {
 public:
-  typedef <%= factory_traits_type %>           _traits_type;
-  typedef <%= factory_traits_type %>::ref_type _ref_type;
+  using _traits_type = <%= factory_traits_type %>;
+  using _ref_type = <%= factory_traits_type %>::ref_type;
 
   template <typename T> friend struct TAOX11_CORBA::object_traits;
 % if is_concrete?

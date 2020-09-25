@@ -19,13 +19,13 @@ namespace IDL
       OStrm_& os,
       TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::__Writer<Fmt> w)
   {
-    typedef TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::__Writer<Fmt> writer_t;
-    typedef typename std::conditional<
-                        std::is_same<
-                          typename writer_t::formatter_t,
-                          std::false_type>::value,
-                        IDL::formatter< <%= amic_scoped_cxxtype %>, OStrm_>,
-                        typename writer_t::formatter_t>::type formatter_t;
+    using writer_t    = TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::__Writer<Fmt>;
+    using formatter_t = typename std::conditional<
+                          std::is_same<
+                            typename writer_t::formatter_t,
+                            std::false_type>::value,
+                          IDL::formatter< <%= amic_scoped_cxxtype %>, OStrm_>,
+                          typename writer_t::formatter_t>::type;
     return TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::write_on (
         os, w.val_,
         formatter_t ());

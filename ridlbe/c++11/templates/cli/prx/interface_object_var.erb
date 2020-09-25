@@ -5,14 +5,13 @@
 % unless is_abstract?
 
 class <%= proxy_cxxname %>;
-typedef <%= proxy_cxxname %> *<%= proxy_cxxname %>_ptr;
+using <%= proxy_cxxname %>_ptr =
+  <%= proxy_cxxname %> *;
 
-typedef
-  TAO_Objref_Var_T< <%= proxy_cxxname %>>
-    <%= proxy_cxxname %>_var;
+using <%= proxy_cxxname %>_var =
+  TAO_Objref_Var_T< <%= proxy_cxxname %>>;
 
-typedef
-  TAO_Objref_Out_T< <%= proxy_cxxname %>>
-    <%= proxy_cxxname %>_out;
+using <%= proxy_cxxname %>_out =
+  TAO_Objref_Out_T< <%= proxy_cxxname %>>;
 % end
 #endif // !_INTF_<%= _intf_traits_decl_incl_guard_ %>_VAR_OUT_CH_

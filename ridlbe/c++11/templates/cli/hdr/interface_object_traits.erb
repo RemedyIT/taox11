@@ -47,14 +47,14 @@ namespace TAOX11_NAMESPACE
     {
       /// std::false_type or std::true_type type indicating whether
       /// this interface is declared as local
-      typedef std::<%= is_local? %>_type is_local;
+      using is_local = std::<%= is_local? %>_type;
       /// std::false_type or std::true_type type indicating whether
       /// this interface is declared as abstract
-      typedef std::<%= is_abstract? %>_type is_abstract;
+      using is_abstract = std::<%= is_abstract? %>_type;
 % if is_local?
       /// Trait for the type from which a local implementation needs
       /// to be derived from
-      typedef <%= scoped_cxxtype %> base_type;
+      using base_type = <%= scoped_cxxtype %>;
 % end
 
       template <typename OStrm_, typename Formatter = formatter< <%= scoped_cxxtype %>, OStrm_>>
