@@ -5,7 +5,7 @@ class <%= skel_export_macro %><%= srvproxy_cxxname %> final
 {
 public:
   using skel_type = <%= scoped_skel_cxxtype %>;
-  using skel_ptr = skel_type *;
+  using skel_ptr = skel_type*;
 
   explicit <%= srvproxy_cxxname %> (<%= srvproxy_cxxname %>::skel_ptr skel);
   virtual ~<%= srvproxy_cxxname %> () = default;
