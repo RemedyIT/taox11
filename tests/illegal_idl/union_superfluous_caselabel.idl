@@ -1,0 +1,18 @@
+/**
+ * @file    union_superfluous_caselabel.idl
+ * @author  Johnny Willemsen
+ *
+ * Illegal IDL example as reported on TAO_IDL_FE by Clayton Calabrese
+
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+enum EnumType {VALUE1, VALUE2};
+
+union NestedUnion switch (EnumType) {
+case VALUE1: boolean u_b;
+case VALUE2: short u_s;
+default: float u_f;
+};
+
