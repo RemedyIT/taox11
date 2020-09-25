@@ -32,32 +32,22 @@ namespace TAOX11_NAMESPACE
     template <>
     struct <%= stub_export_macro %>valuetype_traits< <%= scoped_cxxtype %>>
     {
-      using base_type =
-        <%= scoped_cxxtype %>;
+      using base_type = <%= scoped_cxxtype %>;
       /// Strong reference type
-      using ref_type =
-        valuetype_reference< <%= scoped_cxxtype %>>;
+      using ref_type = valuetype_reference< <%= scoped_cxxtype %>>;
       /// Weak reference type
-      using weak_ref_type =
-        weak_valuetype_reference< <%= scoped_cxxtype %>>;
+      using weak_ref_type = weak_valuetype_reference< <%= scoped_cxxtype %>>;
 % unless is_abstract?
-      using obv_type =
-        <%= scoped_obv_cxxtype %>;
+      using obv_type = <%= scoped_obv_cxxtype %>;
 % end
 % if has_factory?
-      using factory_type =
-        <%= scoped_factory_cxx_type %>;
-      using factory_ref_type =
-        <%= scoped_factory_traits_type %>::ref_type;
-      using weak_factory_ref_type =
-        <%= scoped_factory_traits_type %>::weak_ref_type;
+      using factory_type = <%= scoped_factory_cxx_type %>;
+      using factory_ref_type = <%= scoped_factory_traits_type %>::ref_type;
+      using weak_factory_ref_type = <%= scoped_factory_traits_type %>::weak_ref_type;
 % elsif !is_abstract?
-      using factory_type =
-        CORBA::ValueFactoryBase;
-      using factory_ref_type =
-        IDL::traits<CORBA::ValueFactoryBase>::ref_type;
-      using weak_factory_ref_type =
-        IDL::traits<CORBA::ValueFactoryBase>::weak_ref_type;
+      using factory_type = CORBA::ValueFactoryBase;
+      using factory_ref_type = IDL::traits<CORBA::ValueFactoryBase>::ref_type;
+      using weak_factory_ref_type = IDL::traits<CORBA::ValueFactoryBase>::weak_ref_type;
 % end
       template <typename _Tp1, typename = typename
           std::enable_if<std::is_convertible< <%= scoped_cxxtype %>*, _Tp1*>::value>::type>
