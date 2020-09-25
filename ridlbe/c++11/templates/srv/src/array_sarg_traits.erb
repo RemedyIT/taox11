@@ -14,11 +14,10 @@ namespace PS
         Basic_SArg_Traits_T<
             <%= scoped_cxxtype %>,
 % if generate_any_support?
-            Any_Insert_Policy_Stream
+            Any_Insert_Policy_Stream>
 % else
-            Any_Insert_Policy_Noop
+            Any_Insert_Policy_Noop>
 % end
-            >
   {
   };
 } // namespace PS
