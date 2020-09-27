@@ -5,11 +5,11 @@ struct <%= skel_export_macro %>servant_traits< <%= scoped_cxxtype %>>
 {
   /// Base trait type from which the servant implementations has to be derived
   /// from
-  typedef <%= scoped_skel_cxxtype %> base_type;
+  using base_type = <%= scoped_skel_cxxtype %>;
   /// Strong reference type
-  typedef TAOX11_CORBA::servant_reference< <%= scoped_skel_cxxtype %>> ref_type;
+  using ref_type = TAOX11_CORBA::servant_reference< <%= scoped_skel_cxxtype %>>;
   /// Weak reference type
-  typedef TAOX11_CORBA::weak_servant_reference< <%= scoped_skel_cxxtype %>> weak_ref_type;
+  using weak_ref_type = TAOX11_CORBA::weak_servant_reference< <%= scoped_skel_cxxtype %>>;
 %if generate_tie_support?
   /// TIE type
   template<class T> using tie_type = <%= scoped_tie_cxxtype %><T>;

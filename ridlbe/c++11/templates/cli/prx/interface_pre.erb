@@ -20,9 +20,9 @@ public:
   friend class TAO_TAO::Narrow_Utils<<%= proxy_cxxname %>>;
   friend struct TAOX11_CORBA::object_traits<<%= cxxname %>>;
 
-  typedef <%= proxy_cxxname %>* _ptr_type;
-  typedef TAO_Objref_Var_T<<%= proxy_cxxname %>> _var_type;
-  typedef TAO_Objref_Out_T<<%= proxy_cxxname %>> _out_type;
+  using _ptr_type = <%= proxy_cxxname %>*;
+  using _var_type = TAO_Objref_Var_T<<%= proxy_cxxname %>>;
+  using _out_type = TAO_Objref_Out_T<<%= proxy_cxxname %>>;
 
   static _ptr_type _duplicate (_ptr_type obj);
   static _ptr_type _narrow (TAO_CORBA::Object::_ptr_type obj);

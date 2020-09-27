@@ -10,7 +10,7 @@ abstractbase_traits< <%= scoped_cxxtype %>>::narrow (
 
   if (abref)
   {
-    typedef <%= scoped_cxxtype %> ab_type_t;
+    using ab_type_t = <%= scoped_cxxtype %>;
     try {
       if (abref->_is_object ())
       {
