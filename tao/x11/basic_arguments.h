@@ -29,11 +29,9 @@ namespace TAOX11_NAMESPACE
   class TAOX11_Export Arg_Traits<void>
   {
     public:
-    typedef void        ret_type;
-
-    typedef TAO_TAO::RetArgument ret_val;
-    typedef TAO_TAO::Void_Return_Argument
-                        clonable_ret_val;
+    using ret_type = void;
+    using ret_val = TAO_TAO::RetArgument ;
+    using clonable_ret_val = TAO_TAO::Void_Return_Argument;
   };
 
   /**

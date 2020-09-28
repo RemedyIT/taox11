@@ -24,12 +24,11 @@ namespace TAOX11_NAMESPACE
   {
     class TypeCode; // forward
 
-    typedef object_reference<TypeCode>  typecode_reference;
+    using typecode_reference = object_reference<TypeCode>;
 
-    typedef weak_object_reference<TypeCode> weak_typecode_reference;
+    using weak_typecode_reference = weak_object_reference<TypeCode>;
 
-    typedef object_traits<TypeCode> typecode_traits;
-
+    using typecode_traits = object_traits<TypeCode>;
   } // namespace CORBA
 
   namespace IDL

@@ -42,7 +42,7 @@ namespace std
   class condition_variable
   {
   public:
-    typedef ACE_SYNCH::CONDITION*   native_handle_type;
+    using native_handle_type = ACE_SYNCH::CONDITION*;
 
     condition_variable() noexcept;
     ~condition_variable() noexcept;

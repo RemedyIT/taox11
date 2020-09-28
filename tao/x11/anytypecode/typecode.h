@@ -33,8 +33,8 @@ namespace TAOX11_NAMESPACE
 
   namespace CORBA
   {
-    typedef int16_t Visibility; // forward
-    typedef int16_t ValueModifier; // forward
+    using Visibility = int16_t; // forward
+    using ValueModifier = int16_t; // forward
     enum class TCKind : uint32_t; // forward
 
     class TypeCode_impl;

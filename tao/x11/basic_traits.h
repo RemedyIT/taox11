@@ -178,8 +178,8 @@ namespace TAOX11_NAMESPACE
     struct traits <std::string>
       : public common_traits<std::string>
     {
-      typedef IDL::traits<char> element_traits;
-      typedef std::false_type is_bounded;
+      using element_traits = IDL::traits<char>;
+      using is_bounded = std::false_type;
 
       template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
       static inline OStrm_& write_on(OStrm_& os_, in_type val_, Formatter fmt_ = Formatter ())
