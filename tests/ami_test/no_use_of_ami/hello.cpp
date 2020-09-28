@@ -10,7 +10,7 @@
 #include "hello.h"
 
 B_i::B_i(IDL::traits<CORBA::ORB>::ref_type orb) :
-  orb_(orb)
+  orb_(std::move(orb))
 {
 }
 

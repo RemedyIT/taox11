@@ -40,8 +40,8 @@ bool parse_args(int argc, ACE_TCHAR *argv[])
 { \
     if ((Condition)==0) \
       { \
-          fail++; \
-          TAOX11_TEST_DEBUG << message  << " : Failure" << std::endl; \
+          ++fail; \
+          TAOX11_TEST_ERROR << message  << " : Failure" << std::endl; \
       } \
 }
 
@@ -49,8 +49,8 @@ bool parse_args(int argc, ACE_TCHAR *argv[])
 { \
     if ((val1)!=(val2)) \
       { \
-          fail++; \
-          TAOX11_TEST_DEBUG << message  << " : Failure '"  << val1 << "' not equal to '" << val2 << "'" << std::endl; \
+          ++fail; \
+          TAOX11_TEST_ERROR << message  << " : Failure '"  << val1 << "' not equal to '" << val2 << "'" << std::endl; \
       } \
 }
 
@@ -63,11 +63,10 @@ int
 box_test1(typename IDL::traits<BoxT>::ref_type valuebox, UT val1, UT val2)
 {
   int fail = 0;
-  typename IDL::traits<BoxT>::ref_type valuebox_clone = CORBA::make_reference < BoxT
-    > (val1);
+  typename IDL::traits<BoxT>::ref_type valuebox_clone = CORBA::make_reference<BoxT> (val1);
 
   // should be a deep copy of val1...
-  OBV_Verify("box_test1 should be a deep copy", &valuebox_clone != &valuebox);
+  OBV_Verify("box_test1 should be a deep copy", std::addressof(valuebox_clone) != std::addressof(valuebox));
 
   // but values should be equal
   OBV_Verify("box_test1 values should be equal",
@@ -83,10 +82,10 @@ box_test1(typename IDL::traits<BoxT>::ref_type valuebox, UT val1, UT val2)
 
   if ((valuebox_clone->_value()) != (valuebox->_value()))
     {
-      fail++;
-      TAOX11_TEST_DEBUG << "Failure " << valuebox_clone->_value();
-      TAOX11_TEST_DEBUG << " not equal to " << valuebox->_value();
-      TAOX11_TEST_DEBUG << " : " << "box_test1 equal" << std::endl;
+      ++fail;
+      TAOX11_TEST_ERROR << "Failure " << valuebox_clone->_value();
+      TAOX11_TEST_ERROR << " not equal to " << valuebox->_value();
+      TAOX11_TEST_ERROR << " : " << "box_test1 equal" << std::endl;
     }
   OBV_VerifyEqual("box_test1 equal", valuebox_clone->_value (),
     valuebox->_value ());
@@ -102,8 +101,7 @@ box_test1(typename IDL::traits<BoxT>::ref_type valuebox, UT val1, UT val2)
   OBV_Verify("box_test1 ", ACE::is_equal (valuebox_clone->_value (), val1));
 
   // Test _copy_value
-  IDL::traits<CORBA::ValueBase>::ref_type copy =
-    valuebox->_copy_value();
+  IDL::traits<CORBA::ValueBase>::ref_type copy = valuebox->_copy_value();
   OBV_Verify("box_test1 ", copy != nullptr);
   //OBV_Verify("box_test1 ",  copy->_value () != 0);
 
@@ -111,8 +109,8 @@ box_test1(typename IDL::traits<BoxT>::ref_type valuebox, UT val1, UT val2)
   typename IDL::traits<BoxT>::ref_type down = IDL::traits<BoxT>::narrow (copy);
   if (down == nullptr)
     {
-      fail++;
-      TAOX11_TEST_DEBUG << "Failure at line %l" << std::endl;
+      ++fail;
+      TAOX11_TEST_ERROR << "Failure at line %l" << std::endl;
     }
   else
     {
@@ -132,7 +130,7 @@ simple_box_test()
 {
   int fail = 0;
   UT v {101};
-  typename IDL::traits<BoxT>::ref_type p = CORBA::make_reference < BoxT > (v);
+  typename IDL::traits<BoxT>::ref_type p = CORBA::make_reference <BoxT> (v);
   fail += box_test1<BoxT, UT>(p, 101, 202);
   return fail;
 }
@@ -155,14 +153,12 @@ test_basic()
   fail += simple_box_test<VBdouble, double>();
 
   //VBchar pchar; //= VBchar('A');
-  IDL::traits<VBchar>::ref_type pchar = CORBA::make_reference < VBchar
-    > ('A');
+  IDL::traits<VBchar>::ref_type pchar = CORBA::make_reference<VBchar> ('A');
   if (pchar == nullptr)
     return 1;
 
   fail += box_test1<VBchar, char>(pchar, 'A', 'Z');
-  IDL::traits<VBboolean>::ref_type pbool = CORBA::make_reference
-    < VBboolean > (true);
+  IDL::traits<VBboolean>::ref_type pbool = CORBA::make_reference<VBboolean> (true);
   if (pbool == nullptr)
     return 1;
 
@@ -179,25 +175,21 @@ test_basic()
   fail += simple_box_test<VBTDoctet, uint8_t>();
   fail += simple_box_test<VBTDfloat, float>();
   fail += simple_box_test<VBTDdouble, double>();
-  IDL::traits<VBTDchar>::ref_type pchar2 = CORBA::make_reference < VBTDchar
-    > ('A');
+  IDL::traits<VBTDchar>::ref_type pchar2 = CORBA::make_reference<VBTDchar>('A');
   if (pchar2 == nullptr)
     return 1;
   fail += box_test1<VBTDchar, char>(pchar2, 'A', 'Z');
-  IDL::traits<VBTDboolean>::ref_type pbool2 = CORBA::make_reference
-    < VBTDboolean > (true);
+  IDL::traits<VBTDboolean>::ref_type pbool2 = CORBA::make_reference<VBTDboolean> (true);
   if (pbool2 == nullptr)
     return 1;
   fail += box_test1<VBTDboolean, bool>(pbool2, true, false);
 
   // Enumerated type
-  IDL::traits<VBenum>::ref_type penum = CORBA::make_reference < VBenum
-    > (Color::yellow);
+  IDL::traits<VBenum>::ref_type penum = CORBA::make_reference <VBenum> (Color::yellow);
   fail += box_test1<VBenum, Color>(penum, Color::yellow, Color::red);
 
   // Typedef of enumerated type
-  IDL::traits<VBTDenum>::ref_type penum2 = CORBA::make_reference < VBTDenum
-    > (Color::yellow);
+  IDL::traits<VBTDenum>::ref_type penum2 = CORBA::make_reference <VBTDenum> (Color::yellow);
   fail += box_test1<VBTDenum, Color>(penum2, Color::yellow, Color::red);
 
   // Any
@@ -214,13 +206,11 @@ test_basic()
 //    return 1;
 //  }
   CORBA::Any any2(a2);
-  IDL::traits<VBany>::ref_type pany = CORBA::make_reference < VBany
-    > (any1);
+  IDL::traits<VBany>::ref_type pany = CORBA::make_reference <VBany> (any1);
   //fail += box_test_ref<VBany>(pany, any1, any2);
 
   // Typedef of Any
-  IDL::traits<VBTDany>::ref_type pany2 = CORBA::make_reference < VBTDany
-    > (any1);
+  IDL::traits<VBTDany>::ref_type pany2 = CORBA::make_reference <VBTDany> (any1);
   //fail += box_test_ref<VBTDany>(pany2, any1, any2);
 
   return fail;
@@ -238,14 +228,11 @@ test_basic_invocations(IDL::traits<Test>::ref_type test_object)
     //============================================================
     // Test method invocation with boxed value
     //============================================================
-    IDL::traits<VBlong>::ref_type p1 = CORBA::make_reference < VBlong
-      > (25);
-    IDL::traits<VBlong>::ref_type p2 = CORBA::make_reference < VBlong
-      > (53);
+    IDL::traits<VBlong>::ref_type p1 = CORBA::make_reference <VBlong> (25);
+    IDL::traits<VBlong>::ref_type p2 = CORBA::make_reference <VBlong> (53);
     OBV_Verify("test_basic_invocations ", p1->_value () == 25);
     OBV_Verify("test_basic_invocations ", p2->_value () == 53);
-    IDL::traits<VBlong>::ref_type result = test_object->basic_op1(p1, p2,
-      p3);
+    IDL::traits<VBlong>::ref_type result = test_object->basic_op1(p1, p2, p3);
     OBV_Verify("test_basic_invocations ", p2->_value () == (53*3));
     OBV_Verify("test_basic_invocations ", p3->_value () == (53*5));
     OBV_Verify("test_basic_invocations ",
@@ -287,7 +274,7 @@ test_basic_invocations(IDL::traits<Test>::ref_type test_object)
   }
   catch (...)
   {
-    TAOX11_TEST_DEBUG << "test_basic_invocations: caught a C++ exception"
+    TAOX11_TEST_ERROR << "test_basic_invocations: caught a C++ exception"
       << std::endl;
     fail = 1;
   }
@@ -412,7 +399,7 @@ test_boxed_string_invocations(IDL::traits<Test>::ref_type test_object)
   }
   catch (...)
   {
-    TAOX11_TEST_DEBUG << "test_boxed_string_invocations: "
+    TAOX11_TEST_ERROR << "test_boxed_string_invocations: "
       << "caught a C++ exception\n";
     fail = 1;
   }
@@ -479,8 +466,8 @@ test_boxed_sequence()
       vbseqlong4->_copy_value());
     if (vbseqlong6 == 0)
       {
-        fail++;
-        TAOX11_TEST_DEBUG << "Failure at line %l" << std::endl;
+        ++fail;
+        TAOX11_TEST_ERROR << "Failure at line %l" << std::endl;
       }
     else
       {
@@ -565,7 +552,7 @@ test_boxed_sequence_invocations(IDL::traits<Test>::ref_type test_object)
   }
   catch (...)
   {
-    TAOX11_TEST_DEBUG << "t_b_seq_inv: " << "caught a C++ exception\n";
+    TAOX11_TEST_ERROR << "t_b_seq_inv: " << "caught a C++ exception\n";
     fail = 1;
   }
 
@@ -651,8 +638,8 @@ test_boxed_struct()
     IDL::traits<VBfixed_struct1>::narrow (valuebox3->_copy_value());
   if (valuebox4 == nullptr)
     {
-      fail++;
-      TAOX11_TEST_DEBUG << "Failure at line %l" << std::endl;
+      ++fail;
+      TAOX11_TEST_ERROR << "Failure at line %l" << std::endl;
     }
   else
     {
@@ -791,7 +778,7 @@ test_boxed_struct_invocations(IDL::traits<Test>::ref_type test_object)
   }
   catch (...)
   {
-    TAOX11_TEST_DEBUG << "test_boxed_struct_invocations: "
+    TAOX11_TEST_ERROR << "test_boxed_struct_invocations: "
       << "caught a C++ exception\n";
     fail = 1;
   }
@@ -979,7 +966,7 @@ test_boxed_array_invocations(IDL::traits<Test>::ref_type test_object)
   }
   catch (...)
   {
-    TAOX11_TEST_DEBUG << "test_boxed_array_invocations: "
+    TAOX11_TEST_ERROR << "test_boxed_array_invocations: "
       << "caught a C++ exception\n";
     fail = 1;
   }
@@ -1173,7 +1160,7 @@ test_boxed_union_invocations(IDL::traits<Test>::ref_type test_object)
   }
   catch (...)
   {
-    TAOX11_TEST_DEBUG << "test_boxed_union_invocations: caught a C++ exception\n";
+    TAOX11_TEST_ERROR << "test_boxed_union_invocations: caught a C++ exception\n";
     fail = 1;
   }
   return fail;
