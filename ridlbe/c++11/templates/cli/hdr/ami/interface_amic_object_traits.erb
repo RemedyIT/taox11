@@ -9,21 +9,18 @@ namespace TAOX11_NAMESPACE
   {
     template<>
     <%= amic_export_macro %>object_traits< <%= amic_scoped_cxxtype %>>::shared_ptr_type
-    object_traits< <%= amic_scoped_cxxtype %>>::lock_shared (
-      <%= amic_scoped_cxxtype %>* p);
+    object_traits< <%= amic_scoped_cxxtype %>>::lock_shared (<%= amic_scoped_cxxtype %>* p);
 %   if is_remote?
 
     template<>
     <%= amic_export_macro %>object_traits< <%= amic_scoped_cxxtype %>>::ref_type
-    object_traits< <%= amic_scoped_cxxtype %>>::narrow (
-      object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
+    object_traits< <%= amic_scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
 %   else
 %     if declare_local_object_narrow_specialization?
 
     template<>
     <%= amic_export_macro %>object_traits< <%= amic_scoped_cxxtype %>>::ref_type
-    object_traits< <%= amic_scoped_cxxtype %>>::narrow (
-       object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
+    object_traits< <%= amic_scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
 %     end
 %   end
   } // namespace CORBA

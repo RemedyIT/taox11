@@ -10,8 +10,7 @@ namespace TAOX11_NAMESPACE
   {
     template<>
     <%= stub_export_macro %> object_traits< <%= scoped_factory_cxx_type %>>::shared_ptr_type
-    object_traits< <%= scoped_factory_cxx_type %>>::lock_shared (
-        <%= scoped_factory_cxx_type %>*);
+    object_traits< <%= scoped_factory_cxx_type %>>::lock_shared (<%= scoped_factory_cxx_type %>*);
   } // namespace CORBA
 
   namespace IDL

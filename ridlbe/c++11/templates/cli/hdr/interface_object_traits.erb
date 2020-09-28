@@ -10,24 +10,20 @@ namespace TAOX11_NAMESPACE
 % if is_abstract?
     template<>
     <%= stub_export_macro %>abstractbase_traits< <%= scoped_cxxtype %>>::ref_type
-    abstractbase_traits< <%= scoped_cxxtype %>>::narrow (
-        abstractbase_reference<CORBA::AbstractBase>);
+    abstractbase_traits< <%= scoped_cxxtype %>>::narrow (abstractbase_reference<CORBA::AbstractBase>);
 % else
     template<>
     <%= stub_export_macro %>object_traits< <%= scoped_cxxtype %>>::shared_ptr_type
-    object_traits< <%= scoped_cxxtype %>>::lock_shared (
-        <%= scoped_cxxtype %>* p);
+    object_traits< <%= scoped_cxxtype %>>::lock_shared (<%= scoped_cxxtype %>* p);
 %   if is_remote?
     template<>
     <%= stub_export_macro %>object_traits< <%= scoped_cxxtype %>>::ref_type
-    object_traits< <%= scoped_cxxtype %>>::narrow (
-       object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
+    object_traits< <%= scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
 %   else
 %     if declare_local_object_narrow_specialization?
     template<>
     <%= stub_export_macro %>object_traits< <%= scoped_cxxtype %>>::ref_type
-    object_traits< <%= scoped_cxxtype %>>::narrow (
-       object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
+    object_traits< <%= scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
 %     end
 %   end
 % end
