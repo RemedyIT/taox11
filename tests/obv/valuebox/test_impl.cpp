@@ -11,11 +11,7 @@
 #include <array>
 
 Test_impl::Test_impl(IDL::traits<CORBA::ORB>::ref_type orb) :
-    orb_(orb)
-{
-}
-
-Test_impl::~Test_impl()
+    orb_(std::move(orb))
 {
 }
 
