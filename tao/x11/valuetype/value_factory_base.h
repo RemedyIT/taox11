@@ -67,6 +67,7 @@ namespace TAOX11_NAMESPACE
       friend struct object_traits<ValueFactoryBase>;
 
     private:
+      ValueFactoryBase (ValueFactoryBase&&) = delete;
       ValueFactoryBase (const ValueFactoryBase&) = delete;
       ValueFactoryBase& operator =(const ValueFactoryBase&) = delete;
       ValueFactoryBase& operator =(ValueFactoryBase&&) = delete;
