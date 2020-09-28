@@ -30,11 +30,11 @@ namespace TAOX11_NAMESPACE
     class NamedValue;
 
     class TypeCode;
-    typedef std::vector<TypeCode> ExceptionList;
+    using ExceptionList = std::vector<TypeCode>;
 
     class Request;
 
-    typedef uint32_t Flags;
+    using Flags = uint32_t ;
   } // namespace CORBA
 
   /**

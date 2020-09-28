@@ -38,7 +38,7 @@ std::string iA_impl::do_A(int32_t& result)
 
 Hello::Hello(IDL::traits<CORBA::ORB>::ref_type orb,
     IDL::traits<PortableServer::POA>::ref_type poa, int& result) :
-    orb_(orb), poa_(poa), result_(result)
+    orb_(std::move(orb)), poa_(std::move(poa)), result_(result)
 {
 }
 

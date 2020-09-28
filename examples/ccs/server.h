@@ -81,17 +81,14 @@ private:
       return this->str_ == buf;
     }
   private:
-    CCS::Controller::SearchCriterion sc_;
-    std::string str_;
+    CCS::Controller::SearchCriterion const sc_;
+    std::string const str_;
   };
-
 
   // Map of existing assets. The servant pointer is null
   // the corresponding servant is not in memory.
-  typedef std::map< CCS::AssetType,
-    CORBA::servant_traits< CCS::Thermometer>::ref_type> AssetMap;
-  typedef std::pair< CCS::AssetType,
-    CORBA::servant_traits< CCS::Thermometer>::ref_type> AssetPair;
+  using AssetMap = std::map<CCS::AssetType, CORBA::servant_traits< CCS::Thermometer>::ref_type>;
+  using AssetPair = std::pair<CCS::AssetType, CORBA::servant_traits< CCS::Thermometer>::ref_type>;
   AssetMap assets_;
 
   IDL::traits<PortableServer::POA>::ref_type poa_;
@@ -217,8 +214,8 @@ public:
     CORBA::servant_reference<PortableServer::Servant>) override;
 
 private:
-  typedef std::list<CORBA::servant_traits<CCS::Thermometer>::ref_type> EvictorQueue;
-  typedef std::map<CCS::AssetType, EvictorQueue::iterator > ActiveObjectMap;
+  using EvictorQueue = std::list<CORBA::servant_traits<CCS::Thermometer>::ref_type>;
+  using ActiveObjectMap = std::map<CCS::AssetType, EvictorQueue::iterator>;
 
   static constexpr unsigned int MAX_EQ_SIZE = 100;
   EvictorQueue eq_;

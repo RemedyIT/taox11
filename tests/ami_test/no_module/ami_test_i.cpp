@@ -160,7 +160,7 @@ MyDerived_i::foo_struct (structType &out_t)
 
 Hello_i::Hello_i(IDL::traits<CORBA::ORB>::ref_type orb,
     IDL::traits<PortableServer::POA>::ref_type poa) :
-  orb_(orb), poa_(poa)
+  orb_(std::move(orb)), poa_(std::move(poa))
 {
 }
 IDL::traits<MyFoo>::ref_type Hello_i::get_iMyFoo()

@@ -36,16 +36,16 @@ namespace x11_logger
     : public std::basic_streambuf<CH, TR>
   {
   public:
-    typedef std::basic_streambuf<CH, TR> base_type;
-    typedef std::basic_ios<CH, TR> ios_type;
-    typedef CH char_type;
-    typedef TR char_traits;
-    typedef typename base_type::int_type int_type;
-    typedef typename base_type::pos_type pos_type;
-    typedef typename base_type::off_type off_type;
-    typedef typename ios_type::seekdir seekdir;
-    typedef typename ios_type::openmode openmode;
-    typedef ACE_Log_Priority logprio_type;
+    using base_type = std::basic_streambuf<CH, TR>;
+    using ios_type = std::basic_ios<CH, TR>;
+    using char_type = CH;
+    using char_traits = TR;
+    using int_type = typename base_type::int_type;
+    using pos_type = typename base_type::pos_type;
+    using off_type = typename base_type::off_type ;
+    using seekdir = typename ios_type::seekdir;
+    using openmode = typename ios_type::openmode;
+    using logprio_type = ACE_Log_Priority;
 
     log_buffer_t (typename log_buffer_t<CH, TR>::logprio_type,
                   typename std::basic_ios<CH, TR>::openmode mode);
@@ -97,10 +97,10 @@ namespace x11_logger
     : public virtual std::basic_ios<CH, TR>
   {
   public:
-    typedef std::basic_ios<CH, TR> ios_base;
-    typedef log_buffer_t<CH, TR> buffer_type;
-    typedef typename buffer_type::openmode openmode;
-    typedef typename buffer_type::logprio_type logprio_type;
+    using ios_base = std::basic_ios<CH, TR>;
+    using buffer_type = log_buffer_t<CH, TR>;
+    using openmode = typename buffer_type::openmode;
+    using logprio_type = typename buffer_type::logprio_type;
 
     log_ios_t (logprio_type prio,
                openmode mode);
@@ -125,8 +125,8 @@ namespace x11_logger
       public std::basic_ostream<CH, TR>
   {
   public:
-    typedef log_ios_t<CH, TR> ios_base;
-    typedef typename ios_base::logprio_type logprio_type;
+    using ios_base = log_ios_t<CH, TR>;
+    using logprio_type = typename ios_base::logprio_type;
 
     explicit log_ostream_t(logprio_type prio);
     ~log_ostream_t() = default;

@@ -56,7 +56,7 @@ namespace TAOX11_NAMESPACE
 
       static TAOX11_Log_Module* getInstance();
 
-      typedef x11_logger::Log_Type_T<TAOX11_Log_Module> log_type;
+      using log_type = x11_logger::Log_Type_T<TAOX11_Log_Module>;
 
     private:
       TAOX11_Log_Module();

@@ -44,13 +44,13 @@ namespace TAOX11_NAMESPACE
      * @c TAO::TypeCode::Case_T array:
      *
      * \code
-     *   typedef TAO::TypeCode::Case_T<CORBA::Short, char const *> Foo_Case;
+     *   using Foo_Case = TAO::TypeCode::Case_T<CORBA::Short, char const *>;
      *   Foo_Case _tao_cases_Foo[] =
      *     {
-     *       Foo_Case (0, "a", &CORBA::_tc_short),
-     *       Foo_Case (1, "a", &CORBA::_tc_short),
-     *       Foo_Case (2, "b", &CORBA::_tc_long),
-     *       Foo_Case (0, "c", &CORBA::_tc_octet)
+     *       Foo_Case (0, "a", std::addressof(CORBA::_tc_short)),
+     *       Foo_Case (1, "a", std::addressof(CORBA::_tc_short)),
+     *       Foo_Case (2, "b", std::addressof(CORBA::_tc_long)),
+     *       Foo_Case (0, "c", std::addressof(CORBA::_tc_octet))
      *     };
      * \endcode
      *

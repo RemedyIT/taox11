@@ -43,8 +43,8 @@ namespace TAOX11_NAMESPACE
     template <typename T>
     struct servant_traits
     {
-      typedef servant_reference<T>       ref_type;
-      typedef weak_servant_reference<T>  weak_ref_type;
+      using ref_type = servant_reference<T>;
+      using weak_ref_type = weak_servant_reference<T>;
 
       template <typename _Tp, typename = typename
           std::enable_if<std::is_base_of<PortableServer::Servant, typename _Tp::value_type>::value>::type>
@@ -58,10 +58,10 @@ namespace TAOX11_NAMESPACE
     class servant_reference final
     {
     public:
-      typedef T                     value_type;
-      typedef T*                    ptr_type;
-      typedef std::shared_ptr<T>    shared_ptr_type;
-      typedef servant_traits<T>     traits_type;
+      using value_type = T;
+      using ptr_type =  T*;
+      using shared_ptr_type = std::shared_ptr<T>;
+      using traits_type = servant_traits<T>;
 
       servant_reference (std::nullptr_t = nullptr)
       {}
@@ -223,7 +223,7 @@ namespace TAOX11_NAMESPACE
       { return servant_reference<T> (this->srvt_.lock ()); }
 
     protected:
-      typedef std::weak_ptr<T>  weak_ptr_type;
+      using weak_ptr_type = std::weak_ptr<T>;
 
       template <typename _Tp1> friend class weak_valuetype_reference;
 

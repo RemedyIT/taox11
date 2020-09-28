@@ -180,7 +180,7 @@ namespace x11_logger
 
     static TAOX11_Test_Log_Module* getInstance();
 
-    typedef Log_Type_T<TAOX11_Test_Log_Module> log_type;
+    using log_type = Log_Type_T<TAOX11_Test_Log_Module>;
 
   private:
     TAOX11_Test_Log_Module ();

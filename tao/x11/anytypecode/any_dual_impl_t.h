@@ -33,9 +33,9 @@ namespace TAOX11_NAMESPACE
   class Any_Dual_Impl_T : public Any_Impl
   {
   public:
-    typedef Any_Dual_Impl_T<TRAITS, MARSHAL_POLICY> impl_type;
-    typedef std::shared_ptr<impl_type> ref_type;
-    typedef typename TRAITS::value_type value_type;
+    using impl_type = Any_Dual_Impl_T<TRAITS, MARSHAL_POLICY>;
+    using ref_type = std::shared_ptr<impl_type>;
+    using value_type = typename TRAITS::value_type;
 
     Any_Dual_Impl_T (CORBA::typecode_reference,
                      value_type&&);

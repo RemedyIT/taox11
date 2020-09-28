@@ -15,7 +15,7 @@ template <class T>
 class Test_Wrapper
 {
 public:
-  typedef T TEST_OBJECT;
+  using TEST_OBJECT = T;
 
   // constructor and destructor
   Test_Wrapper(IDL::traits<CORBA::ORB>::ref_type);

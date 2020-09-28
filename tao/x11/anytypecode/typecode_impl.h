@@ -134,8 +134,7 @@ namespace TAOX11_NAMESPACE
 
   } // namespace CORBA
 
-  typedef CORBA::TypeCode_impl TC_helper;
-
+  using TC_helper = CORBA::TypeCode_impl;
 } // namespace TAOX11_NAMESPACE
 
 TAOX11_AnyTypeCode_Export

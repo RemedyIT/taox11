@@ -20,14 +20,14 @@
 namespace TAOX11_NAMESPACE
 {
 
-  typedef TAOX11_IDL::traits<CORBA::TypeCode>::ref_type TypeCode_ref;
+  using TypeCode_ref = TAOX11_IDL::traits<CORBA::TypeCode>::ref_type;
 
   template<>
   struct TAOX11_DynamicAny_Export BasicTypeTraits<bool>
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef bool return_type;
+    using return_type = bool;
   };
 
   template<>
@@ -35,7 +35,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef uint8_t return_type;
+    using return_type = uint8_t;
   };
 
   template<>
@@ -43,7 +43,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef char return_type;
+    using return_type = char;
   };
 
   template<>
@@ -51,7 +51,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef wchar_t return_type;
+    using return_type = wchar_t;
   };
 
   template<>
@@ -59,7 +59,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef int16_t return_type;
+    using return_type = int16_t;
   };
 
   template<>
@@ -67,7 +67,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef uint16_t return_type;
+    using return_type = uint16_t;
   };
 
   template<>
@@ -75,7 +75,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef int32_t return_type;
+    using return_type = int32_t;
   };
 
   template<>
@@ -83,7 +83,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef uint32_t return_type;
+    using return_type = uint32_t;
   };
 
   template<>
@@ -91,7 +91,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef int64_t return_type;
+    using return_type = int64_t;
   };
 
   template<>
@@ -99,7 +99,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef uint64_t return_type;
+    using return_type = uint64_t;
   };
 
   template<>
@@ -107,7 +107,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef float return_type;
+    using return_type = float;
   };
 
   template<>
@@ -115,7 +115,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef double return_type;
+    using return_type = double;
   };
 
   template<>
@@ -123,7 +123,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef long double return_type;
+    using return_type = long double;
   };
 
   template<>
@@ -131,7 +131,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef std::string return_type;
+    using return_type = std::string;
   };
 
   template<>
@@ -139,7 +139,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef std::wstring return_type;
+    using return_type = std::wstring;
   };
 
   template<>
@@ -147,7 +147,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::Any return_type;
+    using return_type = CORBA::Any;
   };
 
   template<>
@@ -155,7 +155,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef IDL::traits<CORBA::Object>::ref_type return_type;
+    using return_type = IDL::traits<CORBA::Object>::ref_type;
   };
 
   template<>
@@ -163,7 +163,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef TypeCode_ref return_type;
+    using return_type = TypeCode_ref;
   };
 
   template<>
@@ -171,7 +171,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::BooleanSeq  return_type;
+    using return_type = CORBA::BooleanSeq ;
   };
 
   template<>
@@ -179,7 +179,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value ;
-    typedef CORBA::OctetSeq  return_type;
+    using return_type = CORBA::OctetSeq;
   };
 
   template<>
@@ -187,7 +187,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::CharSeq  return_type;
+    using return_type = CORBA::CharSeq;
   };
 
   template<>
@@ -195,7 +195,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::WCharSeq return_type;
+    using return_type = CORBA::WCharSeq;
   };
 
   template<>
@@ -203,7 +203,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::ShortSeq return_type;
+    using return_type = CORBA::ShortSeq;
   };
 
   template<>
@@ -211,7 +211,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::UShortSeq return_type;
+    using return_type = CORBA::UShortSeq;
   };
 
   template<>
@@ -219,7 +219,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::LongSeq return_type;
+    using return_type = CORBA::LongSeq;
   };
 
   template<>
@@ -227,7 +227,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-   typedef CORBA::ULongSeq return_type;
+    using return_type = CORBA::ULongSeq;
   };
 
   template<>
@@ -235,7 +235,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::LongLongSeq return_type;
+    using return_type = CORBA::LongLongSeq;
   };
 
   template<>
@@ -243,7 +243,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::ULongLongSeq  return_type;
+    using return_type = CORBA::ULongLongSeq;
   };
 
   template<>
@@ -251,7 +251,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::FloatSeq return_type;
+    using return_type = CORBA::FloatSeq;
   };
 
   template<>
@@ -259,7 +259,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::DoubleSeq return_type;
+    using return_type = CORBA::DoubleSeq;
   };
 
   template<>
@@ -267,7 +267,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::LongDoubleSeq  return_type;
+    using return_type = CORBA::LongDoubleSeq;
   };
 
   template<>
@@ -275,7 +275,7 @@ namespace TAOX11_NAMESPACE
   {
     static TypeCode_ref const tc_value;
     static CORBA::TCKind const tckind_value;
-    typedef CORBA::AnySeq return_type;
+    using return_type = CORBA::AnySeq;
   };
 }
 

@@ -36,16 +36,16 @@ namespace TAOX11_NAMESPACE
     template <typename T>
     struct traits
     {
-      typedef typename std::conditional<
+      using _traits_type = typename std::conditional<
                           std::is_base_of<CORBA::LocalObject, T>::value,
                           CORBA::object_traits<T>,
                           typename std::conditional<
                                   std::is_base_of<CORBA::ValueBase, T>::value,
                                   CORBA::valuetype_traits<T>,
-                                  void>::type>::type _traits_type;
+                                  void>::type>::type;
 
-      typedef typename _traits_type::ref_type ref_type;
-      typedef typename _traits_type::weak_ref_type weak_ref_type;
+      using ref_type = typename _traits_type::ref_type;
+      using weak_ref_type = typename _traits_type::weak_ref_type;
 
       template <typename _Tp>
       inline static ref_type narrow (_Tp obj)
@@ -58,26 +58,26 @@ namespace TAOX11_NAMESPACE
     struct common_traits
     {
       /// common traits
-      typedef T         value_type;
-      typedef const T&  in_type;
-      typedef T&        out_type;
-      typedef T&        inout_type;
+      using value_type = T;
+      using in_type = const T&;
+      using out_type = T&;
+      using inout_type = T&;
 
       template <typename Formatter>
-      struct __Writer { typedef Formatter formatter_t; in_type val_; };
+      struct __Writer { using formatter_t = Formatter; in_type val_; };
     };
 
     template <typename T>
     struct common_byval_traits
     {
       /// common traits
-      typedef T         value_type;
-      typedef T         in_type;
-      typedef T&        out_type;
-      typedef T&        inout_type;
+      using value_type = T;
+      using in_type = T;
+      using out_type = T&;
+      using inout_type = T&;
 
       template <typename Formatter>
-      struct __Writer { typedef Formatter formatter_t; in_type val_; };
+      struct __Writer { using formatter_t = Formatter ; in_type val_; };
     };
 
     template <typename T, typename OStrm_>
@@ -197,8 +197,8 @@ namespace TAOX11_NAMESPACE
     template <typename T, typename OStrm_>
     struct formatter<std::vector<T>, OStrm_>
     {
-      typedef IDL::traits<std::vector<T>> traits;
-      typedef typename traits::element_traits elem_traits;
+      using traits = IDL::traits<std::vector<T>>;
+      using elem_traits = typename traits::element_traits;
 
       template <typename T_ELEM>
       struct element_formatter
@@ -235,8 +235,8 @@ namespace TAOX11_NAMESPACE
     template <typename T, typename OStrm_, const uint32_t B>
     struct formatter<IDL::bounded_vector<T, B>, OStrm_>
     {
-      typedef IDL::traits<IDL::bounded_vector<T, B>> traits;
-      typedef typename traits::element_traits elem_traits;
+      using traits = IDL::traits<IDL::bounded_vector<T, B>>;
+      using elem_traits = typename traits::element_traits;
 
       template <typename T_ELEM>
       struct element_formatter
@@ -272,21 +272,21 @@ namespace TAOX11_NAMESPACE
 
     template <typename T>
     struct __value_type
-    { typedef T value_type; };
+    { using value_type = T; };
     template <typename T>
     struct __value_type<CORBA::object_reference<T>>
-    { typedef typename CORBA::object_reference<T>:: value_type value_type; };
+    { using value_type = typename CORBA::object_reference<T>:: value_type; };
     template <typename T>
     struct __value_type<CORBA::abstractbase_reference<T>>
-    { typedef typename CORBA::abstractbase_reference<T>:: value_type value_type; };
+    { using value_type = typename CORBA::abstractbase_reference<T>:: value_type; };
     template <typename T>
     struct __value_type<CORBA::valuetype_reference<T>>
-    { typedef typename CORBA::valuetype_reference<T>:: value_type value_type; };
+    { using value_type = typename CORBA::valuetype_reference<T>:: value_type; };
 
     template <typename T, typename OStrm_, std::size_t N>
     struct formatter<std::array<T, N>, OStrm_>
     {
-      typedef formatter<typename __value_type<T>::value_type, OStrm_> elem_formatter;
+      using elem_formatter = formatter<typename __value_type<T>::value_type, OStrm_>;
 
       struct element_formatter
       {

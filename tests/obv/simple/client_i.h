@@ -30,7 +30,7 @@ public:
   friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
 
 protected:
-  typedef CORBA::servant_traits<Test::Client>::base_type base_type;
+  using base_type = CORBA::servant_traits<Test::Client>::base_type;
 
   Client_i (CORBA::ORB::_ref_type orb)
    : base_type (),

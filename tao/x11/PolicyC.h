@@ -46,7 +46,7 @@ namespace TAOX11_NAMESPACE {
   namespace CORBA {
 
     // generated from c++/cli_hdr/typedef.erb
-    typedef int16_t PolicyErrorCode;
+    using PolicyErrorCode = int16_t;
 
     // generated from c++/anyop_hdr/typedef.erb
     extern TAOX11_AnyTypeCode_Export TAOX11_CORBA::typecode_reference const _tc_PolicyErrorCode;
@@ -150,7 +150,7 @@ namespace TAOX11_NAMESPACE {
 #define _INTF_TAOX11_NAMESPACE__CORBA__POLICY_FWD_
     class TAOX11_Export Policy;
     class TAOX11_Export Policy_proxy;
-    typedef Policy_proxy* Policy_proxy_ptr;
+    using Policy_proxy_ptr = Policy_proxy*;
     namespace POA
     {
       class TAOX11_Export Policy;
@@ -215,8 +215,8 @@ namespace TAOX11_NAMESPACE
     public:
       friend struct TAOX11_CORBA::object_traits<Policy>;
 
-      typedef IDL::traits<Policy>                     _traits_type;
-      typedef _traits_type::ref_type                  _ref_type;
+      using _traits_type = IDL::traits<Policy>;
+      using _ref_type = _traits_type::ref_type;
 
       virtual const std::string& _interface_repository_id () const;
 
@@ -308,13 +308,13 @@ namespace TAOX11_NAMESPACE {
          OStrm_& os,
          IDL::traits<TAOX11_CORBA::PolicyError>::__Writer<Fmt> w)
      {
-       typedef IDL::traits<TAOX11_CORBA::PolicyError>::__Writer<Fmt> writer_t;
-       typedef typename std::conditional<
+       using writer_t = IDL::traits<TAOX11_CORBA::PolicyError>::__Writer<Fmt>;
+       using formatter_t = typename std::conditional<
                            std::is_same<
                              typename writer_t::formatter_t,
                              std::false_type>::value,
                            formatter<TAOX11_CORBA::PolicyError, OStrm_>,
-                           typename writer_t::formatter_t>::type formatter_t;
+                           typename writer_t::formatter_t>::type;
        return IDL::traits<TAOX11_CORBA::PolicyError>::write_on (
            os, w.val_,
            formatter_t ());
@@ -356,13 +356,13 @@ namespace TAOX11_NAMESPACE {
          OStrm_& os,
          IDL::traits<TAOX11_CORBA::InvalidPolicies>::__Writer<Fmt> w)
      {
-       typedef IDL::traits<TAOX11_CORBA::InvalidPolicies>::__Writer<Fmt> writer_t;
-       typedef typename std::conditional<
+       using writer_t = IDL::traits<TAOX11_CORBA::InvalidPolicies>::__Writer<Fmt>;
+       using formatter_t = typename std::conditional<
                            std::is_same<
                              typename writer_t::formatter_t,
                              std::false_type>::value,
                            formatter<TAOX11_CORBA::InvalidPolicies, OStrm_>,
-                           typename writer_t::formatter_t>::type formatter_t;
+                           typename writer_t::formatter_t>::type;
        return IDL::traits<TAOX11_CORBA::InvalidPolicies>::write_on (
            os, w.val_,
            formatter_t ());
@@ -389,13 +389,13 @@ namespace TAOX11_NAMESPACE {
        OStrm_& os,
        IDL::traits<CORBA::Policy>::__Writer<Fmt> w)
    {
-     typedef IDL::traits<CORBA::Policy>::__Writer<Fmt> writer_t;
-     typedef typename std::conditional<
+     using writer_t = IDL::traits<CORBA::Policy>::__Writer<Fmt>;
+     using formatter_t = typename std::conditional<
                          std::is_same<
                            typename writer_t::formatter_t,
                            std::false_type>::value,
                          formatter<CORBA::Policy, OStrm_>,
-                         typename writer_t::formatter_t>::type formatter_t;
+                         typename writer_t::formatter_t>::type;
      return IDL::traits<CORBA::Policy>::write_on (
          os, w.val_,
          formatter_t ());
