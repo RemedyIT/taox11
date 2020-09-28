@@ -71,7 +71,7 @@ namespace TAOX11_NAMESPACE
     }
     else
     {
-      typedef typename BasicTypeTraits<T>::return_type ret_type;
+      using ret_type = typename BasicTypeTraits<T>::return_type;
       ret_type retval = ret_type ();
       const CORBA::Any &my_any = the_dynany->the_any ();
       if (!(my_any >>= retval))

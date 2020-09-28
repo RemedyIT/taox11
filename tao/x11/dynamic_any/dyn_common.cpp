@@ -935,9 +935,9 @@ namespace TAOX11_NAMESPACE
         Unknown_IDL_Type::ref_type const unk =
             std::dynamic_pointer_cast<Unknown_IDL_Type> (any_impl);
 
-        typedef Any_AbstractBase_Impl_T<
+        using abstract_any_impl_t = Any_AbstractBase_Impl_T<
                     IDL::traits<CORBA::AbstractBase>,
-                    CDR_Marshal_Policy> abstract_any_impl_t;
+                    CDR_Marshal_Policy>;
         abstract_any_impl_t::ref_type const abs =
             std::dynamic_pointer_cast<abstract_any_impl_t::impl_type> (any_impl);
 

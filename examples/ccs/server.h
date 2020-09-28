@@ -81,16 +81,14 @@ private:
       return this->str_ == buf;
     }
   private:
-    CCS::Controller::SearchCriterion sc_;
-    std::string str_;
+    CCS::Controller::SearchCriterion const sc_;
+    std::string const str_;
   };
 
   // Map of existing assets. The servant pointer is null
   // the corresponding servant is not in memory.
-  using AssetMap = std::map<CCS::AssetType,
-    CORBA::servant_traits< CCS::Thermometer>::ref_type>;
-  usig AssetPair = std::pair<CCS::AssetType,
-    CORBA::servant_traits< CCS::Thermometer>::ref_type>;
+  using AssetMap = std::map<CCS::AssetType, CORBA::servant_traits< CCS::Thermometer>::ref_type>;
+  using AssetPair = std::pair<CCS::AssetType, CORBA::servant_traits< CCS::Thermometer>::ref_type>;
   AssetMap assets_;
 
   IDL::traits<PortableServer::POA>::ref_type poa_;

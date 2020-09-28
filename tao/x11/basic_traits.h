@@ -194,8 +194,8 @@ namespace TAOX11_NAMESPACE
     struct traits <std::wstring>
       : public common_traits<std::wstring>
     {
-      typedef IDL::traits<wchar_t> element_traits;
-      typedef std::false_type is_bounded;
+      using element_traits = IDL::traits<wchar_t>;
+      using is_bounded = std::false_type;
 
       template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
       static inline OStrm_& write_on(OStrm_& os_, in_type val_, Formatter fmt_ = Formatter ())
@@ -212,13 +212,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<bool>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<bool>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<bool>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<bool, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<bool>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -226,13 +226,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<char>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<char>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<char>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<char, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<char>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -240,13 +240,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<wchar_t>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<wchar_t>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<wchar_t>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<wchar_t, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<wchar_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -254,13 +254,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<uint8_t>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<uint8_t>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<uint8_t>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<uint8_t, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<uint8_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -268,13 +268,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<int16_t>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<int16_t>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t =  IDL::traits<int16_t>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<int16_t, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<int16_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -282,13 +282,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<uint16_t>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<uint16_t>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<uint16_t>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<uint16_t, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<uint16_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -296,13 +296,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<int32_t>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<int32_t>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<int32_t>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<int32_t, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<int32_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -310,13 +310,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<uint32_t>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<uint32_t>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<uint32_t>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<uint32_t, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<uint32_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -324,13 +324,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<int64_t>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<int64_t>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<int64_t>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<int64_t, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<int64_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -338,13 +338,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<uint64_t>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<uint64_t>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<uint64_t>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<uint64_t, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<uint64_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -352,13 +352,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<float>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<float>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<float>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<float, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<float>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -366,13 +366,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<double>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<double>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<double>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<double, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<double>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -380,13 +380,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<long double>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<long double>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<long double>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<long double, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<long double>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -394,13 +394,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<std::string>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<std::string>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<std::string>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<std::string, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<std::string>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
@@ -408,13 +408,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<std::wstring>::__Writer<Formatter> w)
     {
-      typedef IDL::traits<std::wstring>::__Writer<Formatter> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<std::wstring>::__Writer<Formatter>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<std::wstring, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<std::wstring>::write_on (os, w.val_, formatter_t ());
     }
 

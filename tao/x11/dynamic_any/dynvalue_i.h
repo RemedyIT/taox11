@@ -83,7 +83,7 @@ namespace TAOX11_NAMESPACE
 
     private:
       /// List of base types.
-      typedef std::vector<IDL::traits<CORBA::TypeCode>::ref_type> BaseTypesList_t;
+      using BaseTypesList_t = std::vector<IDL::traits<CORBA::TypeCode>::ref_type>;
 
       /// Decompose the given TypeCode into its hierarchical list of
       /// basetypes. The first element of the list is our actual type,

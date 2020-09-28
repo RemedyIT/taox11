@@ -97,10 +97,10 @@ namespace x11_logger
     : public virtual std::basic_ios<CH, TR>
   {
   public:
-    typedef std::basic_ios<CH, TR> ios_base;
-    typedef log_buffer_t<CH, TR> buffer_type;
-    typedef typename buffer_type::openmode openmode;
-    typedef typename buffer_type::logprio_type logprio_type;
+    using ios_base = std::basic_ios<CH, TR>;
+    using buffer_type = log_buffer_t<CH, TR>;
+    using openmode = typename buffer_type::openmode;
+    using logprio_type = typename buffer_type::logprio_type;
 
     log_ios_t (logprio_type prio,
                openmode mode);
@@ -125,8 +125,8 @@ namespace x11_logger
       public std::basic_ostream<CH, TR>
   {
   public:
-    typedef log_ios_t<CH, TR> ios_base;
-    typedef typename ios_base::logprio_type logprio_type;
+    using ios_base = log_ios_t<CH, TR>;
+    using logprio_type = typename ios_base::logprio_type;
 
     explicit log_ostream_t(logprio_type prio);
     ~log_ostream_t() = default;

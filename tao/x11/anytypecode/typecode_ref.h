@@ -38,10 +38,10 @@ namespace TAOX11_NAMESPACE
       public IDL::common_byval_traits <CORBA::object_reference <CORBA::TypeCode>>,
       public CORBA::object_traits <CORBA::TypeCode>
     {
-      typedef std::false_type is_abstract;
-      typedef std::true_type is_local;
+      using is_abstract = std::false_type;
+      using is_local = std::true_type;
 
-      typedef CORBA::TypeCode base_type;
+      using base_type = CORBA::TypeCode;
 
       template <typename OStrm_, typename Formatter = formatter<CORBA::TypeCode, OStrm_>>
       static inline OStrm_& write_on(

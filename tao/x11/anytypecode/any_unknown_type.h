@@ -56,7 +56,7 @@ namespace TAOX11_NAMESPACE
     // For instance, see Any_Basic_Impl::extract() which copies the insides
     // from an Unknown_IDL_Type to an Any_Basic_Impl.
     // See also tao/AnyTypeCode/Any_Unknown_IDL_Type.h
-    using LOCK=  ACE_Refcounted_Auto_Ptr<ACE_Lock,
+    using LOCK = ACE_Refcounted_Auto_Ptr<ACE_Lock,
                                     ACE_Lock_Adapter<TAO_SYNCH_MUTEX> >;
     static LOCK const lock_i ();
     LOCK const lock_;

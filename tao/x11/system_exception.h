@@ -256,13 +256,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os, \
         IDL::traits<CORBA::name>::__Writer<Fmt> w) \
     { \
-      typedef IDL::traits<CORBA::name>::__Writer<Fmt> writer_t; \
-      typedef typename std::conditional< \
+      using writer_t = IDL::traits<CORBA::name>::__Writer<Fmt>; \
+      using formatter_t = typename std::conditional< \
                           std::is_same< \
                             typename writer_t::formatter_t, \
                             std::false_type>::value, \
                           formatter<CORBA::name, OStrm_>, \
-                          typename writer_t::formatter_t>::type formatter_t; \
+                          typename writer_t::formatter_t>::type; \
       return IDL::traits<CORBA::name>::write_on ( \
           os, w.val_, \
           formatter_t ()); \

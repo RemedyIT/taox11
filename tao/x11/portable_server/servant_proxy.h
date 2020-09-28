@@ -35,7 +35,7 @@ namespace TAOX11_NAMESPACE {
     : public TAO_VERSIONED_NAMESPACE_NAME::TAO_ServantBase
   {
   public:
-    typedef std::shared_ptr<TAOX11_NAMESPACE::PortableServer::Servant> skel_ref_type;
+    using skel_ref_type = std::shared_ptr<TAOX11_NAMESPACE::PortableServer::Servant>;
 
     virtual ~Servant_proxy () = default;
 

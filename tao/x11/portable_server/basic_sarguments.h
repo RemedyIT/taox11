@@ -30,10 +30,8 @@ namespace TAOX11_NAMESPACE
     class TAOX11_PortableServer_Export SArg_Traits<void>
     {
     public:
-
-      typedef void        ret_type;
-      typedef TAO_TAO::RetArgument ret_val;
-
+      using ret_type = void;
+      using ret_val = TAO_TAO::RetArgument;
     };
 
     /**
@@ -42,7 +40,6 @@ namespace TAOX11_NAMESPACE
      *  except (w)char/boolean/octet.
      *
      */
-
     template<>
     class TAOX11_PortableServer_Export SArg_Traits<int16_t>
       : public

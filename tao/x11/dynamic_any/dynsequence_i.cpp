@@ -260,7 +260,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (this->da_members_.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (this->da_members_.size ());
 
       DynamicAny::AnySeq elements(length);
       if (elements.size() != length)
@@ -290,8 +290,8 @@ namespace TAOX11_NAMESPACE
       IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type stripped_tc =
         DynamicAny::DynAnyFactory_i::strip_alias (this->type_);
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (value.size ());
-      const uint32_t bound = stripped_tc->length ();
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (value.size ());
+      uint32_t const bound = stripped_tc->length ();
 
       if (bound > 0 && length > bound)
       {
@@ -400,8 +400,8 @@ namespace TAOX11_NAMESPACE
       IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type stripped_tc =
         DynAnyFactory_i::strip_alias (this->type_);
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
-      const uint32_t bound = stripped_tc->length ();
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const bound = stripped_tc->length ();
 
       if (bound > 0 && length > bound)
       {

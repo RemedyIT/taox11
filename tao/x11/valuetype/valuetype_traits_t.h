@@ -54,8 +54,8 @@ namespace TAOX11_NAMESPACE
     template <typename T>
     struct valuetype_traits
     {
-      typedef valuetype_reference<T>       ref_type;
-      typedef weak_valuetype_reference<T>  weak_ref_type;
+      using ref_type = valuetype_reference<T>;
+      using weak_ref_type = weak_valuetype_reference<T>;
 
       template <typename _Tp, typename = typename
           std::enable_if<std::is_base_of<ValueBase, typename _Tp::value_type>::value>::type>
@@ -69,9 +69,9 @@ namespace TAOX11_NAMESPACE
     class valuetype_reference final
     {
     public:
-      typedef T                     value_type;
-      typedef T*                    ptr_type;
-      typedef valuetype_traits<T>   traits_type;
+      using value_type = T;
+      using ptr_type =  T*;
+      using traits_type = valuetype_traits<T>;
 
       valuetype_reference (std::nullptr_t = nullptr)
       {}
@@ -144,7 +144,7 @@ namespace TAOX11_NAMESPACE
       { return weak_valuetype_reference<T> (*this); }
 
     protected:
-      typedef std::shared_ptr<T>    shared_ptr_type;
+      using shared_ptr_type = std::shared_ptr<T>;
 
       template <typename _Tp1> friend class valuetype_reference;
       template <typename _Tp1> friend struct valuetype_traits;
@@ -184,8 +184,7 @@ namespace TAOX11_NAMESPACE
     class weak_valuetype_reference final
     {
     public:
-      weak_valuetype_reference ()
-      {}
+      weak_valuetype_reference () = default;
       template<typename _Tp1, typename = typename
         std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
       weak_valuetype_reference (const weak_valuetype_reference<_Tp1>& wref)
@@ -239,7 +238,7 @@ namespace TAOX11_NAMESPACE
       { return valuetype_reference<T> (this->vtp_.lock ()); }
 
     protected:
-      typedef std::weak_ptr<T>  weak_ptr_type;
+      using weak_ptr_type = std::weak_ptr<T>;
 
       template <typename _Tp1> friend class weak_servant_reference;
       template <typename _Tp1> friend class weak_abstractbase_reference;

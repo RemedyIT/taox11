@@ -25,7 +25,7 @@ public:
 
 private:
   /// List of base types.
-  typedef std::vector<IDL::traits<CORBA::TypeCode>::ref_type> BaseTypesList_t;
+  using BaseTypesList_t = std::vector<IDL::traits<CORBA::TypeCode>::ref_type>;
 
   void tab ();
 

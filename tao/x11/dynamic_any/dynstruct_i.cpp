@@ -285,7 +285,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
 
       // Check for length match.
       if (length != this->component_count_)
@@ -368,7 +368,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
 
       // Check for length match.
       if (length != this->component_count_)

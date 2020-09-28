@@ -99,7 +99,7 @@ std::string iE_impl::do_something_E()
 
 Hello::Hello(IDL::traits<CORBA::ORB>::ref_type orb,
     IDL::traits<PortableServer::POA>::ref_type poa) :
-  orb_(orb), poa_(poa)
+  orb_(std::move(orb)), poa_(std::move(poa))
 {
 }
 
