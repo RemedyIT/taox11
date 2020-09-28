@@ -39,9 +39,9 @@ _tao<%= cxx_typecode %> (
   "<%= cxxname %>",
   TAO_CORBA::<%= value_modifier_const %>,
 % if has_concrete_base?
-  &__tao::<%= bases.first.scoped_cxx_typecode %>,
+  std::addressof(__tao::<%= bases.first.scoped_cxx_typecode %>),
 % else
-  &TAO_CORBA::_tc_null,
+  std::addressof(TAO_CORBA::_tc_null),
 % end
   <% if member_count > 0 %>_tao_fields<%= cxx_typecode %><% else %>nullptr<% end %>,
   <%= member_count %>);
