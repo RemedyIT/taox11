@@ -69,7 +69,7 @@ namespace std
     id threadId_;
 
   public:
-    typedef ACE_hthread_t native_handle_type;
+    using native_handle_type = ACE_hthread_t;
 
     id get_id () const noexcept
     { return this->threadId_; }
@@ -94,7 +94,7 @@ namespace std
     template<class Function, class... Args>
     explicit thread (Function&& f, Args&&... args)
     {
-      typedef decltype(std::bind(f, args...)) Call;
+      using Call = decltype(std::bind(f, args...));
       std::unique_ptr<Call> call =
           std::make_unique<Call> (std::bind(f, args...));
       if (ACE_OS::thr_create (

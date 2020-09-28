@@ -19,8 +19,8 @@
 namespace TAOX11_NAMESPACE
 {
   class Object_proxy;
-  typedef Object_proxy *Object_proxy_ptr;
-  typedef std::unique_ptr<Object_proxy> Object_proxy_ref;
+  using Object_proxy_ptr = Object_proxy *;
+  using Object_proxy_ref = std::unique_ptr<Object_proxy> ;
 
   namespace CORBA
   {
@@ -31,8 +31,7 @@ namespace TAOX11_NAMESPACE
     /// (Local)Object trait method specializations
     template<>
     TAOX11_Export object_traits<CORBA::Object>::shared_ptr_type
-    object_traits<CORBA::Object>::lock_shared (
-        CORBA::Object*);
+    object_traits<CORBA::Object>::lock_shared (CORBA::Object*);
 
     template<>
     TAOX11_Export object_traits<CORBA::Object>::ref_type
@@ -52,8 +51,8 @@ namespace TAOX11_NAMESPACE
       public IDL::common_byval_traits <CORBA::object_reference <CORBA::Object>>,
       public CORBA::object_traits <CORBA::Object>
     {
-      typedef std::false_type is_abstract;
-      typedef std::false_type is_local;
+      using is_abstract = std::false_type;
+      using is_local = std::false_type;
 
       template <typename OStrm_, typename Formatter = formatter<CORBA::Object, OStrm_>>
       static inline OStrm_& write_on(
@@ -74,10 +73,10 @@ namespace TAOX11_NAMESPACE
       public IDL::common_byval_traits <CORBA::object_reference <CORBA::LocalObject>>,
       public CORBA::object_traits <CORBA::LocalObject>
     {
-      typedef std::false_type is_abstract;
-      typedef std::true_type is_local;
+      using is_abstract = std::false_type;
+      using is_local = std::true_type;
 
-      typedef CORBA::LocalObject base_type;
+      using base_type = CORBA::LocalObject;
 
       template <typename OStrm_, typename Formatter = formatter<CORBA::LocalObject, OStrm_>>
       static inline OStrm_& write_on(

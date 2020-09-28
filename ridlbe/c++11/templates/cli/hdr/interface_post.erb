@@ -41,7 +41,7 @@ private:
   TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type _to_value () override;
 %   end
 protected:
-  typedef std::shared_ptr<<%= cxxname %>> _shared_ptr_type;
+  using _shared_ptr_type = std::shared_ptr<<%= cxxname %>>;
 
   template <typename _Tp1, typename, typename ...Args>
   friend TAOX11_CORBA::object_reference<_Tp1> TAOX11_CORBA::make_reference(Args&& ...args);
@@ -71,7 +71,7 @@ private:
 %##### Local interface #####
 %#
 protected:
-  typedef std::shared_ptr<<%= cxxname %>> _shared_ptr_type;
+  using _shared_ptr_type = std::shared_ptr<<%= cxxname %>>;
 
 %# msvc14.{0|1|2} have a bug that when using a defaulted constructor here we get a crash in the portableserver library
 %# for the POA

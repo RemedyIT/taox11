@@ -62,7 +62,7 @@ namespace TAOX11_NAMESPACE
     class TAOX11_AnyTypeCode_Export Any
     {
     public:
-      typedef std::shared_ptr<Any_Impl>  impl_ref_type;
+      using impl_ref_type = std::shared_ptr<Any_Impl>;
 
       Any () = default;
       Any (const Any &);
@@ -185,13 +185,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<CORBA::Any>::__Writer<Fmt> w)
     {
-      typedef IDL::traits<CORBA::Any>::__Writer<Fmt> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<CORBA::Any>::__Writer<Fmt>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<CORBA::Any, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       IDL::traits<CORBA::Any>::write_on (os, w.val_, formatter_t ());
       return os;
     }

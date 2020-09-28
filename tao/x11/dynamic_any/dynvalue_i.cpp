@@ -321,7 +321,7 @@ namespace TAOX11_NAMESPACE
       }
 
       // Check lengths match.
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
       if (length !=  static_cast <uint32_t>(this->da_members_.size ()))
       {
         throw DynamicAny::DynAny::InvalidValue ();
@@ -399,7 +399,7 @@ namespace TAOX11_NAMESPACE
       }
 
       // Check lengths match.
-      uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
       if (length !=
           static_cast <uint32_t> (
             this->da_members_.size ()))

@@ -11,9 +11,9 @@ namespace TAOX11_NAMESPACE
     struct <%= stub_export_macro %>valuetype_traits< <%= scoped_cxxtype %>>
     {
       /// Strong reference type
-      typedef valuetype_reference< <%= scoped_cxxtype %>> ref_type;
+      using ref_type = valuetype_reference< <%= scoped_cxxtype %>>;
       /// Weak reference type
-      typedef weak_valuetype_reference< <%= scoped_cxxtype %>> weak_ref_type;
+      using weak_ref_type = weak_valuetype_reference< <%= scoped_cxxtype %>>;
 
       static ref_type narrow (valuetype_reference<ValueBase>);
     };
@@ -27,7 +27,7 @@ namespace TAOX11_NAMESPACE
         public CORBA::valuetype_traits < <%= scoped_cxxtype %>>
     {
       /// IDL::traits for the boxed type of the valuebox
-      typedef IDL::traits< <%= scoped_boxed_traits_cxx_typename %>>  boxed_traits;
+      using boxed_traits = IDL::traits< <%= scoped_boxed_traits_cxx_typename %>>;
 
       template <typename OStrm_, typename Formatter = formatter< <%= scoped_cxxtype %>, OStrm_>>
       static inline OStrm_& write_on(

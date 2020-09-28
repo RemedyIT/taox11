@@ -9,12 +9,12 @@ namespace POA
   public:
     /// @name Member types
     //@{
-    typedef TAOX11_CORBA::servant_traits<<%= skel_cxxname %>>    _traits_type;
-    typedef TAOX11_CORBA::servant_reference<<%= skel_cxxname %>> _ref_type;
+    using _traits_type = TAOX11_CORBA::servant_traits<<%= skel_cxxname %>>;
+    using _ref_type = TAOX11_CORBA::servant_reference<<%= skel_cxxname %>>;
     //@}
 
   protected:
-    typedef std::shared_ptr<<%= skel_cxxname %>> _shared_ptr_type;
+    using _shared_ptr_type = std::shared_ptr<<%= skel_cxxname %>>;
     <%= skel_cxxname %> () = default;
     virtual ~<%= skel_cxxname %> () = default;
 

@@ -27,7 +27,7 @@ namespace std
   class mutex
   {
   public:
-    typedef ACE_SYNCH::MUTEX*      native_handle_type;
+    using native_handle_type = ACE_SYNCH::MUTEX*;
 
     mutex () = default;
     ~mutex() = default;
@@ -66,7 +66,7 @@ namespace std
   class recursive_mutex
   {
   public:
-    typedef ACE_SYNCH::RECURSIVE_MUTEX*      native_handle_type;
+    using native_handle_type = ACE_SYNCH::RECURSIVE_MUTEX*;
 
     recursive_mutex () = default;
     ~recursive_mutex() = default;

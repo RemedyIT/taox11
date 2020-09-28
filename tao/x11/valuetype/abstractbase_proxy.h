@@ -29,14 +29,14 @@ namespace TAOX11_NAMESPACE
   //===================================================================
 
   class Abstractbase_proxy;
-  typedef Abstractbase_proxy* Abstractbase_proxy_ptr;
-  typedef TAO_Pseudo_Var_T<Abstractbase_proxy> Abstractbase_proxy_var;
+  using Abstractbase_proxy_ptr = Abstractbase_proxy*;
+  using Abstractbase_proxy_var = TAO_Pseudo_Var_T<Abstractbase_proxy>;
 
   class TAOX11_Valuetype_Export Abstractbase_proxy
       : public TAO_CORBA::AbstractBase
   {
   public:
-    typedef Abstractbase_proxy_ptr  _ptr_type;
+    using _ptr_type = Abstractbase_proxy_ptr;
 
     static _ptr_type _nil ()
     { return nullptr; }

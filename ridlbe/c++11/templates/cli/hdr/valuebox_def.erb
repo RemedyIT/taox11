@@ -6,8 +6,8 @@ class <%= stub_export_macro %><%= cxxname %> final
 public:
   /// @name Member types
   //@{
-  typedef TAOX11_CORBA::valuetype_traits< <%= cxxname %>>     _traits_type;
-  typedef TAOX11_CORBA::valuetype_reference< <%= cxxname %>>  _ref_type;
+  using _traits_type = TAOX11_CORBA::valuetype_traits< <%= cxxname %>>;
+  using _ref_type = TAOX11_CORBA::valuetype_reference< <%= cxxname %>>;
   //@}
 
   void _value (<%= boxed_cxx_in_type %> v) { this->value_ = v; }

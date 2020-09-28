@@ -24,7 +24,7 @@
 namespace TAOX11_NAMESPACE
 {
   class Abstractbase_proxy;
-  typedef Abstractbase_proxy* Abstractbase_proxy_ptr;
+  using Abstractbase_proxy_ptr = Abstractbase_proxy*;
   class ValueFactory_proxy;
 
   namespace CORBA
@@ -34,8 +34,8 @@ namespace TAOX11_NAMESPACE
     class TAOX11_Valuetype_Export AbstractBase
     {
     public:
-      typedef abstractbase_traits<AbstractBase>     _traits_type;
-      typedef abstractbase_reference<AbstractBase>  _ref_type;
+      using _traits_type = abstractbase_traits<AbstractBase>;
+      using _ref_type = abstractbase_reference<AbstractBase>;
 
       /// Overloaded in derived (object & valuetype) classes
       virtual IDL::traits<CORBA::Object>::ref_type _to_object ();
@@ -51,7 +51,7 @@ namespace TAOX11_NAMESPACE
       static bool _abs_unmarshal (TAO_InputCDR&, _ref_type&);
 
     protected:
-      typedef std::shared_ptr<CORBA::AbstractBase>  _shared_ptr_type;
+      using _shared_ptr_type = std::shared_ptr<CORBA::AbstractBase>;
 
       friend class TAOX11_NAMESPACE::ValueFactory_proxy;
       template <typename T> friend class abstractbase_reference;
@@ -108,7 +108,7 @@ namespace TAOX11_NAMESPACE
       AbstractBase& operator =(const AbstractBase&) = delete;
       AbstractBase& operator =(AbstractBase&&) = delete;
 
-      typedef std::weak_ptr<AbstractBase> _weak_reference_type;
+      using _weak_reference_type = std::weak_ptr<AbstractBase>;
       _weak_reference_type self_ref_;
       Abstractbase_proxy_ptr proxy_ {};
     }; // AbstractBase
@@ -184,13 +184,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<CORBA::AbstractBase>::__Writer<Fmt> w)
     {
-      typedef IDL::traits<CORBA::AbstractBase>::__Writer<Fmt> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<CORBA::AbstractBase>::__Writer<Fmt>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<CORBA::AbstractBase, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<CORBA::AbstractBase>::write_on (
           os, w.val_,
           formatter_t ());

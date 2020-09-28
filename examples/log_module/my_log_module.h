@@ -34,7 +34,7 @@ namespace my_logger
   public:
     virtual ~My_Log_Module ();
 
-    typedef x11_logger::Log_Type_T<My_Log_Module> log_type;
+    using log_type = x11_logger::Log_Type_T<My_Log_Module>;
 
     static My_Log_Module* getInstance();
 

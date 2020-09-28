@@ -222,7 +222,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (value.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (value.size ());
 
       if (length != this->da_members_.size ())
       {
@@ -295,7 +295,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (this->da_members_.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (this->da_members_.size ());
 
       if (nc_values.size () != length)
       {
@@ -361,9 +361,8 @@ namespace TAOX11_NAMESPACE
          cdr = tmp_in;
        }
 
-
-        const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (this->da_members_.size());
-        const uint32_t arg_length = this->get_tc_length (tc);
+        uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (this->da_members_.size());
+        uint32_t const arg_length = this->get_tc_length (tc);
 
         if (length != arg_length)
         {

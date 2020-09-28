@@ -25,8 +25,8 @@ namespace TAOX11_NAMESPACE
     class Valuebox_T : public ValueBase
     {
     public:
-      typedef CORBA::valuetype_traits<Valuebox_T<T>>     _traits_type;
-      typedef CORBA::valuetype_reference<Valuebox_T<T>>  _ref_type;
+      using _traits_type = CORBA::valuetype_traits<Valuebox_T<T>>;
+      using _ref_type = CORBA::valuetype_reference<Valuebox_T<T>>;
 
       void swap(Valuebox_T<T>& r)
       {
@@ -34,7 +34,7 @@ namespace TAOX11_NAMESPACE
       }
 
     protected:
-      typedef std::shared_ptr<Valuebox_T<T>>             _shared_ptr_type;
+      using _shared_ptr_type = std::shared_ptr<Valuebox_T<T>>;
 
       Valuebox_T () = default;
       Valuebox_T (const Valuebox_T<T>&) = default;

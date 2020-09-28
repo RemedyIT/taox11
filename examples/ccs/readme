@@ -1,4 +1,3 @@
-
 This example has been taken from the book "Advanced CORBA
 Programming with C++" by Michi Henning and Steve Vinoski.
 The code from the TAO repository has been added to the TAOX11 repository.
@@ -21,7 +20,7 @@ client:
     makes several remote calls on this controller, and terminates.
 
 run_test.pl:
-    The script starts up a new Naming Service, starts thc server and client,
+    The script starts up a new Naming Service, starts the server and client,
     and when the client has completed terminates the server and NamingService.
 
 Running:

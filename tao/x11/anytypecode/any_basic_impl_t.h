@@ -31,9 +31,9 @@ namespace TAOX11_NAMESPACE
   class Any_Basic_Impl_T : public Any_Impl
   {
   public:
-    typedef Any_Basic_Impl_T<TRAITS, MARSHAL_POLICY> impl_type;
-    typedef std::shared_ptr<impl_type> ref_type;
-    typedef typename TRAITS::value_type value_type;
+    using impl_type = Any_Basic_Impl_T<TRAITS, MARSHAL_POLICY>;
+    using ref_type = std::shared_ptr<impl_type>;
+    using value_type = typename TRAITS::value_type;
 
     Any_Basic_Impl_T (CORBA::typecode_reference,
                       value_type val);
@@ -69,9 +69,9 @@ namespace TAOX11_NAMESPACE
   class Any_Object_Impl_T : public Any_Basic_Impl_T<TRAITS, MARSHAL_POLICY>
   {
   public:
-    typedef Any_Object_Impl_T<TRAITS, MARSHAL_POLICY> impl_type;
-    typedef std::shared_ptr<impl_type> ref_type;
-    typedef typename TRAITS::value_type value_type;
+    using impl_type = Any_Object_Impl_T<TRAITS, MARSHAL_POLICY>;
+    using ref_type = std::shared_ptr<impl_type>;
+    using value_type = typename TRAITS::value_type;
 
     Any_Object_Impl_T (CORBA::typecode_reference,
                        value_type val);
@@ -98,9 +98,9 @@ namespace TAOX11_NAMESPACE
   class Any_Value_Impl_T : public Any_Basic_Impl_T<TRAITS, MARSHAL_POLICY>
   {
   public:
-    typedef Any_Value_Impl_T<TRAITS, MARSHAL_POLICY> impl_type;
-    typedef std::shared_ptr<impl_type> ref_type;
-    typedef typename TRAITS::value_type value_type;
+    using impl_type = Any_Value_Impl_T<TRAITS, MARSHAL_POLICY>;
+    using ref_type = std::shared_ptr<impl_type>;
+    using value_type = typename TRAITS::value_type;
 
     Any_Value_Impl_T (CORBA::typecode_reference,
                       value_type val);
@@ -129,9 +129,9 @@ namespace TAOX11_NAMESPACE
   class Any_AbstractBase_Impl_T : public Any_Basic_Impl_T<TRAITS, MARSHAL_POLICY>
   {
   public:
-    typedef Any_AbstractBase_Impl_T<TRAITS, MARSHAL_POLICY> impl_type;
-    typedef std::shared_ptr<impl_type> ref_type;
-    typedef typename TRAITS::value_type value_type;
+    using impl_type = Any_AbstractBase_Impl_T<TRAITS, MARSHAL_POLICY>;
+    using ref_type = std::shared_ptr<impl_type>;
+    using value_type = typename TRAITS::value_type;
 
     Any_AbstractBase_Impl_T (CORBA::typecode_reference,
                       value_type val);

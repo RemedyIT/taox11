@@ -30,7 +30,7 @@ namespace TAOX11_NAMESPACE
   class TAOX11_AnyTypeCode_Export Unknown_IDL_Type : public Any_Impl
   {
   public:
-    typedef std::shared_ptr<Unknown_IDL_Type> ref_type;
+    using ref_type = std::shared_ptr<Unknown_IDL_Type>;
 
     Unknown_IDL_Type (CORBA::typecode_reference,
                       TAO_InputCDR &cdr);
@@ -56,9 +56,8 @@ namespace TAOX11_NAMESPACE
     // For instance, see Any_Basic_Impl::extract() which copies the insides
     // from an Unknown_IDL_Type to an Any_Basic_Impl.
     // See also tao/AnyTypeCode/Any_Unknown_IDL_Type.h
-    typedef ACE_Refcounted_Auto_Ptr<ACE_Lock,
-                                    ACE_Lock_Adapter<TAO_SYNCH_MUTEX> >
-      LOCK;
+    using LOCK = ACE_Refcounted_Auto_Ptr<ACE_Lock,
+                                    ACE_Lock_Adapter<TAO_SYNCH_MUTEX> >;
     static LOCK const lock_i ();
     LOCK const lock_;
     mutable TAO_InputCDR cdr_;
