@@ -6,7 +6,6 @@ class <%= stub_export_macro %><%= factory_cxxname %>
 public:
   using _traits_type = <%= factory_traits_type %>;
   using _ref_type = <%= factory_traits_type %>::ref_type;
-
   template <typename T> friend struct TAOX11_CORBA::object_traits;
 % if is_concrete?
   template <typename _Tp1, typename, typename ...Args>
@@ -15,6 +14,7 @@ public:
   TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
   create_for_unmarshal () override;
 % else
+
 %   initializers.each do |_ini|
 %     _parms = _ini.parameters.dup
 %     _parm = _parms.shift
@@ -35,6 +35,8 @@ public:
 protected:
   <%= factory_cxxname %> () = default;
   virtual ~<%= factory_cxxname %> () = default;
-  <%= factory_cxxname %> (const <%= factory_cxxname %>&) = default;
-  <%= factory_cxxname %> (<%= factory_cxxname %>&&) = default;
+  <%= factory_cxxname %> (const <%= factory_cxxname %>&) = delete;
+  <%= factory_cxxname %> (<%= factory_cxxname %>&&) = delete;
+  <%= factory_cxxname %>& operator =(const <%= factory_cxxname %>&) = delete;
+  <%= factory_cxxname %>& operator =(<%= factory_cxxname %>&&) = delete;
 }; // class <%= factory_cxxname %>

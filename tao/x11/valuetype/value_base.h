@@ -126,7 +126,6 @@ namespace TAOX11_NAMESPACE
       ValueBase& operator =(const ValueBase&) = delete;
       ValueBase& operator =(ValueBase&&) = delete;
 
-
       using _weak_reference_type = std::weak_ptr<ValueBase>;
       _weak_reference_type self_ref_;
       Valuetype_proxy_ptr proxy_;
