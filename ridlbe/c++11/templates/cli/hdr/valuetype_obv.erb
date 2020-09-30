@@ -11,8 +11,8 @@ namespace obv
 % end
   {
   protected:
+%# msvc14.{0|1} have a problem with defaulted constructors, issue #4005
 #if defined (_MSC_VER) && (_MSC_VER < 1920)
-    // msvc14.(0|1) have a problem with defaulted constructors, issue #4005
     <%= cxxname %> () {}
 #else
     <%= cxxname %> () = default;

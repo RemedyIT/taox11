@@ -17,12 +17,12 @@ protected:
       TAOX11_CORBA::abstractbase_reference<TAOX11_CORBA::AbstractBase>);
 #endif /* _MSC_VER < 1910 || clang <= 8 */
 
+%# msvc14.{0|1|2} have a problem with defaulted constructors, issue #4005
 #if defined (_MSC_VER) && (_MSC_VER < 1930)
-    // msvc 14.{0|1|2} have a problem with defaulted constructors, issue #4005
   <%= cxxname %> () {}
 #else
   <%= cxxname %> () = default;
-#endif /* _MSC_VER < 1920 */
+#endif /* _MSC_VER < 1930 */
   <%= cxxname %> (TAOX11_NAMESPACE::Abstractbase_proxy_ptr prx);
   virtual ~<%= cxxname %> () = default;
   /// Required for derived value types
@@ -81,7 +81,7 @@ protected:
 #else
   /// Default constructor
   <%= cxxname %> () = default;
-#endif /* _MSC_VER < 1920 */
+#endif /* _MSC_VER < 1930 */
   /// Destructor
   virtual ~<%= cxxname %> () = default;
 
