@@ -216,7 +216,7 @@ namespace x11_logger
   {
     static Log_Module instance_;
 
-    return &instance_;
+    return std::addressof(instance_);
   }
 
   Log_Module::Log_Module()
@@ -958,7 +958,7 @@ namespace x11_logger
   {
     static TAOX11_Test_Log_Module instance_;
 
-    return &instance_;
+    return std::addressof(instance_);
   }
 
   TAOX11_Test_Log_Module::TAOX11_Test_Log_Module ()
