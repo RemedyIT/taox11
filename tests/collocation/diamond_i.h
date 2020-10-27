@@ -46,7 +46,7 @@ public:
 
   virtual std::string color ();
 
-  virtual int32_t width () override;
+  int32_t width () override;
 };
 
 class DIAMOND_Export Bottom_i

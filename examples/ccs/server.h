@@ -138,11 +138,9 @@ public:
     virtual ~Thermostat_impl() = default;
 
     // CORBA operations
-    virtual CCS::TempType
-    get_nominal () override;
+    CCS::TempType get_nominal () override;
 
-    virtual CCS::TempType
-    set_nominal (CCS::TempType new_temp) override;
+    CCS::TempType set_nominal (CCS::TempType new_temp) override;
 
 private:
     // Copy and assignment not supported

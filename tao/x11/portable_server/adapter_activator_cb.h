@@ -31,8 +31,8 @@ namespace TAOX11_NAMESPACE
 
       ~Adapter_Activator_Callback () = default;
 
-      virtual TAO_CORBA::Boolean unknown_adapter (TAO_PORTABLE_SERVER::POA_ptr parent,
-                                                  const char *name) override;
+      TAO_CORBA::Boolean unknown_adapter (TAO_PORTABLE_SERVER::POA_ptr parent,
+                                          const char *name) override;
 
       IDL::traits<PortableServer::AdapterActivator>::ref_type get_impl () const;
 
