@@ -74,7 +74,7 @@ namespace TAOX11_NAMESPACE
 
       void destroy () override;
 
-      virtual IDL::traits< DynamicAny::DynAny>::ref_type current_component () override;
+      IDL::traits< DynamicAny::DynAny>::ref_type current_component () override;
 
     private:
       /// Check if the typecode is acceptable.
