@@ -192,30 +192,38 @@ module IDL
       end
     end # add_extended_options
 
-    VERSION_REGEXP = /\#\s*define\s+TAOX11_(\w+)_VERSION\s+(\d+)/
+    class << self
 
-    def self.determine_taox11_version()
-      x11_version = {
-        :major => 0,
-        :minor => 0,
-        :beta => 0
-      }
+      VERSION_REGEXP = /\#\s*define\s+TAOX11_(\w+)_VERSION\s+(\d+)/
 
-      base = File.join(File.dirname(__FILE__),'..','..','tao','x11','versionx11.h')
-      File.open(base, "r") do |file|
-        while (line = file.gets)
-          if VERSION_REGEXP =~ line
-            x11_version[$1.downcase.to_sym] = $2.to_i
+      def determine_taox11_version
+        x11_version = {
+          :major => 0,
+          :minor => 0,
+          :beta => 0
+        }
+
+        base = File.join(File.dirname(__FILE__),'..','..','tao','x11','versionx11.h')
+        File.open(base, "r") do |file|
+          while (line = file.gets)
+            if VERSION_REGEXP =~ line
+              x11_version[$1.downcase.to_sym] = $2.to_i
+            end
           end
         end
+        x11_version[:release] ||= x11_version[:beta]
+        x11_version
+      end # determine_taox11_version
+      private :determine_taox11_version
+
+      def taox11_version
+        @taox11_version ||= determine_taox11_version
       end
-      x11_version[:release] ||= x11_version[:beta]
-      x11_version
-    end # determine_taox11_version
+    end
 
     ## Configure C++11 backend
     #
-    Backend.configure('c++11', File.dirname(__FILE__), TITLE, COPYRIGHT, IDL::Cxx11.determine_taox11_version) do |becfg|
+    Backend.configure('c++11', File.dirname(__FILE__), TITLE, COPYRIGHT, IDL::Cxx11.taox11_version) do |becfg|
 
       # load base backend framework
       becfg.add_backend('base')
