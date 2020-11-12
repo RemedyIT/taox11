@@ -219,7 +219,10 @@ namespace x11_logger
     return std::addressof(instance_);
   }
 
-  Log_Module::Log_Module()
+  Log_Module::Log_Module() :
+    category_ ("X11"),
+    priority_mask_ (LP_PANIC),
+    output_mask_ (OS_STDERR)
   {
     // set default
     this->verbosity_mask_ =
