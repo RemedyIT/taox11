@@ -220,14 +220,6 @@ namespace x11_logger
   }
 
   Log_Module::Log_Module()
-  : category_ ("X11"),
-    priority_mask_ (LP_PANIC),
-    verbosity_mask_ (0),
-    output_mask_ (OS_STDERR),
-    file_max_size_ (0),
-    file_count_ (0),
-    file_flags_ (0),
-    file_stream_ (nullptr)
   {
     // set default
     this->verbosity_mask_ =
@@ -436,8 +428,7 @@ namespace x11_logger
   {
     ACE_Log_Guard __guard (ACE_Log_Msg::instance ());
 
-    uint32_t old_mask;
-    old_mask = this->priority_mask_;
+    uint32_t const old_mask = this->priority_mask_;
     this->priority_mask_ = new_mask;
     return old_mask;
   }
@@ -447,8 +438,7 @@ namespace x11_logger
   {
     ACE_Log_Guard __guard (ACE_Log_Msg::instance ());
 
-    uint32_t old_mask;
-    old_mask = this->verbosity_mask_;
+    uint32_t const old_mask = this->verbosity_mask_;
     this->verbosity_mask_ = new_mask;
     return old_mask;
   }
@@ -1293,7 +1283,7 @@ namespace x11_logger
     uint32_t const max = (hp.len_ / 16) + ((hp.len_ % 16) > 0 ? 1 : 0);
     for (uint32_t l=0; l<max ;++l)
     {
-      uint32_t off = l*16;
+      uint32_t const off = l*16;
       uint32_t c=0;
       for (; c<16 && (off+c)<hp.len_ ;++c)
       {
