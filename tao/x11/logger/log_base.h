@@ -157,10 +157,10 @@ namespace x11_logger
     // to logfile base path and creation specs
     void build_file_path (long);
 
-    std::string const category_ { "X11" };
-    uint32_t priority_mask_ { LP_PANIC };
+    std::string const category_;
+    uint32_t priority_mask_ {};
     uint32_t verbosity_mask_ {};
-    uint32_t output_mask_ { OS_STDERR };
+    uint32_t output_mask_ {};
     std::string file_base_;
     uint32_t file_max_size_ {};
     uint32_t file_count_ {};
