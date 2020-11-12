@@ -418,8 +418,6 @@ namespace x11_logger
   /// Get the category name
   const std::string& Log_Module::category () const
   {
-    ACE_Log_Guard __guard (ACE_Log_Msg::instance ());
-
     return this->category_;
   }
 
