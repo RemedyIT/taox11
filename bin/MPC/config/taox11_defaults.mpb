@@ -1,5 +1,5 @@
 // -*- MPC -*-
 
-project : x11_logger, taodefaults {
+project : taox11_basedefaults, x11_logger, taodefaults {
   after += taox11
 }

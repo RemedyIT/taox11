@@ -1,7 +1,4 @@
 // -*- MPC -*-
 
-project : tao_rules {
-  verbatim(gnuace, extension, 1) {
-    include $(TAOX11_ROOT)/tao/rules.taox11.GNU
-  }
+project : taox11_rules_def, tao_rules {
 }
