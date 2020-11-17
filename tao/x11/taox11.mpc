@@ -94,7 +94,7 @@ project(taox11_core_idl) : ridl_core_defaults, install, pidl_install {
   //}
 }
 
-project(taox11) : taolib, taox11_defaults {
+project(taox11) : taox11_defaults, taolib {
   after += taox11_core_idl
   sharedname = taox11
   libout = $(X11_BASE_ROOT)/lib
