@@ -132,6 +132,13 @@ Foo::update_default_union (Test::DefaultData & dd)
   return true;
 }
 
+bool
+Foo::send_unionmessage (const Test::UnionMessage & /*msg*/)
+{
+  return true;
+}
+
+
 void
 Foo::shutdown ()
 {
