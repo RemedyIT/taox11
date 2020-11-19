@@ -32,6 +32,8 @@ public:
   bool update_union (Test::Data & s) override;
   bool update_default_union (Test::DefaultData & dd) override;
 
+  bool send_unionmessage (const Test::UnionMessage & msg) override;
+
   void shutdown () override;
 
   uint16_t get_error_count ();

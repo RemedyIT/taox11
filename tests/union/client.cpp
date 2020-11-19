@@ -373,6 +373,35 @@ test_data_z (IDL::traits<Test::Foo>::ref_type foo)
   return retval;
 }
 
+uint16_t
+test_union_message (IDL::traits<Test::Foo>::ref_type foo)
+{
+  uint16_t retval = 0;
+
+  Test::Data dt_d;
+  Test::B03 b_d;
+
+  // Set the last item
+  b_d.b_03_5 ("XX");
+  dt_d.globalData (Global (4));
+
+  Test::UnionMessage msg_d { Test::Assignment::D, b_d, dt_d };
+
+  TAOX11_TEST_DEBUG << "Sending <"
+      << msg_d << ">" << std::endl;
+
+  bool const ret = foo->send_unionmessage (msg_d);
+
+  if (!ret)
+  {
+    TAOX11_TEST_ERROR << "ERROR: send_unionmessage returned false "
+      << std::endl;
+    ++retval;
+  }
+
+  return retval;
+}
+
 int main (int argc, char* argv[])
 {
   uint16_t retval = 0;
@@ -407,6 +436,7 @@ int main (int argc, char* argv[])
       retval += test_data_x (foo);
       retval += test_data_y (foo);
       retval += test_data_z (foo);
+      retval += test_union_message (foo);
 
       TAOX11_TEST_DEBUG << "shutting down..." << std::endl;
 
