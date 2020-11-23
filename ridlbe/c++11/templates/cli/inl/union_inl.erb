@@ -155,11 +155,6 @@ inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
 % end
   }
 }
-
-inline <%= scoped_switch_in_cxxtype %> <%= scoped_cxxname %>::_d () const
-{
-  return this->disc_;
-}
 % members.each do |_m|
 
 inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11_<%= _m.cxxname %>)
