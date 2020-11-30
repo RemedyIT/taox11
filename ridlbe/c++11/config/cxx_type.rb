@@ -391,7 +391,7 @@ module IDL
 
     class String
       def cxx_type(scope = nil)
-        (size.to_i>0) ? "TAOX11_IDL::bounded_basic_string<char, #{size}>" : 'std::string'
+        (size.to_i>0) ? "TAOX11_IDL::bounded_string<#{size}>" : 'std::string'
       end
       def proxy_cxxtype(scope = nil)
         cxx_type
@@ -403,7 +403,7 @@ module IDL
         "TAOX11_NAMESPACE::CORBA::#{cxx_typecode}"
       end
       def cxx_member_type_name
-        (size.to_i>0) ? "bounded_basic_string<char, #{size}>" : 'string'
+        (size.to_i>0) ? "bounded_string<#{size}>" : 'string'
       end
       def value_to_s(v, scope = nil)
         v.dump
@@ -418,7 +418,7 @@ module IDL
 
     class WString
       def cxx_type(scope = nil)
-        (size.to_i>0) ? "TAOX11_IDL::bounded_basic_string<wchar_t, #{size}>" : 'std::wstring'
+        (size.to_i>0) ? "TAOX11_IDL::bounded_wstring<#{size}>" : 'std::wstring'
       end
       def proxy_cxxtype(scope = nil)
         cxx_type
@@ -430,7 +430,7 @@ module IDL
         "TAOX11_NAMESPACE::CORBA::#{cxx_typecode}"
       end
       def cxx_member_type_name
-        (size.to_i>0) ? "bounded_basic_string<wchar_t, #{size}>" : 'wstring'
+        (size.to_i>0) ? "bounded_wstring<#{size}>" : 'wstring'
       end
       def value_to_s(v, scope = nil)
         return 'L'+v.to_s.dump unless ::Array === v
