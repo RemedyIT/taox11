@@ -346,13 +346,11 @@ namespace TAOX11_NAMESPACE
         { this->_String::swap (__x); }
       };
 
-#if defined (__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7))
     template <const uint32_t _Bound>
       using bounded_string = bounded_basic_string<char, _Bound>;
 
     template <const uint32_t _Bound>
       using bounded_wstring = bounded_basic_string<wchar_t, _Bound>;
-#endif
 
     template<typename _CharT, const uint32_t _Bound, typename _Traits, typename _Alloc>
       bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>

@@ -13,11 +13,6 @@
 #pragma message ("warning: This file should not be included by user code directly. Please remove the include from your code")
 #endif
 
-#if defined(__MINGW32__) && !defined(__MINGW64__)
-# if (__GNUC__ < 4 || (__GNUC__ == 4 && __GNUC_MINOR__ < 8))
-#   define TAOX11_LACKS_STD_TO_STRING
-# endif /* __GNUC__ < 4.8 */
-#endif /* defined(__MINGW32__) && !defined(__MINGW64__) */
 #if defined(__ANDROID_API__)
 # define TAOX11_LACKS_STD_TO_STRING
 #endif /* defined (__ANDROID_API__) */
