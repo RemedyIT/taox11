@@ -6,8 +6,6 @@ project : taox11_rules {
   libpaths += $(X11_BASE_ROOT)/lib
 
   verbatim(gnuace,macros,1) {
-    c++11=1
     taox11_build?=1
-    no_deprecated=0
   }
 }
