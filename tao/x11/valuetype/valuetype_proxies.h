@@ -62,7 +62,7 @@ namespace TAOX11_NAMESPACE
       static void _tao_any_destructor (void *);
       TAO_CORBA::TypeCode_ptr _tao_type () const override;
 
-      virtual void truncation_hook ();
+      void truncation_hook () override;
 
       static Valuetype_proxy* _downcast (TAO_CORBA::ValueBase *v)
       { return dynamic_cast<Valuetype_proxy*> (v); }
