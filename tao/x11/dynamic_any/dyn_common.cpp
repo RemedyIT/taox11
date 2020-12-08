@@ -742,7 +742,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      if (this->has_components_ == false)
+      if (!this->has_components_)
       {
         this->current_position_ = -1;
         return false;
@@ -782,7 +782,7 @@ namespace TAOX11_NAMESPACE
 
       int32_t component_count = static_cast<int32_t> (this->component_count_);
 
-      if (this->has_components_ == false
+      if (!this->has_components_
           || this->current_position_ + 1 >= component_count)
       {
         this->current_position_ = -1;
@@ -927,7 +927,7 @@ namespace TAOX11_NAMESPACE
         IDL::traits<CORBA::AbstractBase>::ref_type retval;
         TAOX11_CORBA::Any::impl_ref_type any_impl = this->any_.impl ();
 
-        if (any_impl == 0)
+        if (any_impl == nullptr)
         {
           throw DynamicAny::DynAny::InvalidValue ();
         }

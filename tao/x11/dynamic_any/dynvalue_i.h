@@ -110,7 +110,7 @@ namespace TAOX11_NAMESPACE
 
       /// Return the member_name at index (0..total_members-1) from
       /// the given hierarchical list of the derived type and it basetypes.
-      static const std::string get_member_name (
+      static std::string get_member_name (
         const BaseTypesList_t &,
         uint32_t index);
 

@@ -20,7 +20,7 @@ namespace TAOX11_NAMESPACE
     {
     public:
       Policy_Manager_impl (TAO_CORBA::PolicyManager_ptr polptr);
-      ~Policy_Manager_impl () = default;
+      ~Policy_Manager_impl () override = default;
 
       ::TAOX11_NAMESPACE::CORBA::PolicyList
       get_policy_overrides (

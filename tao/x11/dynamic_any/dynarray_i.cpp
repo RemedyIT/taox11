@@ -59,7 +59,7 @@ namespace TAOX11_NAMESPACE
       // Get the CDR stream of the Any, if there isn't one, make one.
       CORBA::Any::impl_ref_type impl = any.impl ();
       TAO_OutputCDR out;
-      TAO_InputCDR cdr (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR cdr (static_cast<ACE_Message_Block *> (nullptr));
 
       if (impl->encoded ())
       {
@@ -273,7 +273,7 @@ namespace TAOX11_NAMESPACE
       for (uint32_t i = 0; i < this->component_count_; ++i)
       {
         // Set the flag so the caller can't destroy.
-        this->set_flag (this->da_members_[i], 0);
+        this->set_flag (this->da_members_[i], false);
 
         retval[i] =this->da_members_[i];
       }
@@ -342,7 +342,7 @@ namespace TAOX11_NAMESPACE
         // Get the CDR stream of the Any, if there isn't one, make one.
        TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
        TAO_OutputCDR out;
-       TAO_InputCDR cdr (static_cast<ACE_Message_Block *> (0));
+       TAO_InputCDR cdr (static_cast<ACE_Message_Block *> (nullptr));
 
        if (impl->encoded ())
        {
@@ -431,7 +431,7 @@ namespace TAOX11_NAMESPACE
 
         TAOX11_CORBA::Any::impl_ref_type field_impl = field_any.impl ();
         TAO_OutputCDR field_out;
-        TAO_InputCDR field_cdr (static_cast<ACE_Message_Block *> (0));
+        TAO_InputCDR field_cdr (static_cast<ACE_Message_Block *> (nullptr));
 
         if (field_impl->encoded ())
         {
@@ -527,7 +527,7 @@ namespace TAOX11_NAMESPACE
         // Do a deep destroy.
         for (uint32_t i = 0; i < this->component_count_; ++i)
         {
-          this->set_flag (da_members_[i], 1);
+          this->set_flag (da_members_[i], true);
 
           this->da_members_[i]->destroy ();
         }
@@ -553,7 +553,7 @@ namespace TAOX11_NAMESPACE
 
       const uint32_t index = static_cast<uint32_t> (this->current_position_);
 
-      this->set_flag (this->da_members_[index], 0);
+      this->set_flag (this->da_members_[index], false);
 
       return this->da_members_[index];
     }

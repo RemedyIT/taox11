@@ -148,7 +148,7 @@ namespace TAOX11_NAMESPACE
       // Get the CDR stream of the Any, if there isn't one, make one.
       TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
       TAO_OutputCDR out;
-      TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
 
       if (impl->encoded ())
       {
@@ -307,7 +307,7 @@ namespace TAOX11_NAMESPACE
 
       // A deep copy is made only by copy() (CORBA 3.2).
       // Set the flag so the caller can't destroy.
-      this->set_flag (this->discriminator_, 0);
+      this->set_flag (this->discriminator_, false);
 
       return this->discriminator_;
     }
@@ -346,7 +346,7 @@ namespace TAOX11_NAMESPACE
       IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
 
-      bool match = 0;
+      bool match = false;
 
       for (i = 0; i < length; ++i)
       {
@@ -587,7 +587,7 @@ namespace TAOX11_NAMESPACE
 
       // A deep copy is made only by copy() (CORBA 2.4.2 section 9.2.3.6).
       // Set the flag so the caller can't destroy.
-      this->set_flag (this->member_, 0);
+      this->set_flag (this->member_, false);
 
       return this->member_;
     }
@@ -692,7 +692,7 @@ namespace TAOX11_NAMESPACE
 
       TAOX11_CORBA::Any::impl_ref_type disc_any_impl = disc_any.impl ();
       TAO_OutputCDR disc_out_cdr;
-      TAO_InputCDR disc_in_cdr (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR disc_in_cdr (static_cast<ACE_Message_Block *> (nullptr));
 
       if (disc_any_impl->encoded ())
       {
@@ -726,7 +726,7 @@ namespace TAOX11_NAMESPACE
 
         TAOX11_CORBA::Any::impl_ref_type member_any_impl = member_any.impl ();
         TAO_OutputCDR member_out_cdr;
-        TAO_InputCDR member_in_cdr (static_cast<ACE_Message_Block *> (0));
+        TAO_InputCDR member_in_cdr (static_cast<ACE_Message_Block *> (nullptr));
 
         if (member_any_impl->encoded ())
         {
@@ -819,12 +819,12 @@ namespace TAOX11_NAMESPACE
 
         if (this->member_)
         {
-          this->set_flag (this->member_, 1);
+          this->set_flag (this->member_, true);
 
           this->member_->destroy ();
         }
 
-        this->set_flag (this->discriminator_, 1);
+        this->set_flag (this->discriminator_, true);
 
         this->discriminator_->destroy ();
 
@@ -844,13 +844,13 @@ namespace TAOX11_NAMESPACE
 
       if (this->current_position_ == 1)
       {
-        this->set_flag (this->member_, 0);
+        this->set_flag (this->member_, false);
 
         return this->member_;
       }
       else
       {
-        this->set_flag (this->discriminator_, 0);
+        this->set_flag (this->discriminator_, false);
 
         return this->discriminator_;
       }

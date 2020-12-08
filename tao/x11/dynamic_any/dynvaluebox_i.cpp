@@ -154,7 +154,7 @@ namespace TAOX11_NAMESPACE
 
       // A deep copy is made only by copy() (CORBA 2.4.2 section 9.2.3.6).
       // Set the flag so the caller can't destroy.
-      this->set_flag (this->boxed_, 0);
+      this->set_flag (this->boxed_, false);
 
       return this->boxed_;
     }
@@ -249,7 +249,7 @@ namespace TAOX11_NAMESPACE
         // Do a deep destroy.
         if (this->boxed_)
         {
-          this->set_flag (this->boxed_, 1);
+          this->set_flag (this->boxed_, true);
           this->boxed_->destroy ();
         }
 
@@ -273,7 +273,7 @@ namespace TAOX11_NAMESPACE
         return nullptr;
       }
 
-      this->set_flag (this->boxed_, 0);
+      this->set_flag (this->boxed_, false);
       return this->boxed_;
     }
 
@@ -286,7 +286,7 @@ namespace TAOX11_NAMESPACE
 
       // Get the CDR stream of the Any, if there isn't one, make one.
       TAO_OutputCDR out;
-      TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
       TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
       if (impl->encoded ())
       {
@@ -396,7 +396,7 @@ namespace TAOX11_NAMESPACE
 
         // Now write the boxed value itself
 
-        TAO_InputCDR boxed_in_cdr (static_cast<ACE_Message_Block *> (0));
+        TAO_InputCDR boxed_in_cdr (static_cast<ACE_Message_Block *> (nullptr));
         CORBA::Any boxed_any (this->boxed_->to_any ());
         TAOX11_CORBA::Any::impl_ref_type boxed_impl = boxed_any.impl ();
 

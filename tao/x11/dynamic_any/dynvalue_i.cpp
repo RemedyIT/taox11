@@ -201,7 +201,7 @@ namespace TAOX11_NAMESPACE
       return base->member_type (index);
     }
 
-    const std::string
+    std::string
     DynValue_i::get_member_name (
       const BaseTypesList_t &base_types,
       uint32_t index)
@@ -380,7 +380,7 @@ namespace TAOX11_NAMESPACE
         // A deep copy is made only by copy()
         // (CORBA 2.4.2 section 9.2.3.6).
         // Set the flag so the caller can't destroy.
-        this->set_flag (this->da_members_[i], 0);
+        this->set_flag (this->da_members_[i], false);
 
         members[i].value(this->da_members_[i]);
       }
@@ -515,7 +515,7 @@ namespace TAOX11_NAMESPACE
              i < this->component_count_;
              ++i)
         {
-          this->set_flag (da_members_[i], 1);
+          this->set_flag (da_members_[i], true);
           this->da_members_[i]->destroy ();
         }
 
@@ -540,7 +540,7 @@ namespace TAOX11_NAMESPACE
 
       const uint32_t index =
         static_cast <uint32_t> (this->current_position_);
-      this->set_flag (this->da_members_[index], 0);
+      this->set_flag (this->da_members_[index], false);
 
       return this->da_members_[index] ;
     }
@@ -679,7 +679,7 @@ namespace TAOX11_NAMESPACE
       // make one by marshalling the value into a new stream.
 
       TAO_OutputCDR out;
-      TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
       TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
       if (impl->encoded ())
       {
@@ -1000,7 +1000,7 @@ namespace TAOX11_NAMESPACE
         // and find the address of the original DynValue_i that we
         // created last time and stored in the map.
         void *pos = strm.rd_ptr () + offset - sizeof (TAO_CORBA::Long);
-        void *original = 0;
+        void *original = nullptr;
         if (strm.get_value_map()->get()->find (pos, original))
         {
           TAOX11_LOG_ERROR ("DynValue_i::from_inputCDR() "
