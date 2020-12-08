@@ -201,7 +201,7 @@ namespace TAOX11_NAMESPACE
       return base->member_type (index);
     }
 
-    const std::string
+    std::string
     DynValue_i::get_member_name (
       const BaseTypesList_t &base_types,
       uint32_t index)
