@@ -273,7 +273,7 @@ namespace TAOX11_NAMESPACE
       for (uint32_t i = 0; i < this->component_count_; ++i)
       {
         // Set the flag so the caller can't destroy.
-        this->set_flag (this->da_members_[i], 0);
+        this->set_flag (this->da_members_[i], false);
 
         retval[i] =this->da_members_[i];
       }
@@ -527,7 +527,7 @@ namespace TAOX11_NAMESPACE
         // Do a deep destroy.
         for (uint32_t i = 0; i < this->component_count_; ++i)
         {
-          this->set_flag (da_members_[i], 1);
+          this->set_flag (da_members_[i], true);
 
           this->da_members_[i]->destroy ();
         }
@@ -553,7 +553,7 @@ namespace TAOX11_NAMESPACE
 
       const uint32_t index = static_cast<uint32_t> (this->current_position_);
 
-      this->set_flag (this->da_members_[index], 0);
+      this->set_flag (this->da_members_[index], false);
 
       return this->da_members_[index];
     }

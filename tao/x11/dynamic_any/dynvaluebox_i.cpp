@@ -154,7 +154,7 @@ namespace TAOX11_NAMESPACE
 
       // A deep copy is made only by copy() (CORBA 2.4.2 section 9.2.3.6).
       // Set the flag so the caller can't destroy.
-      this->set_flag (this->boxed_, 0);
+      this->set_flag (this->boxed_, false);
 
       return this->boxed_;
     }
@@ -249,7 +249,7 @@ namespace TAOX11_NAMESPACE
         // Do a deep destroy.
         if (this->boxed_)
         {
-          this->set_flag (this->boxed_, 1);
+          this->set_flag (this->boxed_, true);
           this->boxed_->destroy ();
         }
 
@@ -273,7 +273,7 @@ namespace TAOX11_NAMESPACE
         return nullptr;
       }
 
-      this->set_flag (this->boxed_, 0);
+      this->set_flag (this->boxed_, false);
       return this->boxed_;
     }
 
