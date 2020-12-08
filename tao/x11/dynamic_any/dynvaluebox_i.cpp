@@ -286,7 +286,7 @@ namespace TAOX11_NAMESPACE
 
       // Get the CDR stream of the Any, if there isn't one, make one.
       TAO_OutputCDR out;
-      TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
       TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
       if (impl->encoded ())
       {
@@ -396,7 +396,7 @@ namespace TAOX11_NAMESPACE
 
         // Now write the boxed value itself
 
-        TAO_InputCDR boxed_in_cdr (static_cast<ACE_Message_Block *> (0));
+        TAO_InputCDR boxed_in_cdr (static_cast<ACE_Message_Block *> (nullptr));
         CORBA::Any boxed_any (this->boxed_->to_any ());
         TAOX11_CORBA::Any::impl_ref_type boxed_impl = boxed_any.impl ();
 

@@ -679,7 +679,7 @@ namespace TAOX11_NAMESPACE
       // make one by marshalling the value into a new stream.
 
       TAO_OutputCDR out;
-      TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
       TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
       if (impl->encoded ())
       {
@@ -1000,7 +1000,7 @@ namespace TAOX11_NAMESPACE
         // and find the address of the original DynValue_i that we
         // created last time and stored in the map.
         void *pos = strm.rd_ptr () + offset - sizeof (TAO_CORBA::Long);
-        void *original = 0;
+        void *original = nullptr;
         if (strm.get_value_map()->get()->find (pos, original))
         {
           TAOX11_LOG_ERROR ("DynValue_i::from_inputCDR() "

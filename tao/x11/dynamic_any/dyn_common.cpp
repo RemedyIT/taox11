@@ -927,7 +927,7 @@ namespace TAOX11_NAMESPACE
         IDL::traits<CORBA::AbstractBase>::ref_type retval;
         TAOX11_CORBA::Any::impl_ref_type any_impl = this->any_.impl ();
 
-        if (any_impl == 0)
+        if (any_impl == nullptr)
         {
           throw DynamicAny::DynAny::InvalidValue ();
         }

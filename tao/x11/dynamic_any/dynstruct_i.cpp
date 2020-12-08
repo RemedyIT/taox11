@@ -81,7 +81,7 @@ namespace TAOX11_NAMESPACE
       // Get the CDR stream of the Any, if there isn't one, make one.
        CORBA::Any::impl_ref_type impl = any.impl ();
         TAO_OutputCDR out;
-       TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+       TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
 
        if (impl->encoded ())
        {
@@ -423,7 +423,7 @@ namespace TAOX11_NAMESPACE
         // Get the CDR stream of the Any, if there isn't one, make one.
         CORBA::Any::impl_ref_type impl = any.impl ();
         TAO_OutputCDR out;
-        TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+        TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
 
         if (impl->encoded ())
         {
@@ -514,7 +514,7 @@ namespace TAOX11_NAMESPACE
 
 
       CORBA::Any::impl_ref_type field_impl {};
-      TAO_InputCDR field_in_cdr (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR field_in_cdr (static_cast<ACE_Message_Block *> (nullptr));
 
       for (uint32_t i = 0; i < this->component_count_; ++i)
       {
