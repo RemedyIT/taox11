@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
       Test::FooStruct foostruct;
       for (const auto& foo_member : foostruct.my_f()) {
         if (foo_member != default_uint16_t) {
-          TAOX11_TEST_ERROR << "OctetArray member not value initialized, " << foo_member << " instead of " << default_uint16_t << std::endl;
+          TAOX11_TEST_ERROR << "Array member not value initialized, " << foo_member << " instead of " << default_uint16_t << std::endl;
           return 1;
         }
       }
