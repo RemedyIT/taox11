@@ -27,10 +27,20 @@ module Test
   typedef Object o[4];
   typedef x a[5];
 
+  enum enumType
+  {
+    d,
+    e,
+    b
+  };
+
+  typedef enumType Q[1][2][3];
+
   struct FooStruct {
     F my_f;
     M my_m;
     N my_n;
+    Q my_q;
   };
 
   exception SomeException
