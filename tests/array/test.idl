@@ -23,11 +23,14 @@ module Test
   typedef long G[5];
   typedef string V[5];
   typedef string M[1][2][3];
+  typedef long N[1][2][3];
   typedef Object o[4];
   typedef x a[5];
 
   struct FooStruct {
     F my_f;
+    M my_m;
+    N my_n;
   };
 
   exception SomeException
