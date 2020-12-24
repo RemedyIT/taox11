@@ -152,6 +152,10 @@ module IDL
       def is_default?
         node.labels.include?(:default)
       end
+
+      def is_array_of_pod?
+        IDL::Type::Array === _resolved_idltype && _resolved_idltype.basetype.is_pod?
+      end
     end
 
   end

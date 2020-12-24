@@ -2,9 +2,9 @@
 
 inline <%= scoped_cxxname %>::u_type_::u_type_ ()
 % if has_default?()
-  : <%= default_member.cxxname %>_ {}
+  : <%= default_member.cxxname %>_ <% if default_member.is_array_of_pod? %>{{}}<% else %>{}<% end %>
 % else
-  : <%= members.first.cxxname %>_ {}
+  : <%= members.first.cxxname %>_ <% if members.first.is_array_of_pod? %> {{}}<% else %>{}<% end %>
 % end
 {
 }
