@@ -111,7 +111,7 @@ namespace TAOX11_NAMESPACE
        * @see @c TAO::TypeCode::Case
        */
       //@{
-      TAO_TAO::TypeCode::Case<StringType, TypeCodeType> * clone () const;
+      TAO_TAO::TypeCode::Case<StringType, TypeCodeType> * clone () const override;
       TAO_CORBA::Any* label () const override;
       bool marshal_label (TAO_OutputCDR & cdr) const override;
       bool equal_label (uint32_t index, TAO_CORBA::TypeCode_ptr tc) const override;
