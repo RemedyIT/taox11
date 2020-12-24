@@ -187,6 +187,8 @@ project(*DLL): ridl_ostream_defaults, taox11_lib, taox11_messaging, taox11_porta
     reopen_include2S.cpp
     repo_id_modC.cpp
     repo_id_modS.cpp
+    sequenceC.cpp
+    sequenceS.cpp
     simple2C.cpp
     simple2S.cpp
     simpleC.cpp
@@ -241,6 +243,7 @@ project(*DLL): ridl_ostream_defaults, taox11_lib, taox11_messaging, taox11_porta
     reopen_include1AmiC.cpp
     reopen_include2AmiC.cpp
     repo_id_modAmiC.cpp
+    sequenceAmiC.cpp
     simple2AmiC.cpp
     simpleAmiC.cpp
     structAmiC.cpp
