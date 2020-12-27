@@ -554,7 +554,7 @@ inline void <%= scoped_cxxname %>::_default ()
   this->_clear ();
   this->disc_ = <%= default_label %>;
 %   if !members.first.is_pod?
-  new (std::addressof(this->u_.<%= members.first.cxxname %>_)) <%= members.first.cxx_member_type %> ( );
+  new (std::addressof(this->u_.<%= members.first.cxxname %>_)) <%= members.first.cxx_member_type %> ();
 %   end
 }
 % end
