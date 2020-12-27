@@ -45,7 +45,7 @@
 
 private:
 % members.each do |_m|
-  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if _m.is_pod? %> {}<% end %><% if _m.is_array_of_pod? %> {{}}<% end %>;
+  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if _m.is_pod? %> {}<% end %><% if _m.is_array? %> {{}}<% end %>;
 % end
 };// <%= cxxname %>
 
