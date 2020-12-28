@@ -2,9 +2,9 @@
 
 inline <%= scoped_cxxname %>::u_type_::u_type_ ()
 % if has_default?()
-  : <%= default_member.cxxname %>_ <% if default_member.is_array_of_pod? %>{{}}<% else %>{}<% end %>
+  : <%= default_member.cxxname %>_ <% if default_member.is_array? %>{{}}<% else %>{}<% end %>
 % else
-  : <%= members.first.cxxname %>_ <% if members.first.is_array_of_pod? %> {{}}<% else %>{}<% end %>
+  : <%= members.first.cxxname %>_ <% if members.first.is_array? %> {{}}<% else %>{}<% end %>
 % end
 {
 }
@@ -554,7 +554,7 @@ inline void <%= scoped_cxxname %>::_default ()
   this->_clear ();
   this->disc_ = <%= default_label %>;
 %   if !members.first.is_pod?
-  new (std::addressof(this->u_.<%= members.first.cxxname %>_)) <%= members.first.cxx_member_type %> ( );
+  new (std::addressof(this->u_.<%= members.first.cxxname %>_)) <%= members.first.cxx_member_type %> ();
 %   end
 }
 % end
