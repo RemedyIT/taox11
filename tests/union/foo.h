@@ -43,7 +43,7 @@ private:
   Test::Data s_;
   Test::DefaultData dd_;
 
-  uint16_t errors_;
+  uint16_t errors_ {};
 
   Foo (const Foo&) = delete;
   Foo (Foo&&) = delete;

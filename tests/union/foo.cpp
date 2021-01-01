@@ -10,8 +10,7 @@
 #include "checks.h"
 
 Foo::Foo (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb)
-  , errors_ (0)
+  : orb_ (std::move(orb))
 {
 }
 
@@ -20,7 +19,6 @@ Foo::get_error_count()
 {
   return errors_;
 }
-
 
 bool
 Foo::pass_union (const Test::Data & s)
