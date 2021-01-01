@@ -24,7 +24,7 @@ public:
   bool get_union (Test::Data_out s) override;
   bool get_default_union (Test::DefaultData_out dd) override;
 
-  bool update_union (Test::Data & s);
+  bool update_union (Test::Data & s) override;
   bool update_default_union (Test::DefaultData & dd) override;
 
   bool send_unionmessage (const Test::UnionMessage & msg) override;
