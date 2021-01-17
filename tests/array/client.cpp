@@ -73,10 +73,21 @@ int main(int argc, char* argv[])
 
       Test::ArrayStruct as;
       int32_t default_int32_t {};
+      for (const auto& aaal_member : as.aaal()) {
+        for (const auto& aal_member : aaal_member) {
+          for (const auto& al_member : aal_member) {
+            if (al_member != default_int32_t) {
+              TAOX11_TEST_ERROR << "Array member of aaal not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
+              return 1;
+            }
+          }
+        }
+      }
+
       for (const auto& aal_member : as.aal()) {
         for (const auto& al_member : aal_member) {
           if (al_member != default_int32_t) {
-            TAOX11_TEST_ERROR << "Array member not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
+            TAOX11_TEST_ERROR << "Array member of aal not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
             return 1;
           }
         }
@@ -86,7 +97,7 @@ int main(int argc, char* argv[])
       for (const auto& aae_member : as.aae()) {
         for (const auto& ae_member : aae_member) {
           if (ae_member != default_enumType) {
-            TAOX11_TEST_ERROR << "Array member not value initialized, " << ae_member << " instead of " << default_enumType << std::endl;
+            TAOX11_TEST_ERROR << "Array member of aae not value initialized, " << ae_member << " instead of " << default_enumType << std::endl;
             return 1;
           }
         }
