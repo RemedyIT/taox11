@@ -34,6 +34,12 @@ module Test
     b
   };
 
+  typedef enumType arrayofenum[5];
+  typedef long arrayoflong[5];
+
+  typedef arrayofenum arrayarrayofenum[5];
+  typedef arrayoflong arrayarrayoflong[5];
+
   typedef enumType Q[1][2][3];
 
   struct FooStruct {
