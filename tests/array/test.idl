@@ -42,6 +42,11 @@ module Test
 
   typedef enumType Q[1][2][3];
 
+  struct ArrayStruct {
+    arrayarrayofenum aae;
+    arrayarrayoflong aal;
+  };
+
   struct FooStruct {
     F my_f;
     M my_m;

@@ -71,23 +71,22 @@ int main(int argc, char* argv[])
         }
       }
 
-      Test::arrayarrayofenum aae {};
-      Test:: enumType default_enumType {};
-      for (const auto& aae_member : aae) {
-        for (const auto& ae_member : aae_member) {
-          if (ae_member != default_enumType) {
-            TAOX11_TEST_ERROR << "Array member not value initialized, " << ae_member << " instead of " << default_enumType << std::endl;
+      Test::ArrayStruct as;
+      int32_t default_int32_t {};
+      for (const auto& aal_member : as.aal()) {
+        for (const auto& al_member : aal_member) {
+          if (al_member != default_int32_t) {
+            TAOX11_TEST_ERROR << "Array member not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
             return 1;
           }
         }
       }
 
-      int32_t default_int32_t {};
-      Test::arrayarrayoflong aal {};
-      for (const auto& aal_member : aal) {
-        for (const auto& al_member : aal_member) {
-          if (al_member != default_int32_t) {
-            TAOX11_TEST_ERROR << "Array member not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
+      Test:: enumType default_enumType {};
+      for (const auto& aae_member : as.aae()) {
+        for (const auto& ae_member : aae_member) {
+          if (ae_member != default_enumType) {
+            TAOX11_TEST_ERROR << "Array member not value initialized, " << ae_member << " instead of " << default_enumType << std::endl;
             return 1;
           }
         }
