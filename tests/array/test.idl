@@ -39,14 +39,14 @@ module Test
 
   typedef arrayofenum arrayarrayofenum[5];
   typedef arrayoflong arrayarrayoflong[5];
-  typedef arrayarrayoflong arrayarrayoflonglong[5];
+  typedef arrayarrayoflong arrayarrayarrayoflong[5];
 
   typedef enumType Q[1][2][3];
 
   struct ArrayStruct {
     arrayarrayofenum aae;
     arrayarrayoflong aal;
-    arrayarrayoflonglong aaal;
+    arrayarrayarrayoflong aaal;
   };
 
   struct FooStruct {

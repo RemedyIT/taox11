@@ -61,6 +61,8 @@ int main(int argc, char* argv[])
       TAOX11_TEST_DEBUG << "ostreamtest array v: " << v <<  std::endl;
       TAOX11_TEST_DEBUG << "ostreamtest array m: " << m <<  std::endl;
 
+      TAOX11_TEST_DEBUG << "Testing value initialization" << std::endl;
+
       // Check that array members as part of a structured type are all value initialized
       uint16_t default_uint16_t {};
       Test::FooStruct foostruct;
