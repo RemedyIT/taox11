@@ -54,6 +54,7 @@ module Test
     M my_m;
     N my_n;
     Q my_q;
+    V my_v;
   };
 
   exception SomeException
