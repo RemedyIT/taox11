@@ -19,10 +19,13 @@ module Test
   interface x {
     void do ();
   };
+  typedef string my_string;
   typedef long F[5];
   typedef long G[5];
   typedef string V[5];
   typedef string M[1][2][3];
+  typedef my_string V1[5];
+  typedef my_string M1[1][2][3];
   typedef long N[1][2][3];
   typedef Object o[4];
   typedef x a[5];
@@ -60,9 +63,11 @@ module Test
     long my_a;
     F my_f;
     M my_m;
+    M1 my_m1;
     N my_n;
     Q my_q;
     V my_v;
+    V1 my_v1;
   };
 
   exception SomeException
