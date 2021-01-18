@@ -105,6 +105,19 @@ int main(int argc, char* argv[])
         }
       }
 
+       for (const auto& tdtdaol_member1 : as.tdtdaol()) {
+        for (const auto& tdtdaol_member2 : tdtdaol_member1) {
+          for (const auto& tdtdaol_member3 : tdtdaol_member2) {
+            for (const auto& tdtdaol_member4 : tdtdaol_member3) {
+              if (tdtdaol_member4 != default_int32_t) {
+                TAOX11_TEST_ERROR << "Array member of aal not value initialized, " << tdtdaol_member4 << " instead of " << default_int32_t << std::endl;
+                return 1;
+              }
+            }
+          }
+        }
+      }
+
       if (f.size () != 5 || f.max_size () != 5)
       {
         TAOX11_TEST_ERROR << "ERROR: Test::F has wrong size." << std::endl;

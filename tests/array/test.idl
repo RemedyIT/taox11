@@ -37,6 +37,12 @@ module Test
   typedef enumType arrayofenum[5];
   typedef long arrayoflong[5];
 
+  typedef long twodimarrayoflong[5][5];
+  typedef twodimarrayoflong twodimarrayoftwodimarrayoflong[5][5];
+
+  typedef string twodimarrayofstring[5][5];
+  typedef twodimarrayoflong twodimarrayoftwodimarrayostring[5][5];
+
   typedef arrayofenum arrayarrayofenum[5];
   typedef arrayoflong arrayarrayoflong[5];
   typedef arrayarrayoflong arrayarrayarrayoflong[5];
@@ -47,6 +53,7 @@ module Test
     arrayarrayofenum aae;
     arrayarrayoflong aal;
     arrayarrayarrayoflong aaal;
+    twodimarrayoftwodimarrayoflong tdtdaol;
   };
 
   struct FooStruct {
