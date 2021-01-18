@@ -10,6 +10,7 @@ module Test
 {
   typedef char  charArray[2][2];
   typedef wchar wcharArray[2][2];
+  typedef long longArray[2];
 
   valuetype VT
   {
@@ -84,6 +85,11 @@ module Test
     float      value;
     wcharArray wc_array;
     charArray  c_array;
+  };
+
+  exception ArrayEx
+  {
+    longArray l_array;
   };
 
   exception FooBooEx
