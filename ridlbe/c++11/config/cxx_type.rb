@@ -818,7 +818,7 @@ module IDL
         resolved_cxx_type(scope)
       end
       def zero_initializer
-        "{#{basetype.zero_initializer}}"
+        "{{}}"
       end
     end
 
