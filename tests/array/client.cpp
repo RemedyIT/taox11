@@ -66,9 +66,15 @@ int main(int argc, char* argv[])
       // Check that array members as part of a structured type are all value initialized
       uint16_t default_uint16_t {};
       Test::FooStruct foostruct;
+
+      if (foostruct.my_a() != default_uint16_t) {
+        TAOX11_TEST_ERROR << "Struct member my_a not value initialized, " << foostruct.my_a() << " instead of " << default_uint16_t << std::endl;
+        return 1;
+      }
+
       for (const auto& foo_member : foostruct.my_f()) {
         if (foo_member != default_uint16_t) {
-          TAOX11_TEST_ERROR << "Array member not value initialized, " << foo_member << " instead of " << default_uint16_t << std::endl;
+          TAOX11_TEST_ERROR << "Array member my_f not value initialized, " << foo_member << " instead of " << default_uint16_t << std::endl;
           return 1;
         }
       }

@@ -57,6 +57,7 @@ module Test
   };
 
   struct FooStruct {
+    long my_a;
     F my_f;
     M my_m;
     N my_n;
