@@ -54,7 +54,7 @@ module Test
   typedef long twodimarrayoflong[5][5];
   typedef twodimarrayoflong twodimarrayoftwodimarrayoflong[5][5];
 
-  typedef string twodimarrayofstring[5][5];
+  typedef string twodimarrayofstring[5][4];
   typedef twodimarrayoflong twodimarrayoftwodimarrayostring[5][5];
 
   typedef arrayofenum arrayarrayofenum[5];
