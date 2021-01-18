@@ -152,6 +152,10 @@ module IDL
       '%s'
     end
 
+    # Construct for triggering zero initialization
+    def zero_initializer
+      '{}'
+    end
 
     # define cxxtype methods for 'primitive' types
     {
@@ -386,7 +390,6 @@ module IDL
         ' std::hex << "hex:" << (int)%s << std::dec'
 #        '%s'
        end
-
     end
 
     class String
@@ -647,6 +650,10 @@ module IDL
         is_reference? ? resolved_type.cxx_member_type_name : super
       end
 
+      def zero_initializer
+        resolved_type.zero_initializer
+      end
+
       def cxx_return_type(scope = nil)
         is_reference? ? resolved_type.cxx_member_type(scope, self) : super
       end
@@ -698,6 +705,7 @@ module IDL
       def cdr_from_fmt
         resolved_type.cdr_from_fmt
       end
+
     end
 
     class Interface
@@ -808,6 +816,9 @@ module IDL
       # any insertion/extraction operators arg typename
       def cxx_anyop_arg_typename(scope = nil)
         resolved_cxx_type(scope)
+      end
+      def zero_initializer
+        "{#{basetype.zero_initializer}}"
       end
     end
 

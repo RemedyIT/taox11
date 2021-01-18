@@ -518,9 +518,13 @@ module IDL
         self._resolved_idltype.cxx_anyop_arg_typename
       end
 
+      def zero_initializer
+        self._idltype.zero_initializer
+      end
+
       # template mapping
 
-      # this seems non-sensical but this prevents prefixing
+      # this seems nonsensical but this prevents prefixing
       map_template :anyop, :anyop
 
     end # NodeVisitorBase
