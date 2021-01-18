@@ -34,8 +34,8 @@ module Test
     b
   };
 
-  typedef enumType arrayofenum[5];
-  typedef long arrayoflong[5];
+  typedef enumType arrayofenum[4];
+  typedef long arrayoflong[4];
 
   typedef long twodimarrayoflong[5][5];
   typedef twodimarrayoflong twodimarrayoftwodimarrayoflong[5][5];
