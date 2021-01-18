@@ -818,7 +818,7 @@ module IDL
         resolved_cxx_type(scope)
       end
       def zero_initializer
-        (IDL::Type::String === basetype.resolved_type || IDL::Type::WString === basetype.resolved_type) ? '{}' : '{{}}'
+        (sizes.size == 1 && (IDL::Type::String === basetype.resolved_type || IDL::Type::WString === basetype.resolved_type)) ? '{}' : '{{}}'
       end
     end
 
