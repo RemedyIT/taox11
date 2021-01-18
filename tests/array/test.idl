@@ -68,6 +68,8 @@ module Test
     arrayarrayoflong aal;
     arrayarrayarrayoflong aaal;
     twodimarrayoftwodimarrayoflong tdtdaol;
+    twodimarrayofstring tdaos;
+    twodimarrayoftwodimarrayostring tdtwaos;
   };
 
   struct FooStruct {
