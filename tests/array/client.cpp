@@ -61,13 +61,66 @@ int main(int argc, char* argv[])
       TAOX11_TEST_DEBUG << "ostreamtest array v: " << v <<  std::endl;
       TAOX11_TEST_DEBUG << "ostreamtest array m: " << m <<  std::endl;
 
+      TAOX11_TEST_DEBUG << "Testing value initialization" << std::endl;
+
       // Check that array members as part of a structured type are all value initialized
       uint16_t default_uint16_t {};
       Test::FooStruct foostruct;
+
+      if (foostruct.my_a() != default_uint16_t) {
+        TAOX11_TEST_ERROR << "Struct member my_a not value initialized, " << foostruct.my_a() << " instead of " << default_uint16_t << std::endl;
+        return 1;
+      }
+
       for (const auto& foo_member : foostruct.my_f()) {
         if (foo_member != default_uint16_t) {
-          TAOX11_TEST_ERROR << "Array member not value initialized, " << foo_member << " instead of " << default_uint16_t << std::endl;
+          TAOX11_TEST_ERROR << "Array member my_f not value initialized, " << foo_member << " instead of " << default_uint16_t << std::endl;
           return 1;
+        }
+      }
+
+      Test::ArrayStruct as;
+      int32_t default_int32_t {};
+      for (const auto& aaal_member : as.aaal()) {
+        for (const auto& aal_member : aaal_member) {
+          for (const auto& al_member : aal_member) {
+            if (al_member != default_int32_t) {
+              TAOX11_TEST_ERROR << "Array member of aaal not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
+              return 1;
+            }
+          }
+        }
+      }
+
+      for (const auto& aal_member : as.aal()) {
+        for (const auto& al_member : aal_member) {
+          if (al_member != default_int32_t) {
+            TAOX11_TEST_ERROR << "Array member of aal not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
+            return 1;
+          }
+        }
+      }
+
+      Test:: enumType default_enumType {};
+      for (const auto& aae_member : as.aae()) {
+        for (const auto& ae_member : aae_member) {
+          if (ae_member != default_enumType) {
+            TAOX11_TEST_ERROR << "Array member of aae not value initialized, " << ae_member << " instead of " << default_enumType << std::endl;
+            return 1;
+          }
+        }
+      }
+
+       for (const auto& tdtdaol_member1 : as.tdtdaol()) {
+        for (const auto& tdtdaol_member2 : tdtdaol_member1) {
+          for (const auto& tdtdaol_member3 : tdtdaol_member2) {
+            for (const auto& tdtdaol_member4 : tdtdaol_member3) {
+              if (tdtdaol_member4 != default_int32_t) {
+                TAOX11_TEST_ERROR << "Array member of aal not value initialized, " << tdtdaol_member4 << " instead of " << default_int32_t << std::endl;
+                return 1;
+              }
+            }
+          }
         }
       }
 

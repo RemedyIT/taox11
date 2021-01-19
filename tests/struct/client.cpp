@@ -18,8 +18,20 @@ void test_swap (V & f1, V & f2)
   swap(f1, f2);
 }
 
+template<typename T>
+int check_zero(const std::string& name, T value, T field)
+{
+  if (value != field)
+    {
+      TAOX11_TEST_ERROR << "Struct member " << name << " not value initialized, " << field << " instead of " << value << std::endl;
+      return 1;
+    }
+  return 0;
+}
+
 int main(int argc, char* argv[])
 {
+  int retval {};
   try
     {
       // Test example struct initialization from the C++11 spec
@@ -108,6 +120,23 @@ int main(int argc, char* argv[])
 
       TAOX11_TEST_DEBUG << "successfully called Foo::update_struct (" << simple3 << ") => " << simple4 << std::endl;
 
+      TAOX11_TEST_DEBUG << "Testing zero initialization" << std::endl;
+      Test::AllBasicTypes abt;
+      long double ld{};
+      retval += check_zero ("a", int16_t{}, abt.a());
+      retval += check_zero ("b", int32_t{}, abt.b());
+      retval += check_zero ("c", int64_t{}, abt.c());
+      retval += check_zero ("d", uint16_t{}, abt.d());
+      retval += check_zero ("e", uint32_t{}, abt.e());
+      retval += check_zero ("f", uint64_t{}, abt.f());
+      retval += check_zero ("g", float{}, abt.g());
+      retval += check_zero ("h", double{}, abt.h());
+      retval += check_zero ("i", ld, abt.i());
+      retval += check_zero ("j", char{}, abt.j());
+      retval += check_zero ("k", wchar_t{}, abt.k());
+      retval += check_zero ("l", bool{}, abt.l());
+      retval += check_zero ("m", uint8_t{}, abt.m());
+
       TAOX11_TEST_DEBUG << "shutting down...";
 
       foo->shutdown ();
@@ -119,5 +148,5 @@ int main(int argc, char* argv[])
       TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
       return 1;
     }
-  return 0;
+  return retval;
 }
