@@ -33,14 +33,9 @@ public:
   IDL::traits<CORBA::ValueBase>::ref_type _copy_value () const override;
 
   // Operations
-
-  // generated from c++/cli_hdr/operation.erb
-  /// @copybrief Test::Event::do_print
   void do_print (const std::string& loc) override;
 
   // Attributes
-
-  // generated from c++/cli_hdr/attribute.erb
   double amount() override;
   void amount(double _v) override;
 

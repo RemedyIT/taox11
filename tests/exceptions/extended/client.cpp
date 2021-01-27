@@ -926,6 +926,17 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
       TAOX11_TEST_DEBUG << std::endl << "  " << x << std::endl;
     }
 
+  TAOX11_TEST_DEBUG << "Testing zero initialization" << std::endl;
+  Test::ArrayEx aex;
+  uint16_t default_uint16_t {};
+
+  for (const auto& l_array_member : aex.l_array()) {
+    if (l_array_member != default_uint16_t) {
+      TAOX11_TEST_ERROR << "Exception member l_array not value initialized, " << l_array_member << " instead of " << default_uint16_t << std::endl;
+      ++result;
+    }
+  }
+
   TAOX11_TEST_DEBUG << std::endl;
 
   return result;

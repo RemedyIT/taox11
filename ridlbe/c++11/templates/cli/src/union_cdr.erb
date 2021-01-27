@@ -79,7 +79,7 @@ TAO_CORBA::Boolean operator>> (
 %     # in these cases there is only a single member mapping all labels
 %     _m = _defmem || _ndefmem.shift
   // initialize associated default value
-  <%= _m.cxx_member_type %> temp_val<% if _m.is_pod? %> {}<% end %>;
+  <%= _m.cxx_member_type %> temp_val<%= _m.zero_initializer %>;
   // extract
   if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
   {
@@ -96,7 +96,7 @@ TAO_CORBA::Boolean operator>> (
   if (<%= _lbl == 'false' ? '!' : '' %>_tao_discriminant)
   {
     // initialize associated default value
-    <%= _m.cxx_member_type %> temp_val<% if _m.is_pod? %> {}<% end %>;
+    <%= _m.cxx_member_type %> temp_val<%= _m.zero_initializer %>;
     // extract
     if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
     {
@@ -112,7 +112,7 @@ TAO_CORBA::Boolean operator>> (
   {
 %     _m = _defmem || _ndefmem.shift # get other (non-)default member
     // initialize associated default value
-    <%= _m.cxx_member_type %> temp_val<% if _m.is_pod? %> {}<% end %>;
+    <%= _m.cxx_member_type %> temp_val<%= _m.zero_initializer %>;
     // extract
     if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
     {
@@ -135,7 +135,7 @@ TAO_CORBA::Boolean operator>> (
 %     end
     {
       // initialize associated default value
-      <%= _m.cxx_member_type %> temp_val<% if _m.is_pod? %> {}<% end %>;
+      <%= _m.cxx_member_type %> temp_val<%= _m.zero_initializer %>;
       // extract
       if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
       {
@@ -155,7 +155,7 @@ TAO_CORBA::Boolean operator>> (
 %     _m_def = default_member
     {
       // initialize associated default value
-      <%= _m_def.cxx_member_type %> temp_val<% if _m_def.is_pod? %> {}<% end %>;
+      <%= _m_def.cxx_member_type %> temp_val<%= _m_def.zero_initializer %>;
       // extract
       if (strm >> <%= _m_def.cdr_to_fmt % "temp_val" %>)
       {

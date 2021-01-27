@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - master
+      - v*
+    tags:
+      - AXCIOMA-v*
   pull_request:
     branches:
       - master
+      - v*
   schedule:
     - cron: '0 1 * * SUN'
 
