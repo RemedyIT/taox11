@@ -84,7 +84,7 @@ module BRIX11
         Sys.in_dir(test_root) do
           # generate IDL file
           options[:genidl] = GenerateIDL::OPTIONS.merge(options[:gentest].merge(name: File.basename(options[:gentest][:name])))
-          GenFile.transaction { rc = GenerateIDL.new(entry,options).run(nil) }
+          GenFile.transaction { rc = GenerateIDL.new(entry, options).run(nil) }
           # generate server main
           options[:gensrv] = GenerateServer::OPTIONS.merge(options[:gentest]).merge({name: options[:gentest][:server]})
           GenFile.transaction { rc = GenerateServer.new(entry, options).run(nil) } if rc

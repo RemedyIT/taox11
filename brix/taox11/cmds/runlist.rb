@@ -56,7 +56,7 @@ module BRIX11
         BRIX11.log_fatal('No test list specified.') unless options[:runlist][:list]
 
         test_argv = []
-        test_argv << File.join(runenv['ACE_ROOT'],'bin', 'auto_run_tests.pl')
+        test_argv << File.join(runenv['ACE_ROOT'], 'bin', 'auto_run_tests.pl')
         test_argv << '-l' << options[:runlist][:list]
         test_argv << '-r' << (options[:runlist][:root] || File.dirname(options[:runlist][:list]))
         test_argv << '-s' << options[:runlist][:sandbox] if options[:runlist][:sandbox]

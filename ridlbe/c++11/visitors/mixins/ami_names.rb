@@ -122,10 +122,10 @@ module IDL
          #find last '/'
          repo_index = res.rindex('/')
          if repo_index
-           res.insert((repo_index + 1),handler_prefix)  #IDL:A/AMI_Foo_TestHandler:1.0"
+           res.insert((repo_index + 1), handler_prefix)  #IDL:A/AMI_Foo_TestHandler:1.0"
          else
            repo_index = res.index(':')
-           res.insert((repo_index + 1),handler_prefix)  #IDL:AMI_Foo_TestHandler:1.0"
+           res.insert((repo_index + 1), handler_prefix)  #IDL:AMI_Foo_TestHandler:1.0"
          end
       end
 
