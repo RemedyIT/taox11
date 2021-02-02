@@ -97,7 +97,7 @@ module BRIX11
     private
 
     def key
-      "#{@root_idx}:#{File.join(@dir,@name)}"
+      "#{@root_idx}:#{File.join(@dir, @name)}"
     end
 
     def descend
