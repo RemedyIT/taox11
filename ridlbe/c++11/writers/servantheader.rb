@@ -147,7 +147,7 @@ module IDL
       end
 
       def pre_visit(parser)
-        println();
+        println()
         printiln('// generated from ServantHeaderSrvTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE {')
         inc_nest

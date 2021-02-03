@@ -364,7 +364,7 @@ module IDL
        end
 
        def pre_visit(parser)
-         println();
+         println()
          printiln('// generated from StubProxyObjRefTraitsWriter#pre_visit')
        end
 

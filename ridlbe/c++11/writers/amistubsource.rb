@@ -525,7 +525,7 @@ module IDL
        end
 
        def pre_visit(parser)
-         println();
+         println()
          printiln('// generated from AmiStubSourceProxyObjRefTraitsWriter#pre_visit')
        end
 
