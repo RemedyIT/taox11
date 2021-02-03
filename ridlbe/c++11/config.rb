@@ -380,13 +380,13 @@ module IDL
       # determine output file path for client stub code
       idl_ext = (options[:idlext] ||= File.extname(options[:idlfile]))
       unless options[:idlfile].nil?
-        options[:output]  = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:stub_pfx])
+        options[:output] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:stub_pfx])
         options[:output_ami_incl] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:ami_pfx]+options[:stub_pfx]+options[:hdr_ext])
         options[:output_src] = options[:output] + options[:src_ext]
         options[:output_prx] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:stub_pfx]+options[:proxy_pfx]+options[:hdr_ext])
         options[:output] << options[:hdr_ext]
         if options[:gen_typecodes] && options[:gen_anytypecode_source]
-          options[:output_atc]  = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:anytypecode_pfx]+options[:src_ext])
+          options[:output_atc] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:anytypecode_pfx]+options[:src_ext])
         end
       end
     end

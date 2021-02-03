@@ -331,7 +331,7 @@ module IDL
       end
 
       def pre_visit(parser)
-        println();
+        println()
         printiln('// generated from AmiStubHeaderTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE')
         printiln('{')
@@ -509,7 +509,7 @@ module IDL
       end
 
       def pre_visit(parser)
-        println();
+        println()
         printiln('// generated from AmiStubHeaderAmicTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE')
         printiln('{')
@@ -598,7 +598,7 @@ module IDL
       end
 
       def pre_visit(parser)
-        println();
+        println()
         printiln('// generated from AmiStubHeaderSrvTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE {')
         inc_nest

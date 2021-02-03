@@ -269,7 +269,7 @@ module IDL
         return if node.enclosure.is_local? || node.enclosure.is_pseudo? || node.enclosure.is_abstract?
         check_idl_type(node.idltype)
         node.params.each { |parm| check_idl_type(parm.idltype) }
-        add_include('tao/x11/basic_arguments.h')                   ## for _excep method
+        add_include('tao/x11/basic_arguments.h') ## for _excep method
         unless node.raises.empty?
           add_include('tao/x11/user_exception_proxy_in_t.h')
           add_include('tao/Exception_Data.h')
@@ -477,7 +477,7 @@ module IDL
         # Overload for this visitor only
         intf.class_eval do
           def supported_interface_ids
-            @sup_intf_ids ||= (ancestors.collect {|ancestor| ancestor.ami_repository_id } <<  ami_repository_id)
+            @sup_intf_ids ||= (ancestors.collect {|ancestor| ancestor.ami_repository_id } << ami_repository_id)
           end
         end
         intf.visit_proxy(node)
@@ -525,7 +525,7 @@ module IDL
        end
 
        def pre_visit(parser)
-         println();
+         println()
          printiln('// generated from AmiStubSourceProxyObjRefTraitsWriter#pre_visit')
        end
 
@@ -786,7 +786,7 @@ module IDL
         # Overload for this visitor only
         intf.class_eval do
           def supported_interface_ids
-            @sup_intf_ids ||= (ancestors.collect {|ancestor| ancestor.ami_repository_id } <<  ami_repository_id)
+            @sup_intf_ids ||= (ancestors.collect {|ancestor| ancestor.ami_repository_id } << ami_repository_id)
           end
         end
         intf.visit_skel(node)

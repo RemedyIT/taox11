@@ -343,7 +343,7 @@ module IDL
        end
 
        def pre_visit(parser)
-         println();
+         println()
          printiln('// generated from AmiStubProxyObjRefTraitsWriter#pre_visit')
        end
 

@@ -415,7 +415,7 @@ module IDL
         self.size.to_i == 0
       end
       def os_fmt
-        return  ' "\"" <<  %s << "\"" '
+        return ' "\"" <<  %s << "\"" '
       end
     end
 
@@ -456,7 +456,7 @@ module IDL
         self.size.to_i == 0
       end
       def os_fmt
-        return  ' %s '
+        return ' %s '
       end
     end
 

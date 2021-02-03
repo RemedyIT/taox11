@@ -373,8 +373,8 @@ module IDL
 
       def enter_valuetype(node)
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
-        add_post_include('tao/x11/valuetype/value_base.h')  # after typecode include
-        add_post_include('tao/x11/valuetype/value_factory_base.h') unless node.is_abstract?  # after typecode include
+        add_post_include('tao/x11/valuetype/value_base.h') # after typecode include
+        add_post_include('tao/x11/valuetype/value_factory_base.h') unless node.is_abstract? # after typecode include
         node.state_members.each { |m| check_idl_type(m.idltype) }
       end
 
