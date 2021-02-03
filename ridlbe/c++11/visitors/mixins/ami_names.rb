@@ -115,7 +115,7 @@ module IDL
       end
 
       def ami_repository_id
-         res = node.repository_id   # "IDL:A/Foo_Test:1.0" or "IDL:Foo_Test:1.0"
+         res = node.repository_id # "IDL:A/Foo_Test:1.0" or "IDL:Foo_Test:1.0"
          #skip repo_version
          repo_ver_index = res.rindex(':')
          res.insert((repo_ver_index), 'Handler') #IDL:A/Foo_TestHandler:1.0"

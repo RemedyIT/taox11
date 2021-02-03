@@ -98,7 +98,7 @@ module BRIX11
           options[:genmpc] = GenerateMPC::OPTIONS.dup
           options[:genmpc][:name] = File.basename(options[:gentest][:name])
           options[:genmpc][:client] = [options[:gentest][:client]]
-          unless options[:gentest][:server] == OPTIONS[:server]  # default?
+          unless options[:gentest][:server] == OPTIONS[:server] # default?
             options[:genmpc][:server] = [options[:gentest][:server]] +
                                         Dir.glob('*.idl').collect {|i| "#{File.basename(i, '.*')}_impl" }
           end

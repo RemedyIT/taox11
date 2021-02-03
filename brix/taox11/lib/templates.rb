@@ -125,7 +125,7 @@ module BRIX11
             tpl_full_glob = File.join(Template.template_path[idx], dir, name + '.erb')
             tpl_full_path = Dir.glob(tpl_full_glob).first
             if tpl_full_path && File.file?(tpl_full_path)
-              @root_idx = idx   # mark the root where we found a matching template
+              @root_idx = idx # mark the root where we found a matching template
               return block.call(tpl_full_path)
             end
           end

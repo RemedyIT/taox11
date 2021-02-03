@@ -227,7 +227,7 @@ module IDL
               end
             end
           end
-        end unless @orderedset.empty?   # no need to check if ordered set still empty
+        end unless @orderedset.empty? # no need to check if ordered set still empty
         # now check if remaining range matches dependencies that the already ordered facets
         # may have on the to be ordered facet
         @orderedset.each_with_index do |ofct, oix|
@@ -254,7 +254,7 @@ module IDL
           return (range.min..(range.max < dix ? range.max : dix))
         when :after
           # fct should be ordered after ofct so fct should be inserted at dix+1 at a minimum
-          unless range.include?(dix+1)   # dix+1 should be in possible range
+          unless range.include?(dix+1) # dix+1 should be in possible range
             IDL.fatal("Conflicting ordering dependency for facet #{fct} : #{dpos}:#{dfct}")
           end
           # just return the original (maximum range)

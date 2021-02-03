@@ -103,7 +103,7 @@ module IDL
       public
 
       def supported_interface_ids
-        @sup_intf_ids ||= (collect_ancestors([], node).collect {|ancestor| ancestor.repository_id } <<  node.repository_id)
+        @sup_intf_ids ||= (collect_ancestors([], node).collect {|ancestor| ancestor.repository_id } << node.repository_id)
       end
 
       # return all operations declared in this interface
@@ -173,19 +173,19 @@ module IDL
         abstractbase_attributes.size
       end
 
-      def all_operations (inc_implicit = false)  # incl. inherited
+      def all_operations (inc_implicit = false) # incl. inherited
         @all_operations ||= node.operations(true).collect do |op|
           visitor(OperationVisitor) { |v| v.interface(node); v.visit(op) }
         end
       end
 
-      def all_attributes  # incl. inherited
+      def all_attributes # incl. inherited
         @all_attributes ||= node.attributes(true).collect do |att|
           visitor(AttributeVisitor) {|v| v.visit(att); v.interface(node) }
         end
       end
 
-      def all_attribute_count  # incl. inherited
+      def all_attribute_count # incl. inherited
         self.all_attributes.size
       end
 
