@@ -16,8 +16,8 @@ class Hello
 {
 public:
   /// Constructor
-  Hello (IDL::traits<CORBA::ORB>::ref_type orb, int & result);
-  virtual ~Hello ();
+  Hello (IDL::traits<CORBA::ORB>::ref_type orb, int& result);
+  ~Hello () override = default;
 
   void shutdown () override;
 
@@ -25,7 +25,6 @@ private:
   /// Use an ORB reference to convert strings to objects and shutdown
   /// the application.
   IDL::traits<CORBA::ORB>::ref_type orb_;
-
   int &result_;
 };
 
