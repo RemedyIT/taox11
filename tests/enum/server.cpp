@@ -15,15 +15,15 @@ main (int argc, ACE_TCHAR *argv[])
   int result = 0;
   try
     {
-      IDL::traits<CORBA::ORB>::ref_type _orb = CORBA::ORB_init (argc, argv);
+      IDL::traits<CORBA::ORB>::ref_type orb_ = CORBA::ORB_init (argc, argv);
 
-      if (_orb == nullptr)
+      if (orb_ == nullptr)
         {
           TAOX11_TEST_ERROR << "ERROR: CORBA::ORB_init (argc, argv) returned null ORB." << std::endl;
           return 1;
         }
 
-      IDL::traits<CORBA::Object>::ref_type obj = _orb->resolve_initial_references ("RootPOA");
+      IDL::traits<CORBA::Object>::ref_type obj = orb_->resolve_initial_references ("RootPOA");
 
       if (!obj)
         {
@@ -51,7 +51,7 @@ main (int argc, ACE_TCHAR *argv[])
           return 1;
         }
 
-      CORBA::servant_traits<Test::Hello>::ref_type hello_impl = CORBA::make_reference<Hello> (_orb, result);
+      CORBA::servant_traits<Test::Hello>::ref_type hello_impl = CORBA::make_reference<Hello> (orb_, result);
 
       TAOX11_TEST_DEBUG << "created Hello servant" << std::endl;
 
@@ -69,13 +69,13 @@ main (int argc, ACE_TCHAR *argv[])
 
       IDL::traits<Test::Hello>::ref_type hello = IDL::traits<Test::Hello>::narrow (hello_obj);
 
-      if (hello == nullptr)
+      if (!hello)
         {
           TAOX11_TEST_ERROR << "ERROR: IDL::traits<Test::Hello>::narrow (hello_obj) returned null reference." << std::endl;
           return 1;
         }
 
-      std::string ior = _orb->object_to_string (hello);
+      std::string const ior = orb_->object_to_string (hello);
 
       // Output the IOR to the <ior_output_file>
       std::ofstream fos ("test.ior");
@@ -93,13 +93,13 @@ main (int argc, ACE_TCHAR *argv[])
 
       TAOX11_TEST_DEBUG << "starting event loop" << std::endl;
 
-      _orb->run ();
+      orb_->run ();
 
       TAOX11_TEST_DEBUG << "event loop finished" << std::endl;
 
       root_poa->destroy (true, true);
 
-      _orb->destroy ();
+      orb_->destroy ();
     }
   catch (const std::exception& e)
     {
