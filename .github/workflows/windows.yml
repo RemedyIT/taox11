@@ -59,7 +59,7 @@ jobs:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
     - uses: ilammy/msvc-dev-cmd@v1
-    - uses: actions/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
     - name: Run brix11 configure
