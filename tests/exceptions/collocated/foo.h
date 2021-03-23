@@ -13,12 +13,12 @@ class Bar final
   : public virtual CORBA::servant_traits<Test::Bar>::base_type
 {
 public:
-  Bar ();
-  void
-  do_something (const std::string &message) override;
+  Bar () = default;
+  ~Bar () override = default;
+
+  void do_something (const std::string &message) override;
 
   int32_t something () override;
-
   void something (int32_t _v) override;
 };
 
@@ -28,7 +28,7 @@ class Foo final
 public:
   /// Constructor
   Foo (IDL::traits<CORBA::ORB>::ref_type orb,
-    IDL::traits<Test::Bar>::ref_type bar);
+       IDL::traits<Test::Bar>::ref_type bar);
 
   void do_throw_struct () override;
 
@@ -38,11 +38,8 @@ private:
   IDL::traits<CORBA::ORB>::ref_type orb_;
   IDL::traits<Test::Bar>::ref_type bar_;
 
-  void
-  test_collocated_exception_method ();
-
-  void
-  test_collocated_exception_attribute ();
+  void test_collocated_exception_method ();
+  void test_collocated_exception_attribute ();
 };
 
 #endif /* FOO_H */

@@ -16,7 +16,7 @@ main(int argc, ACE_TCHAR *argv[])
     {
       IDL::traits<CORBA::ORB>::ref_type orb = CORBA::ORB_init (argc, argv);
 
-      if (orb == nullptr)
+      if (!orb)
       {
         TAOX11_TEST_ERROR << "ERROR: CORBA::ORB_init (argc, argv) returned null ORB." << std::endl;
         return 1;
@@ -58,7 +58,7 @@ main(int argc, ACE_TCHAR *argv[])
 
       IDL::traits<CORBA::Object>::ref_type bar_obj = root_poa->id_to_reference (bar_id);
 
-      if (bar_obj == nullptr)
+      if (!bar_obj)
       {
         TAOX11_TEST_ERROR << "ERROR: root_poa->id_to_reference (bar_id) returned null reference." << std::endl;
         return 1;
@@ -66,7 +66,7 @@ main(int argc, ACE_TCHAR *argv[])
 
       IDL::traits<Test::Bar>::ref_type bar = IDL::traits<Test::Bar>::narrow (bar_obj);
 
-      if (bar == nullptr)
+      if (!bar)
       {
         TAOX11_TEST_ERROR << "ERROR: IDL::traits<Test::Bar>::narrow (bar_obj) returned null reference." << std::endl;
         return 1;
@@ -82,7 +82,7 @@ main(int argc, ACE_TCHAR *argv[])
 
       IDL::traits<CORBA::Object>::ref_type foo_obj = root_poa->id_to_reference (foo_id);
 
-      if (foo_obj == nullptr)
+      if (!foo_obj)
       {
         TAOX11_TEST_ERROR << "ERROR: root_poa->id_to_reference (id) returned null reference." << std::endl;
         return 1;
@@ -90,13 +90,13 @@ main(int argc, ACE_TCHAR *argv[])
 
       IDL::traits<Test::Foo>::ref_type foo = IDL::traits<Test::Foo>::narrow (foo_obj);
 
-      if (foo == nullptr)
+      if (!foo)
       {
         TAOX11_TEST_ERROR << "ERROR: IDL::traits<Test::Foo>::narrow (foo_obj) returned null reference." << std::endl;
         return 1;
       }
 
-      std::string ior = orb->object_to_string (foo);
+      std::string const ior = orb->object_to_string (foo);
 
       // Output the IOR to the <ior_output_file>
       std::ofstream fos("test.ior");
@@ -121,6 +121,8 @@ main(int argc, ACE_TCHAR *argv[])
       root_poa->destroy (true, true);
 
       orb->destroy ();
+
+      TAOX11_TEST_DEBUG << "server finished" << std::endl;
     }
   catch (const std::exception& e)
     {
