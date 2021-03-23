@@ -8,13 +8,12 @@
  */
 
 #include "testC.h"
-
 #include "testlib/taox11_testlog.h"
 
-#define STRING_TO_RECEIVE "This is a string"
-#define ALMOST_RIGHT      "Almost right"
-#define UNION_STRING      "This is a union"
-#define WRONG_NUMBER      "Wrong number"
+const std::string STRING_TO_RECEIVE ("This is a string");
+const std::string ALMOST_RIGHT ("Almost right");
+const std::string UNION_STRING ("This is a union");
+const std::string WRONG_NUMBER ("Wrong number");
 
 uint16_t
 test_bar_object (IDL::traits<Test::Foo>::ref_type foo)
@@ -29,7 +28,7 @@ test_bar_object (IDL::traits<Test::Foo>::ref_type foo)
     }
   catch (const Test::BarEx &x)
     {
-      uint16_t prev_result = result;
+      uint16_t const prev_result = result;
       IDL::traits<Test::Bar>::ref_type bar =
         x.bar_i();
       if (!bar)
@@ -50,7 +49,7 @@ test_bar_object (IDL::traits<Test::Foo>::ref_type foo)
           catch (const Test::StructEx &ex)
             {
               TAOX11_TEST_DEBUG << "test_bar_object - bar->do_something "
-                << "Correct exception caught : " << ex << std::endl;
+                << "Correct exception caught: " << ex << std::endl;
               if (ex.struct_i ().id () != 12345)
                 {
                   TAOX11_TEST_ERROR << "test_bar_object - ERROR : Correct exception caught "
@@ -73,7 +72,7 @@ test_bar_object (IDL::traits<Test::Foo>::ref_type foo)
               ++result;
             }
 
-          int32_t value = bar->a_bar ();
+          int32_t const value = bar->a_bar ();
           if (value != 1234)
             {
               TAOX11_TEST_ERROR << "ERROR: incorrect 'bar' found. found <"
@@ -89,8 +88,7 @@ test_bar_object (IDL::traits<Test::Foo>::ref_type foo)
                         << std::endl;
           ++result;
         }
-      const IDL::traits<Test::VT>::ref_type vt =
-        x.bar_valuetype ();
+      const IDL::traits<Test::VT>::ref_type vt = x.bar_valuetype ();
       if (vt->id () != 3)
         {
           TAOX11_TEST_ERROR << "ERROR: incorrect 'id' in valuetype found. found <"
@@ -100,14 +98,13 @@ test_bar_object (IDL::traits<Test::Foo>::ref_type foo)
         }
       if (prev_result == result)
         {
-          TAOX11_TEST_DEBUG << "Successfully caught expected Test::BarEx : ";
+          TAOX11_TEST_DEBUG << "Successfully caught expected Test::BarEx: " << x << std::endl;
         }
       else
         {
           // This is a summary: no need to increase result.
-          TAOX11_TEST_ERROR << "ERROR catching Test::BarEx : ";
+          TAOX11_TEST_ERROR << "ERROR catching Test::BarEx: " << x << std::endl;
         }
-      TAOX11_TEST_DEBUG << std::endl << "  " << x << std::endl;
     }
   return result;
 }
@@ -132,12 +129,9 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
   catch (const CORBA::UserException &x)
     {
       TAOX11_TEST_DEBUG << "Successfully caught expected Test::FooEx as "
-                    << "CORBA::UserException exception:" << std::endl;
-      TAOX11_TEST_DEBUG << "  " << x << std::endl;
+                    << "CORBA::UserException exception:" << x << std::endl;
       excep_user << x;
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   std::stringstream excep_corba;
   try
@@ -150,12 +144,9 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
   catch (const CORBA::Exception &x)
     {
       TAOX11_TEST_DEBUG << "Successfully caught expected Test::FooEx as CORBA::Exception "
-                    << "exception : ";
-      TAOX11_TEST_DEBUG  << std::endl << "  " << x << std::endl;
+                    << "exception: " << x << std::endl;
       excep_corba << x;
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   std::stringstream excep_fooex;
   try
@@ -167,7 +158,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
     }
   catch (const Test::FooEx &x)
     {
-      uint16_t prev_result = result;
+      uint16_t const prev_result = result;
 
       if (x.union_data()._d() == Test::DataType::dtLong)
         {
@@ -192,18 +183,15 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
         }
       if (prev_result == result)
         {
-          TAOX11_TEST_DEBUG << "Successfully caught expected Test::FooEx :";
+          TAOX11_TEST_DEBUG << "Successfully caught expected Test::FooEx: " << x << std::endl;
         }
       else
         {
           // This is a summary: no need to increase result.
-          TAOX11_TEST_ERROR << "ERROR catching Test::FooEx : ";
+          TAOX11_TEST_ERROR << "ERROR catching Test::FooEx: " << x << std::endl;
         }
-      TAOX11_TEST_DEBUG << std::endl << "  " << x << std::endl;
       excep_fooex << x;
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   try
     {
@@ -215,7 +203,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
   catch (const std::exception &x)
     {
       TAOX11_TEST_DEBUG << "Successfully caught expected Test::FooEx as std::exception: "
-                    << std::endl << "  " << x.what () << std::endl;
+                    << x.what () << std::endl;
       try
         {
           throw;
@@ -233,8 +221,6 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
             }
         }
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   if ((excep_fooex.str().find ("FooEx") == std::string::npos) ||
       (excep_fooex.str().find ("message") == std::string::npos) ||
@@ -266,8 +252,6 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
       ++result;
     }
 
-  TAOX11_TEST_DEBUG << std::endl;
-
   try
     {
       uint32_t num = foo->a_number ();
@@ -277,7 +261,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
     }
   catch (const Test::BooEx &x)
     {
-      uint16_t prev_result = result;
+      uint16_t const prev_result = result;
       if (x.id () != 999)
         {
           TAOX11_TEST_ERROR << "ERROR: a_number : Test::BooEx returned with an invalid id! "
@@ -330,28 +314,25 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
 
       if (prev_result == result)
         {
-          TAOX11_TEST_DEBUG << "Successfully caught expected Test::BarEx :";
+          TAOX11_TEST_DEBUG << "Successfully caught expected Test::BarEx: " << x << std::endl;
         }
       else
         {
           // This is a summary: no need to increase result.
-          TAOX11_TEST_ERROR << "ERROR catching Test::BarEx : ";
+          TAOX11_TEST_ERROR << "ERROR catching Test::BarEx: " << x << std::endl;
         }
-      TAOX11_TEST_DEBUG << std::endl << "  " << x << std::endl;
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   try
     {
-      uint32_t num = foo->a_number_and_message ();
+      uint32_t const num = foo->a_number_and_message ();
       TAOX11_TEST_ERROR << "ERROR: Test::Foo::a_number_and_message() returned without "
                     << "throwing exception! " << num << std::endl;
       ++result;
     }
   catch (const CORBA::UserException &x)
     {
-      uint16_t prev_result = result;
+      uint16_t const prev_result = result;
       try
         {
           throw;
@@ -361,7 +342,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
           if (x_.id() != 999)
             {
               TAOX11_TEST_ERROR << "ERROR catching a CORBA::UserException: "
-                            << "a_number_and_message : Test::FooBooEx : "
+                            << "a_number_and_message : Test::FooBooEx: "
                             << "invalid id received <" << x_.id()
                             << "> : expected <999>"
                             << std::endl;
@@ -370,7 +351,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
           if (x_.message().find (WRONG_NUMBER) == std::string::npos)
             {
               TAOX11_TEST_ERROR << "ERROR catching a CORBA::UserException: "
-                            << "a_number_and_message : Test::FooBooEx : "
+                            << "a_number_and_message : Test::FooBooEx: "
                             << "invalid message received <\""
                             << x_.message() << "\"> : expected <\""
                             << WRONG_NUMBER << "\">" << std::endl;
@@ -381,7 +362,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
           if (type_any->kind() != CORBA::TCKind::tk_long)
             {
               TAOX11_TEST_ERROR << "ERROR catching a CORBA::UserException: "
-                            << "a_number_and_message : Test::FooBooEx : "
+                            << "a_number_and_message : Test::FooBooEx: "
                             << "invalid any type received <"
                             << type_any->kind() << "> : expected <"
                             << "CORBA::TCKind::tk_long>" << std::endl;
@@ -393,7 +374,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
               if (value != 4321)
                 {
                   TAOX11_TEST_ERROR << "ERROR catching a CORBA::UserException: "
-                                << "a_number_and_message : Test::FooBooEx : "
+                                << "a_number_and_message : Test::FooBooEx: "
                                 << "invalid any value received <" << value
                                 << "> : expected <4321>"
                                 << std::endl;
@@ -403,7 +384,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
           else
             {
               TAOX11_TEST_ERROR << "ERROR catching a CORBA::UserException: "
-                            << "a_number_and_message : Test::FooBooEx : "
+                            << "a_number_and_message : Test::FooBooEx: "
                             << "Unable to retrieve long from any"
                             << std::endl;
               ++result;
@@ -412,39 +393,36 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
       if (prev_result == result)
         {
           TAOX11_TEST_DEBUG << "Successfully caught expected Test::FooBooEx as "
-                        << "CORBA::UserException exception : ";
+                        << "CORBA::UserException exception: " << x << std::endl;
         }
       else
         {
           // This is a summary: No need to increase the result.
           TAOX11_TEST_ERROR << "ERROR: a_number_and_message : catching Test::FooBooEx "
-                        << "as CORBA::UserException : ";
+                        << "as CORBA::UserException: " << x << std::endl;
         }
-      TAOX11_TEST_DEBUG << std::endl << "  " << x << std::endl;
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   try
     {
-      uint32_t num = foo->a_number_and_message ();
+      uint32_t const num = foo->a_number_and_message ();
       TAOX11_TEST_ERROR << "ERROR: Test::Foo::a_number_and_message() returned without "
                     << "throwing exception! " << num << std::endl;
       ++result;
     }
   catch (const Test::FooBooEx &x)
     {
-      uint16_t prev_result = result;
+      uint16_t const prev_result = result;
       if (x.id() != 999)
         {
-          TAOX11_TEST_ERROR << "ERROR a_number_and_message : Test::FooBooEx : "
+          TAOX11_TEST_ERROR << "ERROR a_number_and_message : Test::FooBooEx: "
                         << "invalid id received <" << x.id()
                         << "> : expected <999>" << std::endl;
           ++result;
         }
       if (x.message().find (WRONG_NUMBER) == std::string::npos)
         {
-          TAOX11_TEST_ERROR << "ERROR a_number_and_message : catching Test::FooBooEx : "
+          TAOX11_TEST_ERROR << "ERROR a_number_and_message : catching Test::FooBooEx: "
                         << "invalid message received <"
                         << x.message() << "> : expected <\"" << WRONG_NUMBER
                         << "\">" << std::endl;
@@ -454,7 +432,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
       IDL::traits<CORBA::TypeCode>::ref_type type_any = any.type();
       if (type_any->kind() != CORBA::TCKind::tk_long)
         {
-          TAOX11_TEST_ERROR << "ERROR a_number_and_message : catching Test::FooBooEx : "
+          TAOX11_TEST_ERROR << "ERROR a_number_and_message : catching Test::FooBooEx: "
                         << "invalid any type received <" << type_any->kind()
                         << "> : expected <CORBA::TCKind::tk_long>"
                         << std::endl;
@@ -465,7 +443,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
         {
           if (value != 4321)
             {
-              TAOX11_TEST_ERROR << "ERROR a_number_and_message : catching Test::FooBooEx : "
+              TAOX11_TEST_ERROR << "ERROR a_number_and_message : catching Test::FooBooEx: "
                             << "invalid any value received <" << value
                             << "> : expected <4321>"
                             << std::endl;
@@ -474,7 +452,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
         }
       else
         {
-          TAOX11_TEST_ERROR << "ERROR a_number_and_message : catching Test::FooBooEx : "
+          TAOX11_TEST_ERROR << "ERROR a_number_and_message : catching Test::FooBooEx: "
                         << "Unable to retrieve long from any"
                         << std::endl;
           ++result;
@@ -483,24 +461,21 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
       if (prev_result == result)
         {
           TAOX11_TEST_DEBUG << "Successfully caught expected Test::FooBooEx as "
-                        << "Test::FooBooEx exception : ";
+                        << "Test::FooBooEx exception: " << x << std::endl;
         }
       else
         {
           // This is a summary. No need to increase result.
-          TAOX11_TEST_ERROR << "ERROR catching Test::FooBooEx : ";
+          TAOX11_TEST_ERROR << "ERROR catching Test::FooBooEx: " << x << std::endl;
         }
-      TAOX11_TEST_DEBUG << std::endl << "  " << x << std::endl;
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   try
     {
-      std::string str = foo->a_string ();
+      std::string const str = foo->a_string ();
       if (str.find (STRING_TO_RECEIVE) == std::string::npos)
         {
-          TAOX11_TEST_ERROR << "ERROR a_string : received an unexpected string : "
+          TAOX11_TEST_ERROR << "ERROR a_string : received an unexpected string: "
                         << "received <\"" << str << "\"> - expected <\""
                         << STRING_TO_RECEIVE << "\">"
                         << std::endl;
@@ -508,20 +483,16 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
         }
       else
         {
-          TAOX11_TEST_DEBUG << "Successfully called Test::Foo::a_string ()."
-                        << std::endl << "  {\""
-                        << str << "\"}" << std::endl;
+          TAOX11_TEST_DEBUG << "Successfully called Test::Foo::a_string (): "
+                        << "{\"" << str << "\"}" << std::endl;
         }
     }
   catch (const CORBA::Exception &x)
     {
       TAOX11_TEST_ERROR << "ERROR: caught unexpected exception after calling "
-                    << "Test::Foo::a_string ()" << std::endl;
-      TAOX11_TEST_ERROR <<  "  " << x << std::endl;
+                    << "Test::Foo::a_string (): " << x << std::endl;
       ++result;
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   try
     {
@@ -532,25 +503,25 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
     }
   catch (const Test::BooEx &x)
     {
-      uint16_t prev_result = result;
+      uint16_t const prev_result = result;
       if (x.id () != 777)
         {
-          TAOX11_TEST_ERROR << "ERROR: a_string : catching Test::BooEx : "
+          TAOX11_TEST_ERROR << "ERROR: a_string : catching Test::BooEx: "
                         << "invalid id received <"
                         << x.id() << "> : expected <999>"
                         << std::endl;
           ++result;
         }
-      const float expected_value = 7.89f;
+      float const expected_value = 7.89f;
       if (x.value () != expected_value)
         {
-          TAOX11_TEST_ERROR << "ERROR: a_string : catching Test::BooEx : "
+          TAOX11_TEST_ERROR << "ERROR: a_string : catching Test::BooEx: "
                         << "invalid value received <" << x.value()
                         << "> : expected <7.89>"
                         << std::endl;
           ++result;
         }
-      const Test::wcharArray wc_array = x.wc_array ();
+      Test::wcharArray const wc_array = x.wc_array ();
       uint8_t wch = L'I';
       for (const std::array<wchar_t, 2> &ar1 : wc_array)
         {
@@ -558,16 +529,16 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
             {
               if (C != wch)
                 {
-                  TAOX11_TEST_ERROR << "ERROR: a_string : catching Test::BooEx : "
+                  TAOX11_TEST_ERROR << "ERROR: a_string : catching Test::BooEx: "
                                 << "invalid wchar array value received <'" << C
                                 << "'> : expected <'" << wch << "'>"
                                 << std::endl;
                   ++result;
                 }
-              wch++;
+              ++wch;
             }
         }
-      const Test::charArray c_array = x.c_array ();
+      Test::charArray const c_array = x.c_array ();
       uint8_t ch = 'M';
       for (const std::array<char, 2> &ar1 : c_array)
         {
@@ -575,29 +546,26 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
             {
               if (C != ch)
                 {
-                  TAOX11_TEST_ERROR << "ERROR: a_string : catching Test::BooEx : "
+                  TAOX11_TEST_ERROR << "ERROR: a_string : catching Test::BooEx: "
                                 << "invalid char array value received <'" << C
                                 << "'> : expected <'" << ch << "'>"
                                 << std::endl;
                   ++result;
                 }
-              ch++;
+              ++ch;
             }
         }
 
       if (prev_result == result)
         {
-          TAOX11_TEST_DEBUG << "Successfully caught expected Test::BooEx : ";
+          TAOX11_TEST_DEBUG << "Successfully caught expected Test::BooEx: " << x << std::endl;
         }
       else
         {
           // This is a summary. No need to increase result
-          TAOX11_TEST_ERROR << "ERROR catching Test::BooEx : ";
+          TAOX11_TEST_ERROR << "ERROR catching Test::BooEx: " << x << std::endl;
         }
-      TAOX11_TEST_DEBUG << std::endl << "  " << x << std::endl;
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   try
     {
@@ -614,12 +582,12 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
         }
       catch (const Test::ReasonEx &x)
         {
-          uint16_t prev_result = result;
+          uint16_t const prev_result = result;
 
           if (x.why() != Test::Reason::two)
             {
               TAOX11_TEST_ERROR << "ERROR catching a CORBA::UserException: "
-                            << "do_reason : Test::ReasonEx : "
+                            << "do_reason : Test::ReasonEx: "
                             << "invalid value for why received <" << x.why()
                             << "> : expected <Test::Reason::two>"
                             << std::endl;
@@ -637,7 +605,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
               if (x.union_data().stringData().compare (UNION_STRING) != 0)
                 {
                   TAOX11_TEST_ERROR << "ERROR catching a CORBA::UserException: "
-                                << "do_reason : Test::ReasonEx : "
+                                << "do_reason : Test::ReasonEx: "
                                 << "invalid stingData in union received <\""
                                 << x.union_data().stringData()
                                 << "\"> : expected <\"" << UNION_STRING << "\">"
@@ -648,7 +616,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
           else
             {
               TAOX11_TEST_ERROR << "ERROR catching a CORBA::UserException: "
-                            << "do_reason : Test::ReasonEx : "
+                            << "do_reason : Test::ReasonEx: "
                             << "invalid type in union received <"
                             << x.union_data()._d()
                             << "> : expected <Test::DataType::dtString>"
@@ -659,18 +627,15 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
           if (prev_result == result)
             {
               TAOX11_TEST_DEBUG << "Successfully caught expected Test::ReasonEx as "
-                            << "CORBA::UserException exception: ";
+                            << "CORBA::UserException exception: " << x << std::endl;
             }
           else
             {
               // This is a summary. No need to increase result
-              TAOX11_TEST_ERROR << "ERROR catching Test::ReasonEx as CORBA::UserException : ";
+              TAOX11_TEST_ERROR << "ERROR catching Test::ReasonEx as CORBA::UserException: " << x << std::endl;
             }
-          TAOX11_TEST_DEBUG << std::endl << "  " << x << std::endl;
         }
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   // catching SystemException CORBA::NO_IMPLEMENT at different levels in the exception hierarchy:
   // as CORBA::SystemException, CORBA::Exception, CORBA::NO_IMPLEMENT and std::exception.
@@ -692,8 +657,6 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
       excep_corba_s << x;
     }
 
-  TAOX11_TEST_DEBUG << std::endl;
-
   std::stringstream excep_system;
   try
     {
@@ -705,12 +668,10 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
   catch (const CORBA::SystemException &x)
     {
       TAOX11_TEST_DEBUG << "Successfully caught expected CORBA::NO_IMPLEMENT as "
-                    << "CORBA::SystemException: " << std::endl << "  " << x
+                    << "CORBA::SystemException: " << x
                     << std::endl;
       excep_system << x;
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   std::stringstream excep_no_impl;
   try
@@ -727,8 +688,6 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
                     << std::endl;
       excep_no_impl << x;
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   try
     {
@@ -779,8 +738,6 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
       ++result;
     }
 
-  TAOX11_TEST_DEBUG << std::endl;
-
   try
     {
       foo->do_throw_struct ();
@@ -796,12 +753,12 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
         }
       catch (const Test::StructEx &x_)
         {
-          uint16_t prev_result = result;
+          uint16_t const prev_result = result;
 
           if (x_.struct_i().id() != 888)
             {
               TAOX11_TEST_ERROR << "ERROR catching a CORBA::UserException: "
-                            << "do_throw_struct : Test::StructEx : "
+                            << "do_throw_struct : Test::StructEx: "
                             << "invalid id received <" << x_.struct_i().id()
                             << "> : expected <888>" << std::endl;
               ++result;
@@ -809,7 +766,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
           if (x_.struct_i().msg().find (ALMOST_RIGHT) == std::string::npos)
             {
               TAOX11_TEST_ERROR << "ERROR catching a CORBA::UserException: "
-                            << "do_throw_struct : Test::StructEx : "
+                            << "do_throw_struct : Test::StructEx: "
                             << "invalid message received <\"" << x_.struct_i().msg()
                             << "\"> : expected <\"" << ALMOST_RIGHT << "\">"
                             << std::endl;
@@ -818,18 +775,15 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
           if (prev_result == result)
             {
               TAOX11_TEST_DEBUG << "Successfully caught expected Test::StructEx as "
-                            << "CORBA::UserException exception: ";
+                            << "CORBA::UserException exception: " << x_ << std::endl;
             }
           else
             {
               // This is a summary. No need to increase result.
-              TAOX11_TEST_ERROR << "ERROR catching Test::StructEx as CORBA::UserException : ";
+              TAOX11_TEST_ERROR << "ERROR catching Test::StructEx as CORBA::UserException: " << x_ << std::endl;
             }
-          TAOX11_TEST_DEBUG << std::endl << "  " << x_ << std::endl;
         }
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   try
     {
@@ -840,11 +794,11 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
     }
   catch (const Test::StructEx &x)
     {
-      uint16_t prev_result = result;
+      uint16_t const prev_result = result;
 
       if (x.struct_i().id() != 888)
         {
-          TAOX11_TEST_ERROR << "ERROR do_throw_struct : catching a Test::StructEx exception : "
+          TAOX11_TEST_ERROR << "ERROR do_throw_struct : catching a Test::StructEx exception: "
                         << "invalid id received <" << x.struct_i().id()
                         << "> : expected <888>" << std::endl;
           ++result;
@@ -859,17 +813,14 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
         }
       if (prev_result == result)
         {
-          TAOX11_TEST_DEBUG << "Successfully caught expected Test::StructEx exception: ";
+          TAOX11_TEST_DEBUG << "Successfully caught expected Test::StructEx exception: " << x << std::endl;
         }
       else
         {
           // This is a summary. No need to increase result
-          TAOX11_TEST_ERROR << "ERROR catching Test::StructEx : ";
+          TAOX11_TEST_ERROR << "ERROR catching Test::StructEx: " << x << std::endl;
         }
-      TAOX11_TEST_DEBUG << std::endl << "  " << x << std::endl;
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   try
     {
@@ -880,11 +831,11 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
     }
   catch (const Test::StructsEx &x)
     {
-      uint16_t prev_result = result;
+      uint16_t const prev_result = result;
 
       if (x.structs().size() != 5)
         {
-          TAOX11_TEST_ERROR << "ERROR do_throw_structs : catching Test::StructsEx : "
+          TAOX11_TEST_ERROR << "ERROR do_throw_structs : catching Test::StructsEx: "
                         << "invalid length received <" << x.structs().size()
                         << "> : expected <5>" << std::endl;
           ++result;
@@ -916,14 +867,13 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
         }
       if (prev_result == result)
         {
-          TAOX11_TEST_DEBUG << "Successfully caught expected Test::StructsEx exception : ";
+          TAOX11_TEST_DEBUG << "Successfully caught expected Test::StructsEx exception: " << x << std::endl;
         }
       else
         {
           // This is a summary. No need to increase result
-          TAOX11_TEST_ERROR << "ERROR catching Test::StructsEx : ";
+          TAOX11_TEST_ERROR << "ERROR catching Test::StructsEx: " << x << std::endl;
         }
-      TAOX11_TEST_DEBUG << std::endl << "  " << x << std::endl;
     }
 
   TAOX11_TEST_DEBUG << "Testing zero initialization" << std::endl;
@@ -937,8 +887,6 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
     }
   }
 
-  TAOX11_TEST_DEBUG << std::endl;
-
   return result;
 }
 
@@ -948,9 +896,9 @@ main (int argc, char* argv[])
   uint16_t errors = 0;
   try
     {
-      IDL::traits<CORBA::ORB>::ref_type _orb = CORBA::ORB_init (argc, argv);
+      IDL::traits<CORBA::ORB>::ref_type orb = CORBA::ORB_init (argc, argv);
 
-      if (_orb == nullptr)
+      if (!orb)
         {
           TAOX11_TEST_ERROR << "ERROR: CORBA::ORB_init (argc, argv) returned null ORB."
                        << std::endl;
@@ -958,7 +906,7 @@ main (int argc, char* argv[])
         }
 
       IDL::traits<CORBA::Object>::ref_type obj =
-        _orb->string_to_object ("file://test.ior");
+        orb->string_to_object ("file://test.ior");
 
       if (!obj)
         {
@@ -978,12 +926,11 @@ main (int argc, char* argv[])
           return 1;
         }
 
-      TAOX11_TEST_DEBUG << "narrowed Foo interface. Starting tests"
-                   << std::endl << std::endl;
+      TAOX11_TEST_DEBUG << "narrowed Foo interface. Starting tests" << std::endl;
 
       IDL::traits<Test::VT>::factory_ref_type vt_factory =
         CORBA::make_reference<Test::VT_init>();
-      _orb->register_value_factory (vt_factory->_obv_repository_id(),
+      orb->register_value_factory (vt_factory->_obv_repository_id(),
                                    vt_factory);
       TAOX11_TEST_DEBUG << "Registered factory with id: "
         << vt_factory->_obv_repository_id() << std::endl;
@@ -992,12 +939,10 @@ main (int argc, char* argv[])
       errors = test_exceptions (foo);
       errors += test_bar_object (foo);
 
-      TAOX11_TEST_DEBUG << std::endl << "shutting down...";
+      TAOX11_TEST_DEBUG << "shutting down..." << std::endl;
 
       foo->shutdown ();
-      _orb->destroy ();
-
-      TAOX11_TEST_DEBUG << std::endl;
+      orb->destroy ();
 
       TAOX11_TEST_DEBUG << "<" << errors
                     << "> problem(s) were found." << std::endl;
