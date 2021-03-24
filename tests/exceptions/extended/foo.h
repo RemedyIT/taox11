@@ -9,8 +9,7 @@
 
 #include "testS.h"
 
-class Bar
-  : public virtual CORBA::servant_traits<Test::Bar>::base_type
+class Bar : public virtual CORBA::servant_traits<Test::Bar>::base_type
 {
 public:
   /// Constructor
@@ -19,7 +18,6 @@ public:
   void do_something () override;
 
   void a_bar (int32_t) override;
-
   int32_t a_bar () override;
 };
 
@@ -29,14 +27,13 @@ class Foo
 public:
   /// Constructor
   Foo (IDL::traits<CORBA::ORB>::ref_type orb,
-    IDL::traits<Test::Bar>::ref_type bar);
+      IDL::traits<Test::Bar>::ref_type bar);
 
   // = The skeleton methods
   void do_it () override;
 
   int32_t a_number () override;
   int32_t a_number_and_message () override;
-
 
   std::string a_string () override;
   void a_string(const std::string& _v) override;
