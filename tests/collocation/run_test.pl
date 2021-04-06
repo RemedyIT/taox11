@@ -19,8 +19,6 @@ $target->AddLibPath ('.');
 
 $status = 0;
 
-print STDOUT "Collocation\n\n";
-
 $SV = $target->CreateProcess ("collocation");
 
 $server = $SV->SpawnWaitKill ($target->ProcessStartWaitInterval());
