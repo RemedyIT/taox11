@@ -11,15 +11,11 @@
 
 #include "tao/x11/orb.h"
 
-template <class T>
+template <class TEST_OBJECT>
 class Test_Wrapper
 {
 public:
-  using TEST_OBJECT = T;
-
-  // constructor and destructor
   Test_Wrapper(IDL::traits<CORBA::ORB>::ref_type);
-
   ~Test_Wrapper () = default;
 
   /**

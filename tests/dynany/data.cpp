@@ -13,7 +13,7 @@
 #include "testlib/taox11_testlog.h"
 
 Data::Data (IDL::traits<CORBA::ORB>::ref_type orb) :
-    orb_ (orb)
+    orb_ (std::move(orb))
 {
   try
   {
@@ -22,7 +22,7 @@ Data::Data (IDL::traits<CORBA::ORB>::ref_type orb) :
       this->orb_->resolve_initial_references ("RootPOA");
 
 
-    if (obj == nullptr)
+    if (!obj)
     {
       TAOX11_TEST_ERROR << "Unable to get root poa reference."
                         << std::endl;
