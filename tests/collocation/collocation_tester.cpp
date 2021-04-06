@@ -83,14 +83,39 @@ Collocation_Test::test_narrow ()
     TAOX11_TEST_ERROR << "left->shape returned incorrect value: " << left->shape () << std::endl;
     ++retval;
   }
+  if (left->color () != "black")
+  {
+    TAOX11_TEST_ERROR << "left->color returned incorrect value: " << left->color () << std::endl;
+    ++retval;
+  }
   if (right->shape () != "right")
   {
     TAOX11_TEST_ERROR << "right->shape returned incorrect value: " << right->shape () << std::endl;
     ++retval;
   }
+  if (right->width () != 0)
+  {
+    TAOX11_TEST_ERROR << "right->width returned incorrect value: " << right->width () << std::endl;
+    ++retval;
+  }
   if (bottom->shape () != "bottom")
   {
     TAOX11_TEST_ERROR << "bottom->shape returned incorrect value: " << bottom->shape () << std::endl;
+    ++retval;
+  }
+  if (bottom->color () != "translucent")
+  {
+    TAOX11_TEST_ERROR << "bottom->color returned incorrect value: " << bottom->color () << std::endl;
+    ++retval;
+  }
+  if (bottom->width () != 100)
+  {
+    TAOX11_TEST_ERROR << "bottom->width returned incorrect value: " << bottom->width () << std::endl;
+    ++retval;
+  }
+  if (bottom->name () != "Jubilee")
+  {
+    TAOX11_TEST_ERROR << "bottom->name returned incorrect value: " << bottom->name () << std::endl;
     ++retval;
   }
 
