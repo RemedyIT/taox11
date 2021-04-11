@@ -17,8 +17,7 @@
 class Driver
 {
 public:
-  // = Constructor and destructor.
-  Driver ();
+  Driver () = default;
   ~Driver ();
 
 enum TEST_TYPE
@@ -49,8 +48,7 @@ private:
   /// underlying ORB (we do not own it)
   IDL::traits<CORBA::ORB>::ref_type orb_;
 
-  TEST_TYPE test_type_;
-
+  TEST_TYPE test_type_ { NO_TEST };
 };
 
 #endif /* X11_DRIVER_H */

@@ -15,13 +15,7 @@
 #include "analyzer.h"
 
 Test_DynEnum::Test_DynEnum (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb),
-    test_name_ ("test_dynenum"),
-    error_count_ (0)
-{
-}
-
-Test_DynEnum::~Test_DynEnum ()
+  : orb_ (std::move(orb))
 {
 }
 

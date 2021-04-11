@@ -15,13 +15,7 @@
 #include "analyzer.h"
 
 Test_DynValue::Test_DynValue(IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb),
-    test_name_ ("test_dynvalue"),
-    error_count_ (0)
-{
-}
-
-Test_DynValue::~Test_DynValue ()
+  : orb_ (std::move(orb))
 {
 }
 

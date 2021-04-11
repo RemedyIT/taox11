@@ -21,7 +21,7 @@ public:
 
   void tab (int t);
 
-  ~DynAnyAnalyzer ();
+  ~DynAnyAnalyzer () = default;
 
   void resetTab ();
 

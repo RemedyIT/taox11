@@ -16,13 +16,7 @@
 
 
 Test_DynArray::Test_DynArray (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb),
-    test_name_ ("test_dynarray"),
-    error_count_ (0)
-{
-}
-
-Test_DynArray::~Test_DynArray ()
+  : orb_ (std::move(orb))
 {
 }
 
