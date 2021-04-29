@@ -62,7 +62,7 @@ test_local_objref ()
     }
   else
     {
-      TAOX11_TEST_DEBUG << "OK  Insertion/extraction of nil local object reference succeeded."<< std::endl;
+      TAOX11_TEST_DEBUG << "OK Insertion/extraction of nil local object reference succeeded."<< std::endl;
     }
 
   ref_in = CORBA::make_reference <foo> ();
@@ -75,7 +75,7 @@ test_local_objref ()
     }
   else
     {
-      TAOX11_TEST_DEBUG << "OK  Insertion/extraction of local object reference succeeded."<< std::endl;
+      TAOX11_TEST_DEBUG << "OK Insertion/extraction of local object reference succeeded."<< std::endl;
     }
 
   return testFailed;
@@ -125,7 +125,7 @@ test_typecode (Test::Hello::_ref_type hello)
     }
   else
     {
-      TAOX11_TEST_DEBUG << "OK  Found expected TCKind null in value."<< std::endl;
+      TAOX11_TEST_DEBUG << "OK Found expected TCKind null in value."<< std::endl;
       // Streaming tk_null typecode to ostream
       TAOX11_TEST_DEBUG << "Streaming tk_null typecode to ostream:" << std::endl;
       TAOX11_TEST_DEBUG << "Typecode: " << null_tc << std::endl;
@@ -288,7 +288,7 @@ test_typecode (Test::Hello::_ref_type hello)
   catch (const CORBA::MARSHAL& e)
   {
     if (e.minor() == 4)
-      TAOX11_TEST_DEBUG << "OK  Found expected CORBA::MARSHAL exception minor code 4."<< std::endl;
+      TAOX11_TEST_DEBUG << "OK Found expected CORBA::MARSHAL exception minor code 4."<< std::endl;
     else
     {
       TAOX11_TEST_ERROR << "ERROR  Unexpected minor code." << e.minor() << std::endl;
@@ -393,22 +393,22 @@ test_typecode (Test::Hello::_ref_type hello)
 
   // TypeCode_impl code, this has in the future to be moved to a typecode test.
   bool bisa = tcref1->_is_a ("dummy");
-  TAOX11_TEST_DEBUG << "OK  Found _is_a: " << bisa << std::endl;
+  TAOX11_TEST_DEBUG << "OK Found _is_a: " << bisa << std::endl;
 
   bool tcrefeq = tcref1->equal (tcref2);
-  TAOX11_TEST_DEBUG << "OK  Found equal: " << tcrefeq << std::endl;
+  TAOX11_TEST_DEBUG << "OK Found equal: " << tcrefeq << std::endl;
 
   bool tcrefev = tcref1->equivalent (tcref2);
-  TAOX11_TEST_DEBUG << "OK  Found equivalent: " << tcrefev << std::endl;
+  TAOX11_TEST_DEBUG << "OK Found equivalent: " << tcrefev << std::endl;
 
   IDL::traits<CORBA::TypeCode>::ref_type tcref4;
   tcref4 = tcref1->get_compact_typecode ();
-  TAOX11_TEST_DEBUG << "OK  Found get_compact_typecode: " << tcref4 << std::endl;
+  TAOX11_TEST_DEBUG << "OK Found get_compact_typecode: " << tcref4 << std::endl;
   // End of TypeCode_impl code
 
   if(!testFailed)
     {
-      TAOX11_TEST_DEBUG << "OK  test_typecode for extracting and inserting TypeCodes in ANY's is  OK." << std::endl;
+      TAOX11_TEST_DEBUG << "OK test_typecode for extracting and inserting TypeCodes in ANY's is  OK." << std::endl;
     }
   else
     TAOX11_TEST_ERROR << "ERROR test_typecode"<< std::endl;
@@ -444,19 +444,19 @@ test_object (Test::Hello::_ref_type hello,
   if (!(eA >>= hello2ref))
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR Extract to of Hello eA >>= hello2ref is false" << std::endl;
+      TAOX11_TEST_ERROR << "ERROR Extract to of Hello eA >>= hello2ref is false" << std::endl;
     }
   if (!(eA >>= gOB))
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR Extract to of Hello eA >>= gOB is false" <<  std::endl;
+      TAOX11_TEST_ERROR << "ERROR Extract to of Hello eA >>= gOB is false" <<  std::endl;
     }
 
   aA <<= aOB;
   if (!(aA >>= dOB))
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR Extract to object aA >>= dOB is false" <<  std::endl;
+      TAOX11_TEST_ERROR << "ERROR Extract to object aA >>= dOB is false" <<  std::endl;
     }
 
   TAOX11_TEST_DEBUG << "Test ostream object: " << dOB << std::endl;
@@ -464,7 +464,7 @@ test_object (Test::Hello::_ref_type hello,
   if (!dOB->_is_equivalent(aOB))
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR with extracting to object aA >>= dOB"  <<  std::endl;
+      TAOX11_TEST_ERROR << "ERROR with extracting to object aA >>= dOB"  <<  std::endl;
     }
 
   cA <<= cOB;
@@ -474,38 +474,38 @@ test_object (Test::Hello::_ref_type hello,
   // c in -> b out, a in -> c out, return = server orb object
 
   if (rA>>=rOB)
-    TAOX11_TEST_DEBUG << "OK  rA>>= rOB is true" <<  std::endl;
+    TAOX11_TEST_DEBUG << "OK rA>>= rOB is true" <<  std::endl;
   else
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR rA>>= rOB is false" <<  std::endl;
+      TAOX11_TEST_ERROR << "ERROR rA>>= rOB is false" <<  std::endl;
     }
   std::string iorstr  = _orb->object_to_string(rOB);
   if (rOB->_is_equivalent(aOB))
-    TAOX11_TEST_DEBUG << "OK  orb obj_server == orb obj client, ior = " << iorstr <<  std::endl;
+    TAOX11_TEST_DEBUG << "OK orb obj_server == orb obj client, ior = " << iorstr <<  std::endl;
   else
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR orb obj_server != orb obj_client"  <<  std::endl;
+      TAOX11_TEST_ERROR << "ERROR orb obj_server != orb obj_client"  <<  std::endl;
     }
   if (!(bA>>=bOB))
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR bA>>= bOB is false" <<  std::endl;
+      TAOX11_TEST_ERROR << "ERROR bA>>= bOB is false" <<  std::endl;
     }
 
   if (!bOB->_is_equivalent(aOB))
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR  Out object isn't correct"  <<  std::endl;
+      TAOX11_TEST_ERROR << "ERROR  Out object isn't correct"  <<  std::endl;
     }
   cA>>=cOB;
   if (cOB->_is_equivalent(aOB))
-    TAOX11_TEST_DEBUG << "OK  InOut object is correct  " << std::endl;
+    TAOX11_TEST_DEBUG << "OK InOut object is correct  " << std::endl;
   else
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR InOut object isn't correct" <<  std::endl;
+      TAOX11_TEST_ERROR << "ERROR InOut object isn't correct" <<  std::endl;
     }
 
   // MCO @ 20150418 - This is not tested anymore.
@@ -517,18 +517,18 @@ test_object (Test::Hello::_ref_type hello,
 //  IDL::traits<CORBA::Object>::ref_type null_objptr = CORBA::make_reference <foo> ();
 //
 //  if (nullptr == &null_objptr->get_proxy ())
-//    TAOX11_TEST_DEBUG << "OK  Found expected nullptr." <<  std::endl;
+//    TAOX11_TEST_DEBUG << "OK Found expected nullptr." <<  std::endl;
 //
 //  try
 //    {
 //      aA <<= null_objptr;
 //      testFailed = true;
-//      TAOX11_TEST_ERROR << " ERROR expected CORBA::MARSHAL exception." <<  std::endl;
+//      TAOX11_TEST_ERROR << "ERROR expected CORBA::MARSHAL exception." <<  std::endl;
 //    }
 //  catch (const CORBA::MARSHAL& e)
 //    {
 //      if (e.minor() == 4)
-//        TAOX11_TEST_DEBUG << "OK  Found expected CORBA::MARSHAL exception minor code 4."<< std::endl;
+//        TAOX11_TEST_DEBUG << "OK Found expected CORBA::MARSHAL exception minor code 4."<< std::endl;
 //      else
 //      {
 //        TAOX11_TEST_ERROR << "ERROR  Unexpected minor code." <<  e.minor() << std::endl;
@@ -538,7 +538,7 @@ test_object (Test::Hello::_ref_type hello,
 //  catch (const CORBA::INV_OBJREF)
 //    {
 //      testFailed = true;
-//      TAOX11_TEST_ERROR << " ERROR expected CORBA::MARSHAL exception." <<  std::endl;
+//      TAOX11_TEST_ERROR << "ERROR expected CORBA::MARSHAL exception." <<  std::endl;
 //    }
 
   // Test insertion operator for nill object_reference
@@ -551,7 +551,7 @@ test_object (Test::Hello::_ref_type hello,
   catch (const CORBA::Exception& ex)
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR: nill object_reference insertion failed: " << ex << std::endl;
+      TAOX11_TEST_ERROR << "ERROR: nill object_reference insertion failed: " << ex << std::endl;
     }
 
   cA <<= nilref;
@@ -574,16 +574,16 @@ test_object (Test::Hello::_ref_type hello,
   catch (const CORBA::Exception& ex)
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR: nill object_reference TestAny4 failed: " << ex << std::endl;
+      TAOX11_TEST_ERROR << "ERROR: nil object_reference TestAny4 failed: " << ex << std::endl;
     }
 
 
   if(!testFailed)
     {
-      TAOX11_TEST_DEBUG << "OK  Exit test_object OK.  Anytest2 for Object in ANY's is  OK." << std::endl;
+      TAOX11_TEST_DEBUG << "OK Exit test_object OK.  Anytest2 for Object in ANY's is  OK." << std::endl;
     }
     else
-      TAOX11_TEST_ERROR << " ERROR test_object failed" <<  std::endl;
+      TAOX11_TEST_ERROR << "ERROR test_object failed" <<  std::endl;
   return testFailed;
 }
 
@@ -620,10 +620,10 @@ test_any_non_copying (Test::Hello::_ref_type hello)
   if(aAA.impl() != nullptr)
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR: nullptr expected" << std::endl;
+      TAOX11_TEST_ERROR << "ERROR: nullptr expected" << std::endl;
     }
   else
-    TAOX11_TEST_DEBUG << "OK  nullptr expected" << std::endl;
+    TAOX11_TEST_DEBUG << "OK nullptr expected" << std::endl;
 
 
   // Test move insertion operator for std::string
@@ -657,13 +657,13 @@ test_any_non_copying (Test::Hello::_ref_type hello)
       if (x != y)
         {
           testFailed = true;
-          TAOX11_TEST_ERROR << " ERROR : Anytest 3 failed with return value x = " << x << " and y = " << y<< std::endl;
+          TAOX11_TEST_ERROR << "ERROR : Anytest 3 failed with return value x = " << x << " and y = " << y<< std::endl;
         }
     }
   else
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR in return value of TestAny3 with Any's" << std::endl;
+      TAOX11_TEST_ERROR << "ERROR in return value of TestAny3 with Any's" << std::endl;
     }
 
   bA>>=bAA;
@@ -672,12 +672,12 @@ test_any_non_copying (Test::Hello::_ref_type hello)
   aAA>>=y;
   if (x == y)
     {
-      TAOX11_TEST_DEBUG << " Anytest 3 OK with out value x = " << x << " and y = " << y  << std::endl;
+      TAOX11_TEST_DEBUG << "Anytest 3 OK with out value x = " << x << " and y = " << y  << std::endl;
     }
   else
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << " ERROR : Anytest 3 failed with out value x = " << x << " and y = " << y<< std::endl;
+      TAOX11_TEST_ERROR << "ERROR : Anytest 3 failed with out value x = " << x << " and y = " << y<< std::endl;
     }
 
   //check on tk_null after move with cA in TestAny3.
@@ -687,7 +687,7 @@ test_any_non_copying (Test::Hello::_ref_type hello)
 
       if (type_any->kind()== CORBA::TCKind::tk_null)
         {
-             TAOX11_TEST_DEBUG << " Anytest 3 OK cA == tk_null " << /*type_any->name() <<*/ std::endl;
+             TAOX11_TEST_DEBUG << "Anytest 3 OK cA == tk_null " << /*type_any->name() <<*/ std::endl;
         }
       else
         {
@@ -698,10 +698,14 @@ test_any_non_copying (Test::Hello::_ref_type hello)
 
   if(!testFailed)
     {
-      TAOX11_TEST_DEBUG << "OK  Exit test_any_non_copying OK." << std::endl;
+      TAOX11_TEST_DEBUG << "OK Exit test_any_non_copying OK." << std::endl;
     }
-    else
-      TAOX11_TEST_ERROR << " ERROR test_any_non_copying failed" <<  std::endl;  return testFailed;
+  else
+    {
+      TAOX11_TEST_ERROR << "ERROR test_any_non_copying failed" <<  std::endl;
+    }
+
+  return testFailed;
 }
 
 int
@@ -764,22 +768,22 @@ main(int argc, char* argv[])
 
       if ((!(aA>>= aL))||(aL != 1))
         {
-          TAOX11_TEST_ERROR << " ERROR : aL != 1" << std::endl;
+          TAOX11_TEST_ERROR << "ERROR : aL != 1" << std::endl;
           testFailed = true;
         }
       if (!(bA>>= bL) || (bL != 2))
         {
-          TAOX11_TEST_ERROR << " ERROR : bL != 2" << std::endl;
+          TAOX11_TEST_ERROR << "ERROR : bL != 2" << std::endl;
           testFailed = true;
         }
       if (!(cA>>= cL) || (cL != 6))
         {
-          TAOX11_TEST_ERROR << " ERROR : cL != 6" << std::endl;
+          TAOX11_TEST_ERROR << "ERROR : cL != 6" << std::endl;
           testFailed = true;
         }
       if (!(rA>>= rL) || (rL != 7))
         {
-          TAOX11_TEST_ERROR << " ERROR : rL != 7" << std::endl;
+          TAOX11_TEST_ERROR << "ERROR : rL != 7" << std::endl;
           testFailed = true;
         }
 
@@ -990,16 +994,16 @@ main(int argc, char* argv[])
       }
       else
       {
-        TAOX11_TEST_INFO << "OK  CORBA::Any equivalent assignment succeeded." << std::endl;
+        TAOX11_TEST_INFO << "OK CORBA::Any equivalent assignment succeeded." << std::endl;
       }
 
       if (testFailed)
       {
-        TAOX11_TEST_ERROR << " ERROR : Any test failed" << std::endl;
+        TAOX11_TEST_ERROR << "ERROR : Any test failed" << std::endl;
       }
       else
       {
-        TAOX11_TEST_DEBUG << " Any Test OK" << std::endl;
+        TAOX11_TEST_DEBUG << "Any Test OK" << std::endl;
       }
 
       TAOX11_TEST_DEBUG << "shutting down...";
