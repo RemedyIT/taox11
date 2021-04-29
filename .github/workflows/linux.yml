@@ -60,6 +60,11 @@ jobs:
             ruby: '3.0'
             PackageDeps: g++-10
           - os: ubuntu-20.04
+            CC: gcc-11
+            CXX: g++-11
+            ruby: '3.0'
+            PackageDeps: g++-11
+          - os: ubuntu-20.04
             CC: gcc-10
             CXX: g++-10
             ruby: '2.7'
