@@ -541,8 +541,8 @@ test_object (Test::Hello::_ref_type hello,
 //      TAOX11_TEST_ERROR << "ERROR expected CORBA::MARSHAL exception." <<  std::endl;
 //    }
 
-  // Test insertion operator for nill object_reference
-  TAOX11_TEST_INFO << "Test insertion for nill object_reference" << std::endl;
+  // Test insertion operator for nil object_reference
+  TAOX11_TEST_INFO << "Test insertion for nil object_reference" << std::endl;
   IDL::traits<CORBA::Object>::ref_type nilref = nullptr;
   try
     {
@@ -551,7 +551,7 @@ test_object (Test::Hello::_ref_type hello,
   catch (const CORBA::Exception& ex)
     {
       testFailed = true;
-      TAOX11_TEST_ERROR << "ERROR: nill object_reference insertion failed: " << ex << std::endl;
+      TAOX11_TEST_ERROR << "ERROR: nil object_reference insertion failed: " << ex << std::endl;
     }
 
   cA <<= nilref;
