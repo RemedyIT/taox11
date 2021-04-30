@@ -34,7 +34,7 @@ test_bar_object (IDL::traits<Test::Foo>::ref_type foo)
       if (!bar)
         {
           TAOX11_TEST_ERROR << "test_bar_object - ERROR : catching a Test::BarEx but "
-            << "the reference to 'bar' seems nill" << std::endl;
+            << "the reference to 'bar' seems nil" << std::endl;
           ++result;
         }
       else
