@@ -37,6 +37,15 @@ Test_DynArray::run_test ()
   {
     TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[4] << " =*=*=*=*" << std::endl;
 
+    IDL::traits<DynamicAny::DynArray>::ref_type dyn_nil =
+      IDL::traits<DynamicAny::DynArray>::narrow (nullptr);
+
+    if (dyn_nil)
+    {
+      ++this->error_count_;
+      TAOX11_TEST_ERROR << "DynArray::narrow(nil) should return nil" << std::endl;
+    }
+
     IDL::traits<CORBA::Object>::ref_type factory_obj =
                     this->orb_->resolve_initial_references ("DynAnyFactory");
 
@@ -46,7 +55,6 @@ Test_DynArray::run_test ()
                         << std::endl;
      return 1;
     }
-
 
     IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory =
         IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);
@@ -112,7 +120,6 @@ Test_DynArray::run_test ()
     in_any2 <<= ta;
 
     ftc1->from_any (in_any2);
-
 
     analyzer.analyze (ftc1);
 

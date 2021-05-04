@@ -34,6 +34,15 @@ Test_DynUnion::run_test ()
 
   try
   {
+    IDL::traits<DynamicAny::DynUnion>::ref_type dyn_nil =
+      IDL::traits<DynamicAny::DynUnion>::narrow (nullptr);
+
+    if (dyn_nil)
+    {
+      ++this->error_count_;
+      TAOX11_TEST_ERROR << "DynUnion::narrow(nil) should return nil" << std::endl;
+    }
+
     IDL::traits<CORBA::Object>::ref_type factory_obj =
                this->orb_->resolve_initial_references ("DynAnyFactory");
 
