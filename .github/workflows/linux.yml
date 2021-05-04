@@ -15,6 +15,10 @@ on:
     - cron: '0 1 * * SUN'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   DOC_ROOT: ${{ github.workspace }}/ACE_TAO
   ACE_ROOT: ${{ github.workspace }}/ACE_TAO/ACE
@@ -49,11 +53,12 @@ jobs:
             CXX: g++-8
             ruby: '2.7'
             PackageDeps: g++-8
-          - os: ubuntu-18.04
+          - os: ubuntu-20.04
             CC: gcc-9
             CXX: g++-9
             ruby: '2.7'
             PackageDeps: g++-9
+            feature: Codecov
           - os: ubuntu-20.04
             CC: gcc-10
             CXX: g++-10
@@ -117,6 +122,10 @@ jobs:
     - name: Run brix11 configure
       run: |
         $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT
+    - name: Add gcov
+      run: |
+        sed -i '1igcov=1' $ACE_ROOT/include/makeinclude/platform_macros.GNU
+      if: matrix.feature == 'Codecov'
     - name: Print brix11 configuration
       run: |
         $X11_BASE_ROOT/bin/brix11 env -- configure -P
@@ -126,6 +135,14 @@ jobs:
     - name: Run brix11 make
       run: |
         $X11_BASE_ROOT/bin/brix11 make -N -d $X11_BASE_ROOT -- make -N -d $TAOX11_ROOT/examples -- make -N -d $TAOX11_ROOT/orbsvcs/tests -- make -N -d $TAOX11_ROOT/tests
+    - name: Run brix11 tests
+      run: |
+        $X11_BASE_ROOT/bin/brix11 run list -l $TAOX11_ROOT/bin/taox11_tests.lst -r $TAOX11_ROOT
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
       if: matrix.feature == 'CodeQL'
+    - uses: codecov/codecov-action@v1
+      with:
+        verbose: true # optional (default = false)
+      if: matrix.feature == 'Codecov'
+
