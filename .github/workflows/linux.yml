@@ -53,11 +53,12 @@ jobs:
             CXX: g++-8
             ruby: '2.7'
             PackageDeps: g++-8
-          - os: ubuntu-18.04
+          - os: ubuntu-20.04
             CC: gcc-9
             CXX: g++-9
             ruby: '2.7'
             PackageDeps: g++-9
+            feature: Codecov
           - os: ubuntu-20.04
             CC: gcc-10
             CXX: g++-10
@@ -68,7 +69,6 @@ jobs:
             CXX: g++-11
             ruby: '3.0'
             PackageDeps: g++-11
-            feature: Codecov
           - os: ubuntu-20.04
             CC: gcc-10
             CXX: g++-10
