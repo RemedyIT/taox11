@@ -32,6 +32,15 @@ Test_DynEnum::run_test ()
 
   try
   {
+    IDL::traits<DynamicAny::DynEnum>::ref_type dyn_nil =
+      IDL::traits<DynamicAny::DynEnum>::narrow (nullptr);
+
+    if (dyn_nil)
+    {
+      ++this->error_count_;
+      TAOX11_TEST_ERROR << "DynEnum::narrow(nil) should return nil" << std::endl;
+    }
+
     IDL::traits<CORBA::Object>::ref_type factory_obj =
           this->orb_->resolve_initial_references ("DynAnyFactory");
 
@@ -41,7 +50,6 @@ Test_DynEnum::run_test ()
                         << std::endl;
      return -1;
     }
-
 
     IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory =
         IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);
