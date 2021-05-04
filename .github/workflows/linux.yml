@@ -124,7 +124,8 @@ jobs:
         $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT
     - name: Add gcov
       run: |
-        sed '1igcov=1' $ACE_ROOT/include/makeinclude/platform_macros.GNU
+        sed -i '1igcov=1' $ACE_ROOT/include/makeinclude/platform_macros.GNU
+      if: matrix.feature == 'Codecov'
     - name: Print brix11 configuration
       run: |
         $X11_BASE_ROOT/bin/brix11 env -- configure -P
