@@ -36,7 +36,6 @@ FOO_IORInterceptor::establish_components (
   // exception.  We check for exceptions despite this fact.  The ORB
   // does the right thing, and ignores any IOR interceptors that throw
   // an exception.
-
   std::string name = this->name ();
 
   CORBA::Any data;
@@ -62,10 +61,8 @@ FOO_IORInterceptor::establish_components (
   info->add_ior_component_to_profile (component,
                                       IOP::TAG_INTERNET_IOP);
 
-
   TAOX11_TEST_INFO << "Added tagged component containing the string \"" <<
       name << "\" to all IIOP profiles." << std::endl;
-
 
   try
   {
@@ -80,6 +77,28 @@ FOO_IORInterceptor::establish_components (
   {
     if (ex.minor () != (CORBA::OMGVMCID | 3))
       throw;
+  }
+
+  TAOX11_TEST_INFO << "Testing IORInfo accessors"<< std::endl;
+  PortableInterceptor::AdapterManagerId manager_id = info->manager_id ();
+  if (manager_id != "RootPOAManager")
+  {
+    TAOX11_TEST_ERROR << "ERROR: manager_id is " << manager_id << std::endl;
+  }
+  PortableInterceptor::AdapterState adapter_state = info->state ();
+  if (adapter_state != 0)
+  {
+    TAOX11_TEST_ERROR << "ERROR: adapter_state is " << adapter_state << std::endl;
+  }
+  IDL::traits<PortableInterceptor::ObjectReferenceTemplate>::ref_type at = info->adapter_template ();
+  if (!at)
+  {
+    TAOX11_TEST_ERROR << "ERROR: adapter template is nil " << std::endl;
+  }
+  IDL::traits<PortableInterceptor::ObjectReferenceFactory>::ref_type cf = info->current_factory ();
+  if (!cf)
+  {
+    TAOX11_TEST_ERROR << "ERROR: current factory is nil " << std::endl;
   }
 }
 
