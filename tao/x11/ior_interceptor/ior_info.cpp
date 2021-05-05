@@ -209,7 +209,7 @@ namespace TAOX11_NAMESPACE
         }
 
       protected:
-        virtual ~ObjectReferenceFactory_proxy () = default;
+        ~ObjectReferenceFactory_proxy () override = default;
 
       private:
         IDL::traits<PortableInterceptor::ObjectReferenceFactory>::ref_type x11_orf_;

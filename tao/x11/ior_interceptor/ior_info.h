@@ -27,12 +27,10 @@ namespace TAOX11_NAMESPACE
       virtual ~IORInfo () = default;
 
       IDL::traits<CORBA::Policy>::ref_type
-      get_effective_policy (
-          CORBA::PolicyType type) override;
+      get_effective_policy (CORBA::PolicyType type) override;
 
       void
-      add_ior_component (
-          const IOP::TaggedComponent& a_component) override;
+      add_ior_component (const IOP::TaggedComponent& a_component) override;
 
       void
       add_ior_component_to_profile (
