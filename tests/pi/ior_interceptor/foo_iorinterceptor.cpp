@@ -109,6 +109,18 @@ FOO_IORInterceptor::establish_components (
     TAOX11_TEST_ERROR << "Narrow nil PortableInterceptor::IORInfo should return nil"
         << std::endl;
   }
+
+  // Test widening and narrowing back
+  IDL::traits<CORBA::Object>::ref_type base_iorinfo = info;
+
+  IDL::traits<PortableInterceptor::IORInfo>::ref_type narrowed_iorinfo =
+      IDL::traits<PortableInterceptor::IORInfo>::narrow (base_iorinfo);
+
+  if (!narrowed_iorinfo)
+  {
+    TAOX11_TEST_ERROR << "Widening and narrow PortableInterceptor::IORInfo failed"
+        << std::endl;
+  }
 }
 
 void
