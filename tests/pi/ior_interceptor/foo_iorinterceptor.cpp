@@ -100,6 +100,15 @@ FOO_IORInterceptor::establish_components (
   {
     TAOX11_TEST_ERROR << "ERROR: current factory is nil " << std::endl;
   }
+
+  IDL::traits<PortableInterceptor::IORInfo>::ref_type nil_iorinfo =
+      IDL::traits<PortableInterceptor::IORInfo>::narrow (nullptr);
+
+  if (nil_iorinfo)
+  {
+    TAOX11_TEST_ERROR << "Narrow nil PortableInterceptor::IORInfo should return nil"
+        << std::endl;
+  }
 }
 
 void
