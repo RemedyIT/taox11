@@ -79,6 +79,7 @@ jobs:
       run: |
         %X11_BASE_ROOT%/bin/brix11 gen build axcioma/workspace.mwc -- gen build %TAOX11_ROOT%/examples -- gen build %TAOX11_ROOT%/orbsvcs/tests -- gen build %TAOX11_ROOT%/tests
       shell: cmd
+    - uses: ammaraskar/msvc-problem-matcher@0.1
     - name: Run brix11 make
       run: |
         %X11_BASE_ROOT%/bin/brix11 make -N -d %X11_BASE_ROOT% -- make -N -d %TAOX11_ROOT%/examples -- make -N -d %TAOX11_ROOT%/orbsvcs/tests -- make -N -d %TAOX11_ROOT%/tests
