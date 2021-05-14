@@ -96,7 +96,9 @@ module RIDL
         else
           self.sub!(/^(?:#{RIDL::CoreExt::String.acronyms_regex}(?=\b|[A-Z_])|\w)/) { $&.downcase }
         end
-        self.gsub!(/(?:_|(\/))([a-z\d]*)/i) { "#{$1}#{RIDL::CoreExt::String.acronyms[$2] || $2.capitalize}" }.gsub('/', '::')
+        self.gsub!(/(?:_|(\/))([a-z\d]*)/i) { "#{$1}#{RIDL::CoreExt::String.acronyms[$2] || $2.capitalize}" }
+        self.gsub!('/', '::')
+        self
       end
 
       # Removes the module part from the expression in the string:
