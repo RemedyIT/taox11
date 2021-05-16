@@ -101,7 +101,7 @@ module IDL
       private
 
       def key
-        "#{@root_idx}:#{File.join(@dir,@name)}"
+        "#{@root_idx}:#{File.join(@dir, @name)}"
       end
 
       def descend
@@ -133,7 +133,7 @@ module IDL
               tpl_full_path = Dir.glob(tpl_full_glob).first
               if tpl_full_path && File.file?(tpl_full_path)
                 @tpl_root = File.join(File.basename(File.dirname(tpl_path)), File.basename(tpl_path))
-                @root_idx = idx   # mark the root where we found a matching template
+                @root_idx = idx # mark the root where we found a matching template
                 return block.call(tpl_full_path)
               end
             end

@@ -212,7 +212,7 @@ module IDL
           visitor(InterfaceVisitor) do |v|
             v.class_eval { include AmiHandler }
             v.visit(base)
-          end unless base.is_abstract?  # leave out abstract bases
+          end unless base.is_abstract? # leave out abstract bases
         end.compact
       end
 

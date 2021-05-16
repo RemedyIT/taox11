@@ -31,15 +31,14 @@ namespace TAOX11_NAMESPACE
         public virtual TAO_CORBA::LocalObject
     {
     public:
-      Locator_Callback (
-        const IDL::traits<TAOX11_NAMESPACE::IORTable::Locator>::ref_type locator);
-      ~Locator_Callback () = default;
+      Locator_Callback (IDL::traits<TAOX11_NAMESPACE::IORTable::Locator>::ref_type locator);
+      ~Locator_Callback () override = default;
 
-      char * locate (const char *);
+      char * locate (const char *) override;
 
-      IDL::traits<TAOX11_NAMESPACE::IORTable::Locator>::ref_type
-        get_impl () const;
+      IDL::traits<TAOX11_NAMESPACE::IORTable::Locator>::ref_type get_impl () const;
     private:
+      Locator_Callback () = delete;
       Locator_Callback (const Locator_Callback&) = delete;
       Locator_Callback (Locator_Callback&&) = delete;
       Locator_Callback& operator= (const Locator_Callback&) = delete;

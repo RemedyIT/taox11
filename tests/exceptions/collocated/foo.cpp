@@ -7,12 +7,8 @@
 #include "foo.h"
 #include "testlib/taox11_testlog.h"
 
-#define EXCEPTION_MESSAGE_METHOD "Start doing something"
-#define EXCEPTION_MESSAGE_ATTRIBUTE "Attribute 'something'"
-
-Bar::Bar ()
-{
-}
+const std::string EXCEPTION_MESSAGE_METHOD ("Start doing something");
+const std::string EXCEPTION_MESSAGE_ATTRIBUTE ("Attribute 'something'");
 
 void
 Bar::do_something (const std::string &message)
@@ -44,8 +40,8 @@ Bar::something (int32_t something)
 
 Foo::Foo (IDL::traits<CORBA::ORB>::ref_type orb,
   IDL::traits<Test::Bar>::ref_type bar)
-  : orb_ (orb)
-  , bar_ (bar)
+  : orb_ (std::move(orb))
+  , bar_ (std::move(bar))
 {
 }
 
@@ -102,7 +98,7 @@ Foo::test_collocated_exception_attribute ()
   // Testing the getraises colocated exception
   try
   {
-    int32_t tmp = this->bar_->something ();
+    int32_t const tmp = this->bar_->something ();
     TAOX11_TEST_ERROR << "ERROR : Foo::test_collocated_exception_attribute - "
       << "No exception caught while getting attribute 'something'. 'something' "
       << "returned " << tmp << std::endl;

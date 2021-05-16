@@ -11,14 +11,14 @@
 #include "hello.h"
 
 Hello::Hello(IDL::traits<CORBA::ORB>::ref_type orb) :
-  orb_ (orb)
+  orb_ (std::move(orb))
 {
 }
 
 IDL::traits<Test::Bar>::ref_type
 Hello::get_bar ()
 {
-  return nullptr;
+  return {};
 }
 
 void

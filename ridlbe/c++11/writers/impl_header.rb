@@ -70,7 +70,7 @@ module IDL
         else
           if generate_servant_implementation?
             visitor(InterfaceVisitor).visit_pre(node)
-            inc_nest  # servant implementation class
+            inc_nest # servant implementation class
           end
         end
       end

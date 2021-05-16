@@ -8,10 +8,9 @@
  */
 
 #include "testC.h"
-
 #include "testlib/taox11_testlog.h"
 
-#define ALMOST_RIGHT "Almost right"
+const std::string ALMOST_RIGHT ("Almost right");
 
 uint16_t
 test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
@@ -27,7 +26,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
     }
   catch (const Test::StructEx &x)
     {
-      const uint16_t prev_result = result;
+      uint16_t const prev_result = result;
 
       if (x.struct_i().id() != 888)
         {
@@ -46,17 +45,14 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
         }
       if (prev_result == result)
         {
-          TAOX11_TEST_DEBUG << "Successfully caught expected Test::StructEx exception : ";
+          TAOX11_TEST_DEBUG << "Successfully caught expected Test::StructEx exception: " << x << std::endl;
         }
       else
         {
           // This is a summary. No need to increase result
-          TAOX11_TEST_ERROR << "ERROR : catching Test::StructEx : ";
+          TAOX11_TEST_ERROR << "ERROR : catching Test::StructEx : " << x << std::endl;
         }
-      TAOX11_TEST_DEBUG << std::endl << "\t" << x << std::endl;
     }
-
-  TAOX11_TEST_DEBUG << std::endl;
 
   return result;
 }
@@ -69,7 +65,7 @@ main (int argc, char* argv[])
     {
       IDL::traits<CORBA::ORB>::ref_type orb = CORBA::ORB_init (argc, argv);
 
-      if (orb == nullptr)
+      if (!orb)
         {
           TAOX11_TEST_ERROR << "ERROR : CORBA::ORB_init (argc, argv) returned null ORB."
             << std::endl;
@@ -92,24 +88,20 @@ main (int argc, char* argv[])
 
       if (!foo)
         {
-          TAOX11_TEST_ERROR << "ERROR : IDL::traits<Test::Foo>::narrow (obj) returned null object."
-            << std::endl;
+          TAOX11_TEST_ERROR << "ERROR : IDL::traits<Test::Foo>::narrow (obj) returned null object." << std::endl;
           return 1;
         }
 
-      TAOX11_TEST_DEBUG << "narrowed Foo interface. Starting tests"
-        << std::endl << std::endl;
+      TAOX11_TEST_DEBUG << "narrowed Foo interface. Starting tests" << std::endl;
 
       errors = test_exceptions (foo);
 
-      TAOX11_TEST_DEBUG << std::endl << "shutting down...";
+      TAOX11_TEST_DEBUG << "shutting down..." << std::endl;
 
       foo->shutdown ();
       orb->destroy ();
 
-      TAOX11_TEST_DEBUG << std::endl;
-
-      TAOX11_TEST_DEBUG << "<" << errors << "> problem(s) were found." << std::endl;
+      TAOX11_TEST_DEBUG << "client <" << errors << "> problem(s) were found." << std::endl;
     }
   catch (const std::exception& e)
     {

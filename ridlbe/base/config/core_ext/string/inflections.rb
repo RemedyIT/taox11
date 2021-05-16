@@ -63,8 +63,8 @@ module RIDL
       def underscore!
         self.gsub!(/::/, '_')
         self.gsub!(/(?:([A-Za-z\d])|^)(#{RIDL::CoreExt::String.acronyms_regex})(?=\b|[^a-z])/) { "#{$1}#{$1 && '_'}#{$2.downcase}" }
-        self.gsub!(/([A-Z\d]+)([A-Z][a-z])/,'\1_\2')
-        self.gsub!(/([a-z\d])([A-Z])/,'\1_\2')
+        self.gsub!(/([A-Z\d]+)([A-Z][a-z])/, '\1_\2')
+        self.gsub!(/([a-z\d])([A-Z])/, '\1_\2')
         self.tr!('-', '_')
         self.downcase!
         self

@@ -93,7 +93,7 @@ main (int argc, char *argv[])
       if (!root_poa)
         {
           TAOX11_TEST_ERROR << "ERROR: IDL::traits<PortableServer::POA>::narrow (obj) "
-                       << "returned nill."
+                       << "returned nil."
                        << std::endl;
           return 1;
         }

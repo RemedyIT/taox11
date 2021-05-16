@@ -15,13 +15,7 @@
 #include "analyzer.h"
 
 Test_DynValue::Test_DynValue(IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb),
-    test_name_ ("test_dynvalue"),
-    error_count_ (0)
-{
-}
-
-Test_DynValue::~Test_DynValue ()
+  : orb_ (std::move(orb))
 {
 }
 
@@ -38,6 +32,15 @@ Test_DynValue::run_test ()
 
   try
   {
+    IDL::traits<DynamicAny::DynValue>::ref_type dyn_nil =
+      IDL::traits<DynamicAny::DynValue>::narrow (nullptr);
+
+    if (dyn_nil)
+    {
+      ++this->error_count_;
+      TAOX11_TEST_ERROR << "DynValue::narrow(nil) should return nil" << std::endl;
+    }
+
     IDL::traits<CORBA::Object>::ref_type factory_obj =
                     this->orb_->resolve_initial_references ("DynAnyFactory");
 

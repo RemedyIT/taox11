@@ -17,13 +17,7 @@
 #include "da_testsC.h"
 
 Test_DynAny::Test_DynAny (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb),
-    test_name_ ("test_dynany"),
-    error_count_ (0)
-{
-}
-
-Test_DynAny::~Test_DynAny ()
+  : orb_ (std::move(orb))
 {
 }
 

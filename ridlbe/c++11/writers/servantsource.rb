@@ -231,7 +231,7 @@ module IDL
         when IDL::Type::Sequence
           add_include('tao/x11/portable_server/basic_sargument_t.h')
           add_include('tao/x11/basic_argument_t.h')
-          add_include('tao/x11/sequence_cdr_t.h')  unless params[:no_cdr_streaming]
+          add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type.basetype)
         when IDL::Type::Array
           add_include('tao/x11/portable_server/basic_sargument_t.h')
@@ -333,7 +333,7 @@ module IDL
           # recheck if already done
           visitor(ArrayVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::String, IDL::Type::WString
-          return if idl_type.resolved_type.is_standard_type?  # handle only bounded strings (unbounded is standard_tpe)
+          return if idl_type.resolved_type.is_standard_type? # handle only bounded strings (unbounded is standard_tpe)
           # find the base typedef for this string
           return unless IDL::Type::ScopedName === idl_type # can't handle anonymous sequence types
           # find base typedef for string

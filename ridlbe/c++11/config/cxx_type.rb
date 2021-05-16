@@ -350,7 +350,7 @@ module IDL
       end
       def value_to_s(v, scope = nil)
         return 'L'+v.to_i.chr.dump.gsub('"', "'") if ::Integer === v
-        return 'L'+v.to_s[0,1].dump.gsub('"', "'") unless ::Array === v
+        return 'L'+v.to_s[0, 1].dump.gsub('"', "'") unless ::Array === v
         'L'+case v.first
         when :char
           "'#{v.last}'"
@@ -415,7 +415,7 @@ module IDL
         self.size.to_i == 0
       end
       def os_fmt
-        return  ' "\"" <<  %s << "\"" '
+        return ' "\"" <<  %s << "\"" '
       end
     end
 
@@ -456,7 +456,7 @@ module IDL
         self.size.to_i == 0
       end
       def os_fmt
-        return  ' %s '
+        return ' %s '
       end
     end
 
@@ -774,7 +774,7 @@ module IDL
         cxx_type
       end
       def value_to_s(v, scope = nil)
-        v.to_s.gsub(/d|D/,'')
+        v.to_s.gsub(/d|D/, '')
       end
     end
 

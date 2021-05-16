@@ -15,13 +15,7 @@
 #include "analyzer.h"
 
 Test_DynUnion::Test_DynUnion (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb),
-    test_name_ ("test_dynunion"),
-    error_count_ (0)
-{
-}
-
-Test_DynUnion::~Test_DynUnion ()
+  : orb_ (std::move(orb))
 {
 }
 
@@ -40,6 +34,14 @@ Test_DynUnion::run_test ()
 
   try
   {
+    IDL::traits<DynamicAny::DynUnion>::ref_type dyn_nil =
+      IDL::traits<DynamicAny::DynUnion>::narrow (nullptr);
+
+    if (dyn_nil)
+    {
+      ++this->error_count_;
+      TAOX11_TEST_ERROR << "DynUnion::narrow(nil) should return nil" << std::endl;
+    }
 
     IDL::traits<CORBA::Object>::ref_type factory_obj =
                this->orb_->resolve_initial_references ("DynAnyFactory");
@@ -50,7 +52,6 @@ Test_DynUnion::run_test ()
                        << std::endl;
       return 1;
     }
-
 
     IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory =
        IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);

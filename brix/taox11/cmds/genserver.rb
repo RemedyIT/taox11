@@ -41,7 +41,7 @@ module BRIX11
                      'Defines name of interface for which to activate a servant.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to generate enclosing module(s).',
                      'Default: derived from first IDL file basename (uppercasing first character)') {|v|
-                        options[:gensrv][:modules] = v.split('::');
+                        options[:gensrv][:modules] = v.split('::')
                         options[:gensrv][:interface] = options[:gensrv][:modules].pop
                      }
         optparser.on('-S[FILES]', '--with-servant=[FILES]',

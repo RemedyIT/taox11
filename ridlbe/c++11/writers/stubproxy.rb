@@ -311,7 +311,7 @@ module IDL
         when IDL::Type::Array
           visitor(ArrayVisitor).visit_cdr(node)
         when IDL::Type::String, IDL::Type::WString
-          visitor(StringVisitor).visit_cdr(node)  # only bounded, unbounded is standard_type
+          visitor(StringVisitor).visit_cdr(node) # only bounded, unbounded is standard_type
         end
       end
 
@@ -364,7 +364,7 @@ module IDL
        end
 
        def pre_visit(parser)
-         println();
+         println()
          printiln('// generated from StubProxyObjRefTraitsWriter#pre_visit')
        end
 

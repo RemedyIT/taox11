@@ -40,7 +40,7 @@ module BRIX11
                      'Defines name of client interface stub.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to generate enclosing module(s).',
                      'Default: derived from first IDL file basename (uppercasing first character)') {|v|
-                       options[:gencli][:modules] = v.split('::');
+                       options[:gencli][:modules] = v.split('::')
                        options[:gencli][:interface] = options[:gencli][:modules].pop
                      }
         optparser.on('--without-shutdown',

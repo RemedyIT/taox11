@@ -51,12 +51,6 @@ main(int argc, ACE_TCHAR *argv[])
   return error_count;
 }
 
-// constructor
-Driver::Driver ()
-  : test_type_ (NO_TEST)
-{
-}
-
 // destructor
 Driver::~Driver ()
 {
@@ -143,7 +137,7 @@ Driver::run ()
 {
   TAOX11_TEST_DEBUG << "Driver::run starting test " << this->test_type_ << std::endl;
 
-  int16_t error_count = 0;
+  int16_t error_count {};
 
   switch (this->test_type_)
   {

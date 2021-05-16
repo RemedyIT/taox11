@@ -31,7 +31,7 @@ module IDL
         def depends_on(*args)
           deplist = args.inject([]) do |l, a|
             if Hash === a
-              l.concat(a.collect {|b,f| {backend: b, facet: f.to_sym}})
+              l.concat(a.collect {|b, f| {backend: b, facet: f.to_sym}})
             else
               l << { facet: a.to_sym }
             end
@@ -44,7 +44,7 @@ module IDL
         def ignore_on_missing(*args)
           deplist = args.inject([]) do |l, a|
             if Hash === a
-              l.concat(a.collect {|b,f| {backend: b, facet: f.to_sym}})
+              l.concat(a.collect {|b, f| {backend: b, facet: f.to_sym}})
             else
               l << { facet: a.to_sym }
             end
@@ -137,9 +137,9 @@ module IDL
         @copyright = facet_config_[:copyright]
         ver = facet_config_[:version]
         @version = (Hash === ver ? ver : { :major => ver.to_i, :minor => 0, :release => 0 })
-        self.class.__send__(:define_method, :_setup_facet, &(facet_config_[:setup] || Proc.new {|_,_| }))
+        self.class.__send__(:define_method, :_setup_facet, &(facet_config_[:setup] || Proc.new {|_, _| }))
         self.class.__send__(:private, :_setup_facet)
-        self.class.__send__(:define_method, :_process_input, &(facet_config_[:process_input] || Proc.new {|_,_| }))
+        self.class.__send__(:define_method, :_process_input, &(facet_config_[:process_input] || Proc.new {|_, _| }))
         self.class.__send__(:private, :_process_input)
       end
 
@@ -227,7 +227,7 @@ module IDL
               end
             end
           end
-        end unless @orderedset.empty?   # no need to check if ordered set still empty
+        end unless @orderedset.empty? # no need to check if ordered set still empty
         # now check if remaining range matches dependencies that the already ordered facets
         # may have on the to be ordered facet
         @orderedset.each_with_index do |ofct, oix|
@@ -254,7 +254,7 @@ module IDL
           return (range.min..(range.max < dix ? range.max : dix))
         when :after
           # fct should be ordered after ofct so fct should be inserted at dix+1 at a minimum
-          unless range.include?(dix+1)   # dix+1 should be in possible range
+          unless range.include?(dix+1) # dix+1 should be in possible range
             IDL.fatal("Conflicting ordering dependency for facet #{fct} : #{dpos}:#{dfct}")
           end
           # just return the original (maximum range)

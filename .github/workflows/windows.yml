@@ -13,6 +13,11 @@ on:
       - v*
   schedule:
     - cron: '0 1 * * SUN'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   DOC_ROOT: ${{ github.workspace }}/ACE_TAO
