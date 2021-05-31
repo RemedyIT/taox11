@@ -68,7 +68,7 @@ class schmegegging_i : public virtual gleep::schmegegging
 {
 };
 
-// TODO: when anynomous times are enabled
+// TODO: when anonymous times are enabled
 // struct something_handler
 //   : public CORBA::servant_traits<bug_1985_c::d::AMI_somethingHandler>
 // {

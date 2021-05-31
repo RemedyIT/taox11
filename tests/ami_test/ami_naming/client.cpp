@@ -641,7 +641,7 @@ int main(int argc, char* argv[])
           (callback_sendc_ami_foo != 1) || (callback_attrib != 8 ) ||
           (callback_foo_two != 1) || (callback_do != 1))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected callbacks. Foo : expected -2- , received -" << callback_foo << "-"
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected callbacks. Foo : expected -2- , received -" << callback_foo << "-"
           << " sendc_foo : expected -1-, received -" << callback_sendc_foo << "-."
           << " sendc_ami_foo : expected -1-, received -" << callback_sendc_ami_foo << "-."
           << " foo_two : expected -1-, received -" << callback_foo_two << "-."

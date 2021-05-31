@@ -129,7 +129,7 @@ main (int argc, char *argv[])
                               policies);
       if (first_poa)
         {
-          TAOX11_TEST_INFO << "Succesfully created <" << FIRST_POA
+          TAOX11_TEST_INFO << "Successfully created <" << FIRST_POA
                       << ">." << std::endl;
         }
       else
@@ -148,7 +148,7 @@ main (int argc, char *argv[])
                                policies);
       if (second_poa)
         {
-          TAOX11_TEST_INFO << "Succesfully created <" << SECOND_POA
+          TAOX11_TEST_INFO << "Successfully created <" << SECOND_POA
                       << ">." << std::endl;
         }
       else
@@ -175,7 +175,7 @@ main (int argc, char *argv[])
                               CORBA::PolicyList ());
       if (third_poa)
         {
-          TAOX11_TEST_INFO << "Succesfully created <" << THIRD_POA
+          TAOX11_TEST_INFO << "Successfully created <" << THIRD_POA
                       << ">." << std::endl;
         }
       else
