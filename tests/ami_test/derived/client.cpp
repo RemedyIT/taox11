@@ -523,7 +523,7 @@ int main(int argc, char* argv[])
 
       if ((nr_of_replies != 0) || (myfoo_foo != 1) || (mybar_foo != 1))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected replies. Expected -12- , received -"
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected replies. Expected -12- , received -"
           << (5 - nr_of_replies) << "-. " << " Expected MyFoo- foo <1> , received <"
           << myfoo_foo << ">. Expected MyBar- foo <1>, received <" << mybar_foo << ">." << std::endl;
           result = 1;
@@ -531,7 +531,7 @@ int main(int argc, char* argv[])
 
       if ((myfoo_attrib != 2) || (mybar_attrib != 2))
          {
-           TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected replies on my_foo_attrib. "
+           TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected replies on my_foo_attrib. "
            << "Expected MyFoo- my_foo_attrib <2> , received <"
            << myfoo_attrib << ">. Expected MyBar- my_foo_attrib <2>, received <"
            << mybar_attrib << ">." << std::endl;
@@ -540,7 +540,7 @@ int main(int argc, char* argv[])
 
       if ((myfoo_foo_excep != 1) || (mybar_foo_excep != 2))
           {
-            TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected exceptions on my_foo. "
+            TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected exceptions on my_foo. "
             << "Expected MyFoo- my_foo_excep <1> , received <"
             << myfoo_foo_excep << ">. Expected MyBar- my_foo_excep <2>, received <"
             << mybar_foo_excep << ">." << std::endl;

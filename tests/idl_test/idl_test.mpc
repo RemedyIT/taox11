@@ -4,7 +4,7 @@ project(*IDL): ridl_ostream_defaults, taox11_messaging {
   custom_only=1
   //Use of -GCa i.o. -GC, because -GC expects with taox11 ami pragma's or annotations
   //and we don't want to change all idl files of this test, so use
-  //-GCa wich is added to taox11 for backwards compatibility.
+  //-GCa which is added to taox11 for backwards compatibility.
   idlflags += -GCa -Gd
   //-GH
   //-GT

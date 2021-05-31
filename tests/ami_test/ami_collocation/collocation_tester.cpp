@@ -54,7 +54,7 @@ Collocation_Test::shutdown ()
   int result {};
   if (callback_operation != 6)
   {
-    TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected callbacks."
+    TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected callbacks."
         << " Foo : expected -6- , received -" << callback_operation << "-"
         << std::endl;
     result = 1;

@@ -283,7 +283,7 @@ int main(int argc, char* argv[])
 
         if (callback_operation != 2)
           {
-            TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected callbacks."
+            TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected callbacks."
             << " expected -2- , received -" << callback_operation << "-."
             << std::endl;
             result = 1;

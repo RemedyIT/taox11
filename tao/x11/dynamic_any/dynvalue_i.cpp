@@ -112,7 +112,7 @@ namespace TAOX11_NAMESPACE
         this->component_count_);
       this->da_members_.resize (this->component_count_);
 
-      // And initalize all of the DynCommon mix-in
+      // And initialize all of the DynCommon mix-in
 
       this->init_common ();
     }
@@ -125,7 +125,7 @@ namespace TAOX11_NAMESPACE
     {
       TAOX11_LOG_TRACE ("DynValue_i::get_base_types");
 
-      // First initalize to the fully derived type we are
+      // First initialize to the fully derived type we are
       // starting with.
 
       base_types.push_back (DynAnyFactory_i::strip_alias (tc));
@@ -551,7 +551,7 @@ namespace TAOX11_NAMESPACE
     // (even though we are a constructed type and should do
     // so with any other type of input). If we don't assume
     // the value type is for us, it will get passed down
-    // (recursivly) to the terminal non-valuetype member
+    // (recursively) to the terminal non-valuetype member
     // which then will be wrong type for the valuetype input
     // we started with.
     void
@@ -604,7 +604,7 @@ namespace TAOX11_NAMESPACE
     // (even though we are a constructed type and should
     // do so with any other type of output). If we don't
     // assume the value type is us, it will get passed down
-    // (recursivly) to the terminal non-valuetype member
+    // (recursively) to the terminal non-valuetype member
     // which then will be wrong type for the valuetype
     // output we want.
     IDL::traits<CORBA::ValueBase>::ref_type
@@ -708,7 +708,7 @@ namespace TAOX11_NAMESPACE
       // with DynValue * instead. However the pointer isn't
       // actually dereferanced by the _tao_write_special_value()
       // call, its address (as a void *) is just used to
-      // check for the null value and any previous writen
+      // check for the null value and any previous written
       // value for the indirection header and the saving of
       // this current location for this new valuetype if it
       // is not indirected (this time).
@@ -906,7 +906,7 @@ namespace TAOX11_NAMESPACE
               <= ++currentBaseMember)
           {
             // Remind us to start again with the next derived type
-            // for the next member to be writen.
+            // for the next member to be written.
             currentBaseMember= 0u;
 
             // We must end the chunk we started for this
@@ -921,7 +921,7 @@ namespace TAOX11_NAMESPACE
           }
         }
         // Write out the end chunking markers for the number
-        // of base types we have writen.
+        // of base types we have written.
         for (i= 1u; i < trunc_ids; ++i)
         {
           if (!ci.end_chunk (out_cdr))
@@ -975,7 +975,7 @@ namespace TAOX11_NAMESPACE
       }
       if (is_indirected)
       {
-        // Effectivly this member? is the same ValueType as previous
+        // Effectively this member? is the same ValueType as previous
         // seen either in another member of this container OR the
         // whole container itself. (Possiably can happen as a
         // circular linked list?)
@@ -1181,7 +1181,7 @@ namespace TAOX11_NAMESPACE
               <= ++currentBaseMember)
         {
           // Remind us to start again with the next derived type
-          // for the next member to be writen.
+          // for the next member to be written.
           currentBaseMember= 0u;
           if (currentBase < num_ids)
           {
