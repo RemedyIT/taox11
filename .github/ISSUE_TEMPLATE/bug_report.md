@@ -23,7 +23,7 @@ A clear and concise description of what you expected to happen.
 Any output (shell/compiler) that is given. When it is a runtime bug please set `X11_LOG_MASK=all` and attach the runtime output as attachment
 
 **Environment:**
-Output of `ruby -v && brix11 env && brix11 -- configure --print-config`
+Output of `ruby -v && brix11 env && bin/brix11 -- configure --print-config`
 
 **Additional context**
 Add any other context about the problem here.
