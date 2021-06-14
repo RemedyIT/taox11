@@ -21,12 +21,12 @@ void Client_i::send_string (IDL::traits<Test::StringBox>::ref_type sb)
 
 IDL::traits<Test::StringBox>::ref_type Client_i::get_string ()
 {
-  return CORBA::make_reference< Test::StringBox> ("Back from server.");
+  return IDL::traits<Test::StringBox>::make_reference ("Back from server.");
 }
 
 void Client_i::get_event (IDL::traits<Test::Event>::ref_type& evt)
 {
-  evt = CORBA::make_reference< Event_impl> (123, 254, "Event#1", 1.66);
+  evt = IDL::traits<Test::Event>::make_reference< Event_impl> (123, 254, "Event#1", 1.66);
 
   TAOX11_TEST_DEBUG << "Client_i::get_event:" << evt <<  std::endl;
 

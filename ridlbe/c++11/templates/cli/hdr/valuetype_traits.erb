@@ -54,6 +54,15 @@ namespace TAOX11_NAMESPACE
       {
         return ref_type::_narrow (std::move(base));
       }
+
+      template <typename TInst = <%= scoped_cxxtype %>,
+                typename = typename
+                  std::enable_if<std::is_base_of< <%= scoped_cxxtype %>, TInst>::value>::type,
+                typename ...Args>
+      inline static ref_type make_reference(Args&& ...args)
+      {
+    	  return TAOX11_CORBA::make_reference<TInst> (std::forward<Args> (args)...);
+      }
     };
   } // namespace CORBA
 
