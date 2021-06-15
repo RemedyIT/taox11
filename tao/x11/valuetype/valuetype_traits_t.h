@@ -63,6 +63,12 @@ namespace TAOX11_NAMESPACE
       {
         return ref_type::_narrow (vt);
       }
+
+      template <typename TInst = T, typename ...Args>
+      inline static valuetype_reference<T> make_reference(Args&& ...args)
+      {
+    	  return TAOX11_CORBA::make_reference<TInst> (std::forward<Args> (args)...);
+      }
     };
 
     template <typename T>
