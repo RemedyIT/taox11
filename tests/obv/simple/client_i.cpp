@@ -26,7 +26,7 @@ IDL::traits<Test::StringBox>::ref_type Client_i::get_string ()
 
 void Client_i::get_event (IDL::traits<Test::Event>::ref_type& evt)
 {
-  evt = IDL::traits<Test::Event>::make_reference< Event_impl> (123, 254, "Event#1", 1.66);
+  evt = IDL::traits<Test::Event>::make_reference<Event_impl> (123, 254, "Event#1", 1.66);
 
   TAOX11_TEST_DEBUG << "Client_i::get_event:" << evt <<  std::endl;
 
