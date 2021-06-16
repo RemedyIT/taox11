@@ -20,7 +20,7 @@ namespace TAOX11_NAMESPACE
       public IDL::common_byval_traits <CORBA::object_reference < <%= scoped_factory_cxx_type %>>>,
       public CORBA::object_traits < <%= scoped_factory_cxx_type %>>
     {
-      using is_abstract = std::false_type ;
+      using is_abstract = std::false_type;
       using is_local = std::true_type;
     };
   } // namespace IDL
@@ -61,7 +61,7 @@ namespace TAOX11_NAMESPACE
                 typename ...Args>
       inline static ref_type make_reference(Args&& ...args)
       {
-    	  return TAOX11_CORBA::make_reference<TInst> (std::forward<Args> (args)...);
+        return TAOX11_CORBA::make_reference<TInst> (std::forward<Args> (args)...);
       }
     };
   } // namespace CORBA

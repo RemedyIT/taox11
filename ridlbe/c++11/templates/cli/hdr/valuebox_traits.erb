@@ -20,7 +20,7 @@ namespace TAOX11_NAMESPACE
       template <typename ...Args>
       inline static ref_type make_reference(Args&& ...args)
       {
-    	  return TAOX11_CORBA::make_reference< <%= scoped_cxxtype %>> (std::forward<Args> (args)...);
+        return TAOX11_CORBA::make_reference< <%= scoped_cxxtype %>> (std::forward<Args> (args)...);
       }
     };
   } // namespace CORBA
