@@ -67,7 +67,7 @@ namespace TAOX11_NAMESPACE
       template <typename TInst = T, typename ...Args>
       inline static valuetype_reference<T> make_reference(Args&& ...args)
       {
-    	  return TAOX11_CORBA::make_reference<TInst> (std::forward<Args> (args)...);
+        return TAOX11_CORBA::make_reference<TInst> (std::forward<Args> (args)...);
       }
     };
 
@@ -76,7 +76,7 @@ namespace TAOX11_NAMESPACE
     {
     public:
       using value_type = T;
-      using ptr_type =  T*;
+      using ptr_type = T*;
       using traits_type = valuetype_traits<T>;
 
       valuetype_reference (std::nullptr_t = nullptr)

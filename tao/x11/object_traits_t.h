@@ -58,7 +58,7 @@ namespace TAOX11_NAMESPACE
           typename ...Args>
       static inline object_reference<T> make_reference(Args&& ...args)
       {
-    	  return TAOX11_CORBA::make_reference<TInst>(std::forward<Args> (args)...);
+        return TAOX11_CORBA::make_reference<TInst>(std::forward<Args> (args)...);
       }
     };
 
