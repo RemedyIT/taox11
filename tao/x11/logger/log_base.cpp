@@ -405,16 +405,12 @@ namespace x11_logger
   /// Get the current priority mask.
   uint32_t Log_Module::priority_mask () const
   {
-    ACE_Log_Guard __guard (ACE_Log_Msg::instance ());
-
     return this->priority_mask_;
   }
 
   /// Get the current verbosity mask.
   uint32_t Log_Module::verbosity_mask () const
   {
-    ACE_Log_Guard __guard (ACE_Log_Msg::instance ());
-
     return this->verbosity_mask_;
   }
 
@@ -427,21 +423,13 @@ namespace x11_logger
   /// Set the priority mask, returns original mask.
   uint32_t Log_Module::priority_mask (uint32_t new_mask)
   {
-    ACE_Log_Guard __guard (ACE_Log_Msg::instance ());
-
-    uint32_t const old_mask = this->priority_mask_;
-    this->priority_mask_ = new_mask;
-    return old_mask;
+    return this->priority_mask_.exchange(new_mask);
   }
 
   /// Set the verbosity mask, returns original mask.
   uint32_t Log_Module::verbosity_mask (uint32_t new_mask)
   {
-    ACE_Log_Guard __guard (ACE_Log_Msg::instance ());
-
-    uint32_t const old_mask = this->verbosity_mask_;
-    this->verbosity_mask_ = new_mask;
-    return old_mask;
+    return this->verbosity_mask_.exchange(new_mask);
   }
 
   // Set the priority mask with value of environment variable category + "_LOG_MASK"
