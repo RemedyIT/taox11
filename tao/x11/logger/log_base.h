@@ -21,6 +21,7 @@
 #include "tao/x11/ext/stdext.h"
 #include "ace/OS_NS_unistd.h"
 #include <thread>
+#include <atomic>
 #if defined(X11_NLOGGING)
 # include <iostream>
 #endif
@@ -158,8 +159,8 @@ namespace x11_logger
     void build_file_path (long);
 
     std::string const category_;
-    uint32_t priority_mask_ {};
-    uint32_t verbosity_mask_ {};
+    std::atomic<uint32_t> priority_mask_;
+    std::atomic<uint32_t> verbosity_mask_ {};
     uint32_t output_mask_ {};
     std::string file_base_;
     uint32_t file_max_size_ {};
