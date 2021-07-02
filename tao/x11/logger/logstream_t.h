@@ -117,7 +117,7 @@ namespace x11_logger
   /**
   * @class log_ostream_t
   *
-  * @brief TAOX11 basic_ostream specializaton
+  * @brief TAOX11 basic_ostream specialization
   */
   template <typename CH, typename TR = std::char_traits<CH> >
   class log_ostream_t

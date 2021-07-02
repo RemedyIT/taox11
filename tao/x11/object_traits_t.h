@@ -51,6 +51,15 @@ namespace TAOX11_NAMESPACE
       using shared_ptr_type = std::shared_ptr<T>;
 
       static shared_ptr_type lock_shared (stub_type*);
+
+      template <typename TInst,
+          typename = typename
+            std::enable_if<std::is_base_of<T, TInst>::value>::type,
+          typename ...Args>
+      static inline object_reference<T> make_reference(Args&& ...args)
+      {
+        return TAOX11_CORBA::make_reference<TInst>(std::forward<Args> (args)...);
+      }
     };
 
     template <typename T>

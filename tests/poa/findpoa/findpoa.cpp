@@ -12,7 +12,7 @@
 #include "tao/x11/portable_server/portableserver_impl.h"
 #include "tao/x11/portable_server/AdapterActivatorC.h"
 
-bool find_non_existant_POA(IDL::traits<PortableServer::POA>::ref_type parent,
+bool find_non_existent_POA(IDL::traits<PortableServer::POA>::ref_type parent,
     const std::string& child_poa_name, bool activate)
 {
   // New environment.
@@ -107,7 +107,7 @@ int main (int argc, char *argv[])
 
       // Try to find a non-existent POA.  Since the Adapter Activator
       // has not been installed yet, this call should fail.
-      if (!find_non_existant_POA (root_poa, "firstPOA", true) )
+      if (!find_non_existent_POA (root_poa, "firstPOA", true) )
         return 1;
 
       // Get a TAO_Adapter_Activator reference
@@ -193,7 +193,7 @@ int main (int argc, char *argv[])
       // Activator has been installed, this call should fail because
       // the activate (if not found) flag is 0.
       TAOX11_TEST_DEBUG << "test find non existent POA" << std::endl;
-      find_non_existant_POA (root_poa, "thirdPOA", false);
+      find_non_existent_POA (root_poa, "thirdPOA", false);
 
       _orb->destroy();
     }

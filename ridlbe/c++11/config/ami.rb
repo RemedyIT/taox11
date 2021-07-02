@@ -100,12 +100,12 @@ module IDL
   end # Cxx11
 
   # extend with AMI pragma support
-  Parser.send(:include, Cxx11::AmiPragma::Parser)
+  Parser.send(:include, Cxx11::AmiPragma::Parser) unless Parser < Cxx11::AmiPragma::Parser
 
   # extend with AMI pragma handling
-  Delegator.send(:include, Cxx11::AmiPragma::Delegator)
+  Delegator.send(:include, Cxx11::AmiPragma::Delegator) unless Delegator < Cxx11::AmiPragma::Delegator
 
   # extend with AMI annotation testing
-  AST::Interface.send(:include, Cxx11::AmiAnnotation::InterfaceMixin)
+  AST::Interface.send(:include, Cxx11::AmiAnnotation::InterfaceMixin) unless AST::Interface < Cxx11::AmiAnnotation::InterfaceMixin
 
 end # IDL

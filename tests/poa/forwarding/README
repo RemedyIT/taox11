@@ -32,5 +32,5 @@ Check run_test.pl for an example of how to run the server.
 The first three calls will be called on the first server, then the
 location forwarding is called and the next three calls are going to be
 called on the second server.  Location forwarding is then called on
-the second one and the last three calls are then done on the thrid
+the second one and the last three calls are then done on the third
 server.

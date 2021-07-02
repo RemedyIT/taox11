@@ -16,6 +16,12 @@ namespace TAOX11_NAMESPACE
       using weak_ref_type = weak_valuetype_reference< <%= scoped_cxxtype %>>;
 
       static ref_type narrow (valuetype_reference<ValueBase>);
+
+      template <typename ...Args>
+      inline static ref_type make_reference(Args&& ...args)
+      {
+        return TAOX11_CORBA::make_reference< <%= scoped_cxxtype %>> (std::forward<Args> (args)...);
+      }
     };
   } // namespace CORBA
 

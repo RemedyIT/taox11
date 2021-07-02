@@ -365,7 +365,7 @@ int main(int argc, char* argv[])
 
       if ((callback != 4) || (callback_excep != 3 ))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected callbacks. Callbacks expected -4- , received -" << callback << "-"
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected callbacks. Callbacks expected -4- , received -" << callback << "-"
           << " Exceptions: expected -3-, received -" << callback_excep << "-."<< std::endl;
           result = 1;
         }

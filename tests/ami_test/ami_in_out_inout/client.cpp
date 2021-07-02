@@ -693,7 +693,7 @@ int main(int argc, char* argv[])
 
       if (callback_operation != 20)
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected callbacks."
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected callbacks."
           << " Expected -20- , received -" << callback_operation
           << std::endl;
           result = 1;

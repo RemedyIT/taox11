@@ -677,7 +677,7 @@ int main(int argc, char* argv[])
          (callback_attrib_der != 1 ) ||
          (callback_operation_der != 1 ))
     {
-      TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected callbacks."
+      TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected callbacks."
       << " Foo : expected -4- , received -" << callback_operation << "-"
       << " do_something : expected -1- , received -" << callback_operation_der << "-"
       << " Attrib : expected -4-, received -" << callback_attrib << "-"

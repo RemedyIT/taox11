@@ -34,7 +34,7 @@ CORBA::WStringSeq * Array2Seq(const std::wstring arr[])
 // Test if wstring sequence content is equal.
 bool eqv(const CORBA::WStringSeq& v1, CORBA::WStringSeq& v2)
 {
-  //if (v1.length() != v2.lenght())
+  //if (v1.length() != v2.length())
   //  return false;
   for (CORBA::WStringSeq::size_type ix = 0; ix < v1.length(); ix++)
   {

@@ -248,7 +248,7 @@ int main(int argc, char* argv[])
 
       if ((nr_of_replies != 0))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client2 didn't recieve expected replies. Expected -1- , received -"
+          TAOX11_TEST_ERROR << "ERROR: Client2 didn't receive expected replies. Expected -1- , received -"
           << (1 - nr_of_replies) << "-. " << std::endl;
           result = 1;
         }

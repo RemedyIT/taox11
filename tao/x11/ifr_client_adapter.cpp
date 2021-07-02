@@ -2,7 +2,7 @@
  * @file    ifr_client_adapter.cpp
  * @author  Martin Corino
  *
- * @brief   Implementatin of the IFR Client Adapter
+ * @brief   Implementation of the IFR Client Adapter
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
