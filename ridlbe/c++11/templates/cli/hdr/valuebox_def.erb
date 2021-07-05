@@ -37,7 +37,7 @@ protected:
   explicit <%= cxxname %> (<%= boxed_cxx_byval_type %> v)
     : TAOX11_CORBA::Valuebox_T< <%= scoped_boxed_cxx_member_type %>> (std::move(v))
   {}
-  virtual ~<%= cxxname %> () = default;
+  ~<%= cxxname %> () override = default;
   <%= cxxname %>& operator= (const <%= cxxname %>&) = delete;
   <%= cxxname %>& operator= (<%= cxxname %>&&) = delete;
 

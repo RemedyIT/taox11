@@ -10,7 +10,7 @@ namespace _impl
 % nest(2) { write_regen_section("#{scoped_cxxname}"+'[Constructors]', default_content: ['/// Constructor(s)', "#{skel_cxxname} ();"]) }
 
     /// Destructor
-    virtual ~<%= skel_cxxname %> ();
+    ~<%= skel_cxxname %> () override;
 
     template <typename T> friend class CORBA::servant_reference;
 

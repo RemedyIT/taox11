@@ -11,7 +11,7 @@ protected:
 
   explicit <%= amic_cxxname %> (<%= proxy_cxxname %>_ptr p, bool inherited = false);
   <%= amic_cxxname %> () = default;
-  virtual ~<%= amic_cxxname %> () = default;
+  ~<%= amic_cxxname %> () override = default;
 
 private:
   /** @name Illegal to be called. Deleted explicitly to let the compiler detect any violation */

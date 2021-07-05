@@ -29,7 +29,7 @@ namespace POA
 
   protected:
     explicit <%= skel_cxxname %> (bool inherited = false);
-    virtual ~<%= skel_cxxname %> ();
+    ~<%= skel_cxxname %> () override;
 
     Servant_proxy_ptr get_proxy () const override;
 
