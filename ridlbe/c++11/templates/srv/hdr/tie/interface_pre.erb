@@ -9,7 +9,7 @@ namespace POA
     std::shared_ptr<T> tied_object_ {};
   public:
     <%= tie_cxxname %> (std::shared_ptr<T> t, IDL::traits<TAOX11_NAMESPACE::PortableServer::POA>::ref_type poa = {}) : tied_object_(std::move(t)), poa_(std::move(poa)) {};
-    virtual ~<%= tie_cxxname %> () = default;
+    ~<%= tie_cxxname %> () override = default;
     std::shared_ptr<T> _tied_object () { return tied_object_; };
     void _tied_object (std::shared_ptr<T> t) { tied_object_ = std::move(t); };
     IDL::traits<TAOX11_NAMESPACE::PortableServer::POA>::ref_type _default_POA () override { if (poa_) return poa_; else return TAOX11_NAMESPACE::PortableServer::Servant::_default_POA(); }

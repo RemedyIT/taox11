@@ -34,7 +34,7 @@ public:
 
 protected:
   <%= factory_cxxname %> () = default;
-  virtual ~<%= factory_cxxname %> () = default;
+  ~<%= factory_cxxname %> () override = default;
   <%= factory_cxxname %> (const <%= factory_cxxname %>&) = delete;
   <%= factory_cxxname %> (<%= factory_cxxname %>&&) = delete;
   <%= factory_cxxname %>& operator =(const <%= factory_cxxname %>&) = delete;
