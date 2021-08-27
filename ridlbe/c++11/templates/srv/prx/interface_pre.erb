@@ -8,7 +8,7 @@ public:
   using skel_ptr = skel_type*;
 
   explicit <%= srvproxy_cxxname %> (<%= srvproxy_cxxname %>::skel_ptr skel);
-  virtual ~<%= srvproxy_cxxname %> () = default;
+  ~<%= srvproxy_cxxname %> () override = default;
 
   void _dispatch (
       TAO_ServerRequest & req,

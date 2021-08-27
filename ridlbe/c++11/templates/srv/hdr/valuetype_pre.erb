@@ -16,7 +16,7 @@ namespace POA
   protected:
     using _shared_ptr_type = std::shared_ptr<<%= skel_cxxname %>>;
     <%= skel_cxxname %> () = default;
-    virtual ~<%= skel_cxxname %> () = default;
+    ~<%= skel_cxxname %> () override = default;
 
     template <typename T> friend class TAOX11_CORBA::servant_reference;
 
