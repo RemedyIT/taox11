@@ -75,4 +75,10 @@ if ($server_status != 0) {
 $server->DeleteFile($iorbase);
 $client->DeleteFile($iorbase);
 
+# Validate that the DeleteFile worked on the remote target
+if ($server->WaitForFileTimed ($iorbase, 0) != -1) {
+    print STDERR "ERROR: Could find <$server_iorfile>, should have been deleted\n";
+    $status = 1;
+}
+
 exit $status;
