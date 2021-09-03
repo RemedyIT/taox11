@@ -236,8 +236,7 @@ main(int argc, char *argv[])
     }
   catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "Server: exception caught: " << e.what()
-            << std::endl;
+      TAOX11_TEST_ERROR << "Server: exception caught: " << e << std::endl;
       return 1;
     }
   TAOX11_TEST_INFO << "Server <" << name_ << "> has ended"

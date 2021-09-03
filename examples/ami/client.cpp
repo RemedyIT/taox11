@@ -338,7 +338,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        taox11_error << "exception caught: " << e.what() << std::endl;
+        taox11_error << "exception caught: " << e << std::endl;
         return 1;
       }
   return result;

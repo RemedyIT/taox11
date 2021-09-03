@@ -130,7 +130,7 @@ void Foo::do_throw_struct ()
   catch (const std::exception& ex)
   {
     TAOX11_TEST_ERROR << "Foo::do_throw_struct - ERROR: "
-      << "Unexpected exception caught: " << ex.what() << std::endl;
+      << "Unexpected exception caught: " << ex << std::endl;
     throw;
   }
   catch (...)

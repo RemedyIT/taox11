@@ -261,7 +261,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        TAOX11_TEST_ERROR << "client2 - exception caught: " << e.what() << std::endl;
+        TAOX11_TEST_ERROR << "client2 - exception caught: " << e << std::endl;
         return 1;
       }
   return result;

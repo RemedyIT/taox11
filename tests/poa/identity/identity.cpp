@@ -658,7 +658,7 @@ int ACE_TMAIN(int argc, ACE_TCHAR *argv[])
   }
   catch (const std::exception& ex)
   {
-    TAOX11_TEST_ERROR << "Exception! " << ex.what () << std::endl;
+    TAOX11_TEST_ERROR << "Exception! " << ex << std::endl;
     return 1;
   }
 

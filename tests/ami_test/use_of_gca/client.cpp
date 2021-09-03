@@ -159,7 +159,7 @@ public:
     catch (const CORBA::Exception& exc)
       {
         callback_excep++;
-        TAOX11_TEST_INFO << "... caught exception -> " << exc.what() << std::endl;
+        TAOX11_TEST_INFO << "... caught exception -> " << exc << std::endl;
       }
   }
 
@@ -184,7 +184,7 @@ public:
     catch (const CORBA::Exception& ex)
       {
         callback_excep++;
-        TAOX11_TEST_INFO << "... caught exception -> " << ex.what() << std::endl;
+        TAOX11_TEST_INFO << "... caught exception -> " << ex << std::endl;
       }
   }
 
@@ -372,7 +372,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+        TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
         return 1;
       }
   return result;

@@ -45,6 +45,6 @@ Data::Data (IDL::traits<CORBA::ORB>::ref_type orb) :
    }
   catch (const std::exception& e)
   {
-     TAOX11_TEST_ERROR << "ERROR: exception caught in Data: " << e.what () << std::endl;
+     TAOX11_TEST_ERROR << "ERROR: exception caught in Data: " << e << std::endl;
   }
 }
