@@ -81,7 +81,7 @@ Foo::test_collocated_exception_method ()
   catch (const std::exception& ex)
   {
     TAOX11_TEST_ERROR << "ERROR : Foo::test_collocated_exception_method - "
-      << "Unexpected std exception caught: " << ex.what() << std::endl;
+      << "Unexpected std exception caught: " << ex << std::endl;
     throw;
   }
   catch (...)
@@ -129,7 +129,7 @@ Foo::test_collocated_exception_attribute ()
   {
     TAOX11_TEST_ERROR << "ERROR : Foo::test_collocated_exception_attribute - "
       << "Unexpected std exception caught while getting attribute 'something' : "
-      << ex.what() << std::endl;
+      << ex << std::endl;
     throw;
   }
   catch (...)
@@ -173,7 +173,7 @@ Foo::test_collocated_exception_attribute ()
   {
     TAOX11_TEST_ERROR << "ERROR : Foo::test_collocated_exception_attribute - "
       << "Unexpected std exception caught while setting attribute 'something' : "
-      << ex.what() << std::endl;
+      << ex << std::endl;
     throw;
   }
   catch (...)

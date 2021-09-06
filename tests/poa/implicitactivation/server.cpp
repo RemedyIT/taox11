@@ -159,7 +159,7 @@ int main(int argc, ACE_TCHAR *argv[])
     _orb->destroy();
   } catch (const std::exception& e)
   {
-    TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+    TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
     return 1;
   }
 

@@ -142,8 +142,7 @@ public:
     }
     catch (const CORBA::Exception& ex)
     {
-      TAOX11_TEST_INFO << "... caught expected exception -> " << ex.what()
-                  << std::endl;
+      TAOX11_TEST_INFO << "... caught expected exception -> " << ex << std::endl;
       std::stringstream excep_c;
       excep_c << ex;
       std::string excep_cstr = excep_c.str();
@@ -693,7 +692,7 @@ int main(int argc, char* argv[])
   }
   catch (const std::exception& e)
   {
-    TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+    TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
     return 1;
   }
   return result;

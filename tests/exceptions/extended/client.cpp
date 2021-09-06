@@ -203,7 +203,7 @@ test_exceptions (IDL::traits<Test::Foo>::ref_type foo)
   catch (const std::exception &x)
     {
       TAOX11_TEST_DEBUG << "Successfully caught expected Test::FooEx as std::exception: "
-                    << x.what () << std::endl;
+                    << x << std::endl;
       try
         {
           throw;
@@ -949,7 +949,7 @@ main (int argc, char* argv[])
     }
   catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+      TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
       return 1;
     }
   return errors;
