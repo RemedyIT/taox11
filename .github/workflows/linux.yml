@@ -141,7 +141,11 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
       if: matrix.feature == 'CodeQL'
-    - uses: codecov/codecov-action@v2.1.0
+    - name: Run gcov
+      run: |
+        gcov .
+      if: matrix.feature == 'Codecov'
+    - uses: codecov/codecov-action@v2
       with:
         verbose: true # optional (default = false)
       if: matrix.feature == 'Codecov'
