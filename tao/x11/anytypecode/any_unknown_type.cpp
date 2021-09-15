@@ -153,10 +153,6 @@ namespace TAOX11_NAMESPACE
   {
   }
 
-  Unknown_IDL_Type::~Unknown_IDL_Type ()
-  {
-  }
-
   bool
   Unknown_IDL_Type::marshal_value (TAO_OutputCDR & cdr)
   {

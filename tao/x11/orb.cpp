@@ -116,10 +116,6 @@ namespace TAOX11_NAMESPACE
       this->orb_registry_ = ORB_Registry::instance (true);
     }
 
-    ORB::~ORB ()
-    {
-    }
-
     ORB_Proxy& ORB::proxy ()
     {
       return *this->proxy_;

@@ -339,7 +339,7 @@ namespace TAOX11_NAMESPACE
           const std::string& orb_name = std::string ());
 
     protected:
-      virtual ~ORB ();
+      ~ORB () override = default;
 
 #if !defined(CORBA_E_MICRO)
       ValueFactoryManagerAdapter *valuefactory_manager ();

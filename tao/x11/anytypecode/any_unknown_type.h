@@ -37,7 +37,7 @@ namespace TAOX11_NAMESPACE
 
     Unknown_IDL_Type (CORBA::typecode_reference);
 
-    virtual ~Unknown_IDL_Type ();
+    ~Unknown_IDL_Type () override = default;
 
     bool marshal_value (TAO_OutputCDR &) override;
 //    virtual const void *value () const;
