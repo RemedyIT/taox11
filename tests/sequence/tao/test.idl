@@ -5,6 +5,10 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
+#include <tao/StringSeq.pidl>
+#include <tao/LongSeq.pidl>
+#include <tao/BooleanSeq.pidl>
+
 /// Put the interfaces in a module, to avoid global namespace pollution
 module Test
 {
@@ -19,11 +23,8 @@ module Test
   };
 
   typedef sequence<Simple>  SimpleSeq;
-
   typedef sequence<long> LongSeq;
-
   typedef sequence<boolean> BoolSeq;
-
   typedef sequence<string> StringSeq;
 
   /// A very simple interface
