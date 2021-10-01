@@ -31,6 +31,7 @@ env:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: ubuntu-18.04
