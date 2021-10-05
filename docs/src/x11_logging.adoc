@@ -282,7 +282,7 @@ _my_logger.h_
      : public x11_logger::Log_Module
    {
    public:
-     virtual ~My_Log_Module () {}
+     ~My_Log_Module () override = default;
 
      static inline My_Log_Module* getInstance();
 
