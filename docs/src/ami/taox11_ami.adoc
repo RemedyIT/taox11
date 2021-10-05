@@ -232,14 +232,14 @@ skeleton class using the `CORBA::amic_traits` of interface `Test::A`.
     Handler () = default;
 
     /// Destructor.
-    ~Handler () = default;
+    ~Handler () override = default;
 
-    virtual void foo (int32_t ami_return_val) override
+    void foo (int32_t ami_return_val) override
     {
       // Do something
     };
 
-    virtual void foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+    void foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
     {
       // Do something
     }
