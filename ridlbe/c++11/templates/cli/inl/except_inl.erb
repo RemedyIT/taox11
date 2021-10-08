@@ -19,9 +19,9 @@ inline <%= scoped_cxxname %>::<%= cxxname %> (
 %     while !_ms.empty?
 %       _m = _ms.shift
 %       if _m.is_array?
-       <%= _indent %><%= "#{_m.cxx_in_type} #{_m.cxxname}" %><%= _ms.empty? ? ')' : ',' %>
+       <%= _indent %><%= "#{_m.scoped_cxx_in_type} #{_m.cxxname}" %><%= _ms.empty? ? ')' : ',' %>
 %       else
-       <%= _indent %><%= "#{_m.cxx_byval_type} #{_m.cxxname}" %><%= _ms.empty? ? ')' : ',' %>
+       <%= _indent %><%= "#{_m.scoped_cxx_byval_type} #{_m.cxxname}" %><%= _ms.empty? ? ')' : ',' %>
 %       end
 %     end
 %   end
