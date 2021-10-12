@@ -62,7 +62,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from ServantSourceWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -72,14 +72,14 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
       def enter_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
         super
-        println()
+        println
         printiln('// generated from ServantSourceWriter#enter_interface')
         printiln('namespace POA')
         printiln('{')
@@ -98,11 +98,11 @@ module IDL
         node.attributes(true).each do |_att|
           visitor(AttributeVisitor) { |v| v.interface(node); v.visit_attribute(_att) }
         end
-        println()
+        println
         visitor(InterfaceVisitor).visit_skel(node)
         dec_nest
         printiln("} // namespace POA")
-        println()
+        println
         super
       end
 

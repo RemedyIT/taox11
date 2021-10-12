@@ -382,7 +382,7 @@ module IDL
         if _cur_scope
           @properties[:_context][:scopes] = _scopes_bak
           @properties[:_context][:cur_scope] = _scopes_bak.last
-          println()
+          println
           printiln('// leaving Base::CodeWriter#at_global_scope')
           @properties[:_context][:scopes].each do |_scope|
             write_open_scope(_scope)
