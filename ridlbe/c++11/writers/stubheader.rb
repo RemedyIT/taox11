@@ -91,7 +91,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from StubHeaderWriter#enter_module')
         printiln("/// @copydoc #{self.doc_scoped_name node}")
         printiln('namespace ' + node.cxxname)
@@ -102,7 +102,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
@@ -116,7 +116,7 @@ module IDL
         end unless params[:no_object_traits]
       end
       def enter_interface(node)
-        println()
+        println
         printiln('// generated from StubHeaderWriter#enter_interface')
         sn = node.scoped_cxxname
         unless @fwd_decl_cache.has_key?(sn)
@@ -239,7 +239,7 @@ module IDL
       end
 
       def visit_const(node)
-        println()
+        println
         printiln('// generated from StubHeaderWriter#visit_const')
         printiln("/// @copydoc #{self.doc_scoped_name node}")
         case node.expression.idltype
@@ -444,7 +444,7 @@ module IDL
       end
 
       def pre_visit(parser)
-        println()
+        println
         printiln('// generated from StubHeaderIDLTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE')
         println('{')
@@ -528,7 +528,7 @@ module IDL
       end
 
       def pre_visit(parser)
-        println()
+        println
         printiln('// generated from StubHeaderIDLTraitsDefWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE')
         println('{')

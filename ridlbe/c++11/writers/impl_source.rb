@@ -38,7 +38,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from ImplSourceWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -48,7 +48,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
@@ -58,7 +58,7 @@ module IDL
         if node.is_local? || node.is_pseudo?
         else
           if generate_servant_implementation?
-            println()
+            println
             printiln('// generated from ImplSourceWriter#enter_interface')
             visitor(InterfaceVisitor).visit_pre(node)
             inc_nest
@@ -81,7 +81,7 @@ module IDL
               visitor(AttributeVisitor) { |v| v.interface(node); v.visit_attribute(_att) }
             end
             visitor(InterfaceVisitor).visit_post(node)
-            println()
+            println
           end
         end
         super

@@ -55,7 +55,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from ServantProxyWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -65,14 +65,14 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
       def enter_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
         super
-        println()
+        println
         printiln('// generated from ServantProxyWriter#enter_interface')
         printiln('namespace POA {')
         inc_nest
@@ -85,7 +85,7 @@ module IDL
         visitor(InterfaceVisitor).visit_post(node)
         dec_nest
         printiln("} // namespace POA")
-        println()
+        println
         super
       end
     end # ServantProxyWriter
