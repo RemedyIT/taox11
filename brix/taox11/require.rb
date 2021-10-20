@@ -91,7 +91,7 @@ module BRIX11
         Common::GenerateDocumentation::OPTIONS[:docsources]['taox11'] = ['${TAOX11_ROOT}/docs']
         Common::GenerateDocumentation::OPTIONS[:adoc_attribs]['taox11_src_root'] = Exec.get_run_environment('TAOX11_ROOT')
 
-        Common::GenerateDocumentation::OPTIONS[:doxygen_config] = '${TAOX11_ROOT}/etc/ciaox11.doxygen'
+        Common::GenerateDocumentation::OPTIONS[:doxygen_config] = '${TAOX11_ROOT}/etc/taox11.doxygen'
       end
 
     end
