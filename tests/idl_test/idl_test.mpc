@@ -37,6 +37,8 @@ project(*IDL): ridl_ostream_defaults, taox11_messaging {
     // Disabled because it uses component
     //$(TAO_ROOT)/tests/IDL_Test/Bug_3819_Regression.idl
     $(TAO_ROOT)/tests/IDL_Test/Bug_3821_Regression.idl
+    $(TAO_ROOT)/tests/IDL_Test/expressions.idl
+
     $(TAO_ROOT)/tests/IDL_Test/full.idl
     $(TAO_ROOT)/tests/IDL_Test/fwd.idl
     $(TAO_ROOT)/tests/IDL_Test/gperf.idl
