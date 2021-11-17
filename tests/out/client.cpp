@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
     {
       IDL::traits<CORBA::ORB>::ref_type _orb = CORBA::ORB_init (argc, argv);
 
-      if (_orb == nullptr)
+      if (!_orb)
       {
         TAOX11_TEST_ERROR << "ERROR: CORBA::ORB_init (argc, argv) returned null ORB." << std::endl;
         return 1;
@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 
       IDL::traits<Test::Hello_Factory>::ref_type hello_factory = IDL::traits<Test::Hello_Factory>::narrow (obj);
 
-      if (hello_factory == nullptr)
+      if (!hello_factory)
       {
         TAOX11_TEST_ERROR << "ERROR: IDL::traits<Test::Hello_Factory>::narrow (obj) returned null object." << std::endl;
         return 1;
@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
                                 hello,
                                 hello2);
 
-      if (hello == nullptr)
+      if (!hello)
       {
         TAOX11_TEST_ERROR << "ERROR: Test::Hello_Factory::get_hello () returned null object." << std::endl;
         return 1;
