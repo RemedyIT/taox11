@@ -61,7 +61,7 @@ void
     };
 %     end
 
-    TAO_TAO::Asynch_Invocation_Adapter _tao_call (
+    TAO_TAO::Asynch_Invocation_Adapter _invocation_call (
 %     if interface.is_abstract?
       _objptr,
 %     else
@@ -96,7 +96,7 @@ void
     }
 %#  else _tao_ami_handler is a nullptr
 
-    _tao_call.invoke (
+    _invocation_call.invoke (
       _tao_ami_handler,
       <%= interface.handler_proxy_cxxname %>::<%= name %>_reply_stub);
   }

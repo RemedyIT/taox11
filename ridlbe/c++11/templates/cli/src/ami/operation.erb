@@ -88,7 +88,7 @@ void
     };
 %   end
 
-    TAO_TAO::Invocation_Adapter _tao_call (
+    TAO_TAO::Invocation_Adapter _invocation_call (
 %   if interface.is_abstract?
       _objptr,
 %   else
@@ -121,9 +121,9 @@ void
     // Invoke the target passing in the array of exception data and
     // the size of this array
 %   if has_raises?
-    _tao_call.invoke (_tao_exceptiondata, <%= raises_count %>);
+    _invocation_call.invoke (_tao_exceptiondata, <%= raises_count %>);
 %   else
-    _tao_call.invoke (nullptr, 0);
+    _invocation_call.invoke (nullptr, 0);
 %   end
   }
   catch_tao_system_ex(_ex)
@@ -287,7 +287,7 @@ void
   };
 %   end
 
-  TAO_TAO::Invocation_Adapter _tao_call (
+  TAO_TAO::Invocation_Adapter _invocation_call (
     this-><%= interface.proxy_cxxname.downcase %>_,
     _tao_args,
     2, // Number of arguments in the _tao_args array
@@ -298,9 +298,9 @@ void
   // Invoke the target passing in the array of exception data and
   // the size of this array
 %   if has_raises?
-  _tao_call.invoke (_tao_exceptiondata, <%= raises_count %>);
+  _invocation_call.invoke (_tao_exceptiondata, <%= raises_count %>);
 %   else
-  _tao_call.invoke (nullptr, 0);
+  _invocation_call.invoke (nullptr, 0);
 %   end
 }
 
