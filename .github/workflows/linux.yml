@@ -27,6 +27,7 @@ env:
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
   RIDL_ROOT: ${{ github.workspace }}/ridl
   TAOX11_ROOT: ${{ github.workspace }}
+  INSTALL_PREFIX: ${{ github.workspace }}/stage
 
 jobs:
   build:
@@ -138,6 +139,9 @@ jobs:
     - name: Run brix11 tests
       run: |
         $X11_BASE_ROOT/bin/brix11 run list -l $TAOX11_ROOT/bin/taox11_tests.lst -r $TAOX11_ROOT
+    - name: Run make install
+      run: |
+        make -j -C ${TAOX11_ROOT} install
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
       if: matrix.feature == 'CodeQL'

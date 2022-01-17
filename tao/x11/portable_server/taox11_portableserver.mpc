@@ -103,81 +103,107 @@ project(taox11_portableserver) : taox11_lib, portableserver, taox11_anytypecode 
   }
 
   Header_Files {
-    ForwardRequestC.h
     AdapterActivatorC.h
-    IdAssignmentPolicyC.h
-    IdUniquenessPolicyC.h
-    ImplicitActivationPolicyC.h
-    LifespanPolicyC.h
-    RequestProcessingPolicyC.h
-    ServantActivatorC.h
-    ServantLocatorC.h
-    ServantManagerC.h
-    ServantRetentionPolicyC.h
-    ThreadPolicyC.h
-    POAManagerC.h
-    POAManagerFactoryC.h
-    POAC.h
-    PS_CurrentC.h
-    PS_ForwardC.h
-    ForwardRequestP.h
-    AdapterActivatorP.h
-    IdAssignmentPolicyP.h
-    IdUniquenessPolicyP.h
-    ImplicitActivationPolicyP.h
-    LifespanPolicyP.h
-    RequestProcessingPolicyP.h
-    ServantActivatorP.h
-    ServantLocatorP.h
-    ServantManagerP.h
-    ServantRetentionPolicyP.h
-    ThreadPolicyP.h
-    POAManagerP.h
-    POAManagerFactoryP.h
-    POAP.h
-    PS_CurrentP.h
-    ForwardRequestS.h
+    AdapterActivatorCP.h
     AdapterActivatorS.h
+    AdapterActivatorSP.h
+    ForwardRequestC.h
+    ForwardRequestCP.h
+    ForwardRequestS.h
+    ForwardRequestSP.h
+    IdAssignmentPolicyC.h
+    IdAssignmentPolicyCP.h
     IdAssignmentPolicyS.h
+    IdAssignmentPolicySP.h
+    IdUniquenessPolicyC.h
+    IdUniquenessPolicyCP.h
     IdUniquenessPolicyS.h
+    IdUniquenessPolicySP.h
+    ImplicitActivationPolicyC.h
+    ImplicitActivationPolicyCP.h
     ImplicitActivationPolicyS.h
+    ImplicitActivationPolicySP.h
+    LifespanPolicyC.h
+    LifespanPolicyCP.h
     LifespanPolicyS.h
-    RequestProcessingPolicyS.h
-    ServantActivatorS.h
-    ServantLocatorS.h
-    ServantManagerS.h
-    ServantRetentionPolicyS.h
-    ThreadPolicyS.h
-    POAManagerS.h
+    LifespanPolicySP.h
+    POAC.h
+    POACP.h
+    POAManagerC.h
+    POAManagerCP.h
+    POAManagerFactoryC.h
+    POAManagerFactoryCP.h
     POAManagerFactoryS.h
+    POAManagerFactorySP.h
+    POAManagerS.h
+    POAManagerSP.h
     POAS.h
+    POASP.h
+    PS_CurrentC.h
+    PS_CurrentCP.h
     PS_CurrentS.h
+    PS_CurrentSP.h
+    PS_ForwardC.h
     PS_ForwardS.h
+    PS_ForwardSP.h
+    PortableServerC.h
+    PortableServerCP.h
+    PortableServerS.h
+    PortableServerSP.h
+    PortableServer_includeC.h
+    PortableServer_includeCP.h
+    PortableServer_includeS.h
+    PortableServer_includeSP.h
+    RequestProcessingPolicyC.h
+    RequestProcessingPolicyCP.h
+    RequestProcessingPolicyS.h
+    RequestProcessingPolicySP.h
+    ServantActivatorC.h
+    ServantActivatorCP.h
+    ServantActivatorS.h
+    ServantActivatorSP.h
+    ServantLocatorC.h
+    ServantLocatorCP.h
+    ServantLocatorS.h
+    ServantLocatorSP.h
+    ServantManagerC.h
+    ServantManagerCP.h
+    ServantManagerS.h
+    ServantManagerSP.h
+    ServantRetentionPolicyC.h
+    ServantRetentionPolicyCP.h
+    ServantRetentionPolicyS.h
+    ServantRetentionPolicySP.h
+    ThreadPolicyC.h
+    ThreadPolicyCP.h
+    ThreadPolicyS.h
+    ThreadPolicySP.h
+    adapter_activator_cb.h
+    basic_sargument_t.h
+    basic_sarguments.h
+    get_skel_arg.h
+    long_double_sargument_t.h
+    operation_table_std_map.h
+    poa_policies_impl.h
+    portableserver.h
+    portableserver_functions.h
+    portableserver_impl.h
+    portableserver_proxies.h
+    sarg_traits_t.h
+    servant_activator_cb.h
+    servant_forward.h
+    servant_locator_cb.h
+    servant_manager_cb.h
+    servant_proxy.h
+    servant_traits_t.h
+    servantbase.h
+    special_basic_sargument_t.h
+    special_basic_sarguments.h
+    stub_sarg_traits.h
+    taox11_portableserver_export.h
+    upcall_command.h
   }
 
-  Header_Files {
-    taox11_portableserver_export.h
-    adapter_activator_cb.h
-    portableserver.h
-    poa_policies_impl.h
-    portableserver_impl.h
-    portableserver_functions.h
-    portableserver_proxies.h
-    servant_proxy.h
-    servant_manager_cb.h
-    servant_locator_cb.h
-    servant_activator_cb.h
-    servantbase.h
-    operation_table_std_map.h
-    stub_sarg_traits.h
-    basic_arguments.h
-    special_basic_arguments.h
-    upcall_command.h
-    sarg_traits_t.h
-    basic_sargument_t.h
-    special_basic_sargument_t.h
-    long_double_sargument_t.h
-  }
 
   Template_Files {
     basic_sargument_t.cpp

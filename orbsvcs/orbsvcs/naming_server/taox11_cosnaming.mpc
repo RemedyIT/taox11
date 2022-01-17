@@ -26,7 +26,7 @@ project(taox11_cosnaming_stub) : taox11_orbsvcslib {
 
   Header_Files {
     CosNamingC.h
-    CosNaming_export.h
+    taox11_cosnaming_export.h
   }
 }
 
@@ -43,6 +43,6 @@ project(taox11_cosnaming_skel) : taox11_orbsvcslib, taox11_portableserver, taox1
 
   Header_Files {
     CosNamingS.h
-    CosNaming_export.h
+    taox11_cosnaming_export.h
   }
 }
