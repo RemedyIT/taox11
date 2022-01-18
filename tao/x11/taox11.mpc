@@ -160,7 +160,6 @@ project(taox11) : taox11_defaults, taolib {
     anyinsert_adapter.h
     CurrentC.h
     orb_typesC.h
-//     InterfaceDefC.h
     Typecode_typesC.h
     CONV_FRAMEC.h
     ParameterModeC.h
@@ -237,7 +236,6 @@ project(taox11) : taox11_defaults, taolib {
     corba.h
     objproxy.h
     stub_arg_traits.h
-//    std_mutex.h
     cdr_long_double.h
     valuefactory_manager_adapter.h
     valuetype_adapter.h
@@ -259,9 +257,7 @@ project(taox11) : taox11_defaults, taolib {
     special_basic_argument_t.h
     user_exception_proxy_in_t.h
     sequence_cdr_t.h
-//    sequence_os_t.h
     array_cdr_t.h
-//    array_os_t.h
     long_double_argument_t.h
     idl_traits_t.h
     bounded_type_traits_t.h

@@ -42,9 +42,26 @@ project(taox11_dynamicany) : taox11_lib, install, taox11_valuetype, taox11_avoid
   }
 
   Header_Files {
-   *.h
-   DynamicAnyC.h
-   DynamicAnyS.h
+    DynamicAnyC.h
+    DynamicAnyCP.h
+    DynamicAnyS.h
+    DynamicAnySP.h
+    basic_type_traits.h
+    basic_type_traits_t.h
+    dyn_common.h
+    dynamicany.h
+    dynany_impl.h
+    dynanyfactory.h
+    dynanyutils_t.h
+    dynarray_i.h
+    dynenum_i.h
+    dynsequence_i.h
+    dynstruct_i.h
+    dynunion_i.h
+    dynvalue_i.h
+    dynvaluebox_i.h
+    dynvaluecommon_i.h
+    taox11_dynamicany_export.h
   }
 
   Template_Files {
