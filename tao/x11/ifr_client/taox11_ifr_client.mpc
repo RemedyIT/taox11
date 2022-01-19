@@ -37,19 +37,23 @@ project(taox11_ifr_client_stub) : taox11_lib, taox11_anytypecode, taox11_avoids_
   }
 
   Header_Files {
-    *.h
     IFR_BaseC.h
+    IFR_BaseCP.h
     IFR_BaseS.h
-    IFR_BaseA.h
+    IFR_BaseSP.h
     IFR_BasicC.h
+    IFR_BasicCP.h
     IFR_BasicS.h
-    IFR_BasicA.h
+    IFR_BasicSP.h
     IFR_ComponentsC.h
+    IFR_ComponentsCP.h
     IFR_ComponentsS.h
-    IFR_ComponentsA.h
+    IFR_ComponentsSP.h
     IFR_ExtendedC.h
+    IFR_ExtendedCP.h
     IFR_ExtendedS.h
-    IFR_ExtendedA.h
+    IFR_ExtendedSP.h
+    taox11_ifr_client_skel_export.h
   }
 
 }
@@ -71,6 +75,7 @@ project(taox11_ifr_client_skel) : taox11_lib, taox11_portableserver, taox11_ifr_
     IFR_BasicS.h
     IFR_ComponentsS.h
     IFR_ExtendedS.h
+    taox11_ifr_client_stub_export.h
   }
 
   Inline_Files {
