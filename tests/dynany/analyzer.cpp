@@ -15,7 +15,7 @@
 #define CASEE(type,CT,str) case CORBA::TCKind::tk_##type: {\
   CT b = da->get_##type() ; \
   tab (level_); \
-  TAOX11_TEST_INFO << str << b << std::endl;; \
+  TAOX11_TEST_INFO << str << b << std::endl; \
   } break;
 
 #define CASEBS(type,CT,str,elem) case CORBA::TCKind::tk_##type: \
@@ -29,7 +29,7 @@
       { \
         elem b = seq[i]; \
         tab (level_); \
-        TAOX11_TEST_INFO <<  "[" << i << "] "<< str << b << std::endl;; \
+        TAOX11_TEST_INFO <<  "[" << i << "] "<< str << b << std::endl; \
       } \
     --level_; \
   } \
