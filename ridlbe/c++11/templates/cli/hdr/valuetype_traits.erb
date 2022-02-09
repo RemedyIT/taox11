@@ -9,16 +9,16 @@ namespace TAOX11_NAMESPACE
   namespace CORBA
   {
     template<>
-    <%= stub_export_macro %> object_traits< <%= scoped_factory_cxx_type %>>::shared_ptr_type
-    object_traits< <%= scoped_factory_cxx_type %>>::lock_shared (<%= scoped_factory_cxx_type %>*);
+    <%= stub_export_macro %> object_traits<<%= scoped_factory_cxx_type %>>::shared_ptr_type
+    object_traits<<%= scoped_factory_cxx_type %>>::lock_shared (<%= scoped_factory_cxx_type %>*);
   } // namespace CORBA
 
   namespace IDL
   {
     template<>
-    struct traits < <%= scoped_factory_cxx_type %>> :
-      public IDL::common_byval_traits <CORBA::object_reference < <%= scoped_factory_cxx_type %>>>,
-      public CORBA::object_traits < <%= scoped_factory_cxx_type %>>
+    struct traits <<%= scoped_factory_cxx_type %>> :
+      public IDL::common_byval_traits <CORBA::object_reference <<%= scoped_factory_cxx_type %>>>,
+      public CORBA::object_traits <<%= scoped_factory_cxx_type %>>
     {
       using is_abstract = std::false_type;
       using is_local = std::true_type;
@@ -29,13 +29,13 @@ namespace TAOX11_NAMESPACE
   namespace CORBA
   {
     template <>
-    struct <%= stub_export_macro %>valuetype_traits< <%= scoped_cxxtype %>>
+    struct <%= stub_export_macro %>valuetype_traits<<%= scoped_cxxtype %>>
     {
       using base_type = <%= scoped_cxxtype %>;
       /// Strong reference type
-      using ref_type = valuetype_reference< <%= scoped_cxxtype %>>;
+      using ref_type = valuetype_reference<<%= scoped_cxxtype %>>;
       /// Weak reference type
-      using weak_ref_type = weak_valuetype_reference< <%= scoped_cxxtype %>>;
+      using weak_ref_type = weak_valuetype_reference<<%= scoped_cxxtype %>>;
 % unless is_abstract?
       using obv_type = <%= scoped_obv_cxxtype %>;
 % end
@@ -49,7 +49,7 @@ namespace TAOX11_NAMESPACE
       using weak_factory_ref_type = IDL::traits<CORBA::ValueFactoryBase>::weak_ref_type;
 % end
       template <typename _Tp1, typename = typename
-          std::enable_if<std::is_convertible< <%= scoped_cxxtype %>*, _Tp1*>::value>::type>
+          std::enable_if<std::is_convertible<<%= scoped_cxxtype %>*, _Tp1*>::value>::type>
       static ref_type narrow (valuetype_reference<_Tp1> base)
       {
         return ref_type::_narrow (std::move(base));
@@ -57,7 +57,7 @@ namespace TAOX11_NAMESPACE
 
       template <typename TInst = <%= scoped_cxxtype %>,
                 typename = typename
-                  std::enable_if<std::is_base_of< <%= scoped_cxxtype %>, TInst>::value>::type,
+                  std::enable_if<std::is_base_of<<%= scoped_cxxtype %>, TInst>::value>::type,
                 typename ...Args>
       inline static ref_type make_reference(Args&& ...args)
       {
@@ -69,14 +69,14 @@ namespace TAOX11_NAMESPACE
   namespace IDL
   {
     template<>
-    struct traits < <%= scoped_cxxtype %>>
-      : public IDL::common_byval_traits<CORBA::valuetype_reference< <%= scoped_cxxtype %>>>,
-        public CORBA::valuetype_traits < <%= scoped_cxxtype %>>
+    struct traits <<%= scoped_cxxtype %>>
+      : public IDL::common_byval_traits<CORBA::valuetype_reference<<%= scoped_cxxtype %>>>,
+        public CORBA::valuetype_traits <<%= scoped_cxxtype %>>
     {
       using is_abstract = std::<%= is_abstract? %>_type;
       using is_truncatable = std::<%= is_truncatable? %>_type;
 
-      template <typename OStrm_, typename Formatter = formatter< <%= scoped_cxxtype %>, OStrm_>>
+      template <typename OStrm_, typename Formatter = formatter<<%= scoped_cxxtype %>, OStrm_>>
       static inline OStrm_& write_on(
           OStrm_& os_, in_type val_,
           Formatter fmt_ = Formatter ())

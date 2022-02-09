@@ -3,7 +3,7 @@
 namespace _impl
 {
   class <%= implementation_export_macro %><%= skel_cxxname %>
-    : public CORBA::servant_traits< <%= scoped_cxxtype %>>::base_type
+    : public CORBA::servant_traits<<%= scoped_cxxtype %>>::base_type
 % nest { write_regen_section("#{scoped_cxxname}"+'[Base List]', default_content: '// your base classes') }
   {
   protected:

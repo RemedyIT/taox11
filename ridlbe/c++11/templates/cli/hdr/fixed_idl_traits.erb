@@ -7,8 +7,8 @@
 #define _ALIAS_<%= alias_md5 %>_TRAITS_DECL_
 
 template<>
-struct traits < <%= scoped_cxxtype %>>
-  : IDL::common_traits< <%= scoped_cxxtype %>>
+struct traits <<%= scoped_cxxtype %>>
+  : IDL::common_traits<<%= scoped_cxxtype %>>
 {
   using digits = std::integral_constant< uint16_t, <%= digits %>>;
   using scale = std::integral_constant< uint16_t, <%= scale %>>;
@@ -26,7 +26,7 @@ struct traits < <%= scoped_cxxtype %>>
 };
 
 template <typename OStrm_>
-struct formatter< <%= scoped_cxxtype %>, OStrm_>
+struct formatter<<%= scoped_cxxtype %>, OStrm_>
 {
   inline OStrm_& operator ()(
       OStrm_& os_,
@@ -41,16 +41,16 @@ struct formatter< <%= scoped_cxxtype %>, OStrm_>
 template <typename OStrm_, typename Fmt>
 inline OStrm_& operator <<(
     OStrm_& os,
-    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> w)
+    IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt> w)
 {
-  using writer_t = IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt>;
+  using writer_t = IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt>;
   using formatter_t = typename std::conditional<
                         std::is_same<
                           typename writer_t::formatter_t,
                           std::false_type>::value,
-                        formatter< <%= scoped_cxxtype %>, OStrm_>,
+                        formatter<<%= scoped_cxxtype %>, OStrm_>,
                         typename writer_t::formatter_t>::type;
-  return IDL::traits< <%= scoped_cxxtype %>>::write_on (
+  return IDL::traits<<%= scoped_cxxtype %>>::write_on (
       os, w.val_,
       formatter_t ());
 }

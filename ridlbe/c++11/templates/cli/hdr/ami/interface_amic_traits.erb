@@ -3,7 +3,7 @@
 namespace IDL
 {
   template <typename OStrm_>
-  struct formatter< <%= amic_scoped_cxxtype %>, OStrm_>
+  struct formatter<<%= amic_scoped_cxxtype %>, OStrm_>
   {
     inline OStrm_& operator ()(
         OStrm_& os_,
@@ -17,16 +17,16 @@ namespace IDL
   template <typename OStrm_, typename Fmt>
   inline OStrm_& operator <<(
       OStrm_& os,
-      TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::__Writer<Fmt> w)
+      TAOX11_CORBA::amic_traits <<%= scoped_cxxtype %>>::__Writer<Fmt> w)
   {
-    using writer_t = TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::__Writer<Fmt>;
+    using writer_t = TAOX11_CORBA::amic_traits <<%= scoped_cxxtype %>>::__Writer<Fmt>;
     using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
-                          IDL::formatter< <%= amic_scoped_cxxtype %>, OStrm_>,
+                          IDL::formatter<<%= amic_scoped_cxxtype %>, OStrm_>,
                           typename writer_t::formatter_t>::type;
-    return TAOX11_CORBA::amic_traits < <%= scoped_cxxtype %>>::write_on (
+    return TAOX11_CORBA::amic_traits <<%= scoped_cxxtype %>>::write_on (
         os, w.val_,
         formatter_t ());
   }

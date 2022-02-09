@@ -4,8 +4,8 @@
 #if !defined (_UNION_<%= _union_traits_incl_guard_ %>_TRAITS_)
 #define _UNION_<%= _union_traits_incl_guard_ %>_TRAITS_
 template<>
-struct traits < <%= scoped_cxxtype %>>
-  : IDL::common_traits< <%= scoped_cxxtype %>>
+struct traits <<%= scoped_cxxtype %>>
+  : IDL::common_traits<<%= scoped_cxxtype %>>
 {
   template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
   static inline OStrm_& write_on(
@@ -20,10 +20,10 @@ struct traits < <%= scoped_cxxtype %>>
 };
 
 template <typename OStrm_>
-struct formatter< <%= scoped_cxxtype %>, OStrm_>;
+struct formatter<<%= scoped_cxxtype %>, OStrm_>;
 
 template <typename OStrm_, typename Fmt>
 OStrm_& operator <<(
     OStrm_&,
-    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt>);
+    IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt>);
 #endif // _UNION_<%= _union_traits_incl_guard_ %>_TRAITS_
