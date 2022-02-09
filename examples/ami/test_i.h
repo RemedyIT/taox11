@@ -14,7 +14,7 @@
 #include "testS.h"
 
 class A_i
-: public virtual CORBA::servant_traits< Test::A>::base_type
+: public virtual CORBA::servant_traits<Test::A>::base_type
 {
 public:
   /// ctor
