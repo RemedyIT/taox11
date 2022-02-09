@@ -160,7 +160,7 @@ namespace TAOX11_NAMESPACE {
       POA_proxy& _proxy ();
 
     protected:
-      virtual ~POA_impl () = default;;
+      virtual ~POA_impl () = default;
 
     private:
       template <typename _Tp1, typename, typename ...Args>
