@@ -6,7 +6,7 @@ namespace obv
   TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
   <%= cxxname %>::_copy_value () const
   {
-    return TAOX11_CORBA::make_reference< <%= scoped_cxx_traits_type %>::obv_type> (*this);
+    return TAOX11_CORBA::make_reference<<%= scoped_cxx_traits_type %>::obv_type> (*this);
   }
 
 % end
@@ -70,7 +70,7 @@ namespace obv
     TAO_CORBA::Boolean const ret =
 %   _n = member_count-1
 %   members.each_with_index do |_m, _i|
-      (strm << <%= _m.cdr_from_fmt % "this->#{_m.cxxname} ()" %>)<%= ((_i < _n ) ? ' &&' : ';') %>
+      (strm <<<%= _m.cdr_from_fmt % "this->#{_m.cxxname} ()" %>)<%= ((_i < _n ) ? ' &&' : ';') %>
 %   end
     if (!ret)
       return false;

@@ -9,21 +9,21 @@ namespace TAOX11_NAMESPACE
   {
 % if is_abstract?
     template<>
-    <%= stub_export_macro %>abstractbase_traits< <%= scoped_cxxtype %>>::ref_type
-    abstractbase_traits< <%= scoped_cxxtype %>>::narrow (abstractbase_reference<CORBA::AbstractBase>);
+    <%= stub_export_macro %>abstractbase_traits<<%= scoped_cxxtype %>>::ref_type
+    abstractbase_traits<<%= scoped_cxxtype %>>::narrow (abstractbase_reference<CORBA::AbstractBase>);
 % else
     template<>
-    <%= stub_export_macro %>object_traits< <%= scoped_cxxtype %>>::shared_ptr_type
-    object_traits< <%= scoped_cxxtype %>>::lock_shared (<%= scoped_cxxtype %>* p);
+    <%= stub_export_macro %>object_traits<<%= scoped_cxxtype %>>::shared_ptr_type
+    object_traits<<%= scoped_cxxtype %>>::lock_shared (<%= scoped_cxxtype %>* p);
 %   if is_remote?
     template<>
-    <%= stub_export_macro %>object_traits< <%= scoped_cxxtype %>>::ref_type
-    object_traits< <%= scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
+    <%= stub_export_macro %>object_traits<<%= scoped_cxxtype %>>::ref_type
+    object_traits<<%= scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
 %   else
 %     if declare_local_object_narrow_specialization?
     template<>
-    <%= stub_export_macro %>object_traits< <%= scoped_cxxtype %>>::ref_type
-    object_traits< <%= scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
+    <%= stub_export_macro %>object_traits<<%= scoped_cxxtype %>>::ref_type
+    object_traits<<%= scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
 %     end
 %   end
 % end
@@ -32,13 +32,13 @@ namespace TAOX11_NAMESPACE
   namespace IDL
   {
     template<>
-    struct traits < <%= scoped_cxxtype %>> :
+    struct traits <<%= scoped_cxxtype %>> :
 % if is_abstract?
-      public IDL::common_byval_traits <CORBA::abstractbase_reference < <%= scoped_cxxtype %>>>,
-      public CORBA::abstractbase_traits < <%= scoped_cxxtype %>>
+      public IDL::common_byval_traits <CORBA::abstractbase_reference <<%= scoped_cxxtype %>>>,
+      public CORBA::abstractbase_traits <<%= scoped_cxxtype %>>
 % else
-      public IDL::common_byval_traits <CORBA::object_reference < <%= scoped_cxxtype %>>>,
-      public CORBA::object_traits < <%= scoped_cxxtype %>>
+      public IDL::common_byval_traits <CORBA::object_reference <<%= scoped_cxxtype %>>>,
+      public CORBA::object_traits <<%= scoped_cxxtype %>>
 % end
     {
       /// std::false_type or std::true_type type indicating whether
@@ -53,7 +53,7 @@ namespace TAOX11_NAMESPACE
       using base_type = <%= scoped_cxxtype %>;
 % end
 
-      template <typename OStrm_, typename Formatter = formatter< <%= scoped_cxxtype %>, OStrm_>>
+      template <typename OStrm_, typename Formatter = formatter<<%= scoped_cxxtype %>, OStrm_>>
       static inline OStrm_& write_on(
           OStrm_& os_, in_type val_,
           Formatter fmt_ = Formatter ())

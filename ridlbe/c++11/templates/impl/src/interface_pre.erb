@@ -6,7 +6,7 @@ namespace _impl {
 % write_regen_section("#{scoped_cxxname}"+'[Constructors]', indent: 1) do
   // your constructor(s)
   <%= skel_cxxname %>::<%= skel_cxxname %> ()
-    : CORBA::servant_traits< <%= scoped_cxxtype %>>::base_type ()
+    : CORBA::servant_traits<<%= scoped_cxxtype %>>::base_type ()
   {
   }
 % end

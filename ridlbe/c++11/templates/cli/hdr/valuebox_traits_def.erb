@@ -4,8 +4,8 @@ namespace TAOX11_NAMESPACE
 {
   namespace CORBA
   {
-    inline valuetype_traits< <%= scoped_cxxtype %>>::ref_type
-    valuetype_traits< <%= scoped_cxxtype %>>::narrow (
+    inline valuetype_traits<<%= scoped_cxxtype %>>::ref_type
+    valuetype_traits<<%= scoped_cxxtype %>>::narrow (
           valuetype_reference<ValueBase> vbref)
     {
       return ref_type::_narrow (vbref);

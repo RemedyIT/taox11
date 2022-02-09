@@ -5,7 +5,7 @@
 void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _struct)
 {
   TAOX11_NAMESPACE::Any_Dual_Impl_T<
-      IDL::traits< <%= scoped_cxxtype %>>,
+      IDL::traits<<%= scoped_cxxtype %>>,
 % if is_local?
       TAOX11_NAMESPACE::NULL_Marshal_Policy
 % else
@@ -18,7 +18,7 @@ void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _struct)
 void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_move_type %> _struct)
 {
    Any_Dual_Impl_T<
-      IDL::traits< <%= scoped_cxxtype %>>,
+      IDL::traits<<%= scoped_cxxtype %>>,
 % if is_local?
       TAOX11_NAMESPACE::NULL_Marshal_Policy
 % else
@@ -31,7 +31,7 @@ void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_move_type %> _struct)
 bool operator>>= (const TAOX11_CORBA::Any &any, <%= scoped_cxx_out_type %> _struct)
 {
   return Any_Dual_Impl_T<
-      IDL::traits< <%= scoped_cxxtype %>>,
+      IDL::traits<<%= scoped_cxxtype %>>,
 % if is_local?
       TAOX11_NAMESPACE::NULL_Marshal_Policy
 % else

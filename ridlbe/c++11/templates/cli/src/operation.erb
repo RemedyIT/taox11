@@ -17,7 +17,7 @@
   TAO_CORBA::Object_ptr const _objptr = _objref->get_proxy ()->get ();
 %   end
 %   unless is_oneway? || is_void?
-  TAOX11_NAMESPACE::Arg_Traits< <%= scoped_cxx_arg_type %>>::ret_val _taox11_retval;
+  TAOX11_NAMESPACE::Arg_Traits<<%= scoped_cxx_arg_type %>>::ret_val _taox11_retval;
 %   else
   TAOX11_NAMESPACE::Arg_Traits<void>::ret_val _taox11_retval;
 %   end
@@ -38,11 +38,11 @@
 %   arguments.each do |_arg|
 %     case _arg.direction
 %     when :in
-    TAOX11_NAMESPACE::Arg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
+    TAOX11_NAMESPACE::Arg_Traits<<%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
 %     when :out
-    TAOX11_NAMESPACE::Arg_Traits< <%= _arg.scoped_cxx_arg_type %>>::out_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
+    TAOX11_NAMESPACE::Arg_Traits<<%= _arg.scoped_cxx_arg_type %>>::out_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
 %     when :inout
-    TAOX11_NAMESPACE::Arg_Traits< <%= _arg.scoped_cxx_arg_type %>>::inout_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
+    TAOX11_NAMESPACE::Arg_Traits<<%= _arg.scoped_cxx_arg_type %>>::inout_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
 %     end
 %   end
 
@@ -61,7 +61,7 @@
 %     raises.each_with_index do |_ex, _index|
       {
         "<%= _ex.repository_id %>",
-        TAOX11_NAMESPACE::UserExceptionProxy::in< <%= _ex.scoped_cxxname %>>::_alloc,
+        TAOX11_NAMESPACE::UserExceptionProxy::in<<%= _ex.scoped_cxxname %>>::_alloc,
 #if TAO_HAS_INTERCEPTORS == 1
 %       if generate_typecode_support?
         TC_helper::get_tao_tc(<%= _ex.scoped_cxx_typecode %>)

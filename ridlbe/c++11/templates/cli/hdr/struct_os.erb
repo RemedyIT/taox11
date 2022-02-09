@@ -5,5 +5,5 @@ operator<< (
     std::ostream& strm,
     <%= scoped_cxx_in_type %> _v)
 {
-  return IDL::traits< <%= scoped_cxxtype %>>::write_on (strm, _v);
+  return IDL::traits<<%= scoped_cxxtype %>>::write_on (strm, _v);
 }

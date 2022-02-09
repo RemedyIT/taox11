@@ -8,19 +8,19 @@ namespace TAOX11_NAMESPACE
   namespace CORBA
   {
     template<>
-    struct <%= stub_export_macro %>valuetype_traits< <%= scoped_cxxtype %>>
+    struct <%= stub_export_macro %>valuetype_traits<<%= scoped_cxxtype %>>
     {
       /// Strong reference type
-      using ref_type = valuetype_reference< <%= scoped_cxxtype %>>;
+      using ref_type = valuetype_reference<<%= scoped_cxxtype %>>;
       /// Weak reference type
-      using weak_ref_type = weak_valuetype_reference< <%= scoped_cxxtype %>>;
+      using weak_ref_type = weak_valuetype_reference<<%= scoped_cxxtype %>>;
 
       static ref_type narrow (valuetype_reference<ValueBase>);
 
       template <typename ...Args>
       inline static ref_type make_reference(Args&& ...args)
       {
-        return TAOX11_CORBA::make_reference< <%= scoped_cxxtype %>> (std::forward<Args> (args)...);
+        return TAOX11_CORBA::make_reference<<%= scoped_cxxtype %>> (std::forward<Args> (args)...);
       }
     };
   } // namespace CORBA
@@ -28,14 +28,14 @@ namespace TAOX11_NAMESPACE
   namespace IDL
   {
     template<>
-    struct traits < <%= scoped_cxxtype %>>
-      : public IDL::common_byval_traits<CORBA::valuetype_reference< <%= scoped_cxxtype %>>>,
-        public CORBA::valuetype_traits < <%= scoped_cxxtype %>>
+    struct traits <<%= scoped_cxxtype %>>
+      : public IDL::common_byval_traits<CORBA::valuetype_reference<<%= scoped_cxxtype %>>>,
+        public CORBA::valuetype_traits <<%= scoped_cxxtype %>>
     {
       /// IDL::traits for the boxed type of the valuebox
-      using boxed_traits = IDL::traits< <%= scoped_boxed_traits_cxx_typename %>>;
+      using boxed_traits = IDL::traits<<%= scoped_boxed_traits_cxx_typename %>>;
 
-      template <typename OStrm_, typename Formatter = formatter< <%= scoped_cxxtype %>, OStrm_>>
+      template <typename OStrm_, typename Formatter = formatter<<%= scoped_cxxtype %>, OStrm_>>
       static inline OStrm_& write_on(
           OStrm_& os_, in_type val_,
           Formatter fmt_ = Formatter ())

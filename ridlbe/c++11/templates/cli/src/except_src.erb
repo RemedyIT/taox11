@@ -2,7 +2,7 @@
 void
 <%= scoped_cxxname %>::_info (std::ostream& user_exception_info) const
 {
-  TAOX11_IDL::traits< <%= scoped_cxxtype %>>::write_on(user_exception_info, *this);
+  TAOX11_IDL::traits<<%= scoped_cxxtype %>>::write_on(user_exception_info, *this);
 }
 
 void <%= scoped_cxxname %>::_raise () const
