@@ -394,7 +394,7 @@ module IDL
       end
 
       def has_annotations?
-        !@node.annotations().empty?
+        !@node.annotations.empty?
       end
 
       def annotations

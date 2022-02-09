@@ -22,16 +22,16 @@ void <%= interface.scoped_srvproxy_cxxname %>::<%= name %>_skel (
   PS::SArg_Traits<void>::ret_val retval;
 % nr_arguments = 1
 % unless is_oneway? || is_void?
-  PS::SArg_Traits< <%= scoped_cxx_arg_type %>>::in_arg_val _taox11_ami_return_val;
+  PS::SArg_Traits<<%= scoped_cxx_arg_type %>>::in_arg_val _taox11_ami_return_val;
 % nr_arguments += 1
 % end
 %    arguments.each do |_arg|
 %       case _arg.direction
 %       when :out
-  PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %>;
+  PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %>;
 % nr_arguments += 1
 %       when :inout
-  PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %>;
+  PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %>;
 % nr_arguments += 1
 %       end
 %     end
@@ -53,20 +53,20 @@ void <%= interface.scoped_srvproxy_cxxname %>::<%= name %>_skel (
     [&]() {
 % _ix = 0
 %   unless is_oneway? || is_void?
-      PS::SArg_Traits< <%= scoped_cxx_arg_type %>>::in_arg_type retval =
+      PS::SArg_Traits<<%= scoped_cxx_arg_type %>>::in_arg_type retval =
 % _ix = _ix + 1
-        std::move (PS::get_in_arg< <%= scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>));
+        std::move (PS::get_in_arg<<%= scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>));
 %   end
 %   arguments.each do |_arg|
 %       case _arg.direction
 %       when :out  #out become in
 % _ix = _ix + 1
-      PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_type <%= _arg.cxxname %> =
-        std::move (PS::get_in_arg< <%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>));
+      PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::in_arg_type <%= _arg.cxxname %> =
+        std::move (PS::get_in_arg<<%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>));
 %       when :inout #inout become in
 % _ix = _ix + 1
-      PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_type <%= _arg.cxxname %> =
-        std::move (PS::get_in_arg< <%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>));
+      PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::in_arg_type <%= _arg.cxxname %> =
+        std::move (PS::get_in_arg<<%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>));
 %       end
 %   end
 % _op_start = "servant.#{cxxname} ("

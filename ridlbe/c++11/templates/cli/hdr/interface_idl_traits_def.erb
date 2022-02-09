@@ -2,7 +2,7 @@
 // generated from <%= ridl_template_path %>
 template <typename OStrm_>
 inline OStrm_&
-formatter< <%= scoped_cxxtype %>, OStrm_>::operator ()(
+formatter<<%= scoped_cxxtype %>, OStrm_>::operator ()(
       OStrm_& os_,
       <%= scoped_cxx_in_type %> val_)
 {
@@ -21,16 +21,16 @@ formatter< <%= scoped_cxxtype %>, OStrm_>::operator ()(
 template <typename OStrm_, typename Fmt>
 inline OStrm_& operator <<(
     OStrm_& os,
-    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> w)
+    IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt> w)
 {
-  using writer_t = IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt>;
+  using writer_t = IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt>;
   using formatter_t = typename std::conditional<
                         std::is_same<
                           typename writer_t::formatter_t,
                           std::false_type>::value,
-                        formatter< <%= scoped_cxxtype %>, OStrm_>,
+                        formatter<<%= scoped_cxxtype %>, OStrm_>,
                         typename writer_t::formatter_t>::type;
-  return IDL::traits< <%= scoped_cxxtype %>>::write_on (
+  return IDL::traits<<%= scoped_cxxtype %>>::write_on (
       os, w.val_,
       formatter_t ());
 }

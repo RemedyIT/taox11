@@ -9,14 +9,14 @@ static const Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array[] =
     {"<%= _op.name %>",
      [] (TAO_ServerRequest & server_request, TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall, TAO_ServantBase * servant)
      {
-      <%= scoped_srvproxy_cxxname %> * const impl = dynamic_cast< <%= scoped_srvproxy_cxxname %> *> (servant);
+      <%= scoped_srvproxy_cxxname %> * const impl = dynamic_cast<<%= scoped_srvproxy_cxxname %> *> (servant);
       <%= _op.defining_interface.handler_scoped_srvproxy_cxxtype %>::<%= _op.name %>_skel (server_request, servant_upcall, impl->skel ());
      }
     },
     {"<%= _op.name %>_excep",
      [] (TAO_ServerRequest & server_request, TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall, TAO_ServantBase * servant)
      {
-      <%= scoped_srvproxy_cxxname %> * const impl = dynamic_cast< <%= scoped_srvproxy_cxxname %> *> (servant);
+      <%= scoped_srvproxy_cxxname %> * const impl = dynamic_cast<<%= scoped_srvproxy_cxxname %> *> (servant);
       <%= _op.defining_interface.handler_scoped_srvproxy_cxxtype %>::<%= _op.name %>_excep_skel (server_request, servant_upcall, impl->skel ());
      }
     },
@@ -26,14 +26,14 @@ static const Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array[] =
     {"get_<%= _att.name %>",
      [] (TAO_ServerRequest & server_request, TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall, TAO_ServantBase * servant)
      {
-      <%= scoped_srvproxy_cxxname %> * const impl = dynamic_cast< <%= scoped_srvproxy_cxxname %> *> (servant);
+      <%= scoped_srvproxy_cxxname %> * const impl = dynamic_cast<<%= scoped_srvproxy_cxxname %> *> (servant);
       <%= _att.defining_interface.handler_scoped_srvproxy_cxxtype %>::get_<%= _att.name %>_skel (server_request, servant_upcall, impl->skel ());
      }
     },
     {"get_<%= _att.name %>_excep",
      [] (TAO_ServerRequest & server_request, TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall, TAO_ServantBase * servant)
      {
-      <%= scoped_srvproxy_cxxname %> * const impl = dynamic_cast< <%= scoped_srvproxy_cxxname %> *> (servant);
+      <%= scoped_srvproxy_cxxname %> * const impl = dynamic_cast<<%= scoped_srvproxy_cxxname %> *> (servant);
       <%= _att.defining_interface.handler_scoped_srvproxy_cxxtype %>::get_<%= _att.name %>_excep_skel (server_request, servant_upcall, impl->skel ());
      }
     },
@@ -42,14 +42,14 @@ static const Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array[] =
     {"set_<%= _att.name %>",
      [] (TAO_ServerRequest & server_request, TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall, TAO_ServantBase * servant)
      {
-      <%= scoped_srvproxy_cxxname %> * const impl = dynamic_cast< <%= scoped_srvproxy_cxxname %> *> (servant);
+      <%= scoped_srvproxy_cxxname %> * const impl = dynamic_cast<<%= scoped_srvproxy_cxxname %> *> (servant);
       <%= _att.defining_interface.handler_scoped_srvproxy_cxxtype %>::set_<%= _att.name %>_skel (server_request, servant_upcall, impl->skel ());
      }
     },
     {"set_<%= _att.name %>_excep",
      [] (TAO_ServerRequest & server_request, TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall, TAO_ServantBase * servant)
      {
-      <%= scoped_srvproxy_cxxname %> * const impl = dynamic_cast< <%= scoped_srvproxy_cxxname %> *> (servant);
+      <%= scoped_srvproxy_cxxname %> * const impl = dynamic_cast<<%= scoped_srvproxy_cxxname %> *> (servant);
       <%= _att.defining_interface.handler_scoped_srvproxy_cxxtype %>::set_<%= _att.name %>_excep_skel (server_request, servant_upcall, impl->skel ());
      }
     },
@@ -91,7 +91,7 @@ TAOX11_NAMESPACE::PortableServer::Servant* <%= srvproxy_cxxname %>::_get_skel ()
       {
         (void) safe_stub.release ();
 
-        return TAO_TAO::Narrow_Utils< <%= scoped_proxy_cxxtype %>>::unchecked_narrow (obj.in ());
+        return TAO_TAO::Narrow_Utils<<%= scoped_proxy_cxxtype %>>::unchecked_narrow (obj.in ());
       }
   }
   catch (const TAO_PORTABLE_SERVER::POA::WrongPolicy&) {

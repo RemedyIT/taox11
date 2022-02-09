@@ -1,15 +1,15 @@
 
 // generated from <%= ridl_template_path %>
 template <>
-struct <%= skel_export_macro %>servant_traits< <%= scoped_cxxtype %>>
+struct <%= skel_export_macro %>servant_traits<<%= scoped_cxxtype %>>
 {
   /// Base trait type from which the servant implementations has to be derived
   /// from
   using base_type = <%= scoped_skel_cxxtype %>;
   /// Strong reference type
-  using ref_type = TAOX11_CORBA::servant_reference< <%= scoped_skel_cxxtype %>>;
+  using ref_type = TAOX11_CORBA::servant_reference<<%= scoped_skel_cxxtype %>>;
   /// Weak reference type
-  using weak_ref_type = TAOX11_CORBA::weak_servant_reference< <%= scoped_skel_cxxtype %>>;
+  using weak_ref_type = TAOX11_CORBA::weak_servant_reference<<%= scoped_skel_cxxtype %>>;
 %if generate_tie_support?
   /// TIE type
   template<class T> using tie_type = <%= scoped_tie_cxxtype %><T>;
@@ -18,7 +18,7 @@ struct <%= skel_export_macro %>servant_traits< <%= scoped_cxxtype %>>
   /// reference. Returns a new reference when this succeeds, a nil reference
   /// when this fails. Narrowing a nil reference will return a nil reference.
   template <typename _Tp1, typename = typename
-      std::enable_if<std::is_convertible< <%= scoped_skel_cxxtype %>*, _Tp1*>::value>::type>
+      std::enable_if<std::is_convertible<<%= scoped_skel_cxxtype %>*, _Tp1*>::value>::type>
   static ref_type narrow (servant_reference<_Tp1> base)
   {
     return ref_type::_narrow (std::move(base));

@@ -49,7 +49,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from ImplHeaderWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -59,7 +59,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 

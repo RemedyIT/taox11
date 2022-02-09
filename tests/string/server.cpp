@@ -18,7 +18,7 @@ main(int argc, ACE_TCHAR *argv[])
     {
       IDL::traits<CORBA::ORB>::ref_type orb = CORBA::ORB_init (argc, argv);
 
-      if (orb == nullptr)
+      if (!orb)
       {
         TAOX11_TEST_ERROR << "ERROR: CORBA::ORB_init (argc, argv) returned null ORB." << std::endl;
         return 1;

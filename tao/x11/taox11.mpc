@@ -160,7 +160,6 @@ project(taox11) : taox11_defaults, taolib {
     anyinsert_adapter.h
     CurrentC.h
     orb_typesC.h
-    InterfaceDefC.h
     Typecode_typesC.h
     CONV_FRAMEC.h
     ParameterModeC.h
@@ -190,37 +189,37 @@ project(taox11) : taox11_defaults, taolib {
     PI_ForwardC.h
     PortableInterceptorC.h
     TimeBaseC.h
-    CurrentP.h
-    Typecode_typesP.h
-    CONV_FRAMEP.h
-    ParameterModeP.h
-    orb_typesP.h
-    Policy_ForwardP.h
-    Policy_ManagerP.h
-    Policy_CurrentP.h
-    PolicyP.h
-    ServicesP.h
-    BooleanSeqP.h
-    CharSeqP.h
-    DoubleSeqP.h
-    FloatSeqP.h
-    LongDoubleSeqP.h
-    LongLongSeqP.h
-    LongSeqP.h
-    OctetSeqP.h
-    ShortSeqP.h
-    StringSeqP.h
-    ULongLongSeqP.h
-    ULongSeqP.h
-    UShortSeqP.h
-    WCharSeqP.h
-    WStringSeqP.h
-    IOPP.h
-    Messaging_PolicyValueP.h
-    Messaging_SyncScopeP.h
-    PI_ForwardP.h
-    PortableInterceptorP.h
-    TimeBaseP.h
+    CurrentCP.h
+    Typecode_typesCP.h
+    CONV_FRAMECP.h
+    ParameterModeCP.h
+    orb_typesCP.h
+    Policy_ForwardCP.h
+    Policy_ManagerCP.h
+    Policy_CurrentCP.h
+    PolicyC.h
+    ServicesCP.h
+    BooleanSeqCP.h
+    CharSeqCP.h
+    DoubleSeqCP.h
+    FloatSeqCP.h
+    LongDoubleSeqCP.h
+    LongLongSeqCP.h
+    LongSeqCP.h
+    OctetSeqCP.h
+    ShortSeqCP.h
+    StringSeqCP.h
+    ULongLongSeqCP.h
+    ULongSeqCP.h
+    UShortSeqCP.h
+    WCharSeqCP.h
+    WStringSeqCP.h
+    IOPCP.h
+    Messaging_PolicyValueCP.h
+    Messaging_SyncScopeCP.h
+    PI_ForwardCP.h
+    PortableInterceptorCP.h
+    TimeBaseCP.h
   }
 
   Header_Files {
@@ -237,7 +236,6 @@ project(taox11) : taox11_defaults, taolib {
     corba.h
     objproxy.h
     stub_arg_traits.h
-    std_mutex.h
     cdr_long_double.h
     valuefactory_manager_adapter.h
     valuetype_adapter.h
@@ -259,9 +257,7 @@ project(taox11) : taox11_defaults, taolib {
     special_basic_argument_t.h
     user_exception_proxy_in_t.h
     sequence_cdr_t.h
-    sequence_os_t.h
     array_cdr_t.h
-    array_os_t.h
     long_double_argument_t.h
     idl_traits_t.h
     bounded_type_traits_t.h

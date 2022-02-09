@@ -16,7 +16,7 @@ TAO_CORBA::Boolean operator>> (
 
   if (_tao_success)
     {
-      _tao_enumerator = static_cast< <%= scoped_cxxtype %>> (_tao_temp);
+      _tao_enumerator = static_cast<<%= scoped_cxxtype %>> (_tao_temp);
     }
 
   return _tao_success;

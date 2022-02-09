@@ -7,8 +7,8 @@ protected:
 #if (defined (_MSC_VER) && (_MSC_VER < 1910)) || (defined __clang__ && __clang_major__ <= 11)
   // vc14 has a problem with friend, issue #4015
   // Clang doesn't support this friend construct, issue #4476
-  friend TAOX11_CORBA::abstractbase_traits< <%= cxxname %>>::ref_type
-    TAOX11_CORBA::abstractbase_traits< <%= cxxname %>>::narrow (
+  friend TAOX11_CORBA::abstractbase_traits<<%= cxxname %>>::ref_type
+    TAOX11_CORBA::abstractbase_traits<<%= cxxname %>>::narrow (
       TAOX11_CORBA::abstractbase_reference<TAOX11_CORBA::AbstractBase>);
 #else
   template<typename T>

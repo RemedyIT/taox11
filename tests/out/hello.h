@@ -18,7 +18,7 @@ public:
   /// Constructor
   Hello_Factory (IDL::traits<CORBA::ORB>::ref_type orb,
       IDL::traits<PortableServer::POA>::ref_type poa);
-  virtual ~Hello_Factory ();
+  ~Hello_Factory () override = default;
 
   // = The skeleton methods
   void get_hello (const std::string& log_string,
@@ -41,8 +41,8 @@ class StringInterface final
   : public virtual CORBA::servant_traits<Test::StringInterface>::base_type
 {
 public:
-  StringInterface () {}
-  ~StringInterface () {}
+  StringInterface () = default;
+  ~StringInterface () override = default;
 private:
   StringInterface (const StringInterface&) = delete;
   StringInterface (StringInterface&&) = delete;
@@ -56,8 +56,8 @@ class Hello final
 {
 public:
   /// Constructor
-  Hello (IDL::traits<CORBA::ORB>::ref_type orb);
-  virtual ~Hello ();
+  explicit Hello (IDL::traits<CORBA::ORB>::ref_type orb);
+  ~Hello () override = default;
 
   // = The skeleton methods
   std::string get_string () override;

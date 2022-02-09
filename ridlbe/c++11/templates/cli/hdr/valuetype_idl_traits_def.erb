@@ -1,7 +1,7 @@
 
 // generated from <%= ridl_template_path %>
 template <typename OStrm_>
-struct formatter< <%= scoped_cxxtype %>, OStrm_>
+struct formatter<<%= scoped_cxxtype %>, OStrm_>
 {
   inline OStrm_& operator ()(
       OStrm_& os_,
@@ -16,11 +16,11 @@ struct formatter< <%= scoped_cxxtype %>, OStrm_>
 % if members.any? {|_m| _m.is_public? } || attributes.size>0
         << '{'
 %   members.select {|_m| _m.is_public? }.each do |_m|
-        << "<%= _sep %><%= _m.cxxname %>=" << IDL::traits< <%= _m.scoped_cxxtype %>>::write(val_-><%= _m.cxxname %> ())
+        << "<%= _sep %><%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write(val_-><%= _m.cxxname %> ())
 %     _sep = ',' unless _sep
 %   end
 %   attributes.each do |_a|
-        << "<%= _sep %><%= _a.cxxname %>=" << IDL::traits< <%= _a.scoped_cxxtype %>>::write(val_-><%= _a.cxxname %> ())
+        << "<%= _sep %><%= _a.cxxname %>=" << IDL::traits<<%= _a.scoped_cxxtype %>>::write(val_-><%= _a.cxxname %> ())
 %     _sep = ',' unless _sep
 %   end
         << '}';
@@ -34,16 +34,16 @@ struct formatter< <%= scoped_cxxtype %>, OStrm_>
 template <typename OStrm_, typename Fmt>
 inline OStrm_& operator <<(
     OStrm_& os,
-    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> w)
+    IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt> w)
 {
-  using writer_t = IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt>;
+  using writer_t = IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt>;
   using formatter_t = typename std::conditional<
                         std::is_same<
                           typename writer_t::formatter_t,
                           std::false_type>::value,
-                        formatter< <%= scoped_cxxtype %>, OStrm_>,
+                        formatter<<%= scoped_cxxtype %>, OStrm_>,
                         typename writer_t::formatter_t>::type;
-  return IDL::traits< <%= scoped_cxxtype %>>::write_on (
+  return IDL::traits<<%= scoped_cxxtype %>>::write_on (
       os, w.val_,
       formatter_t ());
 }
