@@ -35,11 +35,6 @@ jobs:
       matrix:
         include:
           - os: ubuntu-18.04
-            CC: gcc-4.8
-            CXX: g++-4.8
-            ruby: '2.4'
-            PackageDeps: g++-4.8
-          - os: ubuntu-18.04
             CC: gcc-6
             CXX: g++-6
             ruby: '2.5'
