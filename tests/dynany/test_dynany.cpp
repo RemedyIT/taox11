@@ -58,6 +58,136 @@ Test_DynAny::run_test ()
 
     DynAnyAnalyzer analyzer (this->orb_,
                              dynany_factory);
+
+    {
+      TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[5]<< "=*=*=*=*" << std::endl;
+
+      TAOX11_TEST_DEBUG << "testing: constructor(Any)/equal/insert/get" << std::endl;
+
+      CORBA::Any in1;
+      in1 <<= data.m_ushort1;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa1 =
+          dynany_factory->create_dyn_any (in1);
+
+      if (!fa1->equal(fa1))
+      {
+        TAOX11_TEST_ERROR << "Error: create_dyn_any ++ "<< data.labels[5] << std::endl;
+        ++this->error_count_;
+      }
+
+      fa1->insert_ushort (data.m_ushort1);
+
+      uint16_t d_out = fa1->get_ushort ();
+
+      if (!ACE::is_equal (d_out, data.m_ushort1))
+      {
+       TAOX11_TEST_ERROR << "++ ERROR get_ushort ++ "<< d_out << std::endl;
+        ++this->error_count_;
+      }
+
+      TAOX11_TEST_DEBUG << "testing: copy" << std::endl;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa_copy = fa1->copy();
+      if (!fa_copy->equal(fa1))
+       {
+         TAOX11_TEST_ERROR << "Error: copy ++ "<< data.labels[5] << std::endl;
+         ++this->error_count_;
+      }
+      d_out = fa_copy->get_ushort ();
+
+      if (!ACE::is_equal (d_out, data.m_ushort1))
+      {
+       TAOX11_TEST_ERROR << "++ ERROR get_ushort from copy++ "<< d_out << std::endl;
+        ++this->error_count_;
+      }
+
+      TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
+
+      d_out = data.m_ushort1;
+      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+        dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_ushort);
+      CORBA::Any in_any1;
+      in_any1 <<= data.m_ushort1;
+      ftc1->from_any (in_any1);
+      analyzer.analyze (ftc1);
+      CORBA::Any out_any1 = ftc1->to_any ();
+      out_any1 >>= d_out;
+
+      if (!ACE::is_equal (d_out, data.m_ushort1))
+      {
+        TAOX11_TEST_ERROR << "++ ERROR from_any,to_any ++" << data.labels[5]
+                          << " d_out :" << d_out << " m_ushort1 : " << data.m_ushort1
+                          <<  std::endl;
+        ++this->error_count_;
+      }
+
+      fa1->destroy ();
+      ftc1->destroy ();
+    }
+
+    {
+      TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[0]<< "=*=*=*=*" << std::endl;
+
+      TAOX11_TEST_DEBUG << "testing: constructor(Any)/equal/insert/get" << std::endl;
+
+      CORBA::Any in1;
+      in1 <<= data.m_bool1;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa1 = dynany_factory->create_dyn_any (in1);
+
+      if (!fa1->equal(fa1))
+      {
+        TAOX11_TEST_ERROR << "Error: create_dyn_any ++ "<< data.labels[0] << std::endl;
+        ++this->error_count_;
+      }
+
+      fa1->insert_boolean (data.m_bool1);
+
+      bool d_out = fa1->get_boolean ();
+
+      if (!ACE::is_equal (d_out, data.m_bool1))
+      {
+       TAOX11_TEST_ERROR << "++ ERROR get_boolean ++ "<< d_out << std::endl;
+        ++this->error_count_;
+      }
+
+      TAOX11_TEST_DEBUG << "testing: copy" << std::endl;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa_copy = fa1->copy();
+      if (!fa_copy->equal(fa1))
+       {
+         TAOX11_TEST_ERROR << "Error: copy ++ "<< data.labels[0] << std::endl;
+         ++this->error_count_;
+      }
+      d_out = fa_copy->get_boolean ();
+
+      if (!ACE::is_equal (d_out, data.m_bool1))
+      {
+       TAOX11_TEST_ERROR << "++ ERROR get_boolean from copy++ "<< d_out << std::endl;
+        ++this->error_count_;
+      }
+
+      TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
+
+      d_out = data.m_bool1;
+      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+        dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_boolean);
+      CORBA::Any in_any1;
+      in_any1 <<= data.m_bool1;
+      ftc1->from_any (in_any1);
+      analyzer.analyze (ftc1);
+      CORBA::Any out_any1 = ftc1->to_any ();
+      out_any1 >>= d_out;
+
+      if (!ACE::is_equal (d_out, data.m_bool1))
+      {
+        TAOX11_TEST_ERROR << "++ ERROR from_any,to_any ++" << data.labels[0]
+                          << " d_out :" << d_out << " m_bool1 : " << data.m_bool1
+                          <<  std::endl;
+        ++this->error_count_;
+      }
+
+      fa1->destroy ();
+      ftc1->destroy ();
+    }
+
     {
       TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[8]<< "=*=*=*=*" << std::endl;
 
