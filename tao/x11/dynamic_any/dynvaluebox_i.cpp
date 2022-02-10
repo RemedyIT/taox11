@@ -45,7 +45,7 @@ namespace TAOX11_NAMESPACE
     }
 
     void
-    DynValueBox_i::check_typecode (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynValueBox_i::check_typecode (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynValueBox_i::check_typecode");
 
@@ -59,7 +59,7 @@ namespace TAOX11_NAMESPACE
     }
 
     IDL::traits< DynamicAny::DynAny>::ref_type
-    DynValueBox_i::init (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynValueBox_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynValueBox_i::init with tc");
 
@@ -67,12 +67,12 @@ namespace TAOX11_NAMESPACE
       this->type_ = tc;
 
       // member_type() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
-      IDL::traits< CORBA::TypeCode>::ref_type
+      IDL::traits<CORBA::TypeCode>::ref_type
         mtype (unaliased_tc->content_type ());
       this->boxed_ =
-        MakeDynAnyUtils::make_dyn_any_t<IDL::traits< CORBA::TypeCode>::ref_type>
+        MakeDynAnyUtils::make_dyn_any_t<IDL::traits<CORBA::TypeCode>::ref_type>
         (mtype, mtype, this->allow_truncation_);
 
       this->init_common ();
@@ -86,7 +86,7 @@ namespace TAOX11_NAMESPACE
     {
       TAOX11_LOG_TRACE ("DynValueBox_i::init with any");
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = any.type ();
       this->check_typecode (tc);
       this->type_ = tc;
       this->set_from_any (any);
@@ -122,10 +122,10 @@ namespace TAOX11_NAMESPACE
       }
 
       // content_type() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
-      IDL::traits< CORBA::TypeCode>::ref_type my_tc = unaliased_tc->content_type ();
-      IDL::traits< CORBA::TypeCode>::ref_type value_tc = boxed.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type my_tc = unaliased_tc->content_type ();
+      IDL::traits<CORBA::TypeCode>::ref_type value_tc = boxed.type ();
       if (!my_tc->equivalent (value_tc))
       {
         throw DynamicAny::DynAny::TypeMismatch ();
@@ -154,7 +154,7 @@ namespace TAOX11_NAMESPACE
 
       // A deep copy is made only by copy() (CORBA 2.4.2 section 9.2.3.6).
       // Set the flag so the caller can't destroy.
-      this->set_flag (this->boxed_, 0);
+      this->set_flag (this->boxed_, false);
 
       return this->boxed_;
     }
@@ -170,10 +170,10 @@ namespace TAOX11_NAMESPACE
       }
 
       // content_type() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
-      IDL::traits< CORBA::TypeCode>::ref_type my_tc = unaliased_tc->content_type ();
-      IDL::traits< CORBA::TypeCode>::ref_type value_tc = boxed->type ();
+      IDL::traits<CORBA::TypeCode>::ref_type my_tc = unaliased_tc->content_type ();
+      IDL::traits<CORBA::TypeCode>::ref_type value_tc = boxed->type ();
       if (!my_tc->equivalent (value_tc))
       {
         throw DynamicAny::DynAny::TypeMismatch ();
@@ -192,7 +192,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = any.type ();
       if (!this->type_->equivalent (tc))
       {
         throw DynamicAny::DynAny::TypeMismatch ();
@@ -211,7 +211,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = rhs->type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = rhs->type ();
       if (!tc->equivalent (this->type_))
       {
         return false;
@@ -249,7 +249,7 @@ namespace TAOX11_NAMESPACE
         // Do a deep destroy.
         if (this->boxed_)
         {
-          this->set_flag (this->boxed_, 1);
+          this->set_flag (this->boxed_, true);
           this->boxed_->destroy ();
         }
 
@@ -273,7 +273,7 @@ namespace TAOX11_NAMESPACE
         return nullptr;
       }
 
-      this->set_flag (this->boxed_, 0);
+      this->set_flag (this->boxed_, false);
       return this->boxed_;
     }
 
@@ -286,7 +286,7 @@ namespace TAOX11_NAMESPACE
 
       // Get the CDR stream of the Any, if there isn't one, make one.
       TAO_OutputCDR out;
-      TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
       TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
       if (impl->encoded ())
       {
@@ -333,9 +333,9 @@ namespace TAOX11_NAMESPACE
       }
 
       // content_type() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
-      IDL::traits< CORBA::TypeCode>::ref_type boxed_tc (unaliased_tc->content_type ());
+      IDL::traits<CORBA::TypeCode>::ref_type boxed_tc (unaliased_tc->content_type ());
 
       CORBA::Any boxed_any;
 
@@ -396,7 +396,7 @@ namespace TAOX11_NAMESPACE
 
         // Now write the boxed value itself
 
-        TAO_InputCDR boxed_in_cdr (static_cast<ACE_Message_Block *> (0));
+        TAO_InputCDR boxed_in_cdr (static_cast<ACE_Message_Block *> (nullptr));
         CORBA::Any boxed_any (this->boxed_->to_any ());
         TAOX11_CORBA::Any::impl_ref_type boxed_impl = boxed_any.impl ();
 
@@ -419,7 +419,7 @@ namespace TAOX11_NAMESPACE
           boxed_in_cdr = tmp;
         }
 
-        IDL::traits< CORBA::TypeCode>::ref_type boxed_tc = this->boxed_->type ();
+        IDL::traits<CORBA::TypeCode>::ref_type boxed_tc = this->boxed_->type ();
         (void) TAO_Marshal_Object::perform_append (TC_helper::get_tao_tc (boxed_tc),
                                                   &boxed_in_cdr,
                                                    &out_cdr);

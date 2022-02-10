@@ -24,24 +24,24 @@ namespace TAOX11_NAMESPACE
       class bounded_basic_string
         : public std::basic_string<_CharT, _Traits, _Alloc>
       {
-        typedef std::basic_string<_CharT, _Traits, _Alloc>  _String;
+        using _String = std::basic_string<_CharT, _Traits, _Alloc>;
 
       public:
-        typedef _Traits                                     traits_type;
-        typedef typename _Traits::char_type                 value_type;
-        typedef _Alloc                                      allocator_type;
-        typedef typename _String::size_type                 size_type;
-        typedef typename _String::difference_type           difference_type;
-        typedef typename _String::reference                 reference;
-        typedef typename _String::const_reference           const_reference;
-        typedef typename _String::pointer                   pointer;
-        typedef typename _String::const_pointer             const_pointer;
-        typedef typename _String::iterator                  iterator;
-        typedef typename _String::const_iterator            const_iterator;
-        typedef typename _String::const_reverse_iterator    const_reverse_iterator;
-        typedef typename _String::reverse_iterator          reverse_iterator;
+        using traits_type = _Traits;
+        using value_type = typename _Traits::char_type;
+        using allocator_type = _Alloc;
+        using size_type = typename _String::size_type;
+        using difference_type = typename _String::difference_type;
+        using reference = typename _String::reference;
+        using const_reference = typename _String::const_reference;
+        using pointer = typename _String::pointer;
+        using const_pointer = typename _String::const_pointer;
+        using iterator = typename _String::iterator;
+        using const_iterator = typename _String::const_iterator;
+        using const_reverse_iterator = typename _String::const_reverse_iterator;
+        using reverse_iterator = typename _String::reverse_iterator;
 
-        typedef std::integral_constant<uint32_t, _Bound>    bound;
+        using bound = std::integral_constant<uint32_t, _Bound>;
 
         bounded_basic_string() { }
 
@@ -346,13 +346,11 @@ namespace TAOX11_NAMESPACE
         { this->_String::swap (__x); }
       };
 
-#if defined (__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7))
     template <const uint32_t _Bound>
       using bounded_string = bounded_basic_string<char, _Bound>;
 
     template <const uint32_t _Bound>
       using bounded_wstring = bounded_basic_string<wchar_t, _Bound>;
-#endif
 
     template<typename _CharT, const uint32_t _Bound, typename _Traits, typename _Alloc>
       bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>
@@ -395,8 +393,8 @@ namespace TAOX11_NAMESPACE
       inline bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>
       operator+(const bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>& __lhs, _CharT __rhs)
       {
-        typedef bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>     __string_type;
-        typedef typename __string_type::size_type         __size_type;
+        using __string_type = bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>;
+        using __size_type = typename __string_type::size_type;
         __string_type __str(__lhs);
         __str.append(__size_type(1), __rhs);
         return __str;

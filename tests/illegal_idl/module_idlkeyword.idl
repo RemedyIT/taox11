@@ -1,0 +1,17 @@
+/**
+ * @file    module_idlkeyword.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+module Foo
+{
+  module ATTRIBUTE
+  {
+    struct TopicA
+    {
+      string a;
+    };
+  };
+};

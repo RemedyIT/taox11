@@ -14,7 +14,6 @@ namespace TAOX11_NAMESPACE
 {
   namespace BiDirPolicy_impl
   {
-
     BidirectionalPolicy::BidirectionalPolicy (
         TAO_BIDIR_GIOP::BidirectionalPolicy_ptr polptr)
       : pol_ (polptr)

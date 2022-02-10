@@ -6,22 +6,89 @@
  */
 
 /// Put the interfaces in a module, to avoid global namespace pollution
+module Bar
+{
+  typedef sequence<char, 20> b20;
+};
+
 module Test
 {
   typedef sequence<char,20> c20;
   typedef sequence<c20,23> cc23;
+  typedef sequence<Bar::b20,23> bc23;
   interface x {
     void do ();
   };
+  typedef string my_string;
+  typedef wstring my_wstring;
   typedef long F[5];
   typedef long G[5];
   typedef string V[5];
   typedef string M[1][2][3];
+  typedef my_string V1[5];
+  typedef my_string M1[1][2][3];
+  typedef wstring V2[5];
+  typedef wstring M2[1][2][3];
+  typedef my_wstring V3[5];
+  typedef my_wstring M3[1][2][3];
+  typedef string<5> my_bdstring;
+  typedef my_bdstring V4[5];
+  typedef my_bdstring M4[1][2][3];
+  typedef wstring<5> my_bdwstring;
+  typedef my_bdwstring V5[5];
+  typedef my_bdwstring M5[1][2][3];
+  typedef long N[1][2][3];
   typedef Object o[4];
   typedef x a[5];
 
+  enum enumType
+  {
+    d,
+    e,
+    b
+  };
+
+  typedef enumType arrayofenum[4];
+  typedef long arrayoflong[4];
+
+  typedef long twodimarrayoflong[5][5];
+  typedef twodimarrayoflong twodimarrayoftwodimarrayoflong[5][5];
+
+  typedef string twodimarrayofstring[5][4];
+  typedef twodimarrayoflong twodimarrayoftwodimarrayostring[5][5];
+
+  typedef arrayofenum arrayarrayofenum[5];
+  typedef arrayoflong arrayarrayoflong[5];
+  typedef arrayarrayoflong arrayarrayarrayoflong[5];
+
+  typedef enumType Q[1][2][3];
+
+  struct ArrayStruct {
+    arrayarrayofenum aae;
+    arrayarrayoflong aal;
+    arrayarrayarrayoflong aaal;
+    twodimarrayoftwodimarrayoflong tdtdaol;
+    twodimarrayofstring tdaos;
+    twodimarrayoftwodimarrayostring tdtwaos;
+  };
+
   struct FooStruct {
+    long my_a;
     F my_f;
+    M my_m;
+    M1 my_m1;
+    M2 my_m2;
+    M3 my_m3;
+    M4 my_m4;
+    M5 my_m5;
+    N my_n;
+    Q my_q;
+    V my_v;
+    V1 my_v1;
+    V2 my_v2;
+    V3 my_v3;
+    V4 my_v4;
+    V5 my_v5;
   };
 
   exception SomeException

@@ -15,22 +15,22 @@
 namespace TAOX11_NAMESPACE {
 
   class POA_proxy;
-  typedef POA_proxy* POA_proxy_ptr;
-  typedef std::unique_ptr<POA_proxy> POA_proxy_ref;
+  using POA_proxy_ptr = POA_proxy*;
+  using POA_proxy_ref = std::unique_ptr<POA_proxy>;
 
   class POAManager_proxy;
-  typedef POAManager_proxy* POAManager_proxy_ptr;
-  typedef std::unique_ptr<POAManager_proxy> POAManager_proxy_ref;
+  using POAManager_proxy_ptr = POAManager_proxy*;
+  using POAManager_proxy_ref = std::unique_ptr<POAManager_proxy>;
 
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO)
   class POAManagerFactory_proxy;
-  typedef POAManagerFactory_proxy* POAManagerFactory_proxy_ptr;
-  typedef std::unique_ptr<POAManagerFactory_proxy> POAManagerFactory_proxy_ref;
+  using POAManagerFactory_proxy_ptr = POAManagerFactory_proxy*;
+  using POAManagerFactory_proxy_ref = std::unique_ptr<POAManagerFactory_proxy>;
 #endif
 
   class POA_Current_proxy;
-  typedef POA_Current_proxy* POA_Current_proxy_ptr;
-  typedef std::unique_ptr<POA_Current_proxy> POA_Current_proxy_ref;
+  using POA_Current_proxy_ptr = POA_Current_proxy*;
+  using POA_Current_proxy_ref = std::unique_ptr<POA_Current_proxy>;
 
   class Adapter_Activator_Callback;
   class Servant_Manager_Callback;
@@ -160,7 +160,7 @@ namespace TAOX11_NAMESPACE {
       POA_proxy& _proxy ();
 
     protected:
-      virtual ~POA_impl () = default;;
+      virtual ~POA_impl () = default;
 
     private:
       template <typename _Tp1, typename, typename ...Args>

@@ -13,7 +13,6 @@
 
 const ACE_TCHAR *ior = ACE_TEXT ("file://test.ior");
 
-
 bool
 parse_args (int argc, ACE_TCHAR *argv[])
 {
@@ -1326,8 +1325,8 @@ test_typecode_seq ()
 }
 
 bool
-test_typecode_union (){
-
+test_typecode_union ()
+{
   bool testFailed = false;
   bool exceptionReceived = false;
   TAOX11_TEST_DEBUG << "Test typecodes for union types" << std::endl;
@@ -1583,7 +1582,6 @@ test_typecode_union (){
       TAOX11_TEST_ERROR << "ERROR  Unexpected TCKind in value discriminator_type tc_union1."<< std::endl;
       testFailed = true;
     }
-
   }
   catch (const CORBA::Exception & x)
   {
@@ -1749,8 +1747,8 @@ test_typecode_union (){
 }
 
 bool
-test_typecode_misc (){
-
+test_typecode_misc ()
+{
   bool testFailed = false;
   bool exceptionReceived = false;
   TAOX11_TEST_DEBUG << "Test typecodes for different types" << std::endl;
@@ -1835,7 +1833,6 @@ test_typecode_misc (){
       TAOX11_TEST_ERROR << "ERROR  Didn't receive 1 for member_visibility tc_vt ."<< std::endl;
       testFailed = true;
     }
-
   }
   catch (const CORBA::Exception & x)
   {
@@ -1882,7 +1879,6 @@ test_typecode_misc (){
       TAOX11_TEST_ERROR << "ERROR  Unexpected TCKind in value tc_vt->concrete_base_type"<< std::endl;
       testFailed = true;
     }
-
   }
   catch (const CORBA::Exception & x)
   {
@@ -1908,15 +1904,16 @@ test_typecode_misc (){
     TAOX11_TEST_ERROR << "ERROR test_typecode_misc"<< std::endl;
   return testFailed;
 }
+
 int
 main(int argc, char* argv[])
 {
   bool testFailed = false;
   try
     {
-      IDL::traits<CORBA::ORB>::ref_type _orb = CORBA::ORB_init (argc, argv);
+      IDL::traits<CORBA::ORB>::ref_type orb = CORBA::ORB_init (argc, argv);
 
-      if (!_orb)
+      if (!orb)
         {
           TAOX11_TEST_ERROR << "ERROR: CORBA::ORB_init (argc, argv) returned null ORB."
                     << std::endl;
@@ -1926,7 +1923,7 @@ main(int argc, char* argv[])
       if (parse_args (argc, argv) == false)
         return 1;
 
-      IDL::traits<CORBA::Object>::ref_type obj = _orb->string_to_object (ior);
+      IDL::traits<CORBA::Object>::ref_type obj = orb->string_to_object (ior);
 
       if (!obj)
         {
@@ -1989,11 +1986,11 @@ main(int argc, char* argv[])
 
       TAOX11_TEST_DEBUG << std::endl;
 
-      _orb->destroy ();
+      orb->destroy ();
     }
   catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+      TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
       testFailed = true;
     }
 

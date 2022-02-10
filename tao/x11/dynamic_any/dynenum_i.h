@@ -43,7 +43,7 @@ namespace TAOX11_NAMESPACE
 
       /// Initialize using just a TypeCode.
       IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
-      init (IDL::traits< CORBA::TypeCode>::ref_type tc);
+      init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       /// Initialize using an Any.
       IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type

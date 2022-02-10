@@ -51,7 +51,7 @@ $ brix11 gen cli
 
 Generates a standard client main file 'client.cpp' using any IDL file in the project directory,
 attempting to resolve a servant IOR to an interface with name derived from the first IDL file and
-issueing a standard 'shutdown' request.
+issuing a standard 'shutdown' request.
 
 $ brix11 gen cli -I special_test --without-shutdown special_client
 
@@ -61,4 +61,4 @@ resolve a servant IOR to the interface 'Special_test' without standard 'shutdown
 $ brix11 gen cli -i MyModule::MyInterface -I hello
 
 Generates a client main file 'client.cpp' including 'helloC.h' attempting to resolve a servant
-IOR to the interface 'MyModule::MyInterface' and issueing a standard 'shutdown' request.
+IOR to the interface 'MyModule::MyInterface' and issuing a standard 'shutdown' request.

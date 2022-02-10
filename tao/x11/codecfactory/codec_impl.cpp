@@ -103,7 +103,7 @@ namespace TAOX11_NAMESPACE
 
     TAOX11_NAMESPACE::CORBA::Any
     Codec::decode_value (const TAOX11_NAMESPACE::CORBA::OctetSeq& data,
-      TAOX11_IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode >::ref_type tc)
+      TAOX11_IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_NAMESPACE::CORBA::Any x11_ret;
 
@@ -143,9 +143,9 @@ namespace TAOX11_NAMESPACE
   namespace CORBA
   {
     template<>
-    TAOX11_CODECFACTORY_Export object_traits< TAOX11_NAMESPACE::IOP::Codec >::ref_type
+    TAOX11_CODECFACTORY_Export object_traits< TAOX11_NAMESPACE::IOP::Codec>::ref_type
     object_traits< TAOX11_NAMESPACE::IOP::Codec >::narrow (
-       object_traits< TAOX11_NAMESPACE::CORBA::Object >::ref_type obj)
+       object_traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type obj)
     {
       if (obj)
       {

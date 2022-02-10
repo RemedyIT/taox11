@@ -63,7 +63,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from AmiStubProxyWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -73,14 +73,14 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
       def enter_interface(node)
         super
         return if !needs_ami_generation?(node)
-        println()
+        println
         printiln('// generated from AmiStubProxyWriter#enter_interface')
         ami_handler_interface_with_ami_inheritance.visit_pre(node)
         inc_nest
@@ -343,7 +343,7 @@ module IDL
        end
 
        def pre_visit(parser)
-         println();
+         println
          printiln('// generated from AmiStubProxyObjRefTraitsWriter#pre_visit')
        end
 
@@ -441,7 +441,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from AmiStubProxySrvWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -451,14 +451,14 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
         super
-        println()
+        println
         printiln('// generated from AmiStubProxySrvWriter#enter_interface')
         printiln('namespace POA {')
         inc_nest
@@ -472,7 +472,7 @@ module IDL
         ami_handler_interface.visit_post(node)
         dec_nest
         printiln("} // namespace POA")
-        println()
+        println
         super
       end
      end # AmiStubProxySrvWriter

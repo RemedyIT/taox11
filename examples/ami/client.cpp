@@ -52,7 +52,7 @@ public:
   /// Destructor.
   ~Handler () = default;
 
-  virtual void foo (int32_t ami_return_val) override
+  void foo (int32_t ami_return_val) override
   {
     taox11_info << "Callback method <foo> called: result <"
                 << ami_return_val << ">."<< std::endl;
@@ -63,32 +63,32 @@ public:
       }
   }
 
-  virtual void foo_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type ) override
+  void foo_excep (
+      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
   {
     taox11_info << "Callback method <foo_excep> called."<< std::endl;
   }
 
   // callbacks attributes
-  virtual void get_yadda (int32_t res)  override
+  void get_yadda (int32_t res) override
   {
     taox11_info << "Callback method <get_yadda> called: res " << res
                 << std::endl;
   }
 
-  virtual void get_yadda_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type )  override
+  void get_yadda_excep (
+      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
   {
     taox11_info << "Callback method <get_yadda_excep> called." << std::endl;
   }
 
-  virtual void set_yadda ()  override
+  void set_yadda () override
   {
     taox11_info << "Callback method <set_yadda> called:"<< std::endl;
   }
 
-  virtual void set_yadda_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type ) override
+  void set_yadda_excep (
+      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
   {
     taox11_info << "Callback method <set_yadda_excep> called." << std::endl;
   }
@@ -338,7 +338,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        taox11_error << "exception caught: " << e.what() << std::endl;
+        taox11_error << "exception caught: " << e << std::endl;
         return 1;
       }
   return result;

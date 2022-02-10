@@ -16,7 +16,7 @@ class Test_DynValue
 {
 public:
   Test_DynValue (IDL::traits<CORBA::ORB>::ref_type orb);
-  ~Test_DynValue ();
+  ~Test_DynValue () = default;
 
   const std::string test_name () const;
 
@@ -24,8 +24,8 @@ public:
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;
-  std::string test_name_;
-  uint32_t error_count_;
+  std::string test_name_ { "test_dynvalue" };
+  uint32_t error_count_ {};
 
 };
 

@@ -24,25 +24,25 @@ namespace TAOX11_NAMESPACE
       : public std::vector<_Tp, _Alloc>
     {
       // Concept requirements.
-      typedef typename _Alloc::value_type                _Alloc_value_type;
+      using _Alloc_value_type = typename _Alloc::value_type;
 
-      typedef std::vector<_Tp, _Alloc>                   _Vector;
+      using _Vector = std::vector<_Tp, _Alloc>;
 
     public:
-      typedef _Tp                                        value_type;
-      typedef typename _Vector::pointer                  pointer;
-      typedef typename _Vector::const_pointer            const_pointer;
-      typedef typename _Vector::reference                reference;
-      typedef typename _Vector::const_reference          const_reference;
-      typedef typename _Vector::iterator                 iterator;
-      typedef typename _Vector::const_iterator           const_iterator;
-      typedef std::reverse_iterator<const_iterator>      const_reverse_iterator;
-      typedef std::reverse_iterator<iterator>            reverse_iterator;
-      typedef size_t                                     size_type;
-      typedef std::ptrdiff_t                             difference_type;
-      typedef _Alloc                                     allocator_type;
+      using value_type = _Tp;
+      using pointer = typename _Vector::pointer;
+      using const_pointer = typename _Vector::const_pointer;
+      using reference = typename _Vector::reference;
+      using const_reference = typename _Vector::const_reference;
+      using iterator = typename _Vector::iterator;
+      using const_iterator = typename _Vector::const_iterator;
+      using const_reverse_iterator = std::reverse_iterator<const_iterator>;
+      using reverse_iterator = std::reverse_iterator<iterator>;
+      using size_type = size_t;
+      using difference_type = std::ptrdiff_t;
+      using allocator_type = _Alloc;
 
-      typedef std::integral_constant<uint32_t, _Bound>   bound;
+      using bound = std::integral_constant<uint32_t, _Bound>;
 
       bounded_vector() { }
 

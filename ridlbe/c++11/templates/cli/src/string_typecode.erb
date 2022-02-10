@@ -1,6 +1,6 @@
 
 // generated from <%= ridl_template_path %>
-static TAO_TAO::TypeCode::String< TAO_TAO::Null_RefCount_Policy>
+static TAO_TAO::TypeCode::String<TAO_TAO::Null_RefCount_Policy>
     _tao<%= cxx_typecode %>_str (
       TAO_CORBA::<% if is_wstring? %>tk_wstring<% else %>tk_string<% end %>,
       <%= bound %>U);

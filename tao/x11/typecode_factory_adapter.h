@@ -24,15 +24,15 @@ namespace TAOX11_NAMESPACE
   namespace CORBA
   {
     //class Identifier;
-    typedef std::vector<CORBA::Identifier> EnumMemberSeq;
+    using EnumMemberSeq = std::vector<CORBA::Identifier>;
     class StructMember;
-    typedef std::vector<StructMember> StructMemberSeq;
+    using StructMemberSeq = std::vector<StructMember>;
     class UnionMember;
-    typedef std::vector<UnionMember> UnionMemberSeq;
+    using UnionMemberSeq = std::vector<UnionMember>;
     class ValueMember;
-    typedef std::vector<ValueMember> ValueMemberSeq;
+    using ValueMemberSeq = std::vector<ValueMember>;
 
-    typedef int16_t ValueModifier;
+    using ValueModifier = int16_t;
 
     class TypeCode;
   } // namespace CORBA

@@ -4,14 +4,14 @@
 %#
 
 protected:
-  typedef std::shared_ptr<<%= cxxname %>> _shared_ptr_type;
+  using _shared_ptr_type = std::shared_ptr<<%= cxxname %>>;
 
   template <typename _Tp1, typename, typename ...Args>
   friend TAOX11_CORBA::object_reference<_Tp1> TAOX11_CORBA::make_reference(Args&& ...args);
 
   explicit <%= amic_cxxname %> (<%= proxy_cxxname %>_ptr p, bool inherited = false);
   <%= amic_cxxname %> () = default;
-  virtual ~<%= amic_cxxname %> () = default;
+  ~<%= amic_cxxname %> () override = default;
 
 private:
   /** @name Illegal to be called. Deleted explicitly to let the compiler detect any violation */

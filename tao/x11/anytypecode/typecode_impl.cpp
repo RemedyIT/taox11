@@ -52,7 +52,7 @@ marshal_TAOX11_NAMESPACE_CORBA_TypeCode_sequence (
     const std::vector< TAOX11_CORBA::object_traits< ::TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type>& _seq,
     uint32_t _bound)
 {
-  typedef IDL::traits<TAOX11_CORBA::TypeCode>::ref_type _elem_type;
+  using _elem_type = IDL::traits<TAOX11_CORBA::TypeCode>::ref_type;
 
   uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -81,7 +81,7 @@ demarshal_TAOX11_NAMESPACE_CORBA_TypeCode_sequence (
     std::vector< TAOX11_CORBA::object_traits< ::TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type>& _seq,
     uint32_t _bound)
 {
-  typedef IDL::traits< TAOX11_CORBA::TypeCode>::ref_type _elem_type;
+  using _elem_type = IDL::traits< TAOX11_CORBA::TypeCode>::ref_type;
 
   uint32_t length {};
 

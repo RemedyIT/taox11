@@ -39,8 +39,8 @@ namespace TAOX11_NAMESPACE
 #endif
 
   class ORB_Proxy;
-  typedef ORB_Proxy* ORB_Proxy_ptr;
-  typedef std::unique_ptr<ORB_Proxy> ORB_Proxy_ref;
+  using ORB_Proxy_ptr = ORB_Proxy*;
+  using ORB_Proxy_ref = std::unique_ptr<ORB_Proxy>;
 
   namespace CORBA
   {
@@ -48,7 +48,7 @@ namespace TAOX11_NAMESPACE
     class ORB;
     class Any;
     class ValueFactoryBase;
-    typedef object_reference<ValueFactoryBase> ValueFactory;
+    using ValueFactory = object_reference<ValueFactoryBase>;
 
 #if !defined (CORBA_E_COMPACT) && !defined (CORBA_E_MICRO)
     // forwards
@@ -58,15 +58,15 @@ namespace TAOX11_NAMESPACE
 # if (TAO_HAS_MINIMUM_CORBA == 0)
     class Context;
     class Request;
-    typedef std::vector<object_reference<Request>> RequestSeq;
-    typedef std::vector<Identifier> EnumMemberSeq;
+    using RequestSeq = std::vector<object_reference<Request>>;
+    using EnumMemberSeq = std::vector<Identifier>;
     class StructMember;
-    typedef std::vector<StructMember> StructMemberSeq;
+    using StructMemberSeq = std::vector<StructMember>;
     class UnionMember;
-    typedef std::vector<UnionMember> UnionMemberSeq;
+    using UnionMemberSeq = std::vector<UnionMember>;
     class ValueMember;
-    typedef std::vector<ValueMember> ValueMemberSeq;
-    typedef int16_t ValueModifier;
+    using ValueMemberSeq = std::vector<ValueMember>;
+    using ValueModifier = int16_t;
 # endif
 #endif
 
@@ -106,13 +106,13 @@ namespace TAOX11_NAMESPACE
     public:
       /// @name Member types
       //@{
-      typedef IDL::traits<ORB>        _traits_type;
+      using _traits_type = IDL::traits<ORB>;
       /// Strong reference type
-      typedef _traits_type::ref_type  _ref_type;
+      using _ref_type = _traits_type::ref_type;
       //@}
 
-      typedef std::string ObjectId;
-      typedef std::vector<ObjectId> ObjectIdList;
+      using ObjectId = std::string;
+      using ObjectIdList = std::vector<ObjectId>;
 
       friend struct TAOX11_CORBA::object_traits<ORB>;
       friend class Object;
@@ -382,7 +382,7 @@ namespace TAOX11_NAMESPACE
   {
     template<>
     struct traits < CORBA::ORB::InvalidName>
-      : IDL::common_traits< CORBA::ORB::InvalidName>
+      : IDL::common_traits<CORBA::ORB::InvalidName>
     {
       template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
       static inline OStrm_& write_on(
@@ -412,13 +412,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<CORBA::ORB::InvalidName>::__Writer<Fmt> w)
     {
-      typedef IDL::traits<CORBA::ORB::InvalidName>::__Writer<Fmt> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<CORBA::ORB::InvalidName>::__Writer<Fmt>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<CORBA::ORB::InvalidName, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<CORBA::ORB::InvalidName>::write_on (
           os, w.val_,
           formatter_t ());
@@ -441,13 +441,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<CORBA::ORB>::__Writer<Fmt> w)
     {
-      typedef IDL::traits<CORBA::ORB>::__Writer<Fmt> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<CORBA::ORB>::__Writer<Fmt>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<CORBA::ORB, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<CORBA::ORB>::write_on (
           os, w.val_,
           formatter_t ());

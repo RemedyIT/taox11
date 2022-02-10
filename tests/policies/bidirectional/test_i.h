@@ -23,7 +23,6 @@ public:
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;
-
 };
 
 class Simple_Server_i

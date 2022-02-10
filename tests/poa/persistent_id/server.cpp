@@ -38,7 +38,7 @@ protected:
 
 hello_i::hello_i(IDL::traits<CORBA::ORB>::ref_type orb,
     IDL::traits<PortableServer::POA>::ref_type poa) :
-  orb_(orb), poa_(poa)
+  orb_(std::move(orb)), poa_(std::move(poa))
 {
 }
 
@@ -110,9 +110,9 @@ IDL::traits< ::Hello>::ref_type hello_i::create_POA()
   }
 
   CORBA::servant_traits< ::Hello>::ref_type hello_servant =
-      CORBA::make_reference<hello_i> (this->orb_, this->child_poa_);;
+      CORBA::make_reference<hello_i> (this->orb_, this->child_poa_);
 
-  if (this->oid_.size() == 0)
+  if (this->oid_.empty ())
   {
     this->oid_ = this->child_poa_->activate_object(hello_servant);
   }

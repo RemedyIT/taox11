@@ -35,9 +35,8 @@ public:
 private:
   int32_t num_l_;
   int16_t num_s_;
-
-
 };
+
 class Two_i
 : public virtual CORBA::servant_traits< A::Two>::base_type
 {

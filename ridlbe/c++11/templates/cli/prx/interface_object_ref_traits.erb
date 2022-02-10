@@ -7,16 +7,12 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 namespace TAO
 {
   template<>
-  struct Objref_Traits< <%= scoped_proxy_cxxname %>>
+  struct Objref_Traits<<%= scoped_proxy_cxxname %>>
   {
-    static <%= scoped_proxy_cxxname %>_ptr duplicate (
-      <%= scoped_proxy_cxxname %>_ptr p);
-    static void release (
-      <%= scoped_proxy_cxxname %>_ptr p);
+    static <%= scoped_proxy_cxxname %>_ptr duplicate (<%= scoped_proxy_cxxname %>_ptr p);
+    static void release (<%= scoped_proxy_cxxname %>_ptr p);
     static <%= scoped_proxy_cxxname %>_ptr nil ();
-    static ::TAO_CORBA::Boolean marshal (
-      const <%= scoped_proxy_cxxname %>_ptr p,
-      TAO_OutputCDR & cdr);
+    static ::TAO_CORBA::Boolean marshal (const <%= scoped_proxy_cxxname %>_ptr p, TAO_OutputCDR & cdr);
   };
 } // namespace TAO
 % end

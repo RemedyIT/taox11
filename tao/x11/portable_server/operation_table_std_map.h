@@ -73,12 +73,12 @@ public:
 
 private:
 #if defined (ACE_HAS_CPP17)
-  typedef std::string_view key_map_type;
+  using key_map_type = std::string_view ;
 #else
-  typedef std::string key_map_type;
+  using key_map_type = std::string ;
 #endif /* ACE_HAS_CPP17 */
 
-  typedef std::unordered_map<key_map_type, TAO::Operation_Skeletons> map_type;
+  using map_type = std::unordered_map<key_map_type, TAO::Operation_Skeletons>;
 
   map_type map_ {};
 

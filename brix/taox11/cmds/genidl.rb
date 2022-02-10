@@ -32,7 +32,7 @@ module BRIX11
                      'Defines name to use for interface.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to generate enclosing module(s).',
                      'Default: derived from IDL file basename with first character uppercased') {|v|
-                       options[:genidl][:modules] = v.split('::');
+                       options[:genidl][:modules] = v.split('::')
                        options[:genidl][:interface] = options[:genidl][:modules].pop
                      }
         optparser.on('--without-shutdown',

@@ -128,7 +128,7 @@ main(int argc, ACE_TCHAR *argv[])
     }
   catch (const std::exception& e)
     {
-      taox11_error << "exception caught: " << e.what() << std::endl;
+      taox11_error << "exception caught: " << e << std::endl;
       return 1;
     }
 

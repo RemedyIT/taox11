@@ -44,10 +44,10 @@ namespace TAOX11_NAMESPACE
       IDL::traits< DynamicAny::DynAny>::ref_type init (const CORBA::Any& any);
 
       /// Initialize using a TypeCode and an input stream
-      IDL::traits< DynamicAny::DynAny>::ref_type init (IDL::traits< CORBA::TypeCode>::ref_type tc, TAO_InputCDR &in);
+      IDL::traits< DynamicAny::DynAny>::ref_type init (IDL::traits<CORBA::TypeCode>::ref_type tc, TAO_InputCDR &in);
 
       /// Initialize using just a TypeCode.
-      IDL::traits< DynamicAny::DynAny>::ref_type init (IDL::traits< CORBA::TypeCode>::ref_type tc);
+      IDL::traits< DynamicAny::DynAny>::ref_type init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
        // = Functions specific to DynValue.
       DynamicAny::FieldName current_member_name () override;
@@ -74,16 +74,16 @@ namespace TAOX11_NAMESPACE
 
       IDL::traits< DynAny>::ref_type current_component () override;
 
-      void insert_val (IDL::traits< CORBA::ValueBase>::ref_type value) override;
+      void insert_val (IDL::traits<CORBA::ValueBase>::ref_type value) override;
 
-      IDL::traits< CORBA::ValueBase>::ref_type get_val () override;
+      IDL::traits<CORBA::ValueBase>::ref_type get_val () override;
 
       // = DynValueCommon needed to be provided here
       void set_to_value () override;
 
     private:
       /// List of base types.
-      typedef std::vector<IDL::traits< CORBA::TypeCode>::ref_type> BaseTypesList_t;
+      using BaseTypesList_t = std::vector<IDL::traits<CORBA::TypeCode>::ref_type>;
 
       /// Decompose the given TypeCode into its hierarchical list of
       /// basetypes. The first element of the list is our actual type,
@@ -91,35 +91,35 @@ namespace TAOX11_NAMESPACE
       /// All types stored in the list are de-aliased. Optionally
       /// return the total_member_count of the fully derived type.
       static void get_base_types (
-        IDL::traits< CORBA::TypeCode>::ref_type,
+        IDL::traits<CORBA::TypeCode>::ref_type,
         BaseTypesList_t &,
         uint32_t &total_member_count);
 
       /// Return the unaliased valuetype typecode that corresponds to
       /// index (0..total_members-1) from the given hierarchical list of
       /// the derived type and it basetypes.
-      static IDL::traits< CORBA::TypeCode>::ref_type get_correct_base_type (
+      static IDL::traits<CORBA::TypeCode>::ref_type get_correct_base_type (
         const BaseTypesList_t &base_types,
         uint32_t &index);
 
       /// Return the member_type at index (0..total_members-1) from
       /// the given hierarchical list of the derived type and it basetypes.
-      static IDL::traits< CORBA::TypeCode>::ref_type get_member_type (
+      static IDL::traits<CORBA::TypeCode>::ref_type get_member_type (
         const BaseTypesList_t &,
         uint32_t index);
 
       /// Return the member_name at index (0..total_members-1) from
       /// the given hierarchical list of the derived type and it basetypes.
-      static const std::string get_member_name (
+      static std::string get_member_name (
         const BaseTypesList_t &,
         uint32_t index);
 
       /// Check if the typecode is acceptable.
-      void check_typecode (IDL::traits< CORBA::TypeCode>::ref_type tc) override;
+      void check_typecode (IDL::traits<CORBA::TypeCode>::ref_type tc) override;
 
       /// Common code from the init() functions, initializes the
       /// private bits from the given TypeCode
-      void init_helper (IDL::traits< CORBA::TypeCode>::ref_type tc);
+      void init_helper (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       /// Code common to the init(Any) and the member
       /// function from_any().

@@ -8,7 +8,7 @@ TAO_CORBA::Boolean operator<< (
   return
 %   _n = member_count-1
 %   members.each_with_index do |_m, _i|
-    (strm << <%= _m.cdr_from_fmt % "_tao_aggregate.#{_m.cxxname} ()" %>)<%= ((_i < _n ) ? ' &&' : ';') %>
+    (strm <<<%= _m.cdr_from_fmt % "_tao_aggregate.#{_m.cxxname} ()" %>)<%= ((_i < _n ) ? ' &&' : ';') %>
 %   end
 % else
   return true;

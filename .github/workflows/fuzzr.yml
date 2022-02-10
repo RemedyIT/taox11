@@ -5,11 +5,17 @@ on:
   pull_request:
     branches:
       - master
+      - v*
   schedule:
-    - cron: '0 7 * * SUN'
+    - cron: '0 1 * * SUN'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
-  AXCIOMA_ROOT: ${{ github.workspace }}/axcioma
+  X11_BASE_ROOT: ${{ github.workspace }}/axcioma
 
 jobs:
   build:
@@ -18,13 +24,15 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.5
-    - name: git clone dependent repositories
-      run: |
-        git clone --depth 1 git://github.com/RemedyIT/axcioma.git $AXCIOMA_ROOT
+        ruby-version: '2.7'
+    - name: checkout axcioma
+      uses: actions/checkout@v2
+      with:
+        repository: RemedyIT/axcioma
+        path: ${{ env.X11_BASE_ROOT }}
     - name: install fuzzr gem
       run: |
         gem install fuzzr
     - name: Run fuzzr
       run: |
-        fuzz -P $AXCIOMA_ROOT/bin/fuzzers
+        fuzz -P $X11_BASE_ROOT/bin/fuzzers

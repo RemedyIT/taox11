@@ -31,7 +31,7 @@
 <%= proxy_cxxname %>::_ptr_type
 <%= proxy_cxxname %>::_duplicate (_ptr_type obj)
 {
-  if (! TAO_CORBA::is_nil (obj))
+  if (!TAO_CORBA::is_nil (obj))
     {
       obj->_add_ref ();
     }

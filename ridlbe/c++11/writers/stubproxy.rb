@@ -57,7 +57,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from StubProxyWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -67,14 +67,14 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
       def enter_interface(node)
         super
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
-        println()
+        println
         printiln('// generated from StubProxyWriter#enter_interface')
         visitor(InterfaceVisitor).visit_pre(node)
         inc_nest
@@ -311,7 +311,7 @@ module IDL
         when IDL::Type::Array
           visitor(ArrayVisitor).visit_cdr(node)
         when IDL::Type::String, IDL::Type::WString
-          visitor(StringVisitor).visit_cdr(node)  # only bounded, unbounded is standard_type
+          visitor(StringVisitor).visit_cdr(node) # only bounded, unbounded is standard_type
         end
       end
 
@@ -364,7 +364,7 @@ module IDL
        end
 
        def pre_visit(parser)
-         println();
+         println
          printiln('// generated from StubProxyObjRefTraitsWriter#pre_visit')
        end
 

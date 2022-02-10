@@ -53,9 +53,7 @@ main(int argc, ACE_TCHAR *argv[])
         return 1;
       }
 
-
       CORBA::servant_traits<Test::Hello>::ref_type hello_impl = CORBA::make_reference<Hello> (_orb, _result);
-
 
       TAOX11_TEST_DEBUG << "created Hello servant" << std::endl;
 
@@ -107,7 +105,7 @@ main(int argc, ACE_TCHAR *argv[])
     }
   catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+      TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
       return ++_result;
     }
 

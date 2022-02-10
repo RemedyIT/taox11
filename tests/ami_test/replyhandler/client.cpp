@@ -448,7 +448,7 @@ int main(int argc, char* argv[])
 
       if ((callback_foo != 2) || (callback_attrib != 6 ))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected callbacks. Foo : expected -2- , received -" << callback_foo << "-"
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected callbacks. Foo : expected -2- , received -" << callback_foo << "-"
           << " Attrib : expected -6-, received -" << callback_attrib << "-."
           << std::endl;
           result = 1;
@@ -462,7 +462,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+        TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
         return 1;
       }
   return result;

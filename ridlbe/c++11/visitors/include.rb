@@ -57,31 +57,31 @@ module IDL
       end
 
       def client_include_header
-        include_directory + '/' + File.basename(node.filename, '.*')+params[:stub_pfx]+'.h'
+        include_directory.dup << '/' << File.basename(node.filename, '.*') << params[:stub_pfx] << '.h'
       end
 
       def servant_include_header
-        include_directory + '/' + File.basename(node.filename, '.*')+params[:srv_pfx]+'.h'
+        include_directory.dup << '/' << File.basename(node.filename, '.*') << params[:srv_pfx] << '.h'
       end
 
       def ami_client_include_header
-         include_directory + '/' + File.basename(node.filename, '.*')+'Ami'+params[:stub_pfx]+'.h'
+         include_directory.dup << '/' << File.basename(node.filename, '.*') << 'Ami' << params[:stub_pfx] << '.h'
       end
 
       def ami_servant_include_header
-        include_directory + '/' + File.basename(node.filename, '.*')+'Ami'+params[:srv_pfx]+'.h'
+        include_directory.dup << '/' << File.basename(node.filename, '.*') << 'Ami' << params[:srv_pfx] << '.h'
       end
 
       def servant_proxy_header
-        include_directory + '/' + File.basename(node.filename, '.*')+params[:srv_pfx]+params[:proxy_pfx] +'.h'
+        include_directory.dup << '/' << File.basename(node.filename, '.*') << params[:srv_pfx] << params[:proxy_pfx] << '.h'
       end
 
       def ami_servant_proxy_header
-         include_directory + '/' + File.basename(node.filename, '.*')+'Ami'+params[:srv_pfx]+params[:proxy_pfx] +'.h'
+         include_directory.dup << '/' << File.basename(node.filename, '.*') << 'Ami'+params[:srv_pfx] << params[:proxy_pfx] << '.h'
       end
 
       def anyop_include_header
-        anyop_include_directory + '/' + File.basename(node.filename, '.*')+params[:anyop_pfx]+'.h'
+        anyop_include_directory.dup << '/' << File.basename(node.filename, '.*') << params[:anyop_pfx] << '.h'
       end
 
     end

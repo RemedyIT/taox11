@@ -12,7 +12,7 @@
 
 uint16_t result_ = 0;
 
-uint16_t replies_to_recieve_ = 10;
+uint16_t replies_to_receive_ = 10;
 uint16_t received_replies_ = 0;
 
 template<class T>
@@ -588,14 +588,14 @@ int main(int argc, char* argv[])
 
       // Wait until all methods/setters have returned before getting the values of the
       // attributes.
-      while (received_replies_ != replies_to_recieve_)
+      while (received_replies_ != replies_to_receive_)
         {
           std::chrono::seconds tv (1);
           orb->perform_work (tv);
         }
 
       // reset for the next test.
-      replies_to_recieve_ = 7;
+      replies_to_receive_ = 7;
       received_replies_ = 0;
 
       TAOX11_TEST_DEBUG << "Getting the attributes asynchronously." << std::endl;
@@ -609,7 +609,7 @@ int main(int argc, char* argv[])
 
       hello->sendc_bar (nullptr);
 
-      while (received_replies_ != replies_to_recieve_)
+      while (received_replies_ != replies_to_receive_)
         {
           std::chrono::seconds tv (1);
           orb->perform_work (tv);
@@ -623,7 +623,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+      TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
       ++result_;
     }
   return result_;

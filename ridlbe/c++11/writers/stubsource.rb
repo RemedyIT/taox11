@@ -73,15 +73,15 @@ module IDL
         unless node.enclosure.is_a?(IDL::AST::Module)
           case node.idltype.resolved_type
           when IDL::Type::Fixed
-            println()
+            println
             printiln('// generated from StubSourceWriter#visit_const')
-            printi("const #{node.idltype.cxx_type()} ")
+            printi("const #{node.idltype.cxx_type} ")
             println(node.enclosure.cxxname+'::'+node.cxxname + ' {"' + expression_to_s(node.expression, node.enclosure) + '"};')
           end
           if [Type::String, Type::WString].include?(node.expression.idltype.class)
-            println()
+            println
             printiln('// generated from StubSourceWriter#visit_const')
-            printi("const #{node.idltype.cxx_type()} ")
+            printi("const #{node.idltype.cxx_type} ")
             println(node.enclosure.cxxname+'::'+node.cxxname + ' {' + expression_to_s(node.expression, node.enclosure) + '};')
           end
         end
@@ -89,7 +89,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from StubSourceWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -99,7 +99,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
@@ -130,7 +130,7 @@ module IDL
       end
 
       def leave_valuetype(node)
-        (vtv = visitor(ValuetypeVisitor)).visit_obv(node)  unless node.is_abstract?
+        (vtv = visitor(ValuetypeVisitor)).visit_obv(node) unless node.is_abstract?
         # generate valuetype factory implementation unless it's an abstract
         # valuetype or the valuetype has no user defined initializers but does
         # have operations/attributes
@@ -228,7 +228,7 @@ module IDL
       def visit_attribute(node)
         return if node.enclosure.is_local? || (node.enclosure.respond_to?(:is_pseudo?) && node.enclosure.is_pseudo?) || (node.enclosure.respond_to?(:is_abstract?) && node.enclosure.is_abstract?)
         check_idl_type(node.idltype)
-        add_include('tao/x11/basic_arguments.h') unless node.readonly   ## for void return of setter
+        add_include('tao/x11/basic_arguments.h') unless node.readonly ## for void return of setter
         unless node.get_raises.empty? && node.set_raises.empty?
           add_include('tao/x11/user_exception_proxy_in_t.h')
           add_include('tao/x11/user_exception_proxy_out.h')
@@ -385,7 +385,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from StubProxySourceWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -395,7 +395,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
@@ -403,7 +403,7 @@ module IDL
         super
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
         visitor(InterfaceVisitor).visit_proxy(node)
-        println()
+        println
       end
 
     end # StubProxySourceWriter
@@ -414,12 +414,12 @@ module IDL
       end
 
       def pre_visit(parser)
-        println()
+        println
         printiln('// generated from StubSourceObjTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE')
         printiln('{')
         inc_nest
-        println()
+        println
         printiln('namespace CORBA')
         printiln('{')
         inc_nest
@@ -428,7 +428,7 @@ module IDL
       def post_visit(parser)
         dec_nest
         printiln('} // namespace CORBA')
-        println()
+        println
         dec_nest
         printiln('} // namespace TAOX11_NAMESPACE')
       end
@@ -452,7 +452,7 @@ module IDL
       end
 
       def pre_visit(parser)
-        println();
+        println
         printiln('// generated from StubSourceProxyObjRefTraitsWriter#pre_visit')
       end
 
@@ -530,7 +530,7 @@ module IDL
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::String, IDL::Type::WString
-          visitor(StringVisitor).visit_cdr(node)  # only bounded, unbounded is standard_type
+          visitor(StringVisitor).visit_cdr(node) # only bounded, unbounded is standard_type
         end
       end
 
@@ -745,7 +745,7 @@ module IDL
         else
           idl_type = node.idltype.resolved_type
           case idl_type
-          when IDL::Type::String, IDL::Type::WString        # bounded only, unbounded is standard_type
+          when IDL::Type::String, IDL::Type::WString # bounded only, unbounded is standard_type
             visitor(StringVisitor).visit_tao_typecode(node)
           when IDL::Type::Sequence
             visitor(SequenceVisitor).visit_tao_typecode(node)

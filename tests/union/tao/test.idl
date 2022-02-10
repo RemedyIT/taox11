@@ -78,6 +78,39 @@ module Test
       case 4: boolean z_bool;
     };
 
+  enum Assignment
+  {
+    NONE,
+    A,
+    B,
+    C,
+    D
+  };
+
+  struct B01 {
+    long b01_1;
+  };
+
+  struct B02 {
+    string b02_1;
+  };
+
+  union B03 switch (long)
+  {
+    case 0: B01 b_03_1;
+    case 1: B02 b_03_2;
+    case 2: short b_03_3;
+    case 3: long b_03_4;
+    case 4: string b_03_5;
+    default: short b_03_d;
+  };
+
+  struct UnionMessage {
+    Assignment a;
+    B03 b_03;
+    Data d;
+  };
+
   /// A very simple interface
   interface Foo
   {
@@ -95,6 +128,8 @@ module Test
 
     boolean update_union (inout Data s);
     boolean update_default_union (inout DefaultData dd);
+
+    boolean send_unionmessage(in UnionMessage msg);
 
     /// A method to shutdown the ORB
     /**

@@ -132,7 +132,7 @@ int main(int argc, char* argv[])
   }
   catch (const std::exception& ex)
   {
-    TAOX11_TEST_ERROR << "Exception caught: " << ex.what () << std::endl;
+    TAOX11_TEST_ERROR << "Exception caught: " << ex << std::endl;
     return 1;
   }
   return 0;

@@ -2,7 +2,7 @@
 namespace POA
 {
   class <%= srvproxy_cxxname %>;
-  typedef <%= srvproxy_cxxname %>* <%= srvproxy_cxxname %>_ptr;
+  using <%= srvproxy_cxxname %>_ptr = <%= srvproxy_cxxname %>*;
 
   class <%= skel_export_macro %><%= skel_cxxname %>
 % if is_derived?
@@ -23,16 +23,13 @@ namespace POA
   public:
     /// @name Member types
     //@{
-    typedef TAOX11_CORBA::servant_traits< <%= skel_cxxname %>>    _traits_type;
-    typedef TAOX11_CORBA::servant_reference< <%= skel_cxxname %>> _ref_type;
+    using _traits_type = TAOX11_CORBA::servant_traits<<%= skel_cxxname %>>;
+    using _ref_type = TAOX11_CORBA::servant_reference<<%= skel_cxxname %>>;
     //@}
 
   protected:
-    /// Constructor
     explicit <%= skel_cxxname %> (bool inherited = false);
-
-    /// Destructor
-    virtual ~<%= skel_cxxname %> ();
+    ~<%= skel_cxxname %> () override;
 
     Servant_proxy_ptr get_proxy () const override;
 

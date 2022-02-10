@@ -107,16 +107,15 @@ namespace TAOX11_NAMESPACE
     protected:
       friend struct object_traits<TypeCode_impl>;
 
-      bool _tc_marshal (TAO_OutputCDR&)  override;
+      bool _tc_marshal (TAO_OutputCDR&) override;
       bool _tc_unmarshal (TAO_InputCDR&) override;
 
       TypeCode_impl* _impl () override;
 
     private:
-
       static const std::string _repository_id;
 
-      bool static_;
+      bool const static_;
       union
       {
         TAO_CORBA::TypeCode_ptr   tc_;
@@ -135,8 +134,7 @@ namespace TAOX11_NAMESPACE
 
   } // namespace CORBA
 
-  typedef CORBA::TypeCode_impl TC_helper;
-
+  using TC_helper = CORBA::TypeCode_impl;
 } // namespace TAOX11_NAMESPACE
 
 TAOX11_AnyTypeCode_Export

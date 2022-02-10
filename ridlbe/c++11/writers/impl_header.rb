@@ -49,7 +49,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from ImplHeaderWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -59,7 +59,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
@@ -70,7 +70,7 @@ module IDL
         else
           if generate_servant_implementation?
             visitor(InterfaceVisitor).visit_pre(node)
-            inc_nest  # servant implementation class
+            inc_nest # servant implementation class
           end
         end
       end

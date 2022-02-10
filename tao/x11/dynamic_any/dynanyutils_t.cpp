@@ -71,7 +71,7 @@ namespace TAOX11_NAMESPACE
     }
     else
     {
-      typedef typename BasicTypeTraits<T>::return_type ret_type;
+      using ret_type = typename BasicTypeTraits<T>::return_type;
       ret_type retval = ret_type ();
       const CORBA::Any &my_any = the_dynany->the_any ();
       if (!(my_any >>= retval))
@@ -116,7 +116,7 @@ namespace TAOX11_NAMESPACE
   template<typename DA_IMPL, typename ANY_TC>
   typename IDL::traits< DA_IMPL>::ref_type
   CreateDynAnyUtils<DA_IMPL, ANY_TC>::create_dyn_any_t (
-    IDL::traits< CORBA::TypeCode>::ref_type tc,
+    IDL::traits<CORBA::TypeCode>::ref_type tc,
     ANY_TC any_tc,
     bool allow_truncation)
   {
@@ -132,7 +132,7 @@ namespace TAOX11_NAMESPACE
     template<typename ANY_TC>
     IDL::traits< DynamicAny::DynAny>::ref_type
     make_dyn_any_t (
-        IDL::traits< CORBA::TypeCode>::ref_type tc,
+        IDL::traits<CORBA::TypeCode>::ref_type tc,
       ANY_TC any_tc,
       bool allow_truncation)
     {

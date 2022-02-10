@@ -12,17 +12,17 @@
 #include "tao/x11/portable_server/portableserver.h"
 #include "testlib/taox11_testlog.h"
 
-Data::Data (IDL::traits< CORBA::ORB>::ref_type orb) :
-    orb_ (orb)
+Data::Data (IDL::traits<CORBA::ORB>::ref_type orb) :
+    orb_ (std::move(orb))
 {
   try
   {
     // Getting the RootPOA so we can generate object references.
-    IDL::traits< CORBA::Object>::ref_type obj =
+    IDL::traits<CORBA::Object>::ref_type obj =
       this->orb_->resolve_initial_references ("RootPOA");
 
 
-    if (obj == nullptr)
+    if (!obj)
     {
       TAOX11_TEST_ERROR << "Unable to get root poa reference."
                         << std::endl;
@@ -45,6 +45,6 @@ Data::Data (IDL::traits< CORBA::ORB>::ref_type orb) :
    }
   catch (const std::exception& e)
   {
-     TAOX11_TEST_ERROR << "ERROR: exception caught in Data: " << e.what () << std::endl;
+     TAOX11_TEST_ERROR << "ERROR: exception caught in Data: " << e << std::endl;
   }
 }

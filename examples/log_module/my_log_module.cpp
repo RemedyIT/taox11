@@ -15,7 +15,7 @@ namespace my_logger
   {
     static My_Log_Module instance_;
 
-    return &instance_;
+    return std::addressof(instance_);
   }
 
   My_Log_Module::My_Log_Module ()

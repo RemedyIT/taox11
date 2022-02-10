@@ -72,7 +72,7 @@ main(int argc, ACE_TCHAR *argv[])
   }
   catch (const CORBA::Exception& ex)
   {
-    TAOX11_TEST_ERROR << "Exception caught: " << ex.what () << std::endl;
+    TAOX11_TEST_ERROR << "Exception caught: " << ex << std::endl;
     return 1;
   }
 

@@ -19,6 +19,6 @@ public:
 
   /// @name Member types
   //@{
-  typedef TAOX11_NAMESPACE::CORBA::amic_traits< <%= cxxname %>> _traits_type;
-  typedef TAOX11_NAMESPACE::CORBA::amic_traits< <%= cxxname %>>::ref_type _ref_type;
+  using _traits_type = TAOX11_NAMESPACE::CORBA::amic_traits<<%= cxxname %>>;
+  using _ref_type = TAOX11_NAMESPACE::CORBA::amic_traits<<%= cxxname %>>::ref_type;
   //@}

@@ -23,7 +23,7 @@
   /// a BAD_PARAM exception is thrown
   inline void _d (<%= switch_in_cxxtype %>);
   /// Get the discriminator
-  inline <%= switch_in_cxxtype %> _d () const;
+  inline <%= switch_in_cxxtype %> _d () const  { return this->disc_; }
 % members.each do |_m|
 
   /// @copydoc <%= _m.doc_scoped_name %>

@@ -45,7 +45,7 @@ namespace TAOX11_NAMESPACE
     }
 
     IDL::traits< DynamicAny::DynAny>::ref_type
-    DynValue_i::init (IDL::traits< CORBA::TypeCode>::ref_type tc, TAO_InputCDR &in)
+    DynValue_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc, TAO_InputCDR &in)
     {
       TAOX11_LOG_TRACE ("DynValue_i::init with tc and cdr");
       this->init_helper (tc);
@@ -61,7 +61,7 @@ namespace TAOX11_NAMESPACE
     }
 
     IDL::traits< DynamicAny::DynAny>::ref_type
-    DynValue_i::init (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynValue_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynValue_i::init with tc");
       this->init_helper (tc);
@@ -73,12 +73,12 @@ namespace TAOX11_NAMESPACE
            i < this->component_count_;
            ++i)
         {
-          IDL::traits< CORBA::TypeCode>::ref_type
+          IDL::traits<CORBA::TypeCode>::ref_type
             member_type (
               get_member_type (this->da_base_types_, i));
 
           this->da_members_[i] =
-              MakeDynAnyUtils::make_dyn_any_t<IDL::traits< CORBA::TypeCode>::ref_type>
+              MakeDynAnyUtils::make_dyn_any_t<IDL::traits<CORBA::TypeCode>::ref_type>
               (member_type, member_type, this->allow_truncation_);
         }
 
@@ -93,7 +93,7 @@ namespace TAOX11_NAMESPACE
     }
 
     void
-    DynValue_i::init_helper (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynValue_i::init_helper (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynValue_i::init_helper");
 
@@ -112,20 +112,20 @@ namespace TAOX11_NAMESPACE
         this->component_count_);
       this->da_members_.resize (this->component_count_);
 
-      // And initalize all of the DynCommon mix-in
+      // And initialize all of the DynCommon mix-in
 
       this->init_common ();
     }
 
     void
     DynValue_i::get_base_types (
-      IDL::traits< CORBA::TypeCode>::ref_type tc,
+      IDL::traits<CORBA::TypeCode>::ref_type tc,
       BaseTypesList_t &base_types,
       uint32_t &total_member_count)
     {
       TAOX11_LOG_TRACE ("DynValue_i::get_base_types");
 
-      // First initalize to the fully derived type we are
+      // First initialize to the fully derived type we are
       // starting with.
 
       base_types.push_back (DynAnyFactory_i::strip_alias (tc));
@@ -134,7 +134,7 @@ namespace TAOX11_NAMESPACE
 
       // Obtain each derived type's basetype and add this to
       // the list.
-      IDL::traits< CORBA::TypeCode>::ref_type  base =
+      IDL::traits<CORBA::TypeCode>::ref_type  base =
           base_types.back ()->concrete_base_type ();
       while (base)
       {
@@ -151,7 +151,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< CORBA::TypeCode>::ref_type
+    IDL::traits<CORBA::TypeCode>::ref_type
     DynValue_i::get_correct_base_type (
       const BaseTypesList_t &base_types,
       uint32_t &index)
@@ -189,26 +189,26 @@ namespace TAOX11_NAMESPACE
       return base_types[currentBase];
     }
 
-    IDL::traits< CORBA::TypeCode>::ref_type
+    IDL::traits<CORBA::TypeCode>::ref_type
     DynValue_i::get_member_type (
       const BaseTypesList_t &base_types,
       uint32_t index)
     {
       TAOX11_LOG_TRACE ("DynValue_i::get_member_type");
 
-      const IDL::traits< CORBA::TypeCode>::ref_type
+      const IDL::traits<CORBA::TypeCode>::ref_type
         base = get_correct_base_type (base_types, index);
       return base->member_type (index);
     }
 
-    const std::string
+    std::string
     DynValue_i::get_member_name (
       const BaseTypesList_t &base_types,
       uint32_t index)
     {
       TAOX11_LOG_TRACE ("DynValue_i::get_member_name");
 
-      const IDL::traits< CORBA::TypeCode>::ref_type
+      const IDL::traits<CORBA::TypeCode>::ref_type
         base = get_correct_base_type (base_types, index);
       return base->member_name (index);
     }
@@ -226,7 +226,7 @@ namespace TAOX11_NAMESPACE
     }
 
     void
-    DynValue_i::check_typecode (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynValue_i::check_typecode (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynValue_i::check_typecode");
 
@@ -273,7 +273,7 @@ namespace TAOX11_NAMESPACE
         throw DynamicAny::DynAny::InvalidValue ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc (
+      IDL::traits<CORBA::TypeCode>::ref_type tc (
         get_member_type (
           this->da_base_types_,
           this->current_position_));
@@ -321,7 +321,7 @@ namespace TAOX11_NAMESPACE
       }
 
       // Check lengths match.
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
       if (length !=  static_cast <uint32_t>(this->da_members_.size ()))
       {
         throw DynamicAny::DynAny::InvalidValue ();
@@ -331,9 +331,9 @@ namespace TAOX11_NAMESPACE
       uint32_t i;
       for (i = 0; i < length; ++i)
       {
-        IDL::traits< CORBA::TypeCode>::ref_type my_member (
+        IDL::traits<CORBA::TypeCode>::ref_type my_member (
             get_member_type (this->da_base_types_, i));
-        IDL::traits< CORBA::TypeCode>::ref_type value_member (
+        IDL::traits<CORBA::TypeCode>::ref_type value_member (
             values[i].value().type ());
         if (!my_member->equivalent (value_member))
         {
@@ -380,7 +380,7 @@ namespace TAOX11_NAMESPACE
         // A deep copy is made only by copy()
         // (CORBA 2.4.2 section 9.2.3.6).
         // Set the flag so the caller can't destroy.
-        this->set_flag (this->da_members_[i], 0);
+        this->set_flag (this->da_members_[i], false);
 
         members[i].value(this->da_members_[i]);
       }
@@ -399,7 +399,7 @@ namespace TAOX11_NAMESPACE
       }
 
       // Check lengths match.
-      uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
       if (length !=
           static_cast <uint32_t> (
             this->da_members_.size ()))
@@ -411,7 +411,7 @@ namespace TAOX11_NAMESPACE
       uint32_t i = 0;
       for (; i < length; ++i)
       {
-        IDL::traits< CORBA::TypeCode>::ref_type
+        IDL::traits<CORBA::TypeCode>::ref_type
           my_member (
             get_member_type (this->da_base_types_, i)),
           value_member (
@@ -441,7 +441,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc =any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc =any.type ();
       if (!this->type_->equivalent (tc))
       {
         throw DynamicAny::DynAny::TypeMismatch ();
@@ -460,7 +460,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc (rhs->type ());
+      IDL::traits<CORBA::TypeCode>::ref_type tc (rhs->type ());
       if (!tc->equivalent (this->type_) ||
           this->component_count_ !=
             rhs->component_count ()  )
@@ -515,7 +515,7 @@ namespace TAOX11_NAMESPACE
              i < this->component_count_;
              ++i)
         {
-          this->set_flag (da_members_[i], 1);
+          this->set_flag (da_members_[i], true);
           this->da_members_[i]->destroy ();
         }
 
@@ -540,7 +540,7 @@ namespace TAOX11_NAMESPACE
 
       const uint32_t index =
         static_cast <uint32_t> (this->current_position_);
-      this->set_flag (this->da_members_[index], 0);
+      this->set_flag (this->da_members_[index], false);
 
       return this->da_members_[index] ;
     }
@@ -551,11 +551,11 @@ namespace TAOX11_NAMESPACE
     // (even though we are a constructed type and should do
     // so with any other type of input). If we don't assume
     // the value type is for us, it will get passed down
-    // (recursivly) to the terminal non-valuetype member
+    // (recursively) to the terminal non-valuetype member
     // which then will be wrong type for the valuetype input
     // we started with.
     void
-    DynValue_i::insert_val (IDL::traits< CORBA::ValueBase>::ref_type value)
+    DynValue_i::insert_val (IDL::traits<CORBA::ValueBase>::ref_type value)
     {
       TAOX11_LOG_TRACE ("DynValue_i::insert_val");
 
@@ -604,10 +604,10 @@ namespace TAOX11_NAMESPACE
     // (even though we are a constructed type and should
     // do so with any other type of output). If we don't
     // assume the value type is us, it will get passed down
-    // (recursivly) to the terminal non-valuetype member
+    // (recursively) to the terminal non-valuetype member
     // which then will be wrong type for the valuetype
     // output we want.
-    IDL::traits< CORBA::ValueBase>::ref_type
+    IDL::traits<CORBA::ValueBase>::ref_type
     DynValue_i::get_val ()
     {
       TAOX11_LOG_TRACE ("DynValue_i::get_val");
@@ -624,7 +624,7 @@ namespace TAOX11_NAMESPACE
       // Now read in this stream to create the actual value.
       TAO_InputCDR for_reading (out_cdr);
 
-      IDL::traits< CORBA::ValueBase>::ref_type retval;
+      IDL::traits<CORBA::ValueBase>::ref_type retval;
       if (!CORBA::ValueBase::_obv_unmarshal (
             for_reading, retval ))
         {
@@ -679,7 +679,7 @@ namespace TAOX11_NAMESPACE
       // make one by marshalling the value into a new stream.
 
       TAO_OutputCDR out;
-      TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
       TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
       if (impl->encoded ())
       {
@@ -708,7 +708,7 @@ namespace TAOX11_NAMESPACE
       // with DynValue * instead. However the pointer isn't
       // actually dereferanced by the _tao_write_special_value()
       // call, its address (as a void *) is just used to
-      // check for the null value and any previous writen
+      // check for the null value and any previous written
       // value for the indirection header and the saving of
       // this current location for this new valuetype if it
       // is not indirected (this time).
@@ -786,7 +786,7 @@ namespace TAOX11_NAMESPACE
         // non-dealliased versions not the dealliased ones that
         // are stored in the da_base_types_[] list.
         uint32_t i= 0u;
-        for (IDL::traits< CORBA::TypeCode>::ref_type
+        for (IDL::traits<CORBA::TypeCode>::ref_type
                next = this->type_;
              i < trunc_ids;
              ++i)
@@ -887,7 +887,7 @@ namespace TAOX11_NAMESPACE
               TAO_InputCDR in_cdr (unk->_tao_get_cdr ());
 
               // Ok append this member's value to the output stream.
-              IDL::traits< CORBA::TypeCode>::ref_type tc = this->da_members_[currentMember]->type ();
+              IDL::traits<CORBA::TypeCode>::ref_type tc = this->da_members_[currentMember]->type ();
 
               (void) TAO_Marshal_Object::perform_append (
                   TC_helper::get_tao_tc(tc),
@@ -906,7 +906,7 @@ namespace TAOX11_NAMESPACE
               <= ++currentBaseMember)
           {
             // Remind us to start again with the next derived type
-            // for the next member to be writen.
+            // for the next member to be written.
             currentBaseMember= 0u;
 
             // We must end the chunk we started for this
@@ -921,7 +921,7 @@ namespace TAOX11_NAMESPACE
           }
         }
         // Write out the end chunking markers for the number
-        // of base types we have writen.
+        // of base types we have written.
         for (i= 1u; i < trunc_ids; ++i)
         {
           if (!ci.end_chunk (out_cdr))
@@ -975,7 +975,7 @@ namespace TAOX11_NAMESPACE
       }
       if (is_indirected)
       {
-        // Effectivly this member? is the same ValueType as previous
+        // Effectively this member? is the same ValueType as previous
         // seen either in another member of this container OR the
         // whole container itself. (Possiably can happen as a
         // circular linked list?)
@@ -1000,7 +1000,7 @@ namespace TAOX11_NAMESPACE
         // and find the address of the original DynValue_i that we
         // created last time and stored in the map.
         void *pos = strm.rd_ptr () + offset - sizeof (TAO_CORBA::Long);
-        void *original = 0;
+        void *original = nullptr;
         if (strm.get_value_map()->get()->find (pos, original))
         {
           TAOX11_LOG_ERROR ("DynValue_i::from_inputCDR() "
@@ -1129,7 +1129,7 @@ namespace TAOX11_NAMESPACE
         }
 
         // OK read in the current member
-        IDL::traits< CORBA::TypeCode>::ref_type
+        IDL::traits<CORBA::TypeCode>::ref_type
             field_tc (this->da_base_types_[currentBase]
                       ->member_type (currentBaseMember));
         if (CORBA::TCKind::tk_value == field_tc->kind ())
@@ -1181,7 +1181,7 @@ namespace TAOX11_NAMESPACE
               <= ++currentBaseMember)
         {
           // Remind us to start again with the next derived type
-          // for the next member to be writen.
+          // for the next member to be written.
           currentBaseMember= 0u;
           if (currentBase < num_ids)
           {

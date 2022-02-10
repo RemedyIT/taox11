@@ -206,10 +206,10 @@ namespace TAOX11_NAMESPACE
       return rc;
     }
 
-    IDL::traits< CORBA::Object>::ref_type
+    IDL::traits<CORBA::Object>::ref_type
     RequestInfo::forward_reference ()
     {
-      IDL::traits< CORBA::Object>::ref_type rc {};
+      IDL::traits<CORBA::Object>::ref_type rc {};
       try
       {
         TAO_CORBA::Object_var tao_obj = this->reqinf_->forward_reference ();

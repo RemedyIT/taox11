@@ -44,7 +44,7 @@ module BRIX11
                      'Defines name to use for test interface.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to generate enclosing module(s).',
                      "Default: #{options[:gentest][:interface]}") {|v|
-                        options[:gentest][:modules] = v.split('::');
+                        options[:gentest][:modules] = v.split('::')
                         options[:gentest][:interface] = options[:gentest][:modules].pop
                      }
         optparser.on('--no-folder',
@@ -84,7 +84,7 @@ module BRIX11
         Sys.in_dir(test_root) do
           # generate IDL file
           options[:genidl] = GenerateIDL::OPTIONS.merge(options[:gentest].merge(name: File.basename(options[:gentest][:name])))
-          GenFile.transaction { rc = GenerateIDL.new(entry,options).run(nil) }
+          GenFile.transaction { rc = GenerateIDL.new(entry, options).run(nil) }
           # generate server main
           options[:gensrv] = GenerateServer::OPTIONS.merge(options[:gentest]).merge({name: options[:gentest][:server]})
           GenFile.transaction { rc = GenerateServer.new(entry, options).run(nil) } if rc
@@ -98,7 +98,7 @@ module BRIX11
           options[:genmpc] = GenerateMPC::OPTIONS.dup
           options[:genmpc][:name] = File.basename(options[:gentest][:name])
           options[:genmpc][:client] = [options[:gentest][:client]]
-          unless options[:gentest][:server] == OPTIONS[:server]  # default?
+          unless options[:gentest][:server] == OPTIONS[:server] # default?
             options[:genmpc][:server] = [options[:gentest][:server]] +
                                         Dir.glob('*.idl').collect {|i| "#{File.basename(i, '.*')}_impl" }
           end

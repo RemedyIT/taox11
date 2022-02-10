@@ -52,7 +52,7 @@ private:
 };
 
 void
-ShutdownDelay::set_orb (CORBA::object_traits< CORBA::ORB >::ref_type orb)
+ShutdownDelay::set_orb (CORBA::object_traits<CORBA::ORB>::ref_type orb)
 {
   this->orb_ = orb;
 }

@@ -4,17 +4,26 @@ on:
   push:
     branches:
       - master
+      - v*
+    tags:
+      - AXCIOMA-v*
   pull_request:
     branches:
       - master
+      - v*
   schedule:
-    - cron: '0 7 * * SUN'
+    - cron: '0 1 * * SUN'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   DOC_ROOT: ${{ github.workspace }}/ACE_TAO
   ACE_ROOT: ${{ github.workspace }}/ACE_TAO/ACE
   TAO_ROOT: ${{ github.workspace }}/ACE_TAO/TAO
-  MPC_ROOT: ${{ github.workspace }}/MPC
+  MPC_ROOT: ${{ github.workspace }}/ACE_TAO/MPC
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
   RIDL_ROOT: ${{ github.workspace }}/ridl
   TAOX11_ROOT: ${{ github.workspace }}
@@ -22,28 +31,49 @@ env:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: windows-2016
-            ruby: 2.6
+            ruby: '2.6'
+            project_type: vs2017
+          - os: windows-2019
+            ruby: '2.6'
+            project_type: vs2019
+          - os: windows-2019
+            ruby: '3.0'
+            project_type: vs2019
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} ruby-${{ matrix.ruby }}
+    name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }}
     steps:
     - uses: actions/checkout@v2
+    - name: checkout ACE_TAO
+      uses: actions/checkout@v2
+      with:
+        repository: DOCGroup/ACE_TAO
+        path: ${{ env.DOC_ROOT }}
+    - name: checkout MPC
+      uses: actions/checkout@v2
+      with:
+        repository: DOCGroup/MPC
+        path: ${{ env.MPC_ROOT }}
+    - name: checkout ridl
+      uses: actions/checkout@v2
+      with:
+        repository: RemedyIT/ridl
+        path: ${{ env.RIDL_ROOT }}
+    - name: checkout axcioma
+      uses: actions/checkout@v2
+      with:
+        repository: RemedyIT/axcioma
+        path: ${{ env.X11_BASE_ROOT }}
     - uses: ilammy/msvc-dev-cmd@v1
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
-    - name: git clone dependent repositories
-      run: |
-        git clone --depth 1 --branch Latest_Micro git://github.com/DOCGroup/ACE_TAO.git ${env:DOC_ROOT}
-        git clone --depth 1 --branch Latest_ACETAO_Micro  git://github.com/DOCGroup/MPC.git ${env:MPC_ROOT}
-        git clone --depth 1 git://github.com/RemedyIT/axcioma.git ${env:X11_BASE_ROOT}
-        git clone --depth 1 git://github.com/RemedyIT/ridl.git ${env:RIDL_ROOT}
-      shell: pwsh
     - name: Run brix11 configure
       run: |
-        %X11_BASE_ROOT%\bin\brix11 configure -W aceroot=%ACE_ROOT% -W taoroot=%TAO_ROOT% -W mpcroot=%MPC_ROOT%
+        %X11_BASE_ROOT%\bin\brix11 -t ${{ matrix.project_type }} configure -W aceroot=%ACE_ROOT% -W taoroot=%TAO_ROOT% -W mpcroot=%MPC_ROOT%
       shell: cmd
     - name: Print brix11 configuration
       run: |

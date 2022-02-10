@@ -16,17 +16,18 @@
 class Collocation_Test
 {
 public:
-  Collocation_Test ();
+  Collocation_Test () = default;
+  ~Collocation_Test () = default;
 
   void shutdown ();
 
   int init (int argc, ACE_TCHAR *argv[]);
 
-  int test_narrow ();
-
   int run ();
 
 private:
+  int test_narrow ();
+
   IDL::traits<CORBA::ORB>::ref_type orb_;
   IDL::traits<PortableServer::POA>::ref_type root_poa_;
   IDL::traits<PortableServer::POAManager>::ref_type poa_manager_;

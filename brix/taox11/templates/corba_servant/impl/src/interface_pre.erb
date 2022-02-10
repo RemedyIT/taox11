@@ -4,7 +4,7 @@
 % write_regen_section("#{scoped_impl_cxxname}[Constructors]") do
 // Your constructor(s)
 %   if interface_wants_shutdown?(scoped_name)
-<%= impl_cxxname %>::<%= impl_cxxname %> (IDL::traits< CORBA::ORB >::ref_type orb)
+<%= impl_cxxname %>::<%= impl_cxxname %> (IDL::traits<CORBA::ORB>::ref_type orb)
   :  CORBA::servant_traits< <%= scoped_cxxtype %>>::base_type (),
      orb_ (orb)
 %   else

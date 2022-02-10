@@ -7,7 +7,7 @@ namespace TAOX11_NAMESPACE
 {
   // Arg traits specializations.
   template<>
-  class  Arg_Traits< <%= scoped_cxxtype %>>
+  class  Arg_Traits<<%= scoped_cxxtype %>>
     : public Basic_Arg_Traits_T<
         <%= scoped_cxx_traits_type %>::ref_type,
 % if generate_any_support?

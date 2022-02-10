@@ -273,11 +273,11 @@ module IDL
       end
 
       def formatted_cxxname
-        scoped_cxxname.sub(/^TAOX11_NAMESPACE::/,'')
+        scoped_cxxname.sub(/^TAOX11_NAMESPACE::/, '')
       end
 
       def doc_scoped_name
-        "#{origin}::#{scoped_unescaped_name.sub(/^TAOX11_NAMESPACE::/,'')}"
+        "#{origin}::#{scoped_unescaped_name.sub(/^TAOX11_NAMESPACE::/, '')}"
       end
 
       def enclosure_cxxname
@@ -337,7 +337,7 @@ module IDL
       end
 
       def formatted_cxxtype
-        scoped_cxxtype.sub(/TAOX11_NAMESPACE::/,'')
+        scoped_cxxtype.sub(/TAOX11_NAMESPACE::/, '')
       end
 
       def scoped_cxx_traits_type
@@ -518,9 +518,13 @@ module IDL
         self._resolved_idltype.cxx_anyop_arg_typename
       end
 
+      def zero_initializer
+        self._idltype.zero_initializer
+      end
+
       # template mapping
 
-      # this seems non-sensical but this prevents prefixing
+      # this seems nonsensical but this prevents prefixing
       map_template :anyop, :anyop
 
     end # NodeVisitorBase

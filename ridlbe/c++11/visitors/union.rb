@@ -152,6 +152,10 @@ module IDL
       def is_default?
         node.labels.include?(:default)
       end
+
+      def is_array?
+        IDL::Type::Array === _resolved_idltype
+      end
     end
 
   end

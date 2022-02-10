@@ -15,34 +15,28 @@
 #include "tao/x11/dynamic_any/dynanyfactory.h"
 #include "testlib/taox11_testlog.h"
 
-
-DynAnyAnalyzer::DynAnyAnalyzer ( IDL::traits< DynamicAny::DynAnyFactory>::ref_type dany_fact)
-  : level_ (1u),
-    dany_fact_(dany_fact)
+DynAnyAnalyzer::DynAnyAnalyzer (IDL::traits< DynamicAny::DynAnyFactory>::ref_type dany_fact)
+  : dany_fact_(std::move(dany_fact))
 {
 }
 
 void
 DynAnyAnalyzer::get_base_types (
-  IDL::traits< CORBA::TypeCode>::ref_type tc,
+  IDL::traits<CORBA::TypeCode>::ref_type tc,
   BaseTypesList_t &base_types,
   uint32_t total_member_count)
 {
-  // First initalize to the fully derived type we are
+  // First initialize to the fully derived type we are
   // starting with.
-
-  uint32_t numberOfBases = 1u;
+  BaseTypesList_t::size_type numberOfBases { 1 };
   base_types.resize (numberOfBases);
   base_types[0] = DynamicAny::DynAnyFactory_i::strip_alias (tc);
   total_member_count = base_types[0]->member_count ();
 
   // Obtain each derived type's basetype and add this to the list
-
-  IDL::traits< CORBA::TypeCode>::ref_type
-  base = base_types[0]->concrete_base_type();
+  IDL::traits<CORBA::TypeCode>::ref_type base = base_types[0]->concrete_base_type();
   base = DynamicAny::DynAnyFactory_i::strip_alias (base);
   while (base && (CORBA::TCKind::tk_value == base->kind()))
-
   {
     total_member_count += base->member_count ();
     base_types.resize (numberOfBases + 1);
@@ -52,7 +46,7 @@ DynAnyAnalyzer::get_base_types (
   }
 }
 
-IDL::traits< CORBA::TypeCode>::ref_type
+IDL::traits<CORBA::TypeCode>::ref_type
 DynAnyAnalyzer::get_correct_base_type (
   const BaseTypesList_t &base_types,
   uint32_t &index)
@@ -63,11 +57,11 @@ DynAnyAnalyzer::get_correct_base_type (
   // base types members we move up the list to the next
   // derived type until that type's members are exhausted
   // and so on until we reach the member we have asked for.
-  uint32_t  currentBase = ACE_Utils::truncate_cast<uint32_t> (base_types.size ());
+  BaseTypesList_t::size_type currentBase = base_types.size ();
   if (!currentBase)
   {
-    TAOX11_TEST_ERROR <<"Error:DynAnyAnalyzer::::get_correct_base_type () "
-                     <<"BaseTypesList_t is not initialised" << std::endl;
+    TAOX11_TEST_ERROR << "Error:DynAnyAnalyzer::::get_correct_base_type () "
+                      << "BaseTypesList_t is not initialised" << std::endl;
     return {};
   }
 
@@ -76,8 +70,8 @@ DynAnyAnalyzer::get_correct_base_type (
     index -= base_types[currentBase]->member_count ();
     if (!currentBase)
     {
-      TAOX11_TEST_ERROR <<"ERROR: DynAnyAnalyzer::::get_correct_base_type ()"
-                         << "BaseTypesList_t is not large enough\n" << std::endl;
+      TAOX11_TEST_ERROR << "ERROR: DynAnyAnalyzer::::get_correct_base_type ()"
+                        << "BaseTypesList_t is not large enough\n" << std::endl;
       return {};
     }
   }
@@ -90,7 +84,7 @@ DynAnyAnalyzer::get_correct_base_type (
 void
 DynAnyAnalyzer::tab ()
 {
-  for (uint32_t i = 0 ; i < this->level_ ; ++i)
+  for (BaseTypesList_t::size_type i = 0 ; i < this->level_ ; ++i)
   {
     TAOX11_TEST_DEBUG <<  "\t";
   }
@@ -105,9 +99,9 @@ void
 DynAnyAnalyzer::analyze (
     IDL::traits< DynamicAny::DynAny>::ref_type da)
 {
-  IDL::traits< CORBA::TypeCode>::ref_type tc  = da->type ();
+  IDL::traits<CORBA::TypeCode>::ref_type tc  = da->type ();
   CORBA::TCKind kind = tc->kind ();
-  IDL::traits< CORBA::TypeCode>::ref_type dup =tc;
+  IDL::traits<CORBA::TypeCode>::ref_type dup =tc;
 
   // strip aliases
   while (CORBA::TCKind::tk_alias == kind)
@@ -115,7 +109,6 @@ DynAnyAnalyzer::analyze (
     dup = dup->content_type ();
     kind = dup->kind ();
   }
-
 
   switch (kind)
   {
@@ -153,7 +146,7 @@ DynAnyAnalyzer::analyze (
       BaseTypesList_t base_types;
       get_base_types (tc, base_types);
 
-      for (uint32_t i= 0u; i < base_types.size(); ++i)
+      for (BaseTypesList_t::size_type i = {}; i < base_types.size(); ++i)
       {
         if (i)
         {
@@ -185,21 +178,21 @@ DynAnyAnalyzer::analyze (
                            << " -" << base_types[i]->id ()  << std::endl;
         ++level_;
       }
-      level_ -= ACE_Utils::truncate_cast<unsigned int> (base_types.size ());
+      level_ -= base_types.size ();
 
       if (!(dvt->is_null ()))
       {
-        uint32_t member_number = 0u;
+        uint32_t member_number { 0 };
         ++level_;
         if (da->seek (0)) do
         {
           IDL::traits<DynamicAny::DynAny>::ref_type cc = dvt->current_component ();
           DynamicAny::FieldName fn = dvt->current_member_name ();
           uint32_t sub_member_number = member_number;
-          const IDL::traits< CORBA::TypeCode>::ref_type base = get_correct_base_type (
+          IDL::traits<CORBA::TypeCode>::ref_type const base = get_correct_base_type (
                            base_types,
                            sub_member_number);
-          const std::string visability =
+          std::string const visability =
                   ((CORBA::PRIVATE_MEMBER ==
                     base->member_visibility (sub_member_number)) ?
                     "Private" : "Public ");
@@ -238,7 +231,6 @@ DynAnyAnalyzer::analyze (
     CASEE (double, double, "  Value (double) = ");
     CASEE (octet, uint8_t, "  Value (octet) = ");
 
-
       default:
       {
         const CORBA::TCKind
@@ -248,8 +240,4 @@ DynAnyAnalyzer::analyze (
       }
       break;
     }
-}
-
-DynAnyAnalyzer::~DynAnyAnalyzer ()
-{
 }

@@ -153,7 +153,7 @@ namespace x11_logger
   void
   log_buffer_t<CH, TR>::log_record ()
   {
-    // Specialized for char and wchar_t (see log.h/cpp)
+    // Specialized for char and wchar_t (see log_base.h/cpp)
   }
 
   template <typename CH, typename TR>

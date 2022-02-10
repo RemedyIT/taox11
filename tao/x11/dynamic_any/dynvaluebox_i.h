@@ -41,7 +41,7 @@ namespace TAOX11_NAMESPACE
       ~DynValueBox_i () = default;
 
       /// Initialize using just a TypeCode.
-      IDL::traits< DynamicAny::DynAny>::ref_type init (IDL::traits< CORBA::TypeCode>::ref_type tc);
+      IDL::traits< DynamicAny::DynAny>::ref_type init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       /// Initialize using an Any.
       IDL::traits< DynamicAny::DynAny>::ref_type init (const CORBA::Any& any);
@@ -71,7 +71,7 @@ namespace TAOX11_NAMESPACE
 
     private:
       /// Check if the typecode is acceptable.
-      void check_typecode (IDL::traits< CORBA::TypeCode>::ref_type tc) override;
+      void check_typecode (IDL::traits<CORBA::TypeCode>::ref_type tc) override;
 
       /// Code common to the constructor from an Any arg and the member
       /// function from_any().

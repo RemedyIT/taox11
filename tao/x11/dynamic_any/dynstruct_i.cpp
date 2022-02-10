@@ -25,7 +25,7 @@ namespace TAOX11_NAMESPACE
     }
 
     void
-    DynStruct_i::check_typecode (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynStruct_i::check_typecode (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       CORBA::TCKind kind = DynAnyFactory_i::unalias (tc);
 
@@ -50,7 +50,7 @@ namespace TAOX11_NAMESPACE
     IDL::traits< DynamicAny::DynAny>::ref_type
     DynStruct_i::init (const CORBA::Any& any)
     {
-      IDL::traits< CORBA::TypeCode>::ref_type tc = any.type();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = any.type();
       this->check_typecode (tc);
 
       this->type_ = tc;
@@ -66,7 +66,7 @@ namespace TAOX11_NAMESPACE
     DynStruct_i::set_from_any (const CORBA::Any & any)
     {
       // member_type() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (any.type ());
 
       const uint32_t numfields =
@@ -81,7 +81,7 @@ namespace TAOX11_NAMESPACE
       // Get the CDR stream of the Any, if there isn't one, make one.
        CORBA::Any::impl_ref_type impl = any.impl ();
         TAO_OutputCDR out;
-       TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+       TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
 
        if (impl->encoded ())
        {
@@ -112,7 +112,7 @@ namespace TAOX11_NAMESPACE
       for (uint32_t i = 0; i < numfields; i++)
       {
 
-        IDL::traits< CORBA::TypeCode>::ref_type field_tc =
+        IDL::traits<CORBA::TypeCode>::ref_type field_tc =
           unaliased_tc->member_type (i);
 
         CORBA::Any field_any;
@@ -143,14 +143,14 @@ namespace TAOX11_NAMESPACE
     }
 
     IDL::traits< DynamicAny::DynAny>::ref_type
-    DynStruct_i::init (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynStruct_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       this->check_typecode (tc);
 
       this->type_ = tc;
 
       // member_type() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
       DynAnyFactory_i::strip_alias (this->type_);
 
       this->component_count_ =
@@ -161,7 +161,7 @@ namespace TAOX11_NAMESPACE
 
       this->init_common ();
 
-      IDL::traits< CORBA::TypeCode>::ref_type mtype;
+      IDL::traits<CORBA::TypeCode>::ref_type mtype;
 
       for (uint32_t i = 0; i < this->component_count_; ++i)
       {
@@ -169,7 +169,7 @@ namespace TAOX11_NAMESPACE
 
         // Recursively initialize each member.
         this->da_members_.push_back(
-          MakeDynAnyUtils::make_dyn_any_t<IDL::traits< CORBA::TypeCode>::ref_type> (
+          MakeDynAnyUtils::make_dyn_any_t<IDL::traits<CORBA::TypeCode>::ref_type> (
             mtype,
             mtype,
             this->allow_truncation_));
@@ -197,7 +197,7 @@ namespace TAOX11_NAMESPACE
       }
 
       // member_name() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
       const std::string name =
         unaliased_tc->member_name (this->current_position_);
@@ -226,9 +226,9 @@ namespace TAOX11_NAMESPACE
       }
 
       // member_type() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
-      IDL::traits< CORBA::TypeCode>::ref_type tc =
+      IDL::traits<CORBA::TypeCode>::ref_type tc =
       unaliased_tc->member_type (this->current_position_);
 
       CORBA::TCKind retval = DynAnyFactory_i::unalias (tc);
@@ -250,7 +250,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::NO_MEMORY ();
 
       CORBA::Any temp;
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc;
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc;
 
       CORBA::TCKind const tc_kind =
         this->type_->kind ();
@@ -285,7 +285,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
 
       // Check for length match.
       if (length != this->component_count_)
@@ -293,12 +293,12 @@ namespace TAOX11_NAMESPACE
         throw DynamicAny::DynAny::InvalidValue ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type value_tc;
-      IDL::traits< CORBA::TypeCode>::ref_type my_tc;
+      IDL::traits<CORBA::TypeCode>::ref_type value_tc;
+      IDL::traits<CORBA::TypeCode>::ref_type my_tc;
       bool equivalent;
 
       // member_type() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
 
       for (uint32_t i = 0; i < length; ++i)
@@ -341,7 +341,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::NO_MEMORY ();
 
       // member_name() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
 
       // Assign name and value to each pearl on the string.
@@ -351,7 +351,7 @@ namespace TAOX11_NAMESPACE
 
         // A deep copy is made only by copy() (CORBA 3.2.).
         // Set the flag so the caller can't destroy.
-        this->set_flag (this->da_members_[i], 0);
+        this->set_flag (this->da_members_[i], false);
 
         members[i].value ( this->da_members_[i]);
       }
@@ -368,7 +368,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
 
       // Check for length match.
       if (length != this->component_count_)
@@ -376,11 +376,11 @@ namespace TAOX11_NAMESPACE
         throw DynamicAny::DynAny::InvalidValue ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type value_tc;
-      IDL::traits< CORBA::TypeCode>::ref_type my_tc;
+      IDL::traits<CORBA::TypeCode>::ref_type value_tc;
+      IDL::traits<CORBA::TypeCode>::ref_type my_tc;
 
       // member_type() does not work with aliased type codes.
-      IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
         DynAnyFactory_i::strip_alias (this->type_);
 
       for (uint32_t i = 0; i < length; ++i)
@@ -414,7 +414,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = any.type ();
       bool equivalent =
         this->type_->equivalent (tc);
 
@@ -423,7 +423,7 @@ namespace TAOX11_NAMESPACE
         // Get the CDR stream of the Any, if there isn't one, make one.
         CORBA::Any::impl_ref_type impl = any.impl ();
         TAO_OutputCDR out;
-        TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+        TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
 
         if (impl->encoded ())
         {
@@ -452,8 +452,8 @@ namespace TAOX11_NAMESPACE
           in >> str;
         }
 
-        IDL::traits< CORBA::TypeCode>::ref_type field_tc;
-        IDL::traits< CORBA::TypeCode>::ref_type unaliased =
+        IDL::traits<CORBA::TypeCode>::ref_type field_tc;
+        IDL::traits<CORBA::TypeCode>::ref_type unaliased =
             DynamicAny::DynAnyFactory_i::strip_alias (this->type_);
 
         for (uint32_t i = 0; i < this->component_count_; ++i)
@@ -514,11 +514,11 @@ namespace TAOX11_NAMESPACE
 
 
       CORBA::Any::impl_ref_type field_impl {};
-      TAO_InputCDR field_in_cdr (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR field_in_cdr (static_cast<ACE_Message_Block *> (nullptr));
 
       for (uint32_t i = 0; i < this->component_count_; ++i)
       {
-        IDL::traits< CORBA::TypeCode>::ref_type field_tc =
+        IDL::traits<CORBA::TypeCode>::ref_type field_tc =
           this->da_members_[i]->type ();
 
         // Recursive step.
@@ -576,7 +576,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = rhs->type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = rhs->type ();
 
       if (!tc->equivalent (this->type_))
       {
@@ -616,7 +616,7 @@ namespace TAOX11_NAMESPACE
         // Do a deep destroy.
         for (uint32_t i = 0; i < this->component_count_; ++i)
         {
-          this->set_flag (da_members_[i], 1);
+          this->set_flag (da_members_[i], true);
            this->da_members_[i]->destroy ();
          }
          this->destroyed_ = true;
@@ -644,7 +644,7 @@ namespace TAOX11_NAMESPACE
 
       uint32_t index = static_cast <uint32_t> (this->current_position_);
 
-      this->set_flag (this->da_members_[index], 0);
+      this->set_flag (this->da_members_[index], false);
 
       return this->da_members_[index];
     }

@@ -7,7 +7,7 @@ namespace TAOX11_NAMESPACE
 {
   /// Argument traits specializations for <%= name %>
   template<>
-  class Arg_Traits< <%= scoped_cxxtype %>>
+  class Arg_Traits<<%= scoped_cxxtype %>>
     : public Basic_Arg_Traits_T<
         <%= scoped_cxxtype %>,
 % if generate_any_support?
@@ -24,7 +24,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
 /// @name CDR streaming operator specializations for <%= scoped_cxxname %>
 //@{
-<%= stub_export_macro %>TAO_CORBA::Boolean operator<< (TAO_OutputCDR &, const <%= scoped_cxxname %>& );
+<%= stub_export_macro %>TAO_CORBA::Boolean operator<< (TAO_OutputCDR &, const <%= scoped_cxxname %>&);
 <%= stub_export_macro %>TAO_CORBA::Boolean operator>> (TAO_InputCDR &, <%= scoped_cxxname %>&);
 //@}
 

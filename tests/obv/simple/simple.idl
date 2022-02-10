@@ -9,10 +9,16 @@
 
 module Test
 {
+  typedef long longArray[2];
 
   valuetype ext_base : Test::base_vt
   {
     public string dummy;
+  };
+
+  valuetype ArrayValuetype
+  {
+    public longArray l_array;
   };
 
   valuetype Event
@@ -28,7 +34,7 @@ module Test
     factory create_val (in long value);
   };
 
-  typedef sequence<Event>   EventSeq;
+  typedef sequence<Event> EventSeq;
 
   valuetype StringBox string;
 

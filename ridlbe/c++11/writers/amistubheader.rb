@@ -110,7 +110,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from AmiStubHeaderWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -120,7 +120,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
@@ -138,7 +138,7 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
-        println()
+        println
         printiln('// generated from AmiStubHeaderWriter#enter_interface')
         sn = node.scoped_cxxname
         #use ami_interface for ReplyHandler
@@ -331,7 +331,7 @@ module IDL
       end
 
       def pre_visit(parser)
-        println();
+        println
         printiln('// generated from AmiStubHeaderTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE')
         printiln('{')
@@ -442,7 +442,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from AmiStubHeaderAmiCWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -452,7 +452,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
@@ -468,7 +468,7 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
-        println()
+        println
         printiln('// generated from AmiStubHeaderAmiCWriter#enter_interface')
         sn = node.scoped_cxxname
         unless @fwd_decl_cache.has_key?(sn)
@@ -509,7 +509,7 @@ module IDL
       end
 
       def pre_visit(parser)
-        println();
+        println
         printiln('// generated from AmiStubHeaderAmicTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE')
         printiln('{')
@@ -548,7 +548,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from AmiStubHeaderSrvWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -558,7 +558,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
@@ -598,7 +598,7 @@ module IDL
       end
 
       def pre_visit(parser)
-        println();
+        println
         printiln('// generated from AmiStubHeaderSrvTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE {')
         inc_nest

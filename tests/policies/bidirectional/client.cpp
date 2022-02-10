@@ -86,6 +86,16 @@ main (int argc, char *argv[])
         return 1;
       }
 
+      IDL::traits<BiDirPolicy::BidirectionalPolicy>::ref_type nil_bidir =
+          IDL::traits<BiDirPolicy::BidirectionalPolicy>::narrow (nullptr);
+
+      if (nil_bidir)
+      {
+        TAOX11_TEST_ERROR << "Narrow nil BiDirPolicy::BidirectionalPolicy should return nil"
+            << std::endl;
+        return 1;
+      }
+
       // narrow from generic policy ref
       IDL::traits<BiDirPolicy::BidirectionalPolicy>::ref_type bidir_pol =
           IDL::traits<BiDirPolicy::BidirectionalPolicy>::narrow (policies[0]);
