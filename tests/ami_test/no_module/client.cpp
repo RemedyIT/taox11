@@ -142,8 +142,7 @@ public:
     }
     catch (const CORBA::Exception& ex)
     {
-      TAOX11_TEST_INFO << "... caught expected exception -> " << ex.what()
-                  << std::endl;
+      TAOX11_TEST_INFO << "... caught expected exception -> " << ex << std::endl;
       std::stringstream excep_c;
       excep_c << ex;
       std::string excep_cstr = excep_c.str();
@@ -677,7 +676,7 @@ int main(int argc, char* argv[])
          (callback_attrib_der != 1 ) ||
          (callback_operation_der != 1 ))
     {
-      TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected callbacks."
+      TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected callbacks."
       << " Foo : expected -4- , received -" << callback_operation << "-"
       << " do_something : expected -1- , received -" << callback_operation_der << "-"
       << " Attrib : expected -4-, received -" << callback_attrib << "-"
@@ -693,7 +692,7 @@ int main(int argc, char* argv[])
   }
   catch (const std::exception& e)
   {
-    TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+    TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
     return 1;
   }
   return result;

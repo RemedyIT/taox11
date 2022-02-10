@@ -152,6 +152,10 @@ module IDL
       '%s'
     end
 
+    # Construct for triggering zero initialization
+    def zero_initializer
+      '{}'
+    end
 
     # define cxxtype methods for 'primitive' types
     {
@@ -346,7 +350,7 @@ module IDL
       end
       def value_to_s(v, scope = nil)
         return 'L'+v.to_i.chr.dump.gsub('"', "'") if ::Integer === v
-        return 'L'+v.to_s[0,1].dump.gsub('"', "'") unless ::Array === v
+        return 'L'+v.to_s[0, 1].dump.gsub('"', "'") unless ::Array === v
         'L'+case v.first
         when :char
           "'#{v.last}'"
@@ -386,12 +390,11 @@ module IDL
         ' std::hex << "hex:" << (int)%s << std::dec'
 #        '%s'
        end
-
     end
 
     class String
       def cxx_type(scope = nil)
-        (size.to_i>0) ? "TAOX11_IDL::bounded_basic_string<char, #{size}>" : 'std::string'
+        (size.to_i>0) ? "TAOX11_IDL::bounded_string<#{size}>" : 'std::string'
       end
       def proxy_cxxtype(scope = nil)
         cxx_type
@@ -403,7 +406,7 @@ module IDL
         "TAOX11_NAMESPACE::CORBA::#{cxx_typecode}"
       end
       def cxx_member_type_name
-        (size.to_i>0) ? "bounded_basic_string<char, #{size}>" : 'string'
+        (size.to_i>0) ? "bounded_string<#{size}>" : 'string'
       end
       def value_to_s(v, scope = nil)
         v.dump
@@ -412,13 +415,13 @@ module IDL
         self.size.to_i == 0
       end
       def os_fmt
-        return  ' "\"" <<  %s << "\"" '
+        return ' "\"" <<  %s << "\"" '
       end
     end
 
     class WString
       def cxx_type(scope = nil)
-        (size.to_i>0) ? "TAOX11_IDL::bounded_basic_string<wchar_t, #{size}>" : 'std::wstring'
+        (size.to_i>0) ? "TAOX11_IDL::bounded_wstring<#{size}>" : 'std::wstring'
       end
       def proxy_cxxtype(scope = nil)
         cxx_type
@@ -430,7 +433,7 @@ module IDL
         "TAOX11_NAMESPACE::CORBA::#{cxx_typecode}"
       end
       def cxx_member_type_name
-        (size.to_i>0) ? "bounded_basic_string<wchar_t, #{size}>" : 'wstring'
+        (size.to_i>0) ? "bounded_wstring<#{size}>" : 'wstring'
       end
       def value_to_s(v, scope = nil)
         return 'L'+v.to_s.dump unless ::Array === v
@@ -453,7 +456,7 @@ module IDL
         self.size.to_i == 0
       end
       def os_fmt
-        return  ' %s '
+        return ' %s '
       end
     end
 
@@ -647,6 +650,10 @@ module IDL
         is_reference? ? resolved_type.cxx_member_type_name : super
       end
 
+      def zero_initializer
+        resolved_type.zero_initializer
+      end
+
       def cxx_return_type(scope = nil)
         is_reference? ? resolved_type.cxx_member_type(scope, self) : super
       end
@@ -698,6 +705,7 @@ module IDL
       def cdr_from_fmt
         resolved_type.cdr_from_fmt
       end
+
     end
 
     class Interface
@@ -766,7 +774,7 @@ module IDL
         cxx_type
       end
       def value_to_s(v, scope = nil)
-        v.to_s.gsub(/d|D/,'')
+        v.to_s.gsub(/d|D/, '')
       end
     end
 
@@ -808,6 +816,9 @@ module IDL
       # any insertion/extraction operators arg typename
       def cxx_anyop_arg_typename(scope = nil)
         resolved_cxx_type(scope)
+      end
+      def zero_initializer
+        '{{}}'
       end
     end
 

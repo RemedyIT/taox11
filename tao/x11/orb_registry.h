@@ -116,7 +116,7 @@ namespace TAOX11_NAMESPACE
     Object_Loader *codec_factory_loader_ {};
     Object_Loader *dynamicany_factory_loader_ {};
 
-    typedef std::map<std::string, IDL::traits<CORBA::Object>::ref_type> user_services_map_t;
+    using user_services_map_t = std::map<std::string, IDL::traits<CORBA::Object>::ref_type>;
     user_services_map_t user_services_;
 
     static std::shared_ptr<ORB_Registry> instance (bool create=false);

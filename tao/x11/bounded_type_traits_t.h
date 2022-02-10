@@ -19,7 +19,7 @@ namespace TAOX11_NAMESPACE
     template <typename T>           // actual valuetype
     struct bounded_traits
     {
-      typedef std::integral_constant<uint32_t, T::bound::value> bound;
+      using bound = std::integral_constant<uint32_t, T::bound::value>;
     };
   } // namespace IDL
 } // namespace TAOX11_NAMESPACE

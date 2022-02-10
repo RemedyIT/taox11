@@ -206,7 +206,7 @@ Manipulation::perform_iteration (OPERATIONS operation,
           break;
         case OPERATIONS::RESTORE_CURRENT_POLICIES:
           {
-            if (policies.size () != 0)
+            if (!policies.empty ())
               {
                 policy_current->set_policy_overrides (policies,
                   CORBA::SetOverrideType::SET_OVERRIDE);
@@ -215,7 +215,7 @@ Manipulation::perform_iteration (OPERATIONS operation,
           break;
         case OPERATIONS::RESTORE_MANAGER_POLICIES:
           {
-            if (policies.size () != 0)
+            if (!policies.empty ())
               {
                 policy_manager->set_policy_overrides (policies,
                   CORBA::SetOverrideType::SET_OVERRIDE);

@@ -373,6 +373,105 @@ test_data_z (IDL::traits<Test::Foo>::ref_type foo)
   return retval;
 }
 
+uint16_t
+test_union_message (IDL::traits<Test::Foo>::ref_type foo)
+{
+  uint16_t retval = 0;
+
+  Test::Data dt_d;
+  Test::B03 b_d;
+
+  // Set the last item
+  b_d.b_03_5 ("XX");
+  dt_d.globalData (Global (4));
+
+  Test::UnionMessage msg_d { Test::Assignment::D, b_d, dt_d };
+
+  TAOX11_TEST_DEBUG << "Sending <"
+      << msg_d << ">" << std::endl;
+
+  bool const ret = foo->send_unionmessage (msg_d);
+
+  if (!ret)
+  {
+    TAOX11_TEST_ERROR << "ERROR: send_unionmessage returned false "
+      << std::endl;
+    ++retval;
+  }
+
+  return retval;
+}
+
+uint16_t
+test_value_initialization ()
+{
+  TAOX11_TEST_DEBUG << "Test test_value_initialization" << std::endl;
+
+  uint16_t retval {};
+
+  TAOX11_TEST_DEBUG << "Test test_value_initialization Test::unionarrayarrayarrayoflong" << std::endl;
+
+  Test::unionarrayarrayarrayoflong uaaal;
+  int32_t default_int32_t {};
+  for (const auto& aaal_member : uaaal.aaal()) {
+    for (const auto& aal_member : aaal_member) {
+      for (const auto& al_member : aal_member) {
+        if (al_member != default_int32_t) {
+          TAOX11_TEST_ERROR << "Array member of uaaal not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
+          return 1;
+        }
+      }
+    }
+  }
+
+  TAOX11_TEST_DEBUG << "Test test_value_initialization Test::unionarrayarrayoflong" << std::endl;
+
+  Test::unionarrayarrayoflong uaal;
+  for (const auto& aal_member : uaal.aal()) {
+    for (const auto& al_member : aal_member) {
+      if (al_member != default_int32_t) {
+        TAOX11_TEST_ERROR << "Array member of uaal not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
+        return 1;
+      }
+    }
+  }
+
+  TAOX11_TEST_DEBUG << "Test test_value_initialization Test::unionarrayoflong" << std::endl;
+
+  Test::unionarrayoflong ual;
+  for (const auto& al_member : ual.al()) {
+    if (al_member != default_int32_t) {
+      TAOX11_TEST_ERROR << "Array member of ual not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
+      return 1;
+    }
+  }
+
+  TAOX11_TEST_DEBUG << "Test test_value_initialization Test::unionarrayarrayofenum" << std::endl;
+
+  Test:: enumType default_enumType {};
+  Test::unionarrayarrayofenum uaae;
+  for (const auto& aae_member : uaae.aae()) {
+    for (const auto& ae_member : aae_member) {
+      if (ae_member != default_enumType) {
+        TAOX11_TEST_ERROR << "Array member of uaae not value initialized, " << ae_member << " instead of " << default_enumType << std::endl;
+        return 1;
+      }
+    }
+  }
+
+  TAOX11_TEST_DEBUG << "Test test_value_initialization Test::unionarrayofenum" << std::endl;
+
+  Test::unionarrayofenum uae;
+  for (const auto& ae_member : uae.ae()) {
+    if (ae_member != default_enumType) {
+      TAOX11_TEST_ERROR << "Array member of uae not value initialized, " << ae_member << " instead of " << default_enumType << std::endl;
+      return 1;
+    }
+  }
+
+  return retval;
+}
+
 int main (int argc, char* argv[])
 {
   uint16_t retval = 0;
@@ -407,6 +506,8 @@ int main (int argc, char* argv[])
       retval += test_data_x (foo);
       retval += test_data_y (foo);
       retval += test_data_z (foo);
+      retval += test_union_message (foo);
+      retval += test_value_initialization ();
 
       TAOX11_TEST_DEBUG << "shutting down..." << std::endl;
 
@@ -415,7 +516,7 @@ int main (int argc, char* argv[])
     }
   catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+      TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
       return 1;
     }
   return retval;

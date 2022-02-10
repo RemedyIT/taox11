@@ -31,7 +31,7 @@ namespace TAOX11_NAMESPACE
 
     // Any insert  operations
 #define TAOX11_SYSTEM_EXCEPTION(name) \
-    virtual void insert_into_any (CORBA::Any * any, const CORBA::name &) override; \
+    void insert_into_any (CORBA::Any * any, const CORBA::name &) override; \
     // expand the list
     TAOX11_STANDARD_SYSTEM_EXCEPTION_LIST
     // undefine the template

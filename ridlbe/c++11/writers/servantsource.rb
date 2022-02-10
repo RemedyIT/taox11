@@ -62,7 +62,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from ServantSourceWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -72,14 +72,14 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
       def enter_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
         super
-        println()
+        println
         printiln('// generated from ServantSourceWriter#enter_interface')
         printiln('namespace POA')
         printiln('{')
@@ -98,11 +98,11 @@ module IDL
         node.attributes(true).each do |_att|
           visitor(AttributeVisitor) { |v| v.interface(node); v.visit_attribute(_att) }
         end
-        println()
+        println
         visitor(InterfaceVisitor).visit_skel(node)
         dec_nest
         printiln("} // namespace POA")
-        println()
+        println
         super
       end
 
@@ -231,7 +231,7 @@ module IDL
         when IDL::Type::Sequence
           add_include('tao/x11/portable_server/basic_sargument_t.h')
           add_include('tao/x11/basic_argument_t.h')
-          add_include('tao/x11/sequence_cdr_t.h')  unless params[:no_cdr_streaming]
+          add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type.basetype)
         when IDL::Type::Array
           add_include('tao/x11/portable_server/basic_sargument_t.h')
@@ -333,7 +333,7 @@ module IDL
           # recheck if already done
           visitor(ArrayVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::String, IDL::Type::WString
-          return if idl_type.resolved_type.is_standard_type?  # handle only bounded strings (unbounded is standard_tpe)
+          return if idl_type.resolved_type.is_standard_type? # handle only bounded strings (unbounded is standard_tpe)
           # find the base typedef for this string
           return unless IDL::Type::ScopedName === idl_type # can't handle anonymous sequence types
           # find base typedef for string

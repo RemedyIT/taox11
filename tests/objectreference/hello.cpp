@@ -53,7 +53,7 @@ IDL::traits<Test::iA>::ref_type Hello::inout_null(
     }
     catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "ERROR: Usage of received reference failed: " << e.what() << std::endl;
+      TAOX11_TEST_ERROR << "ERROR: Usage of received reference failed: " << e << std::endl;
       ++result_;
     }
   }
@@ -65,7 +65,7 @@ IDL::traits<Test::iA>::ref_type Hello::inout_null(
     }
     catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "ERROR: Usage of received reference failed: " << e.what() << std::endl;
+      TAOX11_TEST_ERROR << "ERROR: Usage of received reference failed: " << e << std::endl;
       ++result_;
     }
   }

@@ -88,6 +88,6 @@ Foo_Factory::factory_name ()
 IDL::traits<Test::Foo>::ref_type
 Foo_Factory::get_foo ()
 {
-  return CORBA::make_reference <Foo_impl> (this->_this ());
+  return IDL::traits<Test::Foo>::make_reference <Foo_impl> (this->_this ());
 }
 

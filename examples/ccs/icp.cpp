@@ -46,8 +46,8 @@ struct DeviceState
   int16_t nominal_temp;
 };
 
-typedef std::map< uint32_t, DeviceState > StateMap;
-typedef std::pair< const uint32_t, DeviceState > StatePair;
+using StateMap = std::map<uint32_t, DeviceState>;
+using StatePair = std::pair<const uint32_t, DeviceState>;
 
 //----------------------------------------------------------------
 

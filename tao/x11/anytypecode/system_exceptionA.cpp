@@ -56,10 +56,10 @@ namespace TAOX11_NAMESPACE
 // marshaling specializations for system exceptions
 #define TAOX11_SYSTEM_EXCEPTION(name) \
   template <> \
-  class CDR_Marshal_Policy<IDL::traits< CORBA::name>> \
+  class CDR_Marshal_Policy<IDL::traits<CORBA::name>> \
   { \
   public: \
-    static bool demarshal_value (TAO_InputCDR& cdr, IDL::traits< CORBA::name>::value_type& value) \
+    static bool demarshal_value (TAO_InputCDR& cdr, IDL::traits<CORBA::name>::value_type& value) \
     { \
       try { \
         value._tao_decode (cdr); \
@@ -69,7 +69,7 @@ namespace TAOX11_NAMESPACE
       } \
       return false; \
     } \
-    static bool marshal_value (TAO_OutputCDR& cdr, const IDL::traits< CORBA::name>::value_type& value) \
+    static bool marshal_value (TAO_OutputCDR& cdr, const IDL::traits<CORBA::name>::value_type& value) \
     { \
       try { \
         value._tao_encode (cdr); \
@@ -91,7 +91,7 @@ namespace TAOX11_NAMESPACE
   void \
   operator<<= (CORBA::Any &any, const CORBA::name &ex) \
   { \
-    Any_Dual_Impl_T<IDL::traits< CORBA::name>, \
+    Any_Dual_Impl_T<IDL::traits<CORBA::name>, \
                     CDR_Marshal_Policy>::insert_copy ( \
         any, \
         CORBA::_tc_ ## name, \
@@ -107,7 +107,7 @@ namespace TAOX11_NAMESPACE
   void \
   operator<<= (CORBA::Any &any, CORBA::name &&ex) \
   { \
-    Any_Dual_Impl_T<IDL::traits< CORBA::name>, \
+    Any_Dual_Impl_T<IDL::traits<CORBA::name>, \
                     CDR_Marshal_Policy>::insert ( \
         any, \
         CORBA::_tc_ ## name, \
@@ -123,7 +123,7 @@ namespace TAOX11_NAMESPACE
   bool \
   operator>>= (const CORBA::Any &any, CORBA::name &ex) \
   { \
-    return Any_Dual_Impl_T<IDL::traits< CORBA::name>, \
+    return Any_Dual_Impl_T<IDL::traits<CORBA::name>, \
                            CDR_Marshal_Policy>::extract ( \
               any, \
               CORBA::_tc_ ## name, \

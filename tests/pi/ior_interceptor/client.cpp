@@ -48,7 +48,7 @@ main(int argc, ACE_TCHAR *argv[])
   }
   catch (const CORBA::Exception& ex)
   {
-    TAOX11_TEST_ERROR << "client exception caught: " << ex.what () << std::endl;
+    TAOX11_TEST_ERROR << "client exception caught: " << ex << std::endl;
     return 1;
   }
 

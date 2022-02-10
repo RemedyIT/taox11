@@ -24,12 +24,11 @@ namespace TAOX11_NAMESPACE
   {
     class TypeCode; // forward
 
-    typedef object_reference<TypeCode>  typecode_reference;
+    using typecode_reference = object_reference<TypeCode>;
 
-    typedef weak_object_reference<TypeCode> weak_typecode_reference;
+    using weak_typecode_reference = weak_object_reference<TypeCode>;
 
-    typedef object_traits<TypeCode> typecode_traits;
-
+    using typecode_traits = object_traits<TypeCode>;
   } // namespace CORBA
 
   namespace IDL
@@ -39,10 +38,10 @@ namespace TAOX11_NAMESPACE
       public IDL::common_byval_traits <CORBA::object_reference <CORBA::TypeCode>>,
       public CORBA::object_traits <CORBA::TypeCode>
     {
-      typedef std::false_type is_abstract;
-      typedef std::true_type is_local;
+      using is_abstract = std::false_type;
+      using is_local = std::true_type;
 
-      typedef CORBA::TypeCode base_type;
+      using base_type = CORBA::TypeCode;
 
       template <typename OStrm_, typename Formatter = formatter<CORBA::TypeCode, OStrm_>>
       static inline OStrm_& write_on(

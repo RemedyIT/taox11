@@ -59,9 +59,9 @@ TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType,
 {
   TAO_TAO::TypeCode::Case<StringType, TypeCodeType> * p {};
 
-  typedef Case_T<DiscriminatorType,
+  using case_type = Case_T<DiscriminatorType,
                  StringType,
-                 TypeCodeType> case_type;
+                 TypeCodeType>;
 
   // The compiler generated memberwise copy constructor is sufficient.
   ACE_NEW_NORETURN (p,

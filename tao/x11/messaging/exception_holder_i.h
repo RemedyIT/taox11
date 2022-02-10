@@ -36,9 +36,9 @@ namespace TAOX11_NAMESPACE
       ACE_Char_Codeset_Translator *char_translator,
       ACE_WChar_Codeset_Translator *wchar_translator);
 
-    virtual void raise_exception() override;
+    void raise_exception() override;
 
-    virtual void raise_exception_with_list (
+    void raise_exception_with_list (
         const ::TAOX11_NAMESPACE::Dynamic::ExceptionList& exc_list) override;
 
   protected:

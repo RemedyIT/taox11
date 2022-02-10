@@ -63,8 +63,8 @@ module RIDL
       def underscore!
         self.gsub!(/::/, '_')
         self.gsub!(/(?:([A-Za-z\d])|^)(#{RIDL::CoreExt::String.acronyms_regex})(?=\b|[^a-z])/) { "#{$1}#{$1 && '_'}#{$2.downcase}" }
-        self.gsub!(/([A-Z\d]+)([A-Z][a-z])/,'\1_\2')
-        self.gsub!(/([a-z\d])([A-Z])/,'\1_\2')
+        self.gsub!(/([A-Z\d]+)([A-Z][a-z])/, '\1_\2')
+        self.gsub!(/([a-z\d])([A-Z])/, '\1_\2')
         self.tr!('-', '_')
         self.downcase!
         self
@@ -96,7 +96,9 @@ module RIDL
         else
           self.sub!(/^(?:#{RIDL::CoreExt::String.acronyms_regex}(?=\b|[A-Z_])|\w)/) { $&.downcase }
         end
-        self.gsub!(/(?:_|(\/))([a-z\d]*)/i) { "#{$1}#{RIDL::CoreExt::String.acronyms[$2] || $2.capitalize}" }.gsub('/', '::')
+        self.gsub!(/(?:_|(\/))([a-z\d]*)/i) { "#{$1}#{RIDL::CoreExt::String.acronyms[$2] || $2.capitalize}" }
+        self.gsub!('/', '::')
+        self
       end
 
       # Removes the module part from the expression in the string:

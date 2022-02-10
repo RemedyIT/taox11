@@ -25,7 +25,7 @@ namespace Test
 
   //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo_impl[Constructors]
   // your constructor(s)
-  Foo_impl::Foo_impl (IDL::traits< CORBA::ORB >::ref_type orb)
+  Foo_impl::Foo_impl (IDL::traits<CORBA::ORB>::ref_type orb)
     :  CORBA::servant_traits< ::Test::Foo>::base_type (),
        orb_ (orb)
   {

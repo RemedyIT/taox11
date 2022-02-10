@@ -40,7 +40,7 @@ namespace TAOX11_NAMESPACE
     DynSequence_i::init (const CORBA::Any& any)
     {
       TAOX11_LOG_TRACE ("DynSequence_i::init with any");
-      IDL::traits< CORBA::TypeCode>::ref_type tc = any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = any.type ();
       CORBA::TCKind kind = DynAnyFactory_i::unalias (tc);
 
       if (kind != CORBA::TCKind::tk_sequence)
@@ -54,7 +54,7 @@ namespace TAOX11_NAMESPACE
       TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
       uint32_t length;
       TAO_OutputCDR out;
-      TAO_InputCDR cdr (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR cdr (static_cast<ACE_Message_Block *> (nullptr));
 
       if (impl->encoded ())
       {
@@ -83,7 +83,7 @@ namespace TAOX11_NAMESPACE
       this->init_common (length);
 
       // Get the type of the sequence elments.
-      IDL::traits< CORBA::TypeCode>::ref_type field_tc =
+      IDL::traits<CORBA::TypeCode>::ref_type field_tc =
         this->get_element_type ();
 
       for (uint32_t i = 0; i < length; ++i)
@@ -118,7 +118,7 @@ namespace TAOX11_NAMESPACE
     }
 
     IDL::traits< DynamicAny::DynAny>::ref_type
-    DynSequence_i::init (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynSequence_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynSequence_i::init with typecode");
 
@@ -260,7 +260,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (this->da_members_.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (this->da_members_.size ());
 
       DynamicAny::AnySeq elements(length);
       if (elements.size() != length)
@@ -290,8 +290,8 @@ namespace TAOX11_NAMESPACE
       IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type stripped_tc =
         DynamicAny::DynAnyFactory_i::strip_alias (this->type_);
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (value.size ());
-      const uint32_t bound = stripped_tc->length ();
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (value.size ());
+      uint32_t const bound = stripped_tc->length ();
 
       if (bound > 0 && length > bound)
       {
@@ -400,8 +400,8 @@ namespace TAOX11_NAMESPACE
       IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type stripped_tc =
         DynAnyFactory_i::strip_alias (this->type_);
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
-      const uint32_t bound = stripped_tc->length ();
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const bound = stripped_tc->length ();
 
       if (bound > 0 && length > bound)
       {
@@ -480,7 +480,7 @@ namespace TAOX11_NAMESPACE
         // Get the CDR stream of the Any, if there isn't one, make one.
         TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
         TAO_OutputCDR out;
-        TAO_InputCDR cdr (static_cast<ACE_Message_Block *> (0));
+        TAO_InputCDR cdr (static_cast<ACE_Message_Block *> (nullptr));
 
         if (impl->encoded ())
         {
@@ -596,7 +596,7 @@ namespace TAOX11_NAMESPACE
 
         TAOX11_CORBA::Any::impl_ref_type field_impl = field_any.impl ();
         TAO_OutputCDR field_out;
-        TAO_InputCDR field_cdr (static_cast<ACE_Message_Block *> (0));
+        TAO_InputCDR field_cdr (static_cast<ACE_Message_Block *> (nullptr));
 
         if (field_impl->encoded ())
         {
@@ -648,7 +648,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = rhs->type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = rhs->type ();
 
       bool equivalent = tc->equivalent (this->type_);
 
@@ -695,7 +695,7 @@ namespace TAOX11_NAMESPACE
         // Do a deep destroy.
         for (uint32_t i = 0; i < this->component_count_; ++i)
         {
-          this->set_flag (da_members_[i], 1);
+          this->set_flag (da_members_[i], true);
           this->da_members_[i]->destroy ();
         }
         this->destroyed_ = true;
@@ -719,7 +719,7 @@ namespace TAOX11_NAMESPACE
 
       uint32_t index = static_cast<uint32_t> (this->current_position_);
 
-      this->set_flag (this->da_members_[index], 0);
+      this->set_flag (this->da_members_[index], false);
 
       return this->da_members_[index];
     }

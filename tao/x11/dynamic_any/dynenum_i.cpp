@@ -42,7 +42,7 @@ namespace TAOX11_NAMESPACE
     {
       TAOX11_LOG_TRACE ("DynEnum_i::init with any");
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = any.type ();
       CORBA::TCKind kind = DynAnyFactory_i::unalias (tc);
 
       if (kind != CORBA::TCKind::tk_enum)
@@ -82,7 +82,7 @@ namespace TAOX11_NAMESPACE
     }
 
     IDL::traits< DynamicAny::DynAny>::ref_type
-    DynEnum_i::init (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    DynEnum_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynEnum_i::init with typecode");
 
@@ -107,7 +107,7 @@ namespace TAOX11_NAMESPACE
     {
       TAOX11_LOG_TRACE ("DynEnum_i::get_as_string");
 
-      IDL::traits< CORBA::TypeCode>::ref_type ct =
+      IDL::traits<CORBA::TypeCode>::ref_type ct =
           DynAnyFactory_i::strip_alias (this->type_);
 
       const std::string retval = ct->member_name (this->value_);
@@ -120,7 +120,7 @@ namespace TAOX11_NAMESPACE
     {
       TAOX11_LOG_TRACE ("DynEnum_i::set_as_string");
 
-      IDL::traits< CORBA::TypeCode>::ref_type ct =
+      IDL::traits<CORBA::TypeCode>::ref_type ct =
           DynAnyFactory_i::strip_alias (this->type_);
 
       uint32_t count = ct->member_count ();
@@ -161,7 +161,7 @@ namespace TAOX11_NAMESPACE
     {
       TAOX11_LOG_TRACE ("DynEnum_i::set_as_ulong");
 
-      IDL::traits< CORBA::TypeCode>::ref_type ct =
+      IDL::traits<CORBA::TypeCode>::ref_type ct =
           DynAnyFactory_i::strip_alias (this->type_);
       uint32_t const max = ct->member_count ();
 
@@ -180,7 +180,7 @@ namespace TAOX11_NAMESPACE
     {
       TAOX11_LOG_TRACE ("DynEnum_i::from_any");
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = any.type ();
       CORBA::TCKind kind = DynAnyFactory_i::unalias (tc);
 
       if (kind == CORBA::TCKind::tk_enum)
@@ -249,7 +249,7 @@ namespace TAOX11_NAMESPACE
     {
       TAOX11_LOG_TRACE ("DynEnum_i::equal");
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = rhs->type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = rhs->type ();
 
       bool equivalent = tc->equivalent (this->type_);
 

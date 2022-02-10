@@ -14,11 +14,8 @@ namespace TAOX11_NAMESPACE
 {
   namespace Messaging_impl
   {
-
     /*--------------------------------------------------------------------
-     *
      * RelativeRoundtripTimeoutPolicy
-     *
     --------------------------------------------------------------------*/
     RelativeRoundtripTimeoutPolicy::RelativeRoundtripTimeoutPolicy (
         TAO_MESSAGING::RelativeRoundtripTimeoutPolicy_ptr polptr)
@@ -35,9 +32,7 @@ namespace TAOX11_NAMESPACE
     }
 
     /*--------------------------------------------------------------------
-     *
      * SyncScopePolicy
-     *
     --------------------------------------------------------------------*/
     SyncScopePolicy::SyncScopePolicy (TAO_MESSAGING::SyncScopePolicy_ptr polptr)
       : pol_ (polptr)
@@ -52,11 +47,8 @@ namespace TAOX11_NAMESPACE
         this->pol_->synchronization ());
     }
 
-
     /*--------------------------------------------------------------------
-     *
      * ConnectionTimeoutPolicy
-     *
     --------------------------------------------------------------------*/
     ConnectionTimeoutPolicy::ConnectionTimeoutPolicy (
           TAO_TAO::ConnectionTimeoutPolicy_ptr polptr)
@@ -73,9 +65,7 @@ namespace TAOX11_NAMESPACE
     }
 
     /*--------------------------------------------------------------------
-     *
      * BufferingConstraintPolicy
-     *
     --------------------------------------------------------------------*/
     BufferingConstraintPolicy::BufferingConstraintPolicy (
           TAO_TAO::BufferingConstraintPolicy_ptr polptr)

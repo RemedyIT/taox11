@@ -88,7 +88,7 @@ void
 %   end
 
     TAOX11_NAMESPACE::Arg_Traits<void>::ret_val _taox11_retval;
-    TAOX11_NAMESPACE::Arg_Traits< <%= scoped_cxx_arg_type %>>::in_arg_val _taox11_att_val {_x11_<%= cxxname %>};
+    TAOX11_NAMESPACE::Arg_Traits<<%= scoped_cxx_arg_type %>>::in_arg_val _taox11_att_val {_x11_<%= cxxname %>};
 
     TAO_TAO::Argument *_tao_args [] =
     {

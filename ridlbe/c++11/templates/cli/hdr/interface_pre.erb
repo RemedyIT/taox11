@@ -21,9 +21,9 @@ public:
 % if is_abstract?
   /// @name Member types
   //@{
-  typedef <%= cxx_traits_type %>           _traits_type;
+  using _traits_type = <%= cxx_traits_type %>;
   /// Strong reference type
-  typedef <%= cxx_traits_type %>::ref_type _ref_type;
+  using _ref_type = <%= cxx_traits_type %>::ref_type;
   //@}
 
   static bool _abs_unmarshal (TAO_InputCDR&, _ref_type&);
@@ -32,9 +32,9 @@ public:
 
   /// @name Member types
   //@{
-  typedef <%= cxx_traits_type %>           _traits_type;
+  using _traits_type = <%= cxx_traits_type %>;
   /// Strong reference type
-  typedef <%= cxx_traits_type %>::ref_type _ref_type;
+  using _ref_type = <%= cxx_traits_type %>::ref_type;
   //@}
 %   unless is_remote? && !has_abstract_base?
 

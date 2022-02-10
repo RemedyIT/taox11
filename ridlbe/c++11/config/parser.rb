@@ -370,7 +370,7 @@ module IDL
         :uint_least64_t,
         :uintmax_t,
         :uintptr_t,
-        :what     ## to prevent clash with std::exception
+        :what ## to prevent clash with std::exception
       ]
 
       def chk_identifier(ident)

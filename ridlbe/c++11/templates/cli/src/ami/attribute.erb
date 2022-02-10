@@ -27,7 +27,7 @@ void
 %   end
 
     TAOX11_NAMESPACE::Arg_Traits<void>::ret_val _taox11_retval;
-    TAOX11_NAMESPACE::Arg_Traits< <%= scoped_cxx_arg_type %>>::in_arg_val _taox11_ami_return_val {ami_return_val};
+    TAOX11_NAMESPACE::Arg_Traits<<%= scoped_cxx_arg_type %>>::in_arg_val _taox11_ami_return_val {ami_return_val};
 
     TAO_TAO::Argument *_tao_args [] =
     {
@@ -42,7 +42,7 @@ void
 %     get_raises.each_with_index do |_ex, _index|
       {
         "<%= _ex.repository_id %>",
-        TAOX11_NAMESPACE::UserExceptionProxy::in< <%= _ex.scoped_cxxname %>>::_alloc,
+        TAOX11_NAMESPACE::UserExceptionProxy::in<<%= _ex.scoped_cxxname %>>::_alloc,
 #if TAO_HAS_INTERCEPTORS == 1
 %       if generate_typecode_support?
         TC_helper::get_tao_tc(<%= _ex.scoped_cxx_typecode %>)
@@ -121,7 +121,7 @@ void
 %     get_raises.each_with_index do |_ex, _index|
         {
           "<%= _ex.repository_id %>",
-          TAOX11_NAMESPACE::UserExceptionProxy::in< <%= _ex.scoped_cxxname %>>::_alloc,
+          TAOX11_NAMESPACE::UserExceptionProxy::in<<%= _ex.scoped_cxxname %>>::_alloc,
 #if TAO_HAS_INTERCEPTORS == 1
 %       if generate_typecode_support?
           TC_helper::get_tao_tc(<%= _ex.scoped_cxx_typecode %>)
@@ -195,7 +195,7 @@ void
 %   get_raises.each_with_index do |_ex, _index|
     {
       "<%= _ex.repository_id %>",
-      TAOX11_NAMESPACE::UserExceptionProxy::in< <%= _ex.scoped_cxxname %>>::_alloc,
+      TAOX11_NAMESPACE::UserExceptionProxy::in<<%= _ex.scoped_cxxname %>>::_alloc,
 #if TAO_HAS_INTERCEPTORS == 1
 %       if generate_typecode_support?
       TC_helper::get_tao_tc(<%= _ex.scoped_cxx_typecode %>)
@@ -269,7 +269,7 @@ void
 %     set_raises.each_with_index do |_ex, _index|
       {
         "<%= _ex.repository_id %>",
-        TAOX11_NAMESPACE::UserExceptionProxy::in< <%= _ex.scoped_cxxname %>>::_alloc,
+        TAOX11_NAMESPACE::UserExceptionProxy::in<<%= _ex.scoped_cxxname %>>::_alloc,
 #if TAO_HAS_INTERCEPTORS == 1
 %       if generate_typecode_support?
         TC_helper::get_tao_tc(<%= _ex.scoped_cxx_typecode %>)
@@ -345,7 +345,7 @@ void
 %     set_raises.each_with_index do |_ex, _index|
         {
           "<%= _ex.repository_id %>",
-          TAOX11_NAMESPACE::UserExceptionProxy::in< <%= _ex.scoped_cxxname %>>::_alloc,
+          TAOX11_NAMESPACE::UserExceptionProxy::in<<%= _ex.scoped_cxxname %>>::_alloc,
 #if TAO_HAS_INTERCEPTORS == 1
 %       if generate_typecode_support?
           TC_helper::get_tao_tc(<%= _ex.scoped_cxx_typecode %>)
@@ -418,7 +418,7 @@ void
 %     set_raises.each_with_index do |_ex, _index|
     {
       "<%= _ex.repository_id %>",
-      TAOX11_NAMESPACE::UserExceptionProxy::in< <%= _ex.scoped_cxxname %>>::_alloc,
+      TAOX11_NAMESPACE::UserExceptionProxy::in<<%= _ex.scoped_cxxname %>>::_alloc,
 #if TAO_HAS_INTERCEPTORS == 1
 %       if generate_typecode_support?
       TC_helper::get_tao_tc(<%= _ex.scoped_cxx_typecode %>)

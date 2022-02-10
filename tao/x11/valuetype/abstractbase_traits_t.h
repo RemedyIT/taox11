@@ -33,9 +33,9 @@ namespace TAOX11_NAMESPACE
     template <typename T>
     struct abstractbase_traits
     {
-      typedef T                               abs_type;
-      typedef abstractbase_reference<T>       ref_type;
-      typedef weak_abstractbase_reference<T>  weak_ref_type;
+      using abs_type = T;
+      using ref_type = abstractbase_reference<T>;
+      using weak_ref_type = weak_abstractbase_reference<T>;
 
       static ref_type narrow (abstractbase_reference<CORBA::AbstractBase>);
     };
@@ -44,9 +44,9 @@ namespace TAOX11_NAMESPACE
     class abstractbase_reference final
     {
     public:
-      typedef T                       value_type;
-      typedef T*                      ptr_type;
-      typedef abstractbase_traits<T>  traits_type;
+      using value_type = T;
+      using ptr_type = T*;
+      using traits_type = abstractbase_traits<T>;
 
       abstractbase_reference (std::nullptr_t = nullptr)
       {}
@@ -127,7 +127,7 @@ namespace TAOX11_NAMESPACE
       { return weak_abstractbase_reference<T> (*this); }
 
     protected:
-      typedef std::shared_ptr<T>    shared_ptr_type;
+      using shared_ptr_type = std::shared_ptr<T>;
 
       template <typename _Tp1> friend class abstractbase_reference;
       template <typename _Tp1> friend struct abstractbase_traits;
@@ -234,7 +234,7 @@ namespace TAOX11_NAMESPACE
       { return abstractbase_reference<T> (this->abs_.lock ()); }
 
     protected:
-      typedef std::weak_ptr<T>  weak_ptr_type;
+      using weak_ptr_type = std::weak_ptr<T>;
 
     private:
       weak_ptr_type abs_;

@@ -25,16 +25,16 @@
 #include "tao/x11/portable_server/portableserver_functions.h"
 #include "orbsvcs/orbsvcs/naming_server/CosNamingC.h"
 
-#define CONTROLLER_OID "Controller"
-#define CCS_OID "CCS"
+const std::string CONTROLLER_OID = { "Controller" };
+const std::string CCS_OID = { "CCS" };
 
 //----------------------------------------------------------------
 
 template<class T>
 typename IDL::traits<T>::ref_type
-resolve_init (IDL::traits< CORBA::ORB >::ref_type orb, const std::string &id)
+resolve_init (IDL::traits<CORBA::ORB>::ref_type orb, const std::string &id)
 {
-  IDL::traits< CORBA::Object >::ref_type obj;
+  IDL::traits<CORBA::Object>::ref_type obj;
   try
   {
     obj = orb->resolve_initial_references (id);
@@ -75,8 +75,8 @@ resolve_init (IDL::traits< CORBA::ORB >::ref_type orb, const std::string &id)
 //----------------------------------------------------------------
 
 // Helper function to create object references.
-static IDL::traits< CCS::Thermometer >::ref_type
-make_dref (IDL::traits< PortableServer::POA >::ref_type poa,
+static IDL::traits<CCS::Thermometer>::ref_type
+make_dref (IDL::traits<PortableServer::POA>::ref_type poa,
   CCS::AssetType anum)
 {
   // Convert asset number to OID.
@@ -106,14 +106,14 @@ make_dref (IDL::traits< PortableServer::POA >::ref_type poa,
 //----------------------------------------------------------------
 
 Administrator_impl::Administrator_impl (
-  IDL::traits< PortableServer::POA >::ref_type poa)
-  : poa_ (poa)
+  IDL::traits<PortableServer::POA>::ref_type poa)
+  : poa_ (std::move(poa))
 {
 }
 
 void
 Administrator_impl::add_impl (CCS::AssetType anum,
-  CORBA::servant_traits< CCS::Thermometer >::ref_type tip)
+  CORBA::servant_traits< CCS::Thermometer>::ref_type tip)
 {
   this->assets_[anum] = tip;
 }
@@ -221,7 +221,6 @@ Thermometer_impl::Thermometer_impl (CCS::AssetType anum,
 }
 
 // Destructor.
-
 Thermometer_impl::~Thermometer_impl ()
 {
   if (this->admin_.exists (this->asset_num ()))
@@ -231,7 +230,6 @@ Thermometer_impl::~Thermometer_impl ()
 }
 
 // IDL model attribute.
-
 CCS::ModelType
 Thermometer_impl::model ()
 {
@@ -246,7 +244,6 @@ Thermometer_impl::model ()
 }
 
 // IDL asset_num attribute.
-
 CCS::AssetType
 Thermometer_impl::asset_num ()
 {
@@ -254,7 +251,6 @@ Thermometer_impl::asset_num ()
 }
 
 // IDL temperature attribute.
-
 CCS::TempType
 Thermometer_impl::temperature ()
 {
@@ -269,7 +265,6 @@ Thermometer_impl::temperature ()
 }
 
 // IDL location attribute accessor.
-
 CCS::LocType
 Thermometer_impl::location ()
 {
@@ -313,21 +308,13 @@ Thermometer_impl::remove ()
 //----------------------------------------------------------------
 
 // Constructor.
-
 Thermostat_impl::
 Thermostat_impl (CCS::AssetType anum, Administrator_impl &admin)
   : Thermometer_impl (anum, admin)
 {
 }
 
-// Destructor.
-
-Thermostat_impl::~Thermostat_impl ()
-{
-}
-
 // IDL get_nominal operation.
-
 CCS::TempType
 Thermostat_impl::get_nominal ()
 {
@@ -420,7 +407,7 @@ Controller_impl::~Controller_impl ()
 
     CCS::Controller::ThermometerSeq assets = this->admin_.list ();
 
-    for (IDL::traits< CCS::Thermometer >::ref_type asset : assets)
+    for (IDL::traits<CCS::Thermometer>::ref_type asset : assets)
     {
         afile << asset->asset_num () << std::endl;
         if (!afile)
@@ -436,7 +423,7 @@ Controller_impl::~Controller_impl ()
     }
 }
 
-IDL::traits< CCS::Thermometer >::ref_type
+IDL::traits<CCS::Thermometer>::ref_type
 Controller_impl::create_thermometer (CCS::AssetType anum,
   const std::string &loc)
 {
@@ -472,7 +459,7 @@ Controller_impl::create_thermometer (CCS::AssetType anum,
   return make_dref (this->poa_, anum);
 }
 
-IDL::traits< CCS::Thermostat >::ref_type
+IDL::traits<CCS::Thermostat>::ref_type
 Controller_impl::create_thermostat (CCS::AssetType anum,
   const std::string &loc,
   CCS::TempType temp)
@@ -520,8 +507,8 @@ Controller_impl::create_thermostat (CCS::AssetType anum,
 
   taox11_debug << "Creating thermostat with AssetType " << anum << std::endl;
 
-  IDL::traits< CORBA::Object >::ref_type obj = make_dref (this->poa_, anum);
-  return IDL::traits< CCS::Thermostat >::narrow (obj);
+  IDL::traits<CORBA::Object>::ref_type obj = make_dref (this->poa_, anum);
+  return IDL::traits<CCS::Thermostat >::narrow (obj);
 }
 
 // IDL list operation.
@@ -544,7 +531,7 @@ Controller_impl::change (const CCS::Controller::ThermostatSeq &tlist,
   // directly, so for each thermostat, we read the nominal
   // temperature, add the delta value to it, and write
   // it back again.
-  for (IDL::traits< CCS::Thermostat >::ref_type tstat : tlist)
+  for (IDL::traits<CCS::Thermostat>::ref_type tstat : tlist)
   {
     if (tstat == nullptr)
       continue;
@@ -584,16 +571,16 @@ Controller_impl::find (CCS::Controller::SearchSeq &slist)
 //----------------------------------------------------------------
 
 DeviceLocator_impl::DeviceLocator_impl (
-  IDL::traits< PortableServer::POA >::ref_type ccs_poa,
+  IDL::traits<PortableServer::POA>::ref_type ccs_poa,
   Administrator_impl &admin)
   : ccs_poa_ (ccs_poa)
   , admin_ (admin)
 {
 }
 
-CORBA::servant_reference< PortableServer::Servant >
+CORBA::servant_reference<PortableServer::Servant>
 DeviceLocator_impl::preinvoke (const PortableServer::ObjectId &oid,
-  IDL::traits< PortableServer::POA >::ref_type,
+  IDL::traits<PortableServer::POA>::ref_type,
   const CORBA::Identifier &operation,
   Cookie &)
 {
@@ -633,7 +620,7 @@ DeviceLocator_impl::preinvoke (const PortableServer::ObjectId &oid,
 
   // Look at the object map to find out whether
   // we have a servant in memory.
-  CORBA::servant_traits< CCS::Thermometer >::ref_type servant;
+  CORBA::servant_traits< CCS::Thermometer>::ref_type servant;
   ActiveObjectMap::iterator servant_pos = this->aom_.find (anum);
   if (servant_pos  == this->aom_.end ())
   {
@@ -699,10 +686,10 @@ DeviceLocator_impl::preinvoke (const PortableServer::ObjectId &oid,
 
 void
 DeviceLocator_impl::postinvoke (const PortableServer::ObjectId &,
-  IDL::traits< PortableServer::POA >::ref_type,
+  IDL::traits<PortableServer::POA>::ref_type,
   const CORBA::Identifier &,
   Cookie,
-  CORBA::servant_reference< PortableServer::Servant >)
+  CORBA::servant_reference<PortableServer::Servant>)
 {
 
 }
@@ -718,17 +705,17 @@ main (int argc, char *argv[])
   try
   {
     // Initialize orb
-    IDL::traits< CORBA::ORB >::ref_type orb =
+    IDL::traits<CORBA::ORB>::ref_type orb =
       CORBA::ORB_init (argc, argv);
 
     // Get reference to Root POA.
-    IDL::traits< CORBA::Object >::ref_type obj =
+    IDL::traits<CORBA::Object>::ref_type obj =
       orb->resolve_initial_references ("RootPOA");
-    IDL::traits< PortableServer::POA >::ref_type poa =
-      IDL::traits< PortableServer::POA >::narrow (obj);
+    IDL::traits<PortableServer::POA>::ref_type poa =
+      IDL::traits<PortableServer::POA >::narrow (obj);
 
     // Get POA manager
-    IDL::traits< PortableServer::POAManager >::ref_type poa_mgr =
+    IDL::traits<PortableServer::POAManager>::ref_type poa_mgr =
       poa->the_POAManager ();
 
     // Create a policy list. We use persistent objects with
@@ -748,19 +735,19 @@ main (int argc, char *argv[])
       PortableServer::ThreadPolicyValue::SINGLE_THREAD_MODEL));
 
     // Create a POA for all CCS elements.
-    IDL::traits< PortableServer::POA >::ref_type ccs_poa =
+    IDL::traits<PortableServer::POA>::ref_type ccs_poa =
       poa->create_POA ("CCS_POA", poa_mgr, policy_list);
 
     // Create a reference for the controller and
     // create the corresponding CORBA object.
     PortableServer::ObjectId oid =
       PortableServer::string_to_ObjectId (CONTROLLER_OID);
-    IDL::traits< CORBA::Object >::ref_type ctrl =
+    IDL::traits<CORBA::Object>::ref_type ctrl =
       ccs_poa->create_reference_with_id (oid,
         "IDL:acme.com/CCS/Controller:1.0");
 
     // Get reference to initial naming context.
-    IDL::traits< CosNaming::NamingContext >::ref_type inc =
+    IDL::traits< CosNaming::NamingContext>::ref_type inc =
       resolve_init< CosNaming::NamingContext > (orb, "NameService");
 
     // Attempt to create CCS context.
@@ -770,7 +757,7 @@ main (int argc, char *argv[])
 
     try
     {
-      IDL::traits< CosNaming::NamingContext >::ref_type nc =
+      IDL::traits< CosNaming::NamingContext>::ref_type nc =
         inc->bind_new_context (n);
     }
     catch (const CosNaming::NamingContext::AlreadyBound &)
@@ -787,7 +774,7 @@ main (int argc, char *argv[])
 
     Administrator_impl admin (ccs_poa);
     // Instantiate the servant locator for devices.
-    IDL::traits< PortableServer::ServantManager >::ref_type locator =
+    IDL::traits<PortableServer::ServantManager>::ref_type locator =
       CORBA::make_reference< DeviceLocator_impl > (ccs_poa, admin);
 
     // Set servant locator.

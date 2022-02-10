@@ -44,7 +44,7 @@ namespace TAOX11_NAMESPACE
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::TAOX11_DynCommon");
     }
 
-    IDL::traits< CORBA::TypeCode>::ref_type
+    IDL::traits<CORBA::TypeCode>::ref_type
     TAOX11_DynCommon::type ()
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::type");
@@ -64,7 +64,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = dyn_any->type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = dyn_any->type ();
 
       bool const equivalent = this->type ()->equivalent (tc);
 
@@ -161,7 +161,7 @@ namespace TAOX11_NAMESPACE
       }
       else
       {
-        IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+        IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
                  DynAnyFactory_i::strip_alias (this->type_);
 
         if (unaliased_tc->kind () != CORBA::TCKind::tk_string)
@@ -187,7 +187,7 @@ namespace TAOX11_NAMESPACE
 
     void
     TAOX11_DynCommon::insert_reference (
-        IDL::traits< CORBA::Object>::ref_type value)
+        IDL::traits<CORBA::Object>::ref_type value)
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::insert_reference");
       if (this->destroyed_)
@@ -251,10 +251,10 @@ namespace TAOX11_NAMESPACE
 
     void
     TAOX11_DynCommon::insert_typecode (
-        IDL::traits< CORBA::TypeCode>::ref_type value)
+        IDL::traits<CORBA::TypeCode>::ref_type value)
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::insert_typecode" << value->kind());
-      DynAnyBasicTypeUtils<IDL::traits< CORBA::TypeCode>::ref_type >::insert_value (value,
+      DynAnyBasicTypeUtils<IDL::traits<CORBA::TypeCode>::ref_type>::insert_value (value,
           IDL::traits<TAOX11_DynCommon>::narrow (this->_lock()));
     }
 
@@ -302,7 +302,7 @@ namespace TAOX11_NAMESPACE
       }
       else
       {
-        IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+        IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
                  DynAnyFactory_i::strip_alias (this->type_);
 
         if (unaliased_tc->kind () != CORBA::TCKind::tk_wstring)
@@ -349,7 +349,7 @@ namespace TAOX11_NAMESPACE
 
     void
     TAOX11_DynCommon::insert_val (
-        IDL::traits< CORBA::ValueBase>::ref_type value)
+        IDL::traits<CORBA::ValueBase>::ref_type value)
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::insert_val");
       if (this->destroyed_)
@@ -501,7 +501,7 @@ namespace TAOX11_NAMESPACE
       }
       else
       {
-        IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+        IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
                  DynAnyFactory_i::strip_alias (this->type_);
 
         if (unaliased_tc->kind () != CORBA::TCKind::tk_string)
@@ -528,7 +528,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< CORBA::Object>::ref_type
+    IDL::traits<CORBA::Object>::ref_type
     TAOX11_DynCommon::get_reference ()
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::get_reference");
@@ -545,7 +545,7 @@ namespace TAOX11_NAMESPACE
       }
       else
       {
-        IDL::traits< CORBA::Object>::ref_type retval;
+        IDL::traits<CORBA::Object>::ref_type retval;
         if (!(this->any_ >>= retval))
         {
           throw DynAny::TypeMismatch ();
@@ -554,11 +554,11 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< CORBA::TypeCode>::ref_type
+    IDL::traits<CORBA::TypeCode>::ref_type
     TAOX11_DynCommon::get_typecode ()
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::get_typecode");
-      return DynAnyBasicTypeUtils< IDL::traits< CORBA::TypeCode>::ref_type>::get_value (
+      return DynAnyBasicTypeUtils< IDL::traits<CORBA::TypeCode>::ref_type>::get_value (
           IDL::traits<TAOX11_DynCommon>::narrow (this->_lock()));
     }
 
@@ -604,7 +604,7 @@ namespace TAOX11_NAMESPACE
       }
       else
       {
-        IDL::traits< CORBA::TypeCode>::ref_type unaliased_tc =
+        IDL::traits<CORBA::TypeCode>::ref_type unaliased_tc =
                  DynAnyFactory_i::strip_alias (this->type_);
 
         if (unaliased_tc->kind () != CORBA::TCKind::tk_wstring)
@@ -675,7 +675,7 @@ namespace TAOX11_NAMESPACE
             this->allow_truncation_ );
     }
 
-    IDL::traits< CORBA::ValueBase>::ref_type
+    IDL::traits<CORBA::ValueBase>::ref_type
     TAOX11_DynCommon::get_val ()
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::get_val");
@@ -742,7 +742,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      if (this->has_components_ == false)
+      if (!this->has_components_)
       {
         this->current_position_ = -1;
         return false;
@@ -782,7 +782,7 @@ namespace TAOX11_NAMESPACE
 
       int32_t component_count = static_cast<int32_t> (this->component_count_);
 
-      if (this->has_components_ == false
+      if (!this->has_components_
           || this->current_position_ + 1 >= component_count)
       {
         this->current_position_ = -1;
@@ -924,10 +924,10 @@ namespace TAOX11_NAMESPACE
           throw DynamicAny::DynAny::TypeMismatch ();
         }
 
-        IDL::traits< CORBA::AbstractBase>::ref_type retval;
+        IDL::traits<CORBA::AbstractBase>::ref_type retval;
         TAOX11_CORBA::Any::impl_ref_type any_impl = this->any_.impl ();
 
-        if (any_impl == 0)
+        if (any_impl == nullptr)
         {
           throw DynamicAny::DynAny::InvalidValue ();
         }
@@ -935,9 +935,9 @@ namespace TAOX11_NAMESPACE
         Unknown_IDL_Type::ref_type const unk =
             std::dynamic_pointer_cast<Unknown_IDL_Type> (any_impl);
 
-        typedef Any_AbstractBase_Impl_T<
-                    IDL::traits< CORBA::AbstractBase>,
-                    CDR_Marshal_Policy> abstract_any_impl_t;
+        using abstract_any_impl_t = Any_AbstractBase_Impl_T<
+                    IDL::traits<CORBA::AbstractBase>,
+                    CDR_Marshal_Policy>;
         abstract_any_impl_t::ref_type const abs =
             std::dynamic_pointer_cast<abstract_any_impl_t::impl_type> (any_impl);
 
@@ -1140,7 +1140,7 @@ namespace TAOX11_NAMESPACE
     TAOX11_DynCommon::set_flag (IDL::traits<DynAny>::ref_type component,
                                 bool destroying)
     {
-      IDL::traits< CORBA::TypeCode>::ref_type tc = component->type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = component->type ();
 
       CORBA::TCKind tk = DynAnyFactory_i::unalias (tc);
 
@@ -1206,7 +1206,7 @@ namespace TAOX11_NAMESPACE
       IDL::traits< DynAny>::ref_type cc =
         this->current_component ();
 
-      IDL::traits< CORBA::TypeCode>::ref_type tc = cc->type ();
+      IDL::traits<CORBA::TypeCode>::ref_type tc = cc->type ();
 
       // We are here because we are a component that is the target of
       // an insert_*() call on our container. It is
@@ -1242,7 +1242,7 @@ namespace TAOX11_NAMESPACE
     }
 
     void
-    TAOX11_DynCommon::check_type (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    TAOX11_DynCommon::check_type (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       bool equivalent =
         this->type_->equivalent (tc);
@@ -1254,7 +1254,7 @@ namespace TAOX11_NAMESPACE
     }
 
     bool
-    TAOX11_DynCommon::is_basic_type_seq (IDL::traits< CORBA::TypeCode>::ref_type tc)
+    TAOX11_DynCommon::is_basic_type_seq (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       return (tc->equal (CORBA::_tc_BooleanSeq)
               || tc->equal (CORBA::_tc_OctetSeq)

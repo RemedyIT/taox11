@@ -15,13 +15,7 @@
 #include "analyzer.h"
 
 Test_DynUnion::Test_DynUnion (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb),
-    test_name_ ("test_dynunion"),
-    error_count_ (0)
-{
-}
-
-Test_DynUnion::~Test_DynUnion ()
+  : orb_ (std::move(orb))
 {
 }
 
@@ -40,8 +34,16 @@ Test_DynUnion::run_test ()
 
   try
   {
+    IDL::traits<DynamicAny::DynUnion>::ref_type dyn_nil =
+      IDL::traits<DynamicAny::DynUnion>::narrow (nullptr);
 
-    IDL::traits< CORBA::Object>::ref_type factory_obj =
+    if (dyn_nil)
+    {
+      ++this->error_count_;
+      TAOX11_TEST_ERROR << "DynUnion::narrow(nil) should return nil" << std::endl;
+    }
+
+    IDL::traits<CORBA::Object>::ref_type factory_obj =
                this->orb_->resolve_initial_references ("DynAnyFactory");
 
     if (factory_obj == nullptr)
@@ -50,7 +52,6 @@ Test_DynUnion::run_test ()
                        << std::endl;
       return 1;
     }
-
 
     IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory =
        IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);
@@ -100,7 +101,7 @@ Test_DynUnion::run_test ()
     fa1->seek (1);
     fa1->insert_typecode (data.m_typecode1);
 
-    IDL::traits< CORBA::TypeCode>::ref_type s_out1 = fa1->get_typecode ();
+    IDL::traits<CORBA::TypeCode>::ref_type s_out1 = fa1->get_typecode ();
 
     bool const equal_tc1 =
       s_out1->equal (data.m_typecode1);
@@ -136,7 +137,7 @@ Test_DynUnion::run_test ()
 
     ftc1->seek (1);
 
-    IDL::traits< CORBA::TypeCode>::ref_type s_out2 =
+    IDL::traits<CORBA::TypeCode>::ref_type s_out2 =
       ftc1->get_typecode ();
 
     bool const equal_tc2 =
@@ -158,7 +159,7 @@ Test_DynUnion::run_test ()
 
     CORBA::Any out_any2 = fa1->to_any ();
 
-    IDL::traits< CORBA::TypeCode>::ref_type s_out3;
+    IDL::traits<CORBA::TypeCode>::ref_type s_out3;
 
     try
     {
@@ -212,7 +213,7 @@ Test_DynUnion::run_test ()
     IDL::traits< DynamicAny::DynAny>::ref_type dp2 =
       ftc1->get_discriminator ();
 
-    IDL::traits< CORBA::TypeCode>::ref_type tc2 =
+    IDL::traits<CORBA::TypeCode>::ref_type tc2 =
       dp2->type ();
 
     CORBA::TCKind tc1kind =
@@ -241,7 +242,7 @@ Test_DynUnion::run_test ()
     CORBA::TCKind tk =
       ftc1->member_kind ();
 
-    IDL::traits< CORBA::TypeCode>::ref_type tc3 =
+    IDL::traits<CORBA::TypeCode>::ref_type tc3 =
       dp3->get_typecode ();
 
     bool  const equal_tc3 =

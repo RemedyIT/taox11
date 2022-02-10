@@ -39,7 +39,7 @@ namespace TAOX11_NAMESPACE
       /// Destructor.
       virtual ~TAOX11_DynCommon () = default;
 
-      IDL::traits< CORBA::TypeCode>::ref_type
+      IDL::traits<CORBA::TypeCode>::ref_type
       type () override;
 
       void assign (IDL::traits< DynAny>::ref_type dyn_any) override;
@@ -64,10 +64,10 @@ namespace TAOX11_NAMESPACE
 
       void insert_string (const std::string&) override;
 
-      void insert_reference (IDL::traits< CORBA::Object>::ref_type) override;
+      void insert_reference (IDL::traits<CORBA::Object>::ref_type) override;
 
       void insert_typecode (
-          IDL::traits< CORBA::TypeCode>::ref_type value) override;
+          IDL::traits<CORBA::TypeCode>::ref_type value) override;
 
       void insert_longlong (int64_t value) override;
 
@@ -84,7 +84,7 @@ namespace TAOX11_NAMESPACE
       void insert_dyn_any (
           IDL::traits< DynAny>::ref_type value) override;
 
-      void insert_val (IDL::traits< CORBA::ValueBase>::ref_type value) override;
+      void insert_val (IDL::traits<CORBA::ValueBase>::ref_type value) override;
 
       bool get_boolean () override;
 
@@ -106,9 +106,9 @@ namespace TAOX11_NAMESPACE
 
       std::string get_string () override;
 
-      IDL::traits< CORBA::Object>::ref_type get_reference () override;
+      IDL::traits<CORBA::Object>::ref_type get_reference () override;
 
-      IDL::traits< CORBA::TypeCode>::ref_type get_typecode () override;
+      IDL::traits<CORBA::TypeCode>::ref_type get_typecode () override;
 
       int64_t get_longlong () override;
 
@@ -124,7 +124,7 @@ namespace TAOX11_NAMESPACE
 
       IDL::traits< DynAny>::ref_type get_dyn_any () override;
 
-      IDL::traits< CORBA::ValueBase>::ref_type get_val () override;
+      IDL::traits<CORBA::ValueBase>::ref_type get_val () override;
 
       bool seek (int32_t index) override;
 
@@ -209,9 +209,9 @@ namespace TAOX11_NAMESPACE
       IDL::traits< DynAny>::ref_type
       check_component (bool isValueType = false);
 
-      void check_type (IDL::traits< CORBA::TypeCode>::ref_type tc);
+      void check_type (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
-      static bool is_basic_type_seq (IDL::traits< CORBA::TypeCode>::ref_type tc);
+      static bool is_basic_type_seq (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       // Accessors
       bool has_components () const;
@@ -251,7 +251,7 @@ namespace TAOX11_NAMESPACE
       bool allow_truncation_;
 
       /// Holder for our type code.
-      IDL::traits< CORBA::TypeCode>::ref_type type_;
+      IDL::traits<CORBA::TypeCode>::ref_type type_;
     };
   }
 }

@@ -40,9 +40,9 @@ void
 %     in_arguments.each do |_arg|
 %       case _arg.direction
 %       when :in
-    TAOX11_NAMESPACE::Arg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
+    TAOX11_NAMESPACE::Arg_Traits<<%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
 %       when :inout
-    TAOX11_NAMESPACE::Arg_Traits< <%= _arg.scoped_cxx_arg_type %>>::inout_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
+    TAOX11_NAMESPACE::Arg_Traits<<%= _arg.scoped_cxx_arg_type %>>::inout_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
 %       end
 %     end
 %     if nr_arguments > 0

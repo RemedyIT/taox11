@@ -138,7 +138,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from AmiStubSourceWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -148,7 +148,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
@@ -269,7 +269,7 @@ module IDL
         return if node.enclosure.is_local? || node.enclosure.is_pseudo? || node.enclosure.is_abstract?
         check_idl_type(node.idltype)
         node.params.each { |parm| check_idl_type(parm.idltype) }
-        add_include('tao/x11/basic_arguments.h')                   ## for _excep method
+        add_include('tao/x11/basic_arguments.h') ## for _excep method
         unless node.raises.empty?
           add_include('tao/x11/user_exception_proxy_in_t.h')
           add_include('tao/Exception_Data.h')
@@ -455,7 +455,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from AmiStubProxySourceWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -465,7 +465,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
@@ -477,11 +477,11 @@ module IDL
         # Overload for this visitor only
         intf.class_eval do
           def supported_interface_ids
-            @sup_intf_ids ||= (ancestors.collect {|ancestor| ancestor.ami_repository_id } <<  ami_repository_id)
+            @sup_intf_ids ||= (ancestors.collect {|ancestor| ancestor.ami_repository_id } << ami_repository_id)
           end
         end
         intf.visit_proxy(node)
-        println()
+        println
       end
 
     end # AmiStubProxySourceWriter
@@ -492,12 +492,12 @@ module IDL
       end
 
       def pre_visit(parser)
-        println()
+        println
         printiln('// generated from StubSourceObjTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE')
         printiln('{')
         inc_nest
-        println()
+        println
         printiln('namespace CORBA')
         printiln('{')
         inc_nest
@@ -506,7 +506,7 @@ module IDL
       def post_visit(parser)
         dec_nest
         printiln('} // namespace CORBA')
-        println()
+        println
         dec_nest
         printiln('} // namespace TAOX11_NAMESPACE')
       end
@@ -525,7 +525,7 @@ module IDL
        end
 
        def pre_visit(parser)
-         println();
+         println
          printiln('// generated from AmiStubSourceProxyObjRefTraitsWriter#pre_visit')
        end
 
@@ -680,7 +680,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from AmiStubSourceAmiCWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -690,7 +690,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
@@ -737,7 +737,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from AmiStubSourceSrvWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -747,14 +747,14 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
         super
-        println()
+        println
         printiln('// generated from AmiStubSourceSrvWriter#enter_interface')
         printiln('namespace POA {')
         inc_nest
@@ -780,19 +780,19 @@ module IDL
             v.visit_attribute(_att)
           end
         end
-        println()
+        println
         intf = ami_handler_interface_with_ami_inheritance
         ###
         # Overload for this visitor only
         intf.class_eval do
           def supported_interface_ids
-            @sup_intf_ids ||= (ancestors.collect {|ancestor| ancestor.ami_repository_id } <<  ami_repository_id)
+            @sup_intf_ids ||= (ancestors.collect {|ancestor| ancestor.ami_repository_id } << ami_repository_id)
           end
         end
         intf.visit_skel(node)
         dec_nest
         printiln("} // namespace POA")
-        println()
+        println
         super
       end
 
@@ -813,7 +813,7 @@ module IDL
         println
         printiln('// generated from AmiStubSourceSArgTraitsWriter#pre_visit')
         println('namespace TAOX11_NAMESPACE {')
-        gen_exceptionholder_traits()
+        gen_exceptionholder_traits
       end
 
       def post_visit(parser)
@@ -884,7 +884,7 @@ module IDL
       end
 
       def gen_exceptionholder_traits()
-        visitor(ExceptionVisitor).visit_exception_holder()
+        visitor(ExceptionVisitor).visit_exception_holder
       end
 
     end # AmiStubSourceSArgTraitsWriter

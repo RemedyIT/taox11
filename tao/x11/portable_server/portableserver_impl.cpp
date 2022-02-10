@@ -175,8 +175,8 @@ namespace TAOX11_NAMESPACE {
 
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO) && (TAO_HAS_MINIMUM_POA == 0)
     template<>
-    object_traits< PortableServer::ServantManager>::ref_type
-    object_traits< PortableServer::ServantManager>::narrow (
+    object_traits<PortableServer::ServantManager>::ref_type
+    object_traits<PortableServer::ServantManager>::narrow (
        object_traits<CORBA::Object>::ref_type obj)
     {
       if (obj)
@@ -200,8 +200,8 @@ namespace TAOX11_NAMESPACE {
 
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO) && (TAO_HAS_MINIMUM_POA == 0)
     template<>
-    object_traits< PortableServer::ServantActivator>::ref_type
-    object_traits< PortableServer::ServantActivator>::narrow (
+    object_traits<PortableServer::ServantActivator>::ref_type
+    object_traits<PortableServer::ServantActivator>::narrow (
       object_reference< CORBA::Object> obj)
     {
       if (obj)
@@ -225,8 +225,8 @@ namespace TAOX11_NAMESPACE {
 
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO) && (TAO_HAS_MINIMUM_POA == 0)
     template<>
-    object_traits< PortableServer::ServantLocator>::ref_type
-    object_traits< PortableServer::ServantLocator>::narrow (
+    object_traits<PortableServer::ServantLocator>::ref_type
+    object_traits<PortableServer::ServantLocator>::narrow (
         object_reference<CORBA::Object> obj)
     {
       if (obj)
@@ -1071,7 +1071,7 @@ namespace TAOX11_NAMESPACE {
     }
 
     // generated from c++/cli_hdr/operation.erb
-    IDL::traits< CORBA::Object>::ref_type
+    IDL::traits<CORBA::Object>::ref_type
     POA_Current_impl::get_reference ()
     {
       try {

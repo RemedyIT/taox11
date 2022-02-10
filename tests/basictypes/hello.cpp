@@ -33,7 +33,7 @@ void swap(T& a, T& b)
 }
 
 Hello::Hello(IDL::traits<CORBA::ORB>::ref_type orb, int& result) :
-  orb_(orb), result_(result)
+  orb_(std::move(orb)), result_(result)
 {
 }
 

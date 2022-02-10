@@ -48,7 +48,7 @@ namespace TAOX11_NAMESPACE
       // Second arg is typed in the template parameter, repeating it
       // this way allows cleaner template code.
       return
-      TAOX11_NAMESPACE::MakeDynAnyUtils::make_dyn_any_t< IDL::traits< CORBA::TypeCode>::ref_type> (
+      TAOX11_NAMESPACE::MakeDynAnyUtils::make_dyn_any_t< IDL::traits<CORBA::TypeCode>::ref_type> (
            type,
            type,
            true );  // Allow truncation
@@ -80,7 +80,7 @@ namespace TAOX11_NAMESPACE
       // within each any, indirection will occur if a DynValue
       // self references with one of its own members.
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
       DynamicAny::DynAnySeq retseq;
       retseq.reserve(length);
       for (uint32_t i = 0; i < length ;++i)
@@ -106,8 +106,7 @@ namespace TAOX11_NAMESPACE
     // self references with one of its own members .
        DynamicAny::DynAnySeq &nc_values = const_cast<DynamicAny::DynAnySeq &> (values);
 
-
-       const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (nc_values.size ());
+       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (nc_values.size ());
        DynamicAny::AnySeq retseq;
        retseq.reserve(length);
        for (uint32_t i = 0; i < length ;++i)
@@ -141,7 +140,7 @@ namespace TAOX11_NAMESPACE
     CORBA::object_reference< CORBA::TypeCode>
     DynAnyFactory_i::strip_alias (CORBA::object_reference<CORBA::TypeCode> tc)
     {
-      IDL::traits< CORBA::TypeCode>::ref_type retval = IDL::traits< CORBA::TypeCode>::narrow(tc);
+      IDL::traits<CORBA::TypeCode>::ref_type retval = IDL::traits<CORBA::TypeCode>::narrow(tc);
       CORBA::TCKind tck = retval->kind ();
 
       while (tck == CORBA::TCKind::tk_alias)

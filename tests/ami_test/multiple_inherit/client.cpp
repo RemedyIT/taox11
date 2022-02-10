@@ -635,7 +635,7 @@ int main(int argc, char* argv[])
 
       if ((nr_of_replies != 0) || (id_o != 4) || (ic_o != 2))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected replies. Expected -12- , received -"
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected replies. Expected -12- , received -"
           << (12 - nr_of_replies) << "-. " << " Expected D callbacks <4> , received <"
           << id_o << ">. Expected C callbacks <2>, received <" << ic_o << ">." << std::endl;
           result = 1;
@@ -643,7 +643,7 @@ int main(int argc, char* argv[])
 
       if ((id_excep != 4) || (ic_excep != 2))
          {
-           TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected  exceptions. "
+           TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected  exceptions. "
             << "Expected D callbacks exceptions <4> , received <"
             << id_excep << ">. Expected C callbacks exceptions <2>, received <"
             << ic_excep << ">." << std::endl;
@@ -658,7 +658,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+        TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
         return 1;
       }
   return result;

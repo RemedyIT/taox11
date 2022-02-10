@@ -15,13 +15,7 @@
 #include "analyzer.h"
 
 Test_DynStruct::Test_DynStruct (IDL::traits<CORBA::ORB>::ref_type  orb )
-  : orb_ (orb),
-    test_name_ ("test_dynstruct"),
-    error_count_ (0)
-{
-}
-
-Test_DynStruct::~Test_DynStruct ()
+  : orb_ (std::move(orb))
 {
 }
 
@@ -44,11 +38,19 @@ Test_DynStruct::run_test ()
 
   try
   {
+    IDL::traits<DynamicAny::DynStruct>::ref_type dyn_nil =
+      IDL::traits<DynamicAny::DynStruct>::narrow (nullptr);
 
-    IDL::traits< CORBA::Object>::ref_type factory_obj =
+    if (dyn_nil)
+    {
+      ++this->error_count_;
+      TAOX11_TEST_ERROR << "DynStruct::narrow(nil) should return nil" << std::endl;
+    }
+
+    IDL::traits<CORBA::Object>::ref_type factory_obj =
                     this->orb_->resolve_initial_references ("DynAnyFactory");
 
-    if (factory_obj == nullptr)
+    if (!factory_obj)
     {
       TAOX11_TEST_ERROR << "Nil factory_obj after resolve_initial_references"
                         << std::endl;

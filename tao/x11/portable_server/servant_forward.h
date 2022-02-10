@@ -24,8 +24,8 @@ namespace TAOX11_NAMESPACE
     template <>
     struct servant_traits<PortableServer::Servant>
     {
-      typedef PortableServer::Servant                             base_type;
-      typedef CORBA::servant_reference<PortableServer::Servant>   ref_type;
+      using base_type = PortableServer::Servant;
+      using ref_type = CORBA::servant_reference<PortableServer::Servant>;
     };
   } // namespace CORBA
 } // namespace TAOX11_NAMESPACE

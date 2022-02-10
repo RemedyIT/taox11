@@ -31,12 +31,12 @@ class Administrator_impl
 {
 public:
   Administrator_impl ();
-  Administrator_impl (IDL::traits< PortableServer::POA >::ref_type poa);
+  Administrator_impl (IDL::traits<PortableServer::POA>::ref_type poa);
   ~Administrator_impl () = default;
 
   void
   add_impl (CCS::AssetType anum,
-    CORBA::servant_traits< CCS::Thermometer >::ref_type tip);
+    CORBA::servant_traits< CCS::Thermometer>::ref_type tip);
 
   void
   remove_impl (CCS::AssetType anum);
@@ -64,7 +64,7 @@ private:
     }
 
     bool operator() (std::pair<const CCS::AssetType,
-      CORBA::servant_traits< CCS::Thermometer >::ref_type> &p) const
+      CORBA::servant_traits< CCS::Thermometer>::ref_type> &p) const
     {
       char buf[32];
       switch (this->sc_)
@@ -81,20 +81,17 @@ private:
       return this->str_ == buf;
     }
   private:
-    CCS::Controller::SearchCriterion sc_;
-    std::string str_;
+    CCS::Controller::SearchCriterion const sc_;
+    std::string const str_;
   };
-
 
   // Map of existing assets. The servant pointer is null
   // the corresponding servant is not in memory.
-  typedef std::map< CCS::AssetType,
-    CORBA::servant_traits< CCS::Thermometer >::ref_type > AssetMap;
-  typedef std::pair< CCS::AssetType,
-    CORBA::servant_traits< CCS::Thermometer >::ref_type > AssetPair;
+  using AssetMap = std::map<CCS::AssetType, CORBA::servant_traits< CCS::Thermometer>::ref_type>;
+  using AssetPair = std::pair<CCS::AssetType, CORBA::servant_traits< CCS::Thermometer>::ref_type>;
   AssetMap assets_;
 
-  IDL::traits< PortableServer::POA >::ref_type poa_;
+  IDL::traits<PortableServer::POA>::ref_type poa_;
 };
 
 
@@ -108,23 +105,17 @@ public:
   Thermometer_impl (CCS::AssetType anum, Administrator_impl &admin);
   virtual ~Thermometer_impl();
 
-  virtual CCS::ModelType
-  model() override;
+  CCS::ModelType model() override;
 
-  virtual CCS::AssetType
-  asset_num() override;
+  CCS::AssetType asset_num() override;
 
-  virtual CCS::TempType
-  temperature() override;
+  CCS::TempType temperature() override;
 
-  virtual CCS::LocType
-  location() override;
+  CCS::LocType location() override;
 
-  virtual void
-  location (const CCS::LocType &loc) override;
+  void location (const CCS::LocType &loc) override;
 
-  virtual void
-  remove() override;
+  void remove() override;
 
 private:
   CCS::AssetType anum_;
@@ -144,15 +135,12 @@ class Thermostat_impl final
 public:
     // Constructor and destructor
     Thermostat_impl(CCS::AssetType anum, Administrator_impl &admin);
-    virtual ~Thermostat_impl();
+    virtual ~Thermostat_impl() = default;
 
     // CORBA operations
-    virtual CCS::TempType
-    get_nominal () override;
+    CCS::TempType get_nominal () override;
 
-    virtual CCS::TempType
-    set_nominal (CCS::TempType new_temp) override;
-
+    CCS::TempType set_nominal (CCS::TempType new_temp) override;
 
 private:
     // Copy and assignment not supported
@@ -165,34 +153,32 @@ class Controller_impl final
 {
 public:
   // Constructor and destructor
-  Controller_impl(IDL::traits< PortableServer::POA >::ref_type poa,
+  Controller_impl(IDL::traits<PortableServer::POA>::ref_type poa,
     const std::string &asset_file,
     Administrator_impl &admin);
   virtual ~Controller_impl();
 
   // CORBA operations
-  virtual CCS::Controller::ThermometerSeq
-  list() override;
+  CCS::Controller::ThermometerSeq list() override;
 
-  virtual void
-  find (CCS::Controller::SearchSeq & slist) override;
+  void find (CCS::Controller::SearchSeq & slist) override;
 
-  virtual void
+  void
   change (const CCS::Controller::ThermostatSeq &tlist,
     int16_t delta) override;
 
-  virtual IDL::traits<CCS::Thermometer>::ref_type
+  IDL::traits<CCS::Thermometer>::ref_type
   create_thermometer (CCS::AssetType anum,
     const std::string &loc) override;
 
-  virtual IDL::traits<CCS::Thermostat>::ref_type
+  IDL::traits<CCS::Thermostat>::ref_type
   create_thermostat (CCS::AssetType anum,
     const std::string &loc,
     CCS::TempType temp) override;
 
 private:
   // POA for thermometers and thermostats
-  IDL::traits< PortableServer::POA >::ref_type poa_;
+  IDL::traits<PortableServer::POA>::ref_type poa_;
 
   // Name of asset number file
   std::string asset_file_;
@@ -206,36 +192,35 @@ private:
 };
 
 class DeviceLocator_impl final
-  : public virtual IDL::traits< PortableServer::ServantLocator >::base_type
+  : public virtual IDL::traits<PortableServer::ServantLocator >::base_type
 {
 public:
-  DeviceLocator_impl (IDL::traits< PortableServer::POA >::ref_type ccs_poa,
+  DeviceLocator_impl (IDL::traits<PortableServer::POA>::ref_type ccs_poa,
     Administrator_impl &admin);
 
-  virtual CORBA::servant_reference< PortableServer::Servant >
+  CORBA::servant_reference<PortableServer::Servant>
   preinvoke (const PortableServer::ObjectId& oid,
-    IDL::traits< PortableServer::POA >::ref_type adapter,
+    IDL::traits<PortableServer::POA>::ref_type adapter,
     const CORBA::Identifier& operation,
     Cookie &the_cookie) override;
 
-
-  virtual void
+  void
   postinvoke (const PortableServer::ObjectId &,
     IDL::traits<PortableServer::POA>::ref_type,
     const CORBA::Identifier &,
     Cookie,
-    CORBA::servant_reference< PortableServer::Servant >) override;
+    CORBA::servant_reference<PortableServer::Servant>) override;
 
 private:
-  typedef std::list< CORBA::servant_traits<CCS::Thermometer >::ref_type > EvictorQueue;
-  typedef std::map< CCS::AssetType, EvictorQueue::iterator > ActiveObjectMap;
+  using EvictorQueue = std::list<CORBA::servant_traits<CCS::Thermometer>::ref_type>;
+  using ActiveObjectMap = std::map<CCS::AssetType, EvictorQueue::iterator>;
 
   static constexpr unsigned int MAX_EQ_SIZE = 100;
   EvictorQueue eq_;
   ActiveObjectMap aom_;
 
-  IDL::traits< PortableServer::POA >::ref_type ccs_poa_;
-  CORBA::servant_traits< CCS::Controller >::ref_type ctrl_;
+  IDL::traits<PortableServer::POA>::ref_type ccs_poa_;
+  CORBA::servant_traits<CCS::Controller>::ref_type ctrl_;
 
   Administrator_impl &admin_;
 

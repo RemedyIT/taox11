@@ -11,14 +11,15 @@
 
 #pragma once
 
+#include "diamond_export.h"
 #include "diamondS.h"
 
 class DIAMOND_Export Top_i
   : public virtual CORBA::servant_traits<Diamond::Top>::base_type
 {
 public:
-  Top_i ();
-  ~Top_i ();
+  Top_i () = default;
+  ~Top_i () override = default;
 
   std::string shape () override;
 };
@@ -27,8 +28,8 @@ class DIAMOND_Export Left_i
   : public virtual CORBA::servant_traits<Diamond::Left>::base_type
 {
 public:
-  Left_i ();
-  ~Left_i ();
+  Left_i () = default;
+  ~Left_i () override = default;
 
   std::string shape () override;
 
@@ -39,22 +40,20 @@ class DIAMOND_Export Right_i
   : public virtual CORBA::servant_traits<Diamond::Right>::base_type
 {
 public:
-  Right_i ();
-  ~Right_i ();
+  Right_i () = default;
+  ~Right_i () override = default;
 
   std::string shape () override;
 
-  virtual std::string color ();
-
-  virtual int32_t width () override;
+  int32_t width () override;
 };
 
 class DIAMOND_Export Bottom_i
   : public virtual CORBA::servant_traits<Diamond::Bottom>::base_type
 {
 public:
-  Bottom_i ();
-  ~Bottom_i ();
+  Bottom_i () = default;
+  ~Bottom_i () override = default;
 
   std::string shape () override;
 

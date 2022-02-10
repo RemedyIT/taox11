@@ -40,11 +40,11 @@ TAO_CORBA::Boolean operator>> (
 
   // Narrow to the right type.
   <%= scoped_proxy_cxxname %>::_ptr_type const _proxy_ptr =
-    TAO_TAO::Narrow_Utils< <%= scoped_proxy_cxxtype %>>::unchecked_narrow (obj.in ());
+    TAO_TAO::Narrow_Utils<<%= scoped_proxy_cxxtype %>>::unchecked_narrow (obj.in ());
 
   if (!TAO_CORBA::is_nil (_proxy_ptr))
     {
-      _tao_objref = TAOX11_CORBA::make_reference< <%= scoped_cxxname %>> (_proxy_ptr);
+      _tao_objref = TAOX11_CORBA::make_reference<<%= scoped_cxxname %>> (_proxy_ptr);
     }
   else
     {

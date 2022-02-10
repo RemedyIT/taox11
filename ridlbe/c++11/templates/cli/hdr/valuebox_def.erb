@@ -1,13 +1,13 @@
 
 // generated from <%= ridl_template_path %>
 class <%= stub_export_macro %><%= cxxname %> final
-  : public TAOX11_CORBA::Valuebox_T< <%= scoped_boxed_cxx_member_type %>>
+  : public TAOX11_CORBA::Valuebox_T<<%= scoped_boxed_cxx_member_type %>>
 {
 public:
   /// @name Member types
   //@{
-  typedef TAOX11_CORBA::valuetype_traits< <%= cxxname %>>     _traits_type;
-  typedef TAOX11_CORBA::valuetype_reference< <%= cxxname %>>  _ref_type;
+  using _traits_type = TAOX11_CORBA::valuetype_traits<<%= cxxname %>>;
+  using _ref_type = TAOX11_CORBA::valuetype_reference<<%= cxxname %>>;
   //@}
 
   void _value (<%= boxed_cxx_in_type %> v) { this->value_ = v; }
@@ -35,9 +35,9 @@ protected:
   <%= cxxname %> (const <%= cxxname %>&) = default;
   <%= cxxname %> (<%= cxxname %>&&) = default;
   explicit <%= cxxname %> (<%= boxed_cxx_byval_type %> v)
-    : TAOX11_CORBA::Valuebox_T< <%= scoped_boxed_cxx_member_type %>> (std::move(v))
+    : TAOX11_CORBA::Valuebox_T<<%= scoped_boxed_cxx_member_type %>> (std::move(v))
   {}
-  virtual ~<%= cxxname %> () = default;
+  ~<%= cxxname %> () override = default;
   <%= cxxname %>& operator= (const <%= cxxname %>&) = delete;
   <%= cxxname %>& operator= (<%= cxxname %>&&) = delete;
 

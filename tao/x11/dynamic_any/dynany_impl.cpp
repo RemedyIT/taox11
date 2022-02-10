@@ -95,7 +95,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< CORBA::TypeCode>::ref_type any_tc = any.type ();
+      IDL::traits<CORBA::TypeCode>::ref_type any_tc = any.type ();
 
       if (!this->type_->equivalent (any_tc))
       {

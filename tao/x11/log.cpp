@@ -21,7 +21,7 @@ namespace TAOX11_NAMESPACE
       {
         static TAOX11_Log_Module instance_;
 
-        return &instance_;
+        return std::addressof(instance_);
       }
 
       TAOX11_Log_Module::TAOX11_Log_Module()

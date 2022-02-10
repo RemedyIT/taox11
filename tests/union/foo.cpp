@@ -10,8 +10,7 @@
 #include "checks.h"
 
 Foo::Foo (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb)
-  , errors_ (0)
+  : orb_ (std::move(orb))
 {
 }
 
@@ -20,7 +19,6 @@ Foo::get_error_count()
 {
   return errors_;
 }
-
 
 bool
 Foo::pass_union (const Test::Data & s)
@@ -167,6 +165,72 @@ Foo::update_default_union (Test::DefaultData & dd)
   dd.longData (99);
   check_default_union (dd, 1, "Foo::update_default_union");
   return true;
+}
+
+bool
+Foo::send_unionmessage (const Test::UnionMessage & msg)
+{
+  TAOX11_TEST_DEBUG << "Received <" << msg << ">" << std::endl;
+
+  if (msg.a () != Test::Assignment::D)
+  {
+    TAOX11_TEST_ERROR << "Foo::send_unionmessage - ERROR - incorrect a received - "
+      << "expected <D> - received <" <<  msg.a () << ">" << std::endl;
+    ++this->errors_;
+  }
+
+  try
+  {
+    if (msg.b_03 ()._d () != 4)
+    {
+      TAOX11_TEST_ERROR << "Foo::send_unionmessage - ERROR - "
+        << "unexpected value for the discriminator detected. Expected <4> - got <"
+        << msg.b_03 ()._d () << ">." << std::endl;
+      ++this->errors_;
+    }
+
+    if (msg.b_03 ().b_03_5 () != "XX")
+    {
+      TAOX11_TEST_ERROR << "Foo::send_unionmessage - ERROR - "
+        << "unexpected value for the last member detected. Expected <XX> - got <"
+        << msg.b_03 ().b_03_5 () << ">." << std::endl;
+      ++this->errors_;
+    }
+  }
+  catch (const CORBA::BAD_PARAM&)
+  {
+    TAOX11_TEST_ERROR << "Foo::send_unionmessage - ERROR - "
+      << "Caught unexpected BAD_PARAM exception whilst examining <b_03>." << std::endl;
+    ++this->errors_;
+  }
+
+  // last member of d
+  try
+  {
+    if (msg.d ()._d () != Test::DataType::dtGlobal)
+    {
+      TAOX11_TEST_ERROR << "Foo::send_unionmessage - ERROR - "
+        << "unexpected value for the discriminator detected. Expected <Test::DataType::dtGlobal> - got <"
+        << msg.d ()._d () << ">." << std::endl;
+      ++this->errors_;
+    }
+
+    if (msg.d ().globalData ().x () != 4)
+    {
+      TAOX11_TEST_ERROR << "Foo::send_unionmessage - ERROR - "
+        << "unexpected value for the last member detected. Expected <4> - got <"
+        << msg.d ().globalData ().x () << ">." << std::endl;
+      ++this->errors_;
+    }
+  }
+  catch (const CORBA::BAD_PARAM&)
+  {
+    TAOX11_TEST_ERROR << "Foo::send_unionmessage - ERROR - "
+      << "Caught unexpected BAD_PARAM exception whilst examining <d>." << std::endl;
+    ++this->errors_;
+  }
+
+  return this->errors_ == 0;
 }
 
 void

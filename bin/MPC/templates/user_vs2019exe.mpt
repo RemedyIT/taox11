@@ -1,0 +1,4 @@
+Release {
+  output_dir   = .
+  WholeProgramOptimization = FastLTCG
+}

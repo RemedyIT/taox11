@@ -6,7 +6,7 @@ namespace obv
   TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
   <%= cxxname %>::_copy_value () const
   {
-    return TAOX11_CORBA::make_reference< <%= scoped_cxx_traits_type %>::obv_type> (*this);
+    return TAOX11_CORBA::make_reference<<%= scoped_cxx_traits_type %>::obv_type> (*this);
   }
 
 % end
@@ -51,18 +51,18 @@ namespace obv
   bool
   <%= cxxname %>::_obv_marshal_state (TAO_OutputCDR &strm, TAO_ChunkInfo &ci) const
   {
-    if (! ci.start_chunk (strm))
+    if (!ci.start_chunk (strm))
       return false;
 
 % if has_concrete_base?
 %   bases.each do |_base|
 %     unless _base.is_abstract?
-    if (! this->_obv_marshal_<%= _base.scoped_cxxname.scope_to_cxxname %>_v (strm, ci))
+    if (!this->_obv_marshal_<%= _base.scoped_cxxname.scope_to_cxxname %>_v (strm, ci))
       return false;
 
 %     end
 %   end
-    if (! ci.start_chunk (strm))
+    if (!ci.start_chunk (strm))
       return false;
 
 % end
@@ -70,18 +70,18 @@ namespace obv
     TAO_CORBA::Boolean const ret =
 %   _n = member_count-1
 %   members.each_with_index do |_m, _i|
-      (strm << <%= _m.cdr_from_fmt % "this->#{_m.cxxname} ()" %>)<%= ((_i < _n ) ? ' &&' : ';') %>
+      (strm <<<%= _m.cdr_from_fmt % "this->#{_m.cxxname} ()" %>)<%= ((_i < _n ) ? ' &&' : ';') %>
 %   end
-    if ( ! ret)
+    if (!ret)
       return false;
 % end
 
 % if has_concrete_base?
-    if (! ci.end_chunk (strm))
+    if (!ci.end_chunk (strm))
       return false;
 
 % end
-    if (! ci.end_chunk (strm))
+    if (!ci.end_chunk (strm))
       return false;
 
     return true;
@@ -96,7 +96,7 @@ namespace obv
 % if has_concrete_base?
 %   bases.each do |_base|
 %     unless _base.is_abstract?
-    if (! this->_obv_unmarshal_<%= _base.scoped_cxxname.scope_to_cxxname %>_v (strm, ci))
+    if (!this->_obv_unmarshal_<%= _base.scoped_cxxname.scope_to_cxxname %>_v (strm, ci))
       return false;
 
 %     end

@@ -22,7 +22,7 @@
 namespace TAOX11_NAMESPACE {
 
   class Servant_proxy; // forward
-  typedef Servant_proxy * Servant_proxy_ptr;
+  using Servant_proxy_ptr = Servant_proxy *;
 
   namespace PortableServer {
 
@@ -36,8 +36,8 @@ namespace TAOX11_NAMESPACE {
     public:
       /// @name Member types
       //@{
-      typedef CORBA::servant_traits<Servant>          _traits_type;
-      typedef CORBA::servant_reference<Servant>       _ref_type;
+      using _traits_type = CORBA::servant_traits<Servant>;
+      using _ref_type = CORBA::servant_reference<Servant>;
       //@}
 
       /// Returns the default POA for this servant.
@@ -64,7 +64,7 @@ namespace TAOX11_NAMESPACE {
       virtual const std::string &_interface_repository_id () const = 0;
 
     protected:
-      typedef _ref_type::shared_ptr_type _shared_ptr_type;
+      using _shared_ptr_type =_ref_type::shared_ptr_type;
       template <typename _Tp1, typename, typename ...Args>
       friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
 
@@ -100,7 +100,7 @@ namespace TAOX11_NAMESPACE {
       };
       friend class dtor;
 
-      typedef std::weak_ptr<Servant> _weak_reference_type;
+      using _weak_reference_type = std::weak_ptr<Servant>;
       _weak_reference_type self_ref_;
     };
 

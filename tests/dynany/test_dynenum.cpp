@@ -14,14 +14,8 @@
 #include "testlib/taox11_testlog.h"
 #include "analyzer.h"
 
-Test_DynEnum::Test_DynEnum (IDL::traits< CORBA::ORB>::ref_type orb)
-  : orb_ (orb),
-    test_name_ ("test_dynenum"),
-    error_count_ (0)
-{
-}
-
-Test_DynEnum::~Test_DynEnum ()
+Test_DynEnum::Test_DynEnum (IDL::traits<CORBA::ORB>::ref_type orb)
+  : orb_ (std::move(orb))
 {
 }
 
@@ -38,7 +32,16 @@ Test_DynEnum::run_test ()
 
   try
   {
-    IDL::traits< CORBA::Object>::ref_type factory_obj =
+    IDL::traits<DynamicAny::DynEnum>::ref_type dyn_nil =
+      IDL::traits<DynamicAny::DynEnum>::narrow (nullptr);
+
+    if (dyn_nil)
+    {
+      ++this->error_count_;
+      TAOX11_TEST_ERROR << "DynEnum::narrow(nil) should return nil" << std::endl;
+    }
+
+    IDL::traits<CORBA::Object>::ref_type factory_obj =
           this->orb_->resolve_initial_references ("DynAnyFactory");
 
     if (factory_obj == nullptr)
@@ -47,7 +50,6 @@ Test_DynEnum::run_test ()
                         << std::endl;
      return -1;
     }
-
 
     IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory =
         IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);

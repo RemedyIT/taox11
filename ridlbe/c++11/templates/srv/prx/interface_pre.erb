@@ -4,11 +4,11 @@ class <%= skel_export_macro %><%= srvproxy_cxxname %> final
   : public TAOX11_NAMESPACE::Servant_proxy
 {
 public:
-  typedef <%= scoped_skel_cxxtype %> skel_type;
-  typedef skel_type *skel_ptr;
+  using skel_type = <%= scoped_skel_cxxtype %>;
+  using skel_ptr = skel_type*;
 
   explicit <%= srvproxy_cxxname %> (<%= srvproxy_cxxname %>::skel_ptr skel);
-  virtual ~<%= srvproxy_cxxname %> () = default;
+  ~<%= srvproxy_cxxname %> () override = default;
 
   void _dispatch (
       TAO_ServerRequest & req,

@@ -330,7 +330,7 @@ TAO_CORBA::Boolean operator>> (
 bool marshal_TAOX11_NAMESPACE_CORBA_Policy_sequence (
     TAO_OutputCDR& _strm, const std::vector< TAOX11_CORBA::object_traits< TAOX11_CORBA::Policy>::ref_type>& _seq, uint32_t _bound)
 {
-  typedef TAOX11_CORBA::object_traits< TAOX11_CORBA::Policy>::ref_type _elem_type;
+  using _elem_type = TAOX11_CORBA::object_traits< TAOX11_CORBA::Policy>::ref_type;
 
   uint32_t length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -356,7 +356,7 @@ bool marshal_TAOX11_NAMESPACE_CORBA_Policy_sequence (
 bool demarshal_TAOX11_NAMESPACE_CORBA_Policy_sequence (
     TAO_InputCDR& _strm, std::vector< TAOX11_CORBA::object_traits< TAOX11_CORBA::Policy>::ref_type>& _seq, uint32_t _bound)
 {
-  typedef TAOX11_CORBA::object_traits< TAOX11_CORBA::Policy>::ref_type _elem_type;
+  using _elem_type = TAOX11_CORBA::object_traits< TAOX11_CORBA::Policy>::ref_type;
 
   uint32_t length {};
 

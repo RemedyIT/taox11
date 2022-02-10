@@ -69,8 +69,8 @@ namespace TAOX11_NAMESPACE {
 #undef TAOX11_POA_POLICY_IMPL
 #define TAOX11_POA_POLICY_IMPL(name) \
     template <> \
-    CORBA::object_traits< PortableServer::name>::ref_type \
-    CORBA::object_traits< PortableServer::name>::narrow(IDL::traits<TAOX11_CORBA::Object>::ref_type obj) \
+    CORBA::object_traits<PortableServer::name>::ref_type \
+    CORBA::object_traits<PortableServer::name>::narrow(IDL::traits<TAOX11_CORBA::Object>::ref_type obj) \
     { \
       if (obj) \
       { \
@@ -83,7 +83,7 @@ namespace TAOX11_NAMESPACE {
             TAO_PORTABLE_SERVER::name::_narrow (obj->get_proxy ()->get ()); \
           if (!TAO_CORBA::is_nil (_pp)) \
           { \
-            return CORBA::object_traits< PortableServer::name>::ref_type (new PortableServer::name ## _impl (_pp)); \
+            return CORBA::object_traits<PortableServer::name>::ref_type (new PortableServer::name ## _impl (_pp)); \
           } \
         } \
         catch_tao_system_ex(_ex) \

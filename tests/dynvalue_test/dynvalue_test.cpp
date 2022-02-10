@@ -13,17 +13,17 @@
 int main (int argc, ACE_TCHAR *argv[])
 {
   // Retrieve the underlying ORB
-  IDL::traits< CORBA::ORB>::ref_type orb_ = CORBA::ORB_init (argc, argv, "local");
+  IDL::traits<CORBA::ORB>::ref_type orb_ = CORBA::ORB_init (argc, argv, "local");
   if (!orb_)
   {
     TAOX11_TEST_ERROR << "Error: Could not init orb" << std::endl;
     return 1;
   }
 
-  IDL::traits< CORBA::Object>::ref_type factory_obj =
+  IDL::traits<CORBA::Object>::ref_type factory_obj =
      orb_->resolve_initial_references ("DynAnyFactory");
 
-  if (factory_obj == nullptr)
+  if (!factory_obj)
   {
     TAOX11_TEST_ERROR << "Error: Nil factory_obj after resolve_initial_references"
                       << std::endl;
@@ -32,7 +32,7 @@ int main (int argc, ACE_TCHAR *argv[])
 
   IDL::traits< DynamicAny::DynAnyFactory>::ref_type dany_fact_ =
      IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);
-  if (dany_fact_ == nullptr)
+  if (!dany_fact_)
   {
     TAOX11_TEST_ERROR << "Error: Nil dynamic any factory after narrow dany_fact_"
                       << std::endl;
@@ -45,11 +45,11 @@ int main (int argc, ACE_TCHAR *argv[])
     // DynValue_Test::BoxedLong
     ////////////////////////////////////////////
     TAOX11_TEST_DEBUG <<"A *=*=*=*= DynValue_Test::BoxedLong =*=*=*=*" << std::endl;
-    const int32_t l1 = -157;
+    int32_t const l1 = -157;
 
     TAOX11_TEST_DEBUG << "A1.Creating DynValue_Test::BoxedLong" << std::endl;
     IDL::traits<DynValue_Test::BoxedLong>::ref_type myBoxedLong =
-        CORBA::make_reference < DynValue_Test::BoxedLong> (l1);
+        CORBA::make_reference <DynValue_Test::BoxedLong> (l1);
 
     TAOX11_TEST_DEBUG << "\tchecking value, long is " << myBoxedLong->_value () << std::endl;
     if (l1 != myBoxedLong->_value ())
@@ -71,7 +71,7 @@ int main (int argc, ACE_TCHAR *argv[])
     }
     if (!myBoxedLongExtracted)
     {
-      TAOX11_TEST_ERROR << "ERROR: Failed Null pointer extracted" << std::endl;
+      TAOX11_TEST_ERROR << "ERROR: Failed null pointer extracted" << std::endl;
       return 1;
     }
     TAOX11_TEST_DEBUG << "\tchecking value, long is " << myBoxedLongExtracted->_value () << std::endl;
@@ -96,7 +96,7 @@ int main (int argc, ACE_TCHAR *argv[])
     }
     if (dvc->is_null ())
     {
-      TAOX11_TEST_ERROR << "ERROR: Failed, this dynamic any (dany_boxed) is Null!" << std::endl;
+      TAOX11_TEST_ERROR << "ERROR: Failed, this dynamic any (dany_boxed) is null!" << std::endl;
       return 1;
     }
 
@@ -104,7 +104,7 @@ int main (int argc, ACE_TCHAR *argv[])
     IDL::traits<DynamicAny::DynAny>::ref_type dany  = dany_fact_->create_dyn_any_from_type_code (DynValue_Test::_tc_BoxedLong);
     analyzer.analyze (dany);
 
-    TAOX11_TEST_DEBUG << "A6.Testing typecode generated dynamic any for being Null, with is_null" << std::endl;
+    TAOX11_TEST_DEBUG << "A6.Testing typecode generated dynamic any for being null, with is_null" << std::endl;
     dvc = IDL::traits< DynamicAny::DynValueCommon>::narrow (dany);
     if (!dvc)
     {
@@ -117,14 +117,14 @@ int main (int argc, ACE_TCHAR *argv[])
       return 1;
     }
 
-    TAOX11_TEST_DEBUG << "A7.Testing for inequality with original dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "A7.Testing for inequality with original dynamic any" << std::endl;
     if (dany->equal (dany_boxed))
     {
       TAOX11_TEST_ERROR << "ERROR : Failed, they test equal" << std::endl;
       return 1;
     }
 
-    TAOX11_TEST_DEBUG << "A8. Setting to value and test for inequality with original dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "A8. Setting to value and test for inequality with original dynamic any" << std::endl;
 
     dvc->set_to_value ();
     if ((dvc->component_count() != 1) || (dvc->component_count() != 1))
@@ -143,14 +143,14 @@ int main (int argc, ACE_TCHAR *argv[])
     TAOX11_TEST_DEBUG << "A9. Setting the long of the typecode generated dynamic any" << std::endl;
     dany->insert_long (l1);
     analyzer.analyze (dany);
-    TAOX11_TEST_DEBUG << " Testing for equality with original dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << " Testing for equality with original dynamic any" << std::endl;
     if (!(dany->equal (dany_boxed)))
     {
       TAOX11_TEST_ERROR << "Error, Failed they test unequal after setting long" << std::endl;
       return 1;
     }
     //dvc with dany
-    TAOX11_TEST_DEBUG << "A10. Setting typecode dynamic any back to Null" << std::endl;
+    TAOX11_TEST_DEBUG << "A10. Setting typecode dynamic any back to null" << std::endl;
     dvc->set_to_null ();
     analyzer.analyze (dany);
     if ((dvc->component_count() != 0) || (dvc->component_count() != 0))
@@ -160,7 +160,7 @@ int main (int argc, ACE_TCHAR *argv[])
     }
 
     //dvc with dany_boxed
-    TAOX11_TEST_DEBUG << "A11. Setting the original dynamic any to Null object" << std::endl;
+    TAOX11_TEST_DEBUG << "A11. Setting the original dynamic any to null object" << std::endl;
     dvc= IDL::traits< DynamicAny::DynValueCommon>::narrow (dany_boxed);
     if (!dvc)
     {
@@ -171,14 +171,14 @@ int main (int argc, ACE_TCHAR *argv[])
     analyzer.analyze (dany_boxed);
 
     //dany_boxed and dany are now both set to null
-    TAOX11_TEST_DEBUG << "A12.Testing for equality with typecode dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "A12.Testing for equality with typecode dynamic any" << std::endl;
     if (!(dany->equal (dany_boxed)))
     {
-      TAOX11_TEST_ERROR << "Error, Failed  they test unequal!" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed they test unequal!" << std::endl;
       return 1;
     }
 
-    TAOX11_TEST_DEBUG << "A13. Converting from Null dynamic any back to any" << std::endl;
+    TAOX11_TEST_DEBUG << "A13. Converting from null dynamic any back to any" << std::endl;
     CORBA::Any myAny2 = dany_boxed->to_any ();
 
     TAOX11_TEST_DEBUG << "  Extracting from this any" << std::endl;
@@ -186,29 +186,31 @@ int main (int argc, ACE_TCHAR *argv[])
     //At this point myBoxedLongExtracted isn't a nullptr
     if (!(myAny2 >>= myBoxedLongExtracted))
     {
-      TAOX11_TEST_ERROR << "Error, Failed  extraction" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed extraction" << std::endl;
       return 1;
     }
     //extraction succesfull, myBoxedLongExtracted  should now contain a nullptr
     if (myBoxedLongExtracted != nullptr)
     {
-      TAOX11_TEST_DEBUG << "Error, Failed  non-Null pointer extracted" << std::endl;
+      TAOX11_TEST_DEBUG << "Error, Failed non-null pointer extracted" << std::endl;
       return 1;
     }
 
     //dvc with dany_boxed,
     TAOX11_TEST_DEBUG << "A14. Setting the dynamic any to VALUE object" << std::endl;
-    bool recieved = false;
+    bool received = false;
     try {
       dany_boxed->get_long();
     }
-    catch (const DynamicAny::DynAny::InvalidValue &){
-      TAOX11_TEST_DEBUG << " Received expected exception, before setting to value object" << std::endl;
-      recieved = true;
-    }
-    if(!recieved)
+    catch (const DynamicAny::DynAny::InvalidValue &)
     {
-       TAOX11_TEST_ERROR << " Error, Failed , starting value of dany_bixed is wrong" << std::endl;
+      TAOX11_TEST_DEBUG << " Received expected exception, before setting to value object" << std::endl;
+      received = true;
+    }
+    if(!received)
+    {
+       TAOX11_TEST_ERROR << " Error, Failed , starting value of dany_boxed is wrong" << std::endl;
+       return 1;
     }
     else
     {
@@ -222,12 +224,12 @@ int main (int argc, ACE_TCHAR *argv[])
     analyzer.analyze (dany_boxed);
 
      //At this point myAny contains myBoxedLong -157, dany was set to null
-    TAOX11_TEST_DEBUG << "A15. Resetting Typecode dynamic any from original any" << std::endl;
+    TAOX11_TEST_DEBUG << "A15. Resetting typecode dynamic any from original any" << std::endl;
     dany->from_any (myAny);
     analyzer.analyze (dany);
     analyzer.analyze (dany_boxed);
 
-    TAOX11_TEST_DEBUG << "A16. Testing for equality with original dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "A16. Testing for equality with original dynamic any" << std::endl;
     if (!(dany->equal (dany_boxed)))
     {
       TAOX11_TEST_ERROR << " Error, Failed they test unequal!" << std::endl;
@@ -238,15 +240,15 @@ int main (int argc, ACE_TCHAR *argv[])
     myAny2 = dany_boxed->to_any ();
 
     TAOX11_TEST_DEBUG << "Extracting from this any" << std::endl;
-    myBoxedLongExtracted=CORBA::make_reference < DynValue_Test::BoxedLong> (9);
+    myBoxedLongExtracted=CORBA::make_reference <DynValue_Test::BoxedLong> (9);
     if (!(myAny >>= myBoxedLongExtracted))
     {
-      TAOX11_TEST_ERROR << "Error, Failed  extraction" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed extraction" << std::endl;
       return 1;
     }
     if (!myBoxedLongExtracted)
     {
-      TAOX11_TEST_ERROR << "Error, Failed  Null pointer extracted" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed null pointer extracted" << std::endl;
       return 1;
     }
     TAOX11_TEST_DEBUG << "checking value, long is " << myBoxedLongExtracted->_value () << std::endl;
@@ -257,7 +259,7 @@ int main (int argc, ACE_TCHAR *argv[])
     }
 
     TAOX11_TEST_DEBUG << "A18.Attempting to get_long from dynamic any" << std::endl;
-    int32_t myLongExtracted = dany_boxed->get_long ();
+    int32_t const myLongExtracted = dany_boxed->get_long ();
     TAOX11_TEST_DEBUG << "checking value, long is " << myLongExtracted << std::endl;
     if (l1 != myLongExtracted)
     {
@@ -277,21 +279,21 @@ int main (int argc, ACE_TCHAR *argv[])
 
     TAOX11_TEST_DEBUG << "A20. get_boxed_value and set_boxed_value " << std::endl;
     CORBA::Any any_bv = davb1->get_boxed_value();
-    int32_t extracted_long = 5;
-    IDL::traits< DynValue_Test::BoxedLong>::ref_type extracted_bl {};
-    if (!(any_bv>>=extracted_long))
+    int32_t extracted_long { 5 };
+    IDL::traits<DynValue_Test::BoxedLong>::ref_type extracted_bl {};
+    if (!(any_bv >>= extracted_long))
     {
-      TAOX11_TEST_ERROR << "Error, Failed  extraction" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed extraction" << std::endl;
       return 1;
     }
     TAOX11_TEST_DEBUG << "after get_boxed_value, checking value, long is " << extracted_long << std::endl;
-    if (l1 !=extracted_long)
+    if (l1 != extracted_long)
     {
       TAOX11_TEST_ERROR << "ERROR: Failed should have been" << l1 << std::endl;
       return 1;
     }
     extracted_long = 23;
-    any_bv<<= extracted_long;
+    any_bv <<= extracted_long;
     davb1->set_boxed_value(any_bv);
     TAOX11_TEST_DEBUG << "after set_boxed_value, checking value, long is " << davb1->get_long() << std::endl;
     if (davb1->get_long() != 23 )
@@ -314,25 +316,22 @@ int main (int argc, ACE_TCHAR *argv[])
       TAOX11_TEST_ERROR << "ERROR: set_boxed_value_as_dyn_any." << std::endl;
     }
 
-
-
     ////////////////////////////////////////////
     // DynValue_Test::NestedValue
     ////////////////////////////////////////////
 
-    const int16_t s1= -17;
-    const int16_t s2= -23;
+    int16_t const s1 = -17;
+    int16_t const s2 = -23;
     TAOX11_TEST_DEBUG <<"B *=*=*=*= DynValue_Test::NestedValue =*=*=*=*" << std::endl;
     IDL::traits<DynValue_Test::NestedValue>::ref_type myNestedValue =
-        CORBA::make_reference < IDL::traits<DynValue_Test::NestedValue>::obv_type>  (s1, s2);
-
+        CORBA::make_reference <IDL::traits<DynValue_Test::NestedValue>::obv_type>  (s1, s2);
 
     TAOX11_TEST_DEBUG << "B1.checking value, shorts are " << myNestedValue->Nested_s1 ()
                      << "," << myNestedValue->Nested_s2() << std::endl;
     if (s1 != myNestedValue->Nested_s1 () ||
         s2 != myNestedValue->Nested_s2 ())
     {
-      TAOX11_TEST_DEBUG << " FAILED should have been " << s1 << " ," << s2 << std::endl;
+      TAOX11_TEST_ERROR << " FAILED should have been " << s1 << " ," << s2 << std::endl;
       return 1;
     }
 
@@ -341,17 +340,16 @@ int main (int argc, ACE_TCHAR *argv[])
 
     TAOX11_TEST_DEBUG << "B3.Extracting from an any" << std::endl;
     IDL::traits<DynValue_Test::NestedValue>::ref_type myNestedValueExtracted =
-        CORBA::make_reference < IDL::traits<DynValue_Test::NestedValue>::obv_type> (9,9);
-
+        CORBA::make_reference <IDL::traits<DynValue_Test::NestedValue>::obv_type> (9,9);
 
     if (!(myAny >>= myNestedValueExtracted))
     {
-      TAOX11_TEST_DEBUG << " FAILED extraction" << std::endl;
+      TAOX11_TEST_ERROR << " FAILED extraction" << std::endl;
       return 1;
     }
     if (!myNestedValueExtracted)
     {
-      TAOX11_TEST_DEBUG << " FAILED Null pointer extracted" << std::endl;
+      TAOX11_TEST_ERROR << " FAILED null pointer extracted" << std::endl;
       return 1;
     }
 
@@ -360,7 +358,7 @@ int main (int argc, ACE_TCHAR *argv[])
     if (s1 != myNestedValueExtracted->Nested_s1 () ||
         s2 != myNestedValueExtracted->Nested_s2 ()   )
     {
-      TAOX11_TEST_DEBUG << " Error, Failed  should have been ," << s1 << " ," << s2 << std::endl;
+      TAOX11_TEST_ERROR << " Error, Failed should have been ," << s1 << " ," << s2 << std::endl;
       return 1;
     }
 
@@ -368,16 +366,16 @@ int main (int argc, ACE_TCHAR *argv[])
     IDL::traits<DynamicAny::DynAny>::ref_type dany_nested = dany_fact_->create_dyn_any  (myAny);
     analyzer.analyze (dany_nested);
 
-    TAOX11_TEST_DEBUG << "B6.Testing dynamic any for non-Null" << std::endl;
+    TAOX11_TEST_DEBUG << "B6.Testing dynamic any for non-null" << std::endl;
     dvc = IDL::traits<DynamicAny::DynValueCommon>::narrow(dany_nested);
     if (!dvc)
     {
-      TAOX11_TEST_DEBUG << " FAILURE can not obtain DynamicAny::DynValueCommon *" << std::endl;
+      TAOX11_TEST_ERROR << " FAILURE can not obtain DynamicAny::DynValueCommon *" << std::endl;
       return 1;
     }
     if (dvc->is_null ())
     {
-      TAOX11_TEST_DEBUG << "Error, Failed  this dynamic any is Null!" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed this dynamic any is null!" << std::endl;
       return 1;
     }
 
@@ -385,32 +383,32 @@ int main (int argc, ACE_TCHAR *argv[])
     dany = dany_fact_->create_dyn_any_from_type_code (DynValue_Test::_tc_NestedValue);
     analyzer.analyze (dany);
 
-    TAOX11_TEST_DEBUG << "B8.Testing typecode generated dynamic any for Null" << std::endl;
+    TAOX11_TEST_DEBUG << "B8.Testing typecode generated dynamic any for null" << std::endl;
     dvc= IDL::traits<DynamicAny::DynValueCommon>::narrow(dany);
     if (!dvc)
     {
-      TAOX11_TEST_DEBUG << " FAILURE can not obtain DynamicAny::DynValueCommon" << std::endl;
+      TAOX11_TEST_ERROR << " FAILURE can not obtain DynamicAny::DynValueCommon" << std::endl;
       return 1;
     }
     if (!(dvc->is_null ()))
     {
-      TAOX11_TEST_DEBUG << " FAILED this dynamic any has a value!" << std::endl;
+      TAOX11_TEST_ERROR << " FAILED this dynamic any has a value!" << std::endl;
       return 1;
     }
 
-    TAOX11_TEST_DEBUG << "B9.Testing for inequality with original dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "B9.Testing for inequality with original dynamic any" << std::endl;
     if (dany->equal (dany_nested))
     {
-      TAOX11_TEST_DEBUG << " FAILED they test equal before setting shorts" << std::endl;
+      TAOX11_TEST_ERROR << " FAILED they test equal before setting shorts" << std::endl;
       return 1;
     }
 
-    TAOX11_TEST_DEBUG << "B10.Setting to value and test for inequality with original dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "B10.Setting to value and test for inequality with original dynamic any" << std::endl;
     dvc->set_to_value ();
     analyzer.analyze (dany);
     if (dany->equal (dany_nested))
     {
-      TAOX11_TEST_DEBUG << " FAILED they test equal before setting shorts" << std::endl;
+      TAOX11_TEST_ERROR << " FAILED they test equal before setting shorts" << std::endl;
       return 1;
     }
 
@@ -419,53 +417,53 @@ int main (int argc, ACE_TCHAR *argv[])
     dany->insert_short (s1);
     if (!(dany->next ()))
     {
-      TAOX11_TEST_DEBUG << "Error, Failed  to move on to second short" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed to move on to second short" << std::endl;
       return 1;
     }
     dany->insert_short (s2);
     analyzer.analyze (dany);
 
-    TAOX11_TEST_DEBUG << "B12.Testing for equality with original dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "B12.Testing for equality with original dynamic any" << std::endl;
     if (!(dany->equal (dany_nested)))
     {
-      TAOX11_TEST_DEBUG << " FAILED they test unequal after setting shorts" << std::endl;
+      TAOX11_TEST_ERROR << " FAILED they test unequal after setting shorts" << std::endl;
       return 1;
     }
 
-    TAOX11_TEST_DEBUG << "B13.Setting typecode dynamic any back to Null" << std::endl;
+    TAOX11_TEST_DEBUG << "B13.Setting typecode dynamic any back to null" << std::endl;
     dvc->set_to_null ();
     analyzer.analyze (dany);
 
-    TAOX11_TEST_DEBUG << "B14.Setting the original dynamic any to Null object" << std::endl;
+    TAOX11_TEST_DEBUG << "B14.Setting the original dynamic any to null object" << std::endl;
     dvc= IDL::traits<DynamicAny::DynValueCommon>::narrow(dany_nested);
     if (!dvc)
     {
-      TAOX11_TEST_DEBUG << " FAILURE can not obtain DynamicAny::DynValueCommon *" << std::endl;
+      TAOX11_TEST_ERROR << " FAILURE can not obtain DynamicAny::DynValueCommon *" << std::endl;
       return 1;
     }
     dvc->set_to_null ();
     analyzer.analyze (dany_nested);
 
-    TAOX11_TEST_DEBUG << "B15.Testing for equality with typecode dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "B15.Testing for equality with typecode dynamic any" << std::endl;
     if (!(dany->equal (dany_nested)))
     {
-      TAOX11_TEST_DEBUG << "Error, Failed  they test unequal!" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed they test unequal!" << std::endl;
       return 1;
     }
 
-    TAOX11_TEST_DEBUG << "B16.Converting from Null dynamic any back to any" << std::endl;
+    TAOX11_TEST_DEBUG << "B16.Converting from null dynamic any back to any" << std::endl;
     myAny2 = dany_nested->to_any ();
 
     TAOX11_TEST_DEBUG << "B17. Extracting from this any" << std::endl;
-    myNestedValueExtracted=CORBA::make_reference < IDL::traits<DynValue_Test::NestedValue>::obv_type> (9,9);
+    myNestedValueExtracted=CORBA::make_reference <IDL::traits<DynValue_Test::NestedValue>::obv_type> (9,9);
     if (!(myAny2 >>= myNestedValueExtracted))
     {
-      TAOX11_TEST_DEBUG << "Error, Failed  extraction" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed extraction" << std::endl;
       return 1;
     }
     if (myNestedValueExtracted)
     {
-      TAOX11_TEST_DEBUG << "Error, Failed  non-Null pointer extracted" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed non-null pointer extracted" << std::endl;
       return 1;
     }
 
@@ -473,14 +471,14 @@ int main (int argc, ACE_TCHAR *argv[])
     dvc->set_to_value ();
     analyzer.analyze (dany_nested);
 
-    TAOX11_TEST_DEBUG << "B19. Resetting Typecode dynamic any from original any" << std::endl;
+    TAOX11_TEST_DEBUG << "B19. Resetting typecode dynamic any from original any" << std::endl;
     dany->from_any (myAny);
     analyzer.analyze (dany);
 
-    TAOX11_TEST_DEBUG << "Testing for equality with original dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "Testing for equality with original dynamic any" << std::endl;
     if (!(dany->equal (dany_nested)))
     {
-      TAOX11_TEST_DEBUG << "Error, Failed  they test unequal!" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed they test unequal!" << std::endl;
       return 1;
     }
 
@@ -488,13 +486,13 @@ int main (int argc, ACE_TCHAR *argv[])
     myAny2 = dany_nested->to_any ();
 
     TAOX11_TEST_DEBUG << "Attempting to extract from this any (without factory)" << std::endl;
-    myNestedValueExtracted=CORBA::make_reference < IDL::traits<DynValue_Test::NestedValue>::obv_type> (9,9);
+    myNestedValueExtracted=CORBA::make_reference <IDL::traits<DynValue_Test::NestedValue>::obv_type> (9,9);
     TAOX11_TEST_DEBUG << "Attempting to extract from this any (without factory)" << std::endl;
     try
     {
       if (myAny2 >>= myNestedValueExtracted)
       {
-       TAOX11_TEST_DEBUG << " FAILED the extraction occured without factory" << std::endl;
+       TAOX11_TEST_ERROR << " FAILED the extraction occurred without factory" << std::endl;
        return 1;
       }
     }
@@ -517,8 +515,8 @@ int main (int argc, ACE_TCHAR *argv[])
     {
       // Expected with no factory registered
     }
-    IDL::traits< DynValue_Test::NestedValue >::factory_ref_type va_factory3 =
-       CORBA::make_reference< DynValue_Test::NestedValue_init > ();
+    IDL::traits<DynValue_Test::NestedValue >::factory_ref_type va_factory3 =
+       CORBA::make_reference<DynValue_Test::NestedValue_init > ();
 
     orb_->register_value_factory (va_factory3->_obv_repository_id (),
        va_factory3);
@@ -526,12 +524,12 @@ int main (int argc, ACE_TCHAR *argv[])
     TAOX11_TEST_DEBUG << "B22. Extracting from this any (now with factory)" << std::endl;
     if (!(myAny2 >>= myNestedValueExtracted))
     {
-      TAOX11_TEST_DEBUG << "Error, Failed  the extraction" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed the extraction" << std::endl;
       return 1;
     }
     if (!myNestedValueExtracted)
     {
-      TAOX11_TEST_DEBUG << "Error, Failed  Null pointer extracted" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed null pointer extracted" << std::endl;
       return 1;
      }
      TAOX11_TEST_DEBUG << "  checking value, shorts are "
@@ -541,7 +539,7 @@ int main (int argc, ACE_TCHAR *argv[])
     if (s1 != myNestedValueExtracted->Nested_s1 () ||
         s2 != myNestedValueExtracted->Nested_s2 ()   )
     {
-      TAOX11_TEST_DEBUG << " Error, Expected " << s1 << "," << s2 << std::endl;
+      TAOX11_TEST_ERROR << " Error, Expected " << s1 << "," << s2 << std::endl;
       return 1;
     }
 
@@ -550,7 +548,7 @@ int main (int argc, ACE_TCHAR *argv[])
         IDL::traits<DynValue_Test::NestedValue>::narrow(dany_nested->get_val ());
     if (!myNestedValueExtracted)
     {
-      TAOX11_TEST_DEBUG << " ERROR: FAILED get_val unsuccessful even with factory" << std::endl;
+      TAOX11_TEST_ERROR << " ERROR: FAILED get_val unsuccessful even with factory" << std::endl;
       return 1;
     }
     TAOX11_TEST_DEBUG << "   checking value, shorts are "
@@ -560,7 +558,7 @@ int main (int argc, ACE_TCHAR *argv[])
     if (s1 != myNestedValueExtracted->Nested_s1 () ||
         s2 != myNestedValueExtracted->Nested_s2 ()   )
     {
-      TAOX11_TEST_DEBUG << " Error, Expected " << s1 << "," << s2 << std::endl;
+      TAOX11_TEST_ERROR << " Error, Expected " << s1 << "," << s2 << std::endl;
       return 1;
     }
 
@@ -570,22 +568,22 @@ int main (int argc, ACE_TCHAR *argv[])
 
     TAOX11_TEST_DEBUG <<"C *=*=*=*= DynValue_Test::NullValue =*=*=*=*" << std::endl;
     IDL::traits<DynValue_Test::NullValue>::ref_type myNullValue =
-        CORBA::make_reference < IDL::traits<DynValue_Test::NullValue>::obv_type>  ();
+        CORBA::make_reference <IDL::traits<DynValue_Test::NullValue>::obv_type>  ();
 
     TAOX11_TEST_DEBUG << "C1. Inserting into an any" << std::endl;
     myAny <<= myNullValue;
 
     TAOX11_TEST_DEBUG << "C2. Extracting from an any" << std::endl;
     IDL::traits<DynValue_Test::NullValue>::ref_type myNullValueExtracted =
-       CORBA::make_reference < IDL::traits<DynValue_Test::NullValue>::obv_type>  ();
+       CORBA::make_reference <IDL::traits<DynValue_Test::NullValue>::obv_type>  ();
     if (!(myAny >>= myNullValueExtracted))
     {
-      TAOX11_TEST_ERROR << "Error, Failed  extraction" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed extraction" << std::endl;
       return 1;
     }
     if (!myNullValueExtracted)
     {
-      TAOX11_TEST_ERROR << "Error, Failed  Null pointer extracted" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed null pointer extracted" << std::endl;
       return 1;
     }
 
@@ -593,7 +591,7 @@ int main (int argc, ACE_TCHAR *argv[])
     IDL::traits< DynamicAny::DynAny>::ref_type dany_null  = dany_fact_->create_dyn_any  (myAny);
     analyzer.analyze (dany_null);
 
-    TAOX11_TEST_DEBUG << "Testing dynamic any for non-Null" << std::endl;
+    TAOX11_TEST_DEBUG << "Testing dynamic any for non-null" << std::endl;
     dvc= IDL::traits<DynamicAny::DynValueCommon >::narrow(dany_null);
     if (!dvc)
     {
@@ -602,7 +600,7 @@ int main (int argc, ACE_TCHAR *argv[])
     }
     if (dvc->is_null ())
     {
-      TAOX11_TEST_ERROR << "Error, Failed  this dynamic any is Null!" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed this dynamic any is null!" << std::endl;
       return 1;
     }
 
@@ -610,7 +608,7 @@ int main (int argc, ACE_TCHAR *argv[])
     dany = dany_fact_->create_dyn_any_from_type_code (DynValue_Test::_tc_NullValue);
     analyzer.analyze (dany);
 
-    TAOX11_TEST_DEBUG << "Testing typecode generated dynamic any for Null" << std::endl;
+    TAOX11_TEST_DEBUG << "Testing typecode generated dynamic any for null" << std::endl;
     dvc= IDL::traits<DynamicAny::DynValueCommon >::narrow (dany);
     if (!dvc)
     {
@@ -619,31 +617,31 @@ int main (int argc, ACE_TCHAR *argv[])
     }
     if (!(dvc->is_null ()))
     {
-      TAOX11_TEST_ERROR << "Error, Failed  this dynamic any has a value!" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed this dynamic any has a value!" << std::endl;
       return 1;
     }
 
-    TAOX11_TEST_DEBUG << "C5. Testing for inequality with original dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "C5. Testing for inequality with original dynamic any" << std::endl;
     if (dany->equal (dany_null))
     {
       TAOX11_TEST_ERROR << " FAILED they test equal before setting to a value" << std::endl;
       return 1;
     }
 
-    TAOX11_TEST_DEBUG << "Setting to value and test for equality with original dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "Setting to value and test for equality with original dynamic any" << std::endl;
     dvc->set_to_value ();
     analyzer.analyze (dany);
     if (!(dany->equal (dany_null)))
     {
-      TAOX11_TEST_ERROR << "Error, Failed  they test unequal" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed they test unequal" << std::endl;
       return 1;
     }
 
-    TAOX11_TEST_DEBUG << "Setting typecode dynamic any back to Null" << std::endl;
+    TAOX11_TEST_DEBUG << "Setting typecode dynamic any back to null" << std::endl;
     dvc->set_to_null ();
     analyzer.analyze (dany);
 
-    TAOX11_TEST_DEBUG << "C6. Setting the original dynamic any to Null object" << std::endl;
+    TAOX11_TEST_DEBUG << "C6. Setting the original dynamic any to null object" << std::endl;
     dvc= IDL::traits<DynamicAny::DynValueCommon >::narrow(dany_null);
     if (!dvc)
     {
@@ -653,26 +651,26 @@ int main (int argc, ACE_TCHAR *argv[])
     dvc->set_to_null ();
     analyzer.analyze (dany_null);
 
-    TAOX11_TEST_DEBUG << "Testing for equality with typecode dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "Testing for equality with typecode dynamic any" << std::endl;
     if (!(dany->equal (dany_null)))
     {
-      TAOX11_TEST_ERROR << "Error, Failed  they test unequal!" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed they test unequal!" << std::endl;
       return 1;
     }
 
-    TAOX11_TEST_DEBUG << "C7. Converting from Null dynamic any back to any" << std::endl;
+    TAOX11_TEST_DEBUG << "C7. Converting from null dynamic any back to any" << std::endl;
     myAny2= dany_null->to_any ();
 
     TAOX11_TEST_DEBUG << "Extracting from this any" << std::endl;
-    myNullValueExtracted= CORBA::make_reference < IDL::traits<DynValue_Test::NullValue>::obv_type> ();
+    myNullValueExtracted= CORBA::make_reference <IDL::traits<DynValue_Test::NullValue>::obv_type> ();
     if (!(myAny2 >>= myNullValueExtracted))
     {
-      TAOX11_TEST_ERROR << "Error, Failed  extraction" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed extraction" << std::endl;
       return 1;
     }
     if (myNullValueExtracted)
     {
-      TAOX11_TEST_ERROR << "Error, Failed  non-Null pointer extracted" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed non-null pointer extracted" << std::endl;
       return 1;
     }
 
@@ -680,14 +678,14 @@ int main (int argc, ACE_TCHAR *argv[])
     dvc->set_to_value ();
      analyzer.analyze (dany_null);
 
-    TAOX11_TEST_DEBUG << "Resetting Typecode dynamic any from original any" << std::endl;
+    TAOX11_TEST_DEBUG << "Resetting typecode dynamic any from original any" << std::endl;
     dany->from_any (myAny);
      analyzer.analyze (dany);
 
-    TAOX11_TEST_DEBUG << "Testing for equality with original dyanamic any" << std::endl;
+    TAOX11_TEST_DEBUG << "Testing for equality with original dynamic any" << std::endl;
     if (!(dany->equal (dany_null)))
     {
-      TAOX11_TEST_ERROR << "Error, Failed  they test unequal!" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed they test unequal!" << std::endl;
       return 1;
     }
 
@@ -695,11 +693,11 @@ int main (int argc, ACE_TCHAR *argv[])
     myAny2 = dany_null->to_any ();
 
     TAOX11_TEST_DEBUG << "Attempting to extract from this any (without factory)" << std::endl;
-    myNullValueExtracted= CORBA::make_reference < IDL::traits<DynValue_Test::NullValue>::obv_type> ();
+    myNullValueExtracted= CORBA::make_reference <IDL::traits<DynValue_Test::NullValue>::obv_type> ();
     try{
       if (myAny2 >>= myNullValueExtracted)
       {
-        TAOX11_TEST_ERROR << "Error, Failed  the extraction occured without factory" << std::endl;
+        TAOX11_TEST_ERROR << "Error, Failed the extraction occurred without factory" << std::endl;
         return 1;
       }
     }
@@ -710,10 +708,10 @@ int main (int argc, ACE_TCHAR *argv[])
     TAOX11_TEST_DEBUG << "C9.  Attempting to get_val from dynamic any (without factory)" << std::endl;
     try
     {
-      myNullValueExtracted= IDL::traits< DynValue_Test::NullValue>::narrow (dany_null->get_val ());
+      myNullValueExtracted= IDL::traits<DynValue_Test::NullValue>::narrow (dany_null->get_val ());
       if (myNullValueExtracted)
       {
-        TAOX11_TEST_ERROR << "Error, Failed  get_val successful without factory" << std::endl;
+        TAOX11_TEST_ERROR << "Error, Failed get_val successful without factory" << std::endl;
         return 1;
       }
     }
@@ -721,20 +719,20 @@ int main (int argc, ACE_TCHAR *argv[])
     {
       // Expected with no factory registered
     }
-    IDL::traits< DynValue_Test::NullValue >::factory_ref_type va_factory4 =
-       CORBA::make_reference< DynValue_Test::NullValue_init > ();
+    IDL::traits<DynValue_Test::NullValue >::factory_ref_type va_factory4 =
+       CORBA::make_reference<DynValue_Test::NullValue_init > ();
 
     orb_->register_value_factory (va_factory4->_obv_repository_id (),
                                   va_factory4);
     TAOX11_TEST_DEBUG << "C10. Extracting from this any (now with factory)" << std::endl;
     if (!(myAny2 >>= myNullValueExtracted))
     {
-      TAOX11_TEST_ERROR << "Error, Failed  the extraction" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed the extraction" << std::endl;
       return 1;
     }
     if (!myNullValueExtracted)
     {
-      TAOX11_TEST_ERROR << "Error, Failed  Null pointer extracted" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed null pointer extracted" << std::endl;
       return 1;
     }
 
@@ -742,7 +740,7 @@ int main (int argc, ACE_TCHAR *argv[])
     myNullValueExtracted= IDL::traits<DynValue_Test::NullValue>::narrow(dany_null->get_val ());
     if (!myNullValueExtracted)
     {
-      TAOX11_TEST_ERROR << "Error, Failed  get_val unsuccessful even with factory" << std::endl;
+      TAOX11_TEST_ERROR << "Error, Failed get_val unsuccessful even with factory" << std::endl;
       return 1;
     }
 
@@ -750,12 +748,12 @@ int main (int argc, ACE_TCHAR *argv[])
   }
   catch (const CORBA::TRANSIENT &)
   {
-    TAOX11_TEST_DEBUG << "Error : Recived CORBA::TRANSIENT" << std::endl;
+    TAOX11_TEST_DEBUG << "Error : Received CORBA::TRANSIENT" << std::endl;
     return 1;
   }
   catch (const CORBA::COMM_FAILURE &)
   {
-    TAOX11_TEST_ERROR << "Error : Recived CORBA::COMM_FAILURE" << std::endl;
+    TAOX11_TEST_ERROR << "Error : Received CORBA::COMM_FAILURE" << std::endl;
     return 1;
   }
   catch (const CORBA::Exception & ex)

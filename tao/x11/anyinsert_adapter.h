@@ -28,21 +28,21 @@ namespace TAOX11_NAMESPACE
     class Policy;
     class Any;
 
-    typedef std::vector < bool> BooleanSeq;
-    typedef std::vector < uint8_t> OctetSeq;
-    typedef std::vector < char> CharSeq;
-    typedef std::vector < wchar_t> WCharSeq;
-    typedef std::vector < int16_t> ShortSeq;
-    typedef std::vector < uint16_t> UShortSeq;
-    typedef std::vector < int32_t> LongSeq;
-    typedef std::vector < uint32_t> ULongSeq;
-    typedef std::vector < int64_t> LongLongSeq;
-    typedef std::vector < uint64_t> ULongLongSeq;
-    typedef std::vector < float> FloatSeq;
-    typedef std::vector < double> DoubleSeq;
-    typedef std::vector < long double> LongDoubleSeq;
-    typedef std::vector < std::string> StringSeq;
-    typedef std::vector < std::wstring> WStringSeq;
+    using BooleanSeq = std::vector <bool>;
+    using OctetSeq = std::vector <uint8_t>;
+    using CharSeq = std::vector <char>;
+    using WCharSeq = std::vector <wchar_t>;
+    using ShortSeq = std::vector <int16_t>;
+    using UShortSeq = std::vector <uint16_t>;
+    using LongSeq = std::vector <int32_t>;
+    using ULongSeq = std::vector <uint32_t>;
+    using LongLongSeq = std::vector <int64_t>;
+    using ULongLongSeq = std::vector <uint64_t>;
+    using FloatSeq = std::vector <float>;
+    using DoubleSeq = std::vector <double>;
+    using LongDoubleSeq= std::vector <long double>;
+    using StringSeq = std::vector <std::string>;
+    using WStringSeq = std::vector <std::wstring>;
   } // namespace CORBA
 
   /**

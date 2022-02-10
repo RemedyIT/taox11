@@ -128,7 +128,7 @@ namespace TAOX11_NAMESPACE
     IDL::traits<TAOX11_NAMESPACE::PortableServer::ServantActivator>::ref_type
     Servant_Activator_Callback::get_impl () const
     {
-      return CORBA::object_traits< PortableServer::ServantActivator>::narrow (
+      return CORBA::object_traits<PortableServer::ServantActivator>::narrow (
           this->Servant_Manager_Callback::get_impl ());
     }
   }

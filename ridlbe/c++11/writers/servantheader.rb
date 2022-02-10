@@ -59,7 +59,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from ServantHeaderWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -69,7 +69,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
@@ -147,7 +147,7 @@ module IDL
       end
 
       def pre_visit(parser)
-        println();
+        println
         printiln('// generated from ServantHeaderSrvTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE {')
         inc_nest
@@ -183,7 +183,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from ServantHeaderTieWriter#pre_visit')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -193,7 +193,7 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 

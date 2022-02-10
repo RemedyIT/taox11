@@ -35,7 +35,7 @@ namespace Test
   protected:
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo_impl[Constructors]
     /// Constructor(s)'
-    Foo_impl (IDL::traits< CORBA::ORB >::ref_type orb);
+    Foo_impl (IDL::traits<CORBA::ORB>::ref_type orb);
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo_impl[Constructors]
 
     /// Destructor
@@ -67,7 +67,7 @@ namespace Test
   private:
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo_impl[User Private]
     // your private definitions
-    IDL::traits< CORBA::ORB >::ref_type orb_;
+    IDL::traits<CORBA::ORB>::ref_type orb_;
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo_impl[User Private]
 
 

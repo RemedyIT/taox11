@@ -21,6 +21,8 @@
 #include "tao/x11/ext/stdext.h"
 #include "ace/OS_NS_unistd.h"
 #include <thread>
+#include <atomic>
+#include <exception>
 #if defined(X11_NLOGGING)
 # include <iostream>
 #endif
@@ -157,9 +159,9 @@ namespace x11_logger
     // to logfile base path and creation specs
     void build_file_path (long);
 
-    std::string category_;
-    uint32_t priority_mask_;
-    uint32_t verbosity_mask_;
+    std::string const category_;
+    std::atomic<uint32_t> priority_mask_;
+    std::atomic<uint32_t> verbosity_mask_ {};
     uint32_t output_mask_ {};
     std::string file_base_;
     uint32_t file_max_size_ {};
@@ -180,7 +182,7 @@ namespace x11_logger
 
     static TAOX11_Test_Log_Module* getInstance();
 
-    typedef Log_Type_T<TAOX11_Test_Log_Module> log_type;
+    using log_type = Log_Type_T<TAOX11_Test_Log_Module>;
 
   private:
     TAOX11_Test_Log_Module ();
@@ -314,6 +316,14 @@ namespace x11_logger
   date (std::basic_ostream<CH, TR>& _os) { return (_os << x11_logger::timestamp (true)); }
 
 } /* x11_logger */
+
+// basic std::exception logging support
+template <typename CH, typename TR>
+inline std::basic_ostream<CH, TR>&
+operator <<(std::basic_ostream<CH, TR>& os_, const std::exception& x_)
+{
+  return (os_ << x_.what ());
+}
 
 // CORE logging
 #if defined(X11_NLOGGING)

@@ -15,15 +15,15 @@ int main(int argc, char* argv[])
 {
   try
     {
-      IDL::traits<CORBA::ORB>::ref_type _orb = CORBA::ORB_init (argc, argv);
+      IDL::traits<CORBA::ORB>::ref_type orb = CORBA::ORB_init (argc, argv);
 
-      if (_orb == nullptr)
+      if (!orb)
       {
         TAOX11_TEST_ERROR << "ERROR: CORBA::ORB_init (argc, argv) returned null ORB." << std::endl;
         return 1;
       }
 
-      IDL::traits<CORBA::Object>::ref_type obj = _orb->string_to_object ("file://test.ior");
+      IDL::traits<CORBA::Object>::ref_type obj = orb->string_to_object ("file://test.ior");
 
       if (!obj)
       {
@@ -53,25 +53,30 @@ int main(int argc, char* argv[])
       for (IDL::traits<Test::Hello>::ref_type& el_foo : foo_seq)
       {
         if (!el_foo)
+        {
           TAOX11_TEST_DEBUG << "null reference" << std::endl;
+        }
       }
 
       IDL::traits<Test::Bar>::ref_type bar = hello->get_bar ();
-
       IDL::traits<Test::Bar>::ref_type bar_in;
       IDL::traits<Test::Bar>::ref_type bar_out;
       IDL::traits<Test::Bar>::ref_type bar_inout;
       hello->with_bar (bar_in, bar_out, bar_inout);
 
       TAOX11_TEST_DEBUG << "shutting down...";
+
       if (hello)
+      {
         hello->shutdown ();
-      _orb->destroy ();
+      }
+
+      orb->destroy ();
       TAOX11_TEST_DEBUG << std::endl;
     }
   catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+      TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
       return 1;
     }
   return 0;

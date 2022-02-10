@@ -43,7 +43,7 @@ namespace TAOX11_NAMESPACE
 
       /// Initialize using just a TypeCode.
       IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
-      init (IDL::traits< CORBA::TypeCode>::ref_type tc);
+      init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       /// Initialize using an Any.
       IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
@@ -73,10 +73,10 @@ namespace TAOX11_NAMESPACE
 
     private:
       /// Returns the type of elements contained in the array.
-      IDL::traits< CORBA::TypeCode>::ref_type get_element_type ();
+      IDL::traits<CORBA::TypeCode>::ref_type get_element_type ();
 
       /// Gets the length of the array from the typecode.
-      uint32_t get_tc_length (IDL::traits< CORBA::TypeCode>::ref_type tc);
+      uint32_t get_tc_length (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       /// Called by both versions of init().
       void init_common (uint32_t component_count);
