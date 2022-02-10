@@ -67,7 +67,7 @@ jobs:
       with:
         repository: jwillemsen/axcioma
         path: ${{ env.X11_BASE_ROOT }}
-        branch: jwi-windowssetupruby
+        ref: jwi-windowssetupruby
     - uses: ilammy/msvc-dev-cmd@v1
     - uses: ruby/setup-ruby@v1
       with:
