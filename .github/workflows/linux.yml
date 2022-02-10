@@ -144,7 +144,7 @@ jobs:
     - name: Run gcov
       run: |
         find . -type f -name '*.gcno' -exec gcov -pb  {} +
-      if: matrix.feature == 'Codecov'      
+      if: matrix.feature == 'Codecov'
     - uses: codecov/codecov-action@v2
       with:
         verbose: true # optional (default = false)
