@@ -38,17 +38,13 @@ public:
   add_impl (CCS::AssetType anum,
     CORBA::servant_traits< CCS::Thermometer>::ref_type tip);
 
-  void
-  remove_impl (CCS::AssetType anum);
+  void remove_impl (CCS::AssetType anum);
 
-  bool
-  exists (CCS::AssetType anum);
+  bool exists (CCS::AssetType anum) const;
 
-  CCS::Controller::ThermometerSeq
-  list ();
+  CCS::Controller::ThermometerSeq list () const;
 
-  void
-  find (CCS::Controller::SearchSeq & slist);
+  void find (CCS::Controller::SearchSeq& slist);
 
 private:
   // Function object for the find_if algorithm to search for
@@ -56,10 +52,9 @@ private:
   class StrFinder
   {
   public:
-    StrFinder (CCS::Controller::SearchCriterion sc,
-      const std::string &str)
+    StrFinder (CCS::Controller::SearchCriterion sc, std::string str)
       : sc_ (sc)
-      , str_ (str)
+      , str_ (std::move(str))
     {
     }
 
@@ -88,7 +83,7 @@ private:
   // Map of existing assets. The servant pointer is null
   // the corresponding servant is not in memory.
   using AssetMap = std::map<CCS::AssetType, CORBA::servant_traits< CCS::Thermometer>::ref_type>;
-  using AssetPair = std::pair<CCS::AssetType, CORBA::servant_traits< CCS::Thermometer>::ref_type>;
+  using AssetPair = std::pair<const CCS::AssetType, CORBA::servant_traits< CCS::Thermometer>::ref_type>;
   AssetMap assets_;
 
   IDL::traits<PortableServer::POA>::ref_type poa_;
