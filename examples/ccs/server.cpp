@@ -25,8 +25,8 @@
 #include "tao/x11/portable_server/portableserver_functions.h"
 #include "orbsvcs/orbsvcs/naming_server/CosNamingC.h"
 
-const std::string CONTROLLER_OID = { "Controller" };
-const std::string CCS_OID = { "CCS" };
+std::string const CONTROLLER_OID = { "Controller" };
+std::string const CCS_OID = { "CCS" };
 
 //----------------------------------------------------------------
 
@@ -125,13 +125,13 @@ Administrator_impl::remove_impl (CCS::AssetType anum)
 }
 
 bool
-Administrator_impl::exists (CCS::AssetType anum)
+Administrator_impl::exists (CCS::AssetType anum) const
 {
   return this->assets_.find (anum) != this->assets_.end ();
 }
 
 CCS::Controller::ThermometerSeq
-Administrator_impl::list ()
+Administrator_impl::list () const
 {
   // Create a -new- thermometer sequence. Because we know
   // the number of elements we will put onto the sequence,
@@ -210,9 +210,6 @@ Administrator_impl::find (CCS::Controller::SearchSeq & slist)
 }
 
 //----------------------------------------------------------------
-
-// Constructor.
-
 Thermometer_impl::Thermometer_impl (CCS::AssetType anum,
   Administrator_impl &admin)
   : anum_ (anum)
@@ -220,7 +217,6 @@ Thermometer_impl::Thermometer_impl (CCS::AssetType anum,
 {
 }
 
-// Destructor.
 Thermometer_impl::~Thermometer_impl ()
 {
   if (this->admin_.exists (this->asset_num ()))
@@ -279,7 +275,6 @@ Thermometer_impl::location ()
 }
 
 // IDL location attribute modifier.
-
 void
 Thermometer_impl::location (const std::string &loc)
 {
@@ -292,7 +287,6 @@ Thermometer_impl::location (const std::string &loc)
 }
 
 // IDL remove operation.
-
 void
 Thermometer_impl::remove ()
 {
@@ -360,8 +354,6 @@ Thermostat_impl::set_nominal (CCS::TempType new_temp)
 }
 
 //----------------------------------------------------------------
-
-// Constructor
 
 Controller_impl::Controller_impl (IDL::traits<PortableServer::POA>::ref_type poa,
   const std::string &asset_file,
@@ -512,7 +504,6 @@ Controller_impl::create_thermostat (CCS::AssetType anum,
 }
 
 // IDL list operation.
-
 CCS::Controller::ThermometerSeq
 Controller_impl::list ()
 {
@@ -520,7 +511,6 @@ Controller_impl::list ()
 }
 
 // IDL change operation.
-
 void
 Controller_impl::change (const CCS::Controller::ThermostatSeq &tlist,
   int16_t delta)
