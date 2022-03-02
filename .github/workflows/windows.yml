@@ -46,24 +46,24 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: checkout ACE_TAO
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: DOCGroup/ACE_TAO
         path: ${{ env.DOC_ROOT }}
     - name: checkout MPC
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: DOCGroup/MPC
         path: ${{ env.MPC_ROOT }}
     - name: checkout ridl
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: RemedyIT/ridl
         path: ${{ env.RIDL_ROOT }}
     - name: checkout axcioma
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
