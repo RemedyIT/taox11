@@ -11,7 +11,7 @@
 #include "treebaseC.h"
 
 Test_impl::Test_impl (IDL::traits<CORBA::ORB>::ref_type orb)
-    : orb_ (orb)
+    : orb_ (std::move(orb))
 {
 }
 

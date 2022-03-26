@@ -17,7 +17,7 @@
 // Constructor
 test_i::test_i (IDL::traits<CORBA::ORB>::ref_type orb,
                 IDL::traits<PortableServer::POA>::ref_type poa)
-  : orb_ (orb),
+  : orb_ (std::move(orb)),
     poa_ (poa)
 {
 }

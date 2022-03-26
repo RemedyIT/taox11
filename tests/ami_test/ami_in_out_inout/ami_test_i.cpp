@@ -11,7 +11,7 @@
 #include <cmath>
 
 AMI_Test_i::AMI_Test_i (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb)
+  : orb_ (std::move(orb))
 {
 }
 

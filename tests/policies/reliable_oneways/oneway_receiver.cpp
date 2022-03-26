@@ -11,7 +11,7 @@
 
 Oneway_Receiver::Oneway_Receiver (
   IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb)
+  : orb_ (std::move(orb))
 {
 }
 

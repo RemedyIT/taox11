@@ -13,7 +13,7 @@
 #include "testdata.h"
 
 Hello::Hello(IDL::traits<CORBA::ORB>::ref_type orb, int& result)
-  : orb_ (orb)
+  : orb_ (std::move(orb))
   , result_ (result)
 {
 }

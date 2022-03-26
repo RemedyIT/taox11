@@ -104,7 +104,7 @@ private:
 
 Task::Task (IDL::traits<CORBA::ORB>::ref_type orb,
   bool test_not_found)
-  : orb_ (orb)
+  : orb_ (std::move(orb))
   , test_not_found_ (test_not_found)
 {
 }

@@ -10,7 +10,7 @@
 #include "test_i.h"
 
 Test_i::Test_i (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb)
+  : orb_ (std::move(orb))
 {
   yadda_ = 0;
 }

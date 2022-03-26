@@ -15,7 +15,7 @@
 ServantActivator::ServantActivator (
   IDL::traits<CORBA::ORB>::ref_type orb,
   IDL::traits<CORBA::Object>::ref_type forward_to)
-    : orb_ (orb)
+    : orb_ (std::move(orb))
     , forward_to_ (forward_to)
 {
 }

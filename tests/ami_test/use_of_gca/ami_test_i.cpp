@@ -9,13 +9,12 @@
 
 #include "ami_test_i.h"
 
-AMI_Test_i::AMI_Test_i (IDL::traits<CORBA::ORB>::ref_type orb
-    )
-  :  orb_ (orb),
-     yadda_ ((int32_t) 0),
-     in_l_ ((int32_t) 931247),
-     inout_l_ ((int32_t) 300),
-     in_l_last_ ((int32_t) 931235)
+AMI_Test_i::AMI_Test_i (IDL::traits<CORBA::ORB>::ref_type orb)
+  : orb_ (std::move(orb)),
+    yadda_ ((int32_t) 0),
+    in_l_ ((int32_t) 931247),
+    inout_l_ ((int32_t) 300),
+    in_l_last_ ((int32_t) 931235)
 {
 }
 int32_t

@@ -38,7 +38,7 @@ MyAdapter_Activator::MyAdapter_Activator (IDL::traits<PortableServer::POAManager
                                           CORBA::PolicyList& first_policies,
                                           CORBA::PolicyList& second_policies)
   : poa_manager_ (poa_manager)
-  , orb_ (orb)
+  , orb_ (std::move(orb))
   , first_poa_policies_(first_policies)
   , second_poa_policies_(second_policies)
 {
