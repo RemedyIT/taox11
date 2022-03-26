@@ -63,7 +63,7 @@ namespace Test
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[Constructors]
     Hello::Hello (IDL::traits<CORBA::ORB>::ref_type orb)
       : CORBA::servant_traits< ::Test::Hello>::base_type ()
-      , orb_ (orb)
+      , orb_ (std::move(orb))
     {
     }
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[Constructors]

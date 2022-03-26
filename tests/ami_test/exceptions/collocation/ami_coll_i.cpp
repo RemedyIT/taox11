@@ -213,7 +213,7 @@ Foo::Foo (IDL::traits<CORBA::ORB>::ref_type orb,
   IDL::traits<Test::Bar>::ref_type bar,
   CORBA::amic_traits<Test::Bar>::replyhandler_ref_type bar_handler,
   CORBA::amic_traits<Test::Bar>::ref_type ami_bar_client)
-  : orb_ (orb)
+  : orb_ (std::move(orb))
   , bar_ (bar)
   , bar_handler_ (bar_handler)
   , ami_bar_client_ (ami_bar_client)

@@ -21,7 +21,7 @@ Server_Task::Server_Task (CORBA::servant_reference<Sender_i> sender,
   , sender_ (sender)
   , event_ (event)
   , no_iterations_ (no_iterations)
-  , orb_ (orb)
+  , orb_ (std::move(orb))
 {
 }
 

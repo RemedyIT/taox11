@@ -100,7 +100,7 @@ private:
 };
 
 Tester_i::Tester_i (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb)
+  : orb_ (std::move(orb))
   , id1_ (0)
   , id2_ (0)
   , count_ (0)

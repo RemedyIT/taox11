@@ -28,7 +28,7 @@ namespace Test
   // your constructor(s)
   Foo_impl::Foo_impl (IDL::traits<CORBA::ORB>::ref_type orb)
     :  CORBA::servant_traits< ::Test::Foo>::base_type (),
-       orb_ (orb)
+       orb_ (std::move(orb))
   {
     // your constructor body
   }

@@ -77,7 +77,7 @@ vt_graph_init_impl::create_for_unmarshal ()
 
 /* test_impl */
 
-test_impl::test_impl (CORBA::ORB::_ref_type orb) : orb_ (orb)
+test_impl::test_impl (CORBA::ORB::_ref_type orb) : orb_ (std::move(orb))
 {
 }
 
