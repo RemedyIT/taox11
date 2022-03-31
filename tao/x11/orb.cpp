@@ -838,9 +838,12 @@ namespace TAOX11_NAMESPACE
                                  << (uint32_t)TAOX11_MICRO_VERSION
                                  << " (c) Remedy IT");
       ACE_utsname uname;
-      ACE_OS::uname (&uname);
-      TAOX11_LOG_INFO ("TAOX11 machine: " << uname.nodename << ", " << uname.machine);
-      TAOX11_LOG_INFO ("TAOX11 platform: " << uname.sysname << ", " <<  uname.release << ", " << uname.version);
+      int const result = ACE_OS::uname (&uname);
+      if (result != -1)
+      {
+        TAOX11_LOG_INFO ("TAOX11 machine: " << uname.nodename << ", " << uname.machine);
+        TAOX11_LOG_INFO ("TAOX11 platform: " << uname.sysname << ", " <<  uname.release << ", " << uname.version);
+      }
       TAOX11_LOG_INFO ("TAOX11 compiler: " << ACE::compiler_name() << " version "
                                            << ACE::compiler_major_version() << "." << ACE::compiler_minor_version () << "." << ACE::compiler_beta_version ());
       TAOX11_LOG_INFO ("TAOX11 buildstamp: " << TAOX11_RELEASE_BUILDSTAMP);
