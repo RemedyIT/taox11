@@ -37,6 +37,8 @@
     __DATE__ " " __TIME__
 #endif
 
+#include "ace/OS_NS_sys_utsname.h"
+
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
 /// @name CDR streaming operator specializations for TAOX11_CORBA::ORB::InvalidName
@@ -835,7 +837,13 @@ namespace TAOX11_NAMESPACE
                                  << (uint32_t)TAOX11_MINOR_VERSION << '.'
                                  << (uint32_t)TAOX11_MICRO_VERSION
                                  << " (c) Remedy IT");
-      TAOX11_LOG_INFO ("Buildstamp : " << TAOX11_RELEASE_BUILDSTAMP);
+      ACE_utsname uname;
+      ACE_OS::uname (&uname);
+      TAOX11_LOG_INFO ("TAOX11 machine: " << uname.nodename << ", " << uname.machine);
+      TAOX11_LOG_INFO ("TAOX11 platform: " << uname.sysname << ", " <<  uname.release << ", " << uname.version);
+      TAOX11_LOG_INFO ("TAOX11 compiler: " << ACE::compiler_name() << " version "
+                                           << ACE::compiler_major_version() << "." << ACE::compiler_minor_version () << "." << ACE::compiler_beta_version ());
+      TAOX11_LOG_INFO ("TAOX11 buildstamp: " << TAOX11_RELEASE_BUILDSTAMP);
 
       try {
         TAO_CORBA::ORB_var _orb;
