@@ -17,12 +17,12 @@ class test_i final : public virtual CORBA::servant_traits<Test::Hello>::base_typ
 {
 public:
   test_i (IDL::traits<PortableServer::POA>::ref_type& poa, PortableServer::ObjectId& id)
-  : poa_ (std::move(poa))
+  : poa_ (poa)
   , id_ (id)
   {
   }
 
-  ~test_i () = default;
+  ~test_i () override = default;
 
   void deactivate_self () override;
 
