@@ -26,7 +26,7 @@ namespace Test
   namespace _impl
   {
     class Foo
-      : public CORBA::servant_traits< ::Test::Foo>::base_type
+      : public CORBA::servant_traits<::Test::Foo>::base_type
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[Base List]
     // your base classes
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo[Base List]
@@ -38,7 +38,7 @@ namespace Test
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo[Constructors]
 
       /// Destructor
-      virtual ~Foo ();
+      ~Foo () override;
 
       template <typename T> friend class CORBA::servant_reference;
 
@@ -72,7 +72,7 @@ namespace Test
   namespace _impl
   {
     class Hello
-      : public CORBA::servant_traits< ::Test::Hello>::base_type
+      : public CORBA::servant_traits<::Test::Hello>::base_type
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[Base List]
     // your base classes
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[Base List]
@@ -84,7 +84,7 @@ namespace Test
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[Constructors]
 
       /// Destructor
-      virtual ~Hello ();
+      ~Hello () override;
 
       template <typename T> friend class CORBA::servant_reference;
 
