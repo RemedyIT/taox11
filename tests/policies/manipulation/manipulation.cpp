@@ -70,7 +70,7 @@ class Test_impl final
 {
 public:
   Test_impl () = default;
-  virtual ~Test_impl () = default;
+  ~Test_impl () override = default;
 private:
   Test_impl (const Test_impl&) = delete;
   Test_impl (Test_impl&&) = delete;

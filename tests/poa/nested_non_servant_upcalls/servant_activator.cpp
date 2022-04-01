@@ -15,7 +15,7 @@ extern Object_Activator *global_object_activator;
 
 
 test_i::test_i(IDL::traits<PortableServer::POA>::ref_type poa) :
-    poa_ (poa)
+    poa_ (std::move(poa))
 {
   TAOX11_TEST_DEBUG << "test_i created: instance " << std::endl;
 }
@@ -32,7 +32,7 @@ test_i::method()
 
 Object_Activator::Object_Activator(ACE_Thread_Manager &thread_manager,
     IDL::traits<PortableServer::POA>::ref_type poa) :
-    ACE_Task_Base (std::addressof(thread_manager)), poa_ (poa)
+    ACE_Task_Base (std::addressof(thread_manager)), poa_ (std::move(poa))
 {
 }
 

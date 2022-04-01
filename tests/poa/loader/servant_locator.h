@@ -41,7 +41,7 @@ public:
                   const std::string& dllname,
                   const std::string& factory_function);
 
-  virtual ~ServantLocator();
+  ~ServantLocator() override;
 
   /**
    * This method is invoked by a POA whenever it receives a request

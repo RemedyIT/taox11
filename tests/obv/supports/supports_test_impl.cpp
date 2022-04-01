@@ -13,10 +13,6 @@
 
 /* vt_graph_impl */
 
-vt_graph_impl::vt_graph_impl ()
-{
-}
-
 // Creates a vt_graph_impl with the given number of nodes. There will be one
 // root node and the rest will be children of it.
 vt_graph_impl::vt_graph_impl (int num_nodes)
@@ -78,10 +74,6 @@ vt_graph_init_impl::create_for_unmarshal ()
 /* test_impl */
 
 test_impl::test_impl (CORBA::ORB::_ref_type orb) : orb_ (std::move(orb))
-{
-}
-
-test_impl::~test_impl ()
 {
 }
 
@@ -157,10 +149,6 @@ test_impl::finish ()
 
 
 /* node_impl */
-
-node_impl::node_impl ()
-{
-}
 
 // Initialize state.
 node_impl::node_impl (const std::string& name)
