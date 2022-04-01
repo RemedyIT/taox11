@@ -13,10 +13,6 @@ Hello::Hello (IDL::traits<CORBA::ORB>::ref_type orb, IDL::traits<Test::Hello_Fac
 {
 }
 
-Hello::~Hello()
-{
-}
-
 std::string
 Hello::get_string ()
 {
@@ -42,11 +38,7 @@ Hello::shutdown ()
 Hello_Factory::Hello_Factory (IDL::traits<CORBA::ORB>::ref_type orb,
                               IDL::traits<PortableServer::POA>::ref_type poa)
  : orb_ (std::move(orb)),
-   poa_ (poa)
-{
-}
-
-Hello_Factory::~Hello_Factory()
+   poa_ (std::move(poa))
 {
 }
 

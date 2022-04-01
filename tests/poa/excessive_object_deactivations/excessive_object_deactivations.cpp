@@ -17,7 +17,7 @@ class test_i final : public virtual CORBA::servant_traits<Test::Hello>::base_typ
 {
 public:
   test_i (IDL::traits<PortableServer::POA>::ref_type& poa, PortableServer::ObjectId& id)
-  : poa_ (poa)
+  : poa_ (std::move(poa))
   , id_ (id)
   {
   }

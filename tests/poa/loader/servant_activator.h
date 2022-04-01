@@ -42,7 +42,7 @@ public:
                     const std::string& dllname,
                     const std::string& factory_function);
 
-  virtual ~ServantActivator();
+  ~ServantActivator() override;
 
   /**
    * This method is invoked by a POA with USE_SERVANT_MANAGER and

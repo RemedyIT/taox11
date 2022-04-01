@@ -21,7 +21,7 @@ class node_impl final
   : public virtual IDL::traits<Supports_Test::Node>::obv_type
 {
 public:
-  node_impl ();
+  node_impl () = default;
 
   node_impl (const std::string& name);
 
@@ -63,7 +63,7 @@ class vt_graph_impl final
   , public virtual CORBA::servant_traits<Supports_Test::vt_graph>::base_type
 {
 public:
-  vt_graph_impl ();
+  vt_graph_impl () = default;
 
   vt_graph_impl (int num_nodes);
 
@@ -103,7 +103,7 @@ class test_impl final
 public:
   test_impl (CORBA::ORB::_ref_type orb);
 
-  virtual ~test_impl ();
+  ~test_impl () override = default;
 
   void pass_obj_graph_in (Supports_Test::graph::_ref_type graph_param) override;
 

@@ -13,7 +13,7 @@ test_i::test_i (IDL::traits<CORBA::ORB>::ref_type orb,
                 IDL::traits<PortableServer::ServantActivator>::weak_ref_type activator,
                 int32_t value)
   : orb_ (std::move(orb)),
-    poa_ (poa),
+    poa_ (std::move(poa)),
     activator_ (activator),
     value_ (value)
 {

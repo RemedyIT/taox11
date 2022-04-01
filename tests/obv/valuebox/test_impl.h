@@ -16,7 +16,7 @@ class Test_impl final
 public:
   /// ctor
   Test_impl(IDL::traits<CORBA::ORB>::ref_type orb);
-  virtual ~Test_impl() = default;
+  ~Test_impl() override = default;
 
   IDL::traits<VBlong>::ref_type basic_op1(
       IDL::traits<VBlong>::ref_type p1,

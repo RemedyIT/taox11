@@ -9,10 +9,6 @@
 #include "testlib/taox11_testlog.h"
 
 // Implementation interface iLocal_A. Method to test if instance is OK.
-iLocal_A_impl::~iLocal_A_impl ()
-{
-}
-
 std::string iLocal_A_impl::do_local ()
 {
   TAOX11_TEST_DEBUG << "Called iLocal_A_impl::do_local" << std::endl;
@@ -37,10 +33,6 @@ std::string iLocal_A_impl::do_A (int32_t& result)
 }
 
 // Implementation interface iLocal_B.
-iLocal_B_impl::~iLocal_B_impl ()
-{
-}
-
 std::string iLocal_B_impl::do_localB ()
 {
   TAOX11_TEST_DEBUG << "Called iLocal_B_impl::do_localB" << std::endl;
@@ -55,11 +47,7 @@ std::string iLocal_B_impl::do_B (int32_t& result)
 
 
 Foo_impl::Foo_impl (IDL::traits<Test::FooFactory>::ref_type factory) :
-  factory_ (factory)
-{
-}
-
-Foo_impl::~Foo_impl ()
+  factory_ (std::move(factory))
 {
 }
 
@@ -73,10 +61,6 @@ IDL::traits<Test::FooFactory>::ref_type
 Foo_impl::get_factory ()
 {
   return factory_;
-}
-
-Foo_Factory::~Foo_Factory ()
-{
 }
 
 std::string
