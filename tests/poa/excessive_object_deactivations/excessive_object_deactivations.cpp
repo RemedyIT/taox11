@@ -27,7 +27,7 @@ public:
   void deactivate_self () override;
 
   IDL::traits<PortableServer::POA>::ref_type _default_POA () override;
-
+private:
   IDL::traits<PortableServer::POA>::ref_type& poa_;
   PortableServer::ObjectId& id_;
 };
