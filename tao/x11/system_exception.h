@@ -35,7 +35,7 @@ namespace TAOX11_NAMESPACE
     {
     public:
       /// Destructor.
-      virtual ~SystemException () throw() = default;
+      virtual ~SystemException () noexcept = default;
 
       /// Get the minor status.
       uint32_t minor () const
@@ -91,7 +91,7 @@ namespace TAOX11_NAMESPACE
                        const char *local_name,
                        uint32_t code,
                        CORBA::CompletionStatus completed);
-
+    public:
       void _info (std::ostream& strm) const override;
 
     private:
@@ -198,7 +198,7 @@ namespace TAOX11_NAMESPACE
     class TAOX11_Export name final : public SystemException \
     { \
     public: \
-      virtual ~name () throw () = default; \
+      virtual ~name () noexcept = default; \
       name (); \
       name (uint32_t code, \
             CORBA::CompletionStatus completed); \
