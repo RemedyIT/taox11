@@ -17,7 +17,7 @@ class iA_impl final
 {
 public:
   iA_impl () = default;
-  ~iA_impl () = default;
+  ~iA_impl () override = default;
 
   std::string do_something_A() override;
 private:
