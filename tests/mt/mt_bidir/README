@@ -2,7 +2,7 @@
 
 @page MT_BiDir Test README File
 
-      This is a stress test that exercises the birectional GIOP
+      This is a stress test that exercises the bidirectional GIOP
 connection implementation with multiple threads in TAO.
 
 To run the test use the run_test.pl script:
