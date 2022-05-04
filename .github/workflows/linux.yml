@@ -112,7 +112,7 @@ jobs:
         sudo apt-get --yes update
         sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
     - name: initialize CodeQL
-      uses: github/codeql-action/init@v1
+      uses: github/codeql-action/init@v2
       with:
         languages: cpp
       if: matrix.feature == 'CodeQL'
@@ -139,7 +139,7 @@ jobs:
       run: |
         make -j -C ${TAOX11_ROOT} install
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      uses: github/codeql-action/analyze@v2
       if: matrix.feature == 'CodeQL'
     - uses: codecov/codecov-action@v3
       with:
