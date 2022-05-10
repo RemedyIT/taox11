@@ -19,6 +19,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 env:
   DOC_ROOT: ${{ github.workspace }}/ACE_TAO
   ACE_ROOT: ${{ github.workspace }}/ACE_TAO/ACE
