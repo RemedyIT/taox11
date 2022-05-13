@@ -14,6 +14,31 @@ struct Global
 
 module Test
 {
+  enum State {
+    STATE_PASS,
+    STATE_FAIL
+  };
+
+  enum Color {
+    COLOR_RED,
+    COLOR_BLUE
+  };
+
+  typedef string<512> BoundedString;
+  typedef sequence <long> LongSeq;
+
+  struct TestStruct {
+    Test::LongSeq testSeq;
+    long willFailHere;
+  };
+
+  union TestUnion_U switch(Color) {
+    case COLOR_BLUE:
+      Test::State FirstCase;
+    case COLOR_RED:
+      Test::TestStruct SecondCase;
+  };
+
   typedef string<25> first_name_t;
   typedef string<10> middle_name_t;
   typedef string<40> last_name_t;
