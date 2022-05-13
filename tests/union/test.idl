@@ -25,8 +25,6 @@ module Test
   };
 
   typedef string<512> BoundedString;
-
-  /// @typedef LongSeq
   typedef sequence <long> LongSeq;
 
   struct TestStruct {
@@ -283,5 +281,4 @@ module Test
      */
     oneway void shutdown ();
   };
-
 };
