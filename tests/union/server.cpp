@@ -97,6 +97,31 @@ main(int argc, ACE_TCHAR *argv[])
 
       TAOX11_TEST_DEBUG << "event loop finished" << std::endl;
 
+      // Testing the TestUnion_U1 type
+      Test::TestUnion_U1 u1_1;
+      Test::TestUnion_U1 u1_2 (u1_1); // make a copy
+      // Validate that u1_1 and u1_2 are the same
+      if (u1_1._d() != u1_2._d())
+      {
+        TAOX11_TEST_ERROR << "u1_1._d() != u1_2._d()" << std::endl;
+        return 1;
+      }
+      Test::TestUnion_U1 u1_3 (std::move(u1_1)); // do a move, u1_1 is now nil
+      // Validate that u1_2 and u1_3 are the same
+      if (u1_2._d() != u1_3._d())
+      {
+        TAOX11_TEST_ERROR << "u1_2._d() != u1_3._d()" << std::endl;
+        return 1;
+      }
+      // Swap the content of u1_2 and u1_3, currently triggers a warning
+      u1_2.swap (u1_3);
+      // Validate that u1_2 and u1_3 are the same
+      if (u1_2._d() != u1_3._d())
+      {
+        TAOX11_TEST_ERROR << "u1_2._d() != u1_3._d()" << std::endl;
+        return 1;
+      }
+
       root_poa->destroy (true, true);
 
       _orb->destroy ();
