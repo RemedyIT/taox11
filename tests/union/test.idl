@@ -32,11 +32,18 @@ module Test
     long willFailHere;
   };
 
-  union TestUnion_U switch(Color) {
+  union TestUnion_U1 switch(Color) {
     case COLOR_BLUE:
       Test::State FirstCase;
     case COLOR_RED:
       Test::TestStruct SecondCase;
+  };
+
+  union TestUnion_U2 switch(Color) {
+    case COLOR_RED:
+      Test::TestStruct SecondCase;
+    case COLOR_BLUE:
+      Test::State FirstCase;
   };
 
   typedef string<25> first_name_t;
