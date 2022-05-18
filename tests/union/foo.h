@@ -36,7 +36,7 @@ public:
 
   void shutdown () override;
 
-  uint16_t get_error_count ();
+  uint16_t get_error_count () const;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;

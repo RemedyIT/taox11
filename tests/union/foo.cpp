@@ -15,13 +15,13 @@ Foo::Foo (IDL::traits<CORBA::ORB>::ref_type orb)
 }
 
 uint16_t
-Foo::get_error_count()
+Foo::get_error_count() const
 {
   return errors_;
 }
 
 bool
-Foo::pass_union (const Test::Data & s)
+Foo::pass_union (const Test::Data& s)
 {
   this->s_ = s;
 
