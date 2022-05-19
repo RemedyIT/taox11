@@ -2,16 +2,7 @@
   <%= cxxname %> () = default;
   ~<%= cxxname %> () = default;
   <%= cxxname %> (<%= cxx_in_type %>) = default;
-#if defined __GNUC__ && __GNUC__ == 8
-% # gcc 8 can give an invalid maybe be used unitialized on the default move
-% # constructor when a struct is used within an union, see SW331
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
-#endif
   <%= cxxname %> (<%= cxx_move_type %>) = default;
-#if defined __GNUC__ && __GNUC__ == 8
-#pragma GCC diagnostic pop
-#endif
 % if member_count > 0
 %   _ms = members.dup
   /// Constructor which accepts value for all members
