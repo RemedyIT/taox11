@@ -1,13 +1,17 @@
-
   // generated from <%= ridl_template_path %>
-  /// Default constructor
   <%= cxxname %> () = default;
-  /// Destructor
   ~<%= cxxname %> () = default;
-  /// Copy constructor
   <%= cxxname %> (<%= cxx_in_type %>) = default;
-  /// Move constructor
+#if defined __GNUC__ && __GNUC__ == 8
+% # gcc 8 can give an invalid maybe be used unitialized on the default move
+% # constructor when a struct is used within an union, see SW331
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#endif
   <%= cxxname %> (<%= cxx_move_type %>) = default;
+#if defined __GNUC__ && __GNUC__ == 8
+#pragma GCC diagnostic pop
+#endif
 % if member_count > 0
 %   _ms = members.dup
   /// Constructor which accepts value for all members
@@ -23,9 +27,7 @@
 %     end
 %   end
 % end
-  /// Copy assignment operator
   <%= cxx_out_type %> operator= (<%= cxx_in_type %>) = default;
-  /// Move assignment operator
   <%= cxx_out_type %> operator= (<%= cxx_move_type %>) = default;
 % members.each do |_m|
 
@@ -40,7 +42,7 @@
   //@}
 % end
 
-  /// Exchange the value of two structs in an efficient matter
+  /// Exchange the value of two structures in an efficient matter
   inline void swap (<%= cxx_inout_type %> s);
 
 private:
