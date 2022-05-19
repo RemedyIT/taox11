@@ -26,9 +26,21 @@ module Test
 
   typedef string<512> BoundedString;
   typedef sequence <long> LongSeq;
+  typedef long LongArray[12];
+  typedef LongArray LongArrayArray[12];
 
   struct TestStruct {
     Test::LongSeq testSeq;
+    long willFailHere;
+  };
+
+  struct TestStructArray {
+    Test::LongArray testArray;
+    long willFailHere;
+  };
+
+  struct TestStructArrayArray {
+    Test::LongArrayArray testArray;
     long willFailHere;
   };
 
@@ -51,6 +63,34 @@ module Test
       Test::State FirstCase;
     case COLOR_RED:
       Test::TestStruct SecondCase;
+  };
+
+  union TestUnion_U4 switch(Color) {
+    case COLOR_BLUE:
+      Test::State FirstCase;
+    case COLOR_RED:
+      Test::TestStructArray SecondCase;
+  };
+
+  union TestUnion_U5 switch(Color) {
+    case COLOR_RED:
+      Test::TestStructArray SecondCase;
+    case COLOR_BLUE:
+      Test::State FirstCase;
+  };
+
+  union TestUnion_U6 switch(Color) {
+    default:
+      Test::TestStructArray SecondCase;
+    case COLOR_BLUE:
+      Test::State FirstCase;
+  };
+
+  union TestUnion_U7 switch(Color) {
+    case COLOR_RED:
+      Test::TestStructArrayArray SecondCase;
+    case COLOR_BLUE:
+      Test::State FirstCase;
   };
 
   typedef string<25> first_name_t;
