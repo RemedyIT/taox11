@@ -46,6 +46,13 @@ module Test
       Test::State FirstCase;
   };
 
+  union TestUnion_U3 switch(Color) {
+    default:
+      Test::State FirstCase;
+    case COLOR_RED:
+      Test::TestStruct SecondCase;
+  };
+
   typedef string<25> first_name_t;
   typedef string<10> middle_name_t;
   typedef string<40> last_name_t;
