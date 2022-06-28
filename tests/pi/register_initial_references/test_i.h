@@ -21,14 +21,11 @@ class test_i final :
     public CORBA::servant_traits<TestModule::test>::base_type
 {
 public:
-
   /// Constructor.
   test_i ();
 
   /// Destructor.
-  ~test_i ();
-
-private:
+  ~test_i () override;
 };
 
 #endif  /* TEST_I_H */

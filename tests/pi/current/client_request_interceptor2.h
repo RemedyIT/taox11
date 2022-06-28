@@ -25,7 +25,6 @@ class ClientRequestInterceptor2
   : public IDL::traits<PortableInterceptor::ClientRequestInterceptor>::base_type
 {
 public:
-
   /// Constructor.
   ClientRequestInterceptor2 (PortableInterceptor::SlotId slot_id);
 
@@ -43,27 +42,21 @@ public:
 
   void destroy () override;
 
-  void send_request (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void send_request (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  void send_poll (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void send_poll (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  void receive_reply (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void receive_reply (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  void receive_exception (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void receive_exception (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  void receive_other (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void receive_other (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
   //@}
 
 private:
   /// The PICurrent slot ID allocated to this application during ORB
   /// initialization.
   PortableInterceptor::SlotId slot_id_;
-
 };
 
 #endif  /* CLIENT_REQUEST_INTERCEPTOR2_H */
