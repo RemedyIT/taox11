@@ -13,8 +13,8 @@
 
 #include "client_request_interceptor.h"
 
-Client_ORBInitializer::Client_ORBInitializer (const std::string& forward_str)
-  : forward_str_ (forward_str)
+Client_ORBInitializer::Client_ORBInitializer (std::string forward_str)
+  : forward_str_ (std::move(forward_str))
 {}
 
 void

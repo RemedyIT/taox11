@@ -29,10 +29,8 @@ class Client_Request_Interceptor final
   : public IDL::traits<PortableInterceptor::ClientRequestInterceptor>::base_type
 {
 public:
-
   /// Constructor.
-  Client_Request_Interceptor (const std::string& orb_id,
-                              const std::string& forward_str);
+  Client_Request_Interceptor (std::string orb_id, std::string forward_str);
 
   /**
    * @name Methods Required by the Client Request Interceptor
