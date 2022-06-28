@@ -46,20 +46,15 @@ public:
 
   void destroy () override;
 
-  void send_request (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void send_request (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  void send_poll (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void send_poll (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  void receive_reply (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void receive_reply (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  void receive_exception (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void receive_exception (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  void receive_other (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void receive_other (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
   //@}
 
 private:
@@ -76,7 +71,6 @@ private:
   /// Stringified reference to the object the initial request will be
   /// forwarded to by this interceptor.
   std::string forward_str_;
-
 };
 
 #endif  /* CLIENT_REQUEST_INTERCEPTOR_H */
