@@ -661,7 +661,6 @@ test_boxed_struct_invocations(IDL::traits<Test>::ref_type test_object)
 
   try
   {
-
     //============================================================
     // Fixed struct
     // Test method invocation with boxed value
@@ -743,18 +742,12 @@ test_boxed_struct_invocations(IDL::traits<Test>::ref_type test_object)
       "variable1");
     IDL::traits<VBvariable_struct1>::ref_type result2 =
       test_object->struct_op3(p4, p5, p6);
-    OBV_VerifyEqual("test_boxed_struct_invocations", p5->_value().l(),
-      vs2.l()*3);
-    OBV_VerifyEqual("test_boxed_struct_invocations", p5->_value().str (),
-      "2variable");
-    OBV_VerifyEqual("test_boxed_struct_invocations", p6->_value().l(),
-      vs2.l()*3);
-    OBV_VerifyEqual("test_boxed_struct_invocations", p6->_value().str (),
-      "2variable");
-    OBV_VerifyEqual("test_boxed_struct_invocations", result2->_value().l(),
-      vs1.l());
-    OBV_VerifyEqual("test_boxed_struct_invocations", result2->_value().str(),
-      vs1.str());
+    OBV_VerifyEqual("test_boxed_struct_invocations", p5->_value().l(), vs2.l()*3);
+    OBV_VerifyEqual("test_boxed_struct_invocations", p5->_value().str (), "2variable");
+    OBV_VerifyEqual("test_boxed_struct_invocations", p6->_value().l(), vs2.l()*3);
+    OBV_VerifyEqual("test_boxed_struct_invocations", p6->_value().str (), "2variable");
+    OBV_VerifyEqual("test_boxed_struct_invocations", result2->_value().l(), vs1.l());
+    OBV_VerifyEqual("test_boxed_struct_invocations", result2->_value().str(), vs1.str());
 
     //============================================================
     // Variable struct
@@ -762,14 +755,10 @@ test_boxed_struct_invocations(IDL::traits<Test>::ref_type test_object)
     //============================================================
 
     test_object->struct_op4(p4->_value(), p5->_value(), p6->_value());
-    OBV_VerifyEqual("test_boxed_struct_invocations", p5->_value().l(),
-      vs2.l()*3*3);
-    OBV_VerifyEqual("test_boxed_struct_invocations", p5->_value().str (),
-      "e2variabl");
+    OBV_VerifyEqual("test_boxed_struct_invocations", p5->_value().l(), vs2.l()*3*3);
+    OBV_VerifyEqual("test_boxed_struct_invocations", p5->_value().str (), "e2variabl");
     OBV_VerifyEqual("test_boxed_struct_invocations", p6->_value().l(), vs1.l());
-    OBV_VerifyEqual("test_boxed_struct_invocations", p6->_value().str(),
-      vs1.str());
-
+    OBV_VerifyEqual("test_boxed_struct_invocations", p6->_value().str(), vs1.str());
   }
   catch (const CORBA::Exception& ex)
   {
@@ -1151,7 +1140,6 @@ test_boxed_union_invocations(IDL::traits<Test>::ref_type test_object)
       "raabracadab");
     OBV_VerifyEqual("test_boxed_union_invocations ", p6->_value()._d (), 1);
     OBV_VerifyEqual("test_boxed_union_invocations ", p6->_value().m1 (), 1722);
-
   }
   catch (const CORBA::Exception& ex)
   {
