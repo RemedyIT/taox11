@@ -42,15 +42,14 @@ parse_args (int argc, ACE_TCHAR *argv[])
   return true;
 }
 
-class Handler
-:public virtual CORBA::amic_traits<Test::A>::replyhandler_base_type
+class Handler : public virtual CORBA::amic_traits<Test::A>::replyhandler_base_type
 {
 public:
   /// Constructor.
   Handler () = default;
 
   /// Destructor.
-  ~Handler () = default;
+  ~Handler () override = default;
 
   void foo (int32_t ami_return_val) override
   {
@@ -63,8 +62,7 @@ public:
       }
   }
 
-  void foo_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
   {
     taox11_info << "Callback method <foo_excep> called."<< std::endl;
   }
@@ -76,8 +74,7 @@ public:
                 << std::endl;
   }
 
-  void get_yadda_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void get_yadda_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
   {
     taox11_info << "Callback method <get_yadda_excep> called." << std::endl;
   }
@@ -87,8 +84,7 @@ public:
     taox11_info << "Callback method <set_yadda> called:"<< std::endl;
   }
 
-  void set_yadda_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void set_yadda_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
   {
     taox11_info << "Callback method <set_yadda_excep> called." << std::endl;
   }
@@ -97,8 +93,7 @@ public:
   {
   }
 
-  void shutdown_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void shutdown_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };
@@ -337,9 +332,9 @@ int main(int argc, char* argv[])
       _orb->destroy ();
     }
   catch (const std::exception& e)
-      {
-        taox11_error << "exception caught: " << e << std::endl;
-        return 1;
-      }
+    {
+      taox11_error << "exception caught: " << e << std::endl;
+      return 1;
+    }
   return result;
 }
