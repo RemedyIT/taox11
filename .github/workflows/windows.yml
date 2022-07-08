@@ -52,21 +52,25 @@ jobs:
       with:
         repository: DOCGroup/ACE_TAO
         path: ${{ env.DOC_ROOT }}
+        ref: ACE+TAO-7_0_4
     - name: checkout MPC
       uses: actions/checkout@v2
       with:
         repository: DOCGroup/MPC
         path: ${{ env.MPC_ROOT }}
+        ref: ACE+TAO-7_0_4
     - name: checkout ridl
       uses: actions/checkout@v2
       with:
         repository: RemedyIT/ridl
         path: ${{ env.RIDL_ROOT }}
+        ref: v2.2.1_dev
     - name: checkout axcioma
       uses: actions/checkout@v2
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
+        ref: v2.2.1_dev
     - uses: ilammy/msvc-dev-cmd@v1
     - uses: actions/setup-ruby@v1
       with:

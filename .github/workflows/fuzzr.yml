@@ -30,6 +30,7 @@ jobs:
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
+        ref: v2.2.1_dev
     - name: install fuzzr gem
       run: |
         gem install fuzzr
