@@ -838,7 +838,7 @@ namespace TAOX11_NAMESPACE
                                  << (uint32_t)TAOX11_MICRO_VERSION
                                  << " (c) Remedy IT");
       ACE_utsname uname;
-      int const result = ACE_OS::uname (&uname);
+      int const result = ACE_OS::uname (std::addressof(uname));
       if (result != -1)
       {
         TAOX11_LOG_INFO ("TAOX11 machine: " << uname.nodename << ", " << uname.machine);
