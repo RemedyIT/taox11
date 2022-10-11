@@ -61,6 +61,7 @@ private:
   <%= switch_cxxtype %> disc_ {<% if has_default?() || has_implicit_default?() %><%= default_label %><% else %><%= members.first.nondefault_labels.first %><% end %>};
   union u_type_
   {
+// Compilation with c++11 standard gives errors on  the ' = default' declaration  
 #if !defined(ACE_HAS_CPP14)
     u_type_ ();
 #else
