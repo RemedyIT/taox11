@@ -43,7 +43,7 @@ namespace TAOX11_NAMESPACE
           user_exc_ (dynamic_cast<CORBA::UserException *> (
                         rhs.user_exc_->_tao_duplicate()))
       {}
-      virtual ~out ();
+      ~out () override;
 
       out &operator= (const out &uex)
       {
