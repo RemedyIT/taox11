@@ -19,6 +19,8 @@ permissions:
 
 env:
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
+  X11_BRANCH: master
+  ACETAOMPC_BRANCH: Latest_ACE7TAO3_Micro
 
 jobs:
   build:
@@ -33,6 +35,7 @@ jobs:
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
+        ref: ${{ env.X11_BRANCH }}
     - name: install fuzzr gem
       run: |
         gem install fuzzr

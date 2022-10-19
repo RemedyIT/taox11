@@ -30,6 +30,8 @@ env:
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
   RIDL_ROOT: ${{ github.workspace }}/ridl
   TAOX11_ROOT: ${{ github.workspace }}
+  X11_BRANCH: master
+  ACETAOMPC_BRANCH: Latest_ACE7TAO3_Micro
 
 jobs:
   build:
@@ -52,23 +54,25 @@ jobs:
       with:
         repository: DOCGroup/ACE_TAO
         path: ${{ env.DOC_ROOT }}
-        ref: Latest_ACE7TAO3_Micro
+        ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout MPC
       uses: actions/checkout@v3
       with:
         repository: DOCGroup/MPC
         path: ${{ env.MPC_ROOT }}
-        ref: Latest_ACE7TAO3_Micro
+        ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout ridl
       uses: actions/checkout@v3
       with:
         repository: RemedyIT/ridl
         path: ${{ env.RIDL_ROOT }}
+        ref: ${{ env.X11_BRANCH }}
     - name: checkout axcioma
       uses: actions/checkout@v3
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
+        ref: ${{ env.X11_BRANCH }}
     - uses: ilammy/msvc-dev-cmd@v1
     - uses: actions/setup-ruby@v1
       with:
