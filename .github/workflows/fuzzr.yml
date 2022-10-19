@@ -20,7 +20,6 @@ permissions:
 env:
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
   X11_BRANCH: master
-  ACETAOMPC_BRANCH: Latest_ACE7TAO3_Micro
 
 jobs:
   build:
