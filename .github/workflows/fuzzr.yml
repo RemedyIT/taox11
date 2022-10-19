@@ -5,6 +5,8 @@ on:
     branches:
       - master
       - v*
+    tags:
+      - AXCIOMA-v*
   pull_request:
     branches:
       - master
