@@ -2,6 +2,9 @@ name: fuzzr
 
 on:
   push:
+    branches:
+      - master
+      - v*
   pull_request:
     branches:
       - master
