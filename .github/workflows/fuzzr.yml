@@ -21,6 +21,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name)
+      run: |
+        echo "X11_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false
+      run: |
+        echo "X11_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
       with:
@@ -30,7 +36,7 @@ jobs:
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
-        ref: ${{ github.ref_name }}
+        ref: ${{ env.X11_BRANCH }}
     - name: install fuzzr gem
       run: |
         gem install fuzzr
