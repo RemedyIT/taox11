@@ -100,13 +100,13 @@ jobs:
       with:
         repository: RemedyIT/ridl
         path: ${{ env.RIDL_ROOT }}
-        ref: {{ github.ref_name }}
+        ref: %{{ github.ref_name }}
     - name: checkout axcioma
       uses: actions/checkout@v2
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
-        ref: {{ github.ref_name }}
+        ref: %{{ github.ref_name }}
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
