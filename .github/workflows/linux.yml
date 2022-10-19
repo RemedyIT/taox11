@@ -82,6 +82,12 @@ jobs:
       CC: ${{ matrix.CC }}
       CXX: ${{ matrix.CXX }}
     steps:
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name)
+      run: |
+        echo "X11_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false
+      run: |
+        echo "X11_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
     - uses: actions/checkout@v2
     - name: checkout ACE_TAO
       uses: actions/checkout@v2
@@ -100,13 +106,13 @@ jobs:
       with:
         repository: RemedyIT/ridl
         path: ${{ env.RIDL_ROOT }}
-        ref: %{{ github.ref_name }}
+        ref: ${{ env.X11_BRANCH }}
     - name: checkout axcioma
       uses: actions/checkout@v2
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
-        ref: %{{ github.ref_name }}
+        ref: ${{ env.X11_BRANCH }}
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
