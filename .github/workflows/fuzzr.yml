@@ -16,15 +16,16 @@ concurrency:
 
 env:
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
+  X11_BRANCH: v2.2.1_dev
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name)
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) && github.repository_owner == 'RemedyIT'
       run: |
         echo "X11_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
-    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false && github.repository_owner == 'RemedyIT'
       run: |
         echo "X11_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
     - uses: actions/checkout@v2
