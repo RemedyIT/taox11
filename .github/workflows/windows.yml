@@ -30,6 +30,8 @@ env:
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
   RIDL_ROOT: ${{ github.workspace }}/ridl
   TAOX11_ROOT: ${{ github.workspace }}
+  X11_BRANCH: master
+  ACETAOMPC_BRANCH: Latest_ACE7TAO3_Micro
 
 jobs:
   build:
@@ -46,10 +48,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }}
     steps:
-    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name)
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) && github.repository_owner == 'RemedyIT'
       run: |
         echo "X11_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
-    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false && github.repository_owner == 'RemedyIT'
       run: |
         echo "X11_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
     - uses: actions/checkout@v3
@@ -58,13 +60,13 @@ jobs:
       with:
         repository: DOCGroup/ACE_TAO
         path: ${{ env.DOC_ROOT }}
-        ref: Latest_ACE7TAO3_Micro
+        ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout MPC
       uses: actions/checkout@v3
       with:
         repository: DOCGroup/MPC
         path: ${{ env.MPC_ROOT }}
-        ref: Latest_ACE7TAO3_Micro
+        ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout ridl
       uses: actions/checkout@v3
       with:
