@@ -27,6 +27,8 @@ env:
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
   RIDL_ROOT: ${{ github.workspace }}/ridl
   TAOX11_ROOT: ${{ github.workspace }}
+  X11_BRANCH: v2.2.1_dev
+  ACETAOMPC_BRANCH: ACE+TAO-7_0_4
 
 jobs:
   build:
@@ -82,31 +84,37 @@ jobs:
       CC: ${{ matrix.CC }}
       CXX: ${{ matrix.CXX }}
     steps:
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) && github.repository_owner == 'RemedyIT'
+      run: |
+        echo "X11_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false && github.repository_owner == 'RemedyIT'
+      run: |
+        echo "X11_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
     - uses: actions/checkout@v2
     - name: checkout ACE_TAO
       uses: actions/checkout@v2
       with:
         repository: DOCGroup/ACE_TAO
         path: ${{ env.DOC_ROOT }}
-        ref: ACE+TAO-7_0_4
+        ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout MPC
       uses: actions/checkout@v2
       with:
         repository: DOCGroup/MPC
         path: ${{ env.MPC_ROOT }}
-        ref: ACE+TAO-7_0_4
+        ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout ridl
       uses: actions/checkout@v2
       with:
         repository: RemedyIT/ridl
         path: ${{ env.RIDL_ROOT }}
-        ref: v2.2.1_dev
+        ref: ${{ env.X11_BRANCH }}
     - name: checkout axcioma
       uses: actions/checkout@v2
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
-        ref: v2.2.1_dev
+        ref: ${{ env.X11_BRANCH }}
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
