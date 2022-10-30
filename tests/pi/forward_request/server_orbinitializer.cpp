@@ -15,23 +15,15 @@
 
 #include "testlib/taox11_testlog.h"
 
-Server_ORBInitializer::Server_ORBInitializer ()
-  : server_interceptor_ ()
+void
+Server_ORBInitializer::pre_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type)
 {
 }
 
 void
-Server_ORBInitializer::pre_init (
-    IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type)
+Server_ORBInitializer::post_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info)
 {
-}
-
-void
-Server_ORBInitializer::post_init (
-    IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info)
-{
-  this->server_interceptor_ =
-      CORBA::make_reference<Server_Request_Interceptor> ();
+  this->server_interceptor_ = CORBA::make_reference<Server_Request_Interceptor> ();
 
   // Install the server request interceptor.
   info->add_server_request_interceptor (this->server_interceptor_);

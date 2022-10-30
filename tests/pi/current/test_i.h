@@ -30,7 +30,7 @@ public:
           IDL::traits<CORBA::ORB>::ref_type orb);
 
   /// Destructor.
-  virtual ~test_i () = default;
+  ~test_i () override = default;
 
   /// Main servant test method.
   void invoke_me () override;
@@ -55,7 +55,6 @@ private:
 
   /// Reference to the ORB.
   IDL::traits<CORBA::ORB>::ref_type orb_;
-
 };
 
 #endif  /* TEST_I_H */
