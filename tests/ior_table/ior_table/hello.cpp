@@ -10,7 +10,7 @@
 
 Hello::Hello (IDL::traits<CORBA::ORB>::ref_type orb,
   bool rebinded)
-  : orb_ (orb)
+  : orb_ (std::move(orb))
   , rebinded_ (rebinded)
 {
 }

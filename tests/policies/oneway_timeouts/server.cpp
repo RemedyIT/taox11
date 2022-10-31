@@ -70,7 +70,7 @@ class Tester_i final
 {
 public:
   explicit Tester_i (IDL::traits<CORBA::ORB>::ref_type orb);
-  virtual ~Tester_i ();
+  ~Tester_i () override;
 
   void test (int32_t id) override;
   int32_t test2 (int32_t id) override;
@@ -100,7 +100,7 @@ private:
 };
 
 Tester_i::Tester_i (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb)
+  : orb_ (std::move(orb))
   , id1_ (0)
   , id2_ (0)
   , count_ (0)

@@ -12,7 +12,7 @@
 #define MAGIC 3145
 
 Test_impl::Test_impl (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb)
+  : orb_ (std::move(orb))
 {
 }
 

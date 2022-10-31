@@ -152,7 +152,7 @@ main(int argc, char *argv[])
 // ****************************************************************
 
 Worker::Worker (IDL::traits<CORBA::ORB>::ref_type orb)
-  :  orb_ (orb)
+  :  orb_ (std::move(orb))
 {
 }
 

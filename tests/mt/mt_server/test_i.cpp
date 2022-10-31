@@ -12,7 +12,7 @@
 #include "testlib/taox11_testlog.h"
 
 Simple_Server_i::Simple_Server_i (IDL::traits<CORBA::ORB>::ref_type orb)
-  :  orb_ (orb)
+  :  orb_ (std::move(orb))
 {
 }
 

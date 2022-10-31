@@ -27,7 +27,7 @@ Hello::shutdown ()
 }
 
 Hello2::Hello2 (IDL::traits<PortableServer::POA>::ref_type poa)
-  : poa_ (poa)
+  : poa_ (std::move(poa))
 {
 }
 

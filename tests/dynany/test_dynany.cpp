@@ -125,6 +125,71 @@ Test_DynAny::run_test ()
     }
 
     {
+      TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[6]<< "=*=*=*=*" << std::endl;
+
+      TAOX11_TEST_DEBUG << "testing: constructor(Any)/equal/insert/get" << std::endl;
+
+      CORBA::Any in1;
+      in1 <<= data.m_ulong1;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa1 =
+          dynany_factory->create_dyn_any (in1);
+
+      if (!fa1->equal(fa1))
+      {
+        TAOX11_TEST_ERROR << "Error: create_dyn_any ++ "<< data.labels[6] << std::endl;
+        ++this->error_count_;
+      }
+
+      fa1->insert_ulong (data.m_ulong1);
+
+      uint32_t d_out = fa1->get_ulong ();
+
+      if (!ACE::is_equal (d_out, data.m_ulong1))
+      {
+       TAOX11_TEST_ERROR << "++ ERROR get_ulong ++ "<< d_out << std::endl;
+        ++this->error_count_;
+      }
+
+      TAOX11_TEST_DEBUG << "testing: copy" << std::endl;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa_copy = fa1->copy();
+      if (!fa_copy->equal(fa1))
+       {
+         TAOX11_TEST_ERROR << "Error: copy ++ "<< data.labels[6] << std::endl;
+         ++this->error_count_;
+      }
+      d_out = fa_copy->get_ulong ();
+
+      if (!ACE::is_equal (d_out, data.m_ulong1))
+      {
+       TAOX11_TEST_ERROR << "++ ERROR get_ulong from copy++ "<< d_out << std::endl;
+        ++this->error_count_;
+      }
+
+      TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
+
+      d_out = data.m_ulong1;
+      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+        dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_ulong);
+      CORBA::Any in_any1;
+      in_any1 <<= data.m_ulong1;
+      ftc1->from_any (in_any1);
+      analyzer.analyze (ftc1);
+      CORBA::Any out_any1 = ftc1->to_any ();
+      out_any1 >>= d_out;
+
+      if (!ACE::is_equal (d_out, data.m_ulong1))
+      {
+        TAOX11_TEST_ERROR << "++ ERROR from_any,to_any ++" << data.labels[6]
+                          << " d_out :" << d_out << " m_ulong1 : " << data.m_ulong1
+                          <<  std::endl;
+        ++this->error_count_;
+      }
+
+      fa1->destroy ();
+      ftc1->destroy ();
+    }
+
+    {
       TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[0]<< "=*=*=*=*" << std::endl;
 
       TAOX11_TEST_DEBUG << "testing: constructor(Any)/equal/insert/get" << std::endl;
@@ -180,6 +245,71 @@ Test_DynAny::run_test ()
       {
         TAOX11_TEST_ERROR << "++ ERROR from_any,to_any ++" << data.labels[0]
                           << " d_out :" << d_out << " m_bool1 : " << data.m_bool1
+                          <<  std::endl;
+        ++this->error_count_;
+      }
+
+      fa1->destroy ();
+      ftc1->destroy ();
+    }
+
+    {
+      TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[1]<< "=*=*=*=*" << std::endl;
+
+      TAOX11_TEST_DEBUG << "testing: constructor(Any)/equal/insert/get" << std::endl;
+
+      CORBA::Any in1;
+      in1 <<= data.m_octet1;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa1 =
+          dynany_factory->create_dyn_any (in1);
+
+      if (!fa1->equal(fa1))
+      {
+        TAOX11_TEST_ERROR << "Error: create_dyn_any ++ "<< data.labels[1] << std::endl;
+        ++this->error_count_;
+      }
+
+      fa1->insert_octet (data.m_octet1);
+
+      uint8_t d_out = fa1->get_octet ();
+
+      if (!ACE::is_equal (d_out, data.m_octet1))
+      {
+       TAOX11_TEST_ERROR << "++ ERROR get_octet ++ "<< d_out << std::endl;
+        ++this->error_count_;
+      }
+
+      TAOX11_TEST_DEBUG << "testing: copy" << std::endl;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa_copy = fa1->copy();
+      if (!fa_copy->equal(fa1))
+       {
+         TAOX11_TEST_ERROR << "Error: copy ++ "<< data.labels[1] << std::endl;
+         ++this->error_count_;
+      }
+      d_out = fa_copy->get_octet ();
+
+      if (!ACE::is_equal (d_out, data.m_octet1))
+      {
+       TAOX11_TEST_ERROR << "++ ERROR get_octet from copy++ "<< d_out << std::endl;
+        ++this->error_count_;
+      }
+
+      TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
+
+      d_out = data.m_octet1;
+      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+        dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_octet);
+      CORBA::Any in_any1;
+      in_any1 <<= data.m_octet1;
+      ftc1->from_any (in_any1);
+      analyzer.analyze (ftc1);
+      CORBA::Any out_any1 = ftc1->to_any ();
+      out_any1 >>= d_out;
+
+      if (!ACE::is_equal (d_out, data.m_octet1))
+      {
+        TAOX11_TEST_ERROR << "++ ERROR from_any,to_any ++" << data.labels[1]
+                          << " d_out :" << d_out << " m_octet1 : " << data.m_octet1
                           <<  std::endl;
         ++this->error_count_;
       }
@@ -247,6 +377,137 @@ Test_DynAny::run_test ()
       {
         TAOX11_TEST_ERROR << "++ ERROR from_any,to_any ++" << data.labels[8]
                           << " d_out :" << d_out << " m_double1 : " << data.m_double1
+                          <<  std::endl;
+        ++this->error_count_;
+      }
+
+      fa1->destroy ();
+      ftc1->destroy ();
+    }
+
+    {
+      TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[9]<< "=*=*=*=*" << std::endl;
+
+      TAOX11_TEST_DEBUG << "testing: constructor(Any)/equal/insert/get" << std::endl;
+
+      CORBA::Any in1;
+      in1 <<= data.m_longlong1;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa1 =
+          dynany_factory->create_dyn_any (in1);
+
+      if (!fa1->equal(fa1))
+      {
+        TAOX11_TEST_ERROR << "Error: create_dyn_any ++ "<< data.labels[9] << std::endl;
+        ++this->error_count_;
+      }
+
+      fa1->insert_longlong (data.m_longlong1);
+
+      int64_t d_out = fa1->get_longlong ();
+
+      if (!ACE::is_equal (d_out, data.m_longlong1))
+      {
+       TAOX11_TEST_ERROR << "++ ERROR get_longlong ++ "<< d_out << std::endl;
+        ++this->error_count_;
+      }
+
+      TAOX11_TEST_DEBUG << "testing: copy" << std::endl;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa_copy = fa1->copy();
+      if (!fa_copy->equal(fa1))
+       {
+         TAOX11_TEST_ERROR << "Error: copy ++ "<< data.labels[9] << std::endl;
+         ++this->error_count_;
+      }
+      d_out = fa_copy->get_longlong ();
+
+      if (!ACE::is_equal (d_out, data.m_longlong1))
+      {
+       TAOX11_TEST_ERROR << "++ ERROR get_longlong from copy++ "<< d_out << std::endl;
+        ++this->error_count_;
+      }
+
+
+      TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
+
+      d_out = data.m_longlong1;
+      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+        dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_longlong);
+      CORBA::Any in_any1;
+      in_any1 <<= data.m_longlong1;
+      ftc1->from_any (in_any1);
+      analyzer.analyze (ftc1);
+      CORBA::Any out_any1 = ftc1->to_any ();
+      out_any1 >>= d_out;
+
+      if (!ACE::is_equal (d_out, data.m_longlong1))
+      {
+        TAOX11_TEST_ERROR << "++ ERROR from_any,to_any ++" << data.labels[9]
+                          << " d_out :" << d_out << " m_longlong1 : " << data.m_longlong1
+                          <<  std::endl;
+        ++this->error_count_;
+      }
+
+      fa1->destroy ();
+      ftc1->destroy ();
+    }
+
+    {
+      TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[10]<< "=*=*=*=*" << std::endl;
+
+      TAOX11_TEST_DEBUG << "testing: constructor(Any)/equal/insert/get" << std::endl;
+
+      CORBA::Any in1;
+      in1 <<= data.m_ulonglong1;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa1 =
+          dynany_factory->create_dyn_any (in1);
+
+      if (!fa1->equal(fa1))
+      {
+        TAOX11_TEST_ERROR << "Error: create_dyn_any ++ "<< data.labels[10] << std::endl;
+        ++this->error_count_;
+      }
+
+      fa1->insert_ulonglong (data.m_ulonglong1);
+
+      uint64_t d_out = fa1->get_ulonglong ();
+
+      if (!ACE::is_equal (d_out, data.m_ulonglong1))
+      {
+       TAOX11_TEST_ERROR << "++ ERROR get_ulonglong ++ "<< d_out << std::endl;
+        ++this->error_count_;
+      }
+
+      TAOX11_TEST_DEBUG << "testing: copy" << std::endl;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa_copy = fa1->copy();
+      if (!fa_copy->equal(fa1))
+       {
+         TAOX11_TEST_ERROR << "Error: copy ++ "<< data.labels[10] << std::endl;
+         ++this->error_count_;
+      }
+      d_out = fa_copy->get_ulonglong ();
+
+      if (!ACE::is_equal (d_out, data.m_ulonglong1))
+      {
+       TAOX11_TEST_ERROR << "++ ERROR get_ulonglong from copy++ "<< d_out << std::endl;
+        ++this->error_count_;
+      }
+
+      TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
+
+      d_out = data.m_ulonglong1;
+      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+        dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_ulonglong);
+      CORBA::Any in_any1;
+      in_any1 <<= data.m_ulonglong1;
+      ftc1->from_any (in_any1);
+      analyzer.analyze (ftc1);
+      CORBA::Any out_any1 = ftc1->to_any ();
+      out_any1 >>= d_out;
+
+      if (!ACE::is_equal (d_out, data.m_ulonglong1))
+      {
+        TAOX11_TEST_ERROR << "++ ERROR from_any,to_any ++" << data.labels[10]
+                          << " d_out :" << d_out << " m_ulonglong1 : " << data.m_ulonglong1
                           <<  std::endl;
         ++this->error_count_;
       }
