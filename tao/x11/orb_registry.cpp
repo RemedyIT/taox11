@@ -95,7 +95,7 @@ namespace TAOX11_NAMESPACE
     {
       TAOX11_LOG_TRACE("ORB_Registry::resolve_initial_reference  name == TAO_OBJID_DYNANYFACTORY");
 
-      if (this->dynamicany_factory_loader_ == nullptr)
+      if (!this->dynamicany_factory_loader_)
       {
         Object_Loader *cfloader = this->resolve_object_loader ("TAOX11_DynamicAny_Loader");
         if (cfloader)
@@ -117,7 +117,7 @@ namespace TAOX11_NAMESPACE
     }
     else if (name == TAO_OBJID_TYPECODEFACTORY)
     {
-      if (this->typecode_factory_loader_ == nullptr)
+      if (!this->typecode_factory_loader_)
       {
         Object_Loader *tcfloader = this->resolve_object_loader ("TAOX11_TypeCodeFactory_Loader");
         if (tcfloader)
@@ -139,7 +139,7 @@ namespace TAOX11_NAMESPACE
     }
     else if (name == TAO_OBJID_CODECFACTORY)
     {
-      if (this->codec_factory_loader_ == nullptr)
+      if (!this->codec_factory_loader_)
       {
         Object_Loader *cfloader = this->resolve_object_loader ("TAOX11_CodecFactory_Loader");
         if (cfloader)
@@ -221,12 +221,12 @@ namespace TAOX11_NAMESPACE
 
   AnyInsertAdapter *ORB_Registry::any_insert_adapter ()
   {
-    if (this->any_insert_adapter_ == nullptr)
+    if (!this->any_insert_adapter_)
     {
       // lock
       std::lock_guard<std::mutex> __guard (ORB_Registry::lock_);
 
-      if (this->any_insert_adapter_ == nullptr)
+      if (!this->any_insert_adapter_)
       {
         try {
           TAOX11_LOG_DEBUG ( "ORB_Registry::any_insert_adapter - Creating adapter with name <"
@@ -242,7 +242,7 @@ namespace TAOX11_NAMESPACE
                 << AnyInsertAdapter::concrete_adapter_name ()
                 << ">");
         }
-        if (this->any_insert_adapter_ == nullptr)
+        if (!this->any_insert_adapter_)
         {
           TAOX11_LOG_ERROR ("ORB_Registry::any_insert_adapter - "
                 << "Unable to create adapter: "
@@ -257,11 +257,11 @@ namespace TAOX11_NAMESPACE
 #if !defined(CORBA_E_MICRO)
   ValueFactoryManagerAdapter *ORB_Registry::valuefactory_manager ()
   {
-    if (this->vf_manager_ == nullptr)
+    if (!this->vf_manager_)
     {
       std::lock_guard<std::mutex> __guard (ORB_Registry::lock_);
 
-      if (this->vf_manager_ == nullptr)
+      if (!this->vf_manager_)
       {
         try {
           TAOX11_LOG_DEBUG ( "ORB_Registry::valuefactory_manager - Creating manager with name <"
@@ -279,7 +279,7 @@ namespace TAOX11_NAMESPACE
                 << ">");
         }
 
-        if (this->vf_manager_ == nullptr)
+        if (!this->vf_manager_)
         {
           TAOX11_LOG_ERROR ("ORB_Registry::valuefactory_manager - "
                 << "Unable to create manager: "
@@ -294,11 +294,11 @@ namespace TAOX11_NAMESPACE
 
   ValueTypeAdapter *ORB_Registry::value_type_adapter ()
   {
-    if (this->vt_adapter_ == nullptr)
+    if (!this->vt_adapter_)
     {
       std::lock_guard<std::mutex> __guard (ORB_Registry::lock_);
 
-      if (this->vt_adapter_ == nullptr)
+      if (!this->vt_adapter_)
       {
         try {
           TAOX11_LOG_DEBUG ( "ORB_Registry::value_type_adapter - Creating adapter with name <"
@@ -316,7 +316,7 @@ namespace TAOX11_NAMESPACE
                 << ">");
         }
 
-        if (this->vt_adapter_ == nullptr)
+        if (!this->vt_adapter_)
         {
           TAOX11_LOG_ERROR ("ORB_Registry::value_type_adapter - "
                 << "Unable to create adapter: "
@@ -331,11 +331,11 @@ namespace TAOX11_NAMESPACE
 
   PolicyFactoryManagerAdapter *ORB_Registry::policy_manager ()
   {
-    if (this->policy_manager_ == nullptr)
+    if (!this->policy_manager_)
     {
       std::lock_guard<std::mutex> __guard (ORB_Registry::lock_);
 
-      if (this->policy_manager_ == nullptr)
+      if (!this->policy_manager_)
       {
         try {
           TAOX11_LOG_DEBUG ( "ORB_Registry::policy_manager - Creating manager with name <"
@@ -354,7 +354,7 @@ namespace TAOX11_NAMESPACE
         }
       }
 
-      if (this->policy_manager_ == nullptr)
+      if (!this->policy_manager_)
       {
         TAOX11_LOG_ERROR ("ORB_Registry::policy_manager - "
               << "Unable to create policy_manager: "
@@ -370,11 +370,11 @@ namespace TAOX11_NAMESPACE
 #if !defined (CORBA_E_COMPACT) && !defined (CORBA_E_MICRO)
     IFRClientAdapter *ORB_Registry::ifr_client_adapter ()
     {
-      if (this->ifr_client_adapter_ == nullptr)
+      if (!this->ifr_client_adapter_)
       {
         std::lock_guard<std::mutex> __guard (ORB_Registry::lock_);
 
-        if (this->ifr_client_adapter_ == nullptr)
+        if (!this->ifr_client_adapter_)
         {
           try {
             TAOX11_LOG_DEBUG ( "ORB_Registry::ifr_client_adapter - Creating adapter with name <"
@@ -392,7 +392,7 @@ namespace TAOX11_NAMESPACE
                   << ">");
           }
 
-          if (this->ifr_client_adapter_ == nullptr)
+          if (!this->ifr_client_adapter_)
           {
             TAOX11_LOG_ERROR ("ORB_Registry::ifr_client_adapter - "
                   << "Unable to create adapter: "
@@ -407,11 +407,11 @@ namespace TAOX11_NAMESPACE
 
     DynamicAdapter *ORB_Registry::dynamic_adapter ()
     {
-      if (this->dynamic_adapter_ == nullptr)
+      if (!this->dynamic_adapter_)
       {
         std::lock_guard<std::mutex> __guard (ORB_Registry::lock_);
 
-        if (this->dynamic_adapter_ == nullptr)
+        if (!this->dynamic_adapter_)
         {
           try {
             TAOX11_LOG_DEBUG ( "ORB_Registry::dynamic_adapter - Creating adapter with name <"
@@ -429,7 +429,7 @@ namespace TAOX11_NAMESPACE
                   << ">");
           }
 
-          if (this->dynamic_adapter_ == nullptr)
+          if (!this->dynamic_adapter_)
           {
             TAOX11_LOG_ERROR ("ORB_Registry::dynamic_adapter - "
                   << "Unable to create adapter: "
@@ -445,11 +445,11 @@ namespace TAOX11_NAMESPACE
 # if (TAO_HAS_MINIMUM_CORBA == 0)
     NVListAdapter *ORB_Registry::nvlist_adapter ()
     {
-      if (this->nvlist_adapter_ == nullptr)
+      if (!this->nvlist_adapter_)
       {
         std::lock_guard<std::mutex> __guard (ORB_Registry::lock_);
 
-        if (this->nvlist_adapter_ == nullptr)
+        if (!this->nvlist_adapter_)
         {
           try {
             TAOX11_LOG_DEBUG ( "ORB_Registry::nvlist_adapter - Creating adapter with name <"
@@ -467,7 +467,7 @@ namespace TAOX11_NAMESPACE
                   << ">");
           }
 
-          if (this->nvlist_adapter_ == nullptr)
+          if (!this->nvlist_adapter_)
           {
             TAOX11_LOG_ERROR ("ORB_Registry::nvlist_adapter - "
                   << "Unable to create adapter: "
@@ -482,11 +482,11 @@ namespace TAOX11_NAMESPACE
 
     TypecodeFactoryAdapter *ORB_Registry::typecode_factory_adapter ()
     {
-      if (this->typecode_factory_adapter_ == nullptr)
+      if (!this->typecode_factory_adapter_)
       {
         std::lock_guard<std::mutex> __guard (ORB_Registry::lock_);
 
-        if (this->typecode_factory_adapter_ == nullptr)
+        if (!this->typecode_factory_adapter_)
         {
           try {
             TAOX11_LOG_DEBUG ( "ORB_Registry::typecode_factory_adapter - Creating adapter with name <"
@@ -504,7 +504,7 @@ namespace TAOX11_NAMESPACE
                   << ">");
           }
 
-          if (this->typecode_factory_adapter_ == nullptr)
+          if (!this->typecode_factory_adapter_)
           {
             TAOX11_LOG_ERROR ("ORB_Registry::typecode_factory_adapter - "
                   << "Unable to create adapter: "
