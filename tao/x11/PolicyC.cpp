@@ -35,10 +35,6 @@ namespace TAOX11_NAMESPACE {
   namespace CORBA {
 
     // generated from c++/cli_src/except_src.erb
-    TAOX11_CORBA::PolicyError::~PolicyError () throw ()
-    {
-    }
-
     const char* TAOX11_CORBA::PolicyError::what() const noexcept
     {
       return "TAOX11_CORBA::PolicyError";
@@ -80,10 +76,6 @@ namespace TAOX11_NAMESPACE {
     }
 
     // generated from c++/cli_src/except_src.erb
-    TAOX11_CORBA::InvalidPolicies::~InvalidPolicies () throw ()
-    {
-    }
-
     const char* TAOX11_CORBA::InvalidPolicies::what() const noexcept
     {
       return "TAOX11_CORBA::InvalidPolicies";

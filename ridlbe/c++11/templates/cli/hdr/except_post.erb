@@ -1,7 +1,7 @@
 
   // generated from <%= ridl_template_path %>
   <%= cxxname %> ();
-  ~<%= cxxname %> () throw () override = default;
+  ~<%= cxxname %> () noexcept override = default;
   <%= cxxname %> (const <%= cxxname %>&) = default;
   <%= cxxname %> (<%= cxxname %>&&) = default;
 % if member_count > 0
