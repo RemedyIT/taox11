@@ -131,7 +131,7 @@ namespace TAOX11_NAMESPACE
         CORBA::Exception *_tao_duplicate () const override;
 
         InvalidName ();
-        virtual ~InvalidName () throw ();
+        ~InvalidName () noexcept override = default;
         InvalidName (const InvalidName&) = default;
         InvalidName (InvalidName&&) = default;
         InvalidName& operator= (const InvalidName& x) = default;

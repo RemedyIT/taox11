@@ -84,7 +84,7 @@ namespace TAOX11_NAMESPACE {
 
       // generated from c++/cli_hdr/except_post.erb
       PolicyError ();
-      virtual ~PolicyError () throw ();
+      ~PolicyError () noexcept override = default;
       PolicyError (const PolicyError&) = default;
       PolicyError (PolicyError&&) = default;
       explicit PolicyError (TAOX11_CORBA::PolicyErrorCode reason);
@@ -122,7 +122,7 @@ namespace TAOX11_NAMESPACE {
 
       // generated from c++/cli_hdr/except_post.erb
       InvalidPolicies ();
-      virtual ~InvalidPolicies () throw ();
+      ~InvalidPolicies () noexcept override = default;
       InvalidPolicies (const InvalidPolicies&) = default;
       InvalidPolicies (InvalidPolicies&&) = default;
       explicit InvalidPolicies (TAOX11_CORBA::UShortSeq indices);
