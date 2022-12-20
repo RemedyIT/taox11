@@ -41,6 +41,7 @@ my $client = PerlACE::TestTarget::create_target(3) || die "Create failed\n";
 my $TARGETHOSTNAME = $client->HostName ();
 my $port = $client->RandomPort ();
 
+my $iorbase = "test.ior";
 $server->DeleteFile($iorbase);
 $client->DeleteFile($iorbase);
 
