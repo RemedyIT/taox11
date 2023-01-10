@@ -10,8 +10,8 @@ template<>
 struct traits <<%= scoped_cxxtype %>>
   : IDL::common_traits<<%= scoped_cxxtype %>>
 {
-  using digits = std::integral_constant< uint16_t, <%= digits %>>;
-  using scale = std::integral_constant< uint16_t, <%= scale %>>;
+  using digits = std::integral_constant<uint16_t, <%= digits %>>;
+  using scale = std::integral_constant<uint16_t, <%= scale %>>;
 
   template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
   static inline OStrm_& write_on(OStrm_& os_, in_type val_, Formatter fmt_ = Formatter ())
