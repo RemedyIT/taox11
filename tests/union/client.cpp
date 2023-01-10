@@ -370,6 +370,20 @@ test_data_z (IDL::traits<Test::Foo>::ref_type foo)
     TAOX11_TEST_DEBUG << "successfully called Foo::test_data_z: <"
       << data << "> - <" << ret << ">." << std::endl;
   }
+
+  // Check that passing an invalid discriminator will result in an exception
+  Test::Z_Union data2;
+  try
+  {
+    data2.z_string("Hello", 4);
+    TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 4 should result in an exception"
+      << std::endl;
+    ++retval;
+  }
+  catch (const CORBA::BAD_PARAM&)
+  {
+    TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 4 resulted in correct exception" << std::endl;
+  }
   return retval;
 }
 
