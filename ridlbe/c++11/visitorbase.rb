@@ -341,7 +341,7 @@ module IDL
       end
 
       def scoped_cxx_traits_type
-        "TAOX11_IDL::traits< #{scoped_cxxtype}>"
+        "TAOX11_IDL::traits<#{scoped_cxxtype}>"
       end
 
       def cxx_arg_type
@@ -425,27 +425,27 @@ module IDL
       end
 
       def implementation_in_type
-        self._idltype.is_reference? ? "IDL::traits< #{scoped_cxxtype}>::ref_type" :
+        self._idltype.is_reference? ? "IDL::traits<#{scoped_cxxtype}>::ref_type" :
           self._idltype.is_a?(IDL::Type::Any) ? "const CORBA::Any&" : scoped_cxx_in_type
       end
 
       def implementation_out_type
-        self._idltype.is_reference? ? "IDL::traits< #{scoped_cxxtype}>::ref_type&" :
+        self._idltype.is_reference? ? "IDL::traits<#{scoped_cxxtype}>::ref_type&" :
           self._idltype.is_a?(IDL::Type::Any) ? "CORBA::Any&" : scoped_cxx_out_type
       end
 
       def implementation_inout_type
-        self._idltype.is_reference? ? "IDL::traits< #{scoped_cxxtype}>::ref_type&" :
+        self._idltype.is_reference? ? "IDL::traits<#{scoped_cxxtype}>::ref_type&" :
           self._idltype.is_a?(IDL::Type::Any) ? "CORBA::Any&" : scoped_cxx_inout_type
       end
 
       def implementation_return_type
-        self._idltype.is_reference? ? "IDL::traits< #{scoped_cxxtype}>::ref_type" :
+        self._idltype.is_reference? ? "IDL::traits<#{scoped_cxxtype}>::ref_type" :
           self._idltype.is_a?(IDL::Type::Any) ? "CORBA::Any" : scoped_cxx_return_type
       end
 
       def implementation_member_type
-        self._idltype.is_reference? ? "IDL::traits< #{scoped_cxxtype}>::ref_type" :
+        self._idltype.is_reference? ? "IDL::traits<#{scoped_cxxtype}>::ref_type" :
           self._idltype.is_a?(IDL::Type::Any) ? "CORBA::Any" : scoped_cxx_member_type
       end
 

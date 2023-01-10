@@ -471,10 +471,10 @@ module IDL
 
     module ReferenceType_Mixin
       def cxx_member_type(scope = nil, typedef = nil)
-        "IDL::traits< #{(typedef || self).cxx_type(scope)}>::ref_type"
+        "IDL::traits<#{(typedef || self).cxx_type(scope)}>::ref_type"
       end
       def resolved_cxx_member_type(scope = nil, typedef = nil)
-        "IDL::traits< #{resolved_cxx_type(scope)}>::ref_type"
+        "IDL::traits<#{resolved_cxx_type(scope)}>::ref_type"
       end
       def cxx_return_type(scope = nil)
         cxx_member_type(scope)
