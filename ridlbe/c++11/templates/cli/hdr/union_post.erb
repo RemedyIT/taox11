@@ -25,7 +25,6 @@
   /// Get the discriminator
   inline <%= switch_in_cxxtype %> _d () const  { return this->disc_; }
 % members.each do |_m|
-
 %if _m.is_default?
 % default_disc = default_label
 %else
