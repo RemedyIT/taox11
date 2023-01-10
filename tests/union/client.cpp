@@ -420,7 +420,6 @@ test_data_z (IDL::traits<Test::Foo>::ref_type foo)
     TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 3 worked" << std::endl;
   }
   return retval;
-
 }
 
 uint16_t
