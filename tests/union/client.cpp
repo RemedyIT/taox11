@@ -386,9 +386,31 @@ test_data_z (IDL::traits<Test::Foo>::ref_type foo)
   }
 
   // Check that we can set a legal different discriminator
-  Test::Z_Union data3;
-  data3.z_string("Hello", 3);
-  if (data3._d () != 3)
+  Test::Z_Union data_z_1;
+  Test::Z_Union data_z_2;
+  Test::Z_Union data_z_3;
+  data_z_1.z_string("Hello", 1);
+  data_z_2.z_string("Hello", 2);
+  data_z_3.z_string("Hello", 3);
+  if (data_z_1._d () != 1)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 1 didn't work" << std::endl;
+    ++retval;
+  }
+  else
+  {
+    TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 1 worked" << std::endl;
+  }
+  if (data_z_2._d () != 2)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 2 didn't work" << std::endl;
+    ++retval;
+  }
+  else
+  {
+    TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 2 worked" << std::endl;
+  }
+  if (data_z_3._d () != 3)
   {
     TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 3 didn't work" << std::endl;
     ++retval;
