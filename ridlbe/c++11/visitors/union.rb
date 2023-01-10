@@ -156,6 +156,11 @@ module IDL
       def is_array?
         IDL::Type::Array === _resolved_idltype
       end
+
+      # Does this union member has multiple legal discriminator values
+      def has_multiple_discriminators?
+        labels.size > 1 || is_default?
+      end
     end
 
   end

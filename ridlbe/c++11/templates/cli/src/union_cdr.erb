@@ -83,10 +83,8 @@ TAO_CORBA::Boolean operator>> (
   // extract
   if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
   {
-    // set union member and associated (default) discriminant
-    _tao_union.<%= _m.cxxname %> (temp_val);
-    // set extracted discriminant
-    _tao_union._d (_tao_discriminant);
+    // set union member and associated discriminant when there are multiple legal discriminant values
+    _tao_union.<%= _m.cxxname %> (temp_val<% if _m.has_multiple_discriminators? %>, _tao_discriminant<% end %>);
     return true;
   }
 %   else
@@ -100,10 +98,8 @@ TAO_CORBA::Boolean operator>> (
     // extract
     if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
     {
-      // set union member and associated (default) discriminant
-      _tao_union.<%= _m.cxxname %> (temp_val);
-      // set extracted discriminant
-      _tao_union._d (_tao_discriminant);
+      // set union member and associated discriminant when there are multiple legal discriminant values
+      _tao_union.<%= _m.cxxname %> (temp_val<% if _m.has_multiple_discriminators? %>, _tao_discriminant<% end %>);
       return true;
     }
   }
@@ -116,10 +112,8 @@ TAO_CORBA::Boolean operator>> (
     // extract
     if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
     {
-      // set union member and associated (default) discriminant
-      _tao_union.<%= _m.cxxname %> (temp_val);
-      // set extracted discriminant
-      _tao_union._d (_tao_discriminant);
+      // set union member and associated discriminant when there are multiple legal discriminant values
+      _tao_union.<%= _m.cxxname %> (temp_val<% if _m.has_multiple_discriminators? %>, _tao_discriminant<% end %>);
       return true;
     }
   }
@@ -139,10 +133,8 @@ TAO_CORBA::Boolean operator>> (
       // extract
       if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
       {
-        // set union member and associated (default) discriminant
-        _tao_union.<%= _m.cxxname %> (temp_val);
-        // set extracted discriminant
-        _tao_union._d (_tao_discriminant);
+        // set union member and associated discriminant when there are multiple legal discriminant values
+        _tao_union.<%= _m.cxxname %> (temp_val<% if _m.has_multiple_discriminators? %>, _tao_discriminant<% end %>);
         return true;
       }
     }
@@ -159,10 +151,8 @@ TAO_CORBA::Boolean operator>> (
       // extract
       if (strm >> <%= _m_def.cdr_to_fmt % "temp_val" %>)
       {
-        // set union member and associated (default) discriminant
-        _tao_union.<%= _m_def.cxxname %> (temp_val);
-        // set extracted discriminant
-        _tao_union._d (_tao_discriminant);
+        // set union member and associated discriminant when there are multiple legal discriminant values
+        _tao_union.<%= _m_def.cxxname %> (temp_val<% if _m_def.has_multiple_discriminators? %>, _tao_discriminant<% end %>);
         return true;
       }
     }
