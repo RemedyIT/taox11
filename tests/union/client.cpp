@@ -384,7 +384,21 @@ test_data_z (IDL::traits<Test::Foo>::ref_type foo)
   {
     TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 4 resulted in correct exception" << std::endl;
   }
+
+  // Check that we can set a legal different discriminator
+  Test::Z_Union data3;
+  data3.z_string("Hello", 3);
+  if (data3._d () != 3)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 3 didn't work" << std::endl;
+    ++retval;
+  }
+  else
+  {
+    TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 3 worked" << std::endl;
+  }
   return retval;
+
 }
 
 uint16_t
@@ -401,8 +415,7 @@ test_union_message (IDL::traits<Test::Foo>::ref_type foo)
 
   Test::UnionMessage msg_d { Test::Assignment::D, b_d, dt_d };
 
-  TAOX11_TEST_DEBUG << "Sending <"
-      << msg_d << ">" << std::endl;
+  TAOX11_TEST_DEBUG << "Sending <" << msg_d << ">" << std::endl;
 
   bool const ret = foo->send_unionmessage (msg_d);
 
