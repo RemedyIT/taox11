@@ -167,6 +167,16 @@ inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
 inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11_<%= _m.cxxname %><% if discriminator_arg %>, <%= switch_in_cxxtype %> _x11_disc<% end %>)
 {
 %   if discriminator_arg
+  // Check whether a valid discriminator value got passed
+%   if switchtype_boolean?
+%     if _m.labels.size == 1
+%       _lbl = _m.labels.first
+  if (<%= _lbl == 'true' ? '!' : '' %>this->disc_)
+  {
+    throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+  }
+%     end
+%   else
   switch (_x11_disc)
   {
 %     if _m.is_default?
@@ -188,6 +198,7 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11
 %     end
   }
 %   end
+% end
 %   _lbl = discriminator_arg ? '_x11_disc' : _m.is_default? ? default_label : _m.nondefault_labels.first
 %   if switchtype_boolean?
   if (<%= _lbl == 'true' ? '!' : '' %>this->disc_)
@@ -218,6 +229,16 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11
 inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_move_type %> _x11_<%= _m.cxxname %><% if discriminator_arg %>, <%= switch_in_cxxtype %> _x11_disc<% end %>)
 {
 %   if discriminator_arg
+  // Check whether a valid discriminator value got passed
+%   if switchtype_boolean?
+%     if _m.labels.size == 1
+%       _lbl = _m.labels.first
+  if (<%= _lbl == 'true' ? '!' : '' %>this->disc_)
+  {
+    throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+  }
+%     end
+%   else
   switch (_x11_disc)
   {
 %     if _m.is_default?
@@ -239,6 +260,7 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_move_type %> _x
 %     end
   }
 %   end
+% end
 %   if switchtype_boolean?
   if (<%= _lbl == 'true' ? '!' : '' %>this->disc_)
 %   else
