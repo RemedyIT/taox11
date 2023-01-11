@@ -27,7 +27,7 @@ module IDL
       end
 
       def cxx_member_type(scope = nil, typedef = nil)
-        "TAOX11_IDL::traits< #{cxx_type}>::ref_type"
+        "TAOX11_IDL::traits<#{cxx_type}>::ref_type"
       end
       def resolved_cxx_member_type(scope = nil, typedef = nil)
         cxx_member_type
