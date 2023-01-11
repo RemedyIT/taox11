@@ -1,7 +1,7 @@
 
 // generated from {brix/taox11/}corba_servant/impl/hdr/interface_pre.erb
 class <%= implementation_export_macro %><%= impl_cxxname %>
-  : public CORBA::servant_traits< <%= scoped_cxxtype %>>::base_type
+  : public CORBA::servant_traits<<%= scoped_cxxtype %>>::base_type
 % write_regen_section("#{scoped_impl_cxxname}[Base List]", default_content: '// Your base classes')
 {
 protected:
