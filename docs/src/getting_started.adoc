@@ -16,7 +16,7 @@ capabilities.
 
 TAOX11 has the following major features:
 
-. Compliant with the IDL to {cxx11} v1.3 language mapping
+. Compliant with the IDL to {cxx11} v1.4 language mapping
 . CORBA v3.3 compliant
 . Full support of the IDL type system (basic types, constant, enum,
 string, wide string, sequence, array, struct, union, typedef, exception)
