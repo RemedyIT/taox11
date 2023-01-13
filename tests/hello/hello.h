@@ -17,7 +17,7 @@ class Hello final
 public:
   /// Constructor
   Hello (IDL::traits<CORBA::ORB>::ref_type orb);
-  virtual ~Hello ();
+  ~Hello () override;
 
   std::string get_string () override;
 

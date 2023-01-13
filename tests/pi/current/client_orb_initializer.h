@@ -42,12 +42,10 @@ public:
    */
   //@{
   /// The pre-initialization hook.
-  void pre_init (
-      IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
+  void pre_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
 
   /// The post-initialization hook.
-  void post_init (
-      IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
+  void post_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
   //@}
 };
 

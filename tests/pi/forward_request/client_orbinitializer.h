@@ -19,17 +19,11 @@ class Client_ORBInitializer final :
   public IDL::traits<PortableInterceptor::ORBInitializer>::base_type
 {
 public:
-  Client_ORBInitializer (const std::string& forward_str);
+  Client_ORBInitializer (std::string forward_str);
 
-  virtual
-  void
-  pre_init (
-      IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
+  void pre_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
 
-  virtual
-  void
-  post_init (
-      IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
+  void post_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
 
 private:
   std::string const forward_str_;

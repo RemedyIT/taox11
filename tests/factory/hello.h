@@ -19,7 +19,7 @@ public:
   /// Constructor
   Hello_Factory (IDL::traits<CORBA::ORB>::ref_type orb,
                  IDL::traits<PortableServer::POA>::ref_type poa);
-  virtual ~Hello_Factory ();
+  ~Hello_Factory () override = default;
 
   // = The skeleton methods
   IDL::traits<Test::Hello>::ref_type get_hello () override;
@@ -40,7 +40,7 @@ class Hello
 public:
   /// Constructor
   Hello (IDL::traits<CORBA::ORB>::ref_type orb, IDL::traits<Test::Hello_Factory>::ref_type factory);
-  virtual ~Hello ();
+  ~Hello () override = default;
 
   // = The skeleton methods
   std::string get_string () override;

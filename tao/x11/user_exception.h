@@ -19,7 +19,7 @@ namespace TAOX11_NAMESPACE {
     {
     public:
       /// Destructor.
-      virtual ~UserException () throw() = default;
+      ~UserException () noexcept override = default;
 
       /// noop
       void _tao_encode (TAO_OutputCDR &) const override;

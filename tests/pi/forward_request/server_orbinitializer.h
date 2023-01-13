@@ -23,7 +23,7 @@ class Server_ORBInitializer final :
 {
 public:
   /// Constructor.
-  Server_ORBInitializer ();
+  Server_ORBInitializer () = default;
 
   void pre_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override;
 

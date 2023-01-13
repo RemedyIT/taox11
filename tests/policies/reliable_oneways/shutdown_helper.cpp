@@ -9,7 +9,7 @@
 #include "shutdown_helper.h"
 
 Shutdown_Helper::Shutdown_Helper (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb)
+  : orb_ (std::move(orb))
 {
 }
 

@@ -18,7 +18,7 @@
 ServantLocator::ServantLocator (IDL::traits<CORBA::ORB>::ref_type orb,
                                 const std::string& dllname,
                                 const std::string& factory_function)
-  : orb_ (orb), result_(0)
+  : orb_ (std::move(orb)), result_(0)
 {
   // The dll is opened using the dllname passed.
   if (this->dll_.open (dllname.c_str()) == -1)

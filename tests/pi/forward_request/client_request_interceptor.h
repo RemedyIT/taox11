@@ -29,10 +29,8 @@ class Client_Request_Interceptor final
   : public IDL::traits<PortableInterceptor::ClientRequestInterceptor>::base_type
 {
 public:
-
   /// Constructor.
-  Client_Request_Interceptor (const std::string& orb_id,
-                              const std::string& forward_str);
+  Client_Request_Interceptor (std::string orb_id, std::string forward_str);
 
   /**
    * @name Methods Required by the Client Request Interceptor
@@ -48,25 +46,20 @@ public:
 
   void destroy () override;
 
-  void send_request (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void send_request (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  void send_poll (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void send_poll (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  void receive_reply (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void receive_reply (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  void receive_exception (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void receive_exception (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
 
-  void receive_other (
-      IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
+  void receive_other (IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri) override;
   //@}
 
 private:
   /// The ID of the ORB this interceptor is registered with.
-  std::string orb_id_;
+  std::string const orb_id_;
 
   /// Pseudo-reference to the ORB this interceptor is registered
   /// with.
@@ -77,8 +70,7 @@ private:
 
   /// Stringified reference to the object the initial request will be
   /// forwarded to by this interceptor.
-  std::string forward_str_;
-
+  std::string const forward_str_;
 };
 
 #endif  /* CLIENT_REQUEST_INTERCEPTOR_H */

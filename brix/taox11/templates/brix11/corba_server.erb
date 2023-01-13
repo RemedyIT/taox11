@@ -108,8 +108,8 @@ main(int argc, char *argv[])
         }
 <% if has_servant_implementation? %>
 
-      CORBA::servant_traits< <%= scoped_interface %>>::ref_type <%= servant_impl_obj %> =
-        CORBA::make_reference< <%= servant_impl_name %>> (_orb);
+      CORBA::servant_traits<<%= scoped_interface %>>::ref_type <%= servant_impl_obj %> =
+        CORBA::make_reference<<%= servant_impl_name %>> (_orb);
 
       taox11_info << "created <%= scoped_interface %> servant" << std::endl;
 
@@ -127,13 +127,13 @@ main(int argc, char *argv[])
           return 1;
         }
 
-      IDL::traits< <%= scoped_interface %>>::ref_type <%= interface_obj %> =
-        IDL::traits< <%= scoped_interface %>>::narrow (obj);
+      IDL::traits<<%= scoped_interface %>>::ref_type <%= interface_obj %> =
+        IDL::traits<<%= scoped_interface %>>::narrow (obj);
 
       if (!<%= interface_obj %>)
         {
           taox11_error
-            << "ERROR: IDL::traits< <%= scoped_interface %>>::narrow (obj) returned null reference."
+            << "ERROR: IDL::traits<<%= scoped_interface %>>::narrow (obj) returned null reference."
             << std::endl;
           return 1;
         }

@@ -2,6 +2,11 @@ name: fuzzr
 
 on:
   push:
+    branches:
+      - master
+      - v*
+    tags:
+      - AXCIOMA-v*
   pull_request:
     branches:
       - master
@@ -14,22 +19,33 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 env:
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
+  X11_BRANCH: master
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) && github.repository_owner == 'RemedyIT'
+      run: |
+        echo "X11_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false && github.repository_owner == 'RemedyIT'
+      run: |
+        echo "X11_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+    - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: '2.7'
     - name: checkout axcioma
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
+        ref: ${{ env.X11_BRANCH }}
     - name: install fuzzr gem
       run: |
         gem install fuzzr

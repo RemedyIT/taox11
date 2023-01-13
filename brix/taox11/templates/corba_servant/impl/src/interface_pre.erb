@@ -5,11 +5,11 @@
 // Your constructor(s)
 %   if interface_wants_shutdown?(scoped_name)
 <%= impl_cxxname %>::<%= impl_cxxname %> (IDL::traits<CORBA::ORB>::ref_type orb)
-  :  CORBA::servant_traits< <%= scoped_cxxtype %>>::base_type (),
+  :  CORBA::servant_traits<<%= scoped_cxxtype %>>::base_type (),
      orb_ (orb)
 %   else
 <%= impl_cxxname %>::<%= impl_cxxname %> ()
-  :  CORBA::servant_traits< <%= scoped_cxxtype %>>::base_type ()
+  :  CORBA::servant_traits<<%= scoped_cxxtype %>>::base_type ()
 %   end
 {
   // Your constructor body

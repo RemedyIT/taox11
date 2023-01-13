@@ -40,7 +40,7 @@ public:
   {
   }
 
-  virtual ~MyAdapterActivator() = default;
+  ~MyAdapterActivator() override = default;
 
   bool unknown_adapter (
     IDL::traits<PortableServer::POA>::ref_type parent,

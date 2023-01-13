@@ -25,16 +25,21 @@
   /// Get the discriminator
   inline <%= switch_in_cxxtype %> _d () const  { return this->disc_; }
 % members.each do |_m|
+%if _m.is_default?
+% default_disc = default_label
+%else
+% default_disc = _m.nondefault_labels.first
+%end
 
   /// @copydoc <%= _m.doc_scoped_name %>
   //@{
   /// Set the value of the union, the discriminator is automatically
   /// set to the correct value
-  inline void <%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11_<%= _m.cxxname %>);
+  inline void <%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11_<%= _m.cxxname %><% if _m.has_multiple_discriminators? %>, <%= switch_in_cxxtype %> _x11_disc = <%= default_disc %><% end %>);
 %   unless _m.is_pod? || _m.is_reference?
   /// Set the value of the union, the discriminator is automatically
   /// set to the correct value
-  inline void <%= _m.cxxname %> (<%= _m.cxx_move_type %> _x11_<%= _m.cxxname %>);
+  inline void <%= _m.cxxname %> (<%= _m.cxx_move_type %> _x11_<%= _m.cxxname %><% if _m.has_multiple_discriminators? %>, <%= switch_in_cxxtype %> _x11_disc = <%= default_disc %><% end %>);
 %   end
   /// Get the value of the union, if the discriminator doesn't match a
   /// BAD_PARAM exception is thrown
@@ -61,10 +66,26 @@ private:
   <%= switch_cxxtype %> disc_ {<% if has_default?() || has_implicit_default?() %><%= default_label %><% else %><%= members.first.nondefault_labels.first %><% end %>};
   union u_type_
   {
+// Compilation with c++11 standard gives errors on  the ' = default' declaration
+#if !defined (ACE_HAS_CPP14) || (defined (_MSC_VER) && (_MSC_VER < 1930))
     u_type_ ();
+#else
+    u_type_ () = default;
+#endif
     ~u_type_ ();
 % members.each do |_m|
+% # The default member or the first member should use the zero_initializer
+% # Visual Studio 2019 doesn't seem to like using default, this leads to
+% # an internal compiler error, see SW331
+% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
+#if !defined (ACE_HAS_CPP14) || (defined (_MSC_VER) && (_MSC_VER < 1930))
     <%= _m.cxx_member_type %> <%= _m.cxxname %>_;
+#else
+    <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first) %> <%= _m.zero_initializer %><% end %>;
+#endif
+% else
+    <%= _m.cxx_member_type %> <%= _m.cxxname %>_;
+% end
 % end
   } u_ {};
 }; // class <%= cxxname %>

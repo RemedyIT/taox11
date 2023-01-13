@@ -22,7 +22,7 @@
   {\
     CORBA::CT##Seq seq = da->get_##type##_seq (); \
     ++level_; \
-    uint32_t len = ACE_Utils::truncate_cast<uint32_t> (seq.size ()); \
+    uint32_t const len = ACE_Utils::truncate_cast<uint32_t> (seq.size ()); \
     tab (level_); \
     TAOX11_TEST_INFO <<  "length = " << len << std::endl; \
     for (uint32_t i = 0; i < len; ++i) \
@@ -36,9 +36,9 @@
   break;
 
 DynAnyAnalyzer::DynAnyAnalyzer ( IDL::traits<CORBA::ORB>::ref_type orb,
-    IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory)
-  : orb_ (orb),
-    dynany_factory_ (dynany_factory),
+    IDL::traits<DynamicAny::DynAnyFactory>::ref_type dynany_factory)
+  : orb_ (std::move(orb)),
+    dynany_factory_ (std::move(dynany_factory)),
     level_ (0)
 {
 }

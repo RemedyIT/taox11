@@ -37,7 +37,7 @@ namespace TAOX11_NAMESPACE
       : public TAO_CORBA::UserException
     {
     public:
-      virtual ~in () = default;
+      ~in () override = default;
 
       in &operator= (const in &uex)
       {
