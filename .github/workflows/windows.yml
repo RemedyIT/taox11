@@ -89,13 +89,13 @@ jobs:
       shell: cmd
     - name: Print brix11 configuration
       run: |
-        %X11_BASE_ROOT%/bin/brix11 env -- configure -P
+        %X11_BASE_ROOT%\bin\brix11 env -- configure -P
       shell: cmd
     - name: Run brix11 gen build
       run: |
         type axcioma\workspace.mwc
-        %X11_BASE_ROOT%/bin/brix11 -v gen build axcioma/workspace.mwc
-      shell: cmd
+        ${env:X11_BASE_ROOT}/bin/brix11 -v gen build axcioma/workspace.mwc -- gen build ${env:TAOX11_ROOT}/examples -- gen build ${env:TAOX11_ROOT}/orbsvcs/tests -- gen build ${env:TAOX11_ROOT}/tests
+      shell: pwsh
     - name: Run brix11 make
       run: |
         %X11_BASE_ROOT%/bin/brix11 make -N -d %X11_BASE_ROOT% -- make -N -d %TAOX11_ROOT%/examples -- make -N -d %TAOX11_ROOT%/orbsvcs/tests -- make -N -d %TAOX11_ROOT%/tests
