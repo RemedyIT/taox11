@@ -93,7 +93,7 @@ jobs:
       shell: cmd
     - name: Run brix11 gen build
       run: |
-        "${env:X11_BASE_ROOT}/bin/brix11" -v gen build axcioma/workspace.mwc -- gen build %TAOX11_ROOT%/examples -- gen build %TAOX11_ROOT%/orbsvcs/tests -- gen build %TAOX11_ROOT%/tests
+        axcioma/bin/brix11 -v gen build axcioma/workspace.mwc
       shell: pwsh
     - name: Run brix11 make
       run: |
