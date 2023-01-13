@@ -62,10 +62,6 @@ namespace TAOX11_NAMESPACE
    */
   namespace CORBA
   {
-    ORB::InvalidName::~InvalidName () throw ()
-    {
-    }
-
     void
     ORB::InvalidName::_info (std::ostream& user_exception_info) const
     {

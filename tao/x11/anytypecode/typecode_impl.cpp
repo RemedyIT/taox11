@@ -479,10 +479,6 @@ TAOX11_NAMESPACE::CORBA::typecode_reference const TAOX11_NAMESPACE::CORBA::TypeC
     __tao::TAOX11_NAMESPACE::CORBA::TypeCode::_tc_BadKind, true);
 
 
-TAOX11_NAMESPACE::CORBA::TypeCode::Bounds::~Bounds () throw ()
-{
-}
-
 void
 TAOX11_NAMESPACE::CORBA::TypeCode::Bounds::_info (std::ostream& user_exception_info) const
 {
@@ -517,10 +513,6 @@ TAOX11_NAMESPACE::CORBA::Exception *TAOX11_NAMESPACE::CORBA::TypeCode::Bounds::_
   if (!result)
     throw TAO_CORBA::NO_MEMORY ();
   return result;
-}
-
-TAOX11_NAMESPACE::CORBA::TypeCode::BadKind::~BadKind () throw ()
-{
 }
 
 void

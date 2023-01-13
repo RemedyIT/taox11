@@ -471,10 +471,10 @@ module IDL
 
     module ReferenceType_Mixin
       def cxx_member_type(scope = nil, typedef = nil)
-        "IDL::traits< #{(typedef || self).cxx_type(scope)}>::ref_type"
+        "IDL::traits<#{(typedef || self).cxx_type(scope)}>::ref_type"
       end
       def resolved_cxx_member_type(scope = nil, typedef = nil)
-        "IDL::traits< #{resolved_cxx_type(scope)}>::ref_type"
+        "IDL::traits<#{resolved_cxx_type(scope)}>::ref_type"
       end
       def cxx_return_type(scope = nil)
         cxx_member_type(scope)
@@ -768,7 +768,7 @@ module IDL
 
     class Fixed
       def cxx_type(scope = nil)
-        digits.nil? ? "TAOX11_NAMESPACE::IDL::Fixed" : "TAOX11_NAMESPACE::IDL::Fixed <#{digits}, #{scale}>"
+        digits.nil? ? "TAOX11_NAMESPACE::IDL::Fixed" : "TAOX11_NAMESPACE::IDL::Fixed<#{digits}, #{scale}>"
       end
       def proxy_cxxtype(scope = nil)
         cxx_type
@@ -780,13 +780,13 @@ module IDL
 
     class Sequence
       def cxx_type(scope = nil)
-        (size.to_i>0) ? "TAOX11_NAMESPACE::IDL::bounded_vector< #{basetype.cxx_member_type(scope)}, #{size}>" : "std::vector< #{basetype.cxx_member_type(scope)}>"
+        (size.to_i>0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.cxx_member_type(scope)}, #{size}>" : "std::vector<#{basetype.cxx_member_type(scope)}>"
       end
       def proxy_cxxtype(scope = nil)
-        (size.to_i>0) ? "TAOX11_NAMESPACE::IDL::bounded_vector< #{basetype.proxy_cxxtype(scope)}, #{size}>" : "std::vector< #{basetype.proxy_cxxtype(scope)}>"
+        (size.to_i>0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.proxy_cxxtype(scope)}, #{size}>" : "std::vector<#{basetype.proxy_cxxtype(scope)}>"
       end
       def resolved_cxx_type(scope = nil)
-        (size.to_i>0) ? "TAOX11_NAMESPACE::IDL::bounded_vector< #{basetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::vector< #{basetype.resolved_cxx_member_type(scope)}>"
+        (size.to_i>0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::vector< #{basetype.resolved_cxx_member_type(scope)}>"
       end
       def base_traits_cxx_typename
         basetype.cxx_type

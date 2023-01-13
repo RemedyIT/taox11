@@ -59,7 +59,7 @@ namespace TAOX11_NAMESPACE
         TAOX11_NAMESPACE::CORBA::Exception *_tao_duplicate () const override;
 
         Bounds ();
-        virtual ~Bounds () throw ();
+        ~Bounds () noexcept override = default;
         Bounds (const Bounds&) = default;
         Bounds (Bounds&&) = default;
         Bounds& operator= (const Bounds& x);
@@ -84,7 +84,7 @@ namespace TAOX11_NAMESPACE
           TAOX11_NAMESPACE::CORBA::Exception *_tao_duplicate () const override;
 
           BadKind ();
-          virtual ~BadKind () throw ();
+          ~BadKind () noexcept override = default;
           BadKind (const BadKind&) = default;
           BadKind (BadKind&&) = default;
           BadKind& operator= (const BadKind& x);

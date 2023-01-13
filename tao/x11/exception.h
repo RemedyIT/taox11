@@ -41,7 +41,7 @@ namespace TAOX11_NAMESPACE
     {
     public:
       /// Destructor.
-      virtual ~Exception () throw () = default;
+      ~Exception () noexcept override = default;
 
       const char* what() const noexcept override;
 

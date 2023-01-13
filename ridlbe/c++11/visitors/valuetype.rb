@@ -186,7 +186,7 @@ module IDL
       end
 
       def factory_traits_type
-        "TAOX11_IDL::traits< #{factory_cxxname}>"
+        "TAOX11_IDL::traits<#{factory_cxxname}>"
       end
 
       def scoped_factory_cxxname
@@ -198,7 +198,7 @@ module IDL
       end
 
       def scoped_factory_traits_type
-        "TAOX11_IDL::traits< #{scoped_factory_cxx_type}>"
+        "TAOX11_IDL::traits<#{scoped_factory_cxx_type}>"
       end
 
       def skel_cxxname

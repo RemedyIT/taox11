@@ -3,9 +3,7 @@
 template <typename OStrm_>
 struct formatter<<%= scoped_cxxtype %>, OStrm_>
 {
-  inline OStrm_& operator ()(
-      OStrm_& os_,
-      <%= scoped_cxx_in_type %> val_)
+  inline OStrm_& operator ()(OStrm_& os_, <%= scoped_cxx_in_type %> val_)
   {
     os_ << "<%= formatted_cxxname %> {";
 % if switchtype_boolean?
@@ -74,7 +72,5 @@ inline OStrm_& operator <<(
                           std::false_type>::value,
                         formatter<<%= scoped_cxxtype %>, OStrm_>,
                         typename writer_t::formatter_t>::type;
-  return IDL::traits<<%= scoped_cxxtype %>>::write_on (
-      os, w.val_,
-      formatter_t ());
+  return IDL::traits<<%= scoped_cxxtype %>>::write_on (os, w.val_, formatter_t ());
 }

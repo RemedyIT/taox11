@@ -2,26 +2,18 @@
 // generated from <%= ridl_template_path %>
 template <typename OStrm_>
 inline OStrm_&
-formatter<<%= scoped_cxxtype %>, OStrm_>::operator ()(
-      OStrm_& os_,
-      <%= scoped_cxx_in_type %> val_)
+formatter<<%= scoped_cxxtype %>, OStrm_>::operator ()(OStrm_& os_, <%= scoped_cxx_in_type %> val_)
 {
 % if is_abstract?
-  os_ << IDL::traits<TAOX11_CORBA::AbstractBase>::_dump (
-           val_,
-           "<%= formatted_cxxname %>");
+  os_ << IDL::traits<TAOX11_CORBA::AbstractBase>::_dump (val_, "<%= formatted_cxxname %>");
 % else
-  os_ << IDL::traits<TAOX11_CORBA::Object>::_dump (
-           std::move (val_),
-           "<%= formatted_cxxname %>");
+  os_ << IDL::traits<TAOX11_CORBA::Object>::_dump (std::move (val_), "<%= formatted_cxxname %>");
 % end
   return os_;
 }
 
 template <typename OStrm_, typename Fmt>
-inline OStrm_& operator <<(
-    OStrm_& os,
-    IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt> w)
+inline OStrm_& operator <<(OStrm_& os, IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt> w)
 {
   using writer_t = IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt>;
   using formatter_t = typename std::conditional<
@@ -30,7 +22,5 @@ inline OStrm_& operator <<(
                           std::false_type>::value,
                         formatter<<%= scoped_cxxtype %>, OStrm_>,
                         typename writer_t::formatter_t>::type;
-  return IDL::traits<<%= scoped_cxxtype %>>::write_on (
-      os, w.val_,
-      formatter_t ());
+  return IDL::traits<<%= scoped_cxxtype %>>::write_on (os, w.val_, formatter_t ());
 }
