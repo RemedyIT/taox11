@@ -370,6 +370,55 @@ test_data_z (IDL::traits<Test::Foo>::ref_type foo)
     TAOX11_TEST_DEBUG << "successfully called Foo::test_data_z: <"
       << data << "> - <" << ret << ">." << std::endl;
   }
+
+  // Check that passing an invalid discriminator will result in an exception
+  Test::Z_Union data2;
+  try
+  {
+    data2.z_string("Hello", 4);
+    TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 4 should result in an exception"
+      << std::endl;
+    ++retval;
+  }
+  catch (const CORBA::BAD_PARAM&)
+  {
+    TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 4 resulted in correct exception" << std::endl;
+  }
+
+  // Check that we can set a legal different discriminator
+  Test::Z_Union data_z_1;
+  Test::Z_Union data_z_2;
+  Test::Z_Union data_z_3;
+  data_z_1.z_string("Hello", 1);
+  data_z_2.z_string("Hello", 2);
+  data_z_3.z_string("Hello", 3);
+  if (data_z_1._d () != 1)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 1 didn't work" << std::endl;
+    ++retval;
+  }
+  else
+  {
+    TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 1 worked" << std::endl;
+  }
+  if (data_z_2._d () != 2)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 2 didn't work" << std::endl;
+    ++retval;
+  }
+  else
+  {
+    TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 2 worked" << std::endl;
+  }
+  if (data_z_3._d () != 3)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 3 didn't work" << std::endl;
+    ++retval;
+  }
+  else
+  {
+    TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 3 worked" << std::endl;
+  }
   return retval;
 }
 
@@ -387,8 +436,7 @@ test_union_message (IDL::traits<Test::Foo>::ref_type foo)
 
   Test::UnionMessage msg_d { Test::Assignment::D, b_d, dt_d };
 
-  TAOX11_TEST_DEBUG << "Sending <"
-      << msg_d << ">" << std::endl;
+  TAOX11_TEST_DEBUG << "Sending <" << msg_d << ">" << std::endl;
 
   bool const ret = foo->send_unionmessage (msg_d);
 

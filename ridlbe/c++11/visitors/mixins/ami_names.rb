@@ -50,7 +50,7 @@ module IDL
       end
 
       def amic_scoped_cxx_in_type
-         @amic_scoped_cxx_in_type ||= ('CORBA::amic_traits< '+scoped_cxxtype+'>::in_type')
+         @amic_scoped_cxx_in_type ||= ('CORBA::amic_traits<'+scoped_cxxtype+'>::in_type')
       end
 
       def handler_scoped_cxxname

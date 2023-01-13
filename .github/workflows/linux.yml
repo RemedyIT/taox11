@@ -44,20 +44,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-18.04
-            CC: gcc-6
-            CXX: g++-6
-            ruby: '2.5'
-            PackageDeps: g++-6
-          - os: ubuntu-18.04
+          - os: ubuntu-20.04
             CC: gcc-7
             CXX: g++-7
-            ruby: '2.6'
+            ruby: '2.5'
             PackageDeps: g++-7
-          - os: ubuntu-18.04
+          - os: ubuntu-20.04
             CC: gcc-8
             CXX: g++-8
-            ruby: '2.7'
+            ruby: '2.6'
             PackageDeps: g++-8
           - os: ubuntu-20.04
             CC: gcc-9
@@ -65,17 +60,17 @@ jobs:
             ruby: '2.7'
             PackageDeps: g++-9
             feature: Codecov
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             CC: gcc-10
             CXX: g++-10
             ruby: '3.0'
             PackageDeps: g++-10
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             CC: gcc-11
             CXX: g++-11
             ruby: '3.0'
             PackageDeps: g++-11
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             CC: gcc-10
             CXX: g++-10
             ruby: '2.7'
@@ -122,7 +117,7 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
     - name: Add repository ${{ matrix.Repo }}
-      if: matrix.Repo != ''
+      if: startsWith (matrix.Repo, 'llvm-toolchain')
       run:
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
         sudo apt-add-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ ${{ matrix.Repo }} main"
