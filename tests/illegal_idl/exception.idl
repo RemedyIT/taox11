@@ -1,0 +1,13 @@
+/**
+ * @file    issue570.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+interface intfmeth_exc_par {
+  exception exc_t {
+    string reason;
+  };
+  void doit (in exc_t ex);
+};
