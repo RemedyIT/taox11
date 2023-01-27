@@ -1,8 +1,8 @@
 /**
  * @file exception_union_member.idl
+ * @author Johnny Willemsen
  *
  * ridlc shall reject use of exception for union member
- *
  */
 module exception_misuse3 {
   exception exc_t {
