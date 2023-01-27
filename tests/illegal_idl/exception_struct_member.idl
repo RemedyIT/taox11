@@ -1,0 +1,15 @@
+/**
+ * @file exception_struct_member.idl
+ *
+ * ridlc shall reject use of exception for struct member
+ *
+ */
+module exception_misuse2 {
+  exception exc_t {
+    string reason;
+  };
+  struct mystruct {
+    exc_t ex;
+  };
+};
+
