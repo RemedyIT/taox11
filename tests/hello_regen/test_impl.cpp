@@ -88,7 +88,7 @@ namespace Test
   // generated from c++11/templates/impl/src/operation
   void
   Hello::create_foo (
-      IDL::traits< ::Test::Foo>::ref_type& foo_inst)
+      IDL::traits<::Test::Foo>::ref_type& foo_inst)
   {
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello::create_foo[Body]
       // your code here
