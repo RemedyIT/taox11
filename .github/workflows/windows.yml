@@ -94,7 +94,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: defaultfeatures
-        path: ${{ env.ACE_ROOT }}/bin/MakeProjectCreator/default.features
+        path: ${{ env.ACE_ROOT }}/bin/MakeProjectCreator/config/default.features
     - uses: actions/upload-artifact@v3
       with:
         name: workspace
