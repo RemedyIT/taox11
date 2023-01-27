@@ -1,0 +1,17 @@
+/**
+ * @file exception_struct_member.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of exception for struct member
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+module exception_misuse2 {
+  exception exc_t {
+    string reason;
+  };
+  struct mystruct {
+    exc_t ex;
+  };
+};
+
