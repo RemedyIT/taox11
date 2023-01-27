@@ -112,7 +112,7 @@ namespace Test
       /// @copydoc test.idl::Test::Hello::create_foo
       void
       create_foo (
-          IDL::traits< ::Test::Foo>::ref_type& foo_inst) override;
+          IDL::traits<::Test::Foo>::ref_type& foo_inst) override;
 
       // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::update
