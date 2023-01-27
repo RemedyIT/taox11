@@ -91,6 +91,14 @@ jobs:
       run: |
         %X11_BASE_ROOT%/bin/brix11 env -- configure -P
       shell: cmd
+    - uses: actions/upload-artifact@v3
+      with:
+        name: defaultfeatures
+        path: ${{ env.ACE_ROOT }}/bin/MakeProjectCreator/default.features
+    - uses: actions/upload-artifact@v3
+      with:
+        name: workspace
+        path: axcioma/workspace.mwc
     - name: Run brix11 gen build
       run: |
         axcioma/bin/brix11 -v gen build axcioma/workspace.mwc -- gen build %TAOX11_ROOT%/examples -- gen build %TAOX11_ROOT%/orbsvcs/tests -- gen build %TAOX11_ROOT%/tests
