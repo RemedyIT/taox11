@@ -1,0 +1,18 @@
+/**
+ * @file exception_union_member.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of exception for union member
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+module exception_misuse3 {
+  exception exc_t {
+    string reason;
+  };
+  union BoolUnion5 switch (boolean)
+  {
+    case FALSE: exc_t ex;
+  };
+};
+
