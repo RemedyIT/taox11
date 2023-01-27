@@ -30,7 +30,8 @@ namespace TAOX11_NAMESPACE
         bool amic)
     {
       std::string objstr = amic ? "CORBA::amic_traits<" : "IDL::traits<";
-      objstr += objtype; objstr += ">::ref_type {";
+      objstr += objtype;
+      objstr += ">::ref_type {";
       if (!obj)
       {
         objstr += "nil";
