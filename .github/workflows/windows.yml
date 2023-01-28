@@ -80,9 +80,22 @@ jobs:
         path: ${{ env.X11_BASE_ROOT }}
         ref: jwi-binarympcconfigfles
     - uses: ilammy/msvc-dev-cmd@v1
+    - name: perl v1
+      run: |
+        perl --version
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
+    - name: perl v2
+      run: |
+        perl --version
+    - uses: shogo82148/actions-setup-perl@v1
+      with:
+        perl-version: '5.32'
+        distribution: strawberry
+    - name: perl v3
+      run: |
+        perl --version
     - name: Run brix11 configure
       run: |
         %X11_BASE_ROOT%\bin\brix11 -t ${{ matrix.project_type }} configure -W aceroot=%ACE_ROOT% -W taoroot=%TAO_ROOT% -W mpcroot=%MPC_ROOT%
