@@ -82,12 +82,14 @@ jobs:
     - uses: ilammy/msvc-dev-cmd@v1
     - name: perl v1
       run: |
+        which perl
         perl --version
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
     - name: perl v2
       run: |
+        which perl
         perl --version
     - uses: shogo82148/actions-setup-perl@v1
       with:
