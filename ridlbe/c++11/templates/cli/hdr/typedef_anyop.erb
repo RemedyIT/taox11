@@ -20,19 +20,22 @@ _any_out_<%= scoped_cxxname.scope_to_cxxname %> (
     const TAOX11_CORBA::Any&,
     <%= scoped_cxx_out_type %>);
 
-// copying version
-inline void operator<<= (TAOX11_CORBA::Any& any, <%= scoped_cxx_in_type %> _val)
+namespace CORBA
 {
-  _any_cp_in_<%= scoped_cxxname.scope_to_cxxname %> (any, _val);
-}
-// non-copying version
-inline void operator<<= (TAOX11_CORBA::Any& any, <%= scoped_cxx_move_type %> _val)
-{
-  _any_mv_in_<%= scoped_cxxname.scope_to_cxxname %> (any, std::move (_val));
-}
-// extraction
-inline bool operator>>= (const TAOX11_CORBA::Any& any, <%= scoped_cxx_out_type %> _val)
-{
-  return _any_out_<%= scoped_cxxname.scope_to_cxxname %> (any, _val);
+  /// Copying any insertion operator
+  inline void operator<<= (TAOX11_CORBA::Any& any, <%= scoped_cxx_in_type %> _val)
+  {
+    _any_cp_in_<%= scoped_cxxname.scope_to_cxxname %> (any, _val);
+  }
+  /// Non-copying any insertion operator
+  inline void operator<<= (TAOX11_CORBA::Any& any, <%= scoped_cxx_move_type %> _val)
+  {
+    _any_mv_in_<%= scoped_cxxname.scope_to_cxxname %> (any, std::move (_val));
+  }
+  /// Any extraction operator
+  inline bool operator>>= (const TAOX11_CORBA::Any& any, <%= scoped_cxx_out_type %> _val)
+  {
+    return _any_out_<%= scoped_cxxname.scope_to_cxxname %> (any, _val);
+  }
 }
 #endif // _ALIAS_ANYOP_<%= alias_md5 %>_DECL_

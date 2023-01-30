@@ -2,9 +2,12 @@
 // generated from <%= ridl_template_path %>
 #if !defined (__TAOX11_ANYOP_<%= scoped_cxxname.to_include_guard %>_DECL__)
 #define __TAOX11_ANYOP_<%= scoped_cxxname.to_include_guard %>_DECL__
-<%= anytypecode_export_macro %>void operator<<= (TAOX11_CORBA::Any &, <%= scoped_cxx_in_type %>);
+namespace CORBA
+{
+  <%= anytypecode_export_macro %>void operator<<= (TAOX11_CORBA::Any &, <%= scoped_cxx_in_type %>);
 %   unless (is_pod? || is_reference?)
-<%= anytypecode_export_macro %>void operator<<= (TAOX11_CORBA::Any &, <%= scoped_cxx_move_type %>);
+  <%= anytypecode_export_macro %>void operator<<= (TAOX11_CORBA::Any &, <%= scoped_cxx_move_type %>);
 %   end
-<%= anytypecode_export_macro %>bool operator>>= (const TAOX11_CORBA::Any &, <%= scoped_cxx_out_type %>);
+  <%= anytypecode_export_macro %>bool operator>>= (const TAOX11_CORBA::Any &, <%= scoped_cxx_out_type %>);
+}
 #endif
