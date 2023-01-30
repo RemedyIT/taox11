@@ -201,8 +201,7 @@ namespace TAOX11_NAMESPACE {
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO) && (TAO_HAS_MINIMUM_POA == 0)
     template<>
     object_traits<PortableServer::ServantActivator>::ref_type
-    object_traits<PortableServer::ServantActivator>::narrow (
-      object_reference< CORBA::Object> obj)
+    object_traits<PortableServer::ServantActivator>::narrow (object_reference<CORBA::Object> obj)
     {
       if (obj)
       {

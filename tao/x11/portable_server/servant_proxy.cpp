@@ -118,8 +118,8 @@ namespace TAOX11_NAMESPACE {
 
   TAO_PORTABLE_SERVER::POA_ptr Servant_proxy::_default_POA ()
   {
-    TAOX11_CORBA::object_reference< TAOX11_NAMESPACE::PortableServer::POA_impl> _poa_impl =
-      TAOX11_CORBA::object_traits< TAOX11_NAMESPACE::PortableServer::POA_impl>::narrow (this->_get_skel ()->_default_POA ());
+    TAOX11_CORBA::object_reference<TAOX11_NAMESPACE::PortableServer::POA_impl> _poa_impl =
+      TAOX11_CORBA::object_traits<TAOX11_NAMESPACE::PortableServer::POA_impl>::narrow (this->_get_skel ()->_default_POA ());
     return TAO_PORTABLE_SERVER::POA::_duplicate ((TAO_PORTABLE_SERVER::POA_ptr)_poa_impl->_proxy ());
   }
 } // namespace TAOX11_NAMESPACE

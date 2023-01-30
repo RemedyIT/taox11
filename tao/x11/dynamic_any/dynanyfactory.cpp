@@ -128,16 +128,16 @@ namespace TAOX11_NAMESPACE
 
       while (tck == CORBA::TCKind::tk_alias)
       {
-        CORBA::object_reference< CORBA::TypeCode> temp = tc->content_type ();
+        CORBA::object_reference<CORBA::TypeCode> temp = tc->content_type ();
         tck = DynAnyFactory_i::unalias (temp);
       }
       TAOX11_LOG_DEBUG ("DynAnyFactory_i::unalias tck:" << tck);
 
       return tck;
     }
-    /// Same as above, but returns type code instead of  TCKind. Caller
+    /// Same as above, but returns type code instead of TCKind. Caller
     /// must release the return value.
-    CORBA::object_reference< CORBA::TypeCode>
+    CORBA::object_reference<CORBA::TypeCode>
     DynAnyFactory_i::strip_alias (CORBA::object_reference<CORBA::TypeCode> tc)
     {
       IDL::traits<CORBA::TypeCode>::ref_type retval = IDL::traits<CORBA::TypeCode>::narrow(tc);
