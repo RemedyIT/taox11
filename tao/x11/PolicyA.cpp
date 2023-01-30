@@ -62,34 +62,36 @@ TAOX11_CORBA::typecode_reference const TAOX11_CORBA::_tc_Policy =
 // generated from StubSourceAnyOpWriter#pre_visit
 namespace TAOX11_NAMESPACE
 {
-
-  // generated from c++/cli_src/anyop.erb
-  void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::PolicyError&)
-  {}
-  void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&&)
-  {}
-  bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&)
+  namespace CORBA
   {
-    return false;
-  }
+    // generated from c++/cli_src/anyop.erb
+    void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::PolicyError&)
+    {}
+    void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&&)
+    {}
+    bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&)
+    {
+      return false;
+    }
 
-  // generated from c++/cli_src/anyop.erb
-  void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::InvalidPolicies&)
-  {}
-  void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&&)
-  {}
-  bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&)
-  {
-    return false;
-  }
+    // generated from c++/cli_src/anyop.erb
+    void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::InvalidPolicies&)
+    {}
+    void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&&)
+    {}
+    bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&)
+    {
+      return false;
+    }
 
-  // generated from c++/cli_src/anyop.erb
-  void operator<<= (TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::ref_type)
-  {}
-  bool operator>>= (const TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::ref_type&)
-  {
-    return false;
-  }
+    // generated from c++/cli_src/anyop.erb
+    void operator<<= (TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::ref_type)
+    {}
+    bool operator>>= (const TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::ref_type&)
+    {
+      return false;
+    }
+  } // namespace CORBA
 
 } // namespace TAOX11_NAMESPACE
 
