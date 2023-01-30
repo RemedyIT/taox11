@@ -62,7 +62,7 @@ namespace TAOX11_NAMESPACE
 
       /// Same as above, but returns type code instead of TCKind. Caller
       /// must release the return value.
-      static CORBA::object_reference<CORBA::TypeCode> strip_alias (CORBA::object_reference< CORBA::TypeCode> tc);
+      static CORBA::object_reference<CORBA::TypeCode> strip_alias (CORBA::object_reference<CORBA::TypeCode> tc);
 
      private:
       DynAnyFactory_i (const DynAnyFactory_i&) = delete;
