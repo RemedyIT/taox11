@@ -34,9 +34,6 @@ namespace TAOX11_NAMESPACE
     class TAOX11_Export SystemException : public Exception
     {
     public:
-      // Make IDL::formatter our friend in order to let it use our _info operation
-      template <typename T, typename Y> friend struct TAOX11_NAMESPACE::IDL::formatter;
-
       /// Destructor.
       ~SystemException () noexcept override = default;
 
@@ -94,6 +91,8 @@ namespace TAOX11_NAMESPACE
                        const char *local_name,
                        uint32_t code,
                        CORBA::CompletionStatus completed);
+
+      template <typename T, typename OStrm_> friend struct IDL::formatter;
 
       void _info (std::ostream& strm) const override;
 
