@@ -406,19 +406,21 @@ namespace TAOX11_NAMESPACE {
 
 namespace TAOX11_NAMESPACE
 {
+  namespace CORBA
+  {
    // generated from c++/cli_hdr/anyop.erb
 #if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICYERROR_DECL__)
 #define __TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICYERROR_DECL__
-  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::PolicyError&);
-  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&&);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&);
+    TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::PolicyError&);
+    TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&&);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&);
 #endif
 
 #if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__INVALIDPOLICIES_DECL__)
 #define __TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__INVALIDPOLICIES_DECL__
-  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::InvalidPolicies&);
-  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&&);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&);
+    TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::InvalidPolicies&);
+    TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&&);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&);
 #endif
 
    // generated from c++/cli_hdr/anyop.erb
@@ -427,7 +429,7 @@ namespace TAOX11_NAMESPACE
   TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::ref_type);
   TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::_ref_type&);
 #endif
-
+  } // namespac CORBA
 } // namespace TAOX11_NAMESPACE
 
 // generated from StubHeaderStdWriter#pre_visit
