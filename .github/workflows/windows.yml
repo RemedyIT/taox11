@@ -80,9 +80,12 @@ jobs:
         path: ${{ env.X11_BASE_ROOT }}
         ref: ${{ env.X11_BRANCH }}
     - uses: ilammy/msvc-dev-cmd@v1
-    - uses: actions/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
+    - uses: shogo82148/actions-setup-perl@v1
+      with:
+        distribution: strawberry
     - name: Run brix11 configure
       run: |
         %X11_BASE_ROOT%\bin\brix11 -t ${{ matrix.project_type }} configure -W aceroot=%ACE_ROOT% -W taoroot=%TAO_ROOT% -W mpcroot=%MPC_ROOT%
