@@ -109,8 +109,6 @@ namespace TAOX11_NAMESPACE
       impl_ref_type impl_ {};
     };
 
-  } // namespace CORBA
-
   /// Typesafe insertion.
   TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, uint8_t);
   TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, bool);
@@ -165,6 +163,9 @@ namespace TAOX11_NAMESPACE
 #if !defined(ACE_LACKS_STD_WSTRING)
   TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &any, std::wstring &s);
 #endif
+
+  } // namespace CORBA
+
 
   namespace IDL
   {
