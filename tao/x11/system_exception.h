@@ -92,6 +92,8 @@ namespace TAOX11_NAMESPACE
                        uint32_t code,
                        CORBA::CompletionStatus completed);
 
+      template <typename T, typename OStrm_> friend struct IDL::formatter;
+
       void _info (std::ostream& strm) const override;
 
     private:
