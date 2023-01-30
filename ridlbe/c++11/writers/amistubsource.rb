@@ -576,9 +576,15 @@ module IDL
         println('namespace TAOX11_NAMESPACE')
         println('{')
         inc_nest
+        println('  namespace CORBA')
+        println('  {')
+        inc_nest
       end
 
       def post_visit(parser)
+        dec_nest
+        println
+        println('  } // namespace CORBA')
         dec_nest
         println
         println('} // namespace TAOX11_NAMESPACE')

@@ -1,8 +1,6 @@
 
 // generated from <%= ridl_template_path %>
-inline std::ostream& operator<< (
-    std::ostream& strm,
-    <%= scoped_cxx_in_type %> _v)
+inline std::ostream& operator<< (std::ostream& strm, <%= scoped_cxx_in_type %> _v)
 {
   return IDL::traits<<%= scoped_cxxtype %>>::write_on (strm, std::move(_v));
 }
