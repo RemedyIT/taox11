@@ -544,7 +544,7 @@ Controller_impl::change (const CCS::Controller::ThermostatSeq &tlist,
   }
   // If we encountered errors in the above loop,
   // we will have added elements to the errors sequence.
-  if (ec.errors ().size () != 0)
+  if (!ec.errors ().empty ())
   {
     throw ec;
   }
