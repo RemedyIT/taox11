@@ -21,10 +21,6 @@
  */
 #include "tao/x11/ext/std_to_string.h"
 /*
- * Provide std::make_unique older/crippled platforms
- */
-#include "tao/x11/ext/std_make_unique_t.h"
-/*
  * Provide std::mutex for crippled platforms.
  */
 #include "tao/x11/ext/std_mutex.h"
