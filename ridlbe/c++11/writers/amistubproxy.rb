@@ -14,7 +14,7 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 module IDL
   module Cxx11
 
-    class AmiStubProxyBaseWriter < AmiBaseWriter #CxxCodeWriterBase
+    class AmiStubProxyBaseWriter < AmiBaseWriter # CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
          self.template_root = File.join('cli', 'prx', 'ami')
@@ -335,7 +335,7 @@ module IDL
         printiln("} // namespace #{node.cxxname}")
       end
 
-    end #AmiStubProxyVarOutWriter
+    end # AmiStubProxyVarOutWriter
 
     class AmiStubProxyObjRefTraitsWriter < AmiStubProxyBaseWriter
        def initialize(output = STDOUT, opts = {})
@@ -355,7 +355,7 @@ module IDL
          ami_handler_interface.visit_object_ref_traits(node)
        end
 
-    end #AmiStubProxyObjRefTraitsWriter
+    end # AmiStubProxyObjRefTraitsWriter
 
     class AmiStubProxyTypecodeWriter < AmiStubProxyBaseWriter
       def initialize(output = STDOUT, opts = {})
