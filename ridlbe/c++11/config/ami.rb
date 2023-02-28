@@ -28,7 +28,7 @@ module IDL
           # add AMI pragma handler
           base.add_pragma_handler(:corba_ami) do |_delegator, _curnode, _pragmastr|
             if (rc = (/^corba_ami\s+(.*)/ =~ _pragmastr ? true : false))
-              _delegator.add_ami_interfaces($1.strip)
+              _delegator.add_ami_interfaces(::Regexp.last_match(1).strip)
             end
             rc
           end
