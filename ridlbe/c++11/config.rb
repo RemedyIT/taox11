@@ -30,7 +30,7 @@ module IDL
         swcfg.for_group :outputdir do |grpcfg|
           grpcfg.on_prepare do |arg, params|
             if /^(.*)=(.*)/ =~ arg
-              return [$1, $2]
+              return [::Regexp.last_match(1), ::Regexp.last_match(2)]
             end
             nil
           end
@@ -53,7 +53,7 @@ module IDL
         swcfg.for_group :b_extopt do |grpcfg|
           grpcfg.on_prepare do |arg, params|
             if /^b\,(.*)=(.*)/ =~ arg
-              return [$1, $2]
+              return [::Regexp.last_match(1), ::Regexp.last_match(2)]
             end
             nil
           end
@@ -207,7 +207,7 @@ module IDL
         File.open(base, "r") do |file|
           while (line = file.gets)
             if VERSION_REGEXP =~ line
-              x11_version[$1.downcase.to_sym] = $2.to_i
+              x11_version[::Regexp.last_match(1).downcase.to_sym] = ::Regexp.last_match(2).to_i
             end
           end
         end

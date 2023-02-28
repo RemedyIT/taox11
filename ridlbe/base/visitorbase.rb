@@ -235,9 +235,9 @@ module IDL
         if VISIT_METHOD_RE =~ method
           IDL.log(3, "VisitorBase: captured call to #{method}")
           Kernel.raise ArgumentError, "Incorrect number of arguments; #{args.size} for 0 - 1" if args.size>1
-          sym = $1
+          sym = ::Regexp.last_match(1)
           tpl, tpl_bases = resolve_template(sym)
-          Kernel.raise "Fatal: cannot resolve RIDL template #{$1}" unless tpl || optional_template?(sym)
+          Kernel.raise "Fatal: cannot resolve RIDL template #{::Regexp.last_match(1)}" unless tpl || optional_template?(sym)
           exec_template_visit(tpl, sym, args.shift || {}, tpl_bases, &block)
         else
           super
@@ -431,9 +431,9 @@ module IDL
             node = extra_props.delete(:node)
           end
           Kernel.raise ArgumentError, 'Invalid node argument' unless node.nil? || IDL::AST::Leaf === node
-          sym = $1
+          sym = ::Regexp.last_match(1)
           tpl, tpl_bases = resolve_template(sym)
-          Kernel.raise "Fatal: cannot resolve RIDL template #{$1}" unless tpl || optional_template?(sym)
+          Kernel.raise "Fatal: cannot resolve RIDL template #{::Regexp.last_match(1)}" unless tpl || optional_template?(sym)
           visit(node) if node
           exec_template_visit(tpl, sym, extra_props || {}, tpl_bases, &block)
         else
