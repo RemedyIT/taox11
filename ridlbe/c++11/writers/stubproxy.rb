@@ -356,7 +356,7 @@ module IDL
         printiln("} // namespace #{node.cxxname}")
       end
 
-    end #StubProxyVarOutWriter
+    end # StubProxyVarOutWriter
 
     class StubProxyObjRefTraitsWriter < StubProxyBaseWriter
        def initialize(output = STDOUT, opts = {})
@@ -376,7 +376,7 @@ module IDL
          visitor(InterfaceVisitor).visit_object_ref_traits(node)
        end
 
-    end #StubProxyObjRefTraitsWriter
+    end # StubProxyObjRefTraitsWriter
 
     class StubProxyTypecodeWriter < StubProxyBaseWriter
       def initialize(output = STDOUT, opts = {})

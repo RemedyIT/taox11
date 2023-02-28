@@ -23,8 +23,8 @@ module IDL
         prefix = 'AMI_'
         postfix ||= 'Handler'
         again = true
-        #check if already an original operation name exists with the prefix and postfix.
-        #In that case add "AMI_' to prefix until unique name is formed
+        # check if already an original operation name exists with the prefix and postfix.
+        # In that case add "AMI_' to prefix until unique name is formed
         while again
           again = false
           node.enclosure.match_members do |_ident|
@@ -116,16 +116,16 @@ module IDL
 
       def ami_repository_id
          res = node.repository_id # "IDL:A/Foo_Test:1.0" or "IDL:Foo_Test:1.0"
-         #skip repo_version
+         # skip repo_version
          repo_ver_index = res.rindex(':')
-         res.insert((repo_ver_index), 'Handler') #IDL:A/Foo_TestHandler:1.0"
-         #find last '/'
+         res.insert((repo_ver_index), 'Handler') # IDL:A/Foo_TestHandler:1.0"
+         # find last '/'
          repo_index = res.rindex('/')
          if repo_index
-           res.insert((repo_index + 1), handler_prefix)  #IDL:A/AMI_Foo_TestHandler:1.0"
+           res.insert((repo_index + 1), handler_prefix)  # IDL:A/AMI_Foo_TestHandler:1.0"
          else
            repo_index = res.index(':')
-           res.insert((repo_index + 1), handler_prefix)  #IDL:AMI_Foo_TestHandler:1.0"
+           res.insert((repo_index + 1), handler_prefix)  # IDL:AMI_Foo_TestHandler:1.0"
          end
       end
 

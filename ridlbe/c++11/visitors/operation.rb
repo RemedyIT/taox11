@@ -130,8 +130,8 @@ module IDL
       def sendc_prefix
         prefix = 'sendc_'
         again = true
-        #check if already an original operation name exists with the prefix.
-        #In that case add "ami_' until unique name is formed
+        # check if already an original operation name exists with the prefix.
+        # In that case add "ami_' until unique name is formed
         while again
           again = false
           node.enclosure.operations.each {|_op|
