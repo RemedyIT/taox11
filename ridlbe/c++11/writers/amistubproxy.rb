@@ -107,8 +107,8 @@ module IDL
 
       def visit_includes(parser)
         writer(AmiStubProxyIncludeWriter,
-               { :default_pre_includes => @default_pre_includes,
-                 :default_post_includes => @default_post_includes }) do |w|
+               { default_pre_includes: @default_pre_includes,
+                 default_post_includes: @default_post_includes }) do |w|
           w.include_guard = @include_guard
           w.visit_nodes(parser)
         end

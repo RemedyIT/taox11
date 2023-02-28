@@ -19,9 +19,9 @@ module IDL
 
       def determine_taox11_version
         x11_version = {
-          :major => 0,
-          :minor => 0,
-          :beta => 0
+          major: 0,
+          minor: 0,
+          beta: 0
         }
 
         base = File.join(File.dirname(__FILE__), '..', '..', 'tao', 'x11', 'versionx11.h')
@@ -50,8 +50,8 @@ module IDL
       #
       becfg.on_setup do |optlist, ridl_params|
 
-        optlist.for_switch '--add-templates=PATH', :type => String,
-             :description => [
+        optlist.for_switch '--add-templates=PATH', type: String,
+             description: [
                 'Add a template library basepath to be evaluated before backend templates.'
                              ] do |swcfg|
           swcfg.on_exec do |arg, params|

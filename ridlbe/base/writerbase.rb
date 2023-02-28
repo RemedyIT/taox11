@@ -119,9 +119,9 @@ module IDL
         @output = IndentedOutput === output ? output : IndentedOutput.new(output)
         @params = opts.dup
         @properties = {
-          :_context => {
-            :scopes => [],
-            :cur_scope => nil
+          _context: {
+            scopes: [],
+            cur_scope: nil
           }
         }
         @visitors = {}
