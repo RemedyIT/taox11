@@ -89,8 +89,8 @@ module IDL
 
       def visit_includes(parser)
         writer(StubProxyIncludeWriter,
-               { :default_pre_includes => @default_pre_includes,
-                 :default_post_includes => @default_post_includes }) do |w|
+               { default_pre_includes: @default_pre_includes,
+                 default_post_includes: @default_post_includes }) do |w|
           w.include_guard = @include_guard
           w.visit_nodes(parser)
         end
@@ -165,7 +165,7 @@ module IDL
         check_idl_type(node.idltype)
       end
 
-      def enter_valuetype(node)
+      def visit_valuetype(node)
         return if node.is_local?
         add_include('tao/x11/basic_argument_t.h')
         node.state_members.each { |m| check_idl_type(m.idltype) }
@@ -356,7 +356,7 @@ module IDL
         printiln("} // namespace #{node.cxxname}")
       end
 
-    end #StubProxyVarOutWriter
+    end # StubProxyVarOutWriter
 
     class StubProxyObjRefTraitsWriter < StubProxyBaseWriter
        def initialize(output = STDOUT, opts = {})
@@ -376,7 +376,7 @@ module IDL
          visitor(InterfaceVisitor).visit_object_ref_traits(node)
        end
 
-    end #StubProxyObjRefTraitsWriter
+    end # StubProxyObjRefTraitsWriter
 
     class StubProxyTypecodeWriter < StubProxyBaseWriter
       def initialize(output = STDOUT, opts = {})

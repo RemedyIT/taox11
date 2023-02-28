@@ -150,7 +150,7 @@ module IDL
       end
 
       def write_regen_section(sectionid, options = nil, &_block)
-        #@output.erbout.flush
+        # @output.erbout.flush
         @output.write_regen_section(sectionid, options, block_given? ? _block : nil)
       end
 

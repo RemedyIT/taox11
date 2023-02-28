@@ -14,7 +14,7 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 module IDL
   module Cxx11
 
-    class AmiStubProxyBaseWriter < AmiBaseWriter #CxxCodeWriterBase
+    class AmiStubProxyBaseWriter < AmiBaseWriter # CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
          self.template_root = File.join('cli', 'prx', 'ami')
@@ -107,8 +107,8 @@ module IDL
 
       def visit_includes(parser)
         writer(AmiStubProxyIncludeWriter,
-               { :default_pre_includes => @default_pre_includes,
-                 :default_post_includes => @default_post_includes }) do |w|
+               { default_pre_includes: @default_pre_includes,
+                 default_post_includes: @default_post_includes }) do |w|
           w.include_guard = @include_guard
           w.visit_nodes(parser)
         end
@@ -188,7 +188,7 @@ module IDL
         check_idl_type(node.idltype)
       end
 
-      def enter_valuetype(node)
+      def visit_valuetype(node)
         return if node.is_local?
         add_include('tao/x11/basic_argument_t.h')
         node.state_members.each { |m| check_idl_type(m.idltype) }
@@ -335,7 +335,7 @@ module IDL
         printiln("} // namespace #{node.cxxname}")
       end
 
-    end #AmiStubProxyVarOutWriter
+    end # AmiStubProxyVarOutWriter
 
     class AmiStubProxyObjRefTraitsWriter < AmiStubProxyBaseWriter
        def initialize(output = STDOUT, opts = {})
@@ -355,7 +355,7 @@ module IDL
          ami_handler_interface.visit_object_ref_traits(node)
        end
 
-    end #AmiStubProxyObjRefTraitsWriter
+    end # AmiStubProxyObjRefTraitsWriter
 
     class AmiStubProxyTypecodeWriter < AmiStubProxyBaseWriter
       def initialize(output = STDOUT, opts = {})

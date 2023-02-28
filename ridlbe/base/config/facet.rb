@@ -136,7 +136,7 @@ module IDL
         @title = facet_config_[:title]
         @copyright = facet_config_[:copyright]
         ver = facet_config_[:version]
-        @version = (Hash === ver ? ver : { :major => ver.to_i, :minor => 0, :release => 0 })
+        @version = (Hash === ver ? ver : { major: ver.to_i, minor: 0, release: 0 })
         self.class.__send__(:define_method, :_setup_facet, &(facet_config_[:setup] || Proc.new {|_, _| }))
         self.class.__send__(:private, :_setup_facet)
         self.class.__send__(:define_method, :_process_input, &(facet_config_[:process_input] || Proc.new {|_, _| }))
@@ -258,7 +258,7 @@ module IDL
             IDL.fatal("Conflicting ordering dependency for facet #{fct} : #{dpos}:#{dfct}")
           end
           # just return the original (maximum range)
-          return range #(range.min..dix+1)
+          return range # (range.min..dix+1)
         end
         range # this should never be reached
       end
@@ -349,7 +349,7 @@ module IDL
       def setup_be_with_facets(optlist, idl_options)
         # load any facets available on the backend search path
         _facet_list = (idl_options[:be_path] || []).collect {|p| Dir[File.join(p, 'ridlbe', "#{name}", 'facets', '*')]}.flatten
-        #_facet_list = Dir[File.join(root, 'facets', '*')]
+        # _facet_list = Dir[File.join(root, 'facets', '*')]
         IDL.log(2, "[#{name}] > found these Facet folders #{_facet_list}")
         _facet_list.select { |p| File.directory?(p) }.each do |p|
           # get facet dirname

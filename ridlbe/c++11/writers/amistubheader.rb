@@ -72,7 +72,7 @@ module IDL
         # generate inline methods
         visit_inlines(parser)
 
-        #sendc functionality
+        # sendc functionality
         visit_amic_header(parser)
 
         # amic traits specializations
@@ -128,7 +128,7 @@ module IDL
         sn = node.scoped_cxxname
         return if @fwd_decl_cache.has_key?(sn) || !needs_ami_generation?(node)
         @fwd_decl_cache[sn] = true
-        #use ami_interface for ReplyHandler
+        # use ami_interface for ReplyHandler
         _ami_intf = ami_handler_interface
         _ami_intf.visit_fwd(node)
         at_global_scope do
@@ -141,7 +141,7 @@ module IDL
         println
         printiln('// generated from AmiStubHeaderWriter#enter_interface')
         sn = node.scoped_cxxname
-        #use ami_interface for ReplyHandler
+        # use ami_interface for ReplyHandler
         _ami_intf = ami_handler_interface_with_ami_inheritance
         unless @fwd_decl_cache.has_key?(sn)
            @fwd_decl_cache[sn] = true
@@ -177,8 +177,8 @@ module IDL
 
       def visit_includes(parser)
         writer(AmiStubHeaderIncludeWriter,
-               { :default_pre_includes => @default_pre_includes,
-                 :default_post_includes => @default_post_includes }) do |w|
+               { default_pre_includes: @default_pre_includes,
+                 default_post_includes: @default_post_includes }) do |w|
           w.include_guard = @include_guard
           w.visit_nodes(parser)
         end
@@ -350,7 +350,7 @@ module IDL
 
       def enter_interface(node)
         return unless needs_ami_generation?(node)
-        #use ami_interface for ReplyHandler
+        # use ami_interface for ReplyHandler
         _ami_intf = ami_handler_interface
         _ami_intf.visit_idl_traits(node)
         _ami_intf.visit_idl_traits_def(node)
