@@ -165,7 +165,7 @@ module IDL
         check_idl_type(node.idltype)
       end
 
-      def enter_valuetype(node)
+      def visit_valuetype(node)
         return if node.is_local?
         add_include('tao/x11/basic_argument_t.h')
         node.state_members.each { |m| check_idl_type(m.idltype) }
