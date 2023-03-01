@@ -1,0 +1,15 @@
+/**
+ * @file    union_duplicate_caselabel.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+enum EnumType {VALUE1, VALUE2};
+
+union NestedUnion switch (EnumType) {
+case VALUE1: boolean u_b;
+case VALUE1: short u_s;
+};
+
