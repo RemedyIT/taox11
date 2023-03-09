@@ -25,7 +25,7 @@ namespace TAOX11_NAMESPACE
     get_ret_arg (TAO_Operation_Details const * details,
                  TAO::Argument * const * skel_args)
     {
-      if (details != nullptr && details->use_stub_args ())
+      if (details && details->use_stub_args ())
       {
         return static_cast<typename TAOX11_NAMESPACE::Arg_Traits<T>::ret_val *> (details->args ()[0])->arg ();
 
@@ -50,7 +50,7 @@ namespace TAOX11_NAMESPACE
                 TAO_TAO::Argument * const * skel_args,
                 size_t i)
     {
-      if (details != nullptr && details->use_stub_args ())
+      if (details && details->use_stub_args ())
       {
         return static_cast<typename TAOX11_NAMESPACE::Arg_Traits<T>::in_arg_val *> (details->args ()[i])->arg ();
       }
@@ -74,7 +74,7 @@ namespace TAOX11_NAMESPACE
                    TAO::Argument * const * skel_args,
                    size_t i)
     {
-      if (details != nullptr && details->use_stub_args ())
+      if (details && details->use_stub_args ())
       {
         return static_cast<typename TAOX11_NAMESPACE::Arg_Traits<T>::inout_arg_val *> (details->args ()[i])->arg ();
       }
@@ -98,7 +98,7 @@ namespace TAOX11_NAMESPACE
                  TAO::Argument * const * skel_args,
                  size_t i)
     {
-      if (details != nullptr && details->use_stub_args ())
+      if (details && details->use_stub_args ())
       {
         return static_cast<typename TAOX11_NAMESPACE::Arg_Traits<T>::out_arg_val *> (details->args ()[i])->arg ();
       }
