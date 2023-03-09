@@ -38,7 +38,7 @@ namespace TAOX11_NAMESPACE
         }
         else
         {
-          throw TAOX11_NAMESPACE::CORBA::INTERNAL ();
+          throw TAO_CORBA::INTERNAL ();
         }
       }
     }
@@ -62,7 +62,7 @@ namespace TAOX11_NAMESPACE
         }
         else
         {
-          throw TAOX11_NAMESPACE::CORBA::INTERNAL ();
+          throw TAO_CORBA::INTERNAL ();
         }
       }
     }
@@ -86,7 +86,7 @@ namespace TAOX11_NAMESPACE
         }
         else
         {
-          throw TAOX11_NAMESPACE::CORBA::INTERNAL ();
+          throw TAO_CORBA::INTERNAL ();
         }
       }
     }
@@ -110,7 +110,7 @@ namespace TAOX11_NAMESPACE
         }
         else
         {
-          throw TAOX11_NAMESPACE::CORBA::INTERNAL ();
+          throw TAO_CORBA::INTERNAL ();
         }
       }
     }
