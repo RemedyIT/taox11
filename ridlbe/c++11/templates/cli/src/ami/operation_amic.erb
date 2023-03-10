@@ -86,8 +86,7 @@ void
     if (ami_handler)
     {
       TAO_CORBA::Object_ptr _tao_ami_handler_obj = ami_handler->get_proxy ()->get ();
-      _tao_ami_handler =
-        <%= interface.handler_proxy_cxxname %>::_narrow (_tao_ami_handler_obj);
+      _tao_ami_handler = <%= interface.handler_proxy_cxxname %>::_narrow (_tao_ami_handler_obj);
 
       if (TAO_CORBA::is_nil (_tao_ami_handler))
       {
