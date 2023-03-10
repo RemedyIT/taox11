@@ -25,16 +25,21 @@ namespace TAOX11_NAMESPACE
     get_ret_arg (TAO_Operation_Details const * details,
                  TAO::Argument * const * skel_args)
     {
-      if (details != 0 && details->use_stub_args ())
+      if (details && details->use_stub_args ())
       {
-        return static_cast<typename TAOX11_NAMESPACE::Arg_Traits<T>::ret_val *> (
-            details->args ()[0])->arg ();
+        return static_cast<typename TAOX11_NAMESPACE::Arg_Traits<T>::ret_val *> (details->args ()[0])->arg ();
 
       }
       else
       {
-        return static_cast<typename PS::SArg_Traits<T>::ret_val *> (
-            skel_args[0])->arg ();
+        if (skel_args)
+        {
+          return static_cast<typename PS::SArg_Traits<T>::ret_val *> (skel_args[0])->arg ();
+        }
+        else
+        {
+          throw TAO_CORBA::INTERNAL ();
+        }
       }
     }
 
@@ -45,15 +50,20 @@ namespace TAOX11_NAMESPACE
                 TAO_TAO::Argument * const * skel_args,
                 size_t i)
     {
-      if (details != 0 && details->use_stub_args ())
+      if (details && details->use_stub_args ())
       {
-        return static_cast<typename TAOX11_NAMESPACE::Arg_Traits<T>::in_arg_val *> (
-                details->args ()[i])->arg ();
+        return static_cast<typename TAOX11_NAMESPACE::Arg_Traits<T>::in_arg_val *> (details->args ()[i])->arg ();
       }
       else
       {
-        return static_cast<typename PS::SArg_Traits<T>::in_arg_val *> (
-                skel_args[i])->arg ();
+        if (skel_args)
+        {
+          return static_cast<typename PS::SArg_Traits<T>::in_arg_val *> (skel_args[i])->arg ();
+        }
+        else
+        {
+          throw TAO_CORBA::INTERNAL ();
+        }
       }
     }
 
@@ -64,16 +74,20 @@ namespace TAOX11_NAMESPACE
                    TAO::Argument * const * skel_args,
                    size_t i)
     {
-      if (details != 0 && details->use_stub_args ())
+      if (details && details->use_stub_args ())
       {
-        return static_cast<typename TAOX11_NAMESPACE::Arg_Traits<T>::inout_arg_val *> (
-            details->args ()[i])->arg ();
+        return static_cast<typename TAOX11_NAMESPACE::Arg_Traits<T>::inout_arg_val *> (details->args ()[i])->arg ();
       }
       else
       {
-        return static_cast<typename PS::SArg_Traits<T>::inout_arg_val *> (
-            skel_args[i])->arg ();
-
+        if (skel_args)
+        {
+          return static_cast<typename PS::SArg_Traits<T>::inout_arg_val *> (skel_args[i])->arg ();
+        }
+        else
+        {
+          throw TAO_CORBA::INTERNAL ();
+        }
       }
     }
 
@@ -84,15 +98,20 @@ namespace TAOX11_NAMESPACE
                  TAO::Argument * const * skel_args,
                  size_t i)
     {
-      if (details != 0 && details->use_stub_args ())
+      if (details && details->use_stub_args ())
       {
-        return static_cast<typename TAOX11_NAMESPACE::Arg_Traits<T>::out_arg_val *> (
-            details->args ()[i])->arg ();
+        return static_cast<typename TAOX11_NAMESPACE::Arg_Traits<T>::out_arg_val *> (details->args ()[i])->arg ();
       }
       else
       {
-        return static_cast<typename PS::SArg_Traits<T>::out_arg_val *> (
-            skel_args[i])->arg ();
+        if (skel_args)
+        {
+          return static_cast<typename PS::SArg_Traits<T>::out_arg_val *> (skel_args[i])->arg ();
+        }
+        else
+        {
+          throw TAO_CORBA::INTERNAL ();
+        }
       }
     }
   } // namespace PS
