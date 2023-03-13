@@ -52,18 +52,18 @@ void <%= interface.scoped_srvproxy_cxxname %>::<%= name %>_skel (
         _taox11_retval.arg ();
 %     end
 %   end
-%   arguments.each_with_index do |_arg, _ix|
+%   arguments.each.with_index(1) do |_arg, _ix|
 %     if generate_thrupoa_collocation?
 %       case _arg.direction
 %       when :in
       PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::in_arg_type <%= _arg.cxxname %> =
-        std::move (PS::get_in_arg<<%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix+1 %>));
+        std::move (PS::get_in_arg<<%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>));
 %       when :out
       PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::out_arg_type <%= _arg.cxxname %> =
-        PS::get_out_arg<<%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix+1 %>);
+        PS::get_out_arg<<%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>);
 %       when :inout
       PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::inout_arg_type <%= _arg.cxxname %> =
-        PS::get_inout_arg<<%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix+1 %>);
+        PS::get_inout_arg<<%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>);
 %       end
 %     else
 %       case _arg.direction
