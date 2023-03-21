@@ -21,9 +21,9 @@ module IDL
       end
 
       def print(str);       @os << str; end
-      def println(str='');  @os << str << "\n"; end
-      def printi(str='');   @os << indent << str; end
-      def printiln(str=''); @os << indent << str << "\n"; end
+      def println(str = '');  @os << str << "\n"; end
+      def printi(str = '');   @os << indent << str; end
+      def printiln(str = ''); @os << indent << str << "\n"; end
 
       def indent()
         @indent * @nest
@@ -267,9 +267,9 @@ module IDL
       ## Direct output printing (no templating).
 
       def print(str);       @output.print(str); end
-      def println(str='');  @output.println(str); end
-      def printi(str='');   @output.printi(str); end
-      def printiln(str=''); @output.printiln(str); end
+      def println(str = '');  @output.println(str); end
+      def printi(str = '');   @output.printi(str); end
+      def printiln(str = ''); @output.printiln(str); end
 
       def nest(in_ = 1, &block)
         @output.nest(in_, &block)
