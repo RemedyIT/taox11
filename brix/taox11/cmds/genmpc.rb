@@ -19,7 +19,7 @@ module BRIX11
           name: 'test',
           idl: true,
           client: true,
-          server: true,
+          server: true
       }
 
       def self.setup(optparser, options)

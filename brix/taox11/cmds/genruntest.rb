@@ -18,7 +18,7 @@ module BRIX11
       OPTIONS = {
           name: 'run_test',
           client: 'client',
-          server: 'server',
+          server: 'server'
       }
 
       def self.setup(optparser, options)

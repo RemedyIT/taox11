@@ -20,7 +20,7 @@ module BRIX11
           idl: true,
           modules: [],
           interface: nil,
-          shutdown: true,
+          shutdown: true
       }
 
       def self.setup(optparser, options)

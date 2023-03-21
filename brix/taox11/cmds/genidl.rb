@@ -19,7 +19,7 @@ module BRIX11
           name: 'test',
           modules: [],
           interface: nil,
-          shutdown: true,
+          shutdown: true
       }
 
       def self.setup(optparser, options)
