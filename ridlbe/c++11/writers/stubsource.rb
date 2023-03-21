@@ -613,9 +613,9 @@ module IDL
         # nothing to do if this is just an alias for another defined type
         return if node.idltype.is_a?(IDL::Type::ScopedName)
 
-        _resolved_type = node.idltype.resolved_type
-        return if _resolved_type.is_a?(IDL::Type::Native) ||
-                  _resolved_type.is_standard_type?
+        resolved_type = node.idltype.resolved_type
+        return if resolved_type.is_a?(IDL::Type::Native) ||
+                  resolved_type.is_standard_type?
 
         visitor(TypedefVisitor).visit_anyop(node)
       end
