@@ -22,7 +22,6 @@ module IDL
     end
 
     class StubHeaderWriter < StubHeaderBaseWriter
-
       helper Cxx11::IncludeGuardHelper
 
       def initialize(output = STDOUT, opts = {})
@@ -333,11 +332,9 @@ module IDL
       def visit_os(parser)
         writer(StubHeaderOSWriter).visit_nodes(parser)
       end
-
     end # StubHeaderWriter
 
     class StubHeaderIncludeWriter < StubHeaderBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -666,7 +663,6 @@ module IDL
 
         visitor(TypedefVisitor).visit_anyop(node)
       end
-
     end # StubHeaderAnyOpWriter
 
     class StubInlineWriter < CxxCodeWriterBase
@@ -704,7 +700,6 @@ module IDL
       def enter_exception(node)
         visitor(ExceptionVisitor).visit_inl(node)
       end
-
     end # StubInlineWriter
 
     class StubHeaderOSWriter < StubHeaderBaseWriter
@@ -765,7 +760,6 @@ module IDL
           true
         end
       end
-
     end # StubHeaderOSWriter
 end # Cxx11
 end # IDL

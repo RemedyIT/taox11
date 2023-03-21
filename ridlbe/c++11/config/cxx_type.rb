@@ -11,7 +11,6 @@ module IDL
   # define language mapping specific type customizations
 
   class Type
-
     # IDL typename
 
     def idltype_name(scope = nil)
@@ -233,7 +232,6 @@ module IDL
       def idltype_name(scope = nil)
         'long long'
       end
-
     end
 
     class UShort
@@ -244,7 +242,6 @@ module IDL
       def idltype_name(scope = nil)
         'unsigned short'
       end
-
     end
 
     class ULong
@@ -255,7 +252,6 @@ module IDL
       def idltype_name(scope = nil)
         'unsigned long'
       end
-
     end
 
     class ULongLong
@@ -266,7 +262,6 @@ module IDL
       def idltype_name(scope = nil)
         'unsigned long long'
       end
-
     end
 
     # for float classes
@@ -317,7 +312,6 @@ module IDL
       def os_fmt
         'std::boolalpha << %s << std::noboolalpha'
       end
-
     end
 
     class Char
@@ -354,7 +348,6 @@ module IDL
       def os_fmt
         return '"\'" <<  %s << "\'" '
       end
-
     end
 
     class WChar
@@ -767,7 +760,6 @@ module IDL
       def cdr_from_fmt
         resolved_type.cdr_from_fmt
       end
-
     end
 
     class Interface
@@ -895,6 +887,5 @@ module IDL
         '{{}}'
       end
     end
-
   end # Type
 end # IDL

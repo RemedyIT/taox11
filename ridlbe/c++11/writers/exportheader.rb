@@ -13,7 +13,6 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 module IDL
   module Cxx11
     class ExportHeaderWriter < Base::Writer
-
       helper Cxx11::IncludeGuardHelper
       helper Cxx11::VersionHelper
       helper_method :macro_base, :file_name

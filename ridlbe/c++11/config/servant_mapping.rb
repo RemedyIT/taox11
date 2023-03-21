@@ -13,7 +13,6 @@ require 'ridlbe/c++11/config/cxx_type'
 
 module IDL
   class Type
-
     class Servant < Native
       SCOPED_NAME = 'TAOX11_NAMESPACE::PortableServer::Servant'
 
@@ -60,9 +59,7 @@ module IDL
       def cxx_member_type_name
         'servant_reference'
       end
-
     end
-
   end
 end
 

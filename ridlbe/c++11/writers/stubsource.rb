@@ -176,7 +176,6 @@ module IDL
       def visit_typecodes(parser)
         writer(StubSourceTypecodeWriter).visit_nodes(parser)
       end
-
     end # StubSourceWriter
 
     class StubSourceIncludeWriter < StubSourceBaseWriter
@@ -388,7 +387,6 @@ module IDL
                                      @default_pre_includes.include?(inc_file) ||
                                      @default_post_includes.include?(inc_file)
       end
-
     end
 
     class StubProxySourceWriter < StubSourceBaseWriter
@@ -419,7 +417,6 @@ module IDL
         visitor(InterfaceVisitor).visit_proxy(node)
         println
       end
-
     end # StubProxySourceWriter
 
     class StubSourceObjTraitsWriter < StubSourceBaseWriter
@@ -480,7 +477,6 @@ module IDL
 
         visitor(InterfaceVisitor).visit_object_ref_traits(node)
       end
-
     end
 
     class StubSourceCDRWriter < StubSourceBaseWriter
@@ -557,7 +553,6 @@ module IDL
           visitor(StringVisitor).visit_cdr(node) # only bounded, unbounded is standard_type
         end
       end
-
     end # StubProxySourceCDRWriter
 
     class StubSourceAnyOpWriter < StubSourceBaseWriter
@@ -625,7 +620,6 @@ module IDL
 
         visitor(TypedefVisitor).visit_anyop(node)
       end
-
     end # StubSourceAnyOpWriter
 
     class StubSourceTypecodeWriter < StubSourceBaseWriter
@@ -791,7 +785,6 @@ module IDL
           end
         end
       end
-
     end # StubSourceTaoTypecodeWriter
   end
 end

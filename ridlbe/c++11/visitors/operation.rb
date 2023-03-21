@@ -11,7 +11,6 @@ require 'ridlbe/c++11/visitors/exception'
 module IDL
   module Cxx11
     class OperationVisitor < NodeVisitorBase
-
       def interface(interface_for_att = nil)
         # set interface_for_att to node.enclosure unless passed as arg or @interface already set
         interface_for_att ||= node.enclosure unless @interface || !node?
@@ -146,11 +145,9 @@ module IDL
       # template mapping
 
       map_template :operation, :operation
-
     end
 
     class ArgumentVisitor < NodeVisitorBase
-
       def direction
         ([:in, :out, :inout])[node.attribute]
       end
@@ -187,7 +184,6 @@ module IDL
           implementation_inout_type
         end
       end
-
     end
   end
 end

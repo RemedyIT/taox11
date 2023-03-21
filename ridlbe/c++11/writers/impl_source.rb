@@ -95,7 +95,6 @@ module IDL
 #        return if node.is_local? || !node.supports_concrete_interface?
 #        visitor(ValuetypeVisitor).visit_pre(node)
 #      end
-
     end # ImplSourceWriter
   end # Cxx11
 end # IDL

@@ -29,7 +29,6 @@ module IDL
     end
 
     alias_method_chain :pre_parse, :root_namespace
-
   end # Delegator
 
   module Cxx11

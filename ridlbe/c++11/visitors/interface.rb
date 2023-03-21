@@ -12,7 +12,6 @@ require 'ridlbe/c++11/visitors/attribute'
 module IDL
   module Cxx11
     class InterfaceVisitor < NodeVisitorBase
-
       def is_forward?
         node.is_forward?
       end

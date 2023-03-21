@@ -20,7 +20,6 @@ module IDL
     end
 
     class ServantProxyWriter < ServantProxyBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 

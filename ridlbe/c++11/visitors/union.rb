@@ -10,7 +10,6 @@
 module IDL
   module Cxx11
     class UnionVisitor < NodeVisitorBase
-
       def members
         @members ||= node.members.collect do |um|
           (umv = visitor(UnionMemberVisitor)).visit(um)
@@ -127,11 +126,9 @@ module IDL
 
       map_template :typecode, :typecode
       map_template :tao_typecode, :union_typecode
-
     end
 
     class UnionMemberVisitor < NodeVisitorBase
-
       def labels
         node.labels.collect { |_l| _l == :default ? 'default' : expression_to_s(_l) }
       end

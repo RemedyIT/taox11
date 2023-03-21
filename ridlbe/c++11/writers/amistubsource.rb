@@ -13,7 +13,6 @@ require 'ridlbe/c++11/visitors/mixins/ami_handler'
 module IDL
   module Cxx11
     class AmiBaseWriter < CxxCodeWriterBase
-
       def initialize(output = STDOUT, opts = {})
          super
       end
@@ -55,7 +54,6 @@ module IDL
           (params[:ami] && node.has_ami_annotation? && !node.is_local? && !node.is_abstract?) ||
           (params[:ami_bc] == true && !node.is_local? && !node.is_abstract?)
        end
-
     end
 
     class AmiStubSourceBaseWriter < AmiBaseWriter
@@ -459,7 +457,6 @@ module IDL
                                      @default_pre_includes.include?(inc_file) ||
                                      @default_post_includes.include?(inc_file)
       end
-
     end
 
     class AmiStubProxySourceWriter < AmiStubSourceBaseWriter
@@ -498,7 +495,6 @@ module IDL
         intf.visit_proxy(node)
         println
       end
-
     end # AmiStubProxySourceWriter
 
     class AmiStubSourceObjTraitsWriter < AmiStubSourceBaseWriter
@@ -532,7 +528,6 @@ module IDL
         ami_handler_interface.visit_object_traits(node)
         ami_interface.visit_amic_object_traits(node)
       end
-
     end
 
     class AmiStubSourceProxyObjRefTraitsWriter < AmiStubSourceBaseWriter
@@ -553,7 +548,6 @@ module IDL
 
          ami_handler_interface.visit_object_ref_traits(node)
        end
-
      end
 
     class AmiStubSourceCDRWriter < AmiStubSourceBaseWriter
@@ -579,7 +573,6 @@ module IDL
         ami_handler_interface.visit_cdr(node)
         ami_interface.visit_amic_cdr(node)
       end
-
      end # AmiStubProxySourceCDRWriter
 
     class AmiStubSourceAnyOpWriter < AmiStubSourceBaseWriter
@@ -614,7 +607,6 @@ module IDL
 
         ami_handler_interface.visit_anyop(node)
       end
-
     end # AmiStubSourceAnyOpWriter
 
     class AmiStubSourceTypecodeWriter < AmiStubSourceBaseWriter
@@ -633,7 +625,6 @@ module IDL
 
         ami_handler_interface.visit_typecode(node)
       end
-
     end # AmiStubSourceTypecodeWriter
 
     class AmiStubSourceTaoTypecodeWriter < AmiStubSourceBaseWriter
@@ -694,7 +685,6 @@ module IDL
 
         leave_scope(node)
       end
-
     end # AmiStubSourceTaoTypecodeWriter
 
     class AmiStubSourceAmiCWriter < AmiStubSourceBaseWriter
@@ -836,7 +826,6 @@ module IDL
       def visit_sarg_traits(parser)
         writer(AmiStubSourceSArgTraitsWriter).visit_nodes(parser)
       end
-
     end # AmiStubSourceSrvWriter
 
     class AmiStubSourceSArgTraitsWriter < AmiStubSourceSrvBaseWriter
@@ -928,7 +917,6 @@ module IDL
       def gen_exceptionholder_traits()
         visitor(ExceptionVisitor).visit_exception_holder
       end
-
     end # AmiStubSourceSArgTraitsWriter
   end
 end

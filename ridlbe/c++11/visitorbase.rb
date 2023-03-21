@@ -15,7 +15,6 @@ module IDL
     # driving methods.
     #
     class VisitorBase < Base::Visitor
-
       visitor_type_id = :base
 
       def initialize(output, properties, writer)
@@ -239,13 +238,11 @@ module IDL
       def proxy_suffix
         STUB_PROXY_SUFFIX
       end
-
     end # VisitorBase
 
     # Visitor base class for node visitors
     #
     class NodeVisitorBase < VisitorBase
-
       include Base::NodeVisitorMethods
 
       visitor_type_id = :node_base
@@ -525,7 +522,6 @@ module IDL
 
       # this seems nonsensical but this prevents prefixing
       map_template :anyop, :anyop
-
     end # NodeVisitorBase
   end # Cxx11
 end # IDL

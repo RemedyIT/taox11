@@ -20,11 +20,9 @@ module IDL
       end
 
       attr_accessor :include_guard
-
     end
 
     class AmiStubProxyWriter < AmiStubProxyBaseWriter
-
       helper Cxx11::IncludeGuardHelper
 
       def initialize(output = STDOUT, opts = {})
@@ -139,7 +137,6 @@ module IDL
     end # AmiStubProxyWriter
 
     class AmiStubProxyIncludeWriter < AmiStubProxyBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -309,7 +306,6 @@ module IDL
 
         ami_handler_interface.visit_cdr(node)
       end
-
     end # AmiStubProxyCDRWriter
 
     class AmiStubProxyVarOutWriter < AmiStubProxyBaseWriter
@@ -352,7 +348,6 @@ module IDL
         dec_nest
         printiln("} // namespace #{node.cxxname}")
       end
-
     end # AmiStubProxyVarOutWriter
 
     class AmiStubProxyObjRefTraitsWriter < AmiStubProxyBaseWriter
@@ -373,7 +368,6 @@ module IDL
 
          ami_handler_interface.visit_object_ref_traits(node)
        end
-
     end # AmiStubProxyObjRefTraitsWriter
 
     class AmiStubProxyTypecodeWriter < AmiStubProxyBaseWriter
@@ -440,7 +434,6 @@ module IDL
           leave_scope(node)
         end
       end
-
     end # AmiStubProxyTypecodeWriter
 
     class AmiStubProxySrvBaseWriter < AmiBaseWriter

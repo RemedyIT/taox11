@@ -11,9 +11,7 @@ require 'ridlbe/base/config/concern'
 
 module IDL
   class Backend
-
     class Facet
-
       class Configurator
         def initialize(facet_klass)
           @facet_klass = facet_klass
@@ -88,7 +86,6 @@ module IDL
       end
 
       class << self
-
         def black_list
           @black_list ||= []
         end
@@ -120,7 +117,6 @@ module IDL
           benm = File.basename(File.dirname(File.dirname(root)))
           Facet.const_set(make_facet_constant(benm, fctnm).to_sym, fct_klass)
         end
-
       end # << self
 
       # initialize black list from environment if defined
@@ -166,7 +162,6 @@ module IDL
       def process_input(parser, params)
         return _process_input(parser, params)
       end
-
     end # Facet
 
     class FacetSorter
@@ -260,7 +255,6 @@ module IDL
         end
         range # this should never be reached
       end
-
     end
 
     module FacetMixin
@@ -381,6 +375,5 @@ module IDL
     end # FacetMixin
 
     include FacetMixin
-
   end # Backend
 end # IDL

@@ -10,7 +10,6 @@
 module IDL
   module Cxx11
     class StructVisitor < NodeVisitorBase
-
       def members
         @members ||= node.members.collect do |sm|
           (smv = visitor(StructMemberVisitor)).visit(sm)
@@ -34,11 +33,9 @@ module IDL
 
       map_template :typecode, :typecode
       map_template :tao_typecode, :struct_typecode
-
     end
 
     class StructMemberVisitor < NodeVisitorBase
-
       def is_object?
         IDL::Type::Interface === _resolved_idltype
       end
@@ -54,7 +51,6 @@ module IDL
       def is_array?
         IDL::Type::Array === _resolved_idltype
       end
-
     end
   end
 end

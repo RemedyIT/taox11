@@ -10,7 +10,6 @@
 module IDL
   module Cxx11
     class IncludeVisitor < NodeVisitorBase
-
       def visit(node)
         super
         visit_template(:include)
@@ -83,7 +82,6 @@ module IDL
       def anyop_include_header
         anyop_include_directory.dup << '/' << File.basename(node.filename, '.*') << params[:anyop_pfx] << '.h'
       end
-
     end
   end
 end

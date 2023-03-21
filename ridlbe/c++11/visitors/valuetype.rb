@@ -15,7 +15,6 @@ require 'ridlbe/c++11/visitors/exception'
 module IDL
   module Cxx11
     class ValuetypeVisitor < NodeVisitorBase
-
       def is_forward?
         node.is_forward?
       end
@@ -223,14 +222,12 @@ module IDL
     end
 
     class ValuetypeMemberVisitor < NodeVisitorBase
-
       def is_public?
         node.is_public?
       end
     end # ValuetypeMemberVisitor
 
     class ValuetypeInitializerVisitor < NodeVisitorBase
-
       def parameters
         @parameters ||= node.params.collect do |param|
           (pv = visitor(Parameter)).visit(param)
@@ -255,7 +252,6 @@ module IDL
 
       class Parameter < NodeVisitorBase
       end
-
     end # ValuetypeInitializerVisitor
   end
 end

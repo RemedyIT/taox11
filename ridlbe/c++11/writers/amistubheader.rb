@@ -23,7 +23,6 @@ module IDL
     end
 
     class AmiStubHeaderWriter < AmiStubHeaderBaseWriter
-
       helper Cxx11::IncludeGuardHelper
 
       def initialize(output = STDOUT, opts = {})
@@ -216,11 +215,9 @@ module IDL
       def visit_servant_header(parser)
          writer(AmiStubHeaderSrvWriter).visit_nodes(parser)
       end
-
     end # AmiStubHeaderWriter
 
     class AmiStubHeaderIncludeWriter < AmiStubHeaderBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -366,7 +363,6 @@ module IDL
         _ami_intf.visit_idl_traits(node)
         _ami_intf.visit_idl_traits_def(node)
       end
-
     end # AmiStubHeaderTraitsWriter
 
     class AmiStubHeaderAnyOpWriter < AmiStubHeaderBaseWriter
@@ -407,7 +403,6 @@ module IDL
         ami_handler_interface.visit_anyop(node)
         end
       end
-
     end # AmiStubHeaderAnyOpWriter
 
     class AmiStubInlineWriter < CxxCodeWriterBase
@@ -430,7 +425,6 @@ module IDL
 
       def leave_interface(node)
       end
-
     end # AmiStubInlineWriter
 
     class AmiStubHeaderOSWriter < AmiStubHeaderBaseWriter
@@ -444,7 +438,6 @@ module IDL
           ami_interface.visit_amic_os(node)
         end
       end
-
     end # AmiStubHeaderOSWriter
 
     class AmiStubHeaderAmiCWriter < AmiStubHeaderBaseWriter
@@ -547,7 +540,6 @@ module IDL
 
         ami_interface.visit_amic_traits(node)
       end
-
     end # AmiStubHeaderTraitsWriter
 
     class AmiStubHeaderBaseSrvWriter < AmiBaseWriter

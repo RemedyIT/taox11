@@ -13,7 +13,6 @@ module IDL
     TITLE = 'RIDL backend base'.freeze
 
     class << self
-
       VERSION_REGEXP = /\#\s*define\s+TAOX11_(\w+)_VERSION\s+(\d+)/
 
       def determine_taox11_version

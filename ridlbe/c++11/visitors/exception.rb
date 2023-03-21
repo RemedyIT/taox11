@@ -11,7 +11,6 @@ require 'ridlbe/c++11/visitors/struct'
 module IDL
   module Cxx11
     class ExceptionVisitor < StructVisitor
-
       visitor_type_id :except
 
       def is_exception?
@@ -22,7 +21,6 @@ module IDL
 
       map_template :typecode, :typecode
       map_template :exception_holder, :exceptionholder_traits
-
     end
 
     class ExRaiseVisitor < NodeVisitorBase

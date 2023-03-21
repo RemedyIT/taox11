@@ -22,7 +22,6 @@ module IDL
     end
 
     class ServantHeaderWriter < ServantHeaderBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -127,7 +126,6 @@ module IDL
     end
 
     class ServantHeaderIncludeWriter < ServantHeaderBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -144,7 +142,6 @@ module IDL
 
         visitor(PreVisitor).visit
       end
-
     end # ServantHeaderIncludeWriter
 
     class ServantHeaderSrvTraitsWriter < ServantHeaderBaseWriter

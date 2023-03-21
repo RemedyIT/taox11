@@ -10,7 +10,6 @@
 module IDL
   module Cxx11
     class SequenceVisitor < NodeVisitorBase
-
       def is_bounded?
         !self._resolved_idltype.size.nil?
       end

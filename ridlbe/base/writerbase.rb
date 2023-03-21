@@ -111,7 +111,6 @@ module IDL
     # Generic output writer base class.
     #
     class Writer
-
       include Base::Helpers
 
       helper_method :idl_file

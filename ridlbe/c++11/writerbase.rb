@@ -12,7 +12,6 @@ module IDL
     # Output writer base class for sourcecode.
     #
     class CxxCodeWriterBase < Base::Writer
-
       include IDL::Base::CodeWriterMethods
 
       def initialize(output = STDOUT, opts = {})
@@ -36,7 +35,6 @@ module IDL
         dec_nest
         printiln("} // namespace #{scope.cxxname}")
       end
-
     end # CxxCodeWriterBase
   end
 end

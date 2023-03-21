@@ -13,7 +13,6 @@ require 'ridlbe/c++11/config/cxx_type'
 
 module IDL
   class Type
-
     class AbstractBase < Native
       SCOPED_NAME = 'CORBA::AbstractBase'
 
@@ -64,9 +63,7 @@ module IDL
       def cxx_member_type_name
         'abstractbase_reference'
       end
-
     end
-
   end
 end
 

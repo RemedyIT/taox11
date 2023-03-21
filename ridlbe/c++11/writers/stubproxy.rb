@@ -22,7 +22,6 @@ module IDL
     end
 
     class StubProxyWriter < StubProxyBaseWriter
-
       helper Cxx11::IncludeGuardHelper
 
       def initialize(output = STDOUT, opts = {})
@@ -112,11 +111,9 @@ module IDL
       def visit_typecodes(parser)
         writer(StubProxyTypecodeWriter).visit_nodes(parser)
       end
-
     end # StubProxyWriter
 
     class StubProxyIncludeWriter < StubProxyBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -334,7 +331,6 @@ module IDL
           visitor(StringVisitor).visit_cdr(node) # only bounded, unbounded is standard_type
         end
       end
-
     end # StubProxyCDRWriter
 
     class StubProxyVarOutWriter < StubProxyBaseWriter
@@ -377,7 +373,6 @@ module IDL
         dec_nest
         printiln("} // namespace #{node.cxxname}")
       end
-
     end # StubProxyVarOutWriter
 
     class StubProxyObjRefTraitsWriter < StubProxyBaseWriter
@@ -398,7 +393,6 @@ module IDL
 
          visitor(InterfaceVisitor).visit_object_ref_traits(node)
        end
-
     end # StubProxyObjRefTraitsWriter
 
     class StubProxyTypecodeWriter < StubProxyBaseWriter
@@ -521,7 +515,6 @@ module IDL
 
         visitor(TypedefVisitor).visit_typecode(node)
       end
-
     end # StubProxyTypecodeWriter
   end # Cxx11
 end # IDL

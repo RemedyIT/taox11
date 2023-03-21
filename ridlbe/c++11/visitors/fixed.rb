@@ -10,7 +10,6 @@
 module IDL
   module Cxx11
     class FixedVisitor < NodeVisitorBase
-
       def digits
         self._resolved_idltype.digits
       end
@@ -18,7 +17,6 @@ module IDL
       def scale
         self._resolved_idltype.scale
       end
-
     end
   end
 end

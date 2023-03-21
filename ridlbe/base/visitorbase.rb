@@ -17,7 +17,6 @@ module IDL
     # driving methods.
     #
     class Visitor
-
       module TemplateMap
         def self.included(base)
           base.singleton_class.class_eval do

@@ -10,7 +10,6 @@
 module IDL
   module Base
     class Template
-
       class << self
         def template_path
           # get template lookup paths for full backend hierarchy
@@ -159,7 +158,6 @@ module IDL
       def self.exists?(path)
         self.new(path).exists?
       end
-
     end # Template
   end # Base
 end # IDL

@@ -10,7 +10,6 @@
 module IDL
   module Cxx11
     class ArrayVisitor < NodeVisitorBase
-
       def element_cxxtype
         self._resolved_idltype.basetype.cxx_type(cur_scope)
       end

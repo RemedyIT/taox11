@@ -23,7 +23,6 @@ module IDL
     end
 
     class ImplHeaderWriter < ImplHeaderBaseWriter
-
       helper Cxx11::IncludeGuardHelper
 
       attr_reader :include_guard

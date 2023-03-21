@@ -10,7 +10,6 @@
 module IDL
   module Cxx11
     class TypedefVisitor < NodeVisitorBase
-
       def is_alias?
         IDL::Type::ScopedName === self._idltype || self._idltype.is_standard_type?
       end
@@ -130,7 +129,6 @@ module IDL
       map_template :typecode, :typecode
       map_template :tao_typecode, :typedef_typecode
       map_template :typedef, :typedef
-
     end
   end
 end

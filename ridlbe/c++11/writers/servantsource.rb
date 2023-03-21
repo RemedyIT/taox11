@@ -124,7 +124,6 @@ module IDL
       def visit_sarg_traits(parser)
         writer(ServantSourceSArgTraitsWriter).visit_nodes(parser)
       end
-
     end # ServantSourceWriter
 
     class ServantSourceIncludeWriter < ServantSourceBaseWriter
@@ -263,7 +262,6 @@ module IDL
                                        @default_pre_includes.include?(inc_file) ||
                                        @default_post_includes.include?(inc_file)
       end
-
     end # ServantSourceIncludeWriter
 
     class ServantSourceSArgTraitsWriter < ServantSourceBaseWriter
