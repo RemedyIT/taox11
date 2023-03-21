@@ -27,7 +27,7 @@ module BRIX11
       end
 
       def register_template(key, code, dir, root, derived_key=nil)
-        registry[key] = { :code => code, :dir => dir, :root => root }
+        registry[key] = { code: code, dir: dir, root: root }
         registry[derived_key][:super] = key if derived_key
       end
 
