@@ -29,7 +29,7 @@ module IDL
           'tao/Object_T.h',
           'tao/operation_details.h',
           'tao/PortableInterceptor.h',
-          'tao/x11/portable_server/portableserver_proxies.h',
+          'tao/x11/portable_server/portableserver_proxies.h'
         ].compact
         @default_post_includes = [
           'tao/x11/portable_server/servant_proxy.h',
@@ -39,7 +39,7 @@ module IDL
           'tao/x11/portable_server/operation_table_std_map.h',
           'tao/x11/portable_server/stub_sarg_traits.h',
           'tao/x11/portable_server/upcall_command.h',
-          'tao/x11/stub_arg_traits.h',
+          'tao/x11/stub_arg_traits.h'
         ]
         @default_post_includes << 'tao/x11/anytypecode/typecode_impl.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
       end
