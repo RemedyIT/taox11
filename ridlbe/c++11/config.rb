@@ -8,7 +8,6 @@
 #--------------------------------------------------------------------
 
 module IDL
-
   module Cxx11
     COPYRIGHT = "Copyright (c) 2007-#{Time.now.year} Remedy IT Expertise BV, The Netherlands".freeze
     TITLE = 'RIDL C++11 backend'.freeze
@@ -631,9 +630,7 @@ module IDL
                       '-Wb,impl_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
       end
     end
-
   end # Cxx11
-
 end # IDL
 
 # config modules

@@ -9,7 +9,6 @@
 
 module IDL
   module Cxx11
-
     class EnumVisitor < NodeVisitorBase
 
       def enumerators
@@ -34,6 +33,5 @@ module IDL
       end
 
     end
-
   end
 end

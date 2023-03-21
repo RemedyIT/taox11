@@ -9,9 +9,7 @@
 
 module IDL
   module Base
-
     module ExpressionConverter
-
       def value_to_s(exp)
         exp.idltype.value_to_s(exp.value)
       end
@@ -64,8 +62,6 @@ module IDL
         end
         "(" + s + ")"
       end
-
     end
-
   end
 end

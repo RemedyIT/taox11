@@ -9,7 +9,6 @@
 
 module IDL
   module Cxx11
-
     class StringVisitor < NodeVisitorBase
 
       def is_wstring?
@@ -53,6 +52,5 @@ module IDL
       map_template :tao_typecode, :string_typecode
 
     end
-
   end
 end

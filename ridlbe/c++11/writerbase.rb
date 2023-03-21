@@ -9,7 +9,6 @@
 
 module IDL
   module Cxx11
-
     # Output writer base class for sourcecode.
     #
     class CxxCodeWriterBase < Base::Writer
@@ -39,6 +38,5 @@ module IDL
       end
 
     end # CxxCodeWriterBase
-
   end
 end

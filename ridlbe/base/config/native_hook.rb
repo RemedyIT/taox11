@@ -10,11 +10,8 @@
 require 'ridlbe/base/config/core'
 
 module IDL
-
   module Base
-
     module NativeHook
-
       @@native_map = {}
 
       def self.included(base)
@@ -45,11 +42,8 @@ module IDL
         end
         idltype_
       end
-
     end # NativeHook
-
   end # Base
-
 end # IDL
 
 # install NativeHook

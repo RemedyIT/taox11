@@ -11,7 +11,6 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class ImplHeaderBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
@@ -119,6 +118,5 @@ module IDL
         end
       end
     end
-
   end # Cxx11
 end # IDL

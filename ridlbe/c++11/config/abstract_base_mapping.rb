@@ -12,7 +12,6 @@
 require 'ridlbe/c++11/config/cxx_type'
 
 module IDL
-
   class Type
 
     class AbstractBase < Native
@@ -69,7 +68,6 @@ module IDL
     end
 
   end
-
 end
 
 # install type mapping

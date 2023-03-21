@@ -12,7 +12,6 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class ExportHeaderWriter < Base::Writer
 
       helper Cxx11::IncludeGuardHelper
@@ -43,6 +42,5 @@ module IDL
         @file_name.sub(/\./, '_').upcase
       end
     end
-
   end # Cxx11
 end # IDL

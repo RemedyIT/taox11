@@ -9,7 +9,6 @@
 require 'ridlbe/base/config/concern'
 
 module IDL
-
   class Parser
     def has_interfaces?
       @d.has_interfaces?
@@ -51,7 +50,6 @@ module IDL
   end
 
   module Base
-
     extend Concern
 
     module ClassMethods
@@ -76,7 +74,5 @@ module IDL
     end # ClassMethods
 
     extend ClassMethods
-
   end # Base
-
 end # IDL

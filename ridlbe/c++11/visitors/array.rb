@@ -9,7 +9,6 @@
 
 module IDL
   module Cxx11
-
     class ArrayVisitor < NodeVisitorBase
 
       def element_cxxtype
@@ -61,6 +60,5 @@ module IDL
         @resolved_idltype ||= self._idltype.resolved_type
       end
     end
-
   end
 end

@@ -10,7 +10,6 @@ require 'ridlbe/c++11/writerbase'
 
 module IDL
   module Cxx11
-
     class ServantSourceBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
@@ -364,6 +363,5 @@ module IDL
         end
       end
     end # ServantSourceSArgTraitsWriter
-
   end # Cxx11
 end # IDL

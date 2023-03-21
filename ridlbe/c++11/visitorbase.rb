@@ -10,7 +10,6 @@ require 'ridlbe/base/visitorbase'
 
 module IDL
   module Cxx11
-
     # Generic visitor base class providing template
     # access to parameters and properties and template
     # driving methods.
@@ -528,6 +527,5 @@ module IDL
       map_template :anyop, :anyop
 
     end # NodeVisitorBase
-
   end # Cxx11
 end # IDL

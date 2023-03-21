@@ -9,7 +9,6 @@
 
 module IDL
   module Cxx11
-
     class ExportVisitor < VisitorBase
 
       def visit
@@ -17,6 +16,5 @@ module IDL
       end
 
     end
-
   end
 end

@@ -9,10 +9,8 @@
 
 module IDL
   module Base
-
     # reopen and extend module
     module ExpressionConverter
-
       def expression_to_s(exp, scope = nil)
         case exp
         when Expression::Value
@@ -61,8 +59,6 @@ module IDL
         end
         "(" + s + ")"
       end
-
     end
-
   end
 end

@@ -10,9 +10,7 @@ require 'ridlbe/base/config/helpers'
 require 'ridlbe/base/visitorbase'
 
 module IDL
-
   module Base
-
     ###
     # Template generation output printer with indentation support.
     class IndentedOutput
@@ -351,7 +349,6 @@ module IDL
     # This will only work for languages and scopes that
     # support re-opening (like c++ namespaces).
     module CodeWriterMethods
-
       protected
 
       def write_open_scope(scope)
@@ -551,9 +548,6 @@ module IDL
 
       def visit_typedef(node)
       end
-
     end # CodeWriterMethods
-
   end # Base
-
 end # IDL

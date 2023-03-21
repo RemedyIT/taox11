@@ -9,7 +9,6 @@
 
 module IDL
   module Cxx11
-
     class IncludeVisitor < NodeVisitorBase
 
       def visit(node)
@@ -86,6 +85,5 @@ module IDL
       end
 
     end
-
   end
 end

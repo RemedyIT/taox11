@@ -9,7 +9,6 @@
 
 module IDL
   module Cxx11
-
     class SequenceVisitor < NodeVisitorBase
 
       def is_bounded?
@@ -65,6 +64,5 @@ module IDL
         @resolved_idltype ||= self._idltype.resolved_type
       end
     end
-
   end
 end

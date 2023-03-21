@@ -12,7 +12,6 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class ServantHeaderBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
@@ -236,6 +235,5 @@ module IDL
         visitor(AttributeVisitor).visit_attribute(node)
       end
     end
-
   end # Cxx11
 end # IDL

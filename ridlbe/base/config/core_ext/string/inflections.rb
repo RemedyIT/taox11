@@ -10,7 +10,6 @@
 module RIDL
   module CoreExt
     module String
-
       ACRONYMS = %w{CORBA CCM DDS IDL}
 
       @@acronyms = ACRONYMS.inject({}) {|h, a| h[a.downcase] = a; h}

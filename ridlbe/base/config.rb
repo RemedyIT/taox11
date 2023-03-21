@@ -8,7 +8,6 @@
 #--------------------------------------------------------------------
 
 module IDL
-
   module Base
     COPYRIGHT = "Copyright (c) 2007-#{Time.now.year} Remedy IT Expertise BV, The Netherlands".freeze
     TITLE = 'RIDL backend base'.freeze
@@ -70,9 +69,7 @@ module IDL
       end # becfg.on_process_input
 
     end # Backend.configure
-
   end # Base
-
 end # IDL
 
 # config modules

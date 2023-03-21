@@ -10,7 +10,6 @@ require 'ridlbe/c++11/visitors/exception'
 
 module IDL
   module Cxx11
-
     class AttributeVisitor < NodeVisitorBase
 
       def interface(interface_for_att = nil)
@@ -127,6 +126,5 @@ module IDL
       map_template :attribute, :attribute
 
     end
-
   end
 end

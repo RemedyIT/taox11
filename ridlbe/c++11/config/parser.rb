@@ -9,7 +9,6 @@
 require 'ridlbe/c++11/config/core'
 
 module IDL
-
   class Delegator
     # Derive CXX11 specific AST Module class to mark explicit root namespaces
     class Cxx11RootModule < IDL::AST::Module
@@ -34,7 +33,6 @@ module IDL
   end # Delegator
 
   module Cxx11
-
     include Base
 
     STUB_PROXY_SUFFIX = '_proxy'
@@ -177,8 +175,6 @@ module IDL
         (node.is_a?(IDL::AST::Interface) && !(node.is_local? || node.is_pseudo? || node.is_forward?)) ||
         (node.is_a?(IDL::AST::Module) && (node.match_members { |m| member_is_ami_candidate(m) }))
       end
-
-
     end
 
     IDL::AST::Include.class_eval do
@@ -277,7 +273,6 @@ module IDL
     end
 
     module ScannerMixin
-
       CXXKW = [
         :alignas,
         :alignof,
@@ -397,13 +392,10 @@ module IDL
         # prefix C++ keywords with '_cxx_'
         CXXKW.include?(ident.to_sym) ? '_cxx_'+ident : ident
       end
-
     end # ScannerMixin
 
     IDL::Scanner.class_eval do
       include ScannerMixin
     end
-
   end # Cxx11
-
 end # IDL

@@ -9,12 +9,10 @@
 
 module IDL
   module Cxx11
-
     ###
     # This mixin extends the standard InterfaceVisitor with AMI specific
     # methods and properties.
     module AmiNames
-
       def amic_cxxname
          @cxxname ||= node.cxxname+'AmiC'
        end
@@ -149,7 +147,6 @@ module IDL
     end # AmiNames
 
     module AmiMember
-
       ###
       # Overloads standard #interface method to add AmiNames
       def interface(interface_for_att = nil)
@@ -171,8 +168,6 @@ module IDL
         end
         intf
       end
-
     end
-
   end
 end

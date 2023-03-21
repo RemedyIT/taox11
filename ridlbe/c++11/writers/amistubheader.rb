@@ -13,7 +13,6 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class AmiStubHeaderBaseWriter < AmiBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
@@ -649,5 +648,4 @@ module IDL
       end
     end
 end # Cxx11
-
 end # IDL

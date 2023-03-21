@@ -9,7 +9,6 @@
 
 module IDL
   module Cxx11
-
     class StructVisitor < NodeVisitorBase
 
       def members
@@ -57,6 +56,5 @@ module IDL
       end
 
     end
-
   end
 end

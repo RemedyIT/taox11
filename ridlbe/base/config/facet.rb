@@ -10,7 +10,6 @@ require 'ridlbe/base/config/core'
 require 'ridlbe/base/config/concern'
 
 module IDL
-
   class Backend
 
     class Facet
@@ -79,7 +78,6 @@ module IDL
         end
 
         module ClassMethods
-
           private
 
           def config(cfg = nil)
@@ -380,11 +378,9 @@ module IDL
         process_input_without_facets(parser, params)
         _ordered_facets.each { |fct| fct.process_input(parser, params) }
       end
-
     end # FacetMixin
 
     include FacetMixin
 
   end # Backend
-
 end # IDL

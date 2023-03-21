@@ -10,7 +10,6 @@ require 'ridlbe/c++11/visitors/struct'
 
 module IDL
   module Cxx11
-
     class ExceptionVisitor < StructVisitor
 
       visitor_type_id :except
@@ -28,6 +27,5 @@ module IDL
 
     class ExRaiseVisitor < NodeVisitorBase
     end
-
   end
 end

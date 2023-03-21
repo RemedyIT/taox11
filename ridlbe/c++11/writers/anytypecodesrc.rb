@@ -10,7 +10,6 @@ require 'ridlbe/c++11/writers/stubsource'
 
 module IDL
   module Cxx11
-
     class AnyTypeCodeBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
@@ -227,7 +226,6 @@ module IDL
       end
 
     end
-
   end # Cxx11
 end # IDL
 

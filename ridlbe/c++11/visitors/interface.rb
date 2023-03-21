@@ -11,7 +11,6 @@ require 'ridlbe/c++11/visitors/attribute'
 
 module IDL
   module Cxx11
-
     class InterfaceVisitor < NodeVisitorBase
 
       def is_forward?
@@ -247,6 +246,5 @@ module IDL
       map_template :typecode, :typecode
       map_template :tao_typecode, :interface_typecode
     end
-
   end
 end

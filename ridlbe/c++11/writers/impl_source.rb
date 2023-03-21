@@ -10,7 +10,6 @@ require 'ridlbe/c++11/writerbase'
 
 module IDL
   module Cxx11
-
     class ImplSourceBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
@@ -98,6 +97,5 @@ module IDL
 #      end
 
     end # ImplSourceWriter
-
   end # Cxx11
 end # IDL

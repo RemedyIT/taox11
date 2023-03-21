@@ -9,7 +9,6 @@
 
 module IDL
   module Cxx11
-
     class TypedefVisitor < NodeVisitorBase
 
       def is_alias?
@@ -133,6 +132,5 @@ module IDL
       map_template :typedef, :typedef
 
     end
-
   end
 end

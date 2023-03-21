@@ -10,7 +10,6 @@ require 'ridlbe/c++11/visitors/mixins/ami_names'
 
 module IDL
   module Cxx11
-
     ###
     # This mixin overrides the standard InterfaceVisitor in such a way
     # that the visitor provides key properties like type names and
@@ -189,7 +188,6 @@ module IDL
       end
 
       module Overloads
-
         def stub_export_macro_with_ami
           params[:amic_export_macro] ? (params[:amic_export_macro]+' ') : stub_export_macro_without_ami
         end
@@ -198,7 +196,6 @@ module IDL
           stub_export_macro
         end
       end # Overloads
-
     end # AmiHandler
 
     ###
@@ -206,7 +203,6 @@ module IDL
     # that the visitor provides base or ancestor visitors with AmiHandler
     # included.
     module AmiInheritance
-
       def bases
         @bases ||= node.bases.collect do |base|
           visitor(InterfaceVisitor) do |v|
@@ -224,8 +220,6 @@ module IDL
           end unless ancestor.is_abstract?  # leave out abstract bases
         end.compact
       end
-
     end
-
   end
 end

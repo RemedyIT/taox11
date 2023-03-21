@@ -9,7 +9,6 @@
 
 module IDL
   module Cxx11
-
     class PreVisitor < VisitorBase
 
       def visit
@@ -25,6 +24,5 @@ module IDL
       end
 
     end
-
   end
 end

@@ -11,7 +11,6 @@ require 'ridlbe/c++11/visitors/operation'
 
 module IDL
   module Cxx11
-
     class ValueboxVisitor < NodeVisitorBase
 
       def boxed_type_is_pod?
@@ -77,6 +76,5 @@ module IDL
       map_template :sarg_traits, :value_sarg_traits
 
     end
-
   end
 end

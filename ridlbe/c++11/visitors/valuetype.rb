@@ -14,7 +14,6 @@ require 'ridlbe/c++11/visitors/exception'
 
 module IDL
   module Cxx11
-
     class ValuetypeVisitor < NodeVisitorBase
 
       def is_forward?
@@ -258,6 +257,5 @@ module IDL
       end
 
     end # ValuetypeInitializerVisitor
-
   end
 end

@@ -11,9 +11,7 @@ require 'erb'
 require 'delegate'
 
 module IDL
-
   module Base
-
     # Generic visitor base class providing template
     # access to parameters and properties and template
     # driving methods.
@@ -21,7 +19,6 @@ module IDL
     class Visitor
 
       module TemplateMap
-
         def self.included(base)
           base.singleton_class.class_eval do
 
@@ -48,7 +45,6 @@ module IDL
 
           end
         end
-
       end # TemplateMap
 
       include TemplateMap
@@ -453,9 +449,6 @@ module IDL
       def _resolved_idltype
         @resolved_idltype ||= @node.idltype.resolved_type
       end
-
     end # NodeVisitorMethods
-
   end # Base
-
 end # IDL

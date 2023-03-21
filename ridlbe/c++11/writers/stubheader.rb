@@ -12,7 +12,6 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class StubHeaderBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
@@ -768,7 +767,5 @@ module IDL
       end
 
     end # StubHeaderOSWriter
-
 end # Cxx11
-
 end # IDL

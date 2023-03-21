@@ -8,7 +8,6 @@
 #--------------------------------------------------------------------
 
 module IDL
-
   # define language mapping specific type customizations
 
   class Type
@@ -898,5 +897,4 @@ module IDL
     end
 
   end # Type
-
 end # IDL

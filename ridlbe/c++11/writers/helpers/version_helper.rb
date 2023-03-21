@@ -8,11 +8,8 @@
 #--------------------------------------------------------------------
 
 module IDL
-
   module Cxx11
-
     module VersionHelper
-
       def taox11_version_header
         "tao/x11/versionx11.h"
       end
@@ -35,7 +32,5 @@ module IDL
             "Please re-generate.\n#endif"
       end
     end
-
   end # Cxx11
-
 end # IDL

@@ -9,7 +9,6 @@
 
 module IDL
   module Cxx11
-
     class FixedVisitor < NodeVisitorBase
 
       def digits
@@ -21,6 +20,5 @@ module IDL
       end
 
     end
-
   end
 end

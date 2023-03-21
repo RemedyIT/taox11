@@ -8,9 +8,7 @@
 #--------------------------------------------------------------------
 
 module IDL
-
   module Base
-
     class Template
 
       class << self
@@ -163,7 +161,5 @@ module IDL
       end
 
     end # Template
-
   end # Base
-
 end # IDL

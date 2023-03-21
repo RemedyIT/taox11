@@ -12,7 +12,6 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class ServantProxyBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
@@ -93,6 +92,5 @@ module IDL
         super
       end
     end # ServantProxyWriter
-
   end # Cxx11
 end # IDL

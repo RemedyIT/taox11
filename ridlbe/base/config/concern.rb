@@ -135,7 +135,5 @@ module IDL
         end
       end
     end
-
   end # Base
-
 end # IDL

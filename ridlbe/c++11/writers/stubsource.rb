@@ -10,7 +10,6 @@ require 'ridlbe/c++11/writerbase'
 
 module IDL
   module Cxx11
-
     class StubSourceBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
@@ -794,6 +793,5 @@ module IDL
       end
 
     end # StubSourceTaoTypecodeWriter
-
   end
 end

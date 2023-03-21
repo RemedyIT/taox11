@@ -930,6 +930,5 @@ module IDL
       end
 
     end # AmiStubSourceSArgTraitsWriter
-
   end
 end

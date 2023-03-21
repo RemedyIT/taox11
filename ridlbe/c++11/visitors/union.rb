@@ -9,7 +9,6 @@
 
 module IDL
   module Cxx11
-
     class UnionVisitor < NodeVisitorBase
 
       def members
@@ -162,6 +161,5 @@ module IDL
         labels.size > 1 || is_default?
       end
     end
-
   end
 end

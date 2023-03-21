@@ -8,11 +8,8 @@
 #--------------------------------------------------------------------
 
 module IDL
-
   module Cxx11
-
     module IncludeGuardHelper
-
       def include_guard_macro
         writer.include_guard
       end
@@ -24,9 +21,6 @@ module IDL
       def include_guard_end
         %Q{#endif /* #{include_guard_macro} */}
       end
-
     end # IncludeGuardHelper
-
   end # Cxx11
-
 end # IDL
