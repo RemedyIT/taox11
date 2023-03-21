@@ -22,7 +22,7 @@ module BRIX11
         # make sure to copy the contents of the global search path variables irrespective of '-E' switch
         # unless the (user) config already defined a value
         Exec.update_run_environment('PATH', ENV['PATH']) unless Exec.has_run_environment?('PATH')
-        if !Exec.mswin?
+        unless Exec.mswin?
           Exec.update_run_environment('LD_LIBRARY_PATH', ENV['LD_LIBRARY_PATH']) unless Exec.has_run_environment?('LD_LIBRARY_PATH')
         end
 
