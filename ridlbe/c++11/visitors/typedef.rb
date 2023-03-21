@@ -19,7 +19,7 @@ module IDL
       end
 
       def aliased_cxxname
-        if self.is_alias? then
+        if self.is_alias?
           self._idltype.is_a?(IDL::Type::ScopedName) ? self._idltype.node.cxxname : self._idltype.cxx_type(cur_scope)
         else
           ''
@@ -27,7 +27,7 @@ module IDL
       end
 
       def aliased_scoped_cxxname
-        if self.is_alias? then
+        if self.is_alias?
           self._idltype.is_a?(IDL::Type::ScopedName) ? self._idltype.node.scoped_cxxname : self._idltype.cxx_type
         else
           ''
@@ -35,7 +35,7 @@ module IDL
       end
 
       def aliased_scoped_traits_cxx_typename
-        if self.is_alias? then
+        if self.is_alias?
           self._idltype.is_a?(IDL::Type::ScopedName) ?
               "#{self._idltype.node.scoped_cxxname}_idl_t" :
               "#{self._idltype.cxx_type.gsub(' ', '_')}_idl_t"
