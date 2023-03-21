@@ -21,7 +21,7 @@ module IDL
       end
 
       def self.map_native_type(scoped_name, type)
-        raise ArgumentError, "mapped type for #{scoped_name} should be IDL::Type::Native derivative" unless IDL::Type::Native === type
+        raise ArgumentError, "mapped type for #{scoped_name} should be IDL::Type::Native derivative" unless type.is_a?(IDL::Type::Native)
 
         @@native_map[scoped_name.to_s] = type
       end
@@ -36,7 +36,7 @@ module IDL
 
       def idltype_with_native_hook
         idltype_ = idltype_without_native_hook
-        if IDL::Type::Native === idltype_ && IDL::Base::NativeHook.has_native_mapping?(sn_ = self.scoped_name)
+        if idltype_.is_a?(IDL::Type::Native) && IDL::Base::NativeHook.has_native_mapping?(sn_ = self.scoped_name)
           idltype_ = NativeHook.native_mapping(sn_)
           IDL.log(2, "RIDL Base - mapped #{sn_} to #{idltype_.class.name}")
         end

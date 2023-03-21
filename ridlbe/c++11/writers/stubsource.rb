@@ -311,11 +311,11 @@ module IDL
       end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
         add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h') if generate_typecodes?
         # just an alias or a sequence, array or fixed?
-        unless IDL::Type::ScopedName === node.idltype
+        unless node.idltype.is_a?(IDL::Type::ScopedName)
           add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if generate_anyops?
           if generate_typecodes?
             idl_type = node.idltype.resolved_type
@@ -545,7 +545,7 @@ module IDL
       def visit_typedef(node)
         return if node.is_local? || params[:no_cdr_streaming]
         # nothing to do if this is just an alias for another defined type
-        return if IDL::Type::ScopedName === node.idltype || node.idltype.resolved_type.is_standard_type?
+        return if node.idltype.is_a?(IDL::Type::ScopedName) || node.idltype.resolved_type.is_standard_type?
 
         idl_type = node.idltype.resolved_type
         case idl_type
@@ -612,10 +612,10 @@ module IDL
 
       def visit_typedef(node)
         # nothing to do if this is just an alias for another defined type
-        return if IDL::Type::ScopedName === node.idltype
+        return if node.idltype.is_a?(IDL::Type::ScopedName)
 
         _resolved_type = node.idltype.resolved_type
-        return if IDL::Type::Native === _resolved_type ||
+        return if _resolved_type.is_a?(IDL::Type::Native) ||
                   _resolved_type.is_standard_type?
 
         visitor(TypedefVisitor).visit_anyop(node)
@@ -662,7 +662,7 @@ module IDL
       end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
         visitor(TypedefVisitor).visit_typecode(node)
       end
@@ -768,9 +768,9 @@ module IDL
       end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
-        if IDL::Type::ScopedName === node.idltype || node.idltype.is_standard_type?
+        if node.idltype.is_a?(IDL::Type::ScopedName) || node.idltype.is_standard_type?
           # alias
           visitor(TypedefVisitor).visit_tao_typecode(node)
         else

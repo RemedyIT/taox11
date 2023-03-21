@@ -16,7 +16,7 @@ module IDL
         interface_for_att ||= node.enclosure unless @interface || !node?
         # (re)set @interface if interface_for_att isn't nil
         if interface_for_att
-          if NodeVisitorBase === interface_for_att
+          if interface_for_att.is_a?(NodeVisitorBase)
             @interface = interface_for_att
           else
             @interface = interface_for_att.is_a?(IDL::AST::Valuetype) ?
@@ -36,7 +36,7 @@ module IDL
         # original context defining the attribute is different from the current context
         interface.node != node.enclosure &&
             # and the current context is not a valuetype or the defining context was an abstract interface
-            (!(IDL::AST::Valuetype === interface.node) || (IDL::AST::Interface === node.enclosure && node.enclosure.is_abstract?))
+            (!(interface.node.is_a?(IDL::AST::Valuetype)) || (node.enclosure.is_a?(IDL::AST::Interface) && node.enclosure.is_abstract?))
       end
 
       def defining_interface

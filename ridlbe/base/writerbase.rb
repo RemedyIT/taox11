@@ -48,7 +48,7 @@ module IDL
       end
 
       def write_regen_section(sectionid, options = nil, proc = nil)
-        if IDL::GenFile === @os
+        if @os.is_a?(IDL::GenFile)
           options ||= {}
           options[:indent] = @indent * (@nest + options[:indent].to_i)
           if proc
@@ -120,7 +120,7 @@ module IDL
       attr_reader :output
 
       def initialize(output = STDOUT, opts = {})
-        @output = IndentedOutput === output ? output : IndentedOutput.new(output)
+        @output = output.is_a?(IndentedOutput) ? output : IndentedOutput.new(output)
         @params = opts.dup
         @properties = {
           _context: {

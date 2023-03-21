@@ -300,8 +300,8 @@ module IDL
       end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type && params[:no_gen_native]
-        return if IDL::Type::ScopedName === node.idltype # alias typedef
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
+        return if node.idltype.is_a?(IDL::Type::ScopedName) # alias typedef
 
         idl_type = node.idltype.resolved_type
         case idl_type

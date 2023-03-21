@@ -26,7 +26,7 @@ module IDL
       end
 
       def switchtype_boolean?
-        IDL::Type::Boolean === switchtype.resolved_type
+        switchtype.resolved_type.is_a?(IDL::Type::Boolean)
       end
 
       def all_labels_single?
@@ -150,7 +150,7 @@ module IDL
       end
 
       def is_array?
-        IDL::Type::Array === _resolved_idltype
+        _resolved_idltype.is_a?(IDL::Type::Array)
       end
 
       # Does this union member has multiple legal discriminator values

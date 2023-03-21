@@ -11,11 +11,11 @@ module IDL
   module Cxx11
     class StringVisitor < NodeVisitorBase
       def is_wstring?
-        IDL::Type::WString === self._idltype.resolved_type
+        self._idltype.resolved_type.is_a?(IDL::Type::WString)
       end
 
       def is_string?
-        IDL::Type::String === self._idltype.resolved_type
+        self._idltype.resolved_type.is_a?(IDL::Type::String)
       end
 
       def is_bounded?

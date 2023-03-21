@@ -151,7 +151,7 @@ module IDL
       # Overloads standard #interface method to add AmiNames
       def interface(interface_for_att = nil)
         intf = super(interface_for_att)
-        if InterfaceVisitor === intf # not for value types
+        if intf.is_a?(InterfaceVisitor) # not for value types
           # make sure to do this only once
           intf.class_eval { include AmiNames } unless intf.singleton_class.included_modules.include?(AmiNames)
         end
@@ -162,7 +162,7 @@ module IDL
       # Overloads standard #defining_interface method to add AmiNames
       def defining_interface
         intf = super
-        if InterfaceVisitor === intf # not for value types
+        if intf.is_a?(InterfaceVisitor) # not for value types
           # make sure to do this only once
           intf.class_eval { include AmiNames } unless intf.singleton_class.included_modules.include?(AmiNames)
         end

@@ -23,7 +23,7 @@ module IDL
       end
 
       def is_objref_sequence?
-        IDL::Type::Interface === self._resolved_idltype.basetype.resolved_type
+        self._resolved_idltype.basetype.resolved_type.is_a?(IDL::Type::Interface)
       end
 
       def basetype_scoped_cxx_typecode

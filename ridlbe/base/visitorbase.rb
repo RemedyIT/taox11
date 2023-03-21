@@ -213,7 +213,7 @@ module IDL
       def exec_template_visit(tpl, name, extra_props, bases = nil)
         yield(self, name) if block_given?
         if tpl
-          if Array === tpl
+          if tpl.is_a?(Array)
             tpl.each { |t| visit_resolved_template(t, extra_props) }
           else
             visit_resolved_template(tpl, extra_props, bases)
@@ -382,7 +382,7 @@ module IDL
         # check for included IDL
         enc = @node.enclosure
         while enc
-          return File.basename(enc.fullpath) if IDL::AST::Include === enc
+          return File.basename(enc.fullpath) if enc.is_a?(IDL::AST::Include)
 
           enc = enc.enclosure
         end
@@ -421,12 +421,12 @@ module IDL
           IDL.log(3, "NodeVisitorMethods: captured call to #{method}")
           Kernel.raise ArgumentError, "Incorrect number of arguments; #{args.size} for 0 - 2" if args.size>2
           node, extra_props = *args
-          if Hash === node
+          if node.is_a?(Hash)
             Kernel.raise ArgumentError, 'Invalid argument following extra_props Hash' if extra_props
             extra_props = node
             node = extra_props.delete(:node)
           end
-          Kernel.raise ArgumentError, 'Invalid node argument' unless node.nil? || IDL::AST::Leaf === node
+          Kernel.raise ArgumentError, 'Invalid node argument' unless node.nil? || node.is_a?(IDL::AST::Leaf)
           sym = ::Regexp.last_match(1)
           tpl, tpl_bases = resolve_template(sym)
           Kernel.raise "Fatal: cannot resolve RIDL template #{::Regexp.last_match(1)}" unless tpl || optional_template?(sym)

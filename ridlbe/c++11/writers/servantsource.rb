@@ -328,21 +328,21 @@ module IDL
           visitor(UnionVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Sequence
           # find the base typedef for this sequence
-          return unless IDL::Type::ScopedName === idl_type # can't handle anonymous sequence types
+          return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous sequence types
 
           # find base typedef for sequence
           res_idl_type = idl_type
-          while IDL::Type::ScopedName === res_idl_type.node.idltype
+          while res_idl_type.node.idltype.is_a?(IDL::Type::ScopedName)
             res_idl_type = res_idl_type.node.idltype
           end
           visitor(SequenceVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Array
           # find the base typedef for this array
-          return unless IDL::Type::ScopedName === idl_type # can't handle anonymous array types
+          return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous array types
 
           # find base typedef for array
           res_idl_type = idl_type
-          while IDL::Type::ScopedName === res_idl_type.node.idltype
+          while res_idl_type.node.idltype.is_a?(IDL::Type::ScopedName)
             res_idl_type = res_idl_type.node.idltype
           end
           # recheck if already done
@@ -350,11 +350,11 @@ module IDL
         when IDL::Type::String, IDL::Type::WString
           return if idl_type.resolved_type.is_standard_type? # handle only bounded strings (unbounded is standard_tpe)
           # find the base typedef for this string
-          return unless IDL::Type::ScopedName === idl_type # can't handle anonymous sequence types
+          return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous sequence types
 
           # find base typedef for string
           res_idl_type = idl_type
-          while IDL::Type::ScopedName === res_idl_type.node.idltype
+          while res_idl_type.node.idltype.is_a?(IDL::Type::ScopedName)
             res_idl_type = res_idl_type.node.idltype
           end
           visitor(StringVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)

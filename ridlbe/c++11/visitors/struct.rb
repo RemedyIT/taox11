@@ -37,7 +37,7 @@ module IDL
 
     class StructMemberVisitor < NodeVisitorBase
       def is_object?
-        IDL::Type::Interface === _resolved_idltype
+        _resolved_idltype.is_a?(IDL::Type::Interface)
       end
 
       def is_local_object?
@@ -49,7 +49,7 @@ module IDL
       end
 
       def is_array?
-        IDL::Type::Array === _resolved_idltype
+        _resolved_idltype.is_a?(IDL::Type::Array)
       end
     end
   end

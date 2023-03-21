@@ -322,7 +322,7 @@ module IDL
       end
 
       def value_to_s(v, scope = nil)
-        if Printables === v
+        if v.is_a?(Printables)
           if Specials.include?(c = v.chr)
             "'\\#{c}'"
           else
@@ -356,8 +356,8 @@ module IDL
       end
 
       def value_to_s(v, scope = nil)
-        return 'L'+v.to_i.chr.dump.gsub('"', "'") if ::Integer === v
-        return 'L'+v.to_s[0, 1].dump.gsub('"', "'") unless ::Array === v
+        return 'L'+v.to_i.chr.dump.gsub('"', "'") if v.is_a?(::Integer)
+        return 'L'+v.to_s[0, 1].dump.gsub('"', "'") unless v.is_a?(::Array)
 
         'L'+case v.first
         when :char
@@ -461,7 +461,7 @@ module IDL
       end
 
       def value_to_s(v, scope = nil)
-        return 'L'+v.to_s.dump unless ::Array === v
+        return 'L'+v.to_s.dump unless v.is_a?(::Array)
 
         'L"'+v.collect do |(elt, elv)|
           case elt

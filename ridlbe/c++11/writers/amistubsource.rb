@@ -362,11 +362,11 @@ module IDL
       end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
         add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h')
         # just an alias or a sequence, array or fixed?
-        unless IDL::Type::ScopedName === node.idltype
+        unless node.idltype.is_a?(IDL::Type::ScopedName)
           add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if generate_anyops?
           if generate_typecodes?
             idl_type = node.idltype.resolved_type
@@ -892,21 +892,21 @@ module IDL
           visitor(UnionVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Sequence
           # find the base typedef for this sequence
-          return unless IDL::Type::ScopedName === idl_type # can't handle anonymous sequence types
+          return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous sequence types
 
           # find base typedef for sequence
           res_idl_type = idl_type
-          while !(IDL::Type::Sequence === res_idl_type.node.idltype)
+          while !(res_idl_type.node.idltype.is_a?(IDL::Type::Sequence))
             res_idl_type = res_idl_type.node.idltype
           end
           visitor(SequenceVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Array
           # find the base typedef for this array
-          return unless IDL::Type::ScopedName === idl_type # can't handle anonymous array types
+          return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous array types
 
           # find base typedef for array
           res_idl_type = idl_type
-          while !(IDL::Type::Array === res_idl_type.node.idltype)
+          while !(res_idl_type.node.idltype.is_a?(IDL::Type::Array))
             res_idl_type = res_idl_type.node.idltype
           end
           # recheck if already done

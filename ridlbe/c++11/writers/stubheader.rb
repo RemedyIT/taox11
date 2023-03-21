@@ -279,7 +279,7 @@ module IDL
           end
         end
         if node.enclosure.is_a?(IDL::AST::Module) || ![Type::String, Type::WString].include?(node.expression.idltype.class)
-          if IDL::Expression::Value === node.expression
+          if node.expression.is_a?(IDL::Expression::Value)
             case node.idltype.resolved_type
             when IDL::Type::Fixed
               println("#{node.cxxname};")
@@ -299,7 +299,7 @@ module IDL
       end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type && params[:no_gen_native]
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
 
         visitor(TypedefVisitor).visit_typedef(node)
       end
@@ -411,8 +411,8 @@ module IDL
       end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type && params[:no_gen_native]
-        return if IDL::Type::ScopedName === node.idltype # alias typedef
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
+        return if node.idltype.is_a?(IDL::Type::ScopedName) # alias typedef
 
         idl_type = node.idltype.resolved_type
         case idl_type
@@ -521,8 +521,8 @@ module IDL
       end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type && params[:no_gen_native]
-        return if IDL::Type::ScopedName === node.idltype # alias typedef
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
+        return if node.idltype.is_a?(IDL::Type::ScopedName) # alias typedef
 
         idl_type = node.idltype.resolved_type
         case idl_type
@@ -655,10 +655,10 @@ module IDL
 
       def visit_typedef(node)
         # nothing to do if this is just an alias for another defined type
-        return if IDL::Type::ScopedName === node.idltype
+        return if node.idltype.is_a?(IDL::Type::ScopedName)
 
         _resolved_type = node.idltype.resolved_type
-        return if IDL::Type::Native === _resolved_type ||
+        return if _resolved_type.is_a?(IDL::Type::Native) ||
                   _resolved_type.is_standard_type?
 
         visitor(TypedefVisitor).visit_anyop(node)
@@ -733,9 +733,9 @@ module IDL
       end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
         # nothing to do if this is just an alias for another defined type
-        return if IDL::Type::ScopedName === node.idltype
+        return if node.idltype.is_a?(IDL::Type::ScopedName)
 
         case node.idltype.resolved_type
         when IDL::Type::Sequence

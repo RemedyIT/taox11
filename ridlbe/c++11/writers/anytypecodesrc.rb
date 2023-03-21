@@ -149,11 +149,11 @@ module IDL
       end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
         add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h') if params[:gen_typecodes]
         # just an alias or a sequence, array or fixed?
-        unless IDL::Type::ScopedName === node.idltype
+        unless node.idltype.is_a?(IDL::Type::ScopedName)
           add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if params[:gen_typecodes]
           idl_type = node.idltype.resolved_type
           case idl_type

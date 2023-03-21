@@ -11,16 +11,16 @@ module IDL
   module Cxx11
     class TypedefVisitor < NodeVisitorBase
       def is_alias?
-        IDL::Type::ScopedName === self._idltype || self._idltype.is_standard_type?
+        self._idltype.is_a?(IDL::Type::ScopedName) || self._idltype.is_standard_type?
       end
 
       def is_array_type?
-        IDL::Type::Array === self._idltype.resolved_type
+        self._idltype.resolved_type.is_a?(IDL::Type::Array)
       end
 
       def aliased_cxxname
         if self.is_alias? then
-          IDL::Type::ScopedName === self._idltype ? self._idltype.node.cxxname : self._idltype.cxx_type(cur_scope)
+          self._idltype.is_a?(IDL::Type::ScopedName) ? self._idltype.node.cxxname : self._idltype.cxx_type(cur_scope)
         else
           ''
         end
@@ -28,7 +28,7 @@ module IDL
 
       def aliased_scoped_cxxname
         if self.is_alias? then
-          IDL::Type::ScopedName === self._idltype ? self._idltype.node.scoped_cxxname : self._idltype.cxx_type
+          self._idltype.is_a?(IDL::Type::ScopedName) ? self._idltype.node.scoped_cxxname : self._idltype.cxx_type
         else
           ''
         end
@@ -36,7 +36,7 @@ module IDL
 
       def aliased_scoped_traits_cxx_typename
         if self.is_alias? then
-          IDL::Type::ScopedName === self._idltype ?
+          self._idltype.is_a?(IDL::Type::ScopedName) ?
               "#{self._idltype.node.scoped_cxxname}_idl_t" :
               "#{self._idltype.cxx_type.gsub(' ', '_')}_idl_t"
         else
@@ -45,19 +45,19 @@ module IDL
       end
 
       def is_array_typedef?
-        IDL::Type::Array === self._idltype
+        self._idltype.is_a?(IDL::Type::Array)
       end
 
       def is_sequence_typedef?
-        IDL::Type::Sequence === self._idltype
+        self._idltype.is_a?(IDL::Type::Sequence)
       end
 
       def is_string_typedef?
-        IDL::Type::String === self._idltype
+        self._idltype.is_a?(IDL::Type::String)
       end
 
       def is_wstring_typedef?
-        IDL::Type::WString === self._idltype
+        self._idltype.is_a?(IDL::Type::WString)
       end
 
       def is_bounded_type?
@@ -121,7 +121,7 @@ module IDL
       end
 
       def is_native?
-        IDL::Type::Native === self._resolved_idltype
+        self._resolved_idltype.is_a?(IDL::Type::Native)
       end
 
       # template mapping
