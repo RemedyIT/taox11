@@ -40,7 +40,7 @@ module BRIX11
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to generate enclosing module(s).',
                      'Default: derived from first IDL file basename (uppercasing first character)') { |v|
                        options[:gensrv][:modules] = v.split('::')
-                        options[:gensrv][:interface] = options[:gensrv][:modules].pop
+                       options[:gensrv][:interface] = options[:gensrv][:modules].pop
                      }
         optparser.on('-S[FILES]', '--with-servant=[FILES]',
                      'Create includes for CORBA servant implementation headers.',
