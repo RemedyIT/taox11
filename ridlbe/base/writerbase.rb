@@ -222,6 +222,7 @@ module IDL
             tpl_list.concat(tpl_ext[:append]) if tpl_ext.has_key?(:append)
             return [tpl_list.collect {|_tpl| File.join(self.template_root, _tpl.to_s)}]
           end
+
           return nil
         end
         tpl_ext
@@ -370,6 +371,7 @@ module IDL
       def at_global_scope(&block)
         _cur_scope = @properties[:_context][:cur_scope]
         raise "cannot break out scope for #{_cur_scope.typename}" unless _cur_scope.nil? || _cur_scope.is_a?(IDL::AST::Module)
+
         if _cur_scope
           printiln('// generated from Base::CodeWriter#at_global_scope')
           @properties[:_context][:scopes].each do |_scope|
@@ -429,11 +431,13 @@ module IDL
 
       def enter_module(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
       def leave_module(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].pop
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
@@ -442,11 +446,13 @@ module IDL
       end
       def enter_interface(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
       def leave_interface(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].pop
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
@@ -455,11 +461,13 @@ module IDL
       end
       def enter_valuetype(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
       def leave_valuetype(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].pop
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
@@ -480,22 +488,26 @@ module IDL
       end
       def enter_struct(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
       def leave_struct(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].pop
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
 
       def enter_exception(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
       def leave_exception(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].pop
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
@@ -504,11 +516,13 @@ module IDL
       end
       def enter_union(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
       def leave_union(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].pop
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end

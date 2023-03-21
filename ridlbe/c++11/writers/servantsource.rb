@@ -78,6 +78,7 @@ module IDL
 
       def enter_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
         super
         println
         printiln('// generated from ServantSourceWriter#enter_interface')
@@ -88,6 +89,7 @@ module IDL
       end
       def leave_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
         dec_nest
         visitor(InterfaceVisitor).visit_post(node)
         # visit all operations (incl. inherited) here directly
@@ -109,6 +111,7 @@ module IDL
       def enter_valuetype(node)
         super
         return if node.is_local? || !node.supports_concrete_interface?
+
         visitor(ValuetypeVisitor).visit_pre(node)
       end
 
@@ -144,6 +147,7 @@ module IDL
 
       def enter_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
         check_idl_type(node.idltype)
         # interfaces ALWAYS provide sequence cdr definitions (forward decl issue)
         add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
@@ -153,37 +157,44 @@ module IDL
 
       def visit_operation(node)
         return if node.enclosure.is_local? || node.enclosure.is_pseudo? || node.enclosure.is_abstract?
+
         check_idl_type(node.idltype)
         node.params.each { |parm| check_idl_type(parm.idltype) }
       end
 
       def visit_attribute(node)
         return if node.enclosure.is_local? || node.enclosure.is_pseudo? || node.enclosure.is_abstract?
+
         check_idl_type(node.idltype)
       end
 
       def visit_valuetype(node)
         return if node.is_abstract? || node.is_local?
+
         node.state_members.each { |m| check_idl_type(m.idltype) }
       end
 
       def visit_valuebox(node)
         return if node.is_local?
+
         check_idl_type(node.boxed_type)
       end
 
       def enter_struct(node)
         return if node.is_local?
+
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
       def enter_union(node)
         return if node.is_local?
+
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
       def visit_typedef(node)
         return if node.is_local?
+
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::Sequence,
@@ -277,12 +288,14 @@ module IDL
 
       def visit_operation(node)
         return if node.enclosure.is_local? || node.enclosure.is_pseudo? || node.enclosure.is_abstract?
+
         check_idl_type(node.idltype)
         node.params.each { |parm| check_idl_type(parm.idltype) }
       end
 
       def visit_attribute(node)
         return if node.enclosure.is_local? || node.enclosure.is_pseudo? || node.enclosure.is_abstract?
+
         check_idl_type(node.idltype)
       end
 
@@ -318,6 +331,7 @@ module IDL
         when IDL::Type::Sequence
           # find the base typedef for this sequence
           return unless IDL::Type::ScopedName === idl_type # can't handle anonymous sequence types
+
           # find base typedef for sequence
           res_idl_type = idl_type
           while IDL::Type::ScopedName === res_idl_type.node.idltype
@@ -327,6 +341,7 @@ module IDL
         when IDL::Type::Array
           # find the base typedef for this array
           return unless IDL::Type::ScopedName === idl_type # can't handle anonymous array types
+
           # find base typedef for array
           res_idl_type = idl_type
           while IDL::Type::ScopedName === res_idl_type.node.idltype
@@ -338,6 +353,7 @@ module IDL
           return if idl_type.resolved_type.is_standard_type? # handle only bounded strings (unbounded is standard_tpe)
           # find the base typedef for this string
           return unless IDL::Type::ScopedName === idl_type # can't handle anonymous sequence types
+
           # find base typedef for string
           res_idl_type = idl_type
           while IDL::Type::ScopedName === res_idl_type.node.idltype

@@ -25,6 +25,7 @@ module IDL
 
       def self.map_native_type(scoped_name, type)
         raise ArgumentError, "mapped type for #{scoped_name} should be IDL::Type::Native derivative" unless IDL::Type::Native === type
+
         @@native_map[scoped_name.to_s] = type
       end
 

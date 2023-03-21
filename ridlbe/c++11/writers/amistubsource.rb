@@ -154,22 +154,26 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
+
         ami_handler_interface.visit_pre(node)
       end
 
       def leave_interface(node)
         return if !needs_ami_generation?(node)
+
         ami_handler_interface_with_ami_inheritance.visit_post(node)
       end
 
       def visit_operation(node)
         return if !needs_ami_generation?(node.enclosure)
+
         (intf_visitor = ami_handler_interface).visit(node.enclosure)
         visitor(OperationVisitor) { |v| v.interface(intf_visitor); v.visit_operation(node) }
       end
 
       def visit_attribute(node)
         return if !needs_ami_generation?(node.enclosure)
+
         (intf_visitor = ami_handler_interface).visit(node.enclosure)
         visitor(AttributeVisitor) do |v|
           v.interface(intf_visitor)
@@ -257,6 +261,7 @@ module IDL
         end
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
         check_idl_type(node.idltype)
         # interfaces ALWAYS provide sequence cdr definitions (forward decl issue)
         add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
@@ -267,6 +272,7 @@ module IDL
 
       def visit_operation(node)
         return if node.enclosure.is_local? || node.enclosure.is_pseudo? || node.enclosure.is_abstract?
+
         check_idl_type(node.idltype)
         node.params.each { |parm| check_idl_type(parm.idltype) }
         add_include('tao/x11/basic_arguments.h') ## for _excep method
@@ -278,6 +284,7 @@ module IDL
 
       def visit_attribute(node)
         return if node.enclosure.is_local? || node.enclosure.is_pseudo? || node.enclosure.is_abstract?
+
         check_idl_type(node.idltype)
         add_include('tao/x11/basic_arguments.h')                  ## for void return of setter and _excep methods
         add_include('tao/x11/portable_server/basic_sarguments.h') ## for void return of setter
@@ -297,6 +304,7 @@ module IDL
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
         add_post_include('tao/x11/valuetype/valuetype_proxies.h') # after typecode includes
         return if node.is_abstract? || node.is_local?
+
         node.state_members.each { |m| check_idl_type(m.idltype) }
       end
 
@@ -308,6 +316,7 @@ module IDL
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
         add_post_include('tao/x11/valuetype/valuetype_proxies.h') # after typecode includes
         return if node.is_local?
+
         check_idl_type(node.boxed_type)
       end
 
@@ -319,6 +328,7 @@ module IDL
         end
         add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if generate_anyops?
         return if node.is_local?
+
         # arg template included in P.h
         node.members.each { |m| check_idl_type(m.idltype) }
       end
@@ -331,6 +341,7 @@ module IDL
         end
         add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if generate_anyops?
         return if node.is_local?
+
         # arg template included in P.h
         node.members.each { |m| check_idl_type(m.idltype) }
       end
@@ -354,6 +365,7 @@ module IDL
 
       def visit_typedef(node)
         return if IDL::Type::Native === node.idltype.resolved_type
+
         add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h')
         # just an alias or a sequence, array or fixed?
         unless IDL::Type::ScopedName === node.idltype
@@ -473,6 +485,7 @@ module IDL
       def enter_interface(node)
         super
         return if !needs_ami_generation?(node)
+
         intf = ami_handler_interface_with_ami_inheritance
         ###
         # Overload for this visitor only
@@ -514,6 +527,7 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
+
         ami_handler_interface.visit_object_traits(node)
         ami_interface.visit_amic_object_traits(node)
       end
@@ -535,6 +549,7 @@ module IDL
 
        def enter_interface(node)
          return if !needs_ami_generation?(node)
+
          ami_handler_interface.visit_object_ref_traits(node)
        end
 
@@ -559,6 +574,7 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
+
         ami_handler_interface.visit_cdr(node)
         ami_interface.visit_amic_cdr(node)
       end
@@ -594,6 +610,7 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
+
         ami_handler_interface.visit_anyop(node)
       end
 
@@ -612,6 +629,7 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
+
         ami_handler_interface.visit_typecode(node)
       end
 
@@ -664,12 +682,14 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
+
         ami_handler_interface.visit_tao_typecode(node)
         enter_scope(node)
       end
 
       def leave_interface(node)
         return if !needs_ami_generation?(node) || node.is_abstract? || node.is_local?
+
         leave_scope(node)
       end
 
@@ -705,21 +725,25 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
+
         ami_interface.visit_amic_pre(node)
       end
 
       def leave_interface(node)
         return if !needs_ami_generation?(node)
+
         ami_interface.visit_amic_post(node)
       end
 
       def visit_operation(node)
         return if !needs_ami_generation?(node.enclosure)
+
         ami_operation.visit_amic(node)
       end
 
       def visit_attribute(node)
         return if !needs_ami_generation?(node.enclosure)
+
         ami_attribute.visit_amic(node)
       end
     end # AmiStubSourceAmiCWriter
@@ -762,6 +786,7 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
+
         super
         println
         printiln('// generated from AmiStubSourceSrvWriter#enter_interface')
@@ -772,6 +797,7 @@ module IDL
 
       def leave_interface(node)
         return if !needs_ami_generation?(node)
+
         dec_nest
         ami_handler_interface.visit_post(node)
         # visit all operations (incl. inherited) here directly
@@ -833,12 +859,14 @@ module IDL
 
       def visit_operation(node)
         return if !needs_ami_generation?(node.enclosure)
+
         check_idl_type(node.idltype)
         node.params.each { |parm| check_idl_type(parm.idltype) }
       end
 
       def visit_attribute(node)
         return if !needs_ami_generation?(node.enclosure)
+
         check_idl_type(node.idltype)
       end
 
@@ -874,6 +902,7 @@ module IDL
         when IDL::Type::Sequence
           # find the base typedef for this sequence
           return unless IDL::Type::ScopedName === idl_type # can't handle anonymous sequence types
+
           # find base typedef for sequence
           res_idl_type = idl_type
           while !(IDL::Type::Sequence === res_idl_type.node.idltype)
@@ -883,6 +912,7 @@ module IDL
         when IDL::Type::Array
           # find the base typedef for this array
           return unless IDL::Type::ScopedName === idl_type # can't handle anonymous array types
+
           # find base typedef for array
           res_idl_type = idl_type
           while !(IDL::Type::Array === res_idl_type.node.idltype)

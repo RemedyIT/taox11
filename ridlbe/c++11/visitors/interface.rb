@@ -92,6 +92,7 @@ module IDL
 
       def collect_ancestors(list_, node_)
         return [] unless node_
+
         node_.bases.inject(list_) do |lst, base|
           collect_ancestors(lst, base)
           lst << base unless lst.include?(base)

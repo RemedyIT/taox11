@@ -52,6 +52,7 @@ module IDL
 
       def visit_include(node)
         return if File.basename(node.filename) == 'orb.idl'
+
         at_global_scope do
           visitor(IncludeVisitor).visit(node)
         end
@@ -75,6 +76,7 @@ module IDL
 
       def enter_interface(node)
         return if node.is_local? || node.is_abstract?
+
         super
         visitor(InterfaceVisitor).visit_pre(node)
         inc_nest  # POA
@@ -82,6 +84,7 @@ module IDL
       end
       def leave_interface(node)
         return if node.is_local? || node.is_abstract?
+
         dec_nest
         dec_nest
         visitor(InterfaceVisitor).visit_post(node)
@@ -91,16 +94,19 @@ module IDL
       def enter_valuetype(node)
         super
         return if node.is_local? || !node.supports_concrete_interface?
+
         visitor(ValuetypeVisitor).visit_pre(node)
       end
 
       def visit_operation(node)
         return if node.enclosure.is_local? || node.enclosure.is_abstract?
+
         visitor(OperationVisitor).visit_operation(node)
       end
 
       def visit_attribute(node)
         return if node.enclosure.is_local? || node.enclosure.is_abstract?
+
         visitor(AttributeVisitor).visit_attribute(node)
       end
 
@@ -165,12 +171,14 @@ module IDL
       def enter_interface(node)
         super
         return if node.is_local? || node.is_abstract?
+
         visitor(InterfaceVisitor).visit_servant_traits(node)
       end
 
       def enter_valuetype(node)
         super
         return if node.is_local? || !node.supports_concrete_interface?
+
         visitor(ValuetypeVisitor).visit_servant_traits(node)
       end
     end
@@ -200,12 +208,14 @@ module IDL
       def enter_interface(node)
         super
         return if node.is_local? || node.is_abstract?
+
         visitor(InterfaceVisitor).visit_pre(node)
         inc_nest  # POA
         inc_nest  # servant tie template
       end
       def leave_interface(node)
         return if node.is_local? || node.is_abstract?
+
         dec_nest
         dec_nest
         visitor(InterfaceVisitor).visit_post(node)
@@ -214,11 +224,13 @@ module IDL
 
       def visit_operation(node)
         return if node.enclosure.is_local? || node.enclosure.is_abstract?
+
         visitor(OperationVisitor).visit_operation(node)
       end
 
       def visit_attribute(node)
         return if node.enclosure.is_local? || node.enclosure.is_abstract?
+
         visitor(AttributeVisitor).visit_attribute(node)
       end
     end

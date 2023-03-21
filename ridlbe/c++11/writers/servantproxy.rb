@@ -48,6 +48,7 @@ module IDL
 
       def visit_include(node)
         return if File.basename(node.filename) == 'orb.idl'
+
         at_global_scope do
           visitor(IncludeVisitor).visit(node)
         end
@@ -71,6 +72,7 @@ module IDL
 
       def enter_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
         super
         println
         printiln('// generated from ServantProxyWriter#enter_interface')
@@ -81,6 +83,7 @@ module IDL
       end
       def leave_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
         dec_nest
         visitor(InterfaceVisitor).visit_post(node)
         dec_nest

@@ -80,6 +80,7 @@ module IDL
 
       def visit_include(node)
         return if File.basename(node.filename) == 'orb.idl'
+
         at_global_scope do
           visitor(IncludeVisitor).visit(node)
         end
@@ -109,6 +110,7 @@ module IDL
       def declare_interface(node)
         sn = node.scoped_cxxname
         return if @fwd_decl_cache.has_key?(sn)
+
         @fwd_decl_cache[sn] = true
         visitor(InterfaceVisitor).visit_fwd(node)
         at_global_scope do
@@ -147,6 +149,7 @@ module IDL
       def declare_struct(node)
         sn = node.scoped_cxxname
         return if @fwd_decl_cache.has_key?(sn)
+
         @fwd_decl_cache[sn] = true
         visitor(StructVisitor).visit_fwd(node)
       end
@@ -164,6 +167,7 @@ module IDL
       def declare_valuetype(node)
         sn = node.scoped_cxxname
         return if @fwd_decl_cache.has_key?(sn)
+
         @fwd_decl_cache[sn] = true
         visitor(ValuetypeVisitor).visit_fwd(node)
         at_global_scope do
@@ -224,6 +228,7 @@ module IDL
       def declare_union(node)
         sn = node.scoped_cxxname
         return if @fwd_decl_cache.has_key?(sn)
+
         @fwd_decl_cache[sn] = true
         visitor(UnionVisitor).visit_fwd(node)
       end
@@ -288,6 +293,7 @@ module IDL
 
       def visit_typedef(node)
         return if IDL::Type::Native === node.idltype.resolved_type && params[:no_gen_native]
+
         visitor(TypedefVisitor).visit_typedef(node)
       end
 
@@ -345,11 +351,13 @@ module IDL
 
       def declare_interface(node)
         return if node.is_pseudo?
+
         add_include('tao/x11/valuetype/abstractbase_traits_t.h') if node.is_abstract?
       end
 
       def enter_interface(node)
         return if node.is_pseudo?
+
         unless node.is_abstract?
           add_include('tao/x11/object.h')
         else
@@ -400,6 +408,7 @@ module IDL
       def visit_typedef(node)
         return if IDL::Type::Native === node.idltype.resolved_type && params[:no_gen_native]
         return if IDL::Type::ScopedName === node.idltype # alias typedef
+
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::Fixed
@@ -509,6 +518,7 @@ module IDL
       def visit_typedef(node)
         return if IDL::Type::Native === node.idltype.resolved_type && params[:no_gen_native]
         return if IDL::Type::ScopedName === node.idltype # alias typedef
+
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::Sequence
@@ -639,9 +649,11 @@ module IDL
       def visit_typedef(node)
         # nothing to do if this is just an alias for another defined type
         return if IDL::Type::ScopedName === node.idltype
+
         _resolved_type = node.idltype.resolved_type
         return if IDL::Type::Native === _resolved_type ||
                   _resolved_type.is_standard_type?
+
         visitor(TypedefVisitor).visit_anyop(node)
       end
 
@@ -718,6 +730,7 @@ module IDL
         return if IDL::Type::Native === node.idltype.resolved_type
         # nothing to do if this is just an alias for another defined type
         return if IDL::Type::ScopedName === node.idltype
+
         case node.idltype.resolved_type
         when IDL::Type::Sequence
           visitor(SequenceVisitor).visit_os(node)

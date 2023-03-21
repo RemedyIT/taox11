@@ -105,6 +105,7 @@ module IDL
 
       def enter_interface(node)
         return if node.is_abstract?
+
         visitor(InterfaceVisitor).visit_pre(node)
       end
       def leave_interface(node)
@@ -113,11 +114,13 @@ module IDL
 
       def visit_operation(node)
         return if node.enclosure.is_local?
+
         visitor(OperationVisitor).visit_operation(node)
       end
 
       def visit_attribute(node)
         return if node.enclosure.is_local?
+
         visitor(AttributeVisitor).visit_attribute(node)
       end
 
@@ -210,12 +213,14 @@ module IDL
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
         add_post_include('tao/x11/exception_macros.h') unless node.is_local?
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
         add_post_include('tao/x11/objproxy.h')
         check_idl_type(node.idltype)
       end
 
       def visit_operation(node)
         return if node.enclosure.is_local? || (node.enclosure.respond_to?(:is_pseudo?) &&node.enclosure.is_pseudo?) || (node.enclosure.respond_to?(:is_abstract?) && node.enclosure.is_abstract?)
+
         check_idl_type(node.idltype)
         node.params.each { |parm| check_idl_type(parm.idltype) }
         unless node.raises.empty?
@@ -227,6 +232,7 @@ module IDL
 
       def visit_attribute(node)
         return if node.enclosure.is_local? || (node.enclosure.respond_to?(:is_pseudo?) && node.enclosure.is_pseudo?) || (node.enclosure.respond_to?(:is_abstract?) && node.enclosure.is_abstract?)
+
         check_idl_type(node.idltype)
         add_include('tao/x11/basic_arguments.h') unless node.readonly ## for void return of setter
         unless node.get_raises.empty? && node.set_raises.empty?
@@ -246,6 +252,7 @@ module IDL
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
         add_post_include('tao/x11/valuetype/valuetype_proxies.h') # after typecode includes
         return if node.is_abstract? || node.is_local?
+
         node.state_members.each { |m| check_idl_type(m.idltype) }
       end
 
@@ -257,6 +264,7 @@ module IDL
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
         add_post_include('tao/x11/valuetype/valuetype_proxies.h') # after typecode includes
         return if node.is_local?
+
         check_idl_type(node.boxed_type)
       end
 
@@ -268,6 +276,7 @@ module IDL
         end
         add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if generate_anyops?
         return if node.is_local?
+
         # arg template included in P.h
         node.members.each { |m| check_idl_type(m.idltype) }
       end
@@ -280,6 +289,7 @@ module IDL
         end
         add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if generate_anyops?
         return if node.is_local?
+
         # arg template included in P.h
         node.members.each { |m| check_idl_type(m.idltype) }
       end
@@ -303,6 +313,7 @@ module IDL
 
       def visit_typedef(node)
         return if IDL::Type::Native === node.idltype.resolved_type
+
         add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h') if generate_typecodes?
         # just an alias or a sequence, array or fixed?
         unless IDL::Type::ScopedName === node.idltype
@@ -403,6 +414,7 @@ module IDL
       def enter_interface(node)
         super
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
         visitor(InterfaceVisitor).visit_proxy(node)
         println
       end
@@ -436,12 +448,14 @@ module IDL
 
       def enter_interface(node)
         return if params[:no_object_traits]
+
         visitor(InterfaceVisitor).visit_object_traits(node)
       end
 
       def enter_valuetype(node)
         # return if no value factory
         return if (node.is_abstract? || (node.initializers.empty? && node.has_operations_or_attributes?))
+
         # object traits for valuefactory
         visitor(ValuetypeVisitor).visit_traits(node)
       end
@@ -462,6 +476,7 @@ module IDL
 
       def enter_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
         visitor(InterfaceVisitor).visit_object_ref_traits(node)
       end
 
@@ -491,36 +506,43 @@ module IDL
 
       def enter_interface(node)
         return if node.is_local? || node.is_pseudo? || params[:no_cdr_streaming]
+
         visitor(InterfaceVisitor).visit_cdr(node)
       end
 
       def enter_valuetype(node)
         return if node.is_local? || params[:no_cdr_streaming]
+
         visitor(ValuetypeVisitor).visit_cdr(node)
       end
 
       def visit_valuebox(node)
         return if node.is_local? || params[:no_cdr_streaming]
+
         visitor(ValueboxVisitor).visit_cdr(node)
       end
 
       def enter_struct(node)
         return if node.is_local? || params[:no_cdr_streaming]
+
         visitor(StructVisitor).visit_cdr(node)
       end
 
       def enter_union(node)
         return if node.is_local? || params[:no_cdr_streaming]
+
         visitor(UnionVisitor).visit_cdr(node)
       end
 
       def enter_exception(node)
         return if params[:no_cdr_streaming]
+
         visitor(ExceptionVisitor).visit_cdr(node)
       end
 
       def visit_enum(node)
         return if params[:no_cdr_streaming]
+
         visitor(EnumVisitor).visit_cdr(node)
       end
 
@@ -528,6 +550,7 @@ module IDL
         return if node.is_local? || params[:no_cdr_streaming]
         # nothing to do if this is just an alias for another defined type
         return if IDL::Type::ScopedName === node.idltype || node.idltype.resolved_type.is_standard_type?
+
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::String, IDL::Type::WString
@@ -595,9 +618,11 @@ module IDL
       def visit_typedef(node)
         # nothing to do if this is just an alias for another defined type
         return if IDL::Type::ScopedName === node.idltype
+
         _resolved_type = node.idltype.resolved_type
         return if IDL::Type::Native === _resolved_type ||
                   _resolved_type.is_standard_type?
+
         visitor(TypedefVisitor).visit_anyop(node)
       end
 
@@ -644,6 +669,7 @@ module IDL
 
       def visit_typedef(node)
         return if IDL::Type::Native === node.idltype.resolved_type
+
         visitor(TypedefVisitor).visit_typecode(node)
       end
     end # StubSourceTypecodeWriter
@@ -748,6 +774,7 @@ module IDL
 
       def visit_typedef(node)
         return if IDL::Type::Native === node.idltype.resolved_type
+
         if IDL::Type::ScopedName === node.idltype || node.idltype.is_standard_type?
           # alias
           visitor(TypedefVisitor).visit_tao_typecode(node)

@@ -32,6 +32,7 @@ module IDL
             if /^(.*)=(.*)/ =~ arg
               return [::Regexp.last_match(1), ::Regexp.last_match(2)]
             end
+
             nil
           end
           grpcfg.for_param '',
@@ -55,6 +56,7 @@ module IDL
             if /^b\,(.*)=(.*)/ =~ arg
               return [::Regexp.last_match(1), ::Regexp.last_match(2)]
             end
+
             nil
           end
           grpcfg.for_params :strings,
@@ -555,6 +557,7 @@ module IDL
 
     def self.gen_export_header(options)
       return if IDL.has_production?(:export_header)
+
       unless options.export_macro
         IDL.fatal('ERROR: it is not allowed to use -Gxh without specifying the macro with -Wb,export_macro=MACRO')
       end
@@ -571,6 +574,7 @@ module IDL
 
     def self.gen_stub_export(options)
       return if IDL.has_production?(:stub_export_header)
+
       export_file = options.stub_export_file || options.stub_export_include
       if export_file
         so = GenFile.new(File.join(options.outputdir, export_file))
@@ -585,6 +589,7 @@ module IDL
 
     def self.gen_skel_export(options)
       return if IDL.has_production?(:skel_export_header)
+
       export_file = options.skel_export_file || options.skel_export_include
       if export_file
         so = GenFile.new(File.join(options.outputdir, export_file))
@@ -599,6 +604,7 @@ module IDL
 
     def self.gen_amic_export(options)
       return if IDL.has_production?(:amic_export_header)
+
       export_file = options.amic_export_file || options.amic_export_include
       if export_file
         so = GenFile.new(File.join(options.outputdir, export_file))
@@ -613,6 +619,7 @@ module IDL
 
     def self.gen_impl_export(options)
       return if IDL.has_production?(:impl_export_header)
+
       export_file = options.impl_export_file || options.impl_export_include
       if export_file
         so = GenFile.new(File.join(options.outputdir, export_file))

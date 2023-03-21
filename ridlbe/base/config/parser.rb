@@ -56,6 +56,7 @@ module IDL
     module ClassMethods
       def resolve(scoped_name, ctx_node, root_namespace = nil)
         return nil unless ctx_node
+
         names = scoped_name.split('::')
         _n = ctx_node
         if names.first.empty? # did we have '::XXX'?

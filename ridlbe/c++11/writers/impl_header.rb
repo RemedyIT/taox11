@@ -65,6 +65,7 @@ module IDL
 
       def enter_interface(node)
         return if node.is_abstract?
+
         super
         if node.is_local?
         else
@@ -76,6 +77,7 @@ module IDL
       end
       def leave_interface(node)
         return if node.is_abstract?
+
         if node.is_local?
         else
           if generate_servant_implementation?
@@ -95,6 +97,7 @@ module IDL
 
       def visit_operation(node)
         return if node.enclosure.is_local?
+
         if node.enclosure.is_local?
         else
           if generate_servant_implementation?
@@ -105,6 +108,7 @@ module IDL
 
       def visit_attribute(node)
         return if node.enclosure.is_local?
+
         if node.enclosure.is_local?
         else
           if generate_servant_implementation?

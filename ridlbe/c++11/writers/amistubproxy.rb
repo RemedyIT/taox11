@@ -80,6 +80,7 @@ module IDL
       def enter_interface(node)
         super
         return if !needs_ami_generation?(node)
+
         println
         printiln('// generated from AmiStubProxyWriter#enter_interface')
         ami_handler_interface_with_ami_inheritance.visit_pre(node)
@@ -96,12 +97,14 @@ module IDL
       def visit_operation(node)
         return if !node.enclosure.is_a?(IDL::AST::Interface) ||
         !needs_ami_generation?(node.enclosure)
+
         visitor(OperationVisitor).visit_operation(node)
       end
 
        def visit_attribute(node)
          return if !node.enclosure.is_a?(IDL::AST::Interface) ||
          !needs_ami_generation?(node.enclosure)
+
          visitor(AttributeVisitor).visit_attribute(node)
        end
 
@@ -160,11 +163,13 @@ module IDL
       def enter_valuetype(node)
         # interfaces ALWAYS provide sequence cdr definitions (forward decl issue)
         return if node.is_local?
+
         add_include('tao/Valuetype/Value_VarOut_T.h')
       end
 
       def declare_interface(node)
         return if !needs_ami_generation?(node)
+
         # interfaces ALWAYS provide sequence cdr definitions (forward decl issue)
         add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
         add_include('tao/x11/basic_argument_t.h')
@@ -172,6 +177,7 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
+
         check_idl_type(node.idltype) unless node.is_abstract?
         # interfaces ALWAYS provide sequence cdr definitions (forward decl issue)
         add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
@@ -179,35 +185,41 @@ module IDL
 
       def visit_operation(node)
         return if !needs_ami_generation?(node.enclosure)
+
         check_idl_type(node.idltype)
         node.params.each { |parm| check_idl_type(parm.idltype) }
       end
 
       def visit_attribute(node)
         return if !needs_ami_generation?(node.enclosure)
+
         check_idl_type(node.idltype)
       end
 
       def visit_valuetype(node)
         return if node.is_local?
+
         add_include('tao/x11/basic_argument_t.h')
         node.state_members.each { |m| check_idl_type(m.idltype) }
       end
 
       def visit_valuebox(node)
         return if node.is_local?
+
         add_include('tao/x11/basic_argument_t.h')
         check_idl_type(node.boxed_type)
       end
 
       def enter_struct(node)
         return if node.is_local?
+
         add_include('tao/x11/basic_argument_t.h')
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
       def enter_union(node)
         return if node.is_local?
+
         add_include('tao/x11/basic_argument_t.h')
         node.members.each { |m| check_idl_type(m.idltype) }
       end
@@ -218,6 +230,7 @@ module IDL
 
       def visit_typedef(node)
         return if node.is_local?
+
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::Sequence,
@@ -287,11 +300,13 @@ module IDL
 
       def declare_interface(node)
         return if !needs_ami_generation?(node)
+
         ami_handler_interface.visit_cdr(node)
       end
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
+
         ami_handler_interface.visit_cdr(node)
       end
 
@@ -320,6 +335,7 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
+
         ami_handler_interface.visit_object_var(node)
       end
 
@@ -354,6 +370,7 @@ module IDL
 
        def enter_interface(node)
          return if !needs_ami_generation?(node)
+
          ami_handler_interface.visit_object_ref_traits(node)
        end
 
@@ -461,6 +478,7 @@ module IDL
 
       def enter_interface(node)
         return if !needs_ami_generation?(node)
+
         super
         println
         printiln('// generated from AmiStubProxySrvWriter#enter_interface')
@@ -472,6 +490,7 @@ module IDL
 
       def leave_interface(node)
         return if !needs_ami_generation?(node) || node.is_pseudo?
+
         dec_nest
         ami_handler_interface.visit_post(node)
         dec_nest

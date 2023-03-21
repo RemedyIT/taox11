@@ -54,6 +54,7 @@ module IDL
 
       def enter_interface(node)
         return if node.is_abstract?
+
         super
         if node.is_local? || node.is_pseudo?
         else
@@ -68,6 +69,7 @@ module IDL
 
       def leave_interface(node)
         return if node.is_abstract?
+
         if node.is_local? || node.is_pseudo?
         else
           if generate_servant_implementation?

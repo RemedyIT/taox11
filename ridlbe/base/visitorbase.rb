@@ -388,6 +388,7 @@ module IDL
         enc = @node.enclosure
         while enc
           return File.basename(enc.fullpath) if IDL::AST::Include === enc
+
           enc = enc.enclosure
         end
         # not from include but from IDL source file

@@ -95,6 +95,7 @@ module IDL
         add_pre_include('tao/AnyTypeCode/Objref_TypeCode_Static.h') if params[:gen_typecodes]
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
         check_idl_type(node.idltype)
       end
 
@@ -103,6 +104,7 @@ module IDL
         add_pre_include('tao/AnyTypeCode/TypeCode_Value_Field.h') if params[:gen_typecodes]
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
         return if node.is_abstract? || node.is_local?
+
         node.state_members.each { |m| check_idl_type(m.idltype) }
       end
 
@@ -110,6 +112,7 @@ module IDL
         add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h') if params[:gen_typecodes]
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
         return if node.is_local?
+
         check_idl_type(node.boxed_type)
       end
 
@@ -118,6 +121,7 @@ module IDL
         add_pre_include('tao/AnyTypeCode/TypeCode_Struct_Field.h') if params[:gen_typecodes]
         add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if params[:gen_any_ops]
         return if node.is_local?
+
         # arg template included in P.h
         node.members.each { |m| check_idl_type(m.idltype) }
       end
@@ -128,6 +132,7 @@ module IDL
         add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if params[:gen_any_ops]
         add_post_include('tao/x11/anytypecode/typecode_case_t.h') if params[:gen_any_ops]
         return if node.is_local?
+
         # arg template included in P.h
         node.members.each { |m| check_idl_type(m.idltype) }
       end
@@ -147,6 +152,7 @@ module IDL
 
       def visit_typedef(node)
         return if IDL::Type::Native === node.idltype.resolved_type
+
         add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h') if params[:gen_typecodes]
         # just an alias or a sequence, array or fixed?
         unless IDL::Type::ScopedName === node.idltype

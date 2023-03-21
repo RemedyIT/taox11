@@ -50,6 +50,7 @@ module IDL
                       _inc_dir.blank? || _inc_dir == '.'
               return (@anyop_inc_dir = File.join(_inc_dir, params[:anyop_outputdir]))
             end
+
             @anyop_inc_dir = _inc_dir
           end
         end

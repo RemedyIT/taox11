@@ -119,6 +119,7 @@ module IDL
           return false
         else
           return false if base < self
+
           @_dependencies.each { |dep| base.send(:include, dep) }
           super
           base.extend const_get("ClassMethods") if const_defined?("ClassMethods")
