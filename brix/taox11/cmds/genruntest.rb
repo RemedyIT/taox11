@@ -24,8 +24,8 @@ module BRIX11
       def self.setup(optparser, options)
         options[:genruntest] = OPTIONS.dup
 
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} gen[erate] runner|script [options] [NAME]\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} gen[erate] runner|script [options] [NAME]\n\n" +
                            "       NAME := name to use for script (no extension); default 'run_test'\n\n"
 
         optparser.on('-S', '--server', '=NAME',

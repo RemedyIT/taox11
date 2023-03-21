@@ -24,8 +24,8 @@ module BRIX11
 
       def self.setup(optparser, options)
         options[:genidl] = OPTIONS.dup
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} gen[erate] idl [options] [NAME]\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} gen[erate] idl [options] [NAME]\n\n" +
                            "       NAME := name to use for IDL file; default 'test'\n\n"
 
         optparser.on('-i', '--interface', '=NAME',

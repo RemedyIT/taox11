@@ -54,7 +54,7 @@ module BRIX11
       path_base = File.basename(path)
       if (path_base != path)
         # include paths should always end with '/'
-        ridl_opts[:xincludepaths] << (File.dirname(path)+'/')
+        ridl_opts[:xincludepaths] << (File.dirname(path) + '/')
       end
       # backup current engine (if any)
       cur_engine = Thread.current[:ridl_engine]

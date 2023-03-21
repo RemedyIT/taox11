@@ -25,8 +25,8 @@ module BRIX11
       def self.setup(optparser, options)
         options[:genmpc] = OPTIONS.dup
 
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} gen[erate] mpc [options] [NAME]\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} gen[erate] mpc [options] [NAME]\n\n" +
                            "       NAME := name to use for project (MPC) file; default 'test'\n\n"
 
         optparser.on('-I[FILE]', '--with-idl=[FILE]',

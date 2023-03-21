@@ -31,10 +31,10 @@ module BRIX11
       def self.setup(optparser, options)
         options[:runtest] = OPTIONS.dup
 
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} run test|script [options] [TEST [test-options]]|[-- test-options]\n\n"+
-                           "       TEST := Path to project folder or test script (extension guessed if not supplied).\n"+
-                           "               Default script name = 'run_test.pl'\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} run test|script [options] [TEST [test-options]]|[-- test-options]\n\n" +
+                           "       TEST := Path to project folder or test script (extension guessed if not supplied).\n" +
+                           "               Default script name = 'run_test.pl'\n" +
                            "       (any test-options will be passed unchecked to the script)\n\n"
 
         optparser.on('--program', '=TOOL',
@@ -70,7 +70,7 @@ module BRIX11
           options[:runtest][:runopts][:chdir] = File.dirname(options[:runtest][:test])
           options[:runtest][:test] = File.basename(options[:runtest][:test])
           # attempt to guess extension
-          if _ext = TOOLS.keys.find { |ext| File.file?(File.join(options[:runtest][:runopts][:chdir], options[:runtest][:test]+ext)) }
+          if _ext = TOOLS.keys.find { |ext| File.file?(File.join(options[:runtest][:runopts][:chdir], options[:runtest][:test] + ext)) }
             options[:runtest][:test] += _ext
           end
         end

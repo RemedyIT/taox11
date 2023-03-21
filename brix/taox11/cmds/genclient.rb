@@ -26,8 +26,8 @@ module BRIX11
       def self.setup(optparser, options)
         options[:gencli] = OPTIONS.dup
 
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} gen[erate] cli[ent] [options] [NAME]\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} gen[erate] cli[ent] [options] [NAME]\n\n" +
                            "       NAME := name to use for client main source code file; default 'client'\n\n"
 
         optparser.on('-I[FILE]', '--with-idl=[FILE]',

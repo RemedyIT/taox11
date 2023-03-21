@@ -29,9 +29,9 @@ module BRIX11
       def self.setup(optparser, options)
         options[:gentest] = OPTIONS.dup
 
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} gen[erate] test [options] NAME\n\n"+
-                           "       NAME := Name to use for test (MPC base and folder). If NAME == '.' than\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} gen[erate] test [options] NAME\n\n" +
+                           "       NAME := Name to use for test (MPC base and folder). If NAME == '.' than\n" +
                            "               create project in working dir with default name 'test'.\n\n"
 
         optparser.on('-S', '--server', '=NAME',

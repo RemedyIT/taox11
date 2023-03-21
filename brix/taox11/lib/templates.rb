@@ -84,14 +84,14 @@ module BRIX11
                     Template.new(path, tpl_reg[:dir], tpl_reg[:root], @lastdir, @lastroot)
                   else
                     # start continued search from current location
-                    Template.new(path, dir, @root_idx+1, dir, @root_idx)
+                    Template.new(path, dir, @root_idx + 1, dir, @root_idx)
                   end
       raise "Fatal: cannot find BRIX11 template #{path} super" unless super_tpl.exists?
       super_tpl
     end
 
     def at_end?
-      @dir=='.' || @dir.empty?
+      @dir == '.' || @dir.empty?
     end
 
     private
@@ -101,7 +101,7 @@ module BRIX11
     end
 
     def descend
-      @dir = File.dirname(@dir) unless @dir=='.' || @dir.empty?
+      @dir = File.dirname(@dir) unless @dir == '.' || @dir.empty?
       ! at_end?
     end
 
@@ -145,11 +145,11 @@ module BRIX11
       # from last found path (or requested path if this is the first match)
       # in last found root till the current matched path in current root
       tpl_dir = @lastdir || File.dirname(@path)
-      tpl_root = @lastroot+1
+      tpl_root = @lastroot + 1
       tpl_derived_key = @lastdir ? "#{@lastroot}:#{File.join(@lastdir, name)}" : nil
       begin
         max_tpl_root = if dir == tpl_dir
-                         @root_idx+1
+                         @root_idx + 1
                        else
                          Template.template_path.size
                        end

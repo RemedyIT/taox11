@@ -27,8 +27,8 @@ module BRIX11
       def self.setup(optparser, options)
         options[:gensrv] = OPTIONS.dup
 
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} gen[erate] server|srv [options] [NAME]\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} gen[erate] server|srv [options] [NAME]\n\n" +
                            "       NAME := name to use for server main source code file; default 'server'\n\n"
 
         optparser.on('-I[FILE]', '--with-idl=[FILE]',
@@ -118,7 +118,7 @@ module BRIX11
           @options[:impl] || []
         end
         def servant_impl_name
-          @options[:svt] == true ? "#{module_names.join('::')}::#{interface_name}_impl" : @options[:svt]|| ''
+          @options[:svt] == true ? "#{module_names.join('::')}::#{interface_name}_impl" : @options[:svt] || ''
         end
         def servant_impl_obj
           @options[:svt] ? "#{interface_name.downcase}_svt" : ''

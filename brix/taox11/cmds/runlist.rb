@@ -24,8 +24,8 @@ module BRIX11
       def self.setup(optparser, options)
         options[:runlist] = OPTIONS.dup
 
-        optparser.banner = "#{DESC}\n\n"+
-            "Usage: #{options[:script_name]} run list [options] [-- test-options]\n"+
+        optparser.banner = "#{DESC}\n\n" +
+            "Usage: #{options[:script_name]} run list [options] [-- test-options]\n" +
             "       (any test-options following '--' will be passed on unchecked)\n\n"
 
         optparser.on('-l', '--list', '=PATH',
