@@ -20,7 +20,6 @@ module IDL
       module TemplateMap
         def self.included(base)
           base.singleton_class.class_eval do
-
             def visitor_type_id(id = nil)
               @visitor_type_id = id.to_sym unless id.blank?
               @visitor_type_id
@@ -41,7 +40,6 @@ module IDL
             def optional_template(id)
               template_optionals << id.to_sym unless template_optionals.include?(id.to_sym)
             end
-
           end
         end
       end # TemplateMap

@@ -326,7 +326,6 @@ module IDL
           end
           true
         end
-
       end
 
       def print_version_with_facets

@@ -223,7 +223,6 @@ module IDL
     ## Configure C++11 backend
     #
     Backend.configure('c++11', File.dirname(__FILE__), TITLE, COPYRIGHT, IDL::Cxx11.taox11_version) do |becfg|
-
       # load base backend framework
       becfg.add_backend('base')
 
@@ -307,7 +306,6 @@ module IDL
         end
 
         IDL::Cxx11.add_extended_options(optlist, ridl_params)
-
       end # becfg.setup
 
       # process input / generate code
@@ -316,7 +314,6 @@ module IDL
       #   in options - initialized option hash
       #
       becfg.on_process_input do |parser, options|
-
         # setup output filenames
         IDL::Cxx11.setup_output(options)
 
@@ -372,7 +369,6 @@ module IDL
           IDL::Cxx11.gen_impl_export(options)
         end
       end # becfg.on_process_input
-
     end # Backend.configure
 
     def self.setup_output(options)

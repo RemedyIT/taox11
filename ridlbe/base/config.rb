@@ -43,11 +43,9 @@ module IDL
     ## Configure backend
     #
     Backend.configure('base', File.dirname(__FILE__), TITLE, COPYRIGHT, Base.taox11_version) do |becfg|
-
       # setup backend option handling
       #
       becfg.on_setup do |optlist, ridl_params|
-
         optlist.for_switch '--add-templates=PATH', type: String,
              description: [
                'Add a template library basepath to be evaluated before backend templates.'
@@ -66,7 +64,6 @@ module IDL
       becfg.on_process_input do |parser, options|
         # do nothing
       end # becfg.on_process_input
-
     end # Backend.configure
   end # Base
 end # IDL
