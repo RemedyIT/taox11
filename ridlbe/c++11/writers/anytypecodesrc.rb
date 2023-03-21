@@ -226,4 +226,3 @@ module IDL
     end
   end # Cxx11
 end # IDL
-
