@@ -72,6 +72,7 @@ module BRIX11
         load_template(tpl_full_path)
       end
       raise "Fatal: cannot find BRIX11 template #{path}" unless tpl
+
       tpl
     end
 
@@ -85,6 +86,7 @@ module BRIX11
                     Template.new(path, dir, @root_idx + 1, dir, @root_idx)
                   end
       raise "Fatal: cannot find BRIX11 template #{path} super" unless super_tpl.exists?
+
       super_tpl
     end
 
@@ -158,6 +160,7 @@ module BRIX11
                                      tpl_derived_key)      # previously found (derived) template (if any)
         end
         break if dir == tpl_dir
+
         tpl_dir = File.dirname(tpl_dir)
         tpl_root = 0
       end until tpl_dir == '.' || tpl_dir.empty?
