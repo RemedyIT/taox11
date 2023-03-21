@@ -20,13 +20,13 @@ module IDL
           @facet_klass = facet_klass
         end
 
-      private
+        private
 
         def facet_config
           @facet_klass.__send__(:config)
         end
 
-      public
+        public
 
         def depends_on(*args)
           deplist = args.inject([]) do |l, a|
@@ -208,7 +208,7 @@ module IDL
         @orderedset
       end
 
-    private
+      private
 
       def find_ordered_pos(fct)
         # start with all possible positions in the ordered set

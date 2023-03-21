@@ -365,7 +365,7 @@ module IDL
          visitor(InterfaceVisitor).visit_object_var(node)
       end
 
-    private
+      private
 
       def enter_scope(node)
         printiln('// generated from StubProxyVarOutWriter#enter_scope')
@@ -423,7 +423,7 @@ module IDL
         super
       end
 
-    private
+      private
 
       def enter_scope(node)
         println
@@ -438,7 +438,7 @@ module IDL
         printiln("} // namespace #{node.cxxname}")
       end
 
-    public
+      public
 
       def enter_module(node)
         enter_scope(node)

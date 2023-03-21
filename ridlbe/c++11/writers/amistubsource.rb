@@ -657,7 +657,7 @@ module IDL
         super
       end
 
-    private
+      private
 
       def enter_scope(node)
         println
@@ -672,7 +672,7 @@ module IDL
         printiln("} // namespace #{node.cxxname}")
       end
 
-    public
+      public
 
       def enter_module(node)
         enter_scope(node)
@@ -872,7 +872,7 @@ module IDL
         check_idl_type(node.idltype)
       end
 
-     private
+      private
 
        # by keeping track of nodes for which we generated an SArg trait we avoid
        # generating multiple code blocks for the same type
