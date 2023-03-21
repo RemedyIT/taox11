@@ -315,15 +315,15 @@ module IDL
     end
 
     class Char
-      Printables = 0x20...0x7f.freeze
-      Specials = ['\\', '\''].freeze
+      PRINTABLES = 0x20...0x7f.freeze
+      SPECIALS = ['\\', '\''].freeze
       def cxx_arg_type(_scope = nil)
         'ACE_InputCDR::to_char'
       end
 
       def value_to_s(v, _scope = nil)
-        if v === Printables
-          if Specials.include?(c = v.chr)
+        if PRINTABLES.include?(v)
+          if SPECIALS.include?(c = v.chr)
             "'\\#{c}'"
           else
             "'#{c}'"
