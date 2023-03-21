@@ -53,14 +53,14 @@ module IDL
       def needs_ami_generation?(node)
           (params[:ami] && node.has_ami_annotation? && !node.is_local? && !node.is_abstract?) ||
           (params[:ami_bc] == true && !node.is_local? && !node.is_abstract?)
-       end
+      end
     end
 
     class AmiStubSourceBaseWriter < AmiBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
         self.template_root = File.join('cli', 'src', 'ami')
-       end
+      end
     end
 
     class AmiStubSourceWriter < AmiStubSourceBaseWriter
@@ -177,7 +177,7 @@ module IDL
           v.interface(intf_visitor)
           v.visit_attribute(node)
         end
-     end
+      end
 
       def visit_includes(parser)
         writer(AmiStubSourceIncludeWriter,

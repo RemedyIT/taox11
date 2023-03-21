@@ -323,7 +323,7 @@ module IDL
 
       def enter_module(node)
          enter_scope(node)
-       end
+      end
 
        def leave_module(node)
          leave_scope(node)

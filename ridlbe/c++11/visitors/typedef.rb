@@ -110,7 +110,7 @@ module IDL
             @handler_scoped_cxxname = ((node.enclosure && !node.enclosure.scopes.empty?) ? node.enclosure.scoped_cxxname + '::' : '') + "AMI_#{node.cxxname}Handler"
           end
           @handler_scoped_cxxname
-        end
+      end
 
       def is_standard_type?
         false

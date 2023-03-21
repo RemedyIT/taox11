@@ -15,7 +15,7 @@ module IDL
     module AmiNames
       def amic_cxxname
          @cxxname ||= node.cxxname + 'AmiC'
-       end
+      end
 
       def handler_prefix
         prefix = 'AMI_'

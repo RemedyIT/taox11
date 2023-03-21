@@ -401,7 +401,7 @@ module IDL
 
       def os_fmt
         ' std::hex << "hex:" << (int)%s << std::dec'
-       end
+      end
     end
 
     class String

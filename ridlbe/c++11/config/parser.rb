@@ -160,7 +160,7 @@ module IDL
         match_members { |m|
             member_is_ami_candidate(m)
         }
-      end
+     end
 
       private
 

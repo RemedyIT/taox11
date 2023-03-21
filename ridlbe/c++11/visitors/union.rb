@@ -100,7 +100,7 @@ module IDL
         node.switchtype.is_standard_type? ?
             "TAO_CORBA::#{node.switchtype.cxx_typecode}" :
             "__tao::#{node.switchtype.scoped_cxx_typecode}"
-       end
+      end
 
       def scoped_switch_in_cxxtype
         node.switchtype.cxx_in_type

@@ -260,7 +260,7 @@ module IDL
         return unless needs_ami_generation?(node)
 
           add_include('tao/x11/object.h')
-       end
+      end
 
       def visit_operation(node)
         check_idl_type(node.idltype)
