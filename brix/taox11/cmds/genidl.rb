@@ -68,12 +68,15 @@ module BRIX11
         def project_name
           @options[:name]
         end
+
         def module_names
           @options[:modules]
         end
+
         def interface_name
           @options[:interface]
         end
+
         def has_shutdown?
           @options[:shutdown]
         end

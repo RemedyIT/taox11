@@ -119,6 +119,7 @@ module BRIX11
           @brix11_prop ||= ImplHelper._prop
           "#{cxxname}#{@brix11_prop.servant_pfx}"
         end
+
         def scoped_impl_cxxname
           @brix11_prop ||= ImplHelper._prop
           "#{scoped_cxxname}#{@brix11_prop.servant_pfx}"

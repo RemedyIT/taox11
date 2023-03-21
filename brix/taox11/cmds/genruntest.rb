@@ -60,9 +60,11 @@ module BRIX11
         def test_name
           @options[:name]
         end
+
         def server_name
           @options[:server]
         end
+
         def client_name
           @options[:client]
         end

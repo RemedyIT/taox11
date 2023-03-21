@@ -80,24 +80,31 @@ module BRIX11
         def client_name
           @options[:name]
         end
+
         def idl_names
           @options[:idl] || []
         end
+
         def has_module?
           !@options[:modules].empty?
         end
+
         def module_names
           @options[:modules]
         end
+
         def interface_name
           @options[:interface]
         end
+
         def interface_obj
           "#{@options[:interface].downcase}_obj"
         end
+
         def scoped_interface
           module_names.empty? ? interface_name : "#{module_names.join('::')}::#{interface_name}"
         end
+
         def has_shutdown?
           @options[:shutdown]
         end

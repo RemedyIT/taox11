@@ -88,21 +88,27 @@ module BRIX11
         def project_name
           @options[:name]
         end
+
         def gen_idl?
           @options[:idl] != false
         end
+
         def idl_names
           @options[:idl] == true ? [project_name] : (@options[:idl] || [])
         end
+
         def gen_client?
           @options[:client]
         end
+
         def client_files
           @options[:client] == true ? ['client'] : @options[:client]
         end
+
         def gen_server?
           @options[:server]
         end
+
         def server_files
           @options[:server]
         end

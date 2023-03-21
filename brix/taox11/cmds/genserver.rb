@@ -93,33 +93,43 @@ module BRIX11
         def server_name
           @options[:name]
         end
+
         def idl_names
           @options[:idl] || []
         end
+
         def has_module?
           !@options[:modules].empty?
         end
+
         def module_names
           @options[:modules]
         end
+
         def interface_name
           @options[:interface]
         end
+
         def interface_obj
           "#{interface_name.downcase}_obj"
         end
+
         def scoped_interface
           module_names.empty? ? interface_name : "#{module_names.join('::')}::#{interface_name}"
         end
+
         def has_servant_implementation?
           @options[:svt]
         end
+
         def implementation_names
           @options[:impl] || []
         end
+
         def servant_impl_name
           @options[:svt] == true ? "#{module_names.join('::')}::#{interface_name}_impl" : @options[:svt] || ''
         end
+
         def servant_impl_obj
           @options[:svt] ? "#{interface_name.downcase}_svt" : ''
         end
