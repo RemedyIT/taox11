@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class GenerateIDL < Command::Base
 
       DESC = 'Generate IDL definitions for CORBA project.'.freeze
@@ -84,6 +83,5 @@ module BRIX11
 
       Command.register('generate:idl', DESC, TAOX11::GenerateIDL)
     end # GenerateIDL
-
   end # Common
 end # BRIX11

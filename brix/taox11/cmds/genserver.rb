@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class GenerateServer < Command::Base
 
       DESC = 'Generate C++ source code for CORBA server main.'.freeze
@@ -137,6 +136,5 @@ module BRIX11
 
       Command.register('generate:server|srv', DESC, TAOX11::GenerateServer)
     end # GenerateServer
-
   end # Common
 end # BRIX11

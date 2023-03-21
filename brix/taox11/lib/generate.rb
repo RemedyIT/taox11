@@ -12,7 +12,6 @@ require 'brix/taox11/lib/eridl'
 require 'brix/taox11/lib/templates'
 
 module BRIX11
-
   GenFile = IDL::GenFile
 
   # reopen Command module
@@ -28,7 +27,6 @@ module BRIX11
   end
 
   module Generate
-
     class Visitor < IDL::Base::Visitor
 
       def initialize(output, properties, writer)
@@ -85,7 +83,5 @@ module BRIX11
       end
 
     end
-
   end # Generate
-
 end # BRIX11

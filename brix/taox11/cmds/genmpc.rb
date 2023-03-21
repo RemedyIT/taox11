@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class GenerateMPC < Command::Base
 
       DESC = 'Generate MPC project file for CORBA project.'.freeze
@@ -116,6 +115,5 @@ module BRIX11
 
       Command.register('generate:mpc', DESC, TAOX11::GenerateMPC)
     end # GenerateMPC
-
   end # Common
 end # BRIX11

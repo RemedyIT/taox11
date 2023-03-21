@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class GenerateClient < Command::Base
 
       DESC = 'Generate C++ source code for CORBA client main.'.freeze
@@ -112,6 +111,5 @@ module BRIX11
 
       Command.register('generate:client', DESC, TAOX11::GenerateClient)
     end # GenerateClient
-
   end # Common
 end # BRIX11

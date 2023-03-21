@@ -12,9 +12,7 @@ require 'ridl/runner'
 require 'ridlbe/base/require'
 
 module BRIX11
-
   module ERIDL
-
     self.singleton_class.class_eval do
       private
 
@@ -68,7 +66,5 @@ module BRIX11
         Thread.current[:ridl_engine] = cur_engine
       end
    end
-
   end # ERIDL
-
 end # BRIX11

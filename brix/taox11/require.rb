@@ -8,9 +8,7 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module TAOX11
-
     ROOT = File.dirname(__FILE__)
     TITLE = 'TAOX11'.freeze
     DESC = 'BRIX11 TAOX11 brix collection'.freeze
@@ -93,7 +91,5 @@ module BRIX11
         Common::GenerateDocumentation::OPTIONS[:doxygen_config] = '${TAOX11_ROOT}/etc/taox11.doxygen'
       end
     end
-
   end
-
 end

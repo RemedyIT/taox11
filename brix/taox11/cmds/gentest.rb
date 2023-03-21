@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class GenerateTest < Command::Base
 
       DESC = 'Generate a CORBA (test) project for TAOX11.'.freeze
@@ -117,6 +116,5 @@ module BRIX11
 
       Command.register('generate:test|project|prj', DESC, TAOX11::GenerateTest)
     end # GenerateTest
-
   end # Common
 end # BRIX11

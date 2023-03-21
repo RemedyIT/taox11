@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class RunList < Command::Base
 
       DESC = 'Run an auto_run_test regression test list.'.freeze
@@ -71,6 +70,5 @@ module BRIX11
 
       Command.register('run:list', DESC, TAOX11::RunList)
     end # RunList
-
   end # Common
 end # BRIX11

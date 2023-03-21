@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class GenerateRunTest < Command::Base
 
       DESC = 'Generate test runner script for CORBA project.'.freeze
@@ -72,6 +71,5 @@ module BRIX11
 
       Command.register('generate:runner|script', DESC, TAOX11::GenerateRunTest)
     end # GenerateTest
-
   end # Common
 end # BRIX11

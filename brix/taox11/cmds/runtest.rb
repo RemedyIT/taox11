@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class RunTest < Command::Base
 
       DESC = 'Run test runner script for project.'.freeze
@@ -95,6 +94,5 @@ module BRIX11
 
       Command.register('run:test|script', DESC, TAOX11::RunTest)
     end # RunTest
-
   end # Common
 end # BRIX11

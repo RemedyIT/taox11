@@ -8,7 +8,6 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   class Template
 
     class << self
@@ -171,5 +170,4 @@ module BRIX11
     end
 
   end # Template
-
 end # BRIX11
