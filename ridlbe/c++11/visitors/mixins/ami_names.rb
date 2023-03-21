@@ -27,7 +27,7 @@ module IDL
           again = false
           node.enclosure.match_members do |_ident|
             if _ident.cxxname == (prefix + node.cxxname + postfix)
-              prefix = prefix + 'AMI_'
+              prefix += 'AMI_'
               again = true
             end
           end
