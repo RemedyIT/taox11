@@ -104,7 +104,7 @@ module IDL
           again = false
           node.enclosure.attributes.each do |_attr|
             if _attr.cxxname == (prefix + get_att_prefix + node.cxxname)
-              prefix= prefix+'ami_'
+              prefix = prefix + 'ami_'
               again = true
             end
           end

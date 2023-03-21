@@ -18,9 +18,9 @@ module IDL
         when Expression::Operation
           operation_to_s(exp)
         when Expression::ScopedName
-          (scope && (scope == exp.node.enclosure)) ? exp.node.cxxname : '::'+exp.node.scoped_cxxname
+          (scope && (scope == exp.node.enclosure)) ? exp.node.cxxname : '::' + exp.node.scoped_cxxname
         when Expression::Enumerator
-          ((scope && (scope == exp.node.enclosure)) ? exp.node.enum.cxxname : '::'+exp.node.enum.scoped_cxxname) +'::'+exp.node.cxxname
+          ((scope && (scope == exp.node.enclosure)) ? exp.node.enum.cxxname : '::' + exp.node.enum.scoped_cxxname) + '::' + exp.node.cxxname
         else
           raise "unknown expression type: #{exp.class.name}"
         end

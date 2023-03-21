@@ -107,7 +107,7 @@ module IDL
 
       def handler_scoped_cxxname
           unless @handler_scoped_cxxname
-            @handler_scoped_cxxname = ((node.enclosure && !node.enclosure.scopes.empty?) ? node.enclosure.scoped_cxxname+'::' : '')+"AMI_#{node.cxxname}Handler"
+            @handler_scoped_cxxname = ((node.enclosure && !node.enclosure.scopes.empty?) ? node.enclosure.scoped_cxxname + '::' : '') + "AMI_#{node.cxxname}Handler"
           end
           @handler_scoped_cxxname
         end

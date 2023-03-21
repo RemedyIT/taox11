@@ -90,7 +90,7 @@ module IDL
             ###
             # Overload standard #client_proxy for this visitor instance
             def client_proxy
-              File.basename(params[:idlfile], params[:idlext])+params[:ami_pfx]+params[:stub_pfx]+params[:proxy_pfx]+'.h'
+              File.basename(params[:idlfile], params[:idlext]) + params[:ami_pfx] + params[:stub_pfx] + params[:proxy_pfx] + '.h'
             end
           end
           v.visit

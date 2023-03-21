@@ -14,7 +14,7 @@ module IDL
     # methods and properties.
     module AmiNames
       def amic_cxxname
-         @cxxname ||= node.cxxname+'AmiC'
+         @cxxname ||= node.cxxname + 'AmiC'
        end
 
       def handler_prefix
@@ -27,7 +27,7 @@ module IDL
           again = false
           node.enclosure.match_members do |_ident|
             if _ident.cxxname == (prefix + node.cxxname + postfix)
-              prefix= prefix+'AMI_'
+              prefix = prefix + 'AMI_'
               again = true
             end
           end
@@ -36,76 +36,76 @@ module IDL
       end
 
       def handler_cxxname
-        @cxxname ||= (handler_prefix+node.cxxname+'Handler')
+        @cxxname ||= (handler_prefix + node.cxxname + 'Handler')
       end
 
       def amic_scoped_cxxname
-        @amic_scoped_cxxname ||= (((node.enclosure && !node.enclosure.scopes.empty?) ?node.enclosure.scoped_cxxname+'::' : '')+node.cxxname+'AmiC')
+        @amic_scoped_cxxname ||= (((node.enclosure && !node.enclosure.scopes.empty?) ? node.enclosure.scoped_cxxname + '::' : '') + node.cxxname + 'AmiC')
       end
 
       def amic_scoped_cxxtype
-        '::'+amic_scoped_cxxname
+        '::' + amic_scoped_cxxname
       end
 
       def amic_scoped_cxx_in_type
-         @amic_scoped_cxx_in_type ||= ('CORBA::amic_traits<'+scoped_cxxtype+'>::in_type')
+         @amic_scoped_cxx_in_type ||= ('CORBA::amic_traits<' + scoped_cxxtype + '>::in_type')
       end
 
       def handler_scoped_cxxname
-        @handler_scoped_cxxname ||= (((node.enclosure && !node.enclosure.scopes.empty?) ?node.enclosure.scoped_cxxname+'::' : '')+handler_cxxname)
+        @handler_scoped_cxxname ||= (((node.enclosure && !node.enclosure.scopes.empty?) ? node.enclosure.scoped_cxxname + '::' : '') + handler_cxxname)
       end
 
       def handler_scoped_cxxtype
-        @handler_scoped_cxxtype ||= (((node.enclosure && !node.enclosure.scopes.empty?) ?node.enclosure.scoped_cxxname+'::' : '')+
-                                     handler_prefix+cxxtype+'Handler')
+        @handler_scoped_cxxtype ||= (((node.enclosure && !node.enclosure.scopes.empty?) ? node.enclosure.scoped_cxxname + '::' : '') +
+                                     handler_prefix + cxxtype + 'Handler')
       end
 
       def handler_scoped_cxx_in_type
-         @handler_scoped_cxx_in_type ||= ('IDL::traits<'+handler_scoped_cxxname+'>::ref_type')
+         @handler_scoped_cxx_in_type ||= ('IDL::traits<' + handler_scoped_cxxname + '>::ref_type')
       end
 
       def handler_scoped_cxx_out_type
-         @handler_scoped_cxx_out_type ||= ('IDL::traits<'+handler_scoped_cxxname+'>::ref_type&')
+         @handler_scoped_cxx_out_type ||= ('IDL::traits<' + handler_scoped_cxxname + '>::ref_type&')
       end
 
       def handler_scoped_cxx_move_type
-        @handler_scoped_cxx_move_type ||= ('IDL::traits<'+handler_scoped_cxxname+'>::ref_type&&')
+        @handler_scoped_cxx_move_type ||= ('IDL::traits<' + handler_scoped_cxxname + '>::ref_type&&')
       end
 
       def handler_skel_cxxname
-        @handler_skel_cxxname ||= handler_prefix+node.skel_cxxname+'Handler'
+        @handler_skel_cxxname ||= handler_prefix + node.skel_cxxname + 'Handler'
       end
 
       def handler_proxy_cxxname
-        @handler_proxy_cxxname ||= handler_cxxname+'_proxy'
+        @handler_proxy_cxxname ||= handler_cxxname + '_proxy'
       end
 
       def handler_scoped_proxy_cxxname
-         @handler_scoped_proxy_cxxname ||= ((node.enclosure && !node.enclosure.scopes.empty?) ? node.enclosure.scoped_cxxname+'::' : '')+handler_cxxname+'_proxy'
+         @handler_scoped_proxy_cxxname ||= ((node.enclosure && !node.enclosure.scopes.empty?) ? node.enclosure.scoped_cxxname + '::' : '') + handler_cxxname + '_proxy'
       end
 
       def handler_scoped_proxy_cxxtype
-        '::'+handler_scoped_proxy_cxxname
+        '::' + handler_scoped_proxy_cxxname
       end
 
       def handler_scoped_skel_cxxname
-        @handler_scoped_skel_cxxname ||= (node.scoped_skel_cxxnamespace+'::'+handler_cxxname)
+        @handler_scoped_skel_cxxname ||= (node.scoped_skel_cxxnamespace + '::' + handler_cxxname)
       end
 
       def handler_scoped_skel_cxxtype
-        '::'+handler_scoped_skel_cxxname
+        '::' + handler_scoped_skel_cxxname
       end
 
       def handler_srvproxy_cxxname
-        @handler_srvproxy_cxxname ||= (handler_cxxname+'_srvproxy')
+        @handler_srvproxy_cxxname ||= (handler_cxxname + '_srvproxy')
       end
 
       def handler_scoped_srvproxy_cxxname
-        @handler_scoped_srvproxy_cxxname ||= (scoped_skel_cxxnamespace+'::'+handler_srvproxy_cxxname)
+        @handler_scoped_srvproxy_cxxname ||= (scoped_skel_cxxnamespace + '::' + handler_srvproxy_cxxname)
       end
 
       def handler_scoped_srvproxy_cxxtype
-        '::'+handler_scoped_srvproxy_cxxname
+        '::' + handler_scoped_srvproxy_cxxname
       end
 
       def handler_scoped_var_name

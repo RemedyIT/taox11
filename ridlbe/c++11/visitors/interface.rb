@@ -205,11 +205,11 @@ module IDL
       end
 
       def scoped_skel_cxxtype
-        '::'+node.scoped_skel_cxxname
+        '::' + node.scoped_skel_cxxname
       end
 
       def scoped_tie_cxxtype
-        '::'+node.scoped_tie_cxxname
+        '::' + node.scoped_tie_cxxname
       end
 
       def proxy_cxxname
@@ -233,7 +233,7 @@ module IDL
       end
 
       def scoped_srvproxy_cxxtype
-        '::'+node.scoped_srvproxy_cxxname
+        '::' + node.scoped_srvproxy_cxxname
       end
 
       def scoped_var_name

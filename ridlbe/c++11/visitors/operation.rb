@@ -134,7 +134,7 @@ module IDL
           again = false
           node.enclosure.operations.each {|_op|
           if _op.cxxname == (prefix + node.cxxname)
-            prefix= prefix+'ami_'
+            prefix = prefix + 'ami_'
             again = true
           end
         }

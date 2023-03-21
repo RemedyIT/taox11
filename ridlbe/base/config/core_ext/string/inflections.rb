@@ -111,7 +111,7 @@ module RIDL
 
       def demodulize!
         if i = self.rindex('::')
-          self.slice!(0, i+2)
+          self.slice!(0, i + 2)
         end
         self
       end

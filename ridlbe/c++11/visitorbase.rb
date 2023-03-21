@@ -22,11 +22,11 @@ module IDL
       end
 
       def client_header
-        File.basename(params[:output] || (File.basename(params[:idlfile], params[:idlext])+params[:stub_pfx]+'.h'))
+        File.basename(params[:output] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + '.h'))
       end
 
       def client_inline
-        File.basename(params[:output_inl] || (File.basename(params[:idlfile], params[:idlext])+params[:stub_pfx]+'.inl'))
+        File.basename(params[:output_inl] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + '.inl'))
       end
 
       def no_client_inline?
@@ -34,7 +34,7 @@ module IDL
       end
 
       def client_proxy
-        File.basename(params[:output_prx] || (File.basename(params[:idlfile], params[:idlext])+params[:stub_pfx]+params[:proxy_pfx]+'.h'))
+        File.basename(params[:output_prx] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + params[:proxy_pfx] + '.h'))
       end
 
       def no_client_proxy?
@@ -42,15 +42,15 @@ module IDL
       end
 
       def client_source
-        File.basename(params[:output_src] || (File.basename(params[:idlfile], params[:idlext])+params[:stub_pfx]+'.cpp'))
+        File.basename(params[:output_src] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + '.cpp'))
       end
 
       def servant_header
-        File.basename(params[:srv_output_hdr] || (File.basename(params[:idlfile], params[:idlext])+params[:srv_pfx]+'.h'))
+        File.basename(params[:srv_output_hdr] || (File.basename(params[:idlfile], params[:idlext]) + params[:srv_pfx] + '.h'))
       end
 
       def servant_proxy
-        File.basename(params[:srv_output_prx] || (File.basename(params[:idlfile], params[:idlext])+params[:srv_pfx]+params[:proxy_pfx]+'.h'))
+        File.basename(params[:srv_output_prx] || (File.basename(params[:idlfile], params[:idlext]) + params[:srv_pfx] + params[:proxy_pfx] + '.h'))
       end
 
       def no_servant_source?
@@ -58,7 +58,7 @@ module IDL
       end
 
       def servant_source
-        File.basename(params[:srv_output_src] || (File.basename(params[:idlfile], params[:idlext])+params[:srv_pfx]+'.cpp'))
+        File.basename(params[:srv_output_src] || (File.basename(params[:idlfile], params[:idlext]) + params[:srv_pfx] + '.cpp'))
       end
 
       def generate_servant_implementation?
@@ -66,11 +66,11 @@ module IDL
       end
 
       def implementation_header
-        File.basename(params[:impl_output] || (File.basename(params[:idlfile], params[:idlext])+params[:impl_pfx]+'.h'))
+        File.basename(params[:impl_output] || (File.basename(params[:idlfile], params[:idlext]) + params[:impl_pfx] + '.h'))
       end
 
       def implementation_source
-        File.basename(params[:impl_output_src] || (File.basename(params[:idlfile], params[:idlext])+params[:impl_pfx]+'.cpp'))
+        File.basename(params[:impl_output_src] || (File.basename(params[:idlfile], params[:idlext]) + params[:impl_pfx] + '.cpp'))
       end
 
       def export_include?
@@ -82,7 +82,7 @@ module IDL
       end
 
       def export_macro
-        params[:export_macro] ? params[:export_macro]+' ' : nil
+        params[:export_macro] ? params[:export_macro] + ' ' : nil
       end
 
       def stub_export_include?
@@ -94,7 +94,7 @@ module IDL
       end
 
       def stub_export_macro
-        params[:stub_export_macro] ? params[:stub_export_macro]+' ' : self.export_macro
+        params[:stub_export_macro] ? params[:stub_export_macro] + ' ' : self.export_macro
       end
 
       def generate_ami_support?
@@ -114,7 +114,7 @@ module IDL
       end
 
       def amic_export_macro
-        params[:amic_export_macro] ? (params[:amic_export_macro]+' ') : self.stub_export_macro
+        params[:amic_export_macro] ? (params[:amic_export_macro] + ' ') : self.stub_export_macro
       end
 
       def implementation_export_include?
@@ -126,7 +126,7 @@ module IDL
       end
 
       def implementation_export_macro
-        params[:impl_export_macro] ? (params[:impl_export_macro]+' ') : self.export_macro
+        params[:impl_export_macro] ? (params[:impl_export_macro] + ' ') : self.export_macro
       end
 
       def anytypecode_export_include?
@@ -138,7 +138,7 @@ module IDL
       end
 
       def anytypecode_export_macro
-        params[:anytypecode_export_macro] ? params[:anytypecode_export_macro]+' ' : self.stub_export_macro
+        params[:anytypecode_export_macro] ? params[:anytypecode_export_macro] + ' ' : self.stub_export_macro
       end
 
       def skel_export_include?
@@ -150,7 +150,7 @@ module IDL
       end
 
       def skel_export_macro
-        params[:skel_export_macro] ? params[:skel_export_macro]+' ' : self.export_macro
+        params[:skel_export_macro] ? params[:skel_export_macro] + ' ' : self.export_macro
       end
 
       def pre_include?

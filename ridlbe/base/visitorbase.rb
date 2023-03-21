@@ -72,7 +72,7 @@ module IDL
         template_prefix.gsub!(/Visitor$/, '')
         template_prefix.underscore!
         subclass.send(:include, TemplateMap)
-        subclass.module_eval <<-EOT, __FILE__, __LINE__+1
+        subclass.module_eval <<-EOT, __FILE__, __LINE__ + 1
           protected
           def resolve_template(sym)
             IDL.log(3, "#{subclass.name}: resolving template \#{sym}")
@@ -229,7 +229,7 @@ module IDL
         # only match regular visit_ methods (no ?,!,= decorations)
         if VISIT_METHOD_RE =~ method
           IDL.log(3, "VisitorBase: captured call to #{method}")
-          Kernel.raise ArgumentError, "Incorrect number of arguments; #{args.size} for 0 - 1" if args.size>1
+          Kernel.raise ArgumentError, "Incorrect number of arguments; #{args.size} for 0 - 1" if args.size > 1
           sym = ::Regexp.last_match(1)
           tpl, tpl_bases = resolve_template(sym)
           Kernel.raise "Fatal: cannot resolve RIDL template #{::Regexp.last_match(1)}" unless tpl || optional_template?(sym)
@@ -419,7 +419,7 @@ module IDL
         # only match regular visit_ methods (no ?,!,= decorations)
         if Visitor::VISIT_METHOD_RE =~ method
           IDL.log(3, "NodeVisitorMethods: captured call to #{method}")
-          Kernel.raise ArgumentError, "Incorrect number of arguments; #{args.size} for 0 - 2" if args.size>2
+          Kernel.raise ArgumentError, "Incorrect number of arguments; #{args.size} for 0 - 2" if args.size > 2
           node, extra_props = *args
           if node.is_a?(Hash)
             Kernel.raise ArgumentError, 'Invalid argument following extra_props Hash' if extra_props

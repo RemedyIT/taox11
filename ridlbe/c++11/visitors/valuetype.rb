@@ -176,7 +176,7 @@ module IDL
       end
 
       def scoped_obv_cxxtype
-        '::'+node.scoped_obv_cxxname
+        '::' + node.scoped_obv_cxxname
       end
 
       def factory_cxxname
@@ -192,7 +192,7 @@ module IDL
       end
 
       def scoped_factory_cxx_type
-        '::'+node.scoped_factory_cxxname
+        '::' + node.scoped_factory_cxxname
       end
 
       def scoped_factory_traits_type
@@ -208,7 +208,7 @@ module IDL
       end
 
       def scoped_skel_cxxtype
-        '::'+node.scoped_skel_cxxname
+        '::' + node.scoped_skel_cxxname
       end
 
       # template mapping

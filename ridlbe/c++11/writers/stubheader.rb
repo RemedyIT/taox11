@@ -419,14 +419,14 @@ module IDL
         when IDL::Type::Fixed
           add_include('tao/x11/fixed_t.h')
         when IDL::Type::Sequence
-          add_include('tao/x11/bounded_vector_t.h') if idl_type.size.to_i>0
-          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i>0
+          add_include('tao/x11/bounded_vector_t.h') if idl_type.size.to_i > 0
+          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i > 0
           check_idl_type(idl_type.basetype)
         when IDL::Type::Array
           check_idl_type(idl_type.basetype)
         when IDL::Type::String, IDL::Type::WString
-          add_include('tao/x11/bounded_string_t.h') if idl_type.size.to_i>0
-          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i>0
+          add_include('tao/x11/bounded_string_t.h') if idl_type.size.to_i > 0
+          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i > 0
         end
       end
 
@@ -531,7 +531,7 @@ module IDL
         when IDL::Type::Array
           visitor(ArrayVisitor).visit_idl_traits(node)
         when IDL::Type::String, IDL::Type::WString
-          visitor(StringVisitor).visit_idl_traits(node) if idl_type.size.to_i>0 # only for bounded strings
+          visitor(StringVisitor).visit_idl_traits(node) if idl_type.size.to_i > 0 # only for bounded strings
         when IDL::Type::Fixed
           visitor(FixedVisitor).visit_idl_traits(node)
         end

@@ -23,7 +23,7 @@ module IDL
       def print(str);       @os << str; end
       def println(str='');  @os << str << "\n"; end
       def printi(str='');   @os << indent << str; end
-      def printiln(str=''); @os << indent  << str << "\n"; end
+      def printiln(str=''); @os << indent << str << "\n"; end
 
       def indent()
         @indent * @nest

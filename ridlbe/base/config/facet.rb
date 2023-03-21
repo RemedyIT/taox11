@@ -247,7 +247,7 @@ module IDL
           return (range.min..(range.max < dix ? range.max : dix))
         when :after
           # fct should be ordered after ofct so fct should be inserted at dix+1 at a minimum
-          unless range.include?(dix+1) # dix+1 should be in possible range
+          unless range.include?(dix + 1) # dix+1 should be in possible range
             IDL.fatal("Conflicting ordering dependency for facet #{fct} : #{dpos}:#{dfct}")
           end
           # just return the original (maximum range)
@@ -310,14 +310,14 @@ module IDL
                 if ignore
                   IDL.log(1,
                           "INFO: Ignoring RIDL :#{name} backend facet #{fct.name}. Cannot find dependency" +
-                          " [#{fdep[:backend] ? "#{fdep[:backend]}/#{fdep[:facet]}": fdep[:facet]}]")
+                          " [#{fdep[:backend] ? "#{fdep[:backend]}/#{fdep[:facet]}" : fdep[:facet]}]")
                   # remove facet
                   _facets.delete(fct.name)
                   # stop checking this facets deps
                   break
                 else
                   IDL.error 'ERROR: Cannot find dependency' +
-                            " [#{fdep[:backend] ? "#{fdep[:backend]}/#{fdep[:facet]}": fdep[:facet]}]" +
+                            " [#{fdep[:backend] ? "#{fdep[:backend]}/#{fdep[:facet]}" : fdep[:facet]}]" +
                             " for RIDL :#{name} backend facet #{fct.name}"
                   exit(1)
                 end

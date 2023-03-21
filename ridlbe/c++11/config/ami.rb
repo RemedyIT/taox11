@@ -39,7 +39,7 @@ module IDL
           # extract (from pragma statement value) and add AMI interface name
           def add_ami_interfaces(s)
             # strip start and end characters (should be the '""' or '<>' brackets)
-            s = s[1, s.size-2]
+            s = s[1, s.size - 2]
             ami_interfaces << s
           end
 

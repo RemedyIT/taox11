@@ -76,7 +76,7 @@ module IDL
       end
 
       def ami_servant_proxy_header
-         include_directory.dup << '/' << File.basename(node.filename, '.*') << 'Ami'+params[:srv_pfx] << params[:proxy_pfx] << '.h'
+         include_directory.dup << '/' << File.basename(node.filename, '.*') << 'Ami' + params[:srv_pfx] << params[:proxy_pfx] << '.h'
       end
 
       def anyop_include_header

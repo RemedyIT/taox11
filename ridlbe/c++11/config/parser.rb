@@ -59,7 +59,7 @@ module IDL
         if @repo_id.nil?
           @repo_ver = '1.0' unless @repo_ver
           format('IDL:%s%s:%s',
-                  if @prefix.empty? then '' else @prefix+'/' end,
+                  if @prefix.empty? then '' else @prefix + '/' end,
                   # filter out the inserted root_namespace if any
                   self.scopes.select{|s| !s.is_a?(IDL::Delegator::Cxx11RootModule) }.collect{|s| s.name}.join('/'),
                   @repo_ver)
@@ -82,7 +82,7 @@ module IDL
 
       def scoped_proxy_cxxname
         unless @scoped_proxy_cxxname
-          @scoped_proxy_cxxname = ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_proxy_cxxname+'::' : '')
+          @scoped_proxy_cxxname = ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_proxy_cxxname + '::' : '')
           @scoped_proxy_cxxname += proxy_cxxname
         end
         @scoped_proxy_cxxname
@@ -94,7 +94,7 @@ module IDL
 
       def scoped_srvproxy_cxxname
         unless @scoped_srvproxy_cxxname
-          @scoped_srvproxy_cxxname = ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_srvproxy_cxxname+'::' : '')
+          @scoped_srvproxy_cxxname = ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_srvproxy_cxxname + '::' : '')
           @scoped_srvproxy_cxxname += srvproxy_cxxname
         end
         @scoped_srvproxy_cxxname
@@ -193,23 +193,23 @@ module IDL
 
     module InterfaceMixin
       def proxy_cxxname
-        cxxname+STUB_PROXY_SUFFIX
+        cxxname + STUB_PROXY_SUFFIX
       end
 
       def scoped_proxy_cxxname
-        scoped_cxxname+STUB_PROXY_SUFFIX
+        scoped_cxxname + STUB_PROXY_SUFFIX
       end
 
       def srvproxy_cxxname
-        cxxname+SRV_PROXY_SUFFIX
+        cxxname + SRV_PROXY_SUFFIX
       end
 
       def scoped_skel_cxxnamespace
-        ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_cxxname+'::' : '')+'POA'
+        ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_cxxname + '::' : '') + 'POA'
       end
 
       def scoped_srvproxy_cxxname
-        scoped_skel_cxxnamespace+'::'+srvproxy_cxxname
+        scoped_skel_cxxnamespace + '::' + srvproxy_cxxname
       end
 
       def skel_cxxname
@@ -217,15 +217,15 @@ module IDL
       end
 
       def scoped_skel_cxxname
-        scoped_skel_cxxnamespace+'::'+cxxname
+        scoped_skel_cxxnamespace + '::' + cxxname
       end
 
       def tie_cxxname
-        cxxname+'_tie'
+        cxxname + '_tie'
       end
 
       def scoped_tie_cxxname
-        scoped_skel_cxxnamespace+'::'+cxxname+'_tie'
+        scoped_skel_cxxnamespace + '::' + cxxname + '_tie'
       end
     end
 
@@ -239,23 +239,23 @@ module IDL
       end
 
       def scoped_obv_cxxnamespace
-        ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_cxxname+'::' : '')+'obv'
+        ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_cxxname + '::' : '') + 'obv'
       end
 
       def scoped_obv_cxxname
-        scoped_obv_cxxnamespace+'::'+obv_cxxname
+        scoped_obv_cxxnamespace + '::' + obv_cxxname
       end
 
       def factory_cxxname
-        cxxname+VALUE_FACTORY_SUFFIX
+        cxxname + VALUE_FACTORY_SUFFIX
       end
 
       def scoped_factory_cxxname
-        scoped_cxxname+VALUE_FACTORY_SUFFIX
+        scoped_cxxname + VALUE_FACTORY_SUFFIX
       end
 
       def scoped_skel_cxxnamespace
-        ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_cxxname+'::' : '')+'POA'
+        ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_cxxname + '::' : '') + 'POA'
       end
 
       def skel_cxxname
@@ -263,7 +263,7 @@ module IDL
       end
 
       def scoped_skel_cxxname
-        scoped_skel_cxxnamespace+'::'+cxxname
+        scoped_skel_cxxnamespace + '::' + cxxname
       end
     end
 
@@ -389,7 +389,7 @@ module IDL
 
       def chk_identifier(ident)
         # prefix C++ keywords with '_cxx_'
-        CXXKW.include?(ident.to_sym) ? '_cxx_'+ident : ident
+        CXXKW.include?(ident.to_sym) ? '_cxx_' + ident : ident
       end
     end # ScannerMixin
 

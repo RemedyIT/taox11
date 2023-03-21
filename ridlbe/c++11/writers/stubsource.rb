@@ -37,8 +37,8 @@ module IDL
         @default_post_includes = [
           'tao/x11/tao_corba.h'
           ]
-        @default_post_includes << 'tao/x11/anytypecode/typecode.h' if (params[:gen_typecodes]||params[:gen_any_ops]) && !params[:gen_anytypecode_source]
-        @default_post_includes << 'tao/x11/anytypecode/typecode_impl.h' if (params[:gen_typecodes]||params[:gen_any_ops]) && !params[:gen_anytypecode_source]
+        @default_post_includes << 'tao/x11/anytypecode/typecode.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
+        @default_post_includes << 'tao/x11/anytypecode/typecode_impl.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
        end
 
       def pre_visit(parser)
@@ -75,13 +75,13 @@ module IDL
             println
             printiln('// generated from StubSourceWriter#visit_const')
             printi("const #{node.idltype.cxx_type} ")
-            println(node.enclosure.cxxname+'::'+node.cxxname + ' {"' + expression_to_s(node.expression, node.enclosure) + '"};')
+            println(node.enclosure.cxxname + '::' + node.cxxname + ' {"' + expression_to_s(node.expression, node.enclosure) + '"};')
           end
           if [Type::String, Type::WString].include?(node.expression.idltype.class)
             println
             printiln('// generated from StubSourceWriter#visit_const')
             printi("const #{node.idltype.cxx_type} ")
-            println(node.enclosure.cxxname+'::'+node.cxxname + ' {' + expression_to_s(node.expression, node.enclosure) + '};')
+            println(node.enclosure.cxxname + '::' + node.cxxname + ' {' + expression_to_s(node.expression, node.enclosure) + '};')
           end
         end
       end
@@ -218,7 +218,7 @@ module IDL
       end
 
       def visit_operation(node)
-        return if node.enclosure.is_local? || (node.enclosure.respond_to?(:is_pseudo?) &&node.enclosure.is_pseudo?) || (node.enclosure.respond_to?(:is_abstract?) && node.enclosure.is_abstract?)
+        return if node.enclosure.is_local? || (node.enclosure.respond_to?(:is_pseudo?) && node.enclosure.is_pseudo?) || (node.enclosure.respond_to?(:is_abstract?) && node.enclosure.is_abstract?)
 
         check_idl_type(node.idltype)
         node.params.each { |parm| check_idl_type(parm.idltype) }

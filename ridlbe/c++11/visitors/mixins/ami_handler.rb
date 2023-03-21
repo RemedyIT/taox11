@@ -94,15 +94,15 @@ module IDL
       end
 
       def cxx_in_type
-        @_cxx_in_type ||= (cxx_traits_type+'::ref_type')
+        @_cxx_in_type ||= (cxx_traits_type + '::ref_type')
       end
 
       def cxx_move_type
-        @_cxx_move_type ||= (cxx_traits_type+'::ref_type&&')
+        @_cxx_move_type ||= (cxx_traits_type + '::ref_type&&')
       end
 
       def cxx_out_type
-        @_cxx_out_type ||= (cxx_traits_type+'::ref_type&')
+        @_cxx_out_type ||= (cxx_traits_type + '::ref_type&')
       end
 
       def cxx_return_type
@@ -114,19 +114,19 @@ module IDL
       end
 
       def scoped_cxxtype
-        @scoped_cxxtype ||= ('::'+scoped_cxxname)
+        @scoped_cxxtype ||= ('::' + scoped_cxxname)
       end
 
       def scoped_cxx_in_type
-        @scoped_cxx_in_type ||= (scoped_cxx_traits_type+'::ref_type')
+        @scoped_cxx_in_type ||= (scoped_cxx_traits_type + '::ref_type')
       end
 
       def scoped_cxx_move_type
-        @scoped_cxx_move_type ||= (scoped_cxx_traits_type+'::ref_type&&')
+        @scoped_cxx_move_type ||= (scoped_cxx_traits_type + '::ref_type&&')
       end
 
       def scoped_cxx_out_type
-        @scoped_cxx_out_type ||= (scoped_cxx_traits_type+'::ref_type&')
+        @scoped_cxx_out_type ||= (scoped_cxx_traits_type + '::ref_type&')
       end
 
       def scoped_cxx_return_type
@@ -189,7 +189,7 @@ module IDL
 
       module Overloads
         def stub_export_macro_with_ami
-          params[:amic_export_macro] ? (params[:amic_export_macro]+' ') : stub_export_macro_without_ami
+          params[:amic_export_macro] ? (params[:amic_export_macro] + ' ') : stub_export_macro_without_ami
         end
 
         def skel_export_macro

@@ -95,8 +95,8 @@ module IDL
           'tao/x11/messaging/ExceptionHolderC.h',
           'tao/x11/messaging/exception_holder_i.h'
           ]
-        @default_post_includes << 'tao/x11/anytypecode/typecode.h' if (params[:gen_typecodes]||params[:gen_any_ops]) && !params[:gen_anytypecode_source]
-        @default_post_includes << 'tao/x11/anytypecode/typecode_impl.h' if (params[:gen_typecodes]||params[:gen_any_ops]) && !params[:gen_anytypecode_source]
+        @default_post_includes << 'tao/x11/anytypecode/typecode.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
+        @default_post_includes << 'tao/x11/anytypecode/typecode_impl.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
       end
 
       def pre_visit(parser)
@@ -246,7 +246,7 @@ module IDL
           # Overloads for this visitor only.
           v.class_eval do
             def client_header
-              File.basename(params[:idlfile], params[:idlext])+params[:ami_pfx]+params[:stub_pfx]+'.h'
+              File.basename(params[:idlfile], params[:idlext]) + params[:ami_pfx] + params[:stub_pfx] + '.h'
             end
           end
           v.visit

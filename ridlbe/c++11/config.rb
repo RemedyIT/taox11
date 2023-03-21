@@ -234,7 +234,7 @@ module IDL
         # defaults
         ridl_params[:stub_pfx] = 'C'
         ridl_params[:srv_pfx] = 'S'
-        ridl_params[:ami_pfx] ='Ami'
+        ridl_params[:ami_pfx] = 'Ami'
         ridl_params[:impl_pfx] = '_impl'
         ridl_params[:client_stubs] = true
         ridl_params[:svnt_skeletons] = true
@@ -380,13 +380,13 @@ module IDL
       # determine output file path for client stub code
       idl_ext = (options[:idlext] ||= File.extname(options[:idlfile]))
       unless options[:idlfile].nil?
-        options[:output] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:stub_pfx])
-        options[:output_ami_incl] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:ami_pfx]+options[:stub_pfx]+options[:hdr_ext])
+        options[:output] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:stub_pfx])
+        options[:output_ami_incl] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:ami_pfx] + options[:stub_pfx] + options[:hdr_ext])
         options[:output_src] = options[:output] + options[:src_ext]
-        options[:output_prx] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:stub_pfx]+options[:proxy_pfx]+options[:hdr_ext])
+        options[:output_prx] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:stub_pfx] + options[:proxy_pfx] + options[:hdr_ext])
         options[:output] << options[:hdr_ext]
         if options[:gen_typecodes] && options[:gen_anytypecode_source]
-          options[:output_atc] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:anytypecode_pfx]+options[:src_ext])
+          options[:output_atc] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:anytypecode_pfx] + options[:src_ext])
         end
       end
     end
@@ -399,52 +399,52 @@ module IDL
 
       if options.gen_export_sta || options.export_sta
         unless options.amic_export_macro || options.base_export_macro
-          IDL.fatal("ERROR: it isn't allowed to use -Gxhsta or -Xsta without specifying the macro with -Wb,amic_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhsta or -Xsta without specifying the macro with -Wb,amic_export_macro=MACRO " +
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
-        options.amic_export_macro = options.base_export_macro+'_AMIC' + options.export_macro_pfx unless options.amic_export_macro || options.base_export_macro.nil?
-        options.amic_export_include = options.base_export_include+'_amic' + options.export_header_pfx unless options.amic_export_include || options.base_export_include.nil?
+        options.amic_export_macro = options.base_export_macro + '_AMIC' + options.export_macro_pfx unless options.amic_export_macro || options.base_export_macro.nil?
+        options.amic_export_include = options.base_export_include + '_amic' + options.export_header_pfx unless options.amic_export_include || options.base_export_include.nil?
       end
     end
 
     def self.check_stub_export_params(options)
       if options.gen_export_st || options.export_st
         unless options.stub_export_macro || options.base_export_macro
-          IDL.fatal("ERROR: it isn't allowed to use -Gxhst or -Xst without specifying the macro with -Wb,stub_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhst or -Xst without specifying the macro with -Wb,stub_export_macro=MACRO " +
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
-        options.stub_export_macro = options.base_export_macro+'_STUB' + options.export_macro_pfx unless options.stub_export_macro || options.base_export_macro.nil?
-        options.stub_export_include = options.base_export_include+'_stub' + options.export_header_pfx unless options.stub_export_include || options.base_export_include.nil?
+        options.stub_export_macro = options.base_export_macro + '_STUB' + options.export_macro_pfx unless options.stub_export_macro || options.base_export_macro.nil?
+        options.stub_export_include = options.base_export_include + '_stub' + options.export_header_pfx unless options.stub_export_include || options.base_export_include.nil?
       end
     end
 
     def self.check_skel_export_params(options)
       if options.gen_export_sk || options.export_sk
         unless options.skel_export_macro || options.base_export_macro
-          IDL.fatal("ERROR: it isn't allowed to use -Gxhsk or -Xsk without specifying the macro with -Wb,skel_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhsk or -Xsk without specifying the macro with -Wb,skel_export_macro=MACRO " +
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
-        options.skel_export_macro = options.base_export_macro+'_SKEL' + options.export_macro_pfx unless options.skel_export_macro || options.base_export_macro.nil?
-        options.skel_export_include = options.base_export_include+'_skel' + options.export_header_pfx unless options.skel_export_include || options.base_export_include.nil?
+        options.skel_export_macro = options.base_export_macro + '_SKEL' + options.export_macro_pfx unless options.skel_export_macro || options.base_export_macro.nil?
+        options.skel_export_include = options.base_export_include + '_skel' + options.export_header_pfx unless options.skel_export_include || options.base_export_include.nil?
       end
     end
 
     def self.check_impl_export_params(options)
       if options.gen_export_impl || options.export_impl
         unless options.impl_export_macro || options.base_export_macro
-          IDL.fatal("ERROR: it isn't allowed to use -Gxhimpl or -Ximpl without specifying the macro with -Wb,impl_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhimpl or -Ximpl without specifying the macro with -Wb,impl_export_macro=MACRO " +
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
-        options.impl_export_macro = options.base_export_macro+'_STUB' + options.export_macro_pfx unless options.impl_export_macro || options.base_export_macro.nil?
-        options.impl_export_include = options.base_export_include+'_stub' + options.export_header_pfx unless options.impl_export_include || options.base_export_include.nil?
+        options.impl_export_macro = options.base_export_macro + '_STUB' + options.export_macro_pfx unless options.impl_export_macro || options.base_export_macro.nil?
+        options.impl_export_include = options.base_export_include + '_stub' + options.export_header_pfx unless options.impl_export_include || options.base_export_include.nil?
       end
     end
 
@@ -480,7 +480,7 @@ module IDL
     def self.generate_servant_skeletons(options)
       options[:skel_outputdir] = options[:outputdir] unless options[:skel_outputdir]
       unless options[:idlfile].nil?
-        options[:srv_output_hdr] = File.join(options[:skel_outputdir], File.basename(options[:idlfile], options[:idlext])+options[:srv_pfx])
+        options[:srv_output_hdr] = File.join(options[:skel_outputdir], File.basename(options[:idlfile], options[:idlext]) + options[:srv_pfx])
         options[:srv_output_src] = options[:srv_output_hdr] + options[:src_ext]
         options[:srv_output_prx] = options[:srv_output_hdr] + options[:proxy_pfx] + options[:hdr_ext]
         options[:srv_output_hdr] += options[:hdr_ext]
@@ -510,7 +510,7 @@ module IDL
     def self.generate_implementations(options)
       options[:impl_outputdir] = options[:outputdir] unless options[:impl_outputdir]
       unless options[:idlfile].nil?
-        options[:impl_output] = File.join(options[:impl_outputdir], File.basename(options[:idlfile], options[:idlext])+options[:impl_pfx])
+        options[:impl_output] = File.join(options[:impl_outputdir], File.basename(options[:idlfile], options[:idlext]) + options[:impl_pfx])
         options[:impl_output_src] = options[:impl_output] + options[:src_ext]
         options[:impl_output] += options[:hdr_ext]
       else
@@ -529,7 +529,7 @@ module IDL
         options[:ami] = true
         options[:ami_stub_outputdir] = options[:outputdir] unless options[:ami_stub_outputdir]
         unless options[:idlfile].nil?
-          options[:ami_stub_output] = File.join(options[:ami_stub_outputdir], File.basename(options[:idlfile], options[:idlext])+options[:ami_pfx]+options[:stub_pfx])
+          options[:ami_stub_output] = File.join(options[:ami_stub_outputdir], File.basename(options[:idlfile], options[:idlext]) + options[:ami_pfx] + options[:stub_pfx])
             options[:ami_stub_output_src] = options[:ami_stub_output] + options[:src_ext]
             options[:ami_stub_output_prx] = options[:ami_stub_output] + options[:proxy_pfx] + options[:hdr_ext]
             options[:ami_stub_output] += options[:hdr_ext]
@@ -580,7 +580,7 @@ module IDL
             :stub_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.stub_export_macro, export_file, so, options))
       else
-        IDL.fatal('ERROR: it is not allowed to use -Gxhst without specifying the file with -Wb,stub_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhst without specifying the file with -Wb,stub_export_file=FILE, ' +
                       '-Wb,stub_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
       end
     end
@@ -595,7 +595,7 @@ module IDL
             :skel_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.skel_export_macro, export_file, so, options))
       else
-        IDL.fatal('ERROR: it is not allowed to use -Gxhsk without specifying the file with -Wb,skel_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhsk without specifying the file with -Wb,skel_export_file=FILE, ' +
                       '-Wb,skel_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
       end
     end
@@ -610,7 +610,7 @@ module IDL
             :amic_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.amic_export_macro, export_file, so, options))
       else
-        IDL.fatal('ERROR: it is not allowed to use -Gxhsta without specifying the file with -Wb,amic_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhsta without specifying the file with -Wb,amic_export_file=FILE, ' +
                       '-Wb,amic_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
       end
     end
@@ -625,7 +625,7 @@ module IDL
             :impl_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.impl_export_macro, export_file, so, options))
       else
-        IDL.fatal('ERROR: it is not allowed to use -Gxhimpl without specifying the file with -Wb,impl_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhimpl without specifying the file with -Wb,impl_export_file=FILE, ' +
                       '-Wb,impl_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
       end
     end
