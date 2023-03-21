@@ -18,7 +18,6 @@ module BRIX11
     VERSION = {major: 1, minor: 0, release: 0}
 
     Collection.configure(:taox11, ROOT, TITLE, DESC, COPYRIGHT, VERSION) do |cfg|
-
       cfg.on_setup do |optparser, options|
         # define common environment for spawning BRIX11 subprocesses
 
@@ -93,7 +92,6 @@ module BRIX11
 
         Common::GenerateDocumentation::OPTIONS[:doxygen_config] = '${TAOX11_ROOT}/etc/taox11.doxygen'
       end
-
     end
 
   end

@@ -16,7 +16,6 @@ module BRIX11
   module ERIDL
 
     self.singleton_class.class_eval do
-
       private
 
       def engines
@@ -36,7 +35,6 @@ module BRIX11
         end
         engines[backend]
       end
-
     end
 
     def self.run(backend, argv, beopts = {})
