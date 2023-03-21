@@ -24,7 +24,7 @@ module IDL
           'tao/CDR.h',
           'tao/Invocation_Adapter.h',
           'tao/Object_T.h'
-          ]
+        ]
         if params[:gen_typecodes]
           @default_pre_includes << 'tao/AnyTypeCode/TypeCode.h'
           @default_pre_includes << 'tao/AnyTypeCode/TypeCode_Constants.h'
@@ -39,7 +39,7 @@ module IDL
           'tao/x11/exception_macros.h',
           'tao/x11/anytypecode/typecode_impl.h',
           'tao/x11/anytypecode/typecode.h'
-          ]
+        ]
       end
 
       def pre_visit(parser)

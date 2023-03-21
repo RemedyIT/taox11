@@ -50,8 +50,8 @@ module IDL
 
         optlist.for_switch '--add-templates=PATH', type: String,
              description: [
-                'Add a template library basepath to be evaluated before backend templates.'
-                             ] do |swcfg|
+               'Add a template library basepath to be evaluated before backend templates.'
+             ] do |swcfg|
           swcfg.on_exec do |arg, params|
             Template.add_user_templates(arg)
           end
