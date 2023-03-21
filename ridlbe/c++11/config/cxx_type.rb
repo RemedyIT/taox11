@@ -322,7 +322,7 @@ module IDL
       end
 
       def value_to_s(v, _scope = nil)
-        if v.is_a?(Printables)
+        if v === Printables
           if Specials.include?(c = v.chr)
             "'\\#{c}'"
           else
