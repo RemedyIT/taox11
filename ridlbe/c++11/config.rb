@@ -464,7 +464,7 @@ module IDL
           IDL.push_production(:stub_proxy, ::IDL::Cxx11::StubProxyWriter.new(co_prx, options))
         end
       end
-      unless !((options[:gen_anytypecode_source] || false) && options[:gen_typecodes])
+      if ((options[:gen_anytypecode_source] || false) && options[:gen_typecodes])
         if options[:output_atc]
           co_atc = GenFile.new(options[:output_atc])
           IDL.push_production(:any_typecode, ::IDL::Cxx11::AnyTypeCodeWriter.new(co_atc, options))

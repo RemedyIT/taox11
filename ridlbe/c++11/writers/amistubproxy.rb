@@ -85,7 +85,7 @@ module IDL
       end
 
       def leave_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
           dec_nest
           ami_handler_interface.visit_post(node)
         end
@@ -416,20 +416,20 @@ module IDL
       end
 
       def declare_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
           ami_handler_interface.visit_typecode(node)
         end
       end
 
       def enter_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
           ami_handler_interface.visit_typecode(node)
           enter_scope(node)
         end
       end
 
       def leave_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
           leave_scope(node)
         end
       end

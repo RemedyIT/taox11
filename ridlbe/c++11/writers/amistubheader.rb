@@ -392,13 +392,13 @@ module IDL
       end
 
       def declare_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
           ami_handler_interface.visit_anyop(node)
         end
       end
 
       def enter_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
         ami_handler_interface.visit_anyop(node)
         end
       end
@@ -430,7 +430,7 @@ module IDL
       end
 
       def enter_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
           ami_handler_interface.visit_os(node)
           ami_interface.visit_amic_os(node)
         end
