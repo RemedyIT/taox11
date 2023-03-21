@@ -28,7 +28,7 @@ module IDL
         def depends_on(*args)
           deplist = args.inject([]) do |l, a|
             if a.is_a?(Hash)
-              l.concat(a.collect {|b, f| {backend: b, facet: f.to_sym}})
+              l.concat(a.collect {|b, f| { backend: b, facet: f.to_sym }})
             else
               l << { facet: a.to_sym }
             end
@@ -41,7 +41,7 @@ module IDL
         def ignore_on_missing(*args)
           deplist = args.inject([]) do |l, a|
             if a.is_a?(Hash)
-              l.concat(a.collect {|b, f| {backend: b, facet: f.to_sym}})
+              l.concat(a.collect {|b, f| { backend: b, facet: f.to_sym }})
             else
               l << { facet: a.to_sym }
             end
@@ -108,7 +108,7 @@ module IDL
             end
           end
           # set basic configuration
-          fct_klass.__send__(:config, {name: facet_name.to_sym, root: root, title: title, copyright: copyright, version: version})
+          fct_klass.__send__(:config, { name: facet_name.to_sym, root: root, title: title, copyright: copyright, version: version })
           # get other config
           block.call(Configurator.new(fct_klass))
           # determine klass constant name from root path : last 3 segments should be <backend>/facets/<facet>

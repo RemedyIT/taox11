@@ -60,38 +60,38 @@ module IDL
           end
           grpcfg.for_params :strings,
             params: {
-              'export_macro' => {description: "-Wb,export_macro=MACRO\t\tSet export macro for all files"},
-              'export_include' => {description: "-Wb,export_include=FILE\t\tSet export include file for all files"},
-              'export_file' => {description: "-Wb,export_file=FILE\t\tSet export file to generate for -Gxh"},
-              'pre_include' => {description: "-Wb,pre_include=FILE\t\tSet include file generated before any other include"},
-              'post_include' => {description: "-Wb,post_include=FILE\t\tSet include file generated at the end of the file"},
-              'base_export_macro' => {description: "-Wb,base_export_macro=MACRO\tSet base of export macro's"},
-              'base_export_include' => {description: "-Wb,base_export_include=FILE\tSet base of export include files"},
-              'stub_export_macro' => {description: "-Wb,stub_export_macro=MACRO\tSet export macro for client files"},
-              'stub_export_include' => {description: "-Wb,stub_export_include=FILE\tSet export include file for client files"},
-              'stub_export_file' => {description: "-Wb,stub_export_file=FILE\t\tSet stub export file to generate for -Gxhst"},
-              'amic_export_macro' => {description: "-Wb,amic_export_macro=MACRO\tSet export macro for ami client files"},
-              'amic_export_include' => {description: "-Wb,amic_export_include=FILE\tSet export include file for ami client files"},
-              'amic_export_file' => {description: "-Wb,amic_export_file=FILE\t\tSet ami export file to generate for -Gxhsta"},
-              'skel_export_macro' => {description: "-Wb,skel_export_macro=MACRO\tSet export macro for servant files"},
-              'skel_export_include' => {description: "-Wb,skel_export_include=FILE\tSet export include file for servant files"},
-              'skel_export_file' => {description: "-Wb,skel_export_file=FILE\t\tSet skeleton export file to generate for -Gxhsk"},
-              'impl_export_macro' => {description: "-Wb,impl_export_macro=MACRO\tSet export macro for implementation files"},
-              'impl_export_include' => {description: "-Wb,impl_export_include=FILE\tSet export include file for implementation files"},
-              'impl_export_file' => {description: "-Wb,impl_export_file=FILE\t\tSet implementation export file to generate for -Gxhimpl"},
-              'anytypecode_export_macro' => {description: "-Wb,anytypecode_export_macro=MACRO\tSet export macro for Any ops en TypeCode"},
-              'anytypecode_export_include' => {description: "-Wb,anytypecode_export_include=FILE\tSet export include file for Any ops en TypeCode"},
-              'include_guard' => {description: "-Wb,include_guard=MACRO\t\tguard to prevent the generated client header file to be included"},
-              'safe_include' => {description: "-Wb,safe_include=FILE\t\tinclude that should be used instead of the own generated client header file"},
-              'unique_include' => {description: "-Wb,unique_include=FILE\t\tinclude that should be generated as only contents of the generated client header file"}
+              'export_macro' => { description: "-Wb,export_macro=MACRO\t\tSet export macro for all files" },
+              'export_include' => { description: "-Wb,export_include=FILE\t\tSet export include file for all files" },
+              'export_file' => { description: "-Wb,export_file=FILE\t\tSet export file to generate for -Gxh" },
+              'pre_include' => { description: "-Wb,pre_include=FILE\t\tSet include file generated before any other include" },
+              'post_include' => { description: "-Wb,post_include=FILE\t\tSet include file generated at the end of the file" },
+              'base_export_macro' => { description: "-Wb,base_export_macro=MACRO\tSet base of export macro's" },
+              'base_export_include' => { description: "-Wb,base_export_include=FILE\tSet base of export include files" },
+              'stub_export_macro' => { description: "-Wb,stub_export_macro=MACRO\tSet export macro for client files" },
+              'stub_export_include' => { description: "-Wb,stub_export_include=FILE\tSet export include file for client files" },
+              'stub_export_file' => { description: "-Wb,stub_export_file=FILE\t\tSet stub export file to generate for -Gxhst" },
+              'amic_export_macro' => { description: "-Wb,amic_export_macro=MACRO\tSet export macro for ami client files" },
+              'amic_export_include' => { description: "-Wb,amic_export_include=FILE\tSet export include file for ami client files" },
+              'amic_export_file' => { description: "-Wb,amic_export_file=FILE\t\tSet ami export file to generate for -Gxhsta" },
+              'skel_export_macro' => { description: "-Wb,skel_export_macro=MACRO\tSet export macro for servant files" },
+              'skel_export_include' => { description: "-Wb,skel_export_include=FILE\tSet export include file for servant files" },
+              'skel_export_file' => { description: "-Wb,skel_export_file=FILE\t\tSet skeleton export file to generate for -Gxhsk" },
+              'impl_export_macro' => { description: "-Wb,impl_export_macro=MACRO\tSet export macro for implementation files" },
+              'impl_export_include' => { description: "-Wb,impl_export_include=FILE\tSet export include file for implementation files" },
+              'impl_export_file' => { description: "-Wb,impl_export_file=FILE\t\tSet implementation export file to generate for -Gxhimpl" },
+              'anytypecode_export_macro' => { description: "-Wb,anytypecode_export_macro=MACRO\tSet export macro for Any ops en TypeCode" },
+              'anytypecode_export_include' => { description: "-Wb,anytypecode_export_include=FILE\tSet export include file for Any ops en TypeCode" },
+              'include_guard' => { description: "-Wb,include_guard=MACRO\t\tguard to prevent the generated client header file to be included" },
+              'safe_include' => { description: "-Wb,safe_include=FILE\t\tinclude that should be used instead of the own generated client header file" },
+              'unique_include' => { description: "-Wb,unique_include=FILE\t\tinclude that should be generated as only contents of the generated client header file" }
             }
         grpcfg.for_params :lists, params: {
               'add_pre_include' => {
                 type: :list,
-                description: "-Wb,add_pre_include=FILE\t\tadds include file to be generated before other includes (except pre_include)"},
+                description: "-Wb,add_pre_include=FILE\t\tadds include file to be generated before other includes (except pre_include)" },
               'add_post_include' => {
                 type: :list,
-                description: "-Wb,add_post_include=FILE\t\tadds include file to be generated at the end of the file (before post_include)"}
+                description: "-Wb,add_post_include=FILE\t\tadds include file to be generated at the end of the file (before post_include)" }
             }
         end
       end

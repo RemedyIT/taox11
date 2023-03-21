@@ -50,7 +50,7 @@ module IDL
             # check for AMI pragma for interface
             if ami_interfaces.include?(intf.scoped_name)
               # add AMI annotation if not yet set
-              intf.annotations << IDL::AST::Annotation.new(:CORBA, {ami: true}) unless intf.has_ami_annotation?
+              intf.annotations << IDL::AST::Annotation.new(:CORBA, { ami: true }) unless intf.has_ami_annotation?
             end
             intf
           end

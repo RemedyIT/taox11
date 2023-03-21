@@ -150,7 +150,7 @@ module IDL
       def visit_includes(parser)
         writer(StubSourceIncludeWriter,
                { default_pre_includes: @default_pre_includes,
-                 default_post_includes: @default_post_includes}).visit_nodes(parser)
+                 default_post_includes: @default_post_includes }).visit_nodes(parser)
       end
 
       def visit_proxy(parser)
