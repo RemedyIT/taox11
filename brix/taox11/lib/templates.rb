@@ -102,7 +102,7 @@ module BRIX11
 
     def descend
       @dir = File.dirname(@dir) unless @dir == '.' || @dir.empty?
-      ! at_end?
+      !at_end?
     end
 
     def find(&block)
