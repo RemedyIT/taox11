@@ -265,7 +265,6 @@ module IDL
         add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
         # required by default for interface because of standard Object methods like 'is_a'
         add_include('tao/x11/portable_server/basic_sarguments.h')
-
       end
 
       def visit_operation(node)
@@ -689,7 +688,6 @@ module IDL
     class AmiStubSourceAmiCWriter < AmiStubSourceBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
-
       end
 
       def pre_visit(parser); end

@@ -45,7 +45,6 @@ module IDL
       end
 
       def pre_visit(parser)
-
         visit_includes(parser)
 
         super

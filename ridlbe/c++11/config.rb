@@ -13,7 +13,6 @@ module IDL
     TITLE = 'RIDL C++11 backend'.freeze
 
     def self.add_extended_options(ol, _idl_params)
-
       ol.for_switch '-i<include options>', type: String, separator: true do |swcfg|
         swcfg.for_param 'c',
             description: "-ic\t\t\tGenerate include statements with \"\" for standard included files. Default." do |arg, params|
