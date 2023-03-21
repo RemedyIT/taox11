@@ -99,7 +99,7 @@ module IDL
 
       def visit_include(node)
         return if File.basename(node.filename) == 'orb.idl'
-        return if !((@params[:ami] && node.has_ami_interfaces_included?) ||
+        return unless ((@params[:ami] && node.has_ami_interfaces_included?) ||
                     (@params[:ami_bc] && node.has_interfaces_ami_candidates))
 
         at_global_scope do
@@ -137,7 +137,7 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         println
         printiln('// generated from AmiStubHeaderWriter#enter_interface')
@@ -158,7 +158,7 @@ module IDL
       end
 
       def leave_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         dec_nest
         ami_handler_interface.visit_post(node)
@@ -257,7 +257,7 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
           add_include('tao/x11/object.h')
        end
@@ -473,7 +473,7 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         println
         printiln('// generated from AmiStubHeaderAmiCWriter#enter_interface')
@@ -491,7 +491,7 @@ module IDL
       end
 
       def leave_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         dec_nest
         ami_interface.visit_amic_post(node)
@@ -573,7 +573,7 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         super
         ami_handler_interface_with_ami_inheritance.visit_pre(node)
@@ -582,7 +582,7 @@ module IDL
       end
 
       def leave_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         dec_nest
         dec_nest
@@ -591,13 +591,13 @@ module IDL
       end
 
       def visit_operation(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
 
         visitor(OperationVisitor).visit_operation(node)
       end
 
       def visit_attribute(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
 
         visitor(AttributeVisitor).visit_attribute(node)
       end
@@ -630,7 +630,7 @@ module IDL
 
       def enter_interface(node)
         super
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_handler_interface.visit_servant_traits(node)
       end

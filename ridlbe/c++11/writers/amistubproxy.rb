@@ -76,7 +76,7 @@ module IDL
 
       def enter_interface(node)
         super
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         println
         printiln('// generated from AmiStubProxyWriter#enter_interface')
@@ -165,7 +165,7 @@ module IDL
       end
 
       def declare_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         # interfaces ALWAYS provide sequence cdr definitions (forward decl issue)
         add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
@@ -173,7 +173,7 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         check_idl_type(node.idltype) unless node.is_abstract?
         # interfaces ALWAYS provide sequence cdr definitions (forward decl issue)
@@ -181,14 +181,14 @@ module IDL
       end
 
       def visit_operation(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
 
         check_idl_type(node.idltype)
         node.params.each { |parm| check_idl_type(parm.idltype) }
       end
 
       def visit_attribute(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
 
         check_idl_type(node.idltype)
       end
@@ -296,13 +296,13 @@ module IDL
       end
 
       def declare_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_handler_interface.visit_cdr(node)
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_handler_interface.visit_cdr(node)
       end
@@ -330,7 +330,7 @@ module IDL
        end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_handler_interface.visit_object_var(node)
       end
@@ -363,7 +363,7 @@ module IDL
        def post_visit(parser); end
 
        def enter_interface(node)
-         return if !needs_ami_generation?(node)
+         return unless needs_ami_generation?(node)
 
          ami_handler_interface.visit_object_ref_traits(node)
        end
@@ -468,7 +468,7 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         super
         println

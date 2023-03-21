@@ -24,7 +24,7 @@ module IDL
         self.only_record_module_scopes = true
 
         @default_pre_includes = []
-        if !params[:no_cdr_streaming]
+        unless params[:no_cdr_streaming]
           @default_pre_includes << 'tao/CDR.h'
         end
         if params[:gen_typecodes] && !params[:gen_anytypecode_source]

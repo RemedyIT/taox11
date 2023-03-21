@@ -151,26 +151,26 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_handler_interface.visit_pre(node)
       end
 
       def leave_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_handler_interface_with_ami_inheritance.visit_post(node)
       end
 
       def visit_operation(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
 
         (intf_visitor = ami_handler_interface).visit(node.enclosure)
         visitor(OperationVisitor) { |v| v.interface(intf_visitor); v.visit_operation(node) }
       end
 
       def visit_attribute(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
 
         (intf_visitor = ami_handler_interface).visit(node.enclosure)
         visitor(AttributeVisitor) do |v|
@@ -482,7 +482,7 @@ module IDL
 
       def enter_interface(node)
         super
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         intf = ami_handler_interface_with_ami_inheritance
         ###
@@ -523,7 +523,7 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_handler_interface.visit_object_traits(node)
         ami_interface.visit_amic_object_traits(node)
@@ -543,7 +543,7 @@ module IDL
        def post_visit(parser); end
 
        def enter_interface(node)
-         return if !needs_ami_generation?(node)
+         return unless needs_ami_generation?(node)
 
          ami_handler_interface.visit_object_ref_traits(node)
        end
@@ -567,7 +567,7 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_handler_interface.visit_cdr(node)
         ami_interface.visit_amic_cdr(node)
@@ -602,7 +602,7 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_handler_interface.visit_anyop(node)
       end
@@ -620,7 +620,7 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_handler_interface.visit_typecode(node)
       end
@@ -673,7 +673,7 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_handler_interface.visit_tao_typecode(node)
         enter_scope(node)
@@ -713,25 +713,25 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_interface.visit_amic_pre(node)
       end
 
       def leave_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         ami_interface.visit_amic_post(node)
       end
 
       def visit_operation(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
 
         ami_operation.visit_amic(node)
       end
 
       def visit_attribute(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
 
         ami_attribute.visit_amic(node)
       end
@@ -773,7 +773,7 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         super
         println
@@ -784,7 +784,7 @@ module IDL
       end
 
       def leave_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
 
         dec_nest
         ami_handler_interface.visit_post(node)
@@ -845,14 +845,14 @@ module IDL
       end
 
       def visit_operation(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
 
         check_idl_type(node.idltype)
         node.params.each { |parm| check_idl_type(parm.idltype) }
       end
 
       def visit_attribute(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
 
         check_idl_type(node.idltype)
       end

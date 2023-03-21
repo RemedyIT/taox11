@@ -132,7 +132,7 @@ module IDL
       def initialize(output = STDOUT, opts = {})
         super
         @includes = []
-        @includes << 'tao/x11/portable_server/servantbase.h' if !params[:no_servant_code]
+        @includes << 'tao/x11/portable_server/servantbase.h' unless params[:no_servant_code]
       end
 
       attr_reader :includes
