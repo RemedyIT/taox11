@@ -680,14 +680,11 @@ module IDL
         super
       end
 
-      def enter_interface(node)
-      end
+      def enter_interface(node); end
 
-      def leave_interface(node)
-      end
+      def leave_interface(node); end
 
-      def enter_valuetype(node)
-      end
+      def enter_valuetype(node); end
 
       def enter_struct(node)
         visitor(StructVisitor).visit_inl(node)

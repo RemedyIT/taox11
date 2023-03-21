@@ -385,8 +385,7 @@ module IDL
          printiln('// generated from StubProxyObjRefTraitsWriter#pre_visit')
        end
 
-       def post_visit(parser)
-       end
+       def post_visit(parser); end
 
        def enter_interface(node)
          return if node.is_local? || node.is_pseudo? || node.is_abstract?

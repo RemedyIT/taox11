@@ -416,20 +416,15 @@ module IDL
         parser.visit_nodes(self)
       end
 
-      def pre_visit(parser)
-      end
+      def pre_visit(parser); end
 
-      def post_visit(parser)
-      end
+      def post_visit(parser); end
 
-      def visit_include(node)
-      end
+      def visit_include(node); end
 
-      def enter_include(node)
-      end
+      def enter_include(node); end
 
-      def leave_include(node)
-      end
+      def leave_include(node); end
 
       def enter_module(node)
         return if self.no_scope_tracking?(node)
@@ -445,8 +440,7 @@ module IDL
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
 
-      def declare_interface(node)
-      end
+      def declare_interface(node); end
 
       def enter_interface(node)
         return if self.no_scope_tracking?(node)
@@ -462,8 +456,7 @@ module IDL
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
 
-      def declare_valuetype(node)
-      end
+      def declare_valuetype(node); end
 
       def enter_valuetype(node)
         return if self.no_scope_tracking?(node)
@@ -479,20 +472,15 @@ module IDL
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
 
-      def visit_valuebox(node)
-      end
+      def visit_valuebox(node); end
 
-      def visit_const(node)
-      end
+      def visit_const(node); end
 
-      def visit_operation(node)
-      end
+      def visit_operation(node); end
 
-      def visit_attribute(node)
-      end
+      def visit_attribute(node); end
 
-      def declare_struct(node)
-      end
+      def declare_struct(node); end
 
       def enter_struct(node)
         return if self.no_scope_tracking?(node)
@@ -522,8 +510,7 @@ module IDL
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
 
-      def declare_union(node)
-      end
+      def declare_union(node); end
 
       def enter_union(node)
         return if self.no_scope_tracking?(node)
@@ -539,14 +526,11 @@ module IDL
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
 
-      def visit_enum(node)
-      end
+      def visit_enum(node); end
 
-      def visit_enumerator(node)
-      end
+      def visit_enumerator(node); end
 
-      def visit_typedef(node)
-      end
+      def visit_typedef(node); end
     end # CodeWriterMethods
   end # Base
 end # IDL

@@ -296,8 +296,7 @@ module IDL
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
-      def enter_exception(node)
-      end
+      def enter_exception(node); end
 
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
@@ -420,11 +419,9 @@ module IDL
         super
       end
 
-      def enter_interface(node)
-      end
+      def enter_interface(node); end
 
-      def leave_interface(node)
-      end
+      def leave_interface(node); end
     end # AmiStubInlineWriter
 
     class AmiStubHeaderOSWriter < AmiStubHeaderBaseWriter
@@ -446,8 +443,7 @@ module IDL
           @fwd_decl_cache = {}
       end
 
-      def post_visit(parser)
-      end
+      def post_visit(parser); end
 
       def enter_module(node)
         super

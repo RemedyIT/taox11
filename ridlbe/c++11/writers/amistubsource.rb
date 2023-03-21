@@ -540,8 +540,7 @@ module IDL
          printiln('// generated from AmiStubSourceProxyObjRefTraitsWriter#pre_visit')
        end
 
-       def post_visit(parser)
-       end
+       def post_visit(parser); end
 
        def enter_interface(node)
          return if !needs_ami_generation?(node)
@@ -693,11 +692,9 @@ module IDL
 
       end
 
-      def pre_visit(parser)
-      end
+      def pre_visit(parser); end
 
-      def post_visit(parser)
-      end
+      def post_visit(parser); end
 
       def enter_module(node)
         super
@@ -757,8 +754,7 @@ module IDL
          visit_sarg_traits(parser)
       end
 
-      def post_visit(parser)
-      end
+      def post_visit(parser); end
 
       def enter_module(node)
         super
