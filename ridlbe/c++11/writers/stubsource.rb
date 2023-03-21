@@ -326,6 +326,7 @@ module IDL
       end
 
       private
+
       def check_idl_type(idl_type)
         idl_type = idl_type.resolved_type
         case idl_type
@@ -669,6 +670,7 @@ module IDL
       end
 
     private
+
       def enter_scope(node)
         println
         printiln('// generated from StubSourceTaoTypecodeWriter#enter_scope')
@@ -682,6 +684,7 @@ module IDL
       end
 
     public
+
       def enter_module(node)
         enter_scope(node)
       end

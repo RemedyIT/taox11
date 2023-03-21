@@ -86,7 +86,9 @@ module IDL
         def force_encoding(encoding)
           @buf.force_encoding(encoding)
         end
+
         private
+
         def _pln(ln)
           @output.print(@output.indent) if (!ln.empty?) && (ln =~ /^\s*\#/).nil?
           @output.println(ln)

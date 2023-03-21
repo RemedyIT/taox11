@@ -127,6 +127,7 @@ module IDL
         end
 
         private
+
         # Makes all the (instance) methods in the helper module available to templates
         # rendered through this writer.
         #

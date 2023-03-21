@@ -377,6 +377,7 @@ module IDL
       end
 
       private
+
       def check_idl_type(idl_type)
         idl_type = idl_type.resolved_type
         case idl_type
@@ -638,6 +639,7 @@ module IDL
       end
 
     private
+
       def enter_scope(node)
         println
         printiln('// generated from AmiStubSourceTaoTypecodeWriter#enter_scope')
@@ -651,6 +653,7 @@ module IDL
       end
 
     public
+
       def enter_module(node)
         enter_scope(node)
       end
@@ -840,6 +843,7 @@ module IDL
       end
 
      private
+
        # by keeping track of nodes for which we generated an SArg trait we avoid
        # generating multiple code blocks for the same type
       def is_tracked?(node)

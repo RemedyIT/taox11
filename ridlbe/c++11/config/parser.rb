@@ -162,6 +162,7 @@ module IDL
       end
 
     private
+
       def member_has_ami_interface(node)
         (node.is_a?(IDL::AST::Interface) && !(node.is_local? || node.is_pseudo? || node.is_forward?) && node.has_ami_annotation?) ||
         (node.is_a?(IDL::AST::Module) && (node.match_members { |m| member_has_ami_interface(m) }))
