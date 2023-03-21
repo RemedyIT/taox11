@@ -34,26 +34,26 @@ module BRIX11
         optparser.on('-I[FILE]', '--with-idl=[FILE]',
                      'Create includes for IDL generated stub headers from FILE.',
                      'Specify filename without extension. Separate with \',\' when more than one.',
-                     'Default: Generate includes for IDL files in working dir') {|v|
+                     'Default: Generate includes for IDL files in working dir') { |v|
                         options[:gensrv][:idl] = (v ? v.split(',') : true)
                      }
         optparser.on('-i', '--interface', '=NAME',
                      'Defines name of interface for which to activate a servant.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to generate enclosing module(s).',
-                     'Default: derived from first IDL file basename (uppercasing first character)') {|v|
+                     'Default: derived from first IDL file basename (uppercasing first character)') { |v|
                         options[:gensrv][:modules] = v.split('::')
                         options[:gensrv][:interface] = options[:gensrv][:modules].pop
                      }
         optparser.on('-S[FILES]', '--with-servant=[FILES]',
                      'Create includes for CORBA servant implementation headers.',
                      'Specify filenames without extension. Separate with \',\' when more than one.',
-                     'Default: Generate include for each \'<idlfile>_impl.h\'.') {|v|
+                     'Default: Generate include for each \'<idlfile>_impl.h\'.') { |v|
                         options[:gensrv][:impl] = (v ? v.split(',') : true)
                      }
         optparser.on('-s', '--servant', '=NAME',
                      'Defines name of servant implementation for which to create a servant.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to specify enclosing module(s).',
-                     'Default: <interface>_impl') {|v| options[:gensrv][:svt] = v }
+                     'Default: <interface>_impl') { |v| options[:gensrv][:svt] = v }
         optparser.on('--without-servant',
                      'Do NOT generate servant creation and activation (also suppresses implementation headers).',
                      'Default: Generate servant creation/activation') { options[:gensrv][:svt] = false }
@@ -64,12 +64,12 @@ module BRIX11
         unless argv.empty? || Command.is_command_arg?(argv.first, options) || argv.first.start_with?('-')
           options[:gensrv][:name] = argv.shift
         end
-        options[:gensrv][:idl] = Dir.glob('*.idl').collect {|p| File.basename(p, '.*') } if options[:gensrv][:idl] == true
+        options[:gensrv][:idl] = Dir.glob('*.idl').collect { |p| File.basename(p, '.*') } if options[:gensrv][:idl] == true
         unless options[:gensrv][:interface]
           options[:gensrv][:interface] = options[:gensrv][:idl].first.sub(/\A(.)/) { $1.upcase } unless options[:gensrv][:idl].empty?
           options[:gensrv][:interface] ||= 'Unknown'
         end
-        options[:gensrv][:impl] = options[:gensrv][:idl].collect {|i| "#{i}_impl" } if options[:gensrv][:impl] == true
+        options[:gensrv][:impl] = options[:gensrv][:idl].collect { |i| "#{i}_impl" } if options[:gensrv][:impl] == true
 
         # run file creation task for server main
         unless File.exist?("#{options[:gensrv][:name]}.cpp") && !options[:force]

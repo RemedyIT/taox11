@@ -32,7 +32,7 @@ module BRIX11
         optparser.on('-I[FILE]', '--with-idl=[FILE]',
                      'Include IDL generation subproject for FILE.',
                      'Specify filenames without extension. Separate with \',\' when more than one.',
-                     'Default: Generate IDL generation subproject for IDL files in working dir') {|v|
+                     'Default: Generate IDL generation subproject for IDL files in working dir') { |v|
                        options[:genmpc][:idl] = (v ? v.split(',') : true)
                      }
         optparser.on('--without-idl',
@@ -41,7 +41,7 @@ module BRIX11
         optparser.on('-C[FILES]', '--with-client=[FILES]',
                      'Include CORBA client subproject with FILES (do not specify IDL generated file).',
                      'Specify filenames without extension. Separate with \',\' when more than one.',
-                     'Default: Generate client subproject with \'client\')') {|v| options[:genmpc][:client] = (v ? v.split(',') : true) }
+                     'Default: Generate client subproject with \'client\')') { |v| options[:genmpc][:client] = (v ? v.split(',') : true) }
         optparser.on('--without-client',
                      'Do NOT generate CORBA client subproject.',
                      'Default: Generate client subproject') { options[:genmpc][:client] = false }
@@ -49,7 +49,7 @@ module BRIX11
                      'Include CORBA server subproject with FILES (do not specify IDL generated files).',
                      'Specify filenames without extension. Separate with \',\' when more than one.',
                      'By default FILES will be set to \'server\' + an \'<idl>_impl\' for all IDL files.',
-                     'Default: Generate server subproject.') {|v| options[:genmpc][:server] = (v ? v.split(',') : true) }
+                     'Default: Generate server subproject.') { |v| options[:genmpc][:server] = (v ? v.split(',') : true) }
         optparser.on('--without-server',
                      'Do NOT generate CORBA server subproject.',
                      'Default: Generate server subproject') { options[:genmpc][:server] = false }
@@ -61,12 +61,12 @@ module BRIX11
           options[:genmpc][:name] = argv.shift
         end
         if options[:genmpc][:idl] == true
-          idlfiles = Dir.glob('*.idl').collect {|p| File.basename(p, '.*') }
+          idlfiles = Dir.glob('*.idl').collect { |p| File.basename(p, '.*') }
           options[:genmpc][:idl] = idlfiles unless idlfiles.empty?
         end
         if options[:genmpc][:server] == true
           options[:genmpc][:server] = ['server']
-          options[:genmpc][:server].concat(options[:genmpc][:idl].collect {|i| "#{i}_impl" }) unless options[:genmpc][:idl] == true
+          options[:genmpc][:server].concat(options[:genmpc][:idl].collect { |i| "#{i}_impl" }) unless options[:genmpc][:idl] == true
         end
         # run file creation task for MPC file
         unless File.exist?("#{options[:genmpc][:name]}.mpc") && !options[:force]

@@ -31,18 +31,18 @@ module BRIX11
         optparser.on('-I[FILE]', '--with-idl=[FILE]',
                      'Generate servant implementation(s) from IDL file(s).',
                      'Specify filename without extension. Separate with \',\' when more than one.',
-                     'Default: all IDL files in working dir') {|v|
+                     'Default: all IDL files in working dir') { |v|
                         options[:gensvt][:idl] = (v ? v.split(',') : true)
                      }
         optparser.on('--svt-pfx', '=POSTFIX',
                      'Defines postfix to use for generated servant implementation filenames',
                      'and classes.',
-                     'Default: \'_impl\'') {|v| options[:gensvt][:postfix] = v }
+                     'Default: \'_impl\'') { |v| options[:gensvt][:postfix] = v }
         optparser.on('--shutdown-on', '=NAME',
                      'Restrict shutdown implementations to interface NAME.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to specify enclosing module(s).',
                      'Separate with \',\' when more than one.',
-                     'Default: all interfaces having shutdown method.') {|v|
+                     'Default: all interfaces having shutdown method.') { |v|
                         options[:gensvt][:shutdowns] = v.split(',')
                      }
         optparser.on('--without-shutdown',
@@ -62,7 +62,7 @@ module BRIX11
         ridl_argv << "--add-templates" << tplpath
         ridl_argv << '-Gisrv'
         ridl_argv << "-impl-pfx=#{options[:gensvt][:postfix]}" if options[:gensvt][:postfix]
-        idl_files = options[:gensvt][:idl] == true ? Dir.glob('*.idl') : options[:gensvt][:idl].collect { |i| "#{i}.idl"}
+        idl_files = options[:gensvt][:idl] == true ? Dir.glob('*.idl') : options[:gensvt][:idl].collect { |i| "#{i}.idl" }
         if idl_files.empty?
           log_error('No IDL files found for \'generate servant\'')
           return false

@@ -17,7 +17,7 @@ module BRIX11
         # only collect this once for every BRIX11 session
         unless @template_path
           # get collection paths
-          @template_path = BRIX11::Collection.lookup_path.collect {|lp| File.join(lp, 'templates', 'brix11') }
+          @template_path = BRIX11::Collection.lookup_path.collect { |lp| File.join(lp, 'templates', 'brix11') }
           # insert any defined user paths at start in reverse order
           (BRIX11.options.config.user_templates || []).reverse { |utp| @template_path.insert(0, utp) }
         end
@@ -66,7 +66,7 @@ module BRIX11
     attr_reader :path, :name, :dir, :root_idx
 
     def exists?
-      find {|_| true } ? true : false
+      find { |_| true } ? true : false
     end
 
     def code

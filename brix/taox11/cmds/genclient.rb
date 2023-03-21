@@ -33,13 +33,13 @@ module BRIX11
         optparser.on('-I[FILE]', '--with-idl=[FILE]',
                      'Create includes for IDL generated stub headers from FILE.',
                      'Specify filename without extension. Separate with \',\' when more than one.',
-                     'Default: Generate includes for IDL files in working dir') {|v|
+                     'Default: Generate includes for IDL files in working dir') { |v|
                        options[:gencli][:idl] = (v ? v.split(',') : true)
                      }
         optparser.on('-i', '--interface', '=NAME',
                      'Defines name of client interface stub.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to generate enclosing module(s).',
-                     'Default: derived from first IDL file basename (uppercasing first character)') {|v|
+                     'Default: derived from first IDL file basename (uppercasing first character)') { |v|
                        options[:gencli][:modules] = v.split('::')
                        options[:gencli][:interface] = options[:gencli][:modules].pop
                      }
@@ -53,7 +53,7 @@ module BRIX11
         unless argv.empty? || Command.is_command_arg?(argv.first, options) || argv.first.start_with?('-')
           options[:gencli][:name] = argv.shift
         end
-        options[:gencli][:idl] = Dir.glob('*.idl').collect {|p| File.basename(p, '.*') } if options[:gencli][:idl] == true
+        options[:gencli][:idl] = Dir.glob('*.idl').collect { |p| File.basename(p, '.*') } if options[:gencli][:idl] == true
         unless options[:gencli][:interface]
           options[:gencli][:interface] = options[:gencli][:idl].first.sub(/\A(.)/) { $1.upcase } unless options[:gencli][:idl].empty?
           options[:gencli][:interface] ||= 'Unknown'

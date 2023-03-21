@@ -30,10 +30,10 @@ module BRIX11
 
         optparser.on('-S', '--server', '=NAME',
                      'Defines name to use for server executable (no extension).',
-                     'Default: server') {|v| options[:genruntest][:server] = v }
+                     'Default: server') { |v| options[:genruntest][:server] = v }
         optparser.on('-C', '--client', '=NAME',
                      'Defines name to use for client executable (no extension).',
-                     'Default: client') {|v| options[:genruntest][:client] = v }
+                     'Default: client') { |v| options[:genruntest][:client] = v }
       end
 
       def run(argv)

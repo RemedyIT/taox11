@@ -84,8 +84,8 @@ module BRIX11
         Exec.update_run_environment('PATH', File.join(base_root, 'bin'), :prepend)
 
         # load collection
-        Dir.glob(File.join(ROOT, 'lib', '*.rb')).each { |p| require "brix/taox11/lib/#{File.basename(p)}"}
-        Dir.glob(File.join(ROOT, 'cmds', '*.rb')).each { |p| require "brix/taox11/cmds/#{File.basename(p)}"}
+        Dir.glob(File.join(ROOT, 'lib', '*.rb')).each { |p| require "brix/taox11/lib/#{File.basename(p)}" }
+        Dir.glob(File.join(ROOT, 'cmds', '*.rb')).each { |p| require "brix/taox11/cmds/#{File.basename(p)}" }
 
         # update documentation config
         Common::GenerateDocumentation::OPTIONS[:docsources]['taox11'] = ['${TAOX11_ROOT}/docs']

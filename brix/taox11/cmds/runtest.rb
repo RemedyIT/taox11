@@ -45,7 +45,7 @@ module BRIX11
       private
 
       def find_tool(cmd)
-        TOOLS.fetch(File.extname(cmd)) {|_| log_error("Do not know how to run #{cmd}"); nil }
+        TOOLS.fetch(File.extname(cmd)) { |_| log_error("Do not know how to run #{cmd}"); nil }
       end
 
       public

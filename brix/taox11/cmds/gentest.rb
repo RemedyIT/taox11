@@ -36,14 +36,14 @@ module BRIX11
 
         optparser.on('-S', '--server', '=NAME',
                      'Defines name to use for server executable (no extension).',
-                     "Default: #{options[:gentest][:server]}") {|v| options[:gentest][:server] = v }
+                     "Default: #{options[:gentest][:server]}") { |v| options[:gentest][:server] = v }
         optparser.on('-C', '--client', '=NAME',
                      'Defines name to use for client executable (no extension).',
-                     "Default: #{options[:gentest][:client]}") {|v| options[:gentest][:client] = v }
+                     "Default: #{options[:gentest][:client]}") { |v| options[:gentest][:client] = v }
         optparser.on('-i', '--interface', '=NAME',
                      'Defines name to use for test interface.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to generate enclosing module(s).',
-                     "Default: #{options[:gentest][:interface]}") {|v|
+                     "Default: #{options[:gentest][:interface]}") { |v|
                         options[:gentest][:modules] = v.split('::')
                         options[:gentest][:interface] = options[:gentest][:modules].pop
                      }
@@ -100,7 +100,7 @@ module BRIX11
           options[:genmpc][:client] = [options[:gentest][:client]]
           unless options[:gentest][:server] == OPTIONS[:server] # default?
             options[:genmpc][:server] = [options[:gentest][:server]] +
-                                        Dir.glob('*.idl').collect {|i| "#{File.basename(i, '.*')}_impl" }
+                                        Dir.glob('*.idl').collect { |i| "#{File.basename(i, '.*')}_impl" }
           end
           GenFile.transaction { rc = GenerateMPC.new(entry, options).run(nil) } if rc
           # generate run script
