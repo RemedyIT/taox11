@@ -15,7 +15,7 @@ module BRIX11
 
       OPTIONS = {
           name: 'run_test',
-          runopts: { },
+          runopts: {},
           tool: nil
       }
 

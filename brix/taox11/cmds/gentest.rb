@@ -84,10 +84,10 @@ module BRIX11
           options[:genidl] = GenerateIDL::OPTIONS.merge(options[:gentest].merge(name: File.basename(options[:gentest][:name])))
           GenFile.transaction { rc = GenerateIDL.new(entry, options).run(nil) }
           # generate server main
-          options[:gensrv] = GenerateServer::OPTIONS.merge(options[:gentest]).merge({name: options[:gentest][:server]})
+          options[:gensrv] = GenerateServer::OPTIONS.merge(options[:gentest]).merge({ name: options[:gentest][:server] })
           GenFile.transaction { rc = GenerateServer.new(entry, options).run(nil) } if rc
           # generate client main
-          options[:gencli] = GenerateClient::OPTIONS.merge(options[:gentest]).merge({name: options[:gentest][:client]})
+          options[:gencli] = GenerateClient::OPTIONS.merge(options[:gentest]).merge({ name: options[:gentest][:client] })
           GenFile.transaction { rc = GenerateClient.new(entry, options).run(nil) } if rc
           # generate servant
           options[:gensvt] = GenerateServant::OPTIONS.dup
