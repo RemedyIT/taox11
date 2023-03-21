@@ -136,7 +136,7 @@ module IDL
 
       attr_reader :includes
 
-      def post_visit(parser)
+      def post_visit(_parser)
         properties[:pre_includes] = @default_pre_includes
         properties[:post_includes] = @default_post_includes
         properties[:includes] = @includes

@@ -84,7 +84,7 @@ module RIDL
       #   'dds_data_writer'.camelize(:lower)        # => "ddsDataWriter"
       #   'test/my-foo'.camelize                    # => "Test::MyFoo"
       #
-      def camelize(uppercase_first_letter = true)
+      def camelize(_uppercase_first_letter = true)
         self.dup.camelize!
       end
 

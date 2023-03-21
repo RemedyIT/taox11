@@ -137,7 +137,7 @@ module IDL
 
       attr_reader :includes
 
-      def post_visit(parser)
+      def post_visit(_parser)
         properties[:includes] = @includes
 
         visitor(PreVisitor).visit
@@ -149,7 +149,7 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         println
         printiln('// generated from ServantHeaderSrvTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE {')
@@ -158,7 +158,7 @@ module IDL
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
         printiln('} // namespace CORBA')
         dec_nest

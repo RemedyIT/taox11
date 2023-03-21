@@ -242,7 +242,7 @@ module IDL
       ###
       # Also support automagic respond_to? for templates but
       # we do not check if the template actually exists.
-      def respond_to_missing?(method, include_private)
+      def respond_to_missing?(method, _include_private)
         VISIT_METHOD_RE =~ method ? true : false
       end
 

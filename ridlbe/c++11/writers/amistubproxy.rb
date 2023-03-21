@@ -150,7 +150,7 @@ module IDL
 
       attr_reader :includes
 
-      def post_visit(parser)
+      def post_visit(_parser)
         properties[:pre_includes] = @default_pre_includes
         properties[:post_includes] = @default_post_includes
         properties[:includes] = @includes
@@ -221,7 +221,7 @@ module IDL
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
-      def visit_enum(node)
+      def visit_enum(_node)
         add_include('tao/x11/basic_argument_t.h')
       end
 
@@ -313,11 +313,11 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         printiln('// generated from AmiStubProxyVarOutWriter#pre_visit')
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         printiln
       end
 
@@ -355,7 +355,7 @@ module IDL
          super
        end
 
-       def pre_visit(parser)
+       def pre_visit(_parser)
          println
          printiln('// generated from AmiStubProxyObjRefTraitsWriter#pre_visit')
        end

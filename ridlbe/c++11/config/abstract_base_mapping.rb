@@ -16,19 +16,19 @@ module IDL
     class AbstractBase < Native
       SCOPED_NAME = 'CORBA::AbstractBase'
 
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         "::TAOX11_#{IDL::Type::AbstractBase::SCOPED_NAME}"
       end
 
-      def cxx_type(scope = nil)
+      def cxx_type(_scope = nil)
         idltype_name
       end
 
-      def cxx_member_type(scope = nil, typedef = nil)
+      def cxx_member_type(_scope = nil, _typedef = nil)
         "TAOX11_IDL::traits<#{cxx_type}>::ref_type"
       end
 
-      def resolved_cxx_member_type(scope = nil, typedef = nil)
+      def resolved_cxx_member_type(_scope = nil, _typedef = nil)
         cxx_member_type
       end
 

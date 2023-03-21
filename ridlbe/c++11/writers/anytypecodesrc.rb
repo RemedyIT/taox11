@@ -82,7 +82,7 @@ module IDL
 
       attr_reader :includes
 
-      def post_visit(parser)
+      def post_visit(_parser)
         properties[:pre_includes] = @default_pre_includes
         properties[:post_includes] = @default_post_includes
         properties[:includes] = @includes
@@ -143,7 +143,7 @@ module IDL
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
-      def visit_enum(node)
+      def visit_enum(_node)
         add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h') if params[:gen_typecodes]
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
       end

@@ -230,7 +230,7 @@ module IDL
 
       attr_reader :includes
 
-      def post_visit(parser)
+      def post_visit(_parser)
         properties[:includes] = @includes
         properties[:pre_includes] = @default_pre_includes
         properties[:post_includes] = @default_post_includes
@@ -271,7 +271,7 @@ module IDL
         check_idl_type(node.idltype)
       end
 
-      def declare_valuetype(node)
+      def declare_valuetype(_node)
         add_include('tao/x11/valuetype/valuetype_traits_t.h')
       end
 
@@ -336,7 +336,7 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         println
         printiln('// generated from AmiStubHeaderTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE')
@@ -347,7 +347,7 @@ module IDL
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
         printiln('} // namespace IDL')
         dec_nest
@@ -518,7 +518,7 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         println
         printiln('// generated from AmiStubHeaderAmicTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE')
@@ -526,7 +526,7 @@ module IDL
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
         printiln('} // namespace TAOX11_NAMESPACE')
       end
@@ -612,7 +612,7 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         println
         printiln('// generated from AmiStubHeaderSrvTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE {')
@@ -621,7 +621,7 @@ module IDL
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
         printiln('} // namespace CORBA')
         dec_nest

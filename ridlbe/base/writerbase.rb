@@ -350,11 +350,11 @@ module IDL
     module CodeWriterMethods
       protected
 
-      def write_open_scope(scope)
+      def write_open_scope(_scope)
         raise 'class including Base::CodeWriterMethods needs to implement #_open_scope and #_close_scope'
       end
 
-      def write_close_scope(scope)
+      def write_close_scope(_scope)
         raise 'class including Base::CodeWriterMethods needs to implement #_open_scope and #_close_scope'
       end
 
@@ -370,7 +370,7 @@ module IDL
         @disable_scope_tracking || (@only_record_module_scopes && !node.is_a?(IDL::AST::Module))
       end
 
-      def at_global_scope(&block)
+      def at_global_scope()
         _cur_scope = @properties[:_context][:cur_scope]
         raise "cannot break out scope for #{_cur_scope.typename}" unless _cur_scope.nil? || _cur_scope.is_a?(IDL::AST::Module)
 

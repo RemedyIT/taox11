@@ -12,7 +12,7 @@ module IDL
     COPYRIGHT = "Copyright (c) 2007-#{Time.now.year} Remedy IT Expertise BV, The Netherlands".freeze
     TITLE = 'RIDL C++11 backend'.freeze
 
-    def self.add_extended_options(ol, idl_params)
+    def self.add_extended_options(ol, _idl_params)
 
       ol.for_switch '-i<include options>', type: String, separator: true do |swcfg|
         swcfg.for_param 'c',

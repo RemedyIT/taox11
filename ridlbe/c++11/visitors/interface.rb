@@ -172,7 +172,7 @@ module IDL
         abstractbase_attributes.size
       end
 
-      def all_operations (inc_implicit = false) # incl. inherited
+      def all_operations (_inc_implicit = false) # incl. inherited
         @all_operations ||= node.operations(true).collect do |op|
           visitor(OperationVisitor) { |v| v.interface(node); v.visit(op) }
         end

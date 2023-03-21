@@ -13,7 +13,7 @@ module IDL
   class Type
     # IDL typename
 
-    def idltype_name(scope = nil)
+    def idltype_name(_scope = nil)
       "#{typename.split('::').last.downcase}"
     end
 
@@ -129,7 +129,7 @@ module IDL
     end
 
     # convert a type specific value to code
-    def value_to_s(v, scope = nil)
+    def value_to_s(v, _scope = nil)
       v.to_s
     end
 
@@ -192,7 +192,7 @@ module IDL
     end
 
     class Void
-      def value_to_s(v, scope = nil)
+      def value_to_s(_v, _scope = nil)
         ''
       end
 
@@ -218,48 +218,48 @@ module IDL
     end
 
     class Long
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         # prevent integer overflow warnings on platforms with 32bit longs
         v == self.min ? "(#{v + 1}-1)" : v.to_s
       end
     end
 
     class LongLong
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         "#{v}LL"
       end
 
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         'long long'
       end
     end
 
     class UShort
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         "#{v}U"
       end
 
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         'unsigned short'
       end
     end
 
     class ULong
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         "#{v}UL"
       end
 
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         'unsigned long'
       end
     end
 
     class ULongLong
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         "#{v}ULL"
       end
 
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         'unsigned long long'
       end
     end
@@ -271,29 +271,29 @@ module IDL
         true
       end
 
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         "#{v}F"
       end
     end
 
     class Double
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         "#{v}"
       end
     end
 
     class LongDouble
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         'long double'
       end
 
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         "#{v}L"
       end
     end
 
     class Boolean
-      def cxx_arg_type(scope = nil)
+      def cxx_arg_type(_scope = nil)
         'ACE_InputCDR::to_boolean'
       end
 
@@ -317,11 +317,11 @@ module IDL
     class Char
       Printables = (0x20)...(0x7f)
       Specials = ['\\', '\'']
-      def cxx_arg_type(scope = nil)
+      def cxx_arg_type(_scope = nil)
         'ACE_InputCDR::to_char'
       end
 
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         if v.is_a?(Printables)
           if Specials.include?(c = v.chr)
             "'\\#{c}'"
@@ -351,11 +351,11 @@ module IDL
     end
 
     class WChar
-      def cxx_arg_type(scope = nil)
+      def cxx_arg_type(_scope = nil)
         'ACE_InputCDR::to_wchar'
       end
 
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         return 'L' + v.to_i.chr.dump.gsub('"', "'") if v.is_a?(::Integer)
         return 'L' + v.to_s[0, 1].dump.gsub('"', "'") unless v.is_a?(::Array)
 
@@ -387,7 +387,7 @@ module IDL
     end
 
     class Octet
-      def cxx_arg_type(scope = nil)
+      def cxx_arg_type(_scope = nil)
         'ACE_InputCDR::to_octet'
       end
 
@@ -406,11 +406,11 @@ module IDL
     end
 
     class String
-      def cxx_type(scope = nil)
+      def cxx_type(_scope = nil)
         (size.to_i > 0) ? "TAOX11_IDL::bounded_string<#{size}>" : 'std::string'
       end
 
-      def proxy_cxxtype(scope = nil)
+      def proxy_cxxtype(_scope = nil)
         cxx_type
       end
 
@@ -426,7 +426,7 @@ module IDL
         (size.to_i > 0) ? "bounded_string<#{size}>" : 'string'
       end
 
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         v.dump
       end
 
@@ -440,11 +440,11 @@ module IDL
     end
 
     class WString
-      def cxx_type(scope = nil)
+      def cxx_type(_scope = nil)
         (size.to_i > 0) ? "TAOX11_IDL::bounded_wstring<#{size}>" : 'std::wstring'
       end
 
-      def proxy_cxxtype(scope = nil)
+      def proxy_cxxtype(_scope = nil)
         cxx_type
       end
 
@@ -460,7 +460,7 @@ module IDL
         (size.to_i > 0) ? "bounded_wstring<#{size}>" : 'wstring'
       end
 
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         return 'L' + v.to_s.dump unless v.is_a?(::Array)
 
         'L"' + v.collect do |(elt, elv)|
@@ -503,7 +503,7 @@ module IDL
         "IDL::traits<#{(typedef || self).cxx_type(scope)}>::ref_type"
       end
 
-      def resolved_cxx_member_type(scope = nil, typedef = nil)
+      def resolved_cxx_member_type(scope = nil, _typedef = nil)
         "IDL::traits<#{resolved_cxx_type(scope)}>::ref_type"
       end
 
@@ -534,7 +534,7 @@ module IDL
 
     class Object
       include ReferenceType_Mixin
-      def cxx_type(scope = nil)
+      def cxx_type(_scope = nil)
         'TAOX11_NAMESPACE::CORBA::Object'
       end
 
@@ -554,14 +554,14 @@ module IDL
         true
       end
 
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         'Object'
       end
     end
 
     class ValueBase
       include ReferenceType_Mixin
-      def cxx_type(scope = nil)
+      def cxx_type(_scope = nil)
         'TAOX11_NAMESPACE::CORBA::ValueBase'
       end
 
@@ -581,17 +581,17 @@ module IDL
         true
       end
 
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         'ValueBase'
       end
     end
 
     class Any
-      def cxx_type(scope = nil)
+      def cxx_type(_scope = nil)
         'TAOX11_NAMESPACE::CORBA::Any'
       end
 
-      def proxy_cxxtype(scope = nil)
+      def proxy_cxxtype(_scope = nil)
         cxx_type
       end
 
@@ -609,7 +609,7 @@ module IDL
     end
 
     class Native
-      def cxx_type(scope = nil)
+      def cxx_type(_scope = nil)
         'void*'
       end
 
@@ -617,7 +617,7 @@ module IDL
         typedef ? typedef.cxx_type(scope) : cxx_type
       end
 
-      def proxy_cxxtype(scope = nil)
+      def proxy_cxxtype(_scope = nil)
         cxx_type
       end
 
@@ -741,7 +741,7 @@ module IDL
         exp.idltype.value_to_s(exp.value, scope)
       end
 
-      def cxx_arg_type(scope = nil)
+      def cxx_arg_type(_scope = nil)
         resolved_type.cxx_arg_type
       end
 
@@ -821,15 +821,15 @@ module IDL
     end
 
     class Fixed
-      def cxx_type(scope = nil)
+      def cxx_type(_scope = nil)
         digits.nil? ? 'TAOX11_NAMESPACE::IDL::Fixed' : "TAOX11_NAMESPACE::IDL::Fixed<#{digits}, #{scale}>"
       end
 
-      def proxy_cxxtype(scope = nil)
+      def proxy_cxxtype(_scope = nil)
         cxx_type
       end
 
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         v.to_s.gsub(/d|D/, '')
       end
     end
