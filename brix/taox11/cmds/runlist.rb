@@ -58,7 +58,7 @@ module BRIX11
         test_argv << '-l' << options[:runlist][:list]
         test_argv << '-r' << (options[:runlist][:root] || File.dirname(options[:runlist][:list]))
         test_argv << '-s' << options[:runlist][:sandbox] if options[:runlist][:sandbox]
-        Common::Configure::Configurator.get_test_config.each { |cfg| test_argv << "-Config" << cfg }
+        Common::Configure::Configurator.get_test_config.each { |cfg| test_argv << '-Config' << cfg }
         while !argv.empty? && argv.first != '--'
           test_argv << argv.shift
         end

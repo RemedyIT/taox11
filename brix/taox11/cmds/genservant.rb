@@ -57,7 +57,7 @@ module BRIX11
         ridl_argv << '--no-skel' unless options[:gensvt][:genskel]
         # find location BRIX servant impl template overrides
         tplpath = File.join(Collection.lookup_path.find { |p| File.directory?(File.join(p, 'templates', 'corba_servant')) } || '', 'templates', 'corba_servant')
-        ridl_argv << "--add-templates" << tplpath
+        ridl_argv << '--add-templates' << tplpath
         ridl_argv << '-Gisrv'
         ridl_argv << "-impl-pfx=#{options[:gensvt][:postfix]}" if options[:gensvt][:postfix]
         idl_files = options[:gensvt][:idl] == true ? Dir.glob('*.idl') : options[:gensvt][:idl].collect { |i| "#{i}.idl" }
