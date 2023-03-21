@@ -315,8 +315,8 @@ module IDL
     end
 
     class Char
-      Printables = 0x20...0x7f
-      Specials = ['\\', '\'']
+      Printables = 0x20...0x7f.freeze
+      Specials = ['\\', '\''].freeze
       def cxx_arg_type(_scope = nil)
         'ACE_InputCDR::to_char'
       end
