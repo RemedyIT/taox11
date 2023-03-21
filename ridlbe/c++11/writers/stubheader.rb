@@ -117,6 +117,7 @@ module IDL
           visitor(InterfaceVisitor).visit_object_traits(node)
         end unless params[:no_object_traits]
       end
+
       def enter_interface(node)
         println
         printiln('// generated from StubHeaderWriter#enter_interface')
@@ -132,6 +133,7 @@ module IDL
         visitor(InterfaceVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_interface(node)
         dec_nest
         visitor(InterfaceVisitor).visit_post(node)
@@ -153,11 +155,13 @@ module IDL
         @fwd_decl_cache[sn] = true
         visitor(StructVisitor).visit_fwd(node)
       end
+
       def enter_struct(node)
         super
         visitor(StructVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_struct(node)
         dec_nest
         visitor(StructVisitor).visit_post(node)
@@ -174,6 +178,7 @@ module IDL
           visitor(ValuetypeVisitor).visit_traits(node)
         end
       end
+
       def enter_valuetype(node)
         sn = node.scoped_cxxname
         unless @fwd_decl_cache.has_key?(sn)
@@ -191,6 +196,7 @@ module IDL
         visitor(ValuetypeVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_valuetype(node)
         dec_nest
         (vtv = visitor(ValuetypeVisitor)).visit_post(node)
@@ -219,6 +225,7 @@ module IDL
         visitor(ExceptionVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_exception(node)
         dec_nest
         visitor(ExceptionVisitor).visit_post(node)
@@ -232,11 +239,13 @@ module IDL
         @fwd_decl_cache[sn] = true
         visitor(UnionVisitor).visit_fwd(node)
       end
+
       def enter_union(node)
         super
         visitor(UnionVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_union(node)
         dec_nest
         visitor(UnionVisitor).visit_post(node)
@@ -607,6 +616,7 @@ module IDL
       def declare_interface(node)
         visitor(InterfaceVisitor).visit_anyop(node)
       end
+
       def enter_interface(node)
         visitor(InterfaceVisitor).visit_anyop(node)
       end
@@ -634,6 +644,7 @@ module IDL
       def declare_union(node)
         visitor(UnionVisitor).visit_anyop(node)
       end
+
       def enter_union(node)
         visitor(UnionVisitor).visit_anyop(node)
       end
@@ -676,6 +687,7 @@ module IDL
 
       def enter_interface(node)
       end
+
       def leave_interface(node)
       end
 

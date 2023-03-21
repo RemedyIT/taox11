@@ -213,6 +213,7 @@ module IDL
                                      @default_pre_includes.include?(inc_file) ||
                                      @default_post_includes.include?(inc_file)
       end
+
       def add_pre_include(inc_file)
         @default_pre_includes << inc_file unless @includes.include?(inc_file) ||
                                      @default_pre_includes.include?(inc_file) ||

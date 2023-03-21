@@ -81,6 +81,7 @@ module IDL
         visitor(InterfaceVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
 

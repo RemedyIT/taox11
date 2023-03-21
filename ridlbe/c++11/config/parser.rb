@@ -17,6 +17,7 @@ module IDL
         super
       end
     end
+
     # chain pre_parse method for user defined root namespace handling
     def pre_parse_with_root_namespace
       ret = pre_parse_without_root_namespace
@@ -114,6 +115,7 @@ module IDL
         end
         @lm_scopes
       end
+
       def scoped_proxy_cxxname
         unless @scoped_proxy_cxxname
           if self.scopes.size == 1 && Cxx11::REMAPPED_ROOT_SCOPES.include?(self.name.to_sym)
@@ -125,6 +127,7 @@ module IDL
         end
         @scoped_proxy_cxxname
       end
+
       def scoped_srvproxy_cxxname
         unless @scoped_srvproxy_cxxname
           if self.scopes.size == 1 && Cxx11::REMAPPED_ROOT_SCOPES.include?(self.name.to_sym)
@@ -143,6 +146,7 @@ module IDL
         # skip include name in name scopes
         enclosure ? enclosure.scoped_proxy_cxxname : ''
       end
+
       def scoped_srvproxy_cxxname
         # skip include name in name scopes
         enclosure ? enclosure.scoped_srvproxy_cxxname : ''
@@ -196,27 +200,35 @@ module IDL
       def proxy_cxxname
         cxxname+STUB_PROXY_SUFFIX
       end
+
       def scoped_proxy_cxxname
         scoped_cxxname+STUB_PROXY_SUFFIX
       end
+
       def srvproxy_cxxname
         cxxname+SRV_PROXY_SUFFIX
       end
+
       def scoped_skel_cxxnamespace
         ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_cxxname+'::' : '')+'POA'
       end
+
       def scoped_srvproxy_cxxname
         scoped_skel_cxxnamespace+'::'+srvproxy_cxxname
       end
+
       def skel_cxxname
         cxxname
       end
+
       def scoped_skel_cxxname
         scoped_skel_cxxnamespace+'::'+cxxname
       end
+
       def tie_cxxname
         cxxname+'_tie'
       end
+
       def scoped_tie_cxxname
         scoped_skel_cxxnamespace+'::'+cxxname+'_tie'
       end
@@ -230,24 +242,31 @@ module IDL
       def obv_cxxname
         cxxname
       end
+
       def scoped_obv_cxxnamespace
         ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_cxxname+'::' : '')+'obv'
       end
+
       def scoped_obv_cxxname
         scoped_obv_cxxnamespace+'::'+obv_cxxname
       end
+
       def factory_cxxname
         cxxname+VALUE_FACTORY_SUFFIX
       end
+
       def scoped_factory_cxxname
         scoped_cxxname+VALUE_FACTORY_SUFFIX
       end
+
       def scoped_skel_cxxnamespace
         ((enclosure && !enclosure.scopes.empty?) ? enclosure.scoped_cxxname+'::' : '')+'POA'
       end
+
       def skel_cxxname
         cxxname
       end
+
       def scoped_skel_cxxname
         scoped_skel_cxxnamespace+'::'+cxxname
       end

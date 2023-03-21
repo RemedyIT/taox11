@@ -447,6 +447,7 @@ module IDL
                                      @default_pre_includes.include?(inc_file) ||
                                      @default_post_includes.include?(inc_file)
       end
+
       def add_pre_include(inc_file)
         @default_pre_includes << inc_file unless @includes.include?(inc_file) ||
                                      @default_pre_includes.include?(inc_file) ||
@@ -665,6 +666,7 @@ module IDL
         printiln('{')
         inc_nest
       end
+
       def leave_scope(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")

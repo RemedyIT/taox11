@@ -86,6 +86,7 @@ module IDL
         ami_handler_interface_with_ami_inheritance.visit_pre(node)
         inc_nest
       end
+
       def leave_interface(node)
         unless !needs_ami_generation?(node)
           dec_nest
@@ -406,6 +407,7 @@ module IDL
         printiln('{')
         inc_nest
       end
+
       def leave_scope(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")

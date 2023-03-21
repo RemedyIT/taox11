@@ -82,6 +82,7 @@ module IDL
         inc_nest  # POA
         inc_nest  # servant skeleton class
       end
+
       def leave_interface(node)
         return if node.is_local? || node.is_abstract?
 
@@ -213,6 +214,7 @@ module IDL
         inc_nest  # POA
         inc_nest  # servant tie template
       end
+
       def leave_interface(node)
         return if node.is_local? || node.is_abstract?
 

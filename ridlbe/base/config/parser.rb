@@ -41,6 +41,7 @@ module IDL
         @scopes.collect{|s| s.unescaped_name}.join('::').freeze
       end
     end
+
     class Node
       # prevents 'hanging' RIDL after exceptions due to Nodes
       # being inspected;

@@ -17,6 +17,7 @@ module IDL
         super
         self.template_root = File.join('impl', 'hdr')
       end
+
       def generate_servant_implementation?
         params[:gen_impl_servant]
       end
@@ -75,6 +76,7 @@ module IDL
           end
         end
       end
+
       def leave_interface(node)
         return if node.is_abstract?
 

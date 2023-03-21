@@ -87,6 +87,7 @@ module IDL
         inc_nest
         inc_nest
       end
+
       def leave_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
 

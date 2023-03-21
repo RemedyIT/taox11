@@ -16,6 +16,7 @@ module IDL
         super
         self.template_root = File.join('impl', 'src')
       end
+
       def generate_servant_implementation?
         params[:gen_impl_servant]
       end

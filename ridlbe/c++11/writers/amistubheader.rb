@@ -245,6 +245,7 @@ module IDL
             def stub_export_include?
               (!params[:amic_export_include].nil?) || super
             end
+
             def stub_export_include
               params[:amic_export_include] || super
             end
@@ -453,7 +454,6 @@ module IDL
           @fwd_decl_cache = {}
       end
 
-
       def post_visit(parser)
       end
 
@@ -593,6 +593,7 @@ module IDL
         inc_nest  # POA
         inc_nest  # servant skeleton class
       end
+
       def leave_interface(node)
         return if !needs_ami_generation?(node)
 

@@ -26,9 +26,11 @@ module IDL
       def println(str="");  @os << str << "\n"; end
       def printi(str="");   @os << indent << str; end
       def printiln(str=""); @os << indent  << str << "\n"; end
+
       def indent()
         @indent * @nest
       end
+
       def nest(in_ = 1)
         @nest += in_
         begin
@@ -68,6 +70,7 @@ module IDL
           @output = output
           @buf = ''
         end
+
         def concat(txt)
           @buf << txt
           if @buf =~ /\n/
@@ -82,6 +85,7 @@ module IDL
           @buf.split("\n").each { |ln| _pln(ln) }
           @buf = ''
         end
+
         # only needed for/called with Ruby >=1.9
         def force_encoding(encoding)
           @buf.force_encoding(encoding)
@@ -100,6 +104,7 @@ module IDL
       def erbout
         @erbout ||= ERBStream.new(self)
       end
+
       def erbout=(t)
         # noop
       end
@@ -268,6 +273,7 @@ module IDL
       def println(str="");  @output.println(str); end
       def printi(str="");   @output.printi(str); end
       def printiln(str=""); @output.printiln(str); end
+
       def nest(in_ = 1, &block)
         @output.nest(in_, &block)
       end
@@ -435,6 +441,7 @@ module IDL
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
+
       def leave_module(node)
         return if self.no_scope_tracking?(node)
 
@@ -444,12 +451,14 @@ module IDL
 
       def declare_interface(node)
       end
+
       def enter_interface(node)
         return if self.no_scope_tracking?(node)
 
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
+
       def leave_interface(node)
         return if self.no_scope_tracking?(node)
 
@@ -459,12 +468,14 @@ module IDL
 
       def declare_valuetype(node)
       end
+
       def enter_valuetype(node)
         return if self.no_scope_tracking?(node)
 
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
+
       def leave_valuetype(node)
         return if self.no_scope_tracking?(node)
 
@@ -486,12 +497,14 @@ module IDL
 
       def declare_struct(node)
       end
+
       def enter_struct(node)
         return if self.no_scope_tracking?(node)
 
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
+
       def leave_struct(node)
         return if self.no_scope_tracking?(node)
 
@@ -505,6 +518,7 @@ module IDL
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
+
       def leave_exception(node)
         return if self.no_scope_tracking?(node)
 
@@ -514,12 +528,14 @@ module IDL
 
       def declare_union(node)
       end
+
       def enter_union(node)
         return if self.no_scope_tracking?(node)
 
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
+
       def leave_union(node)
         return if self.no_scope_tracking?(node)
 

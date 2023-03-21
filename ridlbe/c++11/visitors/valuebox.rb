@@ -17,6 +17,7 @@ module IDL
       def boxed_type_is_pod?
         node.boxed_type.is_pod?
       end
+
       def boxed_type_is_reference?
         node.boxed_type.is_reference?
       end
@@ -28,12 +29,15 @@ module IDL
       def boxed_cxx_in_type
         node.boxed_type.cxx_in_type(cur_scope)
       end
+
       def boxed_cxx_out_type
         node.boxed_type.cxx_out_type(cur_scope)
       end
+
       def boxed_cxx_move_type
         node.boxed_type.cxx_move_type(cur_scope)
       end
+
       def boxed_cxx_byval_type
         node.boxed_type.cxx_byval_type(cur_scope)
       end

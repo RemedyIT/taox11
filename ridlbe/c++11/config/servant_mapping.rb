@@ -29,24 +29,31 @@ module IDL
       def cxx_member_type(scope = nil, typedef = nil)
         "TAOX11_CORBA::servant_traits<#{cxx_type}>::ref_type"
       end
+
       def resolved_cxx_member_type(scope = nil, typedef = nil)
         cxx_member_type
       end
+
       def cxx_return_type(scope = nil)
         cxx_member_type(scope)
       end
+
       def cxx_byval_type(scope = nil)
         cxx_member_type(scope)
       end
+
       def cxx_out_type(scope = nil)
         "#{cxx_member_type(scope)}&"
       end
+
       def cxx_inout_type(scope = nil)
         "#{cxx_member_type(scope)}&"
       end
+
       def cxx_move_type(scope = nil)
         "#{cxx_member_type(scope)}&&"
       end
+
       def is_reference?
         true
       end

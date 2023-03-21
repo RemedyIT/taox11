@@ -197,12 +197,15 @@ module IDL
       def value_to_s(v, scope = nil)
         ''
       end
+
       def cxx_typecode
         "_tc_null"
       end
+
       def scoped_cxx_typecode
         "TAOX11_NAMESPACE::CORBA::#{cxx_typecode}"
       end
+
       def is_standard_type?
         true
       end
@@ -273,6 +276,7 @@ module IDL
       def is_pod?
         true
       end
+
       def value_to_s(v, scope = nil)
         "#{v}F"
       end
@@ -288,6 +292,7 @@ module IDL
       def idltype_name(scope = nil)
         'long double'
       end
+
       def value_to_s(v, scope = nil)
         "#{v}L"
       end
@@ -297,15 +302,19 @@ module IDL
       def cxx_arg_type(scope = nil)
         'ACE_InputCDR::to_boolean'
       end
+
       def cdr_to_fmt
         "ACE_InputCDR::to_boolean (#{super})"
       end
+
       def cdr_from_fmt
         "ACE_OutputCDR::from_boolean (#{super})"
       end
+
       def is_pod?
         true
       end
+
       def os_fmt
         'std::boolalpha << %s << std::noboolalpha'
       end
@@ -318,6 +327,7 @@ module IDL
       def cxx_arg_type(scope = nil)
         'ACE_InputCDR::to_char'
       end
+
       def value_to_s(v, scope = nil)
         if Printables === v
           if Specials.include?(c = v.chr)
@@ -329,15 +339,19 @@ module IDL
           "'#{'\x'+v.chr.unpack('H2').first}'"
         end
       end
+
       def cdr_to_fmt
         "ACE_InputCDR::to_char (#{super})"
       end
+
       def cdr_from_fmt
         "ACE_OutputCDR::from_char (#{super})"
       end
+
       def is_pod?
         true
       end
+
       def os_fmt
         return '"\'" <<  %s << "\'" '
       end
@@ -348,6 +362,7 @@ module IDL
       def cxx_arg_type(scope = nil)
         'ACE_InputCDR::to_wchar'
       end
+
       def value_to_s(v, scope = nil)
         return 'L'+v.to_i.chr.dump.gsub('"', "'") if ::Integer === v
         return 'L'+v.to_s[0, 1].dump.gsub('"', "'") unless ::Array === v
@@ -365,12 +380,15 @@ module IDL
           ''
         end
       end
+
       def cdr_to_fmt
         "ACE_InputCDR::to_wchar (#{super})"
       end
+
       def cdr_from_fmt
         "ACE_OutputCDR::from_wchar (#{super})"
       end
+
       def is_pod?
         true
       end
@@ -380,9 +398,11 @@ module IDL
       def cxx_arg_type(scope = nil)
         'ACE_InputCDR::to_octet'
       end
+
       def cdr_to_fmt
         "ACE_InputCDR::to_octet (#{super})"
       end
+
       def cdr_from_fmt
         "ACE_OutputCDR::from_octet (#{super})"
       end
@@ -397,24 +417,31 @@ module IDL
       def cxx_type(scope = nil)
         (size.to_i>0) ? "TAOX11_IDL::bounded_string<#{size}>" : 'std::string'
       end
+
       def proxy_cxxtype(scope = nil)
         cxx_type
       end
+
       def cxx_typecode
         "_tc_string"
       end
+
       def scoped_cxx_typecode
         "TAOX11_NAMESPACE::CORBA::#{cxx_typecode}"
       end
+
       def cxx_member_type_name
         (size.to_i>0) ? "bounded_string<#{size}>" : 'string'
       end
+
       def value_to_s(v, scope = nil)
         v.dump
       end
+
       def is_standard_type?
         self.size.to_i == 0
       end
+
       def os_fmt
         return ' "\"" <<  %s << "\"" '
       end
@@ -424,18 +451,23 @@ module IDL
       def cxx_type(scope = nil)
         (size.to_i>0) ? "TAOX11_IDL::bounded_wstring<#{size}>" : 'std::wstring'
       end
+
       def proxy_cxxtype(scope = nil)
         cxx_type
       end
+
       def cxx_typecode
         "_tc_wstring"
       end
+
       def scoped_cxx_typecode
         "TAOX11_NAMESPACE::CORBA::#{cxx_typecode}"
       end
+
       def cxx_member_type_name
         (size.to_i>0) ? "bounded_wstring<#{size}>" : 'wstring'
       end
+
       def value_to_s(v, scope = nil)
         return 'L'+v.to_s.dump unless ::Array === v
 
@@ -454,9 +486,11 @@ module IDL
           end
         end.join + '"'
       end
+
       def is_standard_type?
         self.size.to_i == 0
       end
+
       def os_fmt
         return ' %s '
       end
@@ -466,6 +500,7 @@ module IDL
      def idltype_name(scope = nil)
        a = (scope && (scope == node)) ? node.name : ('::'+node.scoped_name)
      end
+
      def idltype_unescaped_name(scope = nil)
        a = (scope && (scope == node)) ? node.unescaped_name : ('::'+node.scoped_unescaped_name)
      end
@@ -475,24 +510,31 @@ module IDL
       def cxx_member_type(scope = nil, typedef = nil)
         "IDL::traits<#{(typedef || self).cxx_type(scope)}>::ref_type"
       end
+
       def resolved_cxx_member_type(scope = nil, typedef = nil)
         "IDL::traits<#{resolved_cxx_type(scope)}>::ref_type"
       end
+
       def cxx_return_type(scope = nil)
         cxx_member_type(scope)
       end
+
       def cxx_byval_type(scope = nil)
         cxx_member_type(scope)
       end
+
       def cxx_out_type(scope = nil)
         "#{cxx_member_type(scope)}&"
       end
+
       def cxx_inout_type(scope = nil)
         "#{cxx_member_type(scope)}&"
       end
+
       def cxx_move_type(scope = nil)
         "#{cxx_member_type(scope)}&&"
       end
+
       def is_reference?
         true
       end
@@ -503,18 +545,23 @@ module IDL
       def cxx_type(scope = nil)
         'TAOX11_NAMESPACE::CORBA::Object'
       end
+
       def cxx_typecode
         "_tc_Object"
       end
+
       def scoped_cxx_typecode
         "TAOX11_NAMESPACE::CORBA::_tc_Object"
       end
+
       def cxx_member_type_name
         'object_reference'
       end
+
       def is_standard_type?
         true
       end
+
       def idltype_name(scope = nil)
         'Object'
       end
@@ -525,18 +572,23 @@ module IDL
       def cxx_type(scope = nil)
         'TAOX11_NAMESPACE::CORBA::ValueBase'
       end
+
       def cxx_member_type_name
         'valuetype_reference'
       end
+
       def cxx_typecode
         "_tc_ValueBase"
       end
+
       def scoped_cxx_typecode
         "TAOX11_NAMESPACE::CORBA::_tc_ValueBase"
       end
+
       def is_standard_type?
         true
       end
+
       def idltype_name(scope = nil)
         'ValueBase'
       end
@@ -546,15 +598,19 @@ module IDL
       def cxx_type(scope = nil)
         'TAOX11_NAMESPACE::CORBA::Any'
       end
+
       def proxy_cxxtype(scope = nil)
         cxx_type
       end
+
       def cxx_typecode
         "_tc_any"
       end
+
       def scoped_cxx_typecode
         "TAOX11_NAMESPACE::CORBA::_tc_any"
       end
+
       def is_standard_type?
         true
       end
@@ -564,6 +620,7 @@ module IDL
       def cxx_type(scope = nil)
         'void*'
       end
+
       def cxx_member_type(scope = nil, typedef = nil)
         typedef ? typedef.cxx_type(scope) : cxx_type
       end
@@ -571,6 +628,7 @@ module IDL
       def proxy_cxxtype(scope = nil)
         cxx_type
       end
+
       def is_reference?
         true
       end
@@ -578,9 +636,11 @@ module IDL
       def cxx_typecode
         ""
       end
+
       def scoped_cxx_typecode
         ""
       end
+
       def is_standard_type?
         false
       end
@@ -704,6 +764,7 @@ module IDL
       def cdr_to_fmt
         resolved_type.cdr_to_fmt
       end
+
       def cdr_from_fmt
         resolved_type.cdr_from_fmt
       end
@@ -772,9 +833,11 @@ module IDL
       def cxx_type(scope = nil)
         digits.nil? ? "TAOX11_NAMESPACE::IDL::Fixed" : "TAOX11_NAMESPACE::IDL::Fixed<#{digits}, #{scale}>"
       end
+
       def proxy_cxxtype(scope = nil)
         cxx_type
       end
+
       def value_to_s(v, scope = nil)
         v.to_s.gsub(/d|D/, '')
       end
@@ -784,15 +847,19 @@ module IDL
       def cxx_type(scope = nil)
         (size.to_i>0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.cxx_member_type(scope)}, #{size}>" : "std::vector<#{basetype.cxx_member_type(scope)}>"
       end
+
       def proxy_cxxtype(scope = nil)
         (size.to_i>0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.proxy_cxxtype(scope)}, #{size}>" : "std::vector<#{basetype.proxy_cxxtype(scope)}>"
       end
+
       def resolved_cxx_type(scope = nil)
         (size.to_i>0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::vector< #{basetype.resolved_cxx_member_type(scope)}>"
       end
+
       def base_traits_cxx_typename
         basetype.cxx_type
       end
+
       # any insertion/extraction operators arg typename
       def cxx_anyop_arg_typename(scope = nil)
         resolved_cxx_type(scope)
@@ -803,22 +870,28 @@ module IDL
       def cxx_type(scope = nil)
         sizes.reverse.inject(basetype.cxx_member_type(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
       end
+
       def proxy_cxxtype(scope = nil)
         sizes.reverse.inject(basetype.proxy_cxxtype(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
       end
+
       def resolved_cxx_type(scope = nil)
         sizes.reverse.inject(basetype.resolved_cxx_member_type(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
       end
+
       def cxx_dim
         sizes.empty? ? '[]' : sizes.collect { |s| "[#{s.to_s}]"}.join
       end
+
       def base_traits_cxx_typename
         basetype.cxx_type
       end
+
       # any insertion/extraction operators arg typename
       def cxx_anyop_arg_typename(scope = nil)
         resolved_cxx_type(scope)
       end
+
       def zero_initializer
         '{{}}'
       end

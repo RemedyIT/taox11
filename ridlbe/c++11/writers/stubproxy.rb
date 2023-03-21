@@ -80,6 +80,7 @@ module IDL
         visitor(InterfaceVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_interface(node)
         unless node.is_local? || node.is_pseudo? || node.is_abstract?
           dec_nest
@@ -431,6 +432,7 @@ module IDL
         printiln('{')
         inc_nest
       end
+
       def leave_scope(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
