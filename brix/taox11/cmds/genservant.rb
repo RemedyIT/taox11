@@ -14,11 +14,11 @@ module BRIX11
       DESC = 'Generate C++ source + header for CORBA servant implementation.'.freeze
 
       OPTIONS = {
-          postfix: nil,
-          idl: true,
-          genskel: false,
-          interfaces: [],
-          shutdowns: true
+        postfix: nil,
+        idl: true,
+        genskel: false,
+        interfaces: [],
+        shutdowns: true
       }
 
       def self.setup(optparser, options)

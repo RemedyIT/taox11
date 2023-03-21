@@ -14,9 +14,9 @@ module BRIX11
       DESC = 'Run test runner script for project.'.freeze
 
       OPTIONS = {
-          name: 'run_test',
-          runopts: {},
-          tool: nil
+        name: 'run_test',
+        runopts: {},
+        tool: nil
       }
 
       TOOLS = {

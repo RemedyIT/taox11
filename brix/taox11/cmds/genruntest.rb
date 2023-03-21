@@ -14,9 +14,9 @@ module BRIX11
       DESC = 'Generate test runner script for CORBA project.'.freeze
 
       OPTIONS = {
-          name: 'run_test',
-          client: 'client',
-          server: 'server'
+        name: 'run_test',
+        client: 'client',
+        server: 'server'
       }
 
       def self.setup(optparser, options)

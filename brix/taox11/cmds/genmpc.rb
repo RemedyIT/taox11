@@ -14,10 +14,10 @@ module BRIX11
       DESC = 'Generate MPC project file for CORBA project.'.freeze
 
       OPTIONS = {
-          name: 'test',
-          idl: true,
-          client: true,
-          server: true
+        name: 'test',
+        idl: true,
+        client: true,
+        server: true
       }
 
       def self.setup(optparser, options)

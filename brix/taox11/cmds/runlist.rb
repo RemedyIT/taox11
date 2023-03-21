@@ -14,9 +14,9 @@ module BRIX11
       DESC = 'Run an auto_run_test regression test list.'.freeze
 
       OPTIONS = {
-          list: nil,
-          root: nil,
-          sandbox: nil
+        list: nil,
+        root: nil,
+        sandbox: nil
       }
 
       def self.setup(optparser, options)

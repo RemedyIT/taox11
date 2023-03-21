@@ -14,14 +14,14 @@ module BRIX11
       DESC = 'Generate a CORBA (test) project for TAOX11.'.freeze
 
       OPTIONS = {
-          name: 'test',
-          client: 'client',
-          server: 'server',
-          modules: [],
-          interface: 'MyTest',
-          folder: true,
-          chdir: nil,
-          build: false
+        name: 'test',
+        client: 'client',
+        server: 'server',
+        modules: [],
+        interface: 'MyTest',
+        folder: true,
+        chdir: nil,
+        build: false
       }
 
       def self.setup(optparser, options)

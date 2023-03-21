@@ -14,12 +14,12 @@ module BRIX11
       DESC = 'Generate C++ source code for CORBA server main.'.freeze
 
       OPTIONS = {
-          name: 'server',
-          idl: true,
-          modules: [],
-          interface: nil,
-          impl: true,
-          svt: true
+        name: 'server',
+        idl: true,
+        modules: [],
+        interface: nil,
+        impl: true,
+        svt: true
       }
 
       def self.setup(optparser, options)

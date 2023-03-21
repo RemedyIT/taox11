@@ -14,10 +14,10 @@ module BRIX11
       DESC = 'Generate IDL definitions for CORBA project.'.freeze
 
       OPTIONS = {
-          name: 'test',
-          modules: [],
-          interface: nil,
-          shutdown: true
+        name: 'test',
+        modules: [],
+        interface: nil,
+        shutdown: true
       }
 
       def self.setup(optparser, options)
