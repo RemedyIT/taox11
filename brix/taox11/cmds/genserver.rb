@@ -33,20 +33,20 @@ module BRIX11
                      'Create includes for IDL generated stub headers from FILE.',
                      'Specify filename without extension. Separate with \',\' when more than one.',
                      'Default: Generate includes for IDL files in working dir') { |v|
-                        options[:gensrv][:idl] = (v ? v.split(',') : true)
+                       options[:gensrv][:idl] = (v ? v.split(',') : true)
                      }
         optparser.on('-i', '--interface', '=NAME',
                      'Defines name of interface for which to activate a servant.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to generate enclosing module(s).',
                      'Default: derived from first IDL file basename (uppercasing first character)') { |v|
-                        options[:gensrv][:modules] = v.split('::')
+                       options[:gensrv][:modules] = v.split('::')
                         options[:gensrv][:interface] = options[:gensrv][:modules].pop
                      }
         optparser.on('-S[FILES]', '--with-servant=[FILES]',
                      'Create includes for CORBA servant implementation headers.',
                      'Specify filenames without extension. Separate with \',\' when more than one.',
                      'Default: Generate include for each \'<idlfile>_impl.h\'.') { |v|
-                        options[:gensrv][:impl] = (v ? v.split(',') : true)
+                       options[:gensrv][:impl] = (v ? v.split(',') : true)
                      }
         optparser.on('-s', '--servant', '=NAME',
                      'Defines name of servant implementation for which to create a servant.',

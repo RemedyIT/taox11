@@ -29,19 +29,19 @@ module BRIX11
         optparser.on('-l', '--list', '=PATH',
                      'Specifies regression test list to feed auto_run_test.',
                      'Default: none') { |v|
-                        options[:runlist][:list] = File.expand_path(v)
+                       options[:runlist][:list] = File.expand_path(v)
                         BRIX11.log_fatal("Cannot access list file #{v}") unless File.file?(options[:runlist][:list])
                      }
         optparser.on('-r', '--root', '=PATH',
                      'Specifies root directory for running the tests.',
                      'Default: <listfile location>') { |v|
-                        options[:runlist][:root] = File.expand_path(v)
+                       options[:runlist][:root] = File.expand_path(v)
                         BRIX11.log_fatal("Cannot access root directory #{v}") unless File.directory?(options[:runlist][:root])
                      }
         optparser.on('-s', '--sandbox', '=SANDBOX',
                      'Specifies sandbox for running each separate test.',
                      'Default: none') { |v|
-                        options[:runlist][:sandbox] = v
+                       options[:runlist][:sandbox] = v
                      }
       end
 

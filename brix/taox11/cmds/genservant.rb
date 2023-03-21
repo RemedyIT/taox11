@@ -30,7 +30,7 @@ module BRIX11
                      'Generate servant implementation(s) from IDL file(s).',
                      'Specify filename without extension. Separate with \',\' when more than one.',
                      'Default: all IDL files in working dir') { |v|
-                        options[:gensvt][:idl] = (v ? v.split(',') : true)
+                       options[:gensvt][:idl] = (v ? v.split(',') : true)
                      }
         optparser.on('--svt-pfx', '=POSTFIX',
                      'Defines postfix to use for generated servant implementation filenames',
@@ -41,7 +41,7 @@ module BRIX11
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to specify enclosing module(s).',
                      'Separate with \',\' when more than one.',
                      'Default: all interfaces having shutdown method.') { |v|
-                        options[:gensvt][:shutdowns] = v.split(',')
+                       options[:gensvt][:shutdowns] = v.split(',')
                      }
         optparser.on('--without-shutdown',
                      'Do not generate any shutdown implementations.',

@@ -60,7 +60,7 @@ module BRIX11
       Thread.current[:ridl_engine] = ridl_engine
       begin
         File.open(path) do |f|
-         return ridl_engine.parse(f, ridl_opts)
+          return ridl_engine.parse(f, ridl_opts)
         end
       ensure
         Thread.current[:ridl_engine] = cur_engine

@@ -42,7 +42,7 @@ module BRIX11
                      'Defines name to use for test interface.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to generate enclosing module(s).',
                      "Default: #{options[:gentest][:interface]}") { |v|
-                        options[:gentest][:modules] = v.split('::')
+                       options[:gentest][:modules] = v.split('::')
                         options[:gentest][:interface] = options[:gentest][:modules].pop
                      }
         optparser.on('--no-folder',
