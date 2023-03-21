@@ -57,11 +57,11 @@ module IDL
     module LeafMixin
       def cxx_repository_id
         if @repo_id.nil?
-          @repo_ver = "1.0" unless @repo_ver
-          format("IDL:%s%s:%s",
-                  if @prefix.empty? then "" else @prefix+"/" end,
+          @repo_ver = '1.0' unless @repo_ver
+          format('IDL:%s%s:%s',
+                  if @prefix.empty? then '' else @prefix+'/' end,
                   # filter out the inserted root_namespace if any
-                  self.scopes.select{|s| !s.is_a?(IDL::Delegator::Cxx11RootModule) }.collect{|s| s.name}.join("/"),
+                  self.scopes.select{|s| !s.is_a?(IDL::Delegator::Cxx11RootModule) }.collect{|s| s.name}.join('/'),
                   @repo_ver)
         else
           @repo_id

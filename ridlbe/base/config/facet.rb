@@ -316,7 +316,7 @@ module IDL
                   # stop checking this facets deps
                   break
                 else
-                  IDL.error "ERROR: Cannot find dependency" +
+                  IDL.error 'ERROR: Cannot find dependency' +
                             " [#{fdep[:backend] ? "#{fdep[:backend]}/#{fdep[:facet]}": fdep[:facet]}]" +
                             " for RIDL :#{name} backend facet #{fct.name}"
                   exit(1)

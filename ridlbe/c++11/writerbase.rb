@@ -27,7 +27,7 @@ module IDL
 
       def write_open_scope(scope)
         printiln("namespace #{scope.cxxname}")
-        printiln("{")
+        printiln('{')
         inc_nest
       end
 

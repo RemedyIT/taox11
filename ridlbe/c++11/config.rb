@@ -204,7 +204,7 @@ module IDL
         }
 
         base = File.join(File.dirname(__FILE__), '..', '..', 'tao', 'x11', 'versionx11.h')
-        File.open(base, "r") do |file|
+        File.open(base, 'r') do |file|
           while (line = file.gets)
             if VERSION_REGEXP =~ line
               x11_version[::Regexp.last_match(1).downcase.to_sym] = ::Regexp.last_match(2).to_i
@@ -261,15 +261,15 @@ module IDL
         # c++11 specific option switches
 
         optlist.for_switch '--no-stubs',
-            description: ["Do not generate client stubs.",
-                             "Default: off"] do |swcfg|
+            description: ['Do not generate client stubs.',
+                             'Default: off'] do |swcfg|
           swcfg.on_exec do |arg, params|
             params[:client_stubs] = false
           end
         end
         optlist.for_switch '--no-skel',
-                           description: ["Do not generate servant skeletons.",
-                                            "Default: off"] do |swcfg|
+                           description: ['Do not generate servant skeletons.',
+                                            'Default: off'] do |swcfg|
           swcfg.on_exec do |arg, params|
             params[:svnt_skeletons] = false
           end

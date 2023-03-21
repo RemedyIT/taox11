@@ -103,7 +103,7 @@ module IDL
         println
         visitor(InterfaceVisitor).visit_skel(node)
         dec_nest
-        printiln("} // namespace POA")
+        printiln('} // namespace POA')
         println
         super
       end

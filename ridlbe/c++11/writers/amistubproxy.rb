@@ -485,7 +485,7 @@ module IDL
         dec_nest
         ami_handler_interface.visit_post(node)
         dec_nest
-        printiln("} // namespace POA")
+        printiln('} // namespace POA')
         println
         super
       end

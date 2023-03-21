@@ -86,7 +86,7 @@ module IDL
         dec_nest
         visitor(InterfaceVisitor).visit_post(node)
         dec_nest
-        printiln("} // namespace POA")
+        printiln('} // namespace POA')
         println
         super
       end

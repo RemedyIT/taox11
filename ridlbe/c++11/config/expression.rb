@@ -33,31 +33,31 @@ module IDL
         when Expression::Operation::UnaryPlus
           s = expression_to_s(op[0], scope)
         when Expression::Operation::UnaryMinus
-          s = "-" + expression_to_s(op[0], scope)
+          s = '-' + expression_to_s(op[0], scope)
         when Expression::Operation::UnaryNot
-          s = "~" + expression_to_s(op[0], scope)
+          s = '~' + expression_to_s(op[0], scope)
         when Expression::Operation::Or
-          s = expression_to_s(op[0], scope) + " | " + expression_to_s(op[1], scope)
+          s = expression_to_s(op[0], scope) + ' | ' + expression_to_s(op[1], scope)
         when Expression::Operation::And
-          s = expression_to_s(op[0], scope) + " & " + expression_to_s(op[1], scope)
+          s = expression_to_s(op[0], scope) + ' & ' + expression_to_s(op[1], scope)
         when Expression::Operation::LShift
-          s = expression_to_s(op[0], scope) + " << " + expression_to_s(op[1], scope)
+          s = expression_to_s(op[0], scope) + ' << ' + expression_to_s(op[1], scope)
         when Expression::Operation::RShift
-          s = expression_to_s(op[0], scope) + " >> " + expression_to_s(op[1], scope)
+          s = expression_to_s(op[0], scope) + ' >> ' + expression_to_s(op[1], scope)
         when Expression::Operation::Add
-          s = expression_to_s(op[0], scope) + " + " + expression_to_s(op[1], scope)
+          s = expression_to_s(op[0], scope) + ' + ' + expression_to_s(op[1], scope)
         when Expression::Operation::Minus
-          s = expression_to_s(op[0], scope) + " - " + expression_to_s(op[1], scope)
+          s = expression_to_s(op[0], scope) + ' - ' + expression_to_s(op[1], scope)
         when Expression::Operation::Mult
-          s = expression_to_s(op[0], scope) + " * " + expression_to_s(op[1], scope)
+          s = expression_to_s(op[0], scope) + ' * ' + expression_to_s(op[1], scope)
         when Expression::Operation::Div
-          s = expression_to_s(op[0], scope) + " / " + expression_to_s(op[1], scope)
+          s = expression_to_s(op[0], scope) + ' / ' + expression_to_s(op[1], scope)
         when Expression::Operation::Mod
-          s = expression_to_s(op[0], scope) + " % " + expression_to_s(op[1], scope)
+          s = expression_to_s(op[0], scope) + ' % ' + expression_to_s(op[1], scope)
         else
           raise "unknown operation: #{exp.type.name}"
         end
-        "(" + s + ")"
+        '(' + s + ')'
       end
     end
   end

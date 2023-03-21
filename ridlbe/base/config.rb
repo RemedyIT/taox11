@@ -23,7 +23,7 @@ module IDL
         }
 
         base = File.join(File.dirname(__FILE__), '..', '..', 'tao', 'x11', 'versionx11.h')
-        File.open(base, "r") do |file|
+        File.open(base, 'r') do |file|
           while (line = file.gets)
             if VERSION_REGEXP =~ line
               x11_version[::Regexp.last_match(1).downcase.to_sym] = ::Regexp.last_match(2).to_i

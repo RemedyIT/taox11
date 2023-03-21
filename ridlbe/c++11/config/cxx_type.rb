@@ -98,7 +98,7 @@ module IDL
     # typecode name methods
 
     def cxx_typecode
-      self.respond_to?(:node) ? "_tc_#{node.cxxname}" : ""
+      self.respond_to?(:node) ? "_tc_#{node.cxxname}" : ''
     end
 
     def scoped_cxx_typecode
@@ -197,7 +197,7 @@ module IDL
       end
 
       def cxx_typecode
-        "_tc_null"
+        '_tc_null'
       end
 
       def scoped_cxx_typecode
@@ -415,7 +415,7 @@ module IDL
       end
 
       def cxx_typecode
-        "_tc_string"
+        '_tc_string'
       end
 
       def scoped_cxx_typecode
@@ -449,7 +449,7 @@ module IDL
       end
 
       def cxx_typecode
-        "_tc_wstring"
+        '_tc_wstring'
       end
 
       def scoped_cxx_typecode
@@ -539,11 +539,11 @@ module IDL
       end
 
       def cxx_typecode
-        "_tc_Object"
+        '_tc_Object'
       end
 
       def scoped_cxx_typecode
-        "TAOX11_NAMESPACE::CORBA::_tc_Object"
+        'TAOX11_NAMESPACE::CORBA::_tc_Object'
       end
 
       def cxx_member_type_name
@@ -570,11 +570,11 @@ module IDL
       end
 
       def cxx_typecode
-        "_tc_ValueBase"
+        '_tc_ValueBase'
       end
 
       def scoped_cxx_typecode
-        "TAOX11_NAMESPACE::CORBA::_tc_ValueBase"
+        'TAOX11_NAMESPACE::CORBA::_tc_ValueBase'
       end
 
       def is_standard_type?
@@ -596,11 +596,11 @@ module IDL
       end
 
       def cxx_typecode
-        "_tc_any"
+        '_tc_any'
       end
 
       def scoped_cxx_typecode
-        "TAOX11_NAMESPACE::CORBA::_tc_any"
+        'TAOX11_NAMESPACE::CORBA::_tc_any'
       end
 
       def is_standard_type?
@@ -626,11 +626,11 @@ module IDL
       end
 
       def cxx_typecode
-        ""
+        ''
       end
 
       def scoped_cxx_typecode
-        ""
+        ''
       end
 
       def is_standard_type?
@@ -646,7 +646,7 @@ module IDL
       end
 
       def cxx_member_type_name
-        "valuetype_reference"
+        'valuetype_reference'
       end
 
       def proxy_cxxtype(scope = nil)
@@ -662,7 +662,7 @@ module IDL
       end
 
       def cxx_member_type_name
-        "valuetype_reference"
+        'valuetype_reference'
       end
 
       def proxy_cxxtype(scope = nil)
@@ -770,7 +770,7 @@ module IDL
       end
 
       def cxx_member_type_name
-        node.is_abstract? ? "abstractbase_reference" : "object_reference"
+        node.is_abstract? ? 'abstractbase_reference' : 'object_reference'
       end
 
       def proxy_cxxtype(scope = nil)
@@ -822,7 +822,7 @@ module IDL
 
     class Fixed
       def cxx_type(scope = nil)
-        digits.nil? ? "TAOX11_NAMESPACE::IDL::Fixed" : "TAOX11_NAMESPACE::IDL::Fixed<#{digits}, #{scale}>"
+        digits.nil? ? 'TAOX11_NAMESPACE::IDL::Fixed' : "TAOX11_NAMESPACE::IDL::Fixed<#{digits}, #{scale}>"
       end
 
       def proxy_cxxtype(scope = nil)

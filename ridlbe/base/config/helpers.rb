@@ -121,7 +121,7 @@ module IDL
               when Module
                 arg
               else
-                raise ArgumentError, "helper must be a Module"
+                raise ArgumentError, 'helper must be a Module'
             end
           end
         end

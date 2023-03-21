@@ -11,7 +11,7 @@ module IDL
   module Cxx11
     module VersionHelper
       def taox11_version_header
-        "tao/x11/versionx11.h"
+        'tao/x11/versionx11.h'
       end
 
       def taox11_version

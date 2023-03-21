@@ -138,7 +138,7 @@ module IDL
       end
 
       def cxx_typecode
-        self.respond_to?(:node) ? "_tc_AMI_#{node.cxxname}Handler" : ""
+        self.respond_to?(:node) ? "_tc_AMI_#{node.cxxname}Handler" : ''
       end
 
       def scoped_cxx_typecode
