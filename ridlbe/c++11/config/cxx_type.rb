@@ -401,7 +401,6 @@ module IDL
 
       def os_fmt
         ' std::hex << "hex:" << (int)%s << std::dec'
-#        '%s'
        end
     end
 
