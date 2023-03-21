@@ -134,6 +134,6 @@ module BRIX11
       end
 
       Command.register('generate:server|srv', DESC, TAOX11::GenerateServer)
-    end # GenerateServer
-  end # Common
-end # BRIX11
+    end
+  end
+end

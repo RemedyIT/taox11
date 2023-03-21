@@ -90,7 +90,7 @@ module BRIX11
           end
         end
         true # make sure to return true if we get to here to allow chaining
-      end # run
+      end
 
       module ImplHelper
         self.singleton_class.class_eval do
@@ -125,6 +125,6 @@ module BRIX11
       end
 
       Command.register('generate:servant|svt', DESC, TAOX11::GenerateServant)
-    end # GenerateServant
-  end # Common
-end # BRIX11
+    end
+  end
+end

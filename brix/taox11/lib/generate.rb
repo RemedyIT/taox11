@@ -79,5 +79,5 @@ module BRIX11
         end
       end
     end
-  end # Generate
-end # BRIX11
+  end
+end

@@ -113,6 +113,6 @@ module BRIX11
       end
 
       Command.register('generate:mpc', DESC, TAOX11::GenerateMPC)
-    end # GenerateMPC
-  end # Common
-end # BRIX11
+    end
+  end
+end

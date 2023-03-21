@@ -81,6 +81,6 @@ module BRIX11
       end
 
       Command.register('generate:idl', DESC, TAOX11::GenerateIDL)
-    end # GenerateIDL
-  end # Common
-end # BRIX11
+    end
+  end
+end

@@ -66,5 +66,5 @@ module BRIX11
         Thread.current[:ridl_engine] = cur_engine
       end
     end
-  end # ERIDL
-end # BRIX11
+  end
+end

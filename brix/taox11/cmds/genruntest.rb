@@ -69,6 +69,6 @@ module BRIX11
       end
 
       Command.register('generate:runner|script', DESC, TAOX11::GenerateRunTest)
-    end # GenerateTest
-  end # Common
-end # BRIX11
+    end
+  end
+end

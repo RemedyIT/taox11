@@ -68,6 +68,6 @@ module BRIX11
       end
 
       Command.register('run:list', DESC, TAOX11::RunList)
-    end # RunList
-  end # Common
-end # BRIX11
+    end
+  end
+end

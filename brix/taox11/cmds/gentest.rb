@@ -114,6 +114,6 @@ module BRIX11
       end
 
       Command.register('generate:test|project|prj', DESC, TAOX11::GenerateTest)
-    end # GenerateTest
-  end # Common
-end # BRIX11
+    end
+  end
+end

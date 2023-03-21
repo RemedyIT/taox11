@@ -50,7 +50,7 @@ module BRIX11
       def add_user_templates(path)
         template_path.insert(0, path) # insert path at head of search list
       end
-    end # << self
+    end
 
     def initialize(path, dir = nil, root = nil, lastdir = nil, lastroot = nil)
       @path = path.to_s
@@ -170,5 +170,5 @@ module BRIX11
     def self.exists?(path)
       self.new(path).exists?
     end
-  end # Template
-end # BRIX11
+  end
+end

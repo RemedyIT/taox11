@@ -109,6 +109,6 @@ module BRIX11
       end
 
       Command.register('generate:client', DESC, TAOX11::GenerateClient)
-    end # GenerateClient
-  end # Common
-end # BRIX11
+    end
+  end
+end

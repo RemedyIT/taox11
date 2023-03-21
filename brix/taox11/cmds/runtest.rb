@@ -92,6 +92,6 @@ module BRIX11
       end
 
       Command.register('run:test|script', DESC, TAOX11::RunTest)
-    end # RunTest
-  end # Common
-end # BRIX11
+    end
+  end
+end
