@@ -11,7 +11,6 @@ require 'brix11/command'
 module BRIX11
   module TAOX11
     class GenerateTest < Command::Base
-
       DESC = 'Generate a CORBA (test) project for TAOX11.'.freeze
 
       OPTIONS = {

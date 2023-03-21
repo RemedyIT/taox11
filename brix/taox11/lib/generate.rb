@@ -28,7 +28,6 @@ module BRIX11
 
   module Generate
     class Visitor < IDL::Base::Visitor
-
       def initialize(output, properties, writer)
         super
       end
@@ -60,11 +59,9 @@ module BRIX11
         IDL::Base::Visitor.context(self, properties, extra_props).parse(@output, BRIX11::Template.new(_file), extra_props)
         @output.erbout.flush
       end
-
     end
 
     class Writer < IDL::Base::Writer
-
       def initialize(output = STDOUT, opts = {})
         super
         self.template_root = ''
@@ -81,7 +78,6 @@ module BRIX11
           super
         end
       end
-
     end
   end # Generate
 end # BRIX11

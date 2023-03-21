@@ -9,7 +9,6 @@
 
 module BRIX11
   class Template
-
     class << self
       def template_path
         # get template lookup paths for full backend hierarchy
@@ -168,6 +167,5 @@ module BRIX11
     def self.exists?(path)
       self.new(path).exists?
     end
-
   end # Template
 end # BRIX11

@@ -11,7 +11,6 @@ require 'brix11/command'
 module BRIX11
   module TAOX11
     class RunTest < Command::Base
-
       DESC = 'Run test runner script for project.'.freeze
 
       OPTIONS = {

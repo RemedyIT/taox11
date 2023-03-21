@@ -11,7 +11,6 @@ require 'brix11/command'
 module BRIX11
   module TAOX11
     class GenerateServant < Command::Base
-
       DESC = 'Generate C++ source + header for CORBA servant implementation.'.freeze
 
       OPTIONS = {

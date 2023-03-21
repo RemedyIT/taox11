@@ -11,7 +11,6 @@ require 'brix11/command'
 module BRIX11
   module TAOX11
     class GenerateIDL < Command::Base
-
       DESC = 'Generate IDL definitions for CORBA project.'.freeze
 
       OPTIONS = {
