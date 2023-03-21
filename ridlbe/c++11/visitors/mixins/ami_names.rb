@@ -116,7 +116,7 @@ module IDL
          res = node.repository_id # "IDL:A/Foo_Test:1.0" or "IDL:Foo_Test:1.0"
          # skip repo_version
          repo_ver_index = res.rindex(':')
-         res.insert((repo_ver_index), 'Handler') # IDL:A/Foo_TestHandler:1.0"
+         res.insert(repo_ver_index, 'Handler') # IDL:A/Foo_TestHandler:1.0"
          # find last '/'
          repo_index = res.rindex('/')
          if repo_index

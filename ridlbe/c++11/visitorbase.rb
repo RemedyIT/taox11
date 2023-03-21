@@ -106,7 +106,7 @@ module IDL
       end
 
       def amic_export_include?
-        (!params[:amic_export_include].nil?) || self.stub_export_include?
+        !params[:amic_export_include].nil? || self.stub_export_include?
       end
 
       def amic_export_include
@@ -118,7 +118,7 @@ module IDL
       end
 
       def implementation_export_include?
-        (!params[:impl_export_include].nil?) || self.export_include?
+        !params[:impl_export_include].nil? || self.export_include?
       end
 
       def implementation_export_include

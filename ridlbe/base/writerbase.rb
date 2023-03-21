@@ -92,7 +92,7 @@ module IDL
         private
 
         def _pln(ln)
-          @output.print(@output.indent) if (!ln.empty?) && (ln =~ /^\s*\#/).nil?
+          @output.print(@output.indent) if !ln.empty? && (ln =~ /^\s*\#/).nil?
           @output.println(ln)
         end
       end

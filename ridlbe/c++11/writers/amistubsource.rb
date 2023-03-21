@@ -892,7 +892,7 @@ module IDL
 
           # find base typedef for sequence
           res_idl_type = idl_type
-          while !(res_idl_type.node.idltype.is_a?(IDL::Type::Sequence))
+          while !res_idl_type.node.idltype.is_a?(IDL::Type::Sequence)
             res_idl_type = res_idl_type.node.idltype
           end
           visitor(SequenceVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
@@ -902,7 +902,7 @@ module IDL
 
           # find base typedef for array
           res_idl_type = idl_type
-          while !(res_idl_type.node.idltype.is_a?(IDL::Type::Array))
+          while !res_idl_type.node.idltype.is_a?(IDL::Type::Array)
             res_idl_type = res_idl_type.node.idltype
           end
           # recheck if already done

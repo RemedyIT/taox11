@@ -100,7 +100,7 @@ module IDL
       def visit_include(node)
         return if File.basename(node.filename) == 'orb.idl'
         return if !((@params[:ami] && node.has_ami_interfaces_included?) ||
-                    (@params[:ami_bc] && (node.has_interfaces_ami_candidates)))
+                    (@params[:ami_bc] && node.has_interfaces_ami_candidates))
 
         at_global_scope do
           visitor(IncludeVisitor).visit(node)
@@ -239,7 +239,7 @@ module IDL
           # Overloads for this visitor only.
           v.class_eval do
             def stub_export_include?
-              (!params[:amic_export_include].nil?) || super
+              !params[:amic_export_include].nil? || super
             end
 
             def stub_export_include

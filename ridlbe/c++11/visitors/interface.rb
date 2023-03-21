@@ -41,7 +41,7 @@ module IDL
       end
 
       def is_concrete?
-        !(is_abstract?)
+        !is_abstract?
       end
 
       def has_concrete_base?

@@ -36,7 +36,7 @@ module IDL
         # original context defining the attribute is different from the current context
         interface.node != node.enclosure &&
             # and the current context is not a valuetype or the defining context was an abstract interface
-            (!(interface.node.is_a?(IDL::AST::Valuetype)) || (node.enclosure.is_a?(IDL::AST::Interface) && node.enclosure.is_abstract?))
+            (!interface.node.is_a?(IDL::AST::Valuetype) || (node.enclosure.is_a?(IDL::AST::Interface) && node.enclosure.is_abstract?))
       end
 
       def defining_interface

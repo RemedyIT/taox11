@@ -32,7 +32,7 @@ module IDL
       end
 
       def is_concrete?
-        (!node.is_abstract?) && node.initializers.empty? && !node.has_operations_or_attributes?
+        !node.is_abstract? && node.initializers.empty? && !node.has_operations_or_attributes?
       end
 
       def is_derived?

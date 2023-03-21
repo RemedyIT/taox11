@@ -315,7 +315,7 @@ module IDL
     end
 
     class Char
-      Printables = (0x20)...(0x7f)
+      Printables = 0x20...0x7f
       Specials = ['\\', '\'']
       def cxx_arg_type(_scope = nil)
         'ACE_InputCDR::to_char'
