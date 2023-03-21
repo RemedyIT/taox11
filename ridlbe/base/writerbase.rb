@@ -222,7 +222,7 @@ module IDL
             tpl_list.concat(tpl_ext[:prepend]) if tpl_ext.has_key?(:prepend)
             tpl_list << tpl if Base::Template.exists?(File.join(params[:template_root], tpl.to_s))
             tpl_list.concat(tpl_ext[:append]) if tpl_ext.has_key?(:append)
-            return [tpl_list.collect {|_tpl| File.join(self.template_root, _tpl.to_s)}]
+            return [tpl_list.collect { |_tpl| File.join(self.template_root, _tpl.to_s) }]
           end
 
           return nil

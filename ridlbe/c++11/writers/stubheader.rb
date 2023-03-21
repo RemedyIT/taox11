@@ -85,7 +85,7 @@ module IDL
       end
 
       def doc_scoped_name(node)
-        visitor(Cxx11::NodeVisitorBase) {|v| v.visit(node) }.doc_scoped_name
+        visitor(Cxx11::NodeVisitorBase) { |v| v.visit(node) }.doc_scoped_name
       end
 
       def enter_module(node)

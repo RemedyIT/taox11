@@ -28,7 +28,7 @@ module IDL
         def depends_on(*args)
           deplist = args.inject([]) do |l, a|
             if a.is_a?(Hash)
-              l.concat(a.collect {|b, f| { backend: b, facet: f.to_sym }})
+              l.concat(a.collect { |b, f| { backend: b, facet: f.to_sym } })
             else
               l << { facet: a.to_sym }
             end
@@ -41,7 +41,7 @@ module IDL
         def ignore_on_missing(*args)
           deplist = args.inject([]) do |l, a|
             if a.is_a?(Hash)
-              l.concat(a.collect {|b, f| { backend: b, facet: f.to_sym }})
+              l.concat(a.collect { |b, f| { backend: b, facet: f.to_sym } })
             else
               l << { facet: a.to_sym }
             end
@@ -53,12 +53,12 @@ module IDL
 
         def setup_before(*args)
           facet_config[:ordering] ||= []
-          facet_config[:ordering].concat args.collect {|a| [:before, a.to_sym]}
+          facet_config[:ordering].concat args.collect { |a| [:before, a.to_sym] }
         end
 
         def setup_after(*args)
           facet_config[:ordering] ||= []
-          facet_config[:ordering].concat args.collect {|a| [:after, a.to_sym]}
+          facet_config[:ordering].concat args.collect { |a| [:after, a.to_sym] }
         end
 
         def on_setup(&block)
@@ -131,9 +131,9 @@ module IDL
         @copyright = facet_config_[:copyright]
         ver = facet_config_[:version]
         @version = (ver.is_a?(Hash) ? ver : { major: ver.to_i, minor: 0, release: 0 })
-        self.class.__send__(:define_method, :_setup_facet, &(facet_config_[:setup] || Proc.new {|_, _| }))
+        self.class.__send__(:define_method, :_setup_facet, &(facet_config_[:setup] || Proc.new { |_, _| }))
         self.class.__send__(:private, :_setup_facet)
-        self.class.__send__(:define_method, :_process_input, &(facet_config_[:process_input] || Proc.new {|_, _| }))
+        self.class.__send__(:define_method, :_process_input, &(facet_config_[:process_input] || Proc.new { |_, _| }))
         self.class.__send__(:private, :_process_input)
       end
 
@@ -190,10 +190,10 @@ module IDL
       def order_facets
         unless @orderedset
           # first collect all facets without ordering deps
-          @orderedset = @facets.values.select {|fct| fct.facet_config[:ordering].nil? }
+          @orderedset = @facets.values.select { |fct| fct.facet_config[:ordering].nil? }
           IDL.log(4, "[#{@be.name}] > collected these unordered facets #{@orderedset}")
           # next insert/append facets *with* ordering deps
-          @facets.values.select {|fct| fct.facet_config[:ordering] }.each do |fct|
+          @facets.values.select { |fct| fct.facet_config[:ordering] }.each do |fct|
             @orderedset.insert(find_ordered_pos(fct), fct)
             IDL.log(4, "[#{@be.name}] > facet order is now #{@orderedset}")
           end
@@ -335,12 +335,12 @@ module IDL
       end
 
       def lookup_path_with_facets
-        (_ordered_facets.collect {|fct| fct.root }).concat(lookup_path_without_facets)
+        (_ordered_facets.collect { |fct| fct.root }).concat(lookup_path_without_facets)
       end
 
       def setup_be_with_facets(optlist, idl_options)
         # load any facets available on the backend search path
-        _facet_list = (idl_options[:be_path] || []).collect {|p| Dir[File.join(p, 'ridlbe', "#{name}", 'facets', '*')]}.flatten
+        _facet_list = (idl_options[:be_path] || []).collect { |p| Dir[File.join(p, 'ridlbe', "#{name}", 'facets', '*')] }.flatten
         # _facet_list = Dir[File.join(root, 'facets', '*')]
         IDL.log(2, "[#{name}] > found these Facet folders #{_facet_list}")
         _facet_list.select { |p| File.directory?(p) }.each do |p|

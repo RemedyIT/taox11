@@ -362,7 +362,7 @@ module IDL
       end
 
       def scoped_enclosure_name
-        @scoped_enclosure_name ||= @node.enclosure.scopes.collect {|s| s.name }.join('::')
+        @scoped_enclosure_name ||= @node.enclosure.scopes.collect { |s| s.name }.join('::')
       end
 
       def in_module_scope?

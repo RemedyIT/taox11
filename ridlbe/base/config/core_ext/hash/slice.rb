@@ -43,7 +43,7 @@ class Hash
   #   {:a => 1, :b => 2, :c => 3, :d => 4}.extract!(:a, :b) # => {:a => 1, :b => 2}
   def extract!(*keys)
     result = {}
-    keys.each {|key| result[key] = delete(key) }
+    keys.each { |key| result[key] = delete(key) }
     result
   end
 end

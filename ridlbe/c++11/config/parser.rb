@@ -61,7 +61,7 @@ module IDL
           format('IDL:%s%s:%s',
                   if @prefix.empty? then '' else @prefix + '/' end,
                   # filter out the inserted root_namespace if any
-                  self.scopes.select{|s| !s.is_a?(IDL::Delegator::Cxx11RootModule) }.collect{|s| s.name}.join('/'),
+                  self.scopes.select{ |s| !s.is_a?(IDL::Delegator::Cxx11RootModule) }.collect{ |s| s.name }.join('/'),
                   @repo_ver)
         else
           @repo_id

@@ -83,11 +83,11 @@ module IDL
       end
 
       def supports_abstract_interfaces?
-        node.interfaces.any? {|_if| _if.is_abstract? }
+        node.interfaces.any? { |_if| _if.is_abstract? }
       end
 
       def abstract_interfaces
-        @abstract_interfaces ||= node.interfaces.find_all {|_if| _if.is_abstract? }.collect do |intf|
+        @abstract_interfaces ||= node.interfaces.find_all { |_if| _if.is_abstract? }.collect do |intf|
           (intfv = visitor(InterfaceVisitor)).visit(intf)
           intfv
         end
@@ -129,7 +129,7 @@ module IDL
           end
           interface_ancestor_nodes.inject(@attributes) do |attlist, intf|
             intf.attributes.inject(attlist) do |_attlist, att|
-              _attlist << visitor(AttributeVisitor) {|v| v.visit(att); v.interface(node) }
+              _attlist << visitor(AttributeVisitor) { |v| v.visit(att); v.interface(node) }
               _attlist
             end
           end

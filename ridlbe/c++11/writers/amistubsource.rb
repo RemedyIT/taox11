@@ -489,7 +489,7 @@ module IDL
         # Overload for this visitor only
         intf.class_eval do
           def supported_interface_ids
-            @sup_intf_ids ||= (ancestors.collect {|ancestor| ancestor.ami_repository_id } << ami_repository_id)
+            @sup_intf_ids ||= (ancestors.collect { |ancestor| ancestor.ami_repository_id } << ami_repository_id)
           end
         end
         intf.visit_proxy(node)
@@ -809,7 +809,7 @@ module IDL
         # Overload for this visitor only
         intf.class_eval do
           def supported_interface_ids
-            @sup_intf_ids ||= (ancestors.collect {|ancestor| ancestor.ami_repository_id } << ami_repository_id)
+            @sup_intf_ids ||= (ancestors.collect { |ancestor| ancestor.ami_repository_id } << ami_repository_id)
           end
         end
         intf.visit_skel(node)

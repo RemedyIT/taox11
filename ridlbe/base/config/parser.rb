@@ -37,7 +37,7 @@ module IDL
   module AST
     class Leaf
       def scoped_unescaped_name
-        @scopes.collect{|s| s.unescaped_name}.join('::').freeze
+        @scopes.collect{ |s| s.unescaped_name }.join('::').freeze
       end
     end
 
@@ -68,7 +68,7 @@ module IDL
           end
         end
         # resolve scoped name
-        names.each {|nm| _n = _n.resolve(nm); break unless _n }
+        names.each { |nm| _n = _n.resolve(nm); break unless _n }
         _n
       end
     end # ClassMethods

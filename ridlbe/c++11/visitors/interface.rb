@@ -102,7 +102,7 @@ module IDL
       public
 
       def supported_interface_ids
-        @sup_intf_ids ||= (collect_ancestors([], node).collect {|ancestor| ancestor.repository_id } << node.repository_id)
+        @sup_intf_ids ||= (collect_ancestors([], node).collect { |ancestor| ancestor.repository_id } << node.repository_id)
       end
 
       # return all operations declared in this interface
@@ -160,7 +160,7 @@ module IDL
             if _base.is_abstract?
               # add all abstract attributes (incl. inherited)
               @abs_attributes.concat(_base.attributes(true).collect do |att|
-                visitor(AttributeVisitor) {|v| v.visit(att); v.interface(node) }
+                visitor(AttributeVisitor) { |v| v.visit(att); v.interface(node) }
               end)
             end
           end unless node.is_abstract? # do not add if this node is abstract itself
@@ -180,7 +180,7 @@ module IDL
 
       def all_attributes # incl. inherited
         @all_attributes ||= node.attributes(true).collect do |att|
-          visitor(AttributeVisitor) {|v| v.visit(att); v.interface(node) }
+          visitor(AttributeVisitor) { |v| v.visit(att); v.interface(node) }
         end
       end
 

@@ -40,13 +40,13 @@ module IDL
       def default_member
         unless @def_member
           um = node.members.find { |m| m.labels.include?(:default) }
-          @def_member = (um ? visitor(UnionMemberVisitor) {|v| v.visit(um)} : nil)
+          @def_member = (um ? visitor(UnionMemberVisitor) { |v| v.visit(um) } : nil)
         end
         @def_member
       end
 
       def non_default_members
-        node.members.collect { |m| m.labels.include?(:default) ? nil : visitor(UnionMemberVisitor) {|v| v.visit(m)} }.compact
+        node.members.collect { |m| m.labels.include?(:default) ? nil : visitor(UnionMemberVisitor) { |v| v.visit(m) } }.compact
       end
 
       def default_label

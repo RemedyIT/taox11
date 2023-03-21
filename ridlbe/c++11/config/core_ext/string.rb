@@ -17,7 +17,7 @@ class String
   end
 
   def to_random_include_guard
-    "#{self}_#{(rand * 100000000).ceil.to_s.unpack('CCCCCCCC').collect {|b|((b || 48) + 17).chr }.join}".to_include_guard
+    "#{self}_#{(rand * 100000000).ceil.to_s.unpack('CCCCCCCC').collect { |b|((b || 48) + 17).chr }.join}".to_include_guard
   end
 
   def scope_to_cxxname

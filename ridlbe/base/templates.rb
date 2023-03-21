@@ -14,7 +14,7 @@ module IDL
         def template_path
           # get template lookup paths for full backend hierarchy
           # only collect this once for every RIDL session
-          @template_path ||= IDL.backend.lookup_path.collect {|lp| File.join(lp, 'templates') }
+          @template_path ||= IDL.backend.lookup_path.collect { |lp| File.join(lp, 'templates') }
         end
 
         def registry
@@ -61,7 +61,7 @@ module IDL
       attr_reader :path, :name, :dir, :tpl_root, :root_idx
 
       def exists?
-        find {|_| true } ? true : false
+        find { |_| true } ? true : false
       end
 
       def code

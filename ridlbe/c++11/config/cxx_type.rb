@@ -871,7 +871,7 @@ module IDL
       end
 
       def cxx_dim
-        sizes.empty? ? '[]' : sizes.collect { |s| "[#{s.to_s}]"}.join
+        sizes.empty? ? '[]' : sizes.collect { |s| "[#{s.to_s}]" }.join
       end
 
       def base_traits_cxx_typename

@@ -12,7 +12,7 @@ module RIDL
     module String
       ACRONYMS = %w{CORBA CCM DDS IDL}
 
-      @@acronyms = ACRONYMS.inject({}) {|h, a| h[a.downcase] = a; h}
+      @@acronyms = ACRONYMS.inject({}) { |h, a| h[a.downcase] = a; h }
       @@acronyms_regex = /#{@@acronyms.values.join('|')}/
 
       def self.acronyms_regex(reset = false)

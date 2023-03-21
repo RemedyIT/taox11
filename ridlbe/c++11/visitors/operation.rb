@@ -132,7 +132,7 @@ module IDL
         # In that case add "ami_' until unique name is formed
         while again
           again = false
-          node.enclosure.operations.each {|_op|
+          node.enclosure.operations.each { |_op|
           if _op.cxxname == (prefix + node.cxxname)
             prefix += 'ami_'
             again = true
