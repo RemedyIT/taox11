@@ -37,7 +37,7 @@ module IDL
   module AST
     class Leaf
       def scoped_unescaped_name
-        @scopes.collect{ |s| s.unescaped_name }.join('::').freeze
+        @scopes.collect { |s| s.unescaped_name }.join('::').freeze
       end
     end
 
