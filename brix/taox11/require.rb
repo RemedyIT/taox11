@@ -8,24 +8,21 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module TAOX11
-
     ROOT = File.dirname(__FILE__)
     TITLE = 'TAOX11'.freeze
     DESC = 'BRIX11 TAOX11 brix collection'.freeze
     COPYRIGHT = "Copyright (c) 2014-#{Time.now.year} Remedy IT Expertise BV, The Netherlands".freeze
-    VERSION = {major: 1, minor: 0, release: 0}
+    VERSION = { major: 1, minor: 0, release: 0 }
 
     Collection.configure(:taox11, ROOT, TITLE, DESC, COPYRIGHT, VERSION) do |cfg|
-
       cfg.on_setup do |optparser, options|
         # define common environment for spawning BRIX11 subprocesses
 
         # make sure to copy the contents of the global search path variables irrespective of '-E' switch
         # unless the (user) config already defined a value
         Exec.update_run_environment('PATH', ENV['PATH']) unless Exec.has_run_environment?('PATH')
-        if !Exec.mswin?
+        unless Exec.mswin?
           Exec.update_run_environment('LD_LIBRARY_PATH', ENV['LD_LIBRARY_PATH']) unless Exec.has_run_environment?('LD_LIBRARY_PATH')
         end
 
@@ -84,8 +81,8 @@ module BRIX11
         Exec.update_run_environment('PATH', File.join(base_root, 'bin'), :prepend)
 
         # load collection
-        Dir.glob(File.join(ROOT, 'lib', '*.rb')).each { |p| require "brix/taox11/lib/#{File.basename(p)}"}
-        Dir.glob(File.join(ROOT, 'cmds', '*.rb')).each { |p| require "brix/taox11/cmds/#{File.basename(p)}"}
+        Dir.glob(File.join(ROOT, 'lib', '*.rb')).each { |p| require "brix/taox11/lib/#{File.basename(p)}" }
+        Dir.glob(File.join(ROOT, 'cmds', '*.rb')).each { |p| require "brix/taox11/cmds/#{File.basename(p)}" }
 
         # update documentation config
         Common::GenerateDocumentation::OPTIONS[:docsources]['taox11'] = ['${TAOX11_ROOT}/docs']
@@ -93,9 +90,6 @@ module BRIX11
 
         Common::GenerateDocumentation::OPTIONS[:doxygen_config] = '${TAOX11_ROOT}/etc/taox11.doxygen'
       end
-
     end
-
   end
-
 end

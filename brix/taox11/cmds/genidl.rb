@@ -10,28 +10,26 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class GenerateIDL < Command::Base
-
       DESC = 'Generate IDL definitions for CORBA project.'.freeze
 
       OPTIONS = {
-          name: 'test',
-          modules: [],
-          interface: nil,
-          shutdown: true,
+        name: 'test',
+        modules: [],
+        interface: nil,
+        shutdown: true
       }
 
       def self.setup(optparser, options)
         options[:genidl] = OPTIONS.dup
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} gen[erate] idl [options] [NAME]\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} gen[erate] idl [options] [NAME]\n\n" +
                            "       NAME := name to use for IDL file; default 'test'\n\n"
 
         optparser.on('-i', '--interface', '=NAME',
                      'Defines name to use for interface.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to generate enclosing module(s).',
-                     'Default: derived from IDL file basename with first character uppercased') {|v|
+                     'Default: derived from IDL file basename with first character uppercased') { |v|
                        options[:genidl][:modules] = v.split('::')
                        options[:genidl][:interface] = options[:genidl][:modules].pop
                      }
@@ -68,19 +66,21 @@ module BRIX11
         def project_name
           @options[:name]
         end
+
         def module_names
           @options[:modules]
         end
+
         def interface_name
           @options[:interface]
         end
+
         def has_shutdown?
           @options[:shutdown]
         end
       end
 
       Command.register('generate:idl', DESC, TAOX11::GenerateIDL)
-    end # GenerateIDL
-
-  end # Common
-end # BRIX11
+    end
+  end
+end

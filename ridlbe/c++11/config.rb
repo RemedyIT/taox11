@@ -8,13 +8,11 @@
 #--------------------------------------------------------------------
 
 module IDL
-
   module Cxx11
     COPYRIGHT = "Copyright (c) 2007-#{Time.now.year} Remedy IT Expertise BV, The Netherlands".freeze
     TITLE = 'RIDL C++11 backend'.freeze
 
-    def self.add_extended_options(ol, idl_params)
-
+    def self.add_extended_options(ol, _idl_params)
       ol.for_switch '-i<include options>', type: String, separator: true do |swcfg|
         swcfg.for_param 'c',
             description: "-ic\t\t\tGenerate include statements with \"\" for standard included files. Default." do |arg, params|
@@ -32,6 +30,7 @@ module IDL
             if /^(.*)=(.*)/ =~ arg
               return [::Regexp.last_match(1), ::Regexp.last_match(2)]
             end
+
             nil
           end
           grpcfg.for_param '',
@@ -55,42 +54,43 @@ module IDL
             if /^b\,(.*)=(.*)/ =~ arg
               return [::Regexp.last_match(1), ::Regexp.last_match(2)]
             end
+
             nil
           end
           grpcfg.for_params :strings,
             params: {
-              'export_macro' => {description: "-Wb,export_macro=MACRO\t\tSet export macro for all files"},
-              'export_include' => {description: "-Wb,export_include=FILE\t\tSet export include file for all files"},
-              'export_file' => {description: "-Wb,export_file=FILE\t\tSet export file to generate for -Gxh"},
-              'pre_include' => {description: "-Wb,pre_include=FILE\t\tSet include file generated before any other include"},
-              'post_include' => {description: "-Wb,post_include=FILE\t\tSet include file generated at the end of the file"},
-              'base_export_macro' => {description: "-Wb,base_export_macro=MACRO\tSet base of export macro's"},
-              'base_export_include' => {description: "-Wb,base_export_include=FILE\tSet base of export include files"},
-              'stub_export_macro' => {description: "-Wb,stub_export_macro=MACRO\tSet export macro for client files"},
-              'stub_export_include' => {description: "-Wb,stub_export_include=FILE\tSet export include file for client files"},
-              'stub_export_file' => {description: "-Wb,stub_export_file=FILE\t\tSet stub export file to generate for -Gxhst"},
-              'amic_export_macro' => {description: "-Wb,amic_export_macro=MACRO\tSet export macro for ami client files"},
-              'amic_export_include' => {description: "-Wb,amic_export_include=FILE\tSet export include file for ami client files"},
-              'amic_export_file' => {description: "-Wb,amic_export_file=FILE\t\tSet ami export file to generate for -Gxhsta"},
-              'skel_export_macro' => {description: "-Wb,skel_export_macro=MACRO\tSet export macro for servant files"},
-              'skel_export_include' => {description: "-Wb,skel_export_include=FILE\tSet export include file for servant files"},
-              'skel_export_file' => {description: "-Wb,skel_export_file=FILE\t\tSet skeleton export file to generate for -Gxhsk"},
-              'impl_export_macro' => {description: "-Wb,impl_export_macro=MACRO\tSet export macro for implementation files"},
-              'impl_export_include' => {description: "-Wb,impl_export_include=FILE\tSet export include file for implementation files"},
-              'impl_export_file' => {description: "-Wb,impl_export_file=FILE\t\tSet implementation export file to generate for -Gxhimpl"},
-              'anytypecode_export_macro' => {description: "-Wb,anytypecode_export_macro=MACRO\tSet export macro for Any ops en TypeCode"},
-              'anytypecode_export_include' => {description: "-Wb,anytypecode_export_include=FILE\tSet export include file for Any ops en TypeCode"},
-              'include_guard' => {description: "-Wb,include_guard=MACRO\t\tguard to prevent the generated client header file to be included"},
-              'safe_include' => {description: "-Wb,safe_include=FILE\t\tinclude that should be used instead of the own generated client header file"},
-              'unique_include' => {description: "-Wb,unique_include=FILE\t\tinclude that should be generated as only contents of the generated client header file"}
+              'export_macro' => { description: "-Wb,export_macro=MACRO\t\tSet export macro for all files" },
+              'export_include' => { description: "-Wb,export_include=FILE\t\tSet export include file for all files" },
+              'export_file' => { description: "-Wb,export_file=FILE\t\tSet export file to generate for -Gxh" },
+              'pre_include' => { description: "-Wb,pre_include=FILE\t\tSet include file generated before any other include" },
+              'post_include' => { description: "-Wb,post_include=FILE\t\tSet include file generated at the end of the file" },
+              'base_export_macro' => { description: "-Wb,base_export_macro=MACRO\tSet base of export macro's" },
+              'base_export_include' => { description: "-Wb,base_export_include=FILE\tSet base of export include files" },
+              'stub_export_macro' => { description: "-Wb,stub_export_macro=MACRO\tSet export macro for client files" },
+              'stub_export_include' => { description: "-Wb,stub_export_include=FILE\tSet export include file for client files" },
+              'stub_export_file' => { description: "-Wb,stub_export_file=FILE\t\tSet stub export file to generate for -Gxhst" },
+              'amic_export_macro' => { description: "-Wb,amic_export_macro=MACRO\tSet export macro for ami client files" },
+              'amic_export_include' => { description: "-Wb,amic_export_include=FILE\tSet export include file for ami client files" },
+              'amic_export_file' => { description: "-Wb,amic_export_file=FILE\t\tSet ami export file to generate for -Gxhsta" },
+              'skel_export_macro' => { description: "-Wb,skel_export_macro=MACRO\tSet export macro for servant files" },
+              'skel_export_include' => { description: "-Wb,skel_export_include=FILE\tSet export include file for servant files" },
+              'skel_export_file' => { description: "-Wb,skel_export_file=FILE\t\tSet skeleton export file to generate for -Gxhsk" },
+              'impl_export_macro' => { description: "-Wb,impl_export_macro=MACRO\tSet export macro for implementation files" },
+              'impl_export_include' => { description: "-Wb,impl_export_include=FILE\tSet export include file for implementation files" },
+              'impl_export_file' => { description: "-Wb,impl_export_file=FILE\t\tSet implementation export file to generate for -Gxhimpl" },
+              'anytypecode_export_macro' => { description: "-Wb,anytypecode_export_macro=MACRO\tSet export macro for Any ops en TypeCode" },
+              'anytypecode_export_include' => { description: "-Wb,anytypecode_export_include=FILE\tSet export include file for Any ops en TypeCode" },
+              'include_guard' => { description: "-Wb,include_guard=MACRO\t\tguard to prevent the generated client header file to be included" },
+              'safe_include' => { description: "-Wb,safe_include=FILE\t\tinclude that should be used instead of the own generated client header file" },
+              'unique_include' => { description: "-Wb,unique_include=FILE\t\tinclude that should be generated as only contents of the generated client header file" }
             }
         grpcfg.for_params :lists, params: {
               'add_pre_include' => {
                 type: :list,
-                description: "-Wb,add_pre_include=FILE\t\tadds include file to be generated before other includes (except pre_include)"},
+                description: "-Wb,add_pre_include=FILE\t\tadds include file to be generated before other includes (except pre_include)" },
               'add_post_include' => {
                 type: :list,
-                description: "-Wb,add_post_include=FILE\t\tadds include file to be generated at the end of the file (before post_include)"}
+                description: "-Wb,add_post_include=FILE\t\tadds include file to be generated at the end of the file (before post_include)" }
             }
         end
       end
@@ -193,7 +193,6 @@ module IDL
     end # add_extended_options
 
     class << self
-
       VERSION_REGEXP = /\#\s*define\s+TAOX11_(\w+)_VERSION\s+(\d+)/
 
       def determine_taox11_version
@@ -204,7 +203,7 @@ module IDL
         }
 
         base = File.join(File.dirname(__FILE__), '..', '..', 'tao', 'x11', 'versionx11.h')
-        File.open(base, "r") do |file|
+        File.open(base, 'r') do |file|
           while (line = file.gets)
             if VERSION_REGEXP =~ line
               x11_version[::Regexp.last_match(1).downcase.to_sym] = ::Regexp.last_match(2).to_i
@@ -224,7 +223,6 @@ module IDL
     ## Configure C++11 backend
     #
     Backend.configure('c++11', File.dirname(__FILE__), TITLE, COPYRIGHT, IDL::Cxx11.taox11_version) do |becfg|
-
       # load base backend framework
       becfg.add_backend('base')
 
@@ -234,7 +232,7 @@ module IDL
         # defaults
         ridl_params[:stub_pfx] = 'C'
         ridl_params[:srv_pfx] = 'S'
-        ridl_params[:ami_pfx] ='Ami'
+        ridl_params[:ami_pfx] = 'Ami'
         ridl_params[:impl_pfx] = '_impl'
         ridl_params[:client_stubs] = true
         ridl_params[:svnt_skeletons] = true
@@ -261,15 +259,15 @@ module IDL
         # c++11 specific option switches
 
         optlist.for_switch '--no-stubs',
-            description: ["Do not generate client stubs.",
-                             "Default: off"] do |swcfg|
+            description: ['Do not generate client stubs.',
+                             'Default: off'] do |swcfg|
           swcfg.on_exec do |arg, params|
             params[:client_stubs] = false
           end
         end
         optlist.for_switch '--no-skel',
-                           description: ["Do not generate servant skeletons.",
-                                            "Default: off"] do |swcfg|
+                           description: ['Do not generate servant skeletons.',
+                                            'Default: off'] do |swcfg|
           swcfg.on_exec do |arg, params|
             params[:svnt_skeletons] = false
           end
@@ -308,7 +306,6 @@ module IDL
         end
 
         IDL::Cxx11.add_extended_options(optlist, ridl_params)
-
       end # becfg.setup
 
       # process input / generate code
@@ -317,7 +314,6 @@ module IDL
       #   in options - initialized option hash
       #
       becfg.on_process_input do |parser, options|
-
         # setup output filenames
         IDL::Cxx11.setup_output(options)
 
@@ -373,20 +369,19 @@ module IDL
           IDL::Cxx11.gen_impl_export(options)
         end
       end # becfg.on_process_input
-
     end # Backend.configure
 
     def self.setup_output(options)
       # determine output file path for client stub code
       idl_ext = (options[:idlext] ||= File.extname(options[:idlfile]))
       unless options[:idlfile].nil?
-        options[:output] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:stub_pfx])
-        options[:output_ami_incl] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:ami_pfx]+options[:stub_pfx]+options[:hdr_ext])
+        options[:output] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:stub_pfx])
+        options[:output_ami_incl] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:ami_pfx] + options[:stub_pfx] + options[:hdr_ext])
         options[:output_src] = options[:output] + options[:src_ext]
-        options[:output_prx] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:stub_pfx]+options[:proxy_pfx]+options[:hdr_ext])
+        options[:output_prx] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:stub_pfx] + options[:proxy_pfx] + options[:hdr_ext])
         options[:output] << options[:hdr_ext]
         if options[:gen_typecodes] && options[:gen_anytypecode_source]
-          options[:output_atc] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext)+options[:anytypecode_pfx]+options[:src_ext])
+          options[:output_atc] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:anytypecode_pfx] + options[:src_ext])
         end
       end
     end
@@ -399,52 +394,52 @@ module IDL
 
       if options.gen_export_sta || options.export_sta
         unless options.amic_export_macro || options.base_export_macro
-          IDL.fatal("ERROR: it isn't allowed to use -Gxhsta or -Xsta without specifying the macro with -Wb,amic_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhsta or -Xsta without specifying the macro with -Wb,amic_export_macro=MACRO " +
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
-        options.amic_export_macro = options.base_export_macro+'_AMIC' + options.export_macro_pfx unless options.amic_export_macro || options.base_export_macro.nil?
-        options.amic_export_include = options.base_export_include+'_amic' + options.export_header_pfx unless options.amic_export_include || options.base_export_include.nil?
+        options.amic_export_macro = options.base_export_macro + '_AMIC' + options.export_macro_pfx unless options.amic_export_macro || options.base_export_macro.nil?
+        options.amic_export_include = options.base_export_include + '_amic' + options.export_header_pfx unless options.amic_export_include || options.base_export_include.nil?
       end
     end
 
     def self.check_stub_export_params(options)
       if options.gen_export_st || options.export_st
         unless options.stub_export_macro || options.base_export_macro
-          IDL.fatal("ERROR: it isn't allowed to use -Gxhst or -Xst without specifying the macro with -Wb,stub_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhst or -Xst without specifying the macro with -Wb,stub_export_macro=MACRO " +
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
-        options.stub_export_macro = options.base_export_macro+'_STUB' + options.export_macro_pfx unless options.stub_export_macro || options.base_export_macro.nil?
-        options.stub_export_include = options.base_export_include+'_stub' + options.export_header_pfx unless options.stub_export_include || options.base_export_include.nil?
+        options.stub_export_macro = options.base_export_macro + '_STUB' + options.export_macro_pfx unless options.stub_export_macro || options.base_export_macro.nil?
+        options.stub_export_include = options.base_export_include + '_stub' + options.export_header_pfx unless options.stub_export_include || options.base_export_include.nil?
       end
     end
 
     def self.check_skel_export_params(options)
       if options.gen_export_sk || options.export_sk
         unless options.skel_export_macro || options.base_export_macro
-          IDL.fatal("ERROR: it isn't allowed to use -Gxhsk or -Xsk without specifying the macro with -Wb,skel_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhsk or -Xsk without specifying the macro with -Wb,skel_export_macro=MACRO " +
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
-        options.skel_export_macro = options.base_export_macro+'_SKEL' + options.export_macro_pfx unless options.skel_export_macro || options.base_export_macro.nil?
-        options.skel_export_include = options.base_export_include+'_skel' + options.export_header_pfx unless options.skel_export_include || options.base_export_include.nil?
+        options.skel_export_macro = options.base_export_macro + '_SKEL' + options.export_macro_pfx unless options.skel_export_macro || options.base_export_macro.nil?
+        options.skel_export_include = options.base_export_include + '_skel' + options.export_header_pfx unless options.skel_export_include || options.base_export_include.nil?
       end
     end
 
     def self.check_impl_export_params(options)
       if options.gen_export_impl || options.export_impl
         unless options.impl_export_macro || options.base_export_macro
-          IDL.fatal("ERROR: it isn't allowed to use -Gxhimpl or -Ximpl without specifying the macro with -Wb,impl_export_macro=MACRO "+
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhimpl or -Ximpl without specifying the macro with -Wb,impl_export_macro=MACRO " +
                         'or with -Wb,base_export_macro=MACRO_PREFIX')
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
-        options.impl_export_macro = options.base_export_macro+'_STUB' + options.export_macro_pfx unless options.impl_export_macro || options.base_export_macro.nil?
-        options.impl_export_include = options.base_export_include+'_stub' + options.export_header_pfx unless options.impl_export_include || options.base_export_include.nil?
+        options.impl_export_macro = options.base_export_macro + '_STUB' + options.export_macro_pfx unless options.impl_export_macro || options.base_export_macro.nil?
+        options.impl_export_include = options.base_export_include + '_stub' + options.export_header_pfx unless options.impl_export_include || options.base_export_include.nil?
       end
     end
 
@@ -469,7 +464,7 @@ module IDL
           IDL.push_production(:stub_proxy, ::IDL::Cxx11::StubProxyWriter.new(co_prx, options))
         end
       end
-      unless !((options[:gen_anytypecode_source] || false) && options[:gen_typecodes])
+      if ((options[:gen_anytypecode_source] || false) && options[:gen_typecodes])
         if options[:output_atc]
           co_atc = GenFile.new(options[:output_atc])
           IDL.push_production(:any_typecode, ::IDL::Cxx11::AnyTypeCodeWriter.new(co_atc, options))
@@ -480,7 +475,7 @@ module IDL
     def self.generate_servant_skeletons(options)
       options[:skel_outputdir] = options[:outputdir] unless options[:skel_outputdir]
       unless options[:idlfile].nil?
-        options[:srv_output_hdr] = File.join(options[:skel_outputdir], File.basename(options[:idlfile], options[:idlext])+options[:srv_pfx])
+        options[:srv_output_hdr] = File.join(options[:skel_outputdir], File.basename(options[:idlfile], options[:idlext]) + options[:srv_pfx])
         options[:srv_output_src] = options[:srv_output_hdr] + options[:src_ext]
         options[:srv_output_prx] = options[:srv_output_hdr] + options[:proxy_pfx] + options[:hdr_ext]
         options[:srv_output_hdr] += options[:hdr_ext]
@@ -510,7 +505,7 @@ module IDL
     def self.generate_implementations(options)
       options[:impl_outputdir] = options[:outputdir] unless options[:impl_outputdir]
       unless options[:idlfile].nil?
-        options[:impl_output] = File.join(options[:impl_outputdir], File.basename(options[:idlfile], options[:idlext])+options[:impl_pfx])
+        options[:impl_output] = File.join(options[:impl_outputdir], File.basename(options[:idlfile], options[:idlext]) + options[:impl_pfx])
         options[:impl_output_src] = options[:impl_output] + options[:src_ext]
         options[:impl_output] += options[:hdr_ext]
       else
@@ -529,7 +524,7 @@ module IDL
         options[:ami] = true
         options[:ami_stub_outputdir] = options[:outputdir] unless options[:ami_stub_outputdir]
         unless options[:idlfile].nil?
-          options[:ami_stub_output] = File.join(options[:ami_stub_outputdir], File.basename(options[:idlfile], options[:idlext])+options[:ami_pfx]+options[:stub_pfx])
+          options[:ami_stub_output] = File.join(options[:ami_stub_outputdir], File.basename(options[:idlfile], options[:idlext]) + options[:ami_pfx] + options[:stub_pfx])
             options[:ami_stub_output_src] = options[:ami_stub_output] + options[:src_ext]
             options[:ami_stub_output_prx] = options[:ami_stub_output] + options[:proxy_pfx] + options[:hdr_ext]
             options[:ami_stub_output] += options[:hdr_ext]
@@ -555,6 +550,7 @@ module IDL
 
     def self.gen_export_header(options)
       return if IDL.has_production?(:export_header)
+
       unless options.export_macro
         IDL.fatal('ERROR: it is not allowed to use -Gxh without specifying the macro with -Wb,export_macro=MACRO')
       end
@@ -571,6 +567,7 @@ module IDL
 
     def self.gen_stub_export(options)
       return if IDL.has_production?(:stub_export_header)
+
       export_file = options.stub_export_file || options.stub_export_include
       if export_file
         so = GenFile.new(File.join(options.outputdir, export_file))
@@ -578,13 +575,14 @@ module IDL
             :stub_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.stub_export_macro, export_file, so, options))
       else
-        IDL.fatal('ERROR: it is not allowed to use -Gxhst without specifying the file with -Wb,stub_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhst without specifying the file with -Wb,stub_export_file=FILE, ' +
                       '-Wb,stub_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
       end
     end
 
     def self.gen_skel_export(options)
       return if IDL.has_production?(:skel_export_header)
+
       export_file = options.skel_export_file || options.skel_export_include
       if export_file
         so = GenFile.new(File.join(options.outputdir, export_file))
@@ -592,13 +590,14 @@ module IDL
             :skel_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.skel_export_macro, export_file, so, options))
       else
-        IDL.fatal('ERROR: it is not allowed to use -Gxhsk without specifying the file with -Wb,skel_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhsk without specifying the file with -Wb,skel_export_file=FILE, ' +
                       '-Wb,skel_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
       end
     end
 
     def self.gen_amic_export(options)
       return if IDL.has_production?(:amic_export_header)
+
       export_file = options.amic_export_file || options.amic_export_include
       if export_file
         so = GenFile.new(File.join(options.outputdir, export_file))
@@ -606,13 +605,14 @@ module IDL
             :amic_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.amic_export_macro, export_file, so, options))
       else
-        IDL.fatal('ERROR: it is not allowed to use -Gxhsta without specifying the file with -Wb,amic_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhsta without specifying the file with -Wb,amic_export_file=FILE, ' +
                       '-Wb,amic_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
       end
     end
 
     def self.gen_impl_export(options)
       return if IDL.has_production?(:impl_export_header)
+
       export_file = options.impl_export_file || options.impl_export_include
       if export_file
         so = GenFile.new(File.join(options.outputdir, export_file))
@@ -620,13 +620,11 @@ module IDL
             :impl_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.impl_export_macro, export_file, so, options))
       else
-        IDL.fatal('ERROR: it is not allowed to use -Gxhimpl without specifying the file with -Wb,impl_export_file=FILE, '+
+        IDL.fatal('ERROR: it is not allowed to use -Gxhimpl without specifying the file with -Wb,impl_export_file=FILE, ' +
                       '-Wb,impl_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
       end
     end
-
   end # Cxx11
-
 end # IDL
 
 # config modules

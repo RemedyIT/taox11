@@ -10,17 +10,15 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class GenerateServant < Command::Base
-
       DESC = 'Generate C++ source + header for CORBA servant implementation.'.freeze
 
       OPTIONS = {
-          postfix: nil,
-          idl: true,
-          genskel: false,
-          interfaces: [],
-          shutdowns: true
+        postfix: nil,
+        idl: true,
+        genskel: false,
+        interfaces: [],
+        shutdowns: true
       }
 
       def self.setup(optparser, options)
@@ -31,19 +29,19 @@ module BRIX11
         optparser.on('-I[FILE]', '--with-idl=[FILE]',
                      'Generate servant implementation(s) from IDL file(s).',
                      'Specify filename without extension. Separate with \',\' when more than one.',
-                     'Default: all IDL files in working dir') {|v|
-                        options[:gensvt][:idl] = (v ? v.split(',') : true)
+                     'Default: all IDL files in working dir') { |v|
+                       options[:gensvt][:idl] = (v ? v.split(',') : true)
                      }
         optparser.on('--svt-pfx', '=POSTFIX',
                      'Defines postfix to use for generated servant implementation filenames',
                      'and classes.',
-                     'Default: \'_impl\'') {|v| options[:gensvt][:postfix] = v }
+                     'Default: \'_impl\'') { |v| options[:gensvt][:postfix] = v }
         optparser.on('--shutdown-on', '=NAME',
                      'Restrict shutdown implementations to interface NAME.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to specify enclosing module(s).',
                      'Separate with \',\' when more than one.',
-                     'Default: all interfaces having shutdown method.') {|v|
-                        options[:gensvt][:shutdowns] = v.split(',')
+                     'Default: all interfaces having shutdown method.') { |v|
+                       options[:gensvt][:shutdowns] = v.split(',')
                      }
         optparser.on('--without-shutdown',
                      'Do not generate any shutdown implementations.',
@@ -59,10 +57,10 @@ module BRIX11
         ridl_argv << '--no-skel' unless options[:gensvt][:genskel]
         # find location BRIX servant impl template overrides
         tplpath = File.join(Collection.lookup_path.find { |p| File.directory?(File.join(p, 'templates', 'corba_servant')) } || '', 'templates', 'corba_servant')
-        ridl_argv << "--add-templates" << tplpath
+        ridl_argv << '--add-templates' << tplpath
         ridl_argv << '-Gisrv'
         ridl_argv << "-impl-pfx=#{options[:gensvt][:postfix]}" if options[:gensvt][:postfix]
-        idl_files = options[:gensvt][:idl] == true ? Dir.glob('*.idl') : options[:gensvt][:idl].collect { |i| "#{i}.idl"}
+        idl_files = options[:gensvt][:idl] == true ? Dir.glob('*.idl') : options[:gensvt][:idl].collect { |i| "#{i}.idl" }
         if idl_files.empty?
           log_error('No IDL files found for \'generate servant\'')
           return false
@@ -92,7 +90,7 @@ module BRIX11
           end
         end
         true # make sure to return true if we get to here to allow chaining
-      end # run
+      end
 
       module ImplHelper
         self.singleton_class.class_eval do
@@ -119,6 +117,7 @@ module BRIX11
           @brix11_prop ||= ImplHelper._prop
           "#{cxxname}#{@brix11_prop.servant_pfx}"
         end
+
         def scoped_impl_cxxname
           @brix11_prop ||= ImplHelper._prop
           "#{scoped_cxxname}#{@brix11_prop.servant_pfx}"
@@ -126,7 +125,6 @@ module BRIX11
       end
 
       Command.register('generate:servant|svt', DESC, TAOX11::GenerateServant)
-    end # GenerateServant
-
-  end # Common
-end # BRIX11
+    end
+  end
+end

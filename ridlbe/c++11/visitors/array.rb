@@ -9,9 +9,7 @@
 
 module IDL
   module Cxx11
-
     class ArrayVisitor < NodeVisitorBase
-
       def element_cxxtype
         self._resolved_idltype.basetype.cxx_type(cur_scope)
       end
@@ -25,7 +23,7 @@ module IDL
       end
 
       def is_objref_sequence?
-        IDL::Type::Interface === self._resolved_idltype.basetype.resolved_type
+        self._resolved_idltype.basetype.resolved_type.is_a?(IDL::Type::Interface)
       end
 
       def basetype_scoped_cxx_typecode
@@ -61,6 +59,5 @@ module IDL
         @resolved_idltype ||= self._idltype.resolved_type
       end
     end
-
   end
 end

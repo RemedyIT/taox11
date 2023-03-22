@@ -10,15 +10,13 @@ require 'ridlbe/c++11/visitors/exception'
 
 module IDL
   module Cxx11
-
     class OperationVisitor < NodeVisitorBase
-
       def interface(interface_for_att = nil)
         # set interface_for_att to node.enclosure unless passed as arg or @interface already set
         interface_for_att ||= node.enclosure unless @interface || !node?
         # (re)set @interface if interface_for_att isn't nil
         if interface_for_att
-          if NodeVisitorBase === interface_for_att
+          if interface_for_att.is_a?(NodeVisitorBase)
             @interface = interface_for_att
           else
             @interface = interface_for_att.is_a?(IDL::AST::Valuetype) ?
@@ -38,7 +36,7 @@ module IDL
         # original context defining the operation is different from the current context
         interface.node != node.enclosure &&
             # and the current context is not a valuetype or the defining context was an abstract interface
-            (!(IDL::AST::Valuetype === interface.node) || (IDL::AST::Interface === node.enclosure && node.enclosure.is_abstract?))
+            (!interface.node.is_a?(IDL::AST::Valuetype) || (node.enclosure.is_a?(IDL::AST::Interface) && node.enclosure.is_abstract?))
       end
 
       def defining_interface
@@ -134,9 +132,9 @@ module IDL
         # In that case add "ami_' until unique name is formed
         while again
           again = false
-          node.enclosure.operations.each {|_op|
+          node.enclosure.operations.each { |_op|
           if _op.cxxname == (prefix + node.cxxname)
-            prefix= prefix+'ami_'
+            prefix += 'ami_'
             again = true
           end
         }
@@ -147,13 +145,11 @@ module IDL
       # template mapping
 
       map_template :operation, :operation
-
     end
 
     class ArgumentVisitor < NodeVisitorBase
-
       def direction
-        ([:in, :out, :inout])[node.attribute]
+        [:in, :out, :inout][node.attribute]
       end
 
       def stub_arg_type
@@ -188,8 +184,6 @@ module IDL
           implementation_inout_type
         end
       end
-
     end
-
   end
 end

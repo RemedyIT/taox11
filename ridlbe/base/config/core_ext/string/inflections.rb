@@ -10,10 +10,9 @@
 module RIDL
   module CoreExt
     module String
-
       ACRONYMS = %w{CORBA CCM DDS IDL}
 
-      @@acronyms = ACRONYMS.inject({}) {|h, a| h[a.downcase] = a; h}
+      @@acronyms = ACRONYMS.inject({}) { |h, a| h[a.downcase] = a; h }
       @@acronyms_regex = /#{@@acronyms.values.join('|')}/
 
       def self.acronyms_regex(reset = false)
@@ -85,7 +84,7 @@ module RIDL
       #   'dds_data_writer'.camelize(:lower)        # => "ddsDataWriter"
       #   'test/my-foo'.camelize                    # => "Test::MyFoo"
       #
-      def camelize(uppercase_first_letter = true)
+      def camelize(_uppercase_first_letter = true)
         self.dup.camelize!
       end
 
@@ -112,7 +111,7 @@ module RIDL
 
       def demodulize!
         if i = self.rindex('::')
-          self.slice!(0, i+2)
+          self.slice!(0, i + 2)
         end
         self
       end

@@ -9,11 +9,9 @@
 
 module IDL
   module Cxx11
-
     # Output writer base class for sourcecode.
     #
     class CxxCodeWriterBase < Base::Writer
-
       include IDL::Base::CodeWriterMethods
 
       def initialize(output = STDOUT, opts = {})
@@ -29,7 +27,7 @@ module IDL
 
       def write_open_scope(scope)
         printiln("namespace #{scope.cxxname}")
-        printiln("{")
+        printiln('{')
         inc_nest
       end
 
@@ -37,8 +35,6 @@ module IDL
         dec_nest
         printiln("} // namespace #{scope.cxxname}")
       end
-
     end # CxxCodeWriterBase
-
   end
 end

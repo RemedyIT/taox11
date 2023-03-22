@@ -9,22 +9,16 @@
 
 module IDL
   module Cxx11
-
     class PreVisitor < VisitorBase
-
       def visit
         visit_template(:pre)
       end
-
     end
 
     class PostVisitor < VisitorBase
-
       def visit
         visit_template(:post)
       end
-
     end
-
   end
 end

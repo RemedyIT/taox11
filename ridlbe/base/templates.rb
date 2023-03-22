@@ -8,23 +8,20 @@
 #--------------------------------------------------------------------
 
 module IDL
-
   module Base
-
     class Template
-
       class << self
         def template_path
           # get template lookup paths for full backend hierarchy
           # only collect this once for every RIDL session
-          @template_path ||= IDL.backend.lookup_path.collect {|lp| File.join(lp, 'templates') }
+          @template_path ||= IDL.backend.lookup_path.collect { |lp| File.join(lp, 'templates') }
         end
 
         def registry
           @registry ||= {}
         end
 
-        def register_template(key, code, dir, root, derived_key=nil)
+        def register_template(key, code, dir, root, derived_key = nil)
           registry[key] = { code: code, dir: dir, root: root }
           registry[derived_key][:super] = key if derived_key
         end
@@ -64,7 +61,7 @@ module IDL
       attr_reader :path, :name, :dir, :tpl_root, :root_idx
 
       def exists?
-        find {|_| true } ? true : false
+        find { |_| true } ? true : false
       end
 
       def code
@@ -88,14 +85,14 @@ module IDL
           Template.new(path, { dir: tpl_reg[:dir], root: tpl_reg[:root], lastdir: @lastdir, lastroot: @lastroot })
         else
           # start continued search from current location
-          Template.new(path, { dir: dir, root: @root_idx+1, lastdir: dir, lastroot: @root_idx })
+          Template.new(path, { dir: dir, root: @root_idx + 1, lastdir: dir, lastroot: @root_idx })
         end
         Kernel.raise "Fatal: cannot find RIDL template #{path} super" unless super_tpl.exists?
         super_tpl
       end
 
       def at_end?
-        @dir=='.' || @dir.empty?
+        @dir == '.' || @dir.empty?
       end
 
       private
@@ -105,7 +102,7 @@ module IDL
       end
 
       def descend
-        @dir = File.dirname(@dir) unless @dir=='.' || @dir.empty?
+        @dir = File.dirname(@dir) unless @dir == '.' || @dir.empty?
         ! at_end?
       end
 
@@ -161,9 +158,6 @@ module IDL
       def self.exists?(path)
         self.new(path).exists?
       end
-
     end # Template
-
   end # Base
-
 end # IDL

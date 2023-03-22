@@ -10,29 +10,27 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class GenerateMPC < Command::Base
-
       DESC = 'Generate MPC project file for CORBA project.'.freeze
 
       OPTIONS = {
-          name: 'test',
-          idl: true,
-          client: true,
-          server: true,
+        name: 'test',
+        idl: true,
+        client: true,
+        server: true
       }
 
       def self.setup(optparser, options)
         options[:genmpc] = OPTIONS.dup
 
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} gen[erate] mpc [options] [NAME]\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} gen[erate] mpc [options] [NAME]\n\n" +
                            "       NAME := name to use for project (MPC) file; default 'test'\n\n"
 
         optparser.on('-I[FILE]', '--with-idl=[FILE]',
                      'Include IDL generation subproject for FILE.',
                      'Specify filenames without extension. Separate with \',\' when more than one.',
-                     'Default: Generate IDL generation subproject for IDL files in working dir') {|v|
+                     'Default: Generate IDL generation subproject for IDL files in working dir') { |v|
                        options[:genmpc][:idl] = (v ? v.split(',') : true)
                      }
         optparser.on('--without-idl',
@@ -41,7 +39,7 @@ module BRIX11
         optparser.on('-C[FILES]', '--with-client=[FILES]',
                      'Include CORBA client subproject with FILES (do not specify IDL generated file).',
                      'Specify filenames without extension. Separate with \',\' when more than one.',
-                     'Default: Generate client subproject with \'client\')') {|v| options[:genmpc][:client] = (v ? v.split(',') : true) }
+                     'Default: Generate client subproject with \'client\')') { |v| options[:genmpc][:client] = (v ? v.split(',') : true) }
         optparser.on('--without-client',
                      'Do NOT generate CORBA client subproject.',
                      'Default: Generate client subproject') { options[:genmpc][:client] = false }
@@ -49,7 +47,7 @@ module BRIX11
                      'Include CORBA server subproject with FILES (do not specify IDL generated files).',
                      'Specify filenames without extension. Separate with \',\' when more than one.',
                      'By default FILES will be set to \'server\' + an \'<idl>_impl\' for all IDL files.',
-                     'Default: Generate server subproject.') {|v| options[:genmpc][:server] = (v ? v.split(',') : true) }
+                     'Default: Generate server subproject.') { |v| options[:genmpc][:server] = (v ? v.split(',') : true) }
         optparser.on('--without-server',
                      'Do NOT generate CORBA server subproject.',
                      'Default: Generate server subproject') { options[:genmpc][:server] = false }
@@ -61,12 +59,12 @@ module BRIX11
           options[:genmpc][:name] = argv.shift
         end
         if options[:genmpc][:idl] == true
-          idlfiles = Dir.glob('*.idl').collect {|p| File.basename(p, '.*') }
+          idlfiles = Dir.glob('*.idl').collect { |p| File.basename(p, '.*') }
           options[:genmpc][:idl] = idlfiles unless idlfiles.empty?
         end
         if options[:genmpc][:server] == true
           options[:genmpc][:server] = ['server']
-          options[:genmpc][:server].concat(options[:genmpc][:idl].collect {|i| "#{i}_impl" }) unless options[:genmpc][:idl] == true
+          options[:genmpc][:server].concat(options[:genmpc][:idl].collect { |i| "#{i}_impl" }) unless options[:genmpc][:idl] == true
         end
         # run file creation task for MPC file
         unless File.exist?("#{options[:genmpc][:name]}.mpc") && !options[:force]
@@ -88,28 +86,33 @@ module BRIX11
         def project_name
           @options[:name]
         end
+
         def gen_idl?
           @options[:idl] != false
         end
+
         def idl_names
           @options[:idl] == true ? [project_name] : (@options[:idl] || [])
         end
+
         def gen_client?
           @options[:client]
         end
+
         def client_files
           @options[:client] == true ? ['client'] : @options[:client]
         end
+
         def gen_server?
           @options[:server]
         end
+
         def server_files
           @options[:server]
         end
       end
 
       Command.register('generate:mpc', DESC, TAOX11::GenerateMPC)
-    end # GenerateMPC
-
-  end # Common
-end # BRIX11
+    end
+  end
+end

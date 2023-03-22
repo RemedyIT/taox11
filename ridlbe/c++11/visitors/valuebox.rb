@@ -11,12 +11,11 @@ require 'ridlbe/c++11/visitors/operation'
 
 module IDL
   module Cxx11
-
     class ValueboxVisitor < NodeVisitorBase
-
       def boxed_type_is_pod?
         node.boxed_type.is_pod?
       end
+
       def boxed_type_is_reference?
         node.boxed_type.is_reference?
       end
@@ -28,12 +27,15 @@ module IDL
       def boxed_cxx_in_type
         node.boxed_type.cxx_in_type(cur_scope)
       end
+
       def boxed_cxx_out_type
         node.boxed_type.cxx_out_type(cur_scope)
       end
+
       def boxed_cxx_move_type
         node.boxed_type.cxx_move_type(cur_scope)
       end
+
       def boxed_cxx_byval_type
         node.boxed_type.cxx_byval_type(cur_scope)
       end
@@ -71,8 +73,6 @@ module IDL
       map_template :value_anyop, :value_anyop
       map_template :cdr, :value_cdr
       map_template :sarg_traits, :value_sarg_traits
-
     end
-
   end
 end

@@ -10,12 +10,12 @@ require 'ridlbe/c++11/writerbase'
 
 module IDL
   module Cxx11
-
     class ImplSourceBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
         self.template_root = File.join('impl', 'src')
       end
+
       def generate_servant_implementation?
         params[:gen_impl_servant]
       end
@@ -54,6 +54,7 @@ module IDL
 
       def enter_interface(node)
         return if node.is_abstract?
+
         super
         if node.is_local? || node.is_pseudo?
         else
@@ -68,6 +69,7 @@ module IDL
 
       def leave_interface(node)
         return if node.is_abstract?
+
         if node.is_local? || node.is_pseudo?
         else
           if generate_servant_implementation?
@@ -93,8 +95,6 @@ module IDL
 #        return if node.is_local? || !node.supports_concrete_interface?
 #        visitor(ValuetypeVisitor).visit_pre(node)
 #      end
-
     end # ImplSourceWriter
-
   end # Cxx11
 end # IDL

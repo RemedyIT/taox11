@@ -8,7 +8,7 @@
 #--------------------------------------------------------------------
 
 class String
-  if defined?(Encoding) && "".respond_to?(:encode)
+  if defined?(Encoding) && ''.respond_to?(:encode)
     def encoding_aware?
       true
     end

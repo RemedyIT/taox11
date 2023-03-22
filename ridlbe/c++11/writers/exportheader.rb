@@ -12,9 +12,7 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class ExportHeaderWriter < Base::Writer
-
       helper Cxx11::IncludeGuardHelper
       helper Cxx11::VersionHelper
       helper_method :macro_base, :file_name
@@ -29,7 +27,7 @@ module IDL
         @include_guard = "__RIDL_#{filename.to_random_include_guard}_EXPORT_INCLUDED__"
       end
 
-      def run(parser=nil)
+      def run(_parser = nil)
         visitor(ExportVisitor).visit
       end
 
@@ -43,6 +41,5 @@ module IDL
         @file_name.sub(/\./, '_').upcase
       end
     end
-
   end # Cxx11
 end # IDL

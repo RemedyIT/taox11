@@ -9,9 +9,7 @@
 
 module IDL
   module Cxx11
-
     class IncludeVisitor < NodeVisitorBase
-
       def visit(node)
         super
         visit_template(:include)
@@ -50,6 +48,7 @@ module IDL
                       _inc_dir.blank? || _inc_dir == '.'
               return (@anyop_inc_dir = File.join(_inc_dir, params[:anyop_outputdir]))
             end
+
             @anyop_inc_dir = _inc_dir
           end
         end
@@ -77,14 +76,12 @@ module IDL
       end
 
       def ami_servant_proxy_header
-         include_directory.dup << '/' << File.basename(node.filename, '.*') << 'Ami'+params[:srv_pfx] << params[:proxy_pfx] << '.h'
+         include_directory.dup << '/' << File.basename(node.filename, '.*') << 'Ami' + params[:srv_pfx] << params[:proxy_pfx] << '.h'
       end
 
       def anyop_include_header
         anyop_include_directory.dup << '/' << File.basename(node.filename, '.*') << params[:anyop_pfx] << '.h'
       end
-
     end
-
   end
 end

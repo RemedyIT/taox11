@@ -9,9 +9,7 @@
 
 module IDL
   module Cxx11
-
     class UnionVisitor < NodeVisitorBase
-
       def members
         @members ||= node.members.collect do |um|
           (umv = visitor(UnionMemberVisitor)).visit(um)
@@ -28,7 +26,7 @@ module IDL
       end
 
       def switchtype_boolean?
-        IDL::Type::Boolean === switchtype.resolved_type
+        switchtype.resolved_type.is_a?(IDL::Type::Boolean)
       end
 
       def all_labels_single?
@@ -42,13 +40,13 @@ module IDL
       def default_member
         unless @def_member
           um = node.members.find { |m| m.labels.include?(:default) }
-          @def_member = (um ? visitor(UnionMemberVisitor) {|v| v.visit(um)} : nil)
+          @def_member = (um ? visitor(UnionMemberVisitor) { |v| v.visit(um) } : nil)
         end
         @def_member
       end
 
       def non_default_members
-        node.members.collect { |m| m.labels.include?(:default) ? nil : visitor(UnionMemberVisitor) {|v| v.visit(m)} }.compact
+        node.members.collect { |m| m.labels.include?(:default) ? nil : visitor(UnionMemberVisitor) { |v| v.visit(m) } }.compact
       end
 
       def default_label
@@ -102,7 +100,7 @@ module IDL
         node.switchtype.is_standard_type? ?
             "TAO_CORBA::#{node.switchtype.cxx_typecode}" :
             "__tao::#{node.switchtype.scoped_cxx_typecode}"
-       end
+      end
 
       def scoped_switch_in_cxxtype
         node.switchtype.cxx_in_type
@@ -128,11 +126,9 @@ module IDL
 
       map_template :typecode, :typecode
       map_template :tao_typecode, :union_typecode
-
     end
 
     class UnionMemberVisitor < NodeVisitorBase
-
       def labels
         node.labels.collect { |_l| _l == :default ? 'default' : expression_to_s(_l) }
       end
@@ -154,7 +150,7 @@ module IDL
       end
 
       def is_array?
-        IDL::Type::Array === _resolved_idltype
+        _resolved_idltype.is_a?(IDL::Type::Array)
       end
 
       # Does this union member has multiple legal discriminator values
@@ -162,6 +158,5 @@ module IDL
         labels.size > 1 || is_default?
       end
     end
-
   end
 end

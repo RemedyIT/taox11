@@ -8,14 +8,12 @@
 #--------------------------------------------------------------------
 
 module IDL
-
   # define language mapping specific type customizations
 
   class Type
-
     # IDL typename
 
-    def idltype_name(scope = nil)
+    def idltype_name(_scope = nil)
       "#{typename.split('::').last.downcase}"
     end
 
@@ -26,7 +24,7 @@ module IDL
     # user space type names
 
     def cxx_type(scope = nil)
-      self.respond_to?(:node) ? ((scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::'+node.scoped_cxxname)) : 'void'
+      self.respond_to?(:node) ? ((scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)) : 'void'
     end
 
     def cxx_in_type(scope = nil)
@@ -81,7 +79,7 @@ module IDL
     # type names following interface proxy scopes
 
     def proxy_cxxtype(scope = nil)
-      self.respond_to?(:node) ? ((scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::'+node.scoped_proxy_cxxname)) : 'void'
+      self.respond_to?(:node) ? ((scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::' + node.scoped_proxy_cxxname)) : 'void'
     end
 
     def proxy_in_cxxtype(scope = nil)
@@ -100,7 +98,7 @@ module IDL
     # typecode name methods
 
     def cxx_typecode
-      self.respond_to?(:node) ? "_tc_#{node.cxxname}" : ""
+      self.respond_to?(:node) ? "_tc_#{node.cxxname}" : ''
     end
 
     def scoped_cxx_typecode
@@ -131,7 +129,7 @@ module IDL
     end
 
     # convert a type specific value to code
-    def value_to_s(v, scope = nil)
+    def value_to_s(v, _scope = nil)
       v.to_s
     end
 
@@ -194,15 +192,18 @@ module IDL
     end
 
     class Void
-      def value_to_s(v, scope = nil)
+      def value_to_s(_v, _scope = nil)
         ''
       end
+
       def cxx_typecode
-        "_tc_null"
+        '_tc_null'
       end
+
       def scoped_cxx_typecode
         "TAOX11_NAMESPACE::CORBA::#{cxx_typecode}"
       end
+
       def is_standard_type?
         true
       end
@@ -217,54 +218,50 @@ module IDL
     end
 
     class Long
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         # prevent integer overflow warnings on platforms with 32bit longs
-        v == self.min ? "(#{v+1}-1)" : v.to_s
+        v == self.min ? "(#{v + 1}-1)" : v.to_s
       end
     end
 
     class LongLong
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         "#{v}LL"
       end
 
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         'long long'
       end
-
     end
 
     class UShort
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         "#{v}U"
       end
 
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         'unsigned short'
       end
-
     end
 
     class ULong
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         "#{v}UL"
       end
 
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         'unsigned long'
       end
-
     end
 
     class ULongLong
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         "#{v}ULL"
       end
 
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         'unsigned long long'
       end
-
     end
 
     # for float classes
@@ -273,85 +270,96 @@ module IDL
       def is_pod?
         true
       end
-      def value_to_s(v, scope = nil)
+
+      def value_to_s(v, _scope = nil)
         "#{v}F"
       end
     end
 
     class Double
-      def value_to_s(v, scope = nil)
+      def value_to_s(v, _scope = nil)
         "#{v}"
       end
     end
 
     class LongDouble
-      def idltype_name(scope = nil)
+      def idltype_name(_scope = nil)
         'long double'
       end
-      def value_to_s(v, scope = nil)
+
+      def value_to_s(v, _scope = nil)
         "#{v}L"
       end
     end
 
     class Boolean
-      def cxx_arg_type(scope = nil)
+      def cxx_arg_type(_scope = nil)
         'ACE_InputCDR::to_boolean'
       end
+
       def cdr_to_fmt
         "ACE_InputCDR::to_boolean (#{super})"
       end
+
       def cdr_from_fmt
         "ACE_OutputCDR::from_boolean (#{super})"
       end
+
       def is_pod?
         true
       end
+
       def os_fmt
         'std::boolalpha << %s << std::noboolalpha'
       end
-
     end
 
     class Char
-      Printables = (0x20)...(0x7f)
-      Specials = ['\\', '\'']
-      def cxx_arg_type(scope = nil)
+      PRINTABLES = 0x20...0x7f.freeze
+      SPECIALS = ['\\', '\''].freeze
+      def cxx_arg_type(_scope = nil)
         'ACE_InputCDR::to_char'
       end
-      def value_to_s(v, scope = nil)
-        if Printables === v
-          if Specials.include?(c = v.chr)
+
+      def value_to_s(v, _scope = nil)
+        if PRINTABLES.include?(v)
+          if SPECIALS.include?(c = v.chr)
             "'\\#{c}'"
           else
             "'#{c}'"
           end
         else
-          "'#{'\x'+v.chr.unpack('H2').first}'"
+          "'#{'\x' + v.chr.unpack('H2').first}'"
         end
       end
+
       def cdr_to_fmt
         "ACE_InputCDR::to_char (#{super})"
       end
+
       def cdr_from_fmt
         "ACE_OutputCDR::from_char (#{super})"
       end
+
       def is_pod?
         true
       end
+
       def os_fmt
         return '"\'" <<  %s << "\'" '
       end
-
     end
 
     class WChar
-      def cxx_arg_type(scope = nil)
+      def cxx_arg_type(_scope = nil)
         'ACE_InputCDR::to_wchar'
       end
-      def value_to_s(v, scope = nil)
-        return 'L'+v.to_i.chr.dump.gsub('"', "'") if ::Integer === v
-        return 'L'+v.to_s[0, 1].dump.gsub('"', "'") unless ::Array === v
-        'L'+case v.first
+
+      def value_to_s(v, _scope = nil)
+        return 'L' + v.to_i.chr.dump.gsub('"', "'") if v.is_a?(::Integer)
+        return 'L' + v.to_s[0, 1].dump.gsub('"', "'") unless v.is_a?(::Array)
+
+        'L' + case v.first
         when :char
           "'#{v.last}'"
         when :esc_ch, :esc
@@ -364,80 +372,97 @@ module IDL
           ''
         end
       end
+
       def cdr_to_fmt
         "ACE_InputCDR::to_wchar (#{super})"
       end
+
       def cdr_from_fmt
         "ACE_OutputCDR::from_wchar (#{super})"
       end
+
       def is_pod?
         true
       end
     end
 
     class Octet
-      def cxx_arg_type(scope = nil)
+      def cxx_arg_type(_scope = nil)
         'ACE_InputCDR::to_octet'
       end
+
       def cdr_to_fmt
         "ACE_InputCDR::to_octet (#{super})"
       end
+
       def cdr_from_fmt
         "ACE_OutputCDR::from_octet (#{super})"
       end
 
       def os_fmt
         ' std::hex << "hex:" << (int)%s << std::dec'
-#        '%s'
-       end
+      end
     end
 
     class String
-      def cxx_type(scope = nil)
-        (size.to_i>0) ? "TAOX11_IDL::bounded_string<#{size}>" : 'std::string'
+      def cxx_type(_scope = nil)
+        (size.to_i > 0) ? "TAOX11_IDL::bounded_string<#{size}>" : 'std::string'
       end
-      def proxy_cxxtype(scope = nil)
+
+      def proxy_cxxtype(_scope = nil)
         cxx_type
       end
+
       def cxx_typecode
-        "_tc_string"
+        '_tc_string'
       end
+
       def scoped_cxx_typecode
         "TAOX11_NAMESPACE::CORBA::#{cxx_typecode}"
       end
+
       def cxx_member_type_name
-        (size.to_i>0) ? "bounded_string<#{size}>" : 'string'
+        (size.to_i > 0) ? "bounded_string<#{size}>" : 'string'
       end
-      def value_to_s(v, scope = nil)
+
+      def value_to_s(v, _scope = nil)
         v.dump
       end
+
       def is_standard_type?
         self.size.to_i == 0
       end
+
       def os_fmt
         return ' "\"" <<  %s << "\"" '
       end
     end
 
     class WString
-      def cxx_type(scope = nil)
-        (size.to_i>0) ? "TAOX11_IDL::bounded_wstring<#{size}>" : 'std::wstring'
+      def cxx_type(_scope = nil)
+        (size.to_i > 0) ? "TAOX11_IDL::bounded_wstring<#{size}>" : 'std::wstring'
       end
-      def proxy_cxxtype(scope = nil)
+
+      def proxy_cxxtype(_scope = nil)
         cxx_type
       end
+
       def cxx_typecode
-        "_tc_wstring"
+        '_tc_wstring'
       end
+
       def scoped_cxx_typecode
         "TAOX11_NAMESPACE::CORBA::#{cxx_typecode}"
       end
+
       def cxx_member_type_name
-        (size.to_i>0) ? "bounded_wstring<#{size}>" : 'wstring'
+        (size.to_i > 0) ? "bounded_wstring<#{size}>" : 'wstring'
       end
-      def value_to_s(v, scope = nil)
-        return 'L'+v.to_s.dump unless ::Array === v
-        'L"'+v.collect do |(elt, elv)|
+
+      def value_to_s(v, _scope = nil)
+        return 'L' + v.to_s.dump unless v.is_a?(::Array)
+
+        'L"' + v.collect do |(elt, elv)|
           case elt
           when :char
             elv
@@ -452,9 +477,11 @@ module IDL
           end
         end.join + '"'
       end
+
       def is_standard_type?
         self.size.to_i == 0
       end
+
       def os_fmt
         return ' %s '
       end
@@ -462,10 +489,11 @@ module IDL
 
     module IdlType_Mixin
      def idltype_name(scope = nil)
-       a = (scope && (scope == node)) ? node.name : ('::'+node.scoped_name)
+       a = (scope && (scope == node)) ? node.name : ('::' + node.scoped_name)
      end
+
      def idltype_unescaped_name(scope = nil)
-       a = (scope && (scope == node)) ? node.unescaped_name : ('::'+node.scoped_unescaped_name)
+       a = (scope && (scope == node)) ? node.unescaped_name : ('::' + node.scoped_unescaped_name)
      end
    end
 
@@ -473,24 +501,31 @@ module IDL
       def cxx_member_type(scope = nil, typedef = nil)
         "IDL::traits<#{(typedef || self).cxx_type(scope)}>::ref_type"
       end
-      def resolved_cxx_member_type(scope = nil, typedef = nil)
+
+      def resolved_cxx_member_type(scope = nil, _typedef = nil)
         "IDL::traits<#{resolved_cxx_type(scope)}>::ref_type"
       end
+
       def cxx_return_type(scope = nil)
         cxx_member_type(scope)
       end
+
       def cxx_byval_type(scope = nil)
         cxx_member_type(scope)
       end
+
       def cxx_out_type(scope = nil)
         "#{cxx_member_type(scope)}&"
       end
+
       def cxx_inout_type(scope = nil)
         "#{cxx_member_type(scope)}&"
       end
+
       def cxx_move_type(scope = nil)
         "#{cxx_member_type(scope)}&&"
       end
+
       def is_reference?
         true
       end
@@ -498,87 +533,105 @@ module IDL
 
     class Object
       include ReferenceType_Mixin
-      def cxx_type(scope = nil)
+      def cxx_type(_scope = nil)
         'TAOX11_NAMESPACE::CORBA::Object'
       end
+
       def cxx_typecode
-        "_tc_Object"
+        '_tc_Object'
       end
+
       def scoped_cxx_typecode
-        "TAOX11_NAMESPACE::CORBA::_tc_Object"
+        'TAOX11_NAMESPACE::CORBA::_tc_Object'
       end
+
       def cxx_member_type_name
         'object_reference'
       end
+
       def is_standard_type?
         true
       end
-      def idltype_name(scope = nil)
+
+      def idltype_name(_scope = nil)
         'Object'
       end
     end
 
     class ValueBase
       include ReferenceType_Mixin
-      def cxx_type(scope = nil)
+      def cxx_type(_scope = nil)
         'TAOX11_NAMESPACE::CORBA::ValueBase'
       end
+
       def cxx_member_type_name
         'valuetype_reference'
       end
+
       def cxx_typecode
-        "_tc_ValueBase"
+        '_tc_ValueBase'
       end
+
       def scoped_cxx_typecode
-        "TAOX11_NAMESPACE::CORBA::_tc_ValueBase"
+        'TAOX11_NAMESPACE::CORBA::_tc_ValueBase'
       end
+
       def is_standard_type?
         true
       end
-      def idltype_name(scope = nil)
+
+      def idltype_name(_scope = nil)
         'ValueBase'
       end
     end
 
     class Any
-      def cxx_type(scope = nil)
+      def cxx_type(_scope = nil)
         'TAOX11_NAMESPACE::CORBA::Any'
       end
-      def proxy_cxxtype(scope = nil)
+
+      def proxy_cxxtype(_scope = nil)
         cxx_type
       end
+
       def cxx_typecode
-        "_tc_any"
+        '_tc_any'
       end
+
       def scoped_cxx_typecode
-        "TAOX11_NAMESPACE::CORBA::_tc_any"
+        'TAOX11_NAMESPACE::CORBA::_tc_any'
       end
+
       def is_standard_type?
         true
       end
     end
 
     class Native
-      def cxx_type(scope = nil)
+      def cxx_type(_scope = nil)
         'void*'
       end
+
       def cxx_member_type(scope = nil, typedef = nil)
         typedef ? typedef.cxx_type(scope) : cxx_type
       end
 
-      def proxy_cxxtype(scope = nil)
+      def proxy_cxxtype(_scope = nil)
         cxx_type
       end
+
       def is_reference?
         true
       end
 
       def cxx_typecode
-        ""
+        ''
       end
+
       def scoped_cxx_typecode
-        ""
+        ''
       end
+
       def is_standard_type?
         false
       end
@@ -588,15 +641,15 @@ module IDL
       include ReferenceType_Mixin
       include IdlType_Mixin
       def cxx_type(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::'+node.scoped_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)
       end
 
       def cxx_member_type_name
-        "valuetype_reference"
+        'valuetype_reference'
       end
 
       def proxy_cxxtype(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::'+node.scoped_proxy_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::' + node.scoped_proxy_cxxname)
       end
     end
 
@@ -604,15 +657,15 @@ module IDL
       include ReferenceType_Mixin
       include IdlType_Mixin
       def cxx_type(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::'+node.scoped_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)
       end
 
       def cxx_member_type_name
-        "valuetype_reference"
+        'valuetype_reference'
       end
 
       def proxy_cxxtype(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::'+node.scoped_proxy_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::' + node.scoped_proxy_cxxname)
       end
 
       def boxed_traits_cxx_typename
@@ -623,7 +676,7 @@ module IDL
     class ScopedName
       include IdlType_Mixin
       def cxx_type(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::'+node.scoped_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)
       end
 
       def resolved_cxx_type(scope = nil)
@@ -631,7 +684,7 @@ module IDL
       end
 
       def proxy_cxxtype(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::'+node.scoped_proxy_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::' + node.scoped_proxy_cxxname)
       end
 
       def cxx_byval_type(scope = nil)
@@ -687,7 +740,7 @@ module IDL
         exp.idltype.value_to_s(exp.value, scope)
       end
 
-      def cxx_arg_type(scope = nil)
+      def cxx_arg_type(_scope = nil)
         resolved_type.cxx_arg_type
       end
 
@@ -702,25 +755,25 @@ module IDL
       def cdr_to_fmt
         resolved_type.cdr_to_fmt
       end
+
       def cdr_from_fmt
         resolved_type.cdr_from_fmt
       end
-
     end
 
     class Interface
       include ReferenceType_Mixin
       include IdlType_Mixin
       def cxx_type(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::'+node.scoped_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)
       end
 
       def cxx_member_type_name
-        node.is_abstract? ? "abstractbase_reference" : "object_reference"
+        node.is_abstract? ? 'abstractbase_reference' : 'object_reference'
       end
 
       def proxy_cxxtype(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::'+node.scoped_proxy_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::' + node.scoped_proxy_cxxname)
       end
     end
 
@@ -728,37 +781,37 @@ module IDL
       include IdlType_Mixin
 
       def cxx_type(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::'+node.scoped_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)
       end
 
       def proxy_cxxtype(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::'+node.scoped_proxy_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::' + node.scoped_proxy_cxxname)
       end
     end
 
     class Union
       include IdlType_Mixin
       def cxx_type(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::'+node.scoped_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)
       end
 
       def proxy_cxxtype(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::'+node.scoped_proxy_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::' + node.scoped_proxy_cxxname)
       end
     end
 
     class Enum
       include IdlType_Mixin
       def cxx_type(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::'+node.scoped_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)
       end
 
       def proxy_cxxtype(scope = nil)
-        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::'+node.scoped_proxy_cxxname)
+        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::' + node.scoped_proxy_cxxname)
       end
 
       def value_to_s(v, scope = nil)
-        ((scope && (scope == node.enclosure)) ? node.cxxname : ('::'+node.scoped_cxxname))+'::'+node.enumerators[v].cxxname
+        ((scope && (scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)) + '::' + node.enumerators[v].cxxname
       end
 
       def is_pod?
@@ -767,30 +820,36 @@ module IDL
     end
 
     class Fixed
-      def cxx_type(scope = nil)
-        digits.nil? ? "TAOX11_NAMESPACE::IDL::Fixed" : "TAOX11_NAMESPACE::IDL::Fixed<#{digits}, #{scale}>"
+      def cxx_type(_scope = nil)
+        digits.nil? ? 'TAOX11_NAMESPACE::IDL::Fixed' : "TAOX11_NAMESPACE::IDL::Fixed<#{digits}, #{scale}>"
       end
-      def proxy_cxxtype(scope = nil)
+
+      def proxy_cxxtype(_scope = nil)
         cxx_type
       end
-      def value_to_s(v, scope = nil)
+
+      def value_to_s(v, _scope = nil)
         v.to_s.gsub(/d|D/, '')
       end
     end
 
     class Sequence
       def cxx_type(scope = nil)
-        (size.to_i>0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.cxx_member_type(scope)}, #{size}>" : "std::vector<#{basetype.cxx_member_type(scope)}>"
+        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.cxx_member_type(scope)}, #{size}>" : "std::vector<#{basetype.cxx_member_type(scope)}>"
       end
+
       def proxy_cxxtype(scope = nil)
-        (size.to_i>0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.proxy_cxxtype(scope)}, #{size}>" : "std::vector<#{basetype.proxy_cxxtype(scope)}>"
+        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.proxy_cxxtype(scope)}, #{size}>" : "std::vector<#{basetype.proxy_cxxtype(scope)}>"
       end
+
       def resolved_cxx_type(scope = nil)
-        (size.to_i>0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::vector< #{basetype.resolved_cxx_member_type(scope)}>"
+        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::vector< #{basetype.resolved_cxx_member_type(scope)}>"
       end
+
       def base_traits_cxx_typename
         basetype.cxx_type
       end
+
       # any insertion/extraction operators arg typename
       def cxx_anyop_arg_typename(scope = nil)
         resolved_cxx_type(scope)
@@ -801,27 +860,31 @@ module IDL
       def cxx_type(scope = nil)
         sizes.reverse.inject(basetype.cxx_member_type(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
       end
+
       def proxy_cxxtype(scope = nil)
         sizes.reverse.inject(basetype.proxy_cxxtype(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
       end
+
       def resolved_cxx_type(scope = nil)
         sizes.reverse.inject(basetype.resolved_cxx_member_type(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
       end
+
       def cxx_dim
-        sizes.empty? ? '[]' : sizes.collect { |s| "[#{s.to_s}]"}.join
+        sizes.empty? ? '[]' : sizes.collect { |s| "[#{s.to_s}]" }.join
       end
+
       def base_traits_cxx_typename
         basetype.cxx_type
       end
+
       # any insertion/extraction operators arg typename
       def cxx_anyop_arg_typename(scope = nil)
         resolved_cxx_type(scope)
       end
+
       def zero_initializer
         '{{}}'
       end
     end
-
   end # Type
-
 end # IDL

@@ -13,7 +13,6 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class AmiStubHeaderBaseWriter < AmiBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
@@ -24,7 +23,6 @@ module IDL
     end
 
     class AmiStubHeaderWriter < AmiStubHeaderBaseWriter
-
       helper Cxx11::IncludeGuardHelper
 
       def initialize(output = STDOUT, opts = {})
@@ -33,8 +31,8 @@ module IDL
           'tao/x11/stddef.h',
           'tao/x11/basic_traits.h',
           'tao/x11/corba.h',
-          'tao/x11/system_exception.h',
-          ]
+          'tao/x11/system_exception.h'
+        ]
         @default_pre_includes << 'tao/x11/orb.h' unless params[:no_orb_include]
         @default_post_includes = []
         @default_post_includes << 'tao/x11/anytypecode/any.h' if params[:gen_any_ops]
@@ -92,7 +90,7 @@ module IDL
             ###
             # Overload standard #client_proxy for this visitor instance
             def client_proxy
-              File.basename(params[:idlfile], params[:idlext])+params[:ami_pfx]+params[:stub_pfx]+params[:proxy_pfx]+'.h'
+              File.basename(params[:idlfile], params[:idlext]) + params[:ami_pfx] + params[:stub_pfx] + params[:proxy_pfx] + '.h'
             end
           end
           v.visit
@@ -101,8 +99,9 @@ module IDL
 
       def visit_include(node)
         return if File.basename(node.filename) == 'orb.idl'
-        return if !((@params[:ami] && node.has_ami_interfaces_included?) ||
-                    (@params[:ami_bc] && (node.has_interfaces_ami_candidates)))
+        return unless ((@params[:ami] && node.has_ami_interfaces_included?) ||
+                    (@params[:ami_bc] && node.has_interfaces_ami_candidates))
+
         at_global_scope do
           visitor(IncludeVisitor).visit(node)
         end
@@ -127,6 +126,7 @@ module IDL
       def declare_interface(node)
         sn = node.scoped_cxxname
         return if @fwd_decl_cache.has_key?(sn) || !needs_ami_generation?(node)
+
         @fwd_decl_cache[sn] = true
         # use ami_interface for ReplyHandler
         _ami_intf = ami_handler_interface
@@ -137,7 +137,8 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         println
         printiln('// generated from AmiStubHeaderWriter#enter_interface')
         sn = node.scoped_cxxname
@@ -157,7 +158,8 @@ module IDL
       end
 
       def leave_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         dec_nest
         ami_handler_interface.visit_post(node)
         super
@@ -166,12 +168,14 @@ module IDL
       def visit_operation(node)
         return if !node.enclosure.is_a?(IDL::AST::Interface) ||
                   !needs_ami_generation?(node.enclosure)
+
         visitor(OperationVisitor).visit_operation(node)
       end
 
       def visit_attribute(node)
         return if !node.enclosure.is_a?(IDL::AST::Interface) ||
                   !needs_ami_generation?(node.enclosure)
+
         visitor(AttributeVisitor).visit_attribute(node)
       end
 
@@ -211,11 +215,9 @@ module IDL
       def visit_servant_header(parser)
          writer(AmiStubHeaderSrvWriter).visit_nodes(parser)
       end
-
     end # AmiStubHeaderWriter
 
     class AmiStubHeaderIncludeWriter < AmiStubHeaderBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -228,7 +230,7 @@ module IDL
 
       attr_reader :includes
 
-      def post_visit(parser)
+      def post_visit(_parser)
         properties[:includes] = @includes
         properties[:pre_includes] = @default_pre_includes
         properties[:post_includes] = @default_post_includes
@@ -237,8 +239,9 @@ module IDL
           # Overloads for this visitor only.
           v.class_eval do
             def stub_export_include?
-              (!params[:amic_export_include].nil?) || super
+              !params[:amic_export_include].nil? || super
             end
+
             def stub_export_include
               params[:amic_export_include] || super
             end
@@ -249,13 +252,15 @@ module IDL
 
       def declare_interface(node)
         return if node.is_pseudo?
+
         add_include('tao/x11/valuetype/abstractbase_traits_t.h') if node.is_abstract?
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
           add_include('tao/x11/object.h')
-       end
+      end
 
       def visit_operation(node)
         check_idl_type(node.idltype)
@@ -266,7 +271,7 @@ module IDL
         check_idl_type(node.idltype)
       end
 
-      def declare_valuetype(node)
+      def declare_valuetype(_node)
         add_include('tao/x11/valuetype/valuetype_traits_t.h')
       end
 
@@ -291,12 +296,12 @@ module IDL
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
-      def enter_exception(node)
-      end
+      def enter_exception(node); end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type && params[:no_gen_native]
-        return if IDL::Type::ScopedName === node.idltype # alias typedef
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
+        return if node.idltype.is_a?(IDL::Type::ScopedName) # alias typedef
+
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::Sequence,
@@ -308,6 +313,7 @@ module IDL
       end
 
       private
+
       def check_idl_type(idl_type)
         idl_type = idl_type.resolved_type
         case idl_type
@@ -330,7 +336,7 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         println
         printiln('// generated from AmiStubHeaderTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE')
@@ -341,7 +347,7 @@ module IDL
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
         printiln('} // namespace IDL')
         dec_nest
@@ -350,12 +356,12 @@ module IDL
 
       def enter_interface(node)
         return unless needs_ami_generation?(node)
+
         # use ami_interface for ReplyHandler
         _ami_intf = ami_handler_interface
         _ami_intf.visit_idl_traits(node)
         _ami_intf.visit_idl_traits_def(node)
       end
-
     end # AmiStubHeaderTraitsWriter
 
     class AmiStubHeaderAnyOpWriter < AmiStubHeaderBaseWriter
@@ -386,17 +392,16 @@ module IDL
       end
 
       def declare_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
           ami_handler_interface.visit_anyop(node)
         end
       end
 
       def enter_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
         ami_handler_interface.visit_anyop(node)
         end
       end
-
     end # AmiStubHeaderAnyOpWriter
 
     class AmiStubInlineWriter < CxxCodeWriterBase
@@ -414,12 +419,9 @@ module IDL
         super
       end
 
-      def enter_interface(node)
-      end
+      def enter_interface(node); end
 
-      def leave_interface(node)
-      end
-
+      def leave_interface(node); end
     end # AmiStubInlineWriter
 
     class AmiStubHeaderOSWriter < AmiStubHeaderBaseWriter
@@ -428,12 +430,11 @@ module IDL
       end
 
       def enter_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
           ami_handler_interface.visit_os(node)
           ami_interface.visit_amic_os(node)
         end
       end
-
     end # AmiStubHeaderOSWriter
 
     class AmiStubHeaderAmiCWriter < AmiStubHeaderBaseWriter
@@ -442,9 +443,7 @@ module IDL
           @fwd_decl_cache = {}
       end
 
-
-      def post_visit(parser)
-      end
+      def post_visit(parser); end
 
       def enter_module(node)
         super
@@ -465,6 +464,7 @@ module IDL
       def declare_interface(node)
         sn = node.scoped_cxxname
         return if @fwd_decl_cache.has_key?(sn) || !needs_ami_generation?(node)
+
         @fwd_decl_cache[sn] = true
         ami_interface.visit_amic_fwd(node)
         at_global_scope do
@@ -473,7 +473,8 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         println
         printiln('// generated from AmiStubHeaderAmiCWriter#enter_interface')
         sn = node.scoped_cxxname
@@ -490,7 +491,8 @@ module IDL
       end
 
       def leave_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         dec_nest
         ami_interface.visit_amic_post(node)
         super
@@ -499,12 +501,14 @@ module IDL
       def visit_operation(node)
         return if !node.enclosure.is_a?(IDL::AST::Interface) ||
                   !needs_ami_generation?(node.enclosure)
+
         ami_operation.visit_amic(node)
       end
 
       def visit_attribute(node)
         return if !node.enclosure.is_a?(IDL::AST::Interface) ||
                   !needs_ami_generation?(node.enclosure)
+
         ami_attribute.visit_amic(node)
       end
     end # AmiStubHeaderAmiCWriter
@@ -514,7 +518,7 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         println
         printiln('// generated from AmiStubHeaderAmicTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE')
@@ -522,16 +526,16 @@ module IDL
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
         printiln('} // namespace TAOX11_NAMESPACE')
       end
 
       def enter_interface(node)
         return unless needs_ami_generation?(node)
+
         ami_interface.visit_amic_traits(node)
       end
-
     end # AmiStubHeaderTraitsWriter
 
     class AmiStubHeaderBaseSrvWriter < AmiBaseWriter
@@ -569,14 +573,17 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         super
         ami_handler_interface_with_ami_inheritance.visit_pre(node)
         inc_nest  # POA
         inc_nest  # servant skeleton class
       end
+
       def leave_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         dec_nest
         dec_nest
         ami_handler_interface.visit_post(node)
@@ -584,12 +591,14 @@ module IDL
       end
 
       def visit_operation(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
+
         visitor(OperationVisitor).visit_operation(node)
       end
 
       def visit_attribute(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
+
         visitor(AttributeVisitor).visit_attribute(node)
       end
 
@@ -603,7 +612,7 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         println
         printiln('// generated from AmiStubHeaderSrvTraitsWriter#pre_visit')
         printiln('namespace TAOX11_NAMESPACE {')
@@ -612,7 +621,7 @@ module IDL
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
         printiln('} // namespace CORBA')
         dec_nest
@@ -621,10 +630,10 @@ module IDL
 
       def enter_interface(node)
         super
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         ami_handler_interface.visit_servant_traits(node)
       end
     end
 end # Cxx11
-
 end # IDL

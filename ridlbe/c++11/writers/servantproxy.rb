@@ -12,7 +12,6 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class ServantProxyBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
@@ -21,7 +20,6 @@ module IDL
     end
 
     class ServantProxyWriter < ServantProxyBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -48,6 +46,7 @@ module IDL
 
       def visit_include(node)
         return if File.basename(node.filename) == 'orb.idl'
+
         at_global_scope do
           visitor(IncludeVisitor).visit(node)
         end
@@ -71,6 +70,7 @@ module IDL
 
       def enter_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
         super
         println
         printiln('// generated from ServantProxyWriter#enter_interface')
@@ -79,16 +79,17 @@ module IDL
         visitor(InterfaceVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_interface(node)
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
         dec_nest
         visitor(InterfaceVisitor).visit_post(node)
         dec_nest
-        printiln("} // namespace POA")
+        printiln('} // namespace POA')
         println
         super
       end
     end # ServantProxyWriter
-
   end # Cxx11
 end # IDL

@@ -14,9 +14,7 @@ require 'ridlbe/c++11/visitors/exception'
 
 module IDL
   module Cxx11
-
     class ValuetypeVisitor < NodeVisitorBase
-
       def is_forward?
         node.is_forward?
       end
@@ -34,7 +32,7 @@ module IDL
       end
 
       def is_concrete?
-        (!node.is_abstract?) && node.initializers.empty? && !node.has_operations_or_attributes?
+        !node.is_abstract? && node.initializers.empty? && !node.has_operations_or_attributes?
       end
 
       def is_derived?
@@ -85,11 +83,11 @@ module IDL
       end
 
       def supports_abstract_interfaces?
-        node.interfaces.any? {|_if| _if.is_abstract? }
+        node.interfaces.any? { |_if| _if.is_abstract? }
       end
 
       def abstract_interfaces
-        @abstract_interfaces ||= node.interfaces.find_all {|_if| _if.is_abstract? }.collect do |intf|
+        @abstract_interfaces ||= node.interfaces.find_all { |_if| _if.is_abstract? }.collect do |intf|
           (intfv = visitor(InterfaceVisitor)).visit(intf)
           intfv
         end
@@ -131,7 +129,7 @@ module IDL
           end
           interface_ancestor_nodes.inject(@attributes) do |attlist, intf|
             intf.attributes.inject(attlist) do |_attlist, att|
-              _attlist << visitor(AttributeVisitor) {|v| v.visit(att); v.interface(node) }
+              _attlist << visitor(AttributeVisitor) { |v| v.visit(att); v.interface(node) }
               _attlist
             end
           end
@@ -178,7 +176,7 @@ module IDL
       end
 
       def scoped_obv_cxxtype
-        '::'+node.scoped_obv_cxxname
+        '::' + node.scoped_obv_cxxname
       end
 
       def factory_cxxname
@@ -194,7 +192,7 @@ module IDL
       end
 
       def scoped_factory_cxx_type
-        '::'+node.scoped_factory_cxxname
+        '::' + node.scoped_factory_cxxname
       end
 
       def scoped_factory_traits_type
@@ -210,7 +208,7 @@ module IDL
       end
 
       def scoped_skel_cxxtype
-        '::'+node.scoped_skel_cxxname
+        '::' + node.scoped_skel_cxxname
       end
 
       # template mapping
@@ -224,14 +222,12 @@ module IDL
     end
 
     class ValuetypeMemberVisitor < NodeVisitorBase
-
       def is_public?
         node.is_public?
       end
     end # ValuetypeMemberVisitor
 
     class ValuetypeInitializerVisitor < NodeVisitorBase
-
       def parameters
         @parameters ||= node.params.collect do |param|
           (pv = visitor(Parameter)).visit(param)
@@ -256,8 +252,6 @@ module IDL
 
       class Parameter < NodeVisitorBase
       end
-
     end # ValuetypeInitializerVisitor
-
   end
 end

@@ -13,7 +13,6 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class AmiStubProxyBaseWriter < AmiBaseWriter # CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
@@ -21,11 +20,9 @@ module IDL
       end
 
       attr_accessor :include_guard
-
     end
 
     class AmiStubProxyWriter < AmiStubProxyBaseWriter
-
       helper Cxx11::IncludeGuardHelper
 
       def initialize(output = STDOUT, opts = {})
@@ -79,14 +76,16 @@ module IDL
 
       def enter_interface(node)
         super
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         println
         printiln('// generated from AmiStubProxyWriter#enter_interface')
         ami_handler_interface_with_ami_inheritance.visit_pre(node)
         inc_nest
       end
+
       def leave_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
           dec_nest
           ami_handler_interface.visit_post(node)
         end
@@ -96,12 +95,14 @@ module IDL
       def visit_operation(node)
         return if !node.enclosure.is_a?(IDL::AST::Interface) ||
         !needs_ami_generation?(node.enclosure)
+
         visitor(OperationVisitor).visit_operation(node)
       end
 
        def visit_attribute(node)
          return if !node.enclosure.is_a?(IDL::AST::Interface) ||
          !needs_ami_generation?(node.enclosure)
+
          visitor(AttributeVisitor).visit_attribute(node)
        end
 
@@ -136,7 +137,6 @@ module IDL
     end # AmiStubProxyWriter
 
     class AmiStubProxyIncludeWriter < AmiStubProxyBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -150,7 +150,7 @@ module IDL
 
       attr_reader :includes
 
-      def post_visit(parser)
+      def post_visit(_parser)
         properties[:pre_includes] = @default_pre_includes
         properties[:post_includes] = @default_post_includes
         properties[:includes] = @includes
@@ -160,64 +160,74 @@ module IDL
       def enter_valuetype(node)
         # interfaces ALWAYS provide sequence cdr definitions (forward decl issue)
         return if node.is_local?
+
         add_include('tao/Valuetype/Value_VarOut_T.h')
       end
 
       def declare_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         # interfaces ALWAYS provide sequence cdr definitions (forward decl issue)
         add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
         add_include('tao/x11/basic_argument_t.h')
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         check_idl_type(node.idltype) unless node.is_abstract?
         # interfaces ALWAYS provide sequence cdr definitions (forward decl issue)
         add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
       end
 
       def visit_operation(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
+
         check_idl_type(node.idltype)
         node.params.each { |parm| check_idl_type(parm.idltype) }
       end
 
       def visit_attribute(node)
-        return if !needs_ami_generation?(node.enclosure)
+        return unless needs_ami_generation?(node.enclosure)
+
         check_idl_type(node.idltype)
       end
 
       def visit_valuetype(node)
         return if node.is_local?
+
         add_include('tao/x11/basic_argument_t.h')
         node.state_members.each { |m| check_idl_type(m.idltype) }
       end
 
       def visit_valuebox(node)
         return if node.is_local?
+
         add_include('tao/x11/basic_argument_t.h')
         check_idl_type(node.boxed_type)
       end
 
       def enter_struct(node)
         return if node.is_local?
+
         add_include('tao/x11/basic_argument_t.h')
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
       def enter_union(node)
         return if node.is_local?
+
         add_include('tao/x11/basic_argument_t.h')
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
-      def visit_enum(node)
+      def visit_enum(_node)
         add_include('tao/x11/basic_argument_t.h')
       end
 
       def visit_typedef(node)
         return if node.is_local?
+
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::Sequence,
@@ -227,6 +237,7 @@ module IDL
       end
 
       private
+
       def check_idl_type(idl_type)
         idl_type = idl_type.resolved_type
         case idl_type
@@ -285,15 +296,16 @@ module IDL
       end
 
       def declare_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         ami_handler_interface.visit_cdr(node)
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         ami_handler_interface.visit_cdr(node)
       end
-
     end # AmiStubProxyCDRWriter
 
     class AmiStubProxyVarOutWriter < AmiStubProxyBaseWriter
@@ -301,28 +313,30 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         printiln('// generated from AmiStubProxyVarOutWriter#pre_visit')
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         printiln
       end
 
       def enter_module(node)
          enter_scope(node)
-       end
+      end
 
        def leave_module(node)
          leave_scope(node)
        end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         ami_handler_interface.visit_object_var(node)
       end
 
-    private
+      private
+
       def enter_scope(node)
         printiln('// generated from AmiStubProxyVarOutWriter#enter_scope')
         printiln('namespace ' + node.cxxname)
@@ -334,7 +348,6 @@ module IDL
         dec_nest
         printiln("} // namespace #{node.cxxname}")
       end
-
     end # AmiStubProxyVarOutWriter
 
     class AmiStubProxyObjRefTraitsWriter < AmiStubProxyBaseWriter
@@ -342,19 +355,18 @@ module IDL
          super
        end
 
-       def pre_visit(parser)
+       def pre_visit(_parser)
          println
          printiln('// generated from AmiStubProxyObjRefTraitsWriter#pre_visit')
        end
 
-       def post_visit(parser)
-       end
+       def post_visit(parser); end
 
        def enter_interface(node)
-         return if !needs_ami_generation?(node)
+         return unless needs_ami_generation?(node)
+
          ami_handler_interface.visit_object_ref_traits(node)
        end
-
     end # AmiStubProxyObjRefTraitsWriter
 
     class AmiStubProxyTypecodeWriter < AmiStubProxyBaseWriter
@@ -378,7 +390,8 @@ module IDL
         super
       end
 
-    private
+      private
+
       def enter_scope(node)
         println
         printiln('// generated from AmiStubProxyTypecodeWriter#enter_scope')
@@ -386,12 +399,14 @@ module IDL
         printiln('{')
         inc_nest
       end
+
       def leave_scope(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
       end
 
-    public
+      public
+
       def enter_module(node)
         enter_scope(node)
       end
@@ -401,24 +416,23 @@ module IDL
       end
 
       def declare_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
           ami_handler_interface.visit_typecode(node)
         end
       end
 
       def enter_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
           ami_handler_interface.visit_typecode(node)
           enter_scope(node)
         end
       end
 
       def leave_interface(node)
-        unless !needs_ami_generation?(node)
+        if needs_ami_generation?(node)
           leave_scope(node)
         end
       end
-
     end # AmiStubProxyTypecodeWriter
 
     class AmiStubProxySrvBaseWriter < AmiBaseWriter
@@ -433,11 +447,9 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
-      end
+      def pre_visit(parser); end
 
-      def post_visit(parser)
-      end
+      def post_visit(parser); end
 
       def enter_module(node)
         super
@@ -456,7 +468,8 @@ module IDL
       end
 
       def enter_interface(node)
-        return if !needs_ami_generation?(node)
+        return unless needs_ami_generation?(node)
+
         super
         println
         printiln('// generated from AmiStubProxySrvWriter#enter_interface')
@@ -468,15 +481,14 @@ module IDL
 
       def leave_interface(node)
         return if !needs_ami_generation?(node) || node.is_pseudo?
+
         dec_nest
         ami_handler_interface.visit_post(node)
         dec_nest
-        printiln("} // namespace POA")
+        printiln('} // namespace POA')
         println
         super
       end
      end # AmiStubProxySrvWriter
-
   end # Cxx11
-
 end # IDL

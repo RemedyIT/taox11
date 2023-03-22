@@ -10,13 +10,11 @@ require 'ridlbe/base/visitorbase'
 
 module IDL
   module Cxx11
-
     # Generic visitor base class providing template
     # access to parameters and properties and template
     # driving methods.
     #
     class VisitorBase < Base::Visitor
-
       visitor_type_id = :base
 
       def initialize(output, properties, writer)
@@ -24,11 +22,11 @@ module IDL
       end
 
       def client_header
-        File.basename(params[:output] || (File.basename(params[:idlfile], params[:idlext])+params[:stub_pfx]+'.h'))
+        File.basename(params[:output] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + '.h'))
       end
 
       def client_inline
-        File.basename(params[:output_inl] || (File.basename(params[:idlfile], params[:idlext])+params[:stub_pfx]+'.inl'))
+        File.basename(params[:output_inl] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + '.inl'))
       end
 
       def no_client_inline?
@@ -36,7 +34,7 @@ module IDL
       end
 
       def client_proxy
-        File.basename(params[:output_prx] || (File.basename(params[:idlfile], params[:idlext])+params[:stub_pfx]+params[:proxy_pfx]+'.h'))
+        File.basename(params[:output_prx] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + params[:proxy_pfx] + '.h'))
       end
 
       def no_client_proxy?
@@ -44,15 +42,15 @@ module IDL
       end
 
       def client_source
-        File.basename(params[:output_src] || (File.basename(params[:idlfile], params[:idlext])+params[:stub_pfx]+'.cpp'))
+        File.basename(params[:output_src] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + '.cpp'))
       end
 
       def servant_header
-        File.basename(params[:srv_output_hdr] || (File.basename(params[:idlfile], params[:idlext])+params[:srv_pfx]+'.h'))
+        File.basename(params[:srv_output_hdr] || (File.basename(params[:idlfile], params[:idlext]) + params[:srv_pfx] + '.h'))
       end
 
       def servant_proxy
-        File.basename(params[:srv_output_prx] || (File.basename(params[:idlfile], params[:idlext])+params[:srv_pfx]+params[:proxy_pfx]+'.h'))
+        File.basename(params[:srv_output_prx] || (File.basename(params[:idlfile], params[:idlext]) + params[:srv_pfx] + params[:proxy_pfx] + '.h'))
       end
 
       def no_servant_source?
@@ -60,7 +58,7 @@ module IDL
       end
 
       def servant_source
-        File.basename(params[:srv_output_src] || (File.basename(params[:idlfile], params[:idlext])+params[:srv_pfx]+'.cpp'))
+        File.basename(params[:srv_output_src] || (File.basename(params[:idlfile], params[:idlext]) + params[:srv_pfx] + '.cpp'))
       end
 
       def generate_servant_implementation?
@@ -68,11 +66,11 @@ module IDL
       end
 
       def implementation_header
-        File.basename(params[:impl_output] || (File.basename(params[:idlfile], params[:idlext])+params[:impl_pfx]+'.h'))
+        File.basename(params[:impl_output] || (File.basename(params[:idlfile], params[:idlext]) + params[:impl_pfx] + '.h'))
       end
 
       def implementation_source
-        File.basename(params[:impl_output_src] || (File.basename(params[:idlfile], params[:idlext])+params[:impl_pfx]+'.cpp'))
+        File.basename(params[:impl_output_src] || (File.basename(params[:idlfile], params[:idlext]) + params[:impl_pfx] + '.cpp'))
       end
 
       def export_include?
@@ -84,7 +82,7 @@ module IDL
       end
 
       def export_macro
-        params[:export_macro] ? params[:export_macro]+' ' : nil
+        params[:export_macro] ? params[:export_macro] + ' ' : nil
       end
 
       def stub_export_include?
@@ -96,7 +94,7 @@ module IDL
       end
 
       def stub_export_macro
-        params[:stub_export_macro] ? params[:stub_export_macro]+' ' : self.export_macro
+        params[:stub_export_macro] ? params[:stub_export_macro] + ' ' : self.export_macro
       end
 
       def generate_ami_support?
@@ -108,7 +106,7 @@ module IDL
       end
 
       def amic_export_include?
-        (!params[:amic_export_include].nil?) || self.stub_export_include?
+        !params[:amic_export_include].nil? || self.stub_export_include?
       end
 
       def amic_export_include
@@ -116,11 +114,11 @@ module IDL
       end
 
       def amic_export_macro
-        params[:amic_export_macro] ? (params[:amic_export_macro]+' ') : self.stub_export_macro
+        params[:amic_export_macro] ? (params[:amic_export_macro] + ' ') : self.stub_export_macro
       end
 
       def implementation_export_include?
-        (!params[:impl_export_include].nil?) || self.export_include?
+        !params[:impl_export_include].nil? || self.export_include?
       end
 
       def implementation_export_include
@@ -128,7 +126,7 @@ module IDL
       end
 
       def implementation_export_macro
-        params[:impl_export_macro] ? (params[:impl_export_macro]+' ') : self.export_macro
+        params[:impl_export_macro] ? (params[:impl_export_macro] + ' ') : self.export_macro
       end
 
       def anytypecode_export_include?
@@ -140,7 +138,7 @@ module IDL
       end
 
       def anytypecode_export_macro
-        params[:anytypecode_export_macro] ? params[:anytypecode_export_macro]+' ' : self.stub_export_macro
+        params[:anytypecode_export_macro] ? params[:anytypecode_export_macro] + ' ' : self.stub_export_macro
       end
 
       def skel_export_include?
@@ -152,7 +150,7 @@ module IDL
       end
 
       def skel_export_macro
-        params[:skel_export_macro] ? params[:skel_export_macro]+' ' : self.export_macro
+        params[:skel_export_macro] ? params[:skel_export_macro] + ' ' : self.export_macro
       end
 
       def pre_include?
@@ -240,13 +238,11 @@ module IDL
       def proxy_suffix
         STUB_PROXY_SUFFIX
       end
-
     end # VisitorBase
 
     # Visitor base class for node visitors
     #
     class NodeVisitorBase < VisitorBase
-
       include Base::NodeVisitorMethods
 
       visitor_type_id = :node_base
@@ -426,27 +422,27 @@ module IDL
 
       def implementation_in_type
         self._idltype.is_reference? ? "IDL::traits<#{scoped_cxxtype}>::ref_type" :
-          self._idltype.is_a?(IDL::Type::Any) ? "const CORBA::Any&" : scoped_cxx_in_type
+          self._idltype.is_a?(IDL::Type::Any) ? 'const CORBA::Any&' : scoped_cxx_in_type
       end
 
       def implementation_out_type
         self._idltype.is_reference? ? "IDL::traits<#{scoped_cxxtype}>::ref_type&" :
-          self._idltype.is_a?(IDL::Type::Any) ? "CORBA::Any&" : scoped_cxx_out_type
+          self._idltype.is_a?(IDL::Type::Any) ? 'CORBA::Any&' : scoped_cxx_out_type
       end
 
       def implementation_inout_type
         self._idltype.is_reference? ? "IDL::traits<#{scoped_cxxtype}>::ref_type&" :
-          self._idltype.is_a?(IDL::Type::Any) ? "CORBA::Any&" : scoped_cxx_inout_type
+          self._idltype.is_a?(IDL::Type::Any) ? 'CORBA::Any&' : scoped_cxx_inout_type
       end
 
       def implementation_return_type
         self._idltype.is_reference? ? "IDL::traits<#{scoped_cxxtype}>::ref_type" :
-          self._idltype.is_a?(IDL::Type::Any) ? "CORBA::Any" : scoped_cxx_return_type
+          self._idltype.is_a?(IDL::Type::Any) ? 'CORBA::Any' : scoped_cxx_return_type
       end
 
       def implementation_member_type
         self._idltype.is_reference? ? "IDL::traits<#{scoped_cxxtype}>::ref_type" :
-          self._idltype.is_a?(IDL::Type::Any) ? "CORBA::Any" : scoped_cxx_member_type
+          self._idltype.is_a?(IDL::Type::Any) ? 'CORBA::Any' : scoped_cxx_member_type
       end
 
       def cdr_to_type
@@ -526,8 +522,6 @@ module IDL
 
       # this seems nonsensical but this prevents prefixing
       map_template :anyop, :anyop
-
     end # NodeVisitorBase
-
   end # Cxx11
 end # IDL

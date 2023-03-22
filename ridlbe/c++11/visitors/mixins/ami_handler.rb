@@ -10,7 +10,6 @@ require 'ridlbe/c++11/visitors/mixins/ami_names'
 
 module IDL
   module Cxx11
-
     ###
     # This mixin overrides the standard InterfaceVisitor in such a way
     # that the visitor provides key properties like type names and
@@ -95,15 +94,15 @@ module IDL
       end
 
       def cxx_in_type
-        @_cxx_in_type ||= (cxx_traits_type+'::ref_type')
+        @_cxx_in_type ||= (cxx_traits_type + '::ref_type')
       end
 
       def cxx_move_type
-        @_cxx_move_type ||= (cxx_traits_type+'::ref_type&&')
+        @_cxx_move_type ||= (cxx_traits_type + '::ref_type&&')
       end
 
       def cxx_out_type
-        @_cxx_out_type ||= (cxx_traits_type+'::ref_type&')
+        @_cxx_out_type ||= (cxx_traits_type + '::ref_type&')
       end
 
       def cxx_return_type
@@ -115,19 +114,19 @@ module IDL
       end
 
       def scoped_cxxtype
-        @scoped_cxxtype ||= ('::'+scoped_cxxname)
+        @scoped_cxxtype ||= ('::' + scoped_cxxname)
       end
 
       def scoped_cxx_in_type
-        @scoped_cxx_in_type ||= (scoped_cxx_traits_type+'::ref_type')
+        @scoped_cxx_in_type ||= (scoped_cxx_traits_type + '::ref_type')
       end
 
       def scoped_cxx_move_type
-        @scoped_cxx_move_type ||= (scoped_cxx_traits_type+'::ref_type&&')
+        @scoped_cxx_move_type ||= (scoped_cxx_traits_type + '::ref_type&&')
       end
 
       def scoped_cxx_out_type
-        @scoped_cxx_out_type ||= (scoped_cxx_traits_type+'::ref_type&')
+        @scoped_cxx_out_type ||= (scoped_cxx_traits_type + '::ref_type&')
       end
 
       def scoped_cxx_return_type
@@ -139,7 +138,7 @@ module IDL
       end
 
       def cxx_typecode
-        self.respond_to?(:node) ? "_tc_AMI_#{node.cxxname}Handler" : ""
+        self.respond_to?(:node) ? "_tc_AMI_#{node.cxxname}Handler" : ''
       end
 
       def scoped_cxx_typecode
@@ -189,16 +188,14 @@ module IDL
       end
 
       module Overloads
-
         def stub_export_macro_with_ami
-          params[:amic_export_macro] ? (params[:amic_export_macro]+' ') : stub_export_macro_without_ami
+          params[:amic_export_macro] ? (params[:amic_export_macro] + ' ') : stub_export_macro_without_ami
         end
 
         def skel_export_macro
           stub_export_macro
         end
       end # Overloads
-
     end # AmiHandler
 
     ###
@@ -206,7 +203,6 @@ module IDL
     # that the visitor provides base or ancestor visitors with AmiHandler
     # included.
     module AmiInheritance
-
       def bases
         @bases ||= node.bases.collect do |base|
           visitor(InterfaceVisitor) do |v|
@@ -224,8 +220,6 @@ module IDL
           end unless ancestor.is_abstract?  # leave out abstract bases
         end.compact
       end
-
     end
-
   end
 end
