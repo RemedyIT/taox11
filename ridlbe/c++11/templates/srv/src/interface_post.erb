@@ -1,7 +1,7 @@
 
 %if all_operations.size > 0 || all_attributes.size > 0
 // generated from <%= ridl_template_path %>
-static const Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array[] =
+static constexpr Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array[] =
 % _std_skel_postfix = generate_thrupoa_collocation? ? '_thru_poa_skel' : '_skel'
   {
 % nr_of_operations = 0;
