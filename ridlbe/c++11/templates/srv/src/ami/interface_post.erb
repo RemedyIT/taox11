@@ -7,14 +7,14 @@ static constexpr Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array
 % nr_of_operations = 0;
 % all_operations.each do |_op|
     {"<%= _op.name %>",
-     [] (TAO_ServerRequest& server_request, TAO_TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant)
+     [] (TAO_ServerRequest& server_request, TAO_TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant) constexpr
      {
       <%= scoped_srvproxy_cxxname %>* const impl = dynamic_cast<<%= scoped_srvproxy_cxxname %>*> (servant);
       <%= _op.defining_interface.handler_scoped_srvproxy_cxxtype %>::<%= _op.name %>_skel (server_request, servant_upcall, impl->skel ());
      }
     },
     {"<%= _op.name %>_excep",
-     [] (TAO_ServerRequest& server_request, TAO_TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant)
+     [] (TAO_ServerRequest& server_request, TAO_TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant) constexpr
      {
       <%= scoped_srvproxy_cxxname %>* const impl = dynamic_cast<<%= scoped_srvproxy_cxxname %>*> (servant);
       <%= _op.defining_interface.handler_scoped_srvproxy_cxxtype %>::<%= _op.name %>_excep_skel (server_request, servant_upcall, impl->skel ());
@@ -24,14 +24,14 @@ static constexpr Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array
 % end
 % all_attributes.each do |_att|
     {"get_<%= _att.name %>",
-     [] (TAO_ServerRequest& server_request, TAO_TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant)
+     [] (TAO_ServerRequest& server_request, TAO_TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant) constexpr
      {
       <%= scoped_srvproxy_cxxname %>* const impl = dynamic_cast<<%= scoped_srvproxy_cxxname %>*> (servant);
       <%= _att.defining_interface.handler_scoped_srvproxy_cxxtype %>::get_<%= _att.name %>_skel (server_request, servant_upcall, impl->skel ());
      }
     },
     {"get_<%= _att.name %>_excep",
-     [] (TAO_ServerRequest& server_request, TAO_TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant)
+     [] (TAO_ServerRequest& server_request, TAO_TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant) constexpr
      {
       <%= scoped_srvproxy_cxxname %>* const impl = dynamic_cast<<%= scoped_srvproxy_cxxname %>*> (servant);
       <%= _att.defining_interface.handler_scoped_srvproxy_cxxtype %>::get_<%= _att.name %>_excep_skel (server_request, servant_upcall, impl->skel ());
@@ -40,14 +40,14 @@ static constexpr Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array
 % nr_of_operations += 2
 %   unless _att.is_readonly?
     {"set_<%= _att.name %>",
-     [] (TAO_ServerRequest& server_request, TAO_TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant)
+     [] (TAO_ServerRequest& server_request, TAO_TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant) constexpr
      {
       <%= scoped_srvproxy_cxxname %>* const impl = dynamic_cast<<%= scoped_srvproxy_cxxname %>*> (servant);
       <%= _att.defining_interface.handler_scoped_srvproxy_cxxtype %>::set_<%= _att.name %>_skel (server_request, servant_upcall, impl->skel ());
      }
     },
     {"set_<%= _att.name %>_excep",
-     [] (TAO_ServerRequest& server_request, TAO_TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant)
+     [] (TAO_ServerRequest& server_request, TAO_TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant) constexpr
      {
       <%= scoped_srvproxy_cxxname %>* const impl = dynamic_cast<<%= scoped_srvproxy_cxxname %>*> (servant);
       <%= _att.defining_interface.handler_scoped_srvproxy_cxxtype %>::set_<%= _att.name %>_excep_skel (server_request, servant_upcall, impl->skel ());
