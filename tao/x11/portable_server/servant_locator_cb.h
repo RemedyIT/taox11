@@ -32,7 +32,7 @@ namespace TAOX11_NAMESPACE
     {
     public:
       Servant_Locator_Callback (
-        IDL::traits< ::TAOX11_NAMESPACE::PortableServer::ServantLocator>::ref_type sl);
+        IDL::traits<::TAOX11_NAMESPACE::PortableServer::ServantLocator>::ref_type sl);
       ~Servant_Locator_Callback ();
 
     TAO_PORTABLE_SERVER::Servant preinvoke (
@@ -48,7 +48,7 @@ namespace TAOX11_NAMESPACE
       TAO_PORTABLE_SERVER::ServantLocator::Cookie the_cookie,
       TAO_PORTABLE_SERVER::Servant the_servant) override;
 
-    IDL::traits< ::TAOX11_NAMESPACE::PortableServer::ServantLocator>::ref_type
+    IDL::traits<::TAOX11_NAMESPACE::PortableServer::ServantLocator>::ref_type
       get_impl () const;
     private:
       /** @name Illegal to be called. Deleted explicitly to let the compiler detect any violation */

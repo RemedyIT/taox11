@@ -36,7 +36,7 @@ namespace TAOX11_NAMESPACE
       this->component_count_ = component_count;
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynArray_i::init (const CORBA::Any & any)
     {
       TAOX11_LOG_TRACE ("DynArray_i::init with any");
@@ -112,7 +112,7 @@ namespace TAOX11_NAMESPACE
       return this->_this();
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynArray_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynArray_i::init with tc");
@@ -473,7 +473,7 @@ namespace TAOX11_NAMESPACE
     }
 
     bool
-    DynArray_i::equal (IDL::traits< DynamicAny::DynAny>::ref_type rhs)
+    DynArray_i::equal (IDL::traits<DynamicAny::DynAny>::ref_type rhs)
     {
       TAOX11_LOG_TRACE ("DynArray_i::equal");
 
@@ -491,7 +491,7 @@ namespace TAOX11_NAMESPACE
         return false;
       }
 
-      IDL::traits< DynamicAny::DynAny>::ref_type tmp;
+      IDL::traits<DynamicAny::DynAny>::ref_type tmp;
       bool member_equal;
 
       for (uint32_t i = 0; i < this->component_count_; ++i)
@@ -536,7 +536,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynArray_i::current_component ()
     {
       TAOX11_LOG_TRACE ("DynArray_i::current_component");

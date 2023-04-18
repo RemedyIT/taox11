@@ -296,7 +296,7 @@ test_boxed_string()
   OBV_Verify("test_boxed_string 3", string1 == string1);
 
   // Make some objects, using our data
-  IDL::traits< VBstring>::ref_type temp = CORBA::make_reference
+  IDL::traits<VBstring>::ref_type temp = CORBA::make_reference
     < VBstring > (string1);
   IDL::traits<VBstring>::ref_type vbstring1(temp);
 
@@ -421,7 +421,7 @@ test_boxed_sequence()
       VBseqlong>();
     if (vbseqlong1 == nullptr)
       return 1;
-    IDL::traits< VBseqlong>::ref_type temp = CORBA::make_reference<
+    IDL::traits<VBseqlong>::ref_type temp = CORBA::make_reference<
       VBseqlong>();
     if (temp == nullptr)
       return 1;

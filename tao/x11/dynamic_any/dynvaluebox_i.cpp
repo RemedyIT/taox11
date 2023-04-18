@@ -58,7 +58,7 @@ namespace TAOX11_NAMESPACE
       throw DynamicAny::DynAnyFactory::InconsistentTypeCode ();
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynValueBox_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynValueBox_i::init with tc");
@@ -81,7 +81,7 @@ namespace TAOX11_NAMESPACE
 
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynValueBox_i::init (const CORBA::Any & any)
     {
       TAOX11_LOG_TRACE ("DynValueBox_i::init with any");
@@ -137,7 +137,7 @@ namespace TAOX11_NAMESPACE
       this->set_to_value ();
     }
 
-    IDL::traits< DynAny>::ref_type
+    IDL::traits<DynAny>::ref_type
     DynValueBox_i::get_boxed_value_as_dyn_any ()
     {
       TAOX11_LOG_TRACE ("DynValueBox_i::get_boxed_value_as_dyn_any");
@@ -160,7 +160,7 @@ namespace TAOX11_NAMESPACE
     }
 
     void
-    DynValueBox_i::set_boxed_value_as_dyn_any (IDL::traits< DynAny>::ref_type boxed )
+    DynValueBox_i::set_boxed_value_as_dyn_any (IDL::traits<DynAny>::ref_type boxed )
     {
       TAOX11_LOG_TRACE ("DynValueBox_i::set_boxed_value_as_dyn_any");
 
@@ -202,7 +202,7 @@ namespace TAOX11_NAMESPACE
     }
 
     bool
-    DynValueBox_i::equal (IDL::traits< DynAny>::ref_type rhs)
+    DynValueBox_i::equal (IDL::traits<DynAny>::ref_type rhs)
     {
       TAOX11_LOG_TRACE ("DynValueBox_i::equal");
 
@@ -217,8 +217,8 @@ namespace TAOX11_NAMESPACE
         return false;
       }
 
-      IDL::traits< DynamicAny::DynValueBox>::ref_type rhs_v=
-          IDL::traits< DynamicAny::DynValueBox>::narrow(rhs);
+      IDL::traits<DynamicAny::DynValueBox>::ref_type rhs_v=
+          IDL::traits<DynamicAny::DynValueBox>::narrow(rhs);
       if (!rhs_v || this->is_null () != rhs_v->is_null ())
       {
         return false;
@@ -226,7 +226,7 @@ namespace TAOX11_NAMESPACE
 
       if (!this->is_null ())
       {
-        IDL::traits< DynAny>::ref_type
+        IDL::traits<DynAny>::ref_type
           tmp (rhs->current_component ());
         return tmp->equal (this->boxed_);
       }
@@ -257,7 +257,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< DynAny>::ref_type
+    IDL::traits<DynAny>::ref_type
     DynValueBox_i::current_component ()
     {
       TAOX11_LOG_TRACE ("DynValueBox_i::current_component");

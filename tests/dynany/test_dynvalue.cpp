@@ -52,8 +52,8 @@ Test_DynValue::run_test ()
     }
 
 
-    IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory =
-        IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);
+    IDL::traits<DynamicAny::DynAnyFactory>::ref_type dynany_factory =
+        IDL::traits<DynamicAny::DynAnyFactory>::narrow (factory_obj);
 
     if (dynany_factory == nullptr)
     {
@@ -64,13 +64,13 @@ Test_DynValue::run_test ()
     TAOX11_TEST_DEBUG <<"Test_DynAny::run_test narrowed dynany_factory" << std::endl;
 
     // Create and register valuetype factories.
-    IDL::traits< DynAnyTests::ShortValue >::factory_ref_type va_factory =
+    IDL::traits<DynAnyTests::ShortValue >::factory_ref_type va_factory =
       CORBA::make_reference< DynAnyTests::ShortValue_init > ();
 
     this->orb_->register_value_factory (va_factory->_obv_repository_id (),
                                         va_factory);
 
-    IDL::traits< DynAnyTests::base_v >::factory_ref_type basev_factory =
+    IDL::traits<DynAnyTests::base_v >::factory_ref_type basev_factory =
       CORBA::make_reference< DynAnyTests::base_v_init > ();
 
     this->orb_->register_value_factory (basev_factory->_obv_repository_id (),
@@ -84,17 +84,17 @@ Test_DynValue::run_test ()
     IDL::traits<DynAnyTests::BoxedLong>::ref_type myBoxedLong =
         CORBA::make_reference < DynAnyTests::BoxedLong> (l1);
 
-    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[20] << " =*=*=*=*" << std::endl;
+    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[23] << " =*=*=*=*" << std::endl;
     {
       TAOX11_TEST_DEBUG << "testing: constructor(Any)/insert/get/seek/rewind" << std::endl;
 
       CORBA::Any in_any1;
       in_any1 <<= myBoxedLong;
-      IDL::traits< DynamicAny::DynAny>::ref_type dp1 =
+      IDL::traits<DynamicAny::DynAny>::ref_type dp1 =
         dynany_factory->create_dyn_any (in_any1);
 
-      IDL::traits< DynamicAny::DynValueBox>::ref_type fa1 =
-          IDL::traits< DynamicAny::DynValueBox>::narrow (dp1);
+      IDL::traits<DynamicAny::DynValueBox>::ref_type fa1 =
+          IDL::traits<DynamicAny::DynValueBox>::narrow (dp1);
 
       fa1->seek (0);
 
@@ -116,11 +116,11 @@ Test_DynValue::run_test ()
 
       TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
 
-      IDL::traits< DynamicAny::DynAny>::ref_type ftc1_base =
+      IDL::traits<DynamicAny::DynAny>::ref_type ftc1_base =
          dynany_factory->create_dyn_any_from_type_code (DynAnyTests::_tc_BoxedLong);
 
-      IDL::traits< DynamicAny::DynValueBox>::ref_type ftc1 =
-           IDL::traits< DynamicAny::DynValueBox>::narrow (ftc1_base);
+      IDL::traits<DynamicAny::DynValueBox>::ref_type ftc1 =
+           IDL::traits<DynamicAny::DynValueBox>::narrow (ftc1_base);
 
       if (!ftc1)
       {
@@ -203,7 +203,7 @@ Test_DynValue::run_test ()
       ftc1->destroy ();
     }
 
-    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[21] << " =*=*=*=*" << std::endl;
+    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[23] << " =*=*=*=*" << std::endl;
     {
       TAOX11_TEST_DEBUG << "testing: constructor(Any) seek/current_member_name/current_member_kind/insert/get/seek/rewind" << std::endl;
       const int16_t s1= -17;
@@ -214,10 +214,10 @@ Test_DynValue::run_test ()
 
       CORBA::Any in_any1;
       in_any1 <<= myShortValue;
-      IDL::traits< DynamicAny::DynAny>::ref_type dp1 =
+      IDL::traits<DynamicAny::DynAny>::ref_type dp1 =
         dynany_factory->create_dyn_any (in_any1);
-      IDL::traits< DynamicAny::DynValue>::ref_type fa1 =
-          IDL::traits< DynamicAny::DynValue>::narrow (dp1);
+      IDL::traits<DynamicAny::DynValue>::ref_type fa1 =
+          IDL::traits<DynamicAny::DynValue>::narrow (dp1);
       fa1->set_to_value();
       fa1->seek (1);
       if(fa1->current_member_name() != "Nested_s2")
@@ -261,11 +261,11 @@ Test_DynValue::run_test ()
 
       TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
 
-      IDL::traits< DynamicAny::DynAny>::ref_type ftc1_base =
+      IDL::traits<DynamicAny::DynAny>::ref_type ftc1_base =
          dynany_factory->create_dyn_any_from_type_code (DynAnyTests::_tc_ShortValue);
 
-      IDL::traits< DynamicAny::DynValue>::ref_type ftc1 =
-           IDL::traits< DynamicAny::DynValue>::narrow (ftc1_base);
+      IDL::traits<DynamicAny::DynValue>::ref_type ftc1 =
+           IDL::traits<DynamicAny::DynValue>::narrow (ftc1_base);
 
       if (!ftc1)
       {
@@ -298,13 +298,13 @@ Test_DynValue::run_test ()
       TAOX11_TEST_DEBUG << "testing: set_members/get_members" << std::endl;
       DynamicAny::NameValuePairSeq nvps = ftc1->get_members ();
 
-      IDL::traits< DynamicAny::DynAny>::ref_type  vm_base =
+      IDL::traits<DynamicAny::DynAny>::ref_type  vm_base =
           dynany_factory->create_dyn_any_from_type_code (
               DynAnyTests::_tc_ShortValue
             );
 
-      IDL::traits< DynamicAny::DynValue>::ref_type  vm =
-            IDL::traits< DynamicAny::DynValue>::narrow (vm_base);
+      IDL::traits<DynamicAny::DynValue>::ref_type  vm =
+            IDL::traits<DynamicAny::DynValue>::narrow (vm_base);
 
       if (!vm)
       {
@@ -337,12 +337,12 @@ Test_DynValue::run_test ()
       DynamicAny::NameDynAnyPairSeq nvdaps =
          fa1->get_members_as_dyn_any ();
 
-      IDL::traits< DynamicAny::DynAny>::ref_type  vm_da_base =
+      IDL::traits<DynamicAny::DynAny>::ref_type  vm_da_base =
           dynany_factory->create_dyn_any_from_type_code (
                   DynAnyTests::_tc_ShortValue);
 
-      IDL::traits< DynamicAny::DynValue>::ref_type  vm_da =
-          IDL::traits< DynamicAny::DynValue>::narrow (vm_da_base);
+      IDL::traits<DynamicAny::DynValue>::ref_type  vm_da =
+          IDL::traits<DynamicAny::DynValue>::narrow (vm_da_base);
 
       if (!vm_da)
       {
@@ -387,7 +387,7 @@ Test_DynValue::run_test ()
       vm_da_base->destroy ();
     }
 
-    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[22] << " =*=*=*=*" << std::endl;
+    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[23] << " =*=*=*=*" << std::endl;
     {
       TAOX11_TEST_DEBUG << "testing: constructor(Any) + get_abstract" << std::endl;
 
@@ -397,7 +397,7 @@ Test_DynValue::run_test ()
 
       CORBA::Any in_any1;
       in_any1 <<= myAbsRef;
-      IDL::traits< DynamicAny::DynAny>::ref_type dp1 =
+      IDL::traits<DynamicAny::DynAny>::ref_type dp1 =
         dynany_factory->create_dyn_any (in_any1);
 
       if (!dp1->type ()->equal (in_any1.type ()))
@@ -433,7 +433,7 @@ Test_DynValue::run_test ()
 
       TAOX11_TEST_DEBUG << "testing: constructor(typecode) + insert_abstract + equal" << std::endl;
 
-      IDL::traits< DynamicAny::DynAny>::ref_type dp2 =
+      IDL::traits<DynamicAny::DynAny>::ref_type dp2 =
         dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_AbstractBase);
       dp2->insert_abstract (myAbsValue);
       if (!dp1->equal (dp2))

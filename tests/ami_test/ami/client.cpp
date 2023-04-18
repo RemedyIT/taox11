@@ -82,7 +82,7 @@ public:
     }
 
   void foo_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
     {
       TAOX11_TEST_INFO
          << "Callback method <foo_excep> called:"
@@ -124,7 +124,7 @@ public:
     {
     }
 
-  void bar_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void bar_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
     {
     }
 
@@ -136,7 +136,7 @@ public:
     };
 
   void get_yadda_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
     {
       callback_excep++;
       TAOX11_TEST_INFO << "Callback method <get_yadda_excep> called:"<< std::endl;
@@ -167,7 +167,7 @@ public:
     }
 
   void set_yadda_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
     {
       TAOX11_TEST_INFO << "Callback method <set_yadda_excep> called:" << std::endl;
       callback_excep++;
@@ -200,7 +200,7 @@ public:
     };
 
   void get_bool_attr_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
     {
      TAOX11_TEST_INFO << "Callback method <get_bool_attr_excep> called:" << std::endl;
      callback_excep++;
@@ -242,7 +242,7 @@ public:
     }
 
   void set_bool_attr_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
     {
       callback_excep++;
       TAOX11_TEST_INFO << "Callback method <set_bool_attr_excep> called:"
@@ -265,7 +265,7 @@ public:
     }
 
   void foo_struct_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
     {
     }
 
@@ -274,7 +274,7 @@ public:
     }
 
   void shutdown_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
     {
     }
 };

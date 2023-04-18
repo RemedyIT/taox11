@@ -22,7 +22,7 @@ namespace TAOX11_NAMESPACE
   namespace PortableServer
   {
     Servant_Locator_Callback::Servant_Locator_Callback (
-      IDL::traits< ::TAOX11_NAMESPACE::PortableServer::ServantLocator>::ref_type sl)
+      IDL::traits<::TAOX11_NAMESPACE::PortableServer::ServantLocator>::ref_type sl)
       : PortableServer::Servant_Manager_Callback (std::move(sl)),
         TAO_PORTABLE_SERVER::ServantLocator ()
     {
@@ -134,7 +134,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< ::TAOX11_NAMESPACE::PortableServer::ServantLocator>::ref_type
+    IDL::traits<::TAOX11_NAMESPACE::PortableServer::ServantLocator>::ref_type
     Servant_Locator_Callback::get_impl () const
     {
       return CORBA::object_traits<PortableServer::ServantLocator>::narrow (

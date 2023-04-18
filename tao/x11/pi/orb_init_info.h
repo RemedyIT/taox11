@@ -42,44 +42,44 @@ namespace TAOX11_NAMESPACE
       void
       register_initial_reference (
           const ObjectId& id,
-          IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type obj) override;
+          IDL::traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type obj) override;
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type
+      IDL::traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type
       resolve_initial_references (
           const ObjectId& id) override;
 
       void
       add_client_request_interceptor (
-          IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::ClientRequestInterceptor>::ref_type interceptor) override;
+          IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::ClientRequestInterceptor>::ref_type interceptor) override;
 
       void
       add_server_request_interceptor (
-          IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::ServerRequestInterceptor>::ref_type interceptor) override;
+          IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::ServerRequestInterceptor>::ref_type interceptor) override;
 
       void
       add_ior_interceptor (
-          IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::IORInterceptor>::ref_type interceptor) override;
+          IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::IORInterceptor>::ref_type interceptor) override;
 
       ::TAOX11_NAMESPACE::PortableInterceptor::SlotId allocate_slot_id () override;
 
       void
       register_policy_factory (
           ::TAOX11_NAMESPACE::CORBA::PolicyType type,
-          IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::PolicyFactory>::ref_type policy_factory) override;
+          IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::PolicyFactory>::ref_type policy_factory) override;
 
       void
       add_client_request_interceptor_with_policy (
-          IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::ClientRequestInterceptor>::ref_type interceptor,
+          IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::ClientRequestInterceptor>::ref_type interceptor,
           const CORBA::PolicyList& policies) override;
 
       void
       add_server_request_interceptor_with_policy (
-          IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::ServerRequestInterceptor>::ref_type interceptor,
+          IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::ServerRequestInterceptor>::ref_type interceptor,
           const CORBA::PolicyList& policies) override;
 
       void
       add_ior_interceptor_with_policy (
-          IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::IORInterceptor>::ref_type interceptor,
+          IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::IORInterceptor>::ref_type interceptor,
           const CORBA::PolicyList& policies) override;
 
 

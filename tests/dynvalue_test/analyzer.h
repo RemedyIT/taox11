@@ -18,7 +18,7 @@
 class DynAnyAnalyzer
 {
 public:
-  DynAnyAnalyzer ( IDL::traits< DynamicAny::DynAnyFactory>::ref_type dany_fact);
+  DynAnyAnalyzer ( IDL::traits<DynamicAny::DynAnyFactory>::ref_type dany_fact);
   ~DynAnyAnalyzer () = default;
   void analyze (IDL::traits<DynamicAny::DynAny>::ref_type da);
 
@@ -45,7 +45,7 @@ private:
     uint32_t &index);
 
   BaseTypesList_t::size_type level_ { 1u} ;
-  IDL::traits< DynamicAny::DynAnyFactory>::ref_type dany_fact_;
+  IDL::traits<DynamicAny::DynAnyFactory>::ref_type dany_fact_;
 };
 
 #endif // DYNVALUE_T_INCLUDE_ANALYZER_H

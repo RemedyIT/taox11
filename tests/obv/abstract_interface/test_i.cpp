@@ -74,7 +74,7 @@ passer_i::shutdown ()
 }
 
 void
-passer_i::pass_ops (IDL::traits< base>::ref_type& outarg)
+passer_i::pass_ops (IDL::traits<base>::ref_type& outarg)
 {
   foo_i::_ref_type servant = CORBA::make_reference<foo_i> ();
 

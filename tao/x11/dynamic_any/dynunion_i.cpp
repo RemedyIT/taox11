@@ -40,7 +40,7 @@ namespace TAOX11_NAMESPACE
       this->member_slot_ = 0;
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynUnion_i::init (const CORBA::Any& any)
     {
       TAOX11_LOG_TRACE (" DynUnion_i::init with any");
@@ -64,7 +64,7 @@ namespace TAOX11_NAMESPACE
       return this->_this();
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynUnion_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE (" DynUnion_i::init with typecode");
@@ -295,7 +295,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynUnion_i::get_discriminator ()
     {
       TAOX11_LOG_TRACE (" DynUnion_i::get_discriminator");
@@ -313,7 +313,7 @@ namespace TAOX11_NAMESPACE
     }
 
     void
-    DynUnion_i::set_discriminator (IDL::traits< DynamicAny::DynAny>::ref_type value)
+    DynUnion_i::set_discriminator (IDL::traits<DynamicAny::DynAny>::ref_type value)
     {
       TAOX11_LOG_TRACE (" DynUnion_i::set_discriminator");
 
@@ -567,7 +567,7 @@ namespace TAOX11_NAMESPACE
       return DynAnyFactory_i::unalias (tc);
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynUnion_i::member ()
     {
       TAOX11_LOG_TRACE (" DynUnion_i::member");
@@ -770,7 +770,7 @@ namespace TAOX11_NAMESPACE
     }
 
     bool
-    DynUnion_i::equal (IDL::traits< DynamicAny::DynAny>::ref_type rhs)
+    DynUnion_i::equal (IDL::traits<DynamicAny::DynAny>::ref_type rhs)
     {
       TAOX11_LOG_TRACE (" DynUnion_i::equal");
 
@@ -832,7 +832,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynUnion_i::current_component ()
     {
       TAOX11_LOG_TRACE (" DynUnion_i::current_component");

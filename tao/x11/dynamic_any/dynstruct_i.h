@@ -30,7 +30,7 @@ namespace TAOX11_NAMESPACE
      * Implementation of Dynamic Any type for Structs
      */
     class TAOX11_DynamicAny_Export DynStruct_i final
-      : public virtual IDL::traits< DynStruct>::base_type,
+      : public virtual IDL::traits<DynStruct>::base_type,
         //public virtual DynamicAny::DynStruct,
         public virtual TAOX11_DynCommon
     {
@@ -42,11 +42,11 @@ namespace TAOX11_NAMESPACE
       ~DynStruct_i () = default;
 
       /// Initialize using just a TypeCode.
-      IDL::traits< DynamicAny::DynAny>::ref_type
+      IDL::traits<DynamicAny::DynAny>::ref_type
       init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       /// Initialize using an Any.
-      IDL::traits< DynamicAny::DynAny>::ref_type
+      IDL::traits<DynamicAny::DynAny>::ref_type
       init (const CORBA::Any& any);
 
       // = Functions specific to DynStruct.
@@ -70,11 +70,11 @@ namespace TAOX11_NAMESPACE
 
       CORBA::Any to_any () override;
 
-      bool equal (IDL::traits< DynamicAny::DynAny>::ref_type dyn_any) override;
+      bool equal (IDL::traits<DynamicAny::DynAny>::ref_type dyn_any) override;
 
       void destroy () override;
 
-      IDL::traits< DynamicAny::DynAny>::ref_type current_component () override;
+      IDL::traits<DynamicAny::DynAny>::ref_type current_component () override;
 
     private:
       /// Check if the typecode is acceptable.
@@ -95,7 +95,7 @@ namespace TAOX11_NAMESPACE
 
     private:
       /// Each component is also a DynAny.
-      std::vector< IDL::traits< DynamicAny::DynAny>::ref_type> da_members_;
+      std::vector< IDL::traits<DynamicAny::DynAny>::ref_type> da_members_;
     };
   }
 }

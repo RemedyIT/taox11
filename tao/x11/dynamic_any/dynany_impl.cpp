@@ -55,7 +55,7 @@ namespace TAOX11_NAMESPACE
       this->component_count_ = 0;
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynAny_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynAny_i::init with tc");
@@ -70,7 +70,7 @@ namespace TAOX11_NAMESPACE
       return this->_this();
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynAny_i::init (const CORBA::Any& any)
     {
       TAOX11_LOG_TRACE ("DynAny_i::init with any");
@@ -116,14 +116,14 @@ namespace TAOX11_NAMESPACE
     }
 
     bool
-    DynAny_i::equal (IDL::traits< DynAny>::ref_type dyn_any)
+    DynAny_i::equal (IDL::traits<DynAny>::ref_type dyn_any)
     {
       TAOX11_LOG_TRACE ("DynAny_i::equal");
       if (this->destroyed_)
       {
         throw CORBA::OBJECT_NOT_EXIST ();
       }
-      IDL::traits< DynAny_i>::ref_type rhs_n = IDL::traits< DynAny_i>::narrow (dyn_any);
+      IDL::traits<DynAny_i>::ref_type rhs_n = IDL::traits<DynAny_i>::narrow (dyn_any);
       if (rhs_n == nullptr)
       {
         return false;
@@ -250,13 +250,13 @@ namespace TAOX11_NAMESPACE
             CORBA::Any lhs_v;
             this->any_ >>= lhs_v;
 
-            IDL::traits< DynamicAny::DynAny>::ref_type rhs_dyn =
+            IDL::traits<DynamicAny::DynAny>::ref_type rhs_dyn =
                 MakeDynAnyUtils::make_dyn_any_t<const CORBA::Any&> (
                 rhs_v.type (),
                 rhs_v,
                 this->allow_truncation_ );
 
-            IDL::traits< DynamicAny::DynAny>::ref_type lhs_dyn =
+            IDL::traits<DynamicAny::DynAny>::ref_type lhs_dyn =
               MakeDynAnyUtils::make_dyn_any_t<const CORBA::Any&> (
                 lhs_v.type(),
                 lhs_v,
@@ -429,7 +429,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    TAOX11_IDL::traits< DynamicAny::DynAny>::ref_type
+    TAOX11_IDL::traits<DynamicAny::DynAny>::ref_type
     DynAny_i::current_component ()
     {
       TAOX11_LOG_TRACE ("DynAny_i::current_component");

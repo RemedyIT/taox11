@@ -26,7 +26,7 @@ public:
   void foo (int32_t ami_return_val,
             int32_t out_l) override;
   void foo_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override;
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override;
 };
 
 

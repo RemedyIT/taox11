@@ -69,7 +69,7 @@ public:
   }
 
   void op_B_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_ERROR << "ERROR: client2 - unexpected exceptipn called: "
                  << std::endl;

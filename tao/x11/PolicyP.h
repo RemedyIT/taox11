@@ -51,10 +51,10 @@ TAOX11_Export TAO_CORBA::Boolean operator>> (TAO_InputCDR &, TAOX11_CORBA::Inval
 // Stub CDR streaming operator specializations
 TAOX11_Export TAO_CORBA::Boolean operator<< (
     TAO_OutputCDR &strm,
-    TAOX11_NAMESPACE::IDL::traits< TAOX11_CORBA::Policy>::ref_type _tao_objref);
+    TAOX11_NAMESPACE::IDL::traits<TAOX11_CORBA::Policy>::ref_type _tao_objref);
 TAOX11_Export TAO_CORBA::Boolean operator>> (
     TAO_InputCDR &strm,
-    TAOX11_NAMESPACE::IDL::traits< TAOX11_CORBA::Policy>::ref_type& _tao_objref);
+    TAOX11_NAMESPACE::IDL::traits<TAOX11_CORBA::Policy>::ref_type& _tao_objref);
 
 // CDR streaming helpers for object ref sequence
 TAOX11_Export bool

@@ -65,7 +65,7 @@ namespace TAOX11_NAMESPACE
     void
     ORB::InvalidName::_info (std::ostream& user_exception_info) const
     {
-      TAOX11_IDL::traits< ORB::InvalidName>::write_on(user_exception_info, *this);
+      TAOX11_IDL::traits<ORB::InvalidName>::write_on(user_exception_info, *this);
     }
 
     void ORB::InvalidName::_raise () const

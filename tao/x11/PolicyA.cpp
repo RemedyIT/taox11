@@ -85,9 +85,9 @@ namespace TAOX11_NAMESPACE
     }
 
     // generated from c++/cli_src/anyop.erb
-    void operator<<= (TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::ref_type)
+    void operator<<= (TAOX11_CORBA::Any &, IDL::traits<TAOX11_CORBA::Policy>::ref_type)
     {}
-    bool operator>>= (const TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::ref_type&)
+    bool operator>>= (const TAOX11_CORBA::Any &, IDL::traits<TAOX11_CORBA::Policy>::ref_type&)
     {
       return false;
     }

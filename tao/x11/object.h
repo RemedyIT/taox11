@@ -184,7 +184,7 @@ namespace TAOX11_NAMESPACE
       : public virtual CORBA::Object
     {
     public:
-      using _traits_type = IDL::traits< LocalObject>;
+      using _traits_type = IDL::traits<LocalObject>;
       using _ref_type =  _traits_type::ref_type;
 
       bool _is_a (const std::string& local_type_id) override;

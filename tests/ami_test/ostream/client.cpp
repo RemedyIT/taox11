@@ -52,7 +52,7 @@ public:
   {
   }
 
-  void foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void foo_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 
@@ -61,7 +61,7 @@ public:
   }
 
   void shutdown_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };

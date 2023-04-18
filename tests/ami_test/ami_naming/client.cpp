@@ -76,7 +76,7 @@ public:
       }
   }
 
-  void foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void foo_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Unexpected callback method <foo_excep> called."<< std::endl;
     result = 1;
@@ -96,7 +96,7 @@ public:
       }
   }
 
-  void sendc_foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void sendc_foo_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Unexpected callback method <sendc_foo_excep> called."
                 << std::endl;
@@ -116,7 +116,7 @@ public:
        }
    }
 
-   void sendc_ami_foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+   void sendc_ami_foo_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
    {
      TAOX11_TEST_INFO << "Error, Unexpected callback method <sendc_ami_foo_excep> called."<< std::endl;
      result = 1;
@@ -137,7 +137,7 @@ public:
   }
 
   void get_yadda_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Unexpected callback method <get_yadda_excep> called."
                 << std::endl;
@@ -150,7 +150,7 @@ public:
     TAOX11_TEST_INFO << "Callback method <set_yadda> called:"<< std::endl;
   }
 
-  void set_yadda_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void set_yadda_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Unexpected callback method <set_yadda_excep> called."
                 << std::endl;
@@ -172,7 +172,7 @@ public:
    }
 
    void get_sendc_get_yadda_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
    {
      TAOX11_TEST_INFO
         << "Error, Unexpected callback method <get_sendc_yadda_excep> called."
@@ -186,7 +186,7 @@ public:
      TAOX11_TEST_INFO << "Callback method <set_sendc_yadda> called:"<< std::endl;
    }
 
-   void set_sendc_get_yadda_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+   void set_sendc_get_yadda_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
    {
      TAOX11_TEST_INFO
         << "Error, Unexpected callback method <set_sendc_yadda_excep> called."
@@ -208,7 +208,7 @@ public:
    }
 
    void get_sendc_ami_get_yadda_excep (
-        IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+        IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
    {
      TAOX11_TEST_INFO
         << "Error, Unexpected callback method <get_sendc_ami_yadda_excep> called."
@@ -222,7 +222,7 @@ public:
      TAOX11_TEST_INFO << "Callback method <set_sendc_ami_yadda> called:"<< std::endl;
    }
 
-   void set_sendc_ami_get_yadda_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+   void set_sendc_ami_get_yadda_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
    {
      TAOX11_TEST_INFO
          << "Error, Unexpected callback method <set_sendc_ami_yadda_excep> called."
@@ -245,7 +245,7 @@ public:
    }
 
    void get_do_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
    {
      TAOX11_TEST_INFO << "Error, Unexpected callback method <get_do_excep> called."
                  << std::endl;
@@ -258,7 +258,7 @@ public:
      TAOX11_TEST_INFO << "Callback method <set_do> called:"<< std::endl;
    }
 
-   void set_do_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+   void set_do_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
    {
      TAOX11_TEST_INFO << "Error, Unexpected callback method <set_do_excep> called."
                  << std::endl;
@@ -289,7 +289,7 @@ public:
       }
   }
 
-  void foo_two_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void foo_two_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Unexpected callback method <foo_two_excep> called."
                 << std::endl;
@@ -309,7 +309,7 @@ public:
       }
   }
 
-  void do_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void do_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Unexpected callback method <_cxx_do_excep> called."
                 << std::endl;

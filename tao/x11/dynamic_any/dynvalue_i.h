@@ -30,7 +30,7 @@ namespace TAOX11_NAMESPACE
      * @brief Implementation of the DynValue class.
      */
     class TAOX11_DynamicAny_Export DynValue_i final
-    : public virtual IDL::traits< DynValue>::base_type,
+    : public virtual IDL::traits<DynValue>::base_type,
       public virtual DynValueCommon_i
     {
     public:
@@ -41,13 +41,13 @@ namespace TAOX11_NAMESPACE
       ~DynValue_i () = default;
 
       /// Initialize using an Any.
-      IDL::traits< DynamicAny::DynAny>::ref_type init (const CORBA::Any& any);
+      IDL::traits<DynamicAny::DynAny>::ref_type init (const CORBA::Any& any);
 
       /// Initialize using a TypeCode and an input stream
-      IDL::traits< DynamicAny::DynAny>::ref_type init (IDL::traits<CORBA::TypeCode>::ref_type tc, TAO_InputCDR &in);
+      IDL::traits<DynamicAny::DynAny>::ref_type init (IDL::traits<CORBA::TypeCode>::ref_type tc, TAO_InputCDR &in);
 
       /// Initialize using just a TypeCode.
-      IDL::traits< DynamicAny::DynAny>::ref_type init (IDL::traits<CORBA::TypeCode>::ref_type tc);
+      IDL::traits<DynamicAny::DynAny>::ref_type init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
        // = Functions specific to DynValue.
       DynamicAny::FieldName current_member_name () override;
@@ -68,11 +68,11 @@ namespace TAOX11_NAMESPACE
 
       CORBA::Any to_any () override;
 
-      bool equal (IDL::traits< DynAny>::ref_type dyn_any) override;
+      bool equal (IDL::traits<DynAny>::ref_type dyn_any) override;
 
       void destroy () override;
 
-      IDL::traits< DynAny>::ref_type current_component () override;
+      IDL::traits<DynAny>::ref_type current_component () override;
 
       void insert_val (IDL::traits<CORBA::ValueBase>::ref_type value) override;
 
@@ -138,7 +138,7 @@ namespace TAOX11_NAMESPACE
       DynValue_i& operator= (DynValue_i&&) = delete;
 
       /// Each component of DynValue and DynValueBox is also a DynAny.
-      std::vector< IDL::traits< DynamicAny::DynAny>::ref_type> da_members_;
+      std::vector< IDL::traits<DynamicAny::DynAny>::ref_type> da_members_;
 
       /// First element of this is our type, each basetype follows
       /// in order backwards down the hierarchy. All types stored are

@@ -70,7 +70,7 @@ public:
       }
   }
 
-  void foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void foo_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Handler Unexpected callback method <foo_excep> called."<< std::endl;
     result = 1;
@@ -89,7 +89,7 @@ public:
   }
 
   void get_yadda_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Handler Unexpected callback method <get_yadda_excep> called." << std::endl;
     result = 1;
@@ -101,7 +101,7 @@ public:
     TAOX11_TEST_INFO << "Handler Callback method <set_yadda> called:"<< std::endl;
   }
 
-  void set_yadda_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void set_yadda_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Handler Unexpected callback method <set_yadda_excep> called." << std::endl;
     result = 1;
@@ -112,7 +112,7 @@ public:
   }
 
   void shutdown_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };
@@ -138,7 +138,7 @@ public:
       }
   }
 
-  void foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void foo_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Handler3: Unexpected callback method <foo_excep> called."<< std::endl;
     result = 1;
@@ -157,7 +157,7 @@ public:
       }
   }
 
-  void get_yadda_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void get_yadda_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Handler3: Unexpected callback method <get_yadda_excep> called." << std::endl;
     result = 1;
@@ -169,7 +169,7 @@ public:
     TAOX11_TEST_INFO << "Handler3: Callback method <set_yadda> called:"<< std::endl;
   }
 
-  void set_yadda_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void set_yadda_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_INFO << "Error, Handler3: Unexpected callback method <set_yadda_excep> called." << std::endl;
     result = 1;
@@ -179,7 +179,7 @@ public:
   {
   }
 
-  void shutdown_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void shutdown_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };

@@ -31,7 +31,7 @@ namespace TAOX11_NAMESPACE
      * Implementation of Dynamic Any type for Unions.
      */
     class TAOX11_DynamicAny_Export DynUnion_i final
-      : public virtual IDL::traits< DynUnion>::base_type,
+      : public virtual IDL::traits<DynUnion>::base_type,
         //public virtual DynamicAny::DynUnion,
         public virtual TAOX11_DynCommon{
     public:
@@ -42,11 +42,11 @@ namespace TAOX11_NAMESPACE
       ~DynUnion_i () = default;
 
       /// Constructor taking an Any argument.
-      IDL::traits< DynamicAny::DynAny>::ref_type
+      IDL::traits<DynamicAny::DynAny>::ref_type
       init (const CORBA::Any& any);
 
       /// Constructor taking a typecode argument.
-      IDL::traits< DynamicAny::DynAny>::ref_type
+      IDL::traits<DynamicAny::DynAny>::ref_type
       init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       // = LocalObject methods.
@@ -54,11 +54,11 @@ namespace TAOX11_NAMESPACE
 
       // = Functions specific to DynUnion.
 
-      IDL::traits< DynamicAny::DynAny>::ref_type
+      IDL::traits<DynamicAny::DynAny>::ref_type
       get_discriminator () override;
 
       void
-      set_discriminator (IDL::traits< DynamicAny::DynAny>::ref_type d) override;
+      set_discriminator (IDL::traits<DynamicAny::DynAny>::ref_type d) override;
 
       void set_to_default_member () override;
 
@@ -68,7 +68,7 @@ namespace TAOX11_NAMESPACE
 
       CORBA::TCKind discriminator_kind () override;
 
-      IDL::traits< DynamicAny::DynAny>::ref_type member () override;
+      IDL::traits<DynamicAny::DynAny>::ref_type member () override;
 
       std::string member_name () override;
 
@@ -80,11 +80,11 @@ namespace TAOX11_NAMESPACE
 
       CORBA::Any to_any () override;
 
-      bool equal (IDL::traits< DynamicAny::DynAny>::ref_type dyn_any) override;
+      bool equal (IDL::traits<DynamicAny::DynAny>::ref_type dyn_any) override;
 
       void destroy () override;
 
-      IDL::traits< DynamicAny::DynAny>::ref_type current_component () override;
+      IDL::traits<DynamicAny::DynAny>::ref_type current_component () override;
 
     private:
       /// Code common to the constructor from an Any arg and the member
@@ -106,8 +106,8 @@ namespace TAOX11_NAMESPACE
 
     private:
       /// Just two components.
-      IDL::traits< DynamicAny::DynAny>::ref_type member_;
-      IDL::traits< DynamicAny::DynAny>::ref_type discriminator_;
+      IDL::traits<DynamicAny::DynAny>::ref_type member_;
+      IDL::traits<DynamicAny::DynAny>::ref_type discriminator_;
 
       /// The active member's slot in the union type code.
       uint32_t member_slot_;

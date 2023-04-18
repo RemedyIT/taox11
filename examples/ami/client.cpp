@@ -62,7 +62,7 @@ public:
       }
   }
 
-  void foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void foo_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     taox11_info << "Callback method <foo_excep> called."<< std::endl;
   }
@@ -74,7 +74,7 @@ public:
                 << std::endl;
   }
 
-  void get_yadda_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void get_yadda_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     taox11_info << "Callback method <get_yadda_excep> called." << std::endl;
   }
@@ -84,7 +84,7 @@ public:
     taox11_info << "Callback method <set_yadda> called:"<< std::endl;
   }
 
-  void set_yadda_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void set_yadda_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     taox11_info << "Callback method <set_yadda_excep> called." << std::endl;
   }
@@ -93,7 +93,7 @@ public:
   {
   }
 
-  void shutdown_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void shutdown_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };

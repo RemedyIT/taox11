@@ -61,7 +61,7 @@ public:
   }
 
   void amifoo_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     nr_of_replies--;
   }
@@ -74,7 +74,7 @@ public:
    }
 
    void get_my_amifoo_attrib_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
    {
      TAOX11_TEST_INFO << "Callback method <get_my_foo_attrib_excep> called."
                  << std::endl;
@@ -87,7 +87,7 @@ public:
      nr_of_replies--;
    }
 
-   void set_my_amifoo_attrib_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
+   void set_my_amifoo_attrib_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
    {
      TAOX11_TEST_INFO << "Callback method <set_my_foo_attrib_excep> called:"
                  << std::endl;

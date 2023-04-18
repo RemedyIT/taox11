@@ -737,7 +737,7 @@ main (int argc, char *argv[])
         "IDL:acme.com/CCS/Controller:1.0");
 
     // Get reference to initial naming context.
-    IDL::traits< CosNaming::NamingContext>::ref_type inc =
+    IDL::traits<CosNaming::NamingContext>::ref_type inc =
       resolve_init< CosNaming::NamingContext > (orb, "NameService");
 
     // Attempt to create CCS context.
@@ -747,7 +747,7 @@ main (int argc, char *argv[])
 
     try
     {
-      IDL::traits< CosNaming::NamingContext>::ref_type nc =
+      IDL::traits<CosNaming::NamingContext>::ref_type nc =
         inc->bind_new_context (n);
     }
     catch (const CosNaming::NamingContext::AlreadyBound &)

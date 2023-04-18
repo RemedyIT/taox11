@@ -39,9 +39,9 @@ class Value2_init_impl : public IDL::traits<OBV_Test::Value2>::factory_type
 public:
   Value2_init_impl ()  = default;
   ~Value2_init_impl () override = default;
-  IDL::traits< OBV_Test::Value2>::ref_type create_default (uint32_t id) override;
+  IDL::traits<OBV_Test::Value2>::ref_type create_default (uint32_t id) override;
 
-  IDL::traits< OBV_Test::Value2>::ref_type create (
+  IDL::traits<OBV_Test::Value2>::ref_type create (
       uint32_t id,
       const OBV_Test::BasValue::BV_Data& data) override;
 

@@ -65,7 +65,7 @@ public:
   }
 
   void foo_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <foo_excep> called: "
                 << "Testing proper exception handling."<< std::endl;
@@ -109,7 +109,7 @@ public:
   }
 
   void foo_no_raises_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO
        << "Callback method <foo_no_raises_excep> called: "
@@ -152,7 +152,7 @@ public:
     }
 
   void bar_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <bar_excep> called: "
                 << "Testing proper exception handling ..."<< std::endl;
@@ -201,7 +201,7 @@ public:
   }
 
   void shutdown_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };

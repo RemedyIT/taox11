@@ -50,8 +50,8 @@ namespace Test
 
     // Compile test ostringstream insertion
     std::ostringstream ss;
-    ss << IDL::traits< ::Test::Person>::write (record) << std::endl;
-    TAOX11_TEST_DEBUG << "server - writing received record -> " << IDL::traits< ::Test::Person>::write (record) << std::endl;
+    ss << IDL::traits<::Test::Person>::write (record) << std::endl;
+    TAOX11_TEST_DEBUG << "server - writing received record -> " << IDL::traits<::Test::Person>::write (record) << std::endl;
 
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo_impl::write_on_servant[Body]
   }

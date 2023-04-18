@@ -45,8 +45,8 @@ Test_DynAny::run_test ()
      return 1;
     }
 
-    IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory =
-        IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);
+    IDL::traits<DynamicAny::DynAnyFactory>::ref_type dynany_factory =
+        IDL::traits<DynamicAny::DynAnyFactory>::narrow (factory_obj);
 
     if (dynany_factory == nullptr)
     {
@@ -103,7 +103,7 @@ Test_DynAny::run_test ()
       TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
 
       d_out = data.m_ushort1;
-      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+      IDL::traits<DynamicAny::DynAny>::ref_type ftc1 =
         dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_ushort);
       CORBA::Any in_any1;
       in_any1 <<= data.m_ushort1;
@@ -168,7 +168,7 @@ Test_DynAny::run_test ()
       TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
 
       d_out = data.m_ulong1;
-      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+      IDL::traits<DynamicAny::DynAny>::ref_type ftc1 =
         dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_ulong);
       CORBA::Any in_any1;
       in_any1 <<= data.m_ulong1;
@@ -232,7 +232,7 @@ Test_DynAny::run_test ()
       TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
 
       d_out = data.m_bool1;
-      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+      IDL::traits<DynamicAny::DynAny>::ref_type ftc1 =
         dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_boolean);
       CORBA::Any in_any1;
       in_any1 <<= data.m_bool1;
@@ -297,7 +297,7 @@ Test_DynAny::run_test ()
       TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
 
       d_out = data.m_octet1;
-      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+      IDL::traits<DynamicAny::DynAny>::ref_type ftc1 =
         dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_octet);
       CORBA::Any in_any1;
       in_any1 <<= data.m_octet1;
@@ -364,7 +364,7 @@ Test_DynAny::run_test ()
 
 
       d_out = data.m_double2;
-      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+      IDL::traits<DynamicAny::DynAny>::ref_type ftc1 =
         dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_double);
       CORBA::Any in_any1;
       in_any1 <<= data.m_double1;
@@ -430,7 +430,7 @@ Test_DynAny::run_test ()
       TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
 
       d_out = data.m_longlong1;
-      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+      IDL::traits<DynamicAny::DynAny>::ref_type ftc1 =
         dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_longlong);
       CORBA::Any in_any1;
       in_any1 <<= data.m_longlong1;
@@ -495,7 +495,7 @@ Test_DynAny::run_test ()
       TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
 
       d_out = data.m_ulonglong1;
-      IDL::traits< DynamicAny::DynAny>::ref_type ftc1 =
+      IDL::traits<DynamicAny::DynAny>::ref_type ftc1 =
         dynany_factory->create_dyn_any_from_type_code (CORBA::_tc_ulonglong);
       CORBA::Any in_any1;
       in_any1 <<= data.m_ulonglong1;
@@ -643,7 +643,7 @@ Test_DynAny::run_test ()
       }
     }
     {
-      TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[17]<< "=*=*=*=*" << std::endl;
+      TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[19]<< "=*=*=*=*" << std::endl;
       TAOX11_TEST_DEBUG << "testing: constructor(Any)/insert/get" << std::endl;
 
       CORBA::Any in1;
@@ -653,7 +653,7 @@ Test_DynAny::run_test ()
 
       if (!fa1->equal(fa1))
       {
-         TAOX11_TEST_ERROR << "++ ERROR create_dyn_any"<< data.labels[17] << std::endl;
+         TAOX11_TEST_ERROR << "++ ERROR create_dyn_any"<< data.labels[19] << std::endl;
           ++this->error_count_;
         }
 
@@ -663,7 +663,7 @@ Test_DynAny::run_test ()
 
       if (!ACE::is_equal (d_out, data.m_longdouble1))
       {
-        TAOX11_TEST_ERROR << "++ ERROR get_longdouble ++"<< data.labels[17] << std::endl;
+        TAOX11_TEST_ERROR << "++ ERROR get_longdouble ++"<< data.labels[19] << std::endl;
         ++this->error_count_;
       }
 
@@ -685,7 +685,7 @@ Test_DynAny::run_test ()
 
       if (!ACE::is_equal (d_out, data.m_longdouble1))
       {
-        TAOX11_TEST_ERROR << "++ ERROR from_any, to_any "<< data.labels[17] << std::endl;
+        TAOX11_TEST_ERROR << "++ ERROR from_any, to_any "<< data.labels[19] << std::endl;
         ++this->error_count_;
       }
 
@@ -749,11 +749,9 @@ Test_DynAny::run_test ()
       IDL::traits<DynamicAny::DynAny>::ref_type fa3 =
         dynany_factory->create_dyn_any (in3);
       fa3->insert_short_seq (data.m_shortseq1);
-      data.m_shortseq2 =
-        fa3->get_short_seq ();
+      data.m_shortseq2 = fa3->get_short_seq ();
 
-      bool good =
-        data.m_shortseq2.size () == data.m_shortseq1.size ();
+      bool good = data.m_shortseq2.size () == data.m_shortseq1.size ();
 
       if (good)
       {
@@ -777,9 +775,42 @@ Test_DynAny::run_test ()
         ++this->error_count_;
       }
 
+      TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[17]<< "=*=*=*=*" << std::endl;
+      TAOX11_TEST_DEBUG << "testing: constructor(Any)/insert/get" << std::endl;
+
+      CORBA::Any in4;
+      CORBA::UShortSeq uss;
+      in4 <<= uss;
+      IDL::traits<DynamicAny::DynAny>::ref_type fa4 =
+        dynany_factory->create_dyn_any (in4);
+      fa4->insert_ushort_seq (data.m_ushortseq1);
+      data.m_ushortseq2 = fa4->get_ushort_seq ();
+
+      good = data.m_ushortseq2.size () == data.m_ushortseq1.size ();
+
+      if (good)
+      {
+        for (uint32_t i = 0; i < data.m_ushortseq1.size (); ++i)
+        {
+          if (data.m_ushortseq2[i] != data.m_ushortseq1[i])
+          {
+            good = false;
+            break;
+          }
+        }
+      }
+
+      if (good)
+      {
+        TAOX11_TEST_DEBUG << "++ OK ++"<< std::endl;
+      }
+      else
+      {
+        TAOX11_TEST_ERROR << "++ ERROR ++ "<< std::endl;
+        ++this->error_count_;
+      }
+
       TAOX11_TEST_DEBUG << "testing: assign" << std::endl;
-
-
 
       TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
 
