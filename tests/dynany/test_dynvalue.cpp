@@ -387,7 +387,7 @@ Test_DynValue::run_test ()
       vm_da_base->destroy ();
     }
 
-    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[21] << " =*=*=*=*" << std::endl;
+    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[23] << " =*=*=*=*" << std::endl;
     {
       TAOX11_TEST_DEBUG << "testing: constructor(Any) + get_abstract" << std::endl;
 
