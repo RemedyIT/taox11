@@ -22,7 +22,7 @@ namespace TAOX11_NAMESPACE
       this->set_proxy (new Object_proxy (codecfactory_ptr));
     }
 
-    TAOX11_IDL::traits< ::TAOX11_NAMESPACE::IOP::Codec>::ref_type
+    TAOX11_IDL::traits<::TAOX11_NAMESPACE::IOP::Codec>::ref_type
     CodecFactory::create_codec (const ::TAOX11_NAMESPACE::IOP::Encoding& enc)
     {
       try
@@ -33,7 +33,7 @@ namespace TAOX11_NAMESPACE
         tao_enc.minor_version = enc.minor_version ();
         TAO_IOP::Codec_ptr codec = this->proxy_->create_codec (tao_enc);
 
-        IDL::traits< IOP::Codec>::ref_type retval =
+        IDL::traits<IOP::Codec>::ref_type retval =
           CORBA::make_reference< IOP_impl::Codec > (codec);
         return retval;
       }
@@ -44,7 +44,7 @@ namespace TAOX11_NAMESPACE
       return nullptr;
     }
 
-    TAOX11_IDL::traits< ::TAOX11_NAMESPACE::IOP::Codec>::ref_type
+    TAOX11_IDL::traits<::TAOX11_NAMESPACE::IOP::Codec>::ref_type
     CodecFactory::create_codec_with_codesets (
       const ::TAOX11_NAMESPACE::IOP::Encoding_1_2& enc)
     {
@@ -60,7 +60,7 @@ namespace TAOX11_NAMESPACE
         TAO_IOP::Codec_ptr codec =
           this->proxy_->create_codec_with_codesets (tao_encoding_1_2);
 
-        IDL::traits< IOP::Codec>::ref_type retval =
+        IDL::traits<IOP::Codec>::ref_type retval =
           CORBA::make_reference< IOP_impl::Codec > (codec);
         return retval;
       }

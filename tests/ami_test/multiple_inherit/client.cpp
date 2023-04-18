@@ -63,7 +63,7 @@ public:
     nr_of_replies--;
   }
   void op_A_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO
        << "ERROR:: Callback method <AHandler::op_A_excep> called unexpectedly."
@@ -94,7 +94,7 @@ public:
   }
 
   void op_A_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
   {
     TAOX11_TEST_INFO
        << "ERROR:: Callback method <BHandler::op_A_excep> called unexpectedly."
@@ -112,7 +112,7 @@ public:
     nr_of_replies--;
   }
   void op_B_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
   {
     TAOX11_TEST_INFO
        << "ERROR:: Callback method <BHandler::op_B_excep> called unexpectedly."
@@ -148,7 +148,7 @@ public:
   }
 
   void op_A_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     try
       {
@@ -194,7 +194,7 @@ public:
   }
 
   void op_C_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     try
       {
@@ -250,7 +250,7 @@ public:
     id_o++;
   }
   void op_A_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     try
       {
@@ -295,7 +295,7 @@ public:
   }
 
   void op_B_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     try
       {
@@ -340,7 +340,7 @@ public:
   }
 
   void op_C_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     try
       {
@@ -384,7 +384,7 @@ public:
   }
 
   void op_D_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     try
       {

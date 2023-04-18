@@ -239,7 +239,7 @@ skeleton class using the `CORBA::amic_traits` of interface `Test::A`.
       // Do something
     };
 
-    void foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+    void foo_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
     {
       // Do something
     }

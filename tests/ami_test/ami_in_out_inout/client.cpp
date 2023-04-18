@@ -80,7 +80,7 @@ public:
   }
 
   void foo_char_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -102,7 +102,7 @@ public:
   }
 
   void foo_wchar_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -124,7 +124,7 @@ public:
   };
 
   void foo_octet_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -147,7 +147,7 @@ public:
   }
 
   void foo_bool_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -170,7 +170,7 @@ public:
   }
 
   void foo_enum_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -193,7 +193,7 @@ public:
   }
 
   void foo_struct_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -216,7 +216,7 @@ public:
 
 
   void foo_sequence_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -242,7 +242,7 @@ public:
   }
 
   void foo_array_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -264,7 +264,7 @@ public:
   }
 
   void foo_union_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   };
 
@@ -287,7 +287,7 @@ public:
   }
 
   void foo_wstring_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -309,7 +309,7 @@ public:
   }
 
   void foo_string_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   };
 
@@ -331,7 +331,7 @@ public:
   }
 
   void foo_u_l_l_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -357,7 +357,7 @@ public:
   }
 
   void foo_float_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -384,7 +384,7 @@ public:
   }
 
   void foo_long_double_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -395,7 +395,7 @@ public:
   }
 
   void foo_void_in_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -413,7 +413,7 @@ public:
   }
 
   void foo_void_out_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -431,7 +431,7 @@ public:
   }
 
   void foo_void_inout_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -444,7 +444,7 @@ public:
 
 
   void foo_no_arg_excep (
-     IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -456,7 +456,7 @@ public:
   }
 
   void foo_void_no_arg_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -465,7 +465,7 @@ public:
   }
 
   void shutdown_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };

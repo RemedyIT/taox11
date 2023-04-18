@@ -34,11 +34,11 @@ class passer_i final : public virtual CORBA::servant_traits<passer>::base_type
 public:
   passer_i (IDL::traits<CORBA::ORB>::ref_type orb, IDL::traits<PortableServer::POA>::ref_type poa);
 
-  void pass_ops (IDL::traits< base>::ref_type&  outarg) override;
+  void pass_ops (IDL::traits<base>::ref_type&  outarg) override;
 
-  void pass_state (IDL::traits< base>::ref_type&  outarg) override;
+  void pass_state (IDL::traits<base>::ref_type&  outarg) override;
 
-  void pass_nil (IDL::traits< base>::ref_type&  outarg) override;
+  void pass_nil (IDL::traits<base>::ref_type&  outarg) override;
 
   void shutdown () override;
 private:

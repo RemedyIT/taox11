@@ -85,7 +85,7 @@ public:
   }
 
   void foo_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO
        << "Callback method <foo_excep> called:"
@@ -131,7 +131,7 @@ public:
   };
 
   void get_yadda_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     callback_excep++;
     TAOX11_TEST_INFO << "Callback method <Handler::get_yadda_excep> called:"
@@ -163,7 +163,7 @@ public:
   }
 
   void set_yadda_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <Handler::set_yadda_excep> called:"
                 << std::endl;
@@ -197,7 +197,7 @@ public:
   };
 
   void get_bool_attr_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <Handler::get_bool_attr_excep> called:"
                 << std::endl;
@@ -241,7 +241,7 @@ public:
   }
 
   void set_bool_attr_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     callback_excep++;
     TAOX11_TEST_INFO << "Callback method <Handler::set_bool_attr_excep> called:"
@@ -265,7 +265,7 @@ public:
   }
 
   void foo_struct_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };
@@ -294,7 +294,7 @@ public:
   }
 
   void do_something_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <DerivedHandler::do_someting_excep> called."
                << std::endl;
@@ -315,7 +315,7 @@ public:
   }
 
   void get_my_derived_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <DerivedHandler::get_my_derived_attrib_excep> called."
                 << std::endl;
@@ -328,7 +328,7 @@ public:
   }
 
   void set_my_derived_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <DerivedHandler::set_my_derived_attrib_excep> called:"
                 << std::endl;
@@ -341,7 +341,7 @@ public:
   }
 
   void foo_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO
        << "Callback method <DerivedHandler::foo_excep> called:"
@@ -356,7 +356,7 @@ public:
   };
 
   void get_yadda_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     callback_excep++;
     TAOX11_TEST_INFO << "Callback method <DerivedHandler::get_yadda_excep> called:"<< std::endl;
@@ -369,7 +369,7 @@ public:
   }
 
   void set_yadda_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <DerivedHandler::set_yadda_excep> called:" << std::endl;
     callback_excep++;
@@ -383,7 +383,7 @@ public:
   };
 
   void get_bool_attr_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
    TAOX11_TEST_INFO << "Callback method <DerivedHandler::get_bool_attr_excep> called:" << std::endl;
    callback_excep++;
@@ -396,7 +396,7 @@ public:
   }
 
   void set_bool_attr_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     callback_excep++;
     TAOX11_TEST_INFO << "Callback method <DerivedHandler::set_bool_attr_excep> called:"
@@ -412,7 +412,7 @@ public:
   }
 
   void foo_struct_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };

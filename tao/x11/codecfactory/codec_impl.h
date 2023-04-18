@@ -43,7 +43,7 @@ namespace TAOX11_NAMESPACE
 
       TAOX11_NAMESPACE::CORBA::Any
       decode_value (const ::TAOX11_NAMESPACE::CORBA::OctetSeq& data,
-        TAOX11_IDL::traits< ::TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type tc) override;
+        TAOX11_IDL::traits<::TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type tc) override;
 
     private:
       Codec (const Codec&) = delete;

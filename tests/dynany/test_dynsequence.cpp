@@ -80,8 +80,8 @@ Test_DynSequence::run_test ()
      }
 
 
-     IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory =
-         IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);
+     IDL::traits<DynamicAny::DynAnyFactory>::ref_type dynany_factory =
+         IDL::traits<DynamicAny::DynAnyFactory>::narrow (factory_obj);
 
      if (!dynany_factory)
      {

@@ -56,7 +56,7 @@ namespace TAOX11_NAMESPACE
     }
 
     void
-    TAOX11_DynCommon::assign (IDL::traits< DynAny>::ref_type dyn_any)
+    TAOX11_DynCommon::assign (IDL::traits<DynAny>::ref_type dyn_any)
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::assign");
       if (this->destroyed_)
@@ -155,7 +155,7 @@ namespace TAOX11_NAMESPACE
 
       if (this->has_components_)
       {
-        IDL::traits< DynAny>::ref_type cc =
+        IDL::traits<DynAny>::ref_type cc =
              this->check_component ();
         cc->insert_string (value);
       }
@@ -197,7 +197,7 @@ namespace TAOX11_NAMESPACE
 
       if (this->has_components_)
       {
-         IDL::traits< DynAny>::ref_type cc =
+         IDL::traits<DynAny>::ref_type cc =
              this->check_component ();
          cc->insert_reference (value);
       }
@@ -296,7 +296,7 @@ namespace TAOX11_NAMESPACE
 
       if (this->has_components_)
       {
-        IDL::traits< DynAny>::ref_type cc =
+        IDL::traits<DynAny>::ref_type cc =
              this->check_component ();
         cc->insert_wstring (value);
       }
@@ -334,7 +334,7 @@ namespace TAOX11_NAMESPACE
     }
 
     void
-    TAOX11_DynCommon::insert_dyn_any ( IDL::traits< DynAny>::ref_type dyn_any)
+    TAOX11_DynCommon::insert_dyn_any ( IDL::traits<DynAny>::ref_type dyn_any)
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::insert_dyn_any");
       if (this->destroyed_)
@@ -359,7 +359,7 @@ namespace TAOX11_NAMESPACE
 
       if (this->has_components_)
       {
-        IDL::traits< DynAny>::ref_type cc =
+        IDL::traits<DynAny>::ref_type cc =
              this->check_component (true);
 
         cc->insert_val (value);
@@ -494,7 +494,7 @@ namespace TAOX11_NAMESPACE
 
       if (this->has_components_)
       {
-         IDL::traits< DynAny>::ref_type cc =
+         IDL::traits<DynAny>::ref_type cc =
            this->check_component ();
 
            return cc->get_string ();
@@ -539,7 +539,7 @@ namespace TAOX11_NAMESPACE
 
       if (this->has_components_)
       {
-        IDL::traits< DynAny>::ref_type cc =
+        IDL::traits<DynAny>::ref_type cc =
               this->check_component ();
         return cc->get_reference ();
       }
@@ -599,7 +599,7 @@ namespace TAOX11_NAMESPACE
 
       if (this->has_components_)
       {
-        IDL::traits< DynAny>::ref_type cc = this->check_component ();
+        IDL::traits<DynAny>::ref_type cc = this->check_component ();
         return cc->get_wstring ();
       }
       else
@@ -642,7 +642,7 @@ namespace TAOX11_NAMESPACE
 
       if (this->has_components_)
       {
-         IDL::traits< DynAny>::ref_type cc =
+         IDL::traits<DynAny>::ref_type cc =
              this->check_component ();
          return cc->get_any ();
       }
@@ -657,7 +657,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< DynAny>::ref_type
+    IDL::traits<DynAny>::ref_type
     TAOX11_DynCommon::get_dyn_any ()
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::get_dyn_any");
@@ -795,7 +795,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< DynAny>::ref_type
+    IDL::traits<DynAny>::ref_type
     TAOX11_DynCommon::copy ()
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::copy");
@@ -829,7 +829,7 @@ namespace TAOX11_NAMESPACE
 
     void
     TAOX11_DynCommon::insert_abstract
-    (IDL::traits< ::TAOX11_CORBA::AbstractBase>::ref_type value)
+    (IDL::traits<::TAOX11_CORBA::AbstractBase>::ref_type value)
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::insert_abstract");
 
@@ -840,7 +840,7 @@ namespace TAOX11_NAMESPACE
 
       if (this->has_components_)
       {
-         IDL::traits< DynAny>::ref_type cc = this->check_component ();
+         IDL::traits<DynAny>::ref_type cc = this->check_component ();
           cc->insert_abstract (value);
        }
       else
@@ -900,7 +900,7 @@ namespace TAOX11_NAMESPACE
     }
 
 
-    IDL::traits< ::TAOX11_CORBA::AbstractBase>::ref_type
+    IDL::traits<::TAOX11_CORBA::AbstractBase>::ref_type
     TAOX11_DynCommon::get_abstract ()
     {
       TAOX11_LOG_TRACE ("TAOX11_DynCommon::get_abstract");
@@ -912,7 +912,7 @@ namespace TAOX11_NAMESPACE
 
       if (this->has_components_)
       {
-        IDL::traits< DynAny>::ref_type cc = this->check_component ();
+        IDL::traits<DynAny>::ref_type cc = this->check_component ();
         return cc->get_abstract ();
       }
       else
@@ -1193,7 +1193,7 @@ namespace TAOX11_NAMESPACE
 
 
 
-    IDL::traits< DynAny>::ref_type
+    IDL::traits<DynAny>::ref_type
     TAOX11_DynCommon::check_component (bool isValueType)
     {
       TAOX11_LOG_TRACE("TAOX11_DynCommon::check_component");
@@ -1203,7 +1203,7 @@ namespace TAOX11_NAMESPACE
         throw DynAny::InvalidValue ();
       }
 
-      IDL::traits< DynAny>::ref_type cc =
+      IDL::traits<DynAny>::ref_type cc =
         this->current_component ();
 
       IDL::traits<CORBA::TypeCode>::ref_type tc = cc->type ();

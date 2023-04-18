@@ -639,8 +639,8 @@ namespace TAOX11_NAMESPACE {
         if (!imgr)
           this->_proxy()->set_servant_manager(TAO_PORTABLE_SERVER::ServantActivator::_nil ());
 
-        const IDL::traits< ::TAOX11_NAMESPACE::PortableServer::ServantActivator>::ref_type sa =
-          IDL::traits< ::TAOX11_NAMESPACE::PortableServer::ServantActivator>::narrow (imgr);
+        const IDL::traits<::TAOX11_NAMESPACE::PortableServer::ServantActivator>::ref_type sa =
+          IDL::traits<::TAOX11_NAMESPACE::PortableServer::ServantActivator>::narrow (imgr);
         if (sa != nullptr)
           {
             TAOX11_LOG_DEBUG ("Successfully narrowed given ServantManager to a ServantActivator.");
@@ -649,8 +649,8 @@ namespace TAOX11_NAMESPACE {
             this->_proxy()->set_servant_manager(tao_sa.in ());
             return;
           }
-        const IDL::traits< ::TAOX11_NAMESPACE::PortableServer::ServantLocator>::ref_type sl =
-          IDL::traits< ::TAOX11_NAMESPACE::PortableServer::ServantLocator>::narrow (imgr);
+        const IDL::traits<::TAOX11_NAMESPACE::PortableServer::ServantLocator>::ref_type sl =
+          IDL::traits<::TAOX11_NAMESPACE::PortableServer::ServantLocator>::narrow (imgr);
         if (sl != nullptr)
           {
             TAOX11_LOG_DEBUG ("Successfully narrowed given ServantManager to a ServantLocator.");

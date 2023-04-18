@@ -43,7 +43,7 @@ namespace TAOX11_NAMESPACE {
     void
     TAOX11_CORBA::PolicyError::_info (std::ostream& strm) const
     {
-      TAOX11_IDL::traits< TAOX11_CORBA::PolicyError>::write_on(strm, *this);
+      TAOX11_IDL::traits<TAOX11_CORBA::PolicyError>::write_on(strm, *this);
     }
 
     void TAOX11_CORBA::PolicyError::_raise () const
@@ -84,7 +84,7 @@ namespace TAOX11_NAMESPACE {
     void
     TAOX11_CORBA::InvalidPolicies::_info (std::ostream& strm) const
     {
-      TAOX11_IDL::traits< TAOX11_CORBA::InvalidPolicies>::write_on(strm, *this);
+      TAOX11_IDL::traits<TAOX11_CORBA::InvalidPolicies>::write_on(strm, *this);
     }
 
     void TAOX11_CORBA::InvalidPolicies::_raise () const
@@ -295,9 +295,9 @@ TAO_CORBA::Boolean operator>> (
 
 TAO_CORBA::Boolean operator<< (
     TAO_OutputCDR &strm,
-    IDL::traits< TAOX11_CORBA::Policy>::ref_type _tao_objref)
+    IDL::traits<TAOX11_CORBA::Policy>::ref_type _tao_objref)
 {
-  IDL::traits< TAOX11_CORBA::Object>::ref_type _x11_obj = _tao_objref;
+  IDL::traits<TAOX11_CORBA::Object>::ref_type _x11_obj = _tao_objref;
   return (strm << _x11_obj);
 }
 
@@ -378,7 +378,7 @@ TAO_END_VERSIONED_NAMESPACE_DECL
 // generated from c++/cli_src/interface_os.erb
 std::ostream& operator<< (
     std::ostream& strm ,
-    IDL::traits< TAOX11_CORBA::Policy>::ref_type _v)
+    IDL::traits<TAOX11_CORBA::Policy>::ref_type _v)
 {
   strm << "object_reference {";
   if (_v == nullptr)

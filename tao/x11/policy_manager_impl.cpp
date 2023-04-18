@@ -16,7 +16,7 @@ namespace TAOX11_NAMESPACE
   namespace CORBA
   {
     class TAOX11_Export Policy_Manager_impl final
-      : public ::TAOX11_NAMESPACE::IDL::traits< PolicyManager>::base_type
+      : public ::TAOX11_NAMESPACE::IDL::traits<PolicyManager>::base_type
     {
     public:
       Policy_Manager_impl (TAO_CORBA::PolicyManager_ptr polptr);

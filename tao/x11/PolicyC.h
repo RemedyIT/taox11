@@ -181,7 +181,7 @@ namespace TAOX11_NAMESPACE
   {
     template<>
     struct traits < TAOX11_CORBA::Policy> :
-      public IDL::common_byval_traits <IDL::traits< TAOX11_CORBA::Policy>::ref_type>,
+      public IDL::common_byval_traits <IDL::traits<TAOX11_CORBA::Policy>::ref_type>,
       public CORBA::object_traits < TAOX11_CORBA::Policy>
     {
       static constexpr bool local = false;
@@ -381,7 +381,7 @@ namespace TAOX11_NAMESPACE {
        OStrm_& os_,
        IDL::traits<CORBA::Policy>::in_type o_)
    {
-     return os_ << IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::_dump (o_, "CORBA::Policy");
+     return os_ << IDL::traits<TAOX11_NAMESPACE::CORBA::Object>::_dump (o_, "CORBA::Policy");
    }
 
    template <typename OStrm_, typename Fmt>
@@ -426,8 +426,8 @@ namespace TAOX11_NAMESPACE
    // generated from c++/cli_hdr/anyop.erb
 #if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICY_DECL__)
 #define __TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICY_DECL__
-  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::ref_type);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::_ref_type&);
+  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, IDL::traits<TAOX11_CORBA::Policy>::ref_type);
+  TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, IDL::traits<TAOX11_CORBA::Policy>::_ref_type&);
 #endif
   } // namespac CORBA
 } // namespace TAOX11_NAMESPACE
@@ -512,7 +512,7 @@ inline TAOX11_CORBA::InvalidPolicies& TAOX11_CORBA::InvalidPolicies::operator= (
 // generated from c++/cli_hdr/interface_os.erb
 TAOX11_Export std::ostream& operator<< (
     std::ostream& strm,
-    IDL::traits< TAOX11_CORBA::Policy>::ref_type);
+    IDL::traits<TAOX11_CORBA::Policy>::ref_type);
 
 #if defined (__TAOX11_INCLUDE_STUB_PROXY__)
 #include "PolicyP.h"

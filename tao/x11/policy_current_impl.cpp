@@ -16,7 +16,7 @@ namespace TAOX11_NAMESPACE
   namespace CORBA
   {
     class TAOX11_Export Policy_Current_impl final
-      : public ::TAOX11_NAMESPACE::IDL::traits< PolicyCurrent>::base_type
+      : public ::TAOX11_NAMESPACE::IDL::traits<PolicyCurrent>::base_type
     {
     public:
       Policy_Current_impl (TAO_CORBA::PolicyCurrent_ptr polptr);

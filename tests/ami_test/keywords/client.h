@@ -28,14 +28,14 @@ public:
 
   void
   inout_bool_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   _cxx_uint32_t (int16_t ami_return_val) override;
 
   void
   uint32_t_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   inout_int16_t (::Test::_cxx_int16_t ami_return_val,
@@ -44,7 +44,7 @@ public:
 
   void
   inout_int16_t_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   get_attr_int32_t (
@@ -52,14 +52,14 @@ public:
 
   void
   get_attr_int32_t_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   set_attr_int32_t () override;
 
   void
   set_attr_int32_t_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   get_attr_bool (
@@ -67,14 +67,14 @@ public:
 
   void
   get_attr_bool_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   set_attr_bool () override;
 
   void
   set_attr_bool_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   get_attr_int16_t (
@@ -82,14 +82,14 @@ public:
 
   void
   get_attr_int16_t_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   set_attr_int16_t () override;
 
   void
   set_attr_int16_t_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   get_attr_least8_t (
@@ -97,14 +97,14 @@ public:
 
   void
   get_attr_least8_t_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   set_attr_least8_t () override;
 
   void
   set_attr_least8_t_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   get_attr_cpplib_keyword_struct (
@@ -112,14 +112,14 @@ public:
 
   void
   get_attr_cpplib_keyword_struct_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   set_attr_cpplib_keyword_struct () override;
 
   void
   set_attr_cpplib_keyword_struct_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   get_attr_int_keyword_struct (
@@ -127,14 +127,14 @@ public:
 
   void
   get_attr_int_keyword_struct_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   set_attr_int_keyword_struct () override;
 
   void
   set_attr_int_keyword_struct_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   get_attr_cpp_keyword_struct (
@@ -142,34 +142,34 @@ public:
 
   void
   get_attr_cpp_keyword_struct_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   set_attr_cpp_keyword_struct () override;
 
   void
   set_attr_cpp_keyword_struct_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   bar () override;
 
   void
   bar_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   shutdown () override;
 
   void
   shutdown_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override;
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override;
 
   void
   _cxx_class () override;
 
   void
-  class_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override;
+  class_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override;
 
   void
   _cxx_void (
@@ -177,19 +177,19 @@ public:
       const std::string& interface) override;
 
   void
-  void_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override;
+  void_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override;
 
   void
   get_private (::Test::_cxx_bool ami_return_val) override;
 
   void
-  get_private_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override;
+  get_private_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override;
 
   void
   set_private () override;
 
   void
-  set_private_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override;
+  set_private_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override;
 
 private:
   Handler (const Handler&) = delete;

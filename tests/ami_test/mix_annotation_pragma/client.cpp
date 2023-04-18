@@ -65,7 +65,7 @@ public:
   }
 
   void foo_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     try
       {
@@ -110,7 +110,7 @@ public:
    }
 
    void get_my_foo_attrib_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
    {
      TAOX11_TEST_INFO << "Callback method <get_my_foo_attrib_excep> called."
                  << std::endl;
@@ -124,7 +124,7 @@ public:
      myfoo_attrib++;
    }
 
-   void set_my_foo_attrib_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
+   void set_my_foo_attrib_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
    {
      TAOX11_TEST_INFO << "Callback method <set_my_foo_attrib_excep> called:"
                  << std::endl;
@@ -150,7 +150,7 @@ public:
   }
 
   void bye_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <bye_excep> called."<< std::endl;
   }
@@ -164,7 +164,7 @@ public:
   }
 
   void foo_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     try
       {
@@ -210,7 +210,7 @@ public:
   }
 
   void get_my_foo_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <MyBarHandler::get_my_foo_attrib_excep> called."
                 << std::endl;
@@ -225,7 +225,7 @@ public:
   }
 
   void set_my_foo_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <MyBarHandler::set_my_foo_attrib_excep> called:"
                 << std::endl;
@@ -236,7 +236,7 @@ public:
   }
 
   void do_something_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <MyBarHandler::do_someting_excep> called."
                << std::endl;
@@ -249,7 +249,7 @@ public:
   }
 
   void get_my_derived_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <MyBarHandler::get_my_derived_attrib_excep> called."
                 << std::endl;
@@ -262,7 +262,7 @@ public:
   }
 
   void set_my_derived_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <MyBarHandler::set_my_derived_attrib_excep> called:"
                 << std::endl;
@@ -276,7 +276,7 @@ public:
   }
 
   void get_my_bar_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <MyBarHandler::get_my_bar_attrib_excep> called."
                 << std::endl;
@@ -290,7 +290,7 @@ public:
   }
 
   void set_my_bar_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
      TAOX11_TEST_INFO << "Callback method <MyBarHandler::set_my_bar_attrib_excep> called:"
                  << std::endl;

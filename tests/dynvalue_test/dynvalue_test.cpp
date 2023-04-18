@@ -30,8 +30,8 @@ int main (int argc, ACE_TCHAR *argv[])
     return 1;
   }
 
-  IDL::traits< DynamicAny::DynAnyFactory>::ref_type dany_fact_ =
-     IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);
+  IDL::traits<DynamicAny::DynAnyFactory>::ref_type dany_fact_ =
+     IDL::traits<DynamicAny::DynAnyFactory>::narrow (factory_obj);
   if (!dany_fact_)
   {
     TAOX11_TEST_ERROR << "Error: Nil dynamic any factory after narrow dany_fact_"
@@ -87,8 +87,8 @@ int main (int argc, ACE_TCHAR *argv[])
 
     TAOX11_TEST_DEBUG << "A4.Testing dynamic any for not being null with is_null, " << std::endl;
 
-    IDL::traits< DynamicAny::DynValueCommon>::ref_type dvc =
-                       IDL::traits< DynamicAny::DynValueCommon>::narrow (dany_boxed);
+    IDL::traits<DynamicAny::DynValueCommon>::ref_type dvc =
+                       IDL::traits<DynamicAny::DynValueCommon>::narrow (dany_boxed);
     if (!dvc)
     {
       TAOX11_TEST_ERROR << "ERROR : Failed, can not narrow dany_boxed to  DynamicAny::DynValueCommon" << std::endl;
@@ -105,7 +105,7 @@ int main (int argc, ACE_TCHAR *argv[])
     analyzer.analyze (dany);
 
     TAOX11_TEST_DEBUG << "A6.Testing typecode generated dynamic any for being null, with is_null" << std::endl;
-    dvc = IDL::traits< DynamicAny::DynValueCommon>::narrow (dany);
+    dvc = IDL::traits<DynamicAny::DynValueCommon>::narrow (dany);
     if (!dvc)
     {
       TAOX11_TEST_ERROR << "ERROR : Failed, can not narrow dany to  DynamicAny::DynValueCommon" << std::endl;
@@ -161,7 +161,7 @@ int main (int argc, ACE_TCHAR *argv[])
 
     //dvc with dany_boxed
     TAOX11_TEST_DEBUG << "A11. Setting the original dynamic any to null object" << std::endl;
-    dvc= IDL::traits< DynamicAny::DynValueCommon>::narrow (dany_boxed);
+    dvc= IDL::traits<DynamicAny::DynValueCommon>::narrow (dany_boxed);
     if (!dvc)
     {
       TAOX11_TEST_ERROR << "ERROR: Failed, can not obtain DynamicAny::DynValueCommon *" << std::endl;
@@ -268,8 +268,8 @@ int main (int argc, ACE_TCHAR *argv[])
     }
 
     TAOX11_TEST_DEBUG << "A19. Narrow DynAny to DynValueBox " << std::endl;
-    IDL::traits< DynamicAny::DynValueBox>::ref_type davb1 =
-          IDL::traits< DynamicAny::DynValueBox>::narrow (dany_boxed);
+    IDL::traits<DynamicAny::DynValueBox>::ref_type davb1 =
+          IDL::traits<DynamicAny::DynValueBox>::narrow (dany_boxed);
 
     if (!davb1)
     {
@@ -588,7 +588,7 @@ int main (int argc, ACE_TCHAR *argv[])
     }
 
     TAOX11_TEST_DEBUG << "C3. Creating dynamic any from any" << std::endl;
-    IDL::traits< DynamicAny::DynAny>::ref_type dany_null  = dany_fact_->create_dyn_any  (myAny);
+    IDL::traits<DynamicAny::DynAny>::ref_type dany_null  = dany_fact_->create_dyn_any  (myAny);
     analyzer.analyze (dany_null);
 
     TAOX11_TEST_DEBUG << "Testing dynamic any for non-null" << std::endl;

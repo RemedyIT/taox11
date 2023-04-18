@@ -40,7 +40,7 @@ namespace TAOX11_NAMESPACE
             true );  //  Allow truncation
     }
 
-    TAOX11_IDL::traits< DynAny>::ref_type
+    TAOX11_IDL::traits<DynAny>::ref_type
     DynAnyFactory_i::create_dyn_any_from_type_code (CORBA::object_reference<CORBA::TypeCode> type)
     {
       TAOX11_LOG_TRACE ("DynAnyFactory_i::create_dyn_any_from_type_code ");
@@ -54,7 +54,7 @@ namespace TAOX11_NAMESPACE
            true );  // Allow truncation
    }
 
-    TAOX11_IDL::traits< DynAny>::ref_type
+    TAOX11_IDL::traits<DynAny>::ref_type
     DynAnyFactory_i::create_dyn_any_without_truncation (
         const TAOX11_NAMESPACE::CORBA::Any& value)
     {

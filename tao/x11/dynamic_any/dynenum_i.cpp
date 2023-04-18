@@ -37,7 +37,7 @@ namespace TAOX11_NAMESPACE
       this->component_count_ = 0;
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynEnum_i::init (const CORBA::Any &any)
     {
       TAOX11_LOG_TRACE ("DynEnum_i::init with any");
@@ -81,7 +81,7 @@ namespace TAOX11_NAMESPACE
       return this->_this();
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynEnum_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynEnum_i::init with typecode");
@@ -245,7 +245,7 @@ namespace TAOX11_NAMESPACE
     }
 
     bool
-    DynEnum_i::equal (IDL::traits< DynamicAny::DynAny>::ref_type rhs)
+    DynEnum_i::equal (IDL::traits<DynamicAny::DynAny>::ref_type rhs)
     {
       TAOX11_LOG_TRACE ("DynEnum_i::equal");
 
@@ -301,7 +301,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynEnum_i::current_component ()
     {
       TAOX11_LOG_TRACE ("DynEnum_i::current_component");

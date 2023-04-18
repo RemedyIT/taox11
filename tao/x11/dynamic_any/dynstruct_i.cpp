@@ -47,7 +47,7 @@ namespace TAOX11_NAMESPACE
       this->current_position_ = this->component_count_ ? 0 : -1;
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynStruct_i::init (const CORBA::Any& any)
     {
       IDL::traits<CORBA::TypeCode>::ref_type tc = any.type();
@@ -142,7 +142,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynStruct_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       this->check_typecode (tc);
@@ -569,7 +569,7 @@ namespace TAOX11_NAMESPACE
     }
 
     bool
-    DynStruct_i::equal (IDL::traits< DynamicAny::DynAny>::ref_type rhs)
+    DynStruct_i::equal (IDL::traits<DynamicAny::DynAny>::ref_type rhs)
     {
       if (this->destroyed_)
       {
@@ -623,7 +623,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynStruct_i::current_component ()
     {
       if (this->destroyed_)

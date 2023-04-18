@@ -23,7 +23,7 @@ public:
 
   void shutdown();
 
-  IDL::traits< ::Hello>::ref_type create_POA();
+  IDL::traits<::Hello>::ref_type create_POA();
 
   void destroy_POA();
 
@@ -61,7 +61,7 @@ IDL::traits<PortableServer::POA>::ref_type hello_i::_default_POA()
   return poa_;
 }
 
-IDL::traits< ::Hello>::ref_type hello_i::create_POA()
+IDL::traits<::Hello>::ref_type hello_i::create_POA()
 {
   CORBA::PolicyList policies(2);
   IDL::traits<PortableServer::IdAssignmentPolicy>::ref_type idas_pol =
@@ -122,7 +122,7 @@ IDL::traits< ::Hello>::ref_type hello_i::create_POA()
   }
   PortableServer::ObjectId id = this->poa_->activate_object(hello_servant);
   IDL::traits<CORBA::Object>::ref_type object = this->poa_->id_to_reference(id);
-  ::Hello::_ref_type test_ref = IDL::traits< ::Hello>::narrow (object);
+  ::Hello::_ref_type test_ref = IDL::traits<::Hello>::narrow (object);
   return test_ref;
 }
 

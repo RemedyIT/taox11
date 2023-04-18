@@ -26,9 +26,9 @@
 
 std::ostream& operator<< (
     std::ostream& strm,
-    TAOX11_NAMESPACE::IDL::traits< ::TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type tc)
+    TAOX11_NAMESPACE::IDL::traits<::TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type tc)
 {
-  return TAOX11_NAMESPACE::IDL::traits< ::TAOX11_NAMESPACE::CORBA::TypeCode>::write_on (strm, tc);
+  return TAOX11_NAMESPACE::IDL::traits<::TAOX11_NAMESPACE::CORBA::TypeCode>::write_on (strm, tc);
 }
 
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
@@ -81,7 +81,7 @@ demarshal_TAOX11_NAMESPACE_CORBA_TypeCode_sequence (
     std::vector< TAOX11_CORBA::object_traits< ::TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type>& _seq,
     uint32_t _bound)
 {
-  using _elem_type = IDL::traits< TAOX11_CORBA::TypeCode>::ref_type;
+  using _elem_type = IDL::traits<TAOX11_CORBA::TypeCode>::ref_type;
 
   uint32_t length {};
 
@@ -482,7 +482,7 @@ TAOX11_NAMESPACE::CORBA::typecode_reference const TAOX11_NAMESPACE::CORBA::TypeC
 void
 TAOX11_NAMESPACE::CORBA::TypeCode::Bounds::_info (std::ostream& user_exception_info) const
 {
-  TAOX11_IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode::Bounds>::write_on(user_exception_info, *this);
+  TAOX11_IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode::Bounds>::write_on(user_exception_info, *this);
 }
 
 void TAOX11_NAMESPACE::CORBA::TypeCode::Bounds::_raise () const
@@ -518,7 +518,7 @@ TAOX11_NAMESPACE::CORBA::Exception *TAOX11_NAMESPACE::CORBA::TypeCode::Bounds::_
 void
 TAOX11_NAMESPACE::CORBA::TypeCode::BadKind::_info (std::ostream& user_exception_info) const
 {
-  TAOX11_IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode::BadKind>::write_on(user_exception_info, *this);
+  TAOX11_IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode::BadKind>::write_on(user_exception_info, *this);
 }
 
 void TAOX11_NAMESPACE::CORBA::TypeCode::BadKind::_raise () const
@@ -555,7 +555,7 @@ TAOX11_NAMESPACE::CORBA::Exception *TAOX11_NAMESPACE::CORBA::TypeCode::BadKind::
 void operator<<= (TAOX11_CORBA::Any &any, const ::TAOX11_NAMESPACE::CORBA::TypeCode::Bounds& _struct )
 {
   TAOX11_NAMESPACE::Any_Dual_Impl_T<
-      IDL::traits< ::TAOX11_NAMESPACE::CORBA::TypeCode::Bounds>,
+      IDL::traits<::TAOX11_NAMESPACE::CORBA::TypeCode::Bounds>,
       TAOX11_NAMESPACE::CDR_Marshal_Policy
         >::insert_copy (
           any,
@@ -567,7 +567,7 @@ void operator<<= (TAOX11_CORBA::Any &any, const ::TAOX11_NAMESPACE::CORBA::TypeC
 void operator<<= (TAOX11_CORBA::Any &any , ::TAOX11_NAMESPACE::CORBA::TypeCode::Bounds&& _struct )
 {
    Any_Dual_Impl_T<
-      IDL::traits< ::TAOX11_NAMESPACE::CORBA::TypeCode::Bounds>,
+      IDL::traits<::TAOX11_NAMESPACE::CORBA::TypeCode::Bounds>,
       TAOX11_NAMESPACE::CDR_Marshal_Policy
         >::insert (
           any,
@@ -579,7 +579,7 @@ void operator<<= (TAOX11_CORBA::Any &any , ::TAOX11_NAMESPACE::CORBA::TypeCode::
 bool operator>>= (const TAOX11_CORBA::Any &any , ::TAOX11_NAMESPACE::CORBA::TypeCode::Bounds& _struct)
 {
   return  Any_Dual_Impl_T<
-      IDL::traits< ::TAOX11_NAMESPACE::CORBA::TypeCode::Bounds>,
+      IDL::traits<::TAOX11_NAMESPACE::CORBA::TypeCode::Bounds>,
       TAOX11_NAMESPACE::CDR_Marshal_Policy
         >::extract (
           any,
@@ -591,7 +591,7 @@ bool operator>>= (const TAOX11_CORBA::Any &any , ::TAOX11_NAMESPACE::CORBA::Type
 void operator<<= (TAOX11_CORBA::Any &any, const ::TAOX11_NAMESPACE::CORBA::TypeCode::BadKind& _struct )
 {
   TAOX11_NAMESPACE::Any_Dual_Impl_T<
-      IDL::traits< ::TAOX11_NAMESPACE::CORBA::TypeCode::BadKind>,
+      IDL::traits<::TAOX11_NAMESPACE::CORBA::TypeCode::BadKind>,
       TAOX11_NAMESPACE::CDR_Marshal_Policy
         >::insert_copy (
           any,
@@ -603,7 +603,7 @@ void operator<<= (TAOX11_CORBA::Any &any, const ::TAOX11_NAMESPACE::CORBA::TypeC
 void operator<<= (TAOX11_CORBA::Any &any , ::TAOX11_NAMESPACE::CORBA::TypeCode::BadKind&& _struct )
 {
    Any_Dual_Impl_T<
-      IDL::traits< ::TAOX11_NAMESPACE::CORBA::TypeCode::BadKind>,
+      IDL::traits<::TAOX11_NAMESPACE::CORBA::TypeCode::BadKind>,
       TAOX11_NAMESPACE::CDR_Marshal_Policy
         >::insert (
           any,
@@ -615,7 +615,7 @@ void operator<<= (TAOX11_CORBA::Any &any , ::TAOX11_NAMESPACE::CORBA::TypeCode::
 bool operator>>= (const TAOX11_CORBA::Any &any , ::TAOX11_NAMESPACE::CORBA::TypeCode::BadKind& _struct)
 {
   return  Any_Dual_Impl_T<
-      IDL::traits< ::TAOX11_NAMESPACE::CORBA::TypeCode::BadKind>,
+      IDL::traits<::TAOX11_NAMESPACE::CORBA::TypeCode::BadKind>,
       TAOX11_NAMESPACE::CDR_Marshal_Policy
         >::extract (
           any,

@@ -155,13 +155,13 @@ main(int argc, char *argv[])
           return 1;
         }
 
-      IDL::traits< Simple>::ref_type simple_obj =
-        IDL::traits< Simple>::narrow (obj);
+      IDL::traits<Simple>::ref_type simple_obj =
+        IDL::traits<Simple>::narrow (obj);
 
       if (!simple_obj)
         {
           TAOX11_TEST_ERROR
-            << "ERROR: IDL::traits< Simple>::narrow (obj) returned null reference."
+            << "ERROR: IDL::traits<Simple>::narrow (obj) returned null reference."
             << std::endl;
           return 1;
         }

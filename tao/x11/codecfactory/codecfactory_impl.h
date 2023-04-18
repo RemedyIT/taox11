@@ -32,10 +32,10 @@ namespace TAOX11_NAMESPACE
       CodecFactory (TAO_IOP::CodecFactory_ptr codecfactory_ptr);
       ~CodecFactory () = default;
 
-      TAOX11_IDL::traits< ::TAOX11_NAMESPACE::IOP::Codec>::ref_type
+      TAOX11_IDL::traits<::TAOX11_NAMESPACE::IOP::Codec>::ref_type
       create_codec (const ::TAOX11_NAMESPACE::IOP::Encoding& enc) override;
 
-      TAOX11_IDL::traits< ::TAOX11_NAMESPACE::IOP::Codec>::ref_type
+      TAOX11_IDL::traits<::TAOX11_NAMESPACE::IOP::Codec>::ref_type
       create_codec_with_codesets (const ::TAOX11_NAMESPACE::IOP::Encoding_1_2& enc) override;
 
     private:

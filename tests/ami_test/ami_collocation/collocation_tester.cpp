@@ -34,7 +34,7 @@ Handler::foo (int32_t ami_return_val,
 
 void
 Handler::foo_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder)
 {
   TAOX11_TEST_ERROR
          << "ERROR: Unexpected exception <foo_excep> called"
