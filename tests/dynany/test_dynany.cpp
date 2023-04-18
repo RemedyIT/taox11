@@ -643,7 +643,7 @@ Test_DynAny::run_test ()
       }
     }
     {
-      TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[19]<< "=*=*=*=*" << std::endl;
+      TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[18]<< "=*=*=*=*" << std::endl;
       TAOX11_TEST_DEBUG << "testing: constructor(Any)/insert/get" << std::endl;
 
       CORBA::Any in1;
@@ -653,7 +653,7 @@ Test_DynAny::run_test ()
 
       if (!fa1->equal(fa1))
       {
-         TAOX11_TEST_ERROR << "++ ERROR create_dyn_any"<< data.labels[19] << std::endl;
+         TAOX11_TEST_ERROR << "++ ERROR create_dyn_any"<< data.labels[18] << std::endl;
           ++this->error_count_;
         }
 
@@ -663,7 +663,7 @@ Test_DynAny::run_test ()
 
       if (!ACE::is_equal (d_out, data.m_longdouble1))
       {
-        TAOX11_TEST_ERROR << "++ ERROR get_longdouble ++"<< data.labels[19] << std::endl;
+        TAOX11_TEST_ERROR << "++ ERROR get_longdouble ++"<< data.labels[18] << std::endl;
         ++this->error_count_;
       }
 
@@ -685,7 +685,7 @@ Test_DynAny::run_test ()
 
       if (!ACE::is_equal (d_out, data.m_longdouble1))
       {
-        TAOX11_TEST_ERROR << "++ ERROR from_any, to_any "<< data.labels[19] << std::endl;
+        TAOX11_TEST_ERROR << "++ ERROR from_any, to_any "<< data.labels[18] << std::endl;
         ++this->error_count_;
       }
 

@@ -84,7 +84,7 @@ Test_DynValue::run_test ()
     IDL::traits<DynAnyTests::BoxedLong>::ref_type myBoxedLong =
         CORBA::make_reference < DynAnyTests::BoxedLong> (l1);
 
-    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[23] << " =*=*=*=*" << std::endl;
+    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[21] << " =*=*=*=*" << std::endl;
     {
       TAOX11_TEST_DEBUG << "testing: constructor(Any)/insert/get/seek/rewind" << std::endl;
 
@@ -203,7 +203,7 @@ Test_DynValue::run_test ()
       ftc1->destroy ();
     }
 
-    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[23] << " =*=*=*=*" << std::endl;
+    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[21] << " =*=*=*=*" << std::endl;
     {
       TAOX11_TEST_DEBUG << "testing: constructor(Any) seek/current_member_name/current_member_kind/insert/get/seek/rewind" << std::endl;
       const int16_t s1= -17;
@@ -387,7 +387,7 @@ Test_DynValue::run_test ()
       vm_da_base->destroy ();
     }
 
-    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[23] << " =*=*=*=*" << std::endl;
+    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[21] << " =*=*=*=*" << std::endl;
     {
       TAOX11_TEST_DEBUG << "testing: constructor(Any) + get_abstract" << std::endl;
 
