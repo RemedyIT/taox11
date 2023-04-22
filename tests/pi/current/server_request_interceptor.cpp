@@ -43,7 +43,6 @@ ServerRequestInterceptor::receive_request_service_contexts (
   try
   {
     // Insert data into the RSC (request scope current).
-
     uint32_t number = 62;
 
     CORBA::Any data;
@@ -76,8 +75,7 @@ ServerRequestInterceptor::receive_request (
     new_data <<= number;
 
     // Set a value in RSC, this should not effect TSC anymore
-    ri->set_slot (this->slot_id_,
-                  new_data);
+    ri->set_slot (this->slot_id_, new_data);
 
     // Now retrieve the data from the TSC again.  It should not have
     // changed to the new value
@@ -93,6 +91,11 @@ ServerRequestInterceptor::receive_request (
 
       throw CORBA::INTERNAL ();
     }
+
+    PortableInterceptor::ORBId const orbid = ri->orb_id ();
+    PortableInterceptor::AdapterName const adaptername = ri->adapter_name ();
+
+    TAOX11_TEST_DEBUG << "Got orb id <" << orbid << "> and adapter name " << adaptername << std::endl;
   }
   catch (const PortableInterceptor::InvalidSlot& ex)
   {
