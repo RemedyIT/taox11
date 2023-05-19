@@ -48,7 +48,7 @@ jobs:
         ref: ${{ env.X11_BRANCH }}
     - name: install fuzzr gem
       run: |
-        gem install rite-fuzzr
+        gem install fuzzr
     - name: Run fuzzr
       run: |
         fuzz -P $X11_BASE_ROOT/bin/fuzzers
