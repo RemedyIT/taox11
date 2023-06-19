@@ -81,6 +81,11 @@ jobs:
             ruby: '3.2'
             PackageDeps: g++-12
           - os: ubuntu-22.04
+            CC: gcc-13
+            CXX: g++-13
+            ruby: '3.2'
+            PackageDeps: g++-13
+          - os: ubuntu-22.04
             CC: gcc-10
             CXX: g++-10
             ruby: '2.7'
