@@ -119,7 +119,7 @@ namespace TAOX11_NAMESPACE {
     // generated from c++/cli_src/interface_pre.erb
     static const std::string TAOX11_NAMESPACE_corba_policy_stub_repo_id_ = "IDL:CORBA/Policy:1.0";
 
-    const std::string& Policy::_interface_repository_id () const
+    std::string Policy::_interface_repository_id () const
     {
       return TAOX11_NAMESPACE_corba_policy_stub_repo_id_;
     }

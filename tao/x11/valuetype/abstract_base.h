@@ -45,7 +45,7 @@ namespace TAOX11_NAMESPACE
       virtual bool _is_a (const std::string& local_type_id);
 
       /// Get the (local) repository id (overloaded in derived interfaces).
-      virtual std::string _interface_repository_id ();
+      virtual std::string _interface_repository_id () const;
 
       static bool _abs_marshal (TAO_OutputCDR&, _ref_type);
       static bool _abs_unmarshal (TAO_InputCDR&, _ref_type&);

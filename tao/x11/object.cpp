@@ -213,7 +213,7 @@ namespace TAOX11_NAMESPACE
     }
 #endif
 
-    std::string Object::_interface_repository_id ()
+    std::string Object::_interface_repository_id () const
     {
       if (this->proxy_)
       {

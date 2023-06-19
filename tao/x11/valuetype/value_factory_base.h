@@ -62,7 +62,7 @@ namespace TAOX11_NAMESPACE
     {
     protected:
       ValueFactoryBase () = default;
-       virtual ~ValueFactoryBase ()= default;
+      ~ValueFactoryBase () override = default;
 
       friend struct object_traits<ValueFactoryBase>;
 
@@ -76,7 +76,7 @@ namespace TAOX11_NAMESPACE
       using _traits_type = IDL::traits<ValueFactoryBase>;
       using _ref_type = IDL::traits<ValueFactoryBase>::ref_type;
 
-      virtual const std::string& _interface_repository_id () const;
+      std::string _interface_repository_id () const override;
 
       virtual CORBA::valuetype_reference<CORBA::ValueBase> create_for_unmarshal () = 0;
 
