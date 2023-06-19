@@ -134,7 +134,7 @@ namespace TAOX11_NAMESPACE
     {
       try {
         TAO_CORBA::StringSeq_var safe_args (this->orbii_->arguments ());
-        return std::move (seq_to_x11<CORBA::StringSeq> (safe_args.in ()));
+        return seq_to_x11<CORBA::StringSeq> (safe_args.in ());
       }
       catch_tao_system_ex (_sx)
       return {};
