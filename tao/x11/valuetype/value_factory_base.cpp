@@ -24,7 +24,7 @@ namespace TAOX11_NAMESPACE
 
     static const std::string ValueFactoryBase_repository_id_ = "IDL:omg.org/CORBA/ValueFactoryBase:1.0";
 
-    const std::string& ValueFactoryBase::_interface_repository_id () const
+    std::string ValueFactoryBase::_interface_repository_id () const
     {
       return ValueFactoryBase_repository_id_;
     }

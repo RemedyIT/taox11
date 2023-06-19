@@ -854,12 +854,12 @@ namespace TAOX11_NAMESPACE
         }
         else if (value != nullptr)
         {
-          std::string value_id = value->_interface_repository_id ();
-          if ( value_id != "IDL:omg.org/CORBA/AbstractBase:1.0")
+          std::string const value_id = value->_interface_repository_id ();
+          if (value_id != "IDL:omg.org/CORBA/AbstractBase:1.0")
           {
-            std::string my_id = this->type_->id ();
+            std::string const my_id = this->type_->id ();
 
-            if ( value_id !=  my_id)
+            if (value_id != my_id)
             {
                // If 'value' is an objref, this will be a virtual
                // call. If not, it will just compare to the repo id

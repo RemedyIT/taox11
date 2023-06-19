@@ -76,7 +76,7 @@ namespace TAOX11_NAMESPACE
 #endif
 
       /// Get the (local) repository id.
-      virtual std::string _interface_repository_id ();
+      virtual std::string _interface_repository_id () const;
 
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO)
       // DII operations to create a request.
