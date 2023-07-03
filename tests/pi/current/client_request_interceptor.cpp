@@ -34,20 +34,36 @@ void
 ClientRequestInterceptor::send_request (
       IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri)
 {
-  TAOX11_TEST_INFO << "ClientRequestInterceptor::send_request (" << ri->operation () << ")" << std::endl;
+  TAOX11_TEST_INFO << "ClientRequestInterceptor::send_request (" << ri->operation () << ") with id " << ri->request_id () << std::endl;
 
-  std::string op = ri->operation ();
+  std::string const op = ri->operation ();
 
   if (op != "invoke_me")
     return; // Don't mess with PICurrent if not invoking test method.
+
+  if (op == "shutdown")
+  {
+    if (ri->response_expected ())
+    {
+      TAOX11_TEST_ERROR << "ERROR: Shutdown shouldn't have a response expected." << std::endl;
+      throw CORBA::INTERNAL ();
+    }
+  }
+  else
+  {
+    if (!ri->response_expected ())
+    {
+      TAOX11_TEST_ERROR << "ERROR: Other operations shouldn't have a response expected." << std::endl;
+      throw CORBA::INTERNAL ();
+    }
+  }
 
   try
   {
     // Retrieve data from the RSC (request scope current).
     uint32_t number = 0;
 
-    CORBA::Any data =
-      ri->get_slot (this->slot_id_);
+    CORBA::Any const data = ri->get_slot (this->slot_id_);
 
     if (!(data >>= number))
     {
@@ -65,8 +81,7 @@ ClientRequestInterceptor::send_request (
 
     // Now reset the contents of our slot in the thread-scope
     // current (TSC).
-    this->pi_current_->set_slot (this->slot_id_,
-                                 new_data);
+    this->pi_current_->set_slot (this->slot_id_, new_data);
 
     // Now retrieve the data from the RSC again.  It should not have
     // changed!
