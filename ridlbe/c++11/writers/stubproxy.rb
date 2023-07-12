@@ -206,6 +206,9 @@ module IDL
         when IDL::Type::Sequence
           add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type)
+        when IDL::Type::Map
+          add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
+          check_idl_type(idl_type)
         when IDL::Type::Array
           add_include('tao/x11/array_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type)
@@ -232,6 +235,10 @@ module IDL
         when IDL::Type::Sequence
           add_include('tao/x11/basic_argument_t.h')
           check_idl_type(idl_type.basetype)
+        when IDL::Type::Map
+          add_include('tao/x11/basic_argument_t.h')
+          check_idl_type(idl_type.keytype)
+          check_idl_type(idl_type.valuetype)
         when IDL::Type::Array
           add_include('tao/x11/basic_argument_t.h')
           check_idl_type(idl_type.basetype)
@@ -325,6 +332,8 @@ module IDL
         case idl_type
         when IDL::Type::Sequence
           visitor(SequenceVisitor).visit_cdr(node)
+        when IDL::Type::Map
+          visitor(MapVisitor).visit_cdr(node)
         when IDL::Type::Array
           visitor(ArrayVisitor).visit_cdr(node)
         when IDL::Type::String, IDL::Type::WString

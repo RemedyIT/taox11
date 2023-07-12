@@ -330,6 +330,12 @@ module IDL
                 check_idl_type(idl_type)
                 check_idl_type(idl_type.basetype)
               end
+            when IDL::Type::Map
+              add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h')
+              unless node.is_local?
+                check_idl_type(idl_type)
+                check_idl_type(idl_type.basetype)
+              end
             end
           end
         end
@@ -360,6 +366,9 @@ module IDL
              IDL::Type::Component
           add_include('tao/x11/stub_arg_traits.h') unless params[:no_cdr_streaming]
         when IDL::Type::Sequence
+          # arg template included in P.h
+          check_idl_type(idl_type.basetype)
+        when IDL::Type::Map
           # arg template included in P.h
           check_idl_type(idl_type.basetype)
         when IDL::Type::Array
@@ -779,6 +788,8 @@ module IDL
             visitor(StringVisitor).visit_tao_typecode(node)
           when IDL::Type::Sequence
             visitor(SequenceVisitor).visit_tao_typecode(node)
+          when IDL::Type::Map
+            visitor(MapVisitor).visit_tao_typecode(node)
           when IDL::Type::Array
             visitor(ArrayVisitor).visit_tao_typecode(node)
           end

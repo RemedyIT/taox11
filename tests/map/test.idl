@@ -1,0 +1,169 @@
+/**
+ * @file    test.idl
+ * @author  Mark Drijver
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+module TestBounded <typename T>
+{
+  interface Bounded {
+    void test_bounded_in (in T pin);
+    void test_bounded_out (out T pout);
+    T test_bounded_ret ();
+  };
+};
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  typedef map<string,long> StringLongMap;
+  typedef map<string,long,5> StringLongMap5;
+
+  struct CorbaSequences
+  {
+    CORBA::WCharSeq wchar_seq;
+    CORBA::CharSeq char_seq;
+
+    CORBA::WStringSeq wstring_seq;
+    CORBA::StringSeq string_seq;
+
+    CORBA::ShortSeq short_seq;
+    CORBA::UShortSeq ushort_seq;
+
+    CORBA::LongSeq long_seq;
+    CORBA::ULongSeq ulong_seq;
+
+    CORBA::LongLongSeq longlong_seq;
+    CORBA::ULongLongSeq ulonglong_seq;
+
+    CORBA::DoubleSeq double_seq;
+    CORBA::LongDoubleSeq longdouble_seq;
+
+    CORBA::FloatSeq float_seq;
+    CORBA::OctetSeq octet_seq;
+    CORBA::BooleanSeq bool_seq;
+  };
+
+  struct Simple
+  {
+    octet   o;
+    long    l;
+    string  s;
+    double  d;
+    boolean b;
+    char    c;
+  };
+  typedef Simple Simple2;
+
+  typedef sequence<Simple> SimpleSeq;
+  typedef sequence<SimpleSeq> SimpleSeqSeq;
+  typedef sequence<SimpleSeqSeq> SimpleSeqSeqSeq;
+  typedef sequence<Simple> AnotherSimpleSeq;
+  typedef sequence<Simple2> Simple2Seq;
+  typedef sequence<Simple2> AnotherSimple2Seq;
+  // test names with embedded undercores
+  typedef sequence<Simple2> Simple_Seq;
+  typedef sequence<Simple2> Simple__Seq;
+
+  typedef sequence<long> LongSeq;
+  typedef sequence<boolean> BoolSeq;
+  typedef sequence<string> StringSeq;
+
+  // Bounded sequences
+  typedef sequence<octet, 10> OctetBounded;
+  typedef sequence<short, 10> ShortBounded;
+  typedef sequence<long, 10> LongBounded;
+  typedef sequence<long long, 10> LongLongBounded;
+  typedef sequence<double, 10> DoubleBounded;
+  typedef sequence<long double, 10> LongDoubleBounded;
+  typedef sequence<float, 10> FloatBounded;
+  typedef sequence<boolean, 10> BoolBounded;
+
+  typedef sequence<unsigned short, 10> UShortBounded;
+  typedef sequence<unsigned long, 10> ULongBounded;
+  typedef sequence<unsigned long long, 10> ULongLongBounded;
+
+  typedef sequence<string, 10> StringBounded;
+  typedef sequence<char, 10> CharBounded;
+  typedef sequence<wchar, 10> WCharBounded;
+
+
+  typedef char ca5[5];
+  typedef sequence<CharBounded, 23> cc23;
+  typedef sequence<ca5, 10> ca5_10;
+
+  typedef sequence<Simple, 10> SimpleBounded;
+
+  module TestBounded<Test::OctetBounded> TestOctetBounded;
+  module TestBounded<Test::ShortBounded> TestShortBounded;
+  module TestBounded<Test::LongBounded> TestLongBounded;
+  module TestBounded<Test::LongLongBounded> TestLongLongBounded;
+  module TestBounded<Test::DoubleBounded> TestDoubleBounded;
+  module TestBounded<Test::LongDoubleBounded> TestLongDoubleBounded;
+  module TestBounded<Test::FloatBounded> TestFloatBounded;
+  module TestBounded<Test::BoolBounded> TestBoolBounded;
+
+  module TestBounded<Test::UShortBounded> TestUShortBounded;
+  module TestBounded<Test::ULongBounded> TestULongBounded;
+  module TestBounded<Test::ULongLongBounded> TestULongLongBounded;
+
+  module TestBounded<Test::StringBounded> TestStringBounded;
+  module TestBounded<Test::CharBounded> TestCharBounded;
+  module TestBounded<Test::WCharBounded> TestWCharBounded;
+
+  interface Foo
+  {
+    LongSeq test_long_seq (in LongSeq sin,
+      inout LongSeq sinout,
+      out LongSeq sout);
+    BoolSeq test_bool_seq (in BoolSeq sin,
+      inout BoolSeq sinout,
+      out BoolSeq sout);
+    StringSeq test_string_seq (in StringSeq sin,
+      inout StringSeq sinout,
+      out StringSeq sout);
+    SimpleSeq test_struct_seq (in SimpleSeq sin,
+      inout SimpleSeq sinout,
+      out SimpleSeq sout);
+
+    // Randomly test BAD_PARAM exceptions
+    LongBounded long_bounded (in LongBounded sin,
+      inout LongBounded sinout,
+      out LongBounded sout);
+    BoolBounded bool_bounded (in BoolBounded sin,
+      inout BoolBounded sinout,
+      out BoolBounded sout);
+    StringBounded string_bounded (in StringBounded sin,
+      inout StringBounded sinout,
+      out StringBounded sout);
+    SimpleBounded struct_bounded (in SimpleBounded sin,
+      inout SimpleBounded sinout,
+      out SimpleBounded sout);
+
+    // Testing the BAD_PARAM for every one of these.
+    TestOctetBounded::Bounded get_octet_bounded ();
+    TestShortBounded::Bounded get_short_bounded ();
+    TestLongBounded::Bounded get_long_bounded ();
+    TestLongLongBounded::Bounded get_longlong_bounded ();
+    TestDoubleBounded::Bounded get_double_bounded ();
+    TestLongDoubleBounded::Bounded get_long_double_bounded ();
+    TestFloatBounded::Bounded get_float_bounded ();
+    TestBoolBounded::Bounded get_bool_bounded ();
+    TestUShortBounded::Bounded get_ushort_bounded ();
+    TestULongBounded::Bounded get_ulong_bounded ();
+    TestULongLongBounded::Bounded get_ulonglong_bounded ();
+
+    TestStringBounded::Bounded get_string_bounded ();
+    TestCharBounded::Bounded get_char_bounded ();
+    TestWCharBounded::Bounded get_wchar_bounded ();
+
+    // Test the CORBA structs
+    CorbaSequences test_corba_sequences (in CorbaSequences cs_in,
+      inout CorbaSequences cs_inout,
+      out CorbaSequences cs_out);
+
+    /// A method to shutdown the ORB
+    oneway void shutdown ();
+  };
+};

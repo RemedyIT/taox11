@@ -97,6 +97,7 @@ tests/localinterface/run_test.pl:
 tests/log_test/run_test.pl:
 tests/log_test_backend/run_test.pl:
 tests/log_test_env/run_test.pl:
+tests/map/run_test.pl:
 tests/move/run_test.pl:
 tests/mt/mt_server/run_test.pl:
 tests/mt/mt_client/run_test.pl:

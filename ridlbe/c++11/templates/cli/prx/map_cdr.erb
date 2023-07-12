@@ -1,0 +1,53 @@
+
+// generated from <%= ridl_template_path %>
+// Unaliased type : <%= resolved_cxxtype %>
+% alias_md5 =  resolved_cxxtype.to_md5
+// MD5            : <%= alias_md5 %>
+#if !defined (_ALIAS_<%= alias_md5 %>_ARG_TRAITS_)
+#define _ALIAS_<%= alias_md5 %>_ARG_TRAITS_
+namespace TAOX11_NAMESPACE
+{
+  /// Argument traits specializations for <%= name %>
+  template<>
+  class Arg_Traits<<%= scoped_cxxtype %>>
+    : public Basic_Arg_Traits_T<
+        <%= scoped_cxxtype %>,
+% if generate_any_support?
+%   if generate_anyinsert_adapter?
+        Any_Insert_Policy_AnyInsert_Adapter>
+%   else
+        Any_Insert_Policy_Stream>
+%   end
+% else
+        Any_Insert_Policy_Noop>
+% end
+  {
+  };
+} // namespace TAOX11_NAMESPACE
+
+TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+
+/// @name CDR streaming operator specializations for <%= scoped_cxxname %>
+//@{
+inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR &cdr, const IDL::traits<<%= scoped_cxxtype %>>::value_type &v)
+{
+% if is_bounded?
+%#  return taox11_sequence_cdr<<%= scoped_cxxtype %>::value_type>::insert<<%= bound %>U> (cdr, v);
+% else
+%  #return taox11_sequence_cdr<<%= scoped_cxxtype %>::value_type>::insert (cdr, v);
+% end
+  return false;
+}
+inline TAO_CORBA::Boolean operator>> (TAO_InputCDR &cdr, IDL::traits<<%= scoped_cxxtype %>>::value_type& v)
+{
+% if is_bounded?
+%#  return taox11_sequence_cdr<<%= scoped_cxxtype %>::value_type>::extract<<%= bound %>U> (cdr, v);
+% else
+%#  return taox11_sequence_cdr<<%= scoped_cxxtype %>::value_type>::extract (cdr, v);
+% end
+return false;
+}
+//@}
+
+TAO_END_VERSIONED_NAMESPACE_DECL
+# endif // !_ALIAS_<%= alias_md5 %>_ARG_TRAITS_

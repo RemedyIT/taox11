@@ -1,0 +1,14 @@
+
+// generated from <%= ridl_template_path %>
+// Unaliased type : <%= resolved_cxxtype %>
+% alias_md5 =  resolved_cxxtype.to_md5
+// MD5            : <%= alias_md5 %>
+#if !defined (_ALIAS_OSTREAM_<%= alias_md5 %>_DECL_)
+#define _ALIAS_OSTREAM_<%= alias_md5 %>_DECL_
+
+inline std::ostream& operator<< (std::ostream& strm, <%= scoped_cxx_in_type %> _v)
+{
+  return IDL::traits<<%= scoped_cxxtype %>>::write_on (strm, _v);
+}
+
+#endif // _ALIAS_OSTREAM_<%= alias_md5 %>_DECL_

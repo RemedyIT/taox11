@@ -167,6 +167,12 @@ module IDL
               check_idl_type(idl_type)
               check_idl_type(idl_type.basetype)
             end
+          when IDL::Type::Map
+            add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h') if params[:gen_typecodes]
+            unless node.is_local?
+              check_idl_type(idl_type)
+              check_idl_type(idl_type.basetype)
+            end
           end
         end
       end
@@ -198,6 +204,9 @@ module IDL
              IDL::Type::Union
           # arg template included in P.h
         when IDL::Type::Sequence
+          # arg template included in P.h
+          check_idl_type(idl_type.basetype)
+        when IDL::Type::Map
           # arg template included in P.h
           check_idl_type(idl_type.basetype)
         when IDL::Type::Array

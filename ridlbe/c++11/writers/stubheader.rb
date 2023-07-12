@@ -422,6 +422,11 @@ module IDL
           add_include('tao/x11/bounded_vector_t.h') if idl_type.size.to_i > 0
           add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i > 0
           check_idl_type(idl_type.basetype)
+        when IDL::Type::Map
+          add_include('tao/x11/bounded_vector_t.h') if idl_type.size.to_i > 0
+          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i > 0
+          check_idl_type(idl_type.keytype)
+          check_idl_type(idl_type.valuetype)
         when IDL::Type::Array
           check_idl_type(idl_type.basetype)
         when IDL::Type::String, IDL::Type::WString
@@ -528,6 +533,8 @@ module IDL
         case idl_type
         when IDL::Type::Sequence
           visitor(SequenceVisitor).visit_idl_traits(node)
+        when IDL::Type::Map
+          visitor(MapVisitor).visit_idl_traits(node)
         when IDL::Type::Array
           visitor(ArrayVisitor).visit_idl_traits(node)
         when IDL::Type::String, IDL::Type::WString
@@ -737,6 +744,8 @@ module IDL
         case node.idltype.resolved_type
         when IDL::Type::Sequence
           visitor(SequenceVisitor).visit_os(node)
+        when IDL::Type::Map
+          visitor(MapVisitor).visit_os(node)
         when IDL::Type::Array
           visitor(ArrayVisitor).visit_os(node)
         when IDL::Type::Fixed

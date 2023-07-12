@@ -843,7 +843,7 @@ module IDL
       end
 
       def resolved_cxx_type(scope = nil)
-        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::vector< #{basetype.resolved_cxx_member_type(scope)}>"
+        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::vector<#{basetype.resolved_cxx_member_type(scope)}>"
       end
 
       def base_traits_cxx_typename
@@ -856,17 +856,44 @@ module IDL
       end
     end
 
-    class Array
+    class Map
       def cxx_type(scope = nil)
-        sizes.reverse.inject(basetype.cxx_member_type(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
+        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.cxx_member_type(scope)}, #{valuetype.cxx_member_type(scope)}, #{size}>" : "std::map<#{keytype.cxx_member_type(scope)},#{valuetype.cxx_member_type(scope)}>"
       end
 
       def proxy_cxxtype(scope = nil)
-        sizes.reverse.inject(basetype.proxy_cxxtype(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
+        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.proxy_cxxtype(scope)}, #{valuetype.proxy_cxxtype(scope)}, #{size}>" : "std::map<#{keytype.proxy_cxxtype(scope)},#{valuetype.proxy_cxxtype(scope)}>"
       end
 
       def resolved_cxx_type(scope = nil)
-        sizes.reverse.inject(basetype.resolved_cxx_member_type(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
+        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.resolved_cxx_member_type(scope)}, #{valuetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::map<#{keytype.resolved_cxx_member_type(scope)}, #{valuetype.resolved_cxx_member_type(scope)}>"
+      end
+
+      def key_traits_cxx_typename
+        keytype.cxx_type
+      end
+
+      def value_traits_cxx_typename
+        valuetype.cxx_type
+      end
+
+      # any insertion/extraction operators arg typename
+      def cxx_anyop_arg_typename(scope = nil)
+        resolved_cxx_type(scope)
+      end
+    end
+
+    class Array
+      def cxx_type(scope = nil)
+        sizes.reverse.inject(basetype.cxx_member_type(scope)) { |typestr, siz| typestr = "std::array<#{typestr}, #{siz}>" }
+      end
+
+      def proxy_cxxtype(scope = nil)
+        sizes.reverse.inject(basetype.proxy_cxxtype(scope)) { |typestr, siz| typestr = "std::array<#{typestr}, #{siz}>" }
+      end
+
+      def resolved_cxx_type(scope = nil)
+        sizes.reverse.inject(basetype.resolved_cxx_member_type(scope)) { |typestr, siz| typestr = "std::array<#{typestr}, #{siz}>" }
       end
 
       def cxx_dim
