@@ -287,7 +287,7 @@ module IDL
               println("#{node.cxxname} {#{node.idltype.resolved_type.value_to_s(node.value)}};")
             end
           else
-            println("#{node.cxxname} = #{expression_to_s(node.expression, node.enclosure)};")
+            println("#{node.cxxname} {#{expression_to_s(node.expression, node.enclosure)}};")
           end
         else
           println(node.cxxname + ';')
