@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------
-# @file   run_illegal_idl3_test.pl
+# @file   run_test.pl
 # @author Mark Drijver
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
