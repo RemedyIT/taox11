@@ -1,0 +1,19 @@
+// ridl_ostream_defaults was removed for testing
+project(*explicit_ints_gen_Idl): ridl_defaults {
+  IDL_Files {
+    test.idl
+    idlflags += --idl-version 4 -Scdr
+  }
+  custom_only = 1
+}
+
+project(*explicit_ints_gen_Server): taox11_server {
+  after += *explicit_ints_gen_Idl
+  Source_Files {
+    main.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
