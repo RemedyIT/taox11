@@ -57,11 +57,13 @@ nil
 Defines a preprocessor macro. By default the following macros are
 defined: +
 
-* `__RIDL__` set to the stringified version number of the RIDL frontend
-* `__RIDLBE__` set to the id of the active (main) RIDL backend; here
+* `\\__RIDL__` set to the stringified version number of the RIDL frontend
+* `\\__RIDLBE__` set to the id of the active (main) RIDL backend; here
 `{cxx11}`
-* `__RIDLBE_VER__` set to the stringified version of the active (main)
-RIDL backend|
+* `\\__RIDLBE_VER__` set to the stringified version of the active (main)
+RIDL backend
+* `\\__RIDL_IDL_VERSION__` set to the stringified version of the IDL
+version (3 or 4)|
 
 |-n|--namespace=NAMESPACE|
 
@@ -74,6 +76,12 @@ nil
 Set verbosity level. Repeat to increment.|
 
 0
+
+||--idl-version=VERSION|
+
+Select the IDL version, 3 or 4 |
+
+3
 
 ||--stdidl|
 
