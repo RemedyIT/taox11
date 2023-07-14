@@ -36,6 +36,8 @@ module IDL
           s = '-' + expression_to_s(op[0], scope)
         when Expression::Operation::UnaryNot
           s = '~' + expression_to_s(op[0], scope)
+        when Expression::Operation::Xor
+          s = expression_to_s(op[0], scope) + ' ^ ' + expression_to_s(op[1], scope)
         when Expression::Operation::Or
           s = expression_to_s(op[0], scope) + ' | ' + expression_to_s(op[1], scope)
         when Expression::Operation::And
