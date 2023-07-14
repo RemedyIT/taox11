@@ -1,3 +1,12 @@
+/**
+ * @file    main.cpp
+ * @author  Johnny Willemsen
+ *
+ * @brief   CORBA C++11 client application for testing int8/uint8
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
 #include "testC.h"
 #include "testlib/taox11_testlog.h"
 
