@@ -880,15 +880,15 @@ module IDL
 
     class Array
       def cxx_type(scope = nil)
-        sizes.reverse.inject(basetype.cxx_member_type(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
+        sizes.reverse.inject(basetype.cxx_member_type(scope)) { |typestr, siz| typestr = "std::array<#{typestr}, #{siz}>" }
       end
 
       def proxy_cxxtype(scope = nil)
-        sizes.reverse.inject(basetype.proxy_cxxtype(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
+        sizes.reverse.inject(basetype.proxy_cxxtype(scope)) { |typestr, siz| typestr = "std::array<#{typestr}, #{siz}>" }
       end
 
       def resolved_cxx_type(scope = nil)
-        sizes.reverse.inject(basetype.resolved_cxx_member_type(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
+        sizes.reverse.inject(basetype.resolved_cxx_member_type(scope)) { |typestr, siz| typestr = "std::array<#{typestr}, #{siz}>" }
       end
 
       def cxx_dim
