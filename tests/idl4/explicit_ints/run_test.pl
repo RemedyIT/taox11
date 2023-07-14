@@ -17,7 +17,7 @@ my $target = PerlACE::TestTarget::create_target(2) || die "Create target 2 faile
 
 $status = 0;
 
-$SV = $target->CreateProcess ("server");
+$SV = $target->CreateProcess ("client");
 
 $server = $SV->SpawnWaitKill ($target->ProcessStartWaitInterval());
 

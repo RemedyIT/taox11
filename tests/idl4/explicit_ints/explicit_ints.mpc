@@ -7,13 +7,12 @@ project(*explicit_ints_gen_Idl): ridl_defaults {
   custom_only = 1
 }
 
-project(*explicit_ints_gen_Server): taox11_server {
+project(*explicit_ints_gen_Server): taox11_client {
   after += *explicit_ints_gen_Idl
   Source_Files {
     main.cpp
   }
   Source_Files {
     testC.cpp
-    testS.cpp
   }
 }
