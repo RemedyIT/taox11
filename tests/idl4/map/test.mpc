@@ -1,6 +1,7 @@
 // -*- MPC -*-
 
-project(*map_idl): ridl_ostream_defaults {
+// No ostream ridl_ostream_defaults
+project(*map_idl): ridl_defaults {
   IDL_Files {
     test.idl
     idlflags += --idl-version=4
@@ -8,25 +9,10 @@ project(*map_idl): ridl_ostream_defaults {
   custom_only = 1
 }
 
-project(*map_server): taox11_server {
-  after += *map_idl
-  Source_Files {
-    foo.cpp
-    server.cpp
-  }
-  Source_Files {
-    testC.cpp
-    testS.cpp
-  }
-}
-
 project(*map_client): taox11_client {
   after += *map_idl
   Source_Files {
     client.cpp
-    test_sequences.cpp
-    test_corba_sequences.cpp
-    test_bounded_sequences.cpp
   }
   Source_Files {
     testC.cpp

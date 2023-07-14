@@ -29,7 +29,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
 /// @name CDR streaming operator specializations for <%= scoped_cxxname %>
 //@{
-inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR &cdr, const IDL::traits<<%= scoped_cxxtype %>>::value_type &v)
+inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR & /*cdr*/, const IDL::traits<<%= scoped_cxxtype %>>::value_type & /*v*/)
 {
 % if is_bounded?
 %#  return taox11_sequence_cdr<<%= scoped_cxxtype %>::value_type>::insert<<%= bound %>U> (cdr, v);
@@ -38,14 +38,14 @@ inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR &cdr, const IDL::traits<<%= 
 % end
   return false;
 }
-inline TAO_CORBA::Boolean operator>> (TAO_InputCDR &cdr, IDL::traits<<%= scoped_cxxtype %>>::value_type& v)
+inline TAO_CORBA::Boolean operator>> (TAO_InputCDR & /*cdr*/, IDL::traits<<%= scoped_cxxtype %>>::value_type& /*v*/)
 {
 % if is_bounded?
 %#  return taox11_sequence_cdr<<%= scoped_cxxtype %>::value_type>::extract<<%= bound %>U> (cdr, v);
 % else
 %#  return taox11_sequence_cdr<<%= scoped_cxxtype %>::value_type>::extract (cdr, v);
 % end
-return false;
+  return false;
 }
 //@}
 

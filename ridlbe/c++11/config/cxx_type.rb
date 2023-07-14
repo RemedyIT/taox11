@@ -858,11 +858,11 @@ module IDL
 
     class Map
       def cxx_type(scope = nil)
-        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.cxx_member_type(scope)}, #{valuetype.cxx_member_type(scope)}, #{size}>" : "std::map<#{keytype.cxx_member_type(scope)},#{valuetype.cxx_member_type(scope)}>"
+        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.cxx_member_type(scope)}, #{valuetype.cxx_member_type(scope)}, #{size}>" : "std::map<#{keytype.cxx_member_type(scope)}, #{valuetype.cxx_member_type(scope)}>"
       end
 
       def proxy_cxxtype(scope = nil)
-        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.proxy_cxxtype(scope)}, #{valuetype.proxy_cxxtype(scope)}, #{size}>" : "std::map<#{keytype.proxy_cxxtype(scope)},#{valuetype.proxy_cxxtype(scope)}>"
+        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.proxy_cxxtype(scope)}, #{valuetype.proxy_cxxtype(scope)}, #{size}>" : "std::map<#{keytype.proxy_cxxtype(scope)}, #{valuetype.proxy_cxxtype(scope)}>"
       end
 
       def resolved_cxx_type(scope = nil)
