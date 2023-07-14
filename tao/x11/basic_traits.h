@@ -55,6 +55,18 @@ namespace TAOX11_NAMESPACE
       static inline __Writer<Formatter> write (in_type val) { return {val} ; }
     };
     template<>
+    struct traits <int8_t> : public common_byval_traits<int8_t>
+    {
+      template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
+      static inline OStrm_& write_on(OStrm_& os_, in_type val_, Formatter fmt_ = Formatter ())
+      {
+        return fmt_ (os_, val_);
+      }
+
+      template <typename Formatter = std::false_type>
+      static inline __Writer<Formatter> write (in_type val) { return {val} ; }
+    };
+    template<>
     struct traits <uint8_t> : public common_byval_traits<uint8_t>
     {
       template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>

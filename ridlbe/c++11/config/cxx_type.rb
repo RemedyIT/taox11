@@ -160,6 +160,8 @@ module IDL
       Char => 'char',
       WChar => 'wchar_t',
       Octet => 'uint8_t',
+      TinyShort => 'int8_t',
+      UTinyShort => 'uint8_t',
       Short => 'int16_t',
       UShort => 'uint16_t',
       Long => 'int32_t',
@@ -217,6 +219,16 @@ module IDL
       end
     end
 
+    class TinyShort
+      def value_to_s(v, _scope = nil)
+        v.to_s
+      end
+
+      def idltype_name(_scope = nil)
+        'int8'
+      end
+    end
+
     class Long
       def value_to_s(v, _scope = nil)
         # prevent integer overflow warnings on platforms with 32bit longs
@@ -231,6 +243,16 @@ module IDL
 
       def idltype_name(_scope = nil)
         'long long'
+      end
+    end
+
+    class UTinyShort
+      def value_to_s(v, _scope = nil)
+        v.to_s
+      end
+
+      def idltype_name(_scope = nil)
+        'uint8'
       end
     end
 
@@ -278,7 +300,7 @@ module IDL
 
     class Double
       def value_to_s(v, _scope = nil)
-        "#{v}"
+        v.to_s
       end
     end
 
