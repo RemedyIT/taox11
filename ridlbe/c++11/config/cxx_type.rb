@@ -221,7 +221,7 @@ module IDL
 
     class TinyShort
       def value_to_s(v, _scope = nil)
-        "#{v}"
+        v.to_s
       end
 
       def idltype_name(_scope = nil)
@@ -248,7 +248,7 @@ module IDL
 
     class UTinyShort
       def value_to_s(v, _scope = nil)
-        "#{v}"
+        v.to_s
       end
 
       def idltype_name(_scope = nil)
@@ -300,7 +300,7 @@ module IDL
 
     class Double
       def value_to_s(v, _scope = nil)
-        "#{v}"
+        v.to_s
       end
     end
 
