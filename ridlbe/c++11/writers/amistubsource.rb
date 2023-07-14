@@ -380,6 +380,12 @@ module IDL
                 check_idl_type(idl_type)
                 check_idl_type(idl_type.basetype)
               end
+            when IDL::Type::Map
+              add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h')
+              unless node.is_local?
+                check_idl_type(idl_type)
+                check_idl_type(idl_type.basetype)
+              end
             end
           end
         end
@@ -428,6 +434,11 @@ module IDL
           # stub arg template included in P.h
           add_include('tao/x11/portable_server/basic_sargument_t.h')
         when IDL::Type::Sequence
+          # stub arg template included in P.h
+          add_include('tao/x11/portable_server/basic_sargument_t.h')
+          add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
+          check_idl_type(idl_type.basetype)
+        when IDL::Type::Map
           # stub arg template included in P.h
           add_include('tao/x11/portable_server/basic_sargument_t.h')
           add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
@@ -894,6 +905,16 @@ module IDL
             res_idl_type = res_idl_type.node.idltype
           end
           visitor(SequenceVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
+        when IDL::Type::Map
+          # find the base typedef for this map
+          return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous sequence types
+
+          # find base typedef for map
+          res_idl_type = idl_type
+          while !res_idl_type.node.idltype.is_a?(IDL::Type::Sequence)
+            res_idl_type = res_idl_type.node.idltype
+          end
+          visitor(MapVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Array
           # find the base typedef for this array
           return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous array types

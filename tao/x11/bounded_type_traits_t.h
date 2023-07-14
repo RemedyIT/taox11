@@ -2,7 +2,7 @@
  * @file    bounded_type_traits_t.h
  * @author  Martin Corino
  *
- * @brief   Helper traits templates for IDL typedefs of possibly bounded types (string, wstring or sequence)
+ * @brief   Helper traits templates for IDL typedefs of possibly bounded types (string, wstring, sequence, or map)
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
  */

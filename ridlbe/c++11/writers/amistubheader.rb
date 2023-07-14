@@ -305,7 +305,8 @@ module IDL
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::Sequence,
-             IDL::Type::Array
+             IDL::Type::Array,
+             IDL::Type::Map
           check_idl_type(idl_type.basetype)
         when IDL::Type::String,
              IDL::Type::WString

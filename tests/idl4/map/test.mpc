@@ -1,0 +1,21 @@
+// -*- MPC -*-
+
+// No ostream ridl_ostream_defaults
+project(*map_idl): ridl_defaults {
+  IDL_Files {
+    test.idl
+    idlflags += --idl-version=4
+  }
+  custom_only = 1
+}
+
+project(*map_client): taox11_client {
+  after += *map_idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}
+

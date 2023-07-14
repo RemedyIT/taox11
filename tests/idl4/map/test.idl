@@ -1,0 +1,13 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  typedef map<string,long> StringLongMap;
+  //typedef map<string,long,5> StringLongMap5;
+};
