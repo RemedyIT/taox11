@@ -1,6 +1,6 @@
 /**
  * @file    client.cpp
- * @author  Martin Corino
+ * @author  Johnny Willemsen
  *
  * @brief   CORBA C++11 client application
  *
