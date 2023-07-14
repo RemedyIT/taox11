@@ -22,10 +22,10 @@ the https://www.omg.org/spec/CORBA[CORBA specification], and the
 http://www.amazon.com/gp/product/0201379279/ref=as_li_tf_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0201379279&linkCode=as2&tag=theaceorb-20[Advanced
 CORBA Programming with C++] book.
 
-Any IDL4 support is experimental and not usable for production usage.
-The IDL to {cxx11} language does provide a mapping for the IDL4 extended datatypes, but
-but only for DDS there is a wire protocol for transferring these types through the wire.
-For CORBA/LwCCM a lot of parts are not standardized yet and need still a lot of
+All https://www.omg.org/spec/IDL/4.2[IDL4] support is experimental.
+The IDL to {cxx11} language defines a mapping for the IDL4 extended datatypes, but
+there is only for DDS a standardized wire protocol for transferring these types through the wire.
+For CORBA this is standardized yet and need still a lot of
 research and standardization work.
 
 == Usage
