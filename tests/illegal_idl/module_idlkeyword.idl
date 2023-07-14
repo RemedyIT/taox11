@@ -7,7 +7,7 @@
 
 module Foo
 {
-  module MAP
+  module ATTRIBUTE
   {
     struct TopicA
     {
