@@ -25,7 +25,7 @@ unless (-e $ridl) {
 }
 
 opendir(DIRH, ".") or die "Could not open dir. $!";
-@files = grep(/idl$/,readdir(DIRH));
+@files = grep(/\.idl$/,readdir(DIRH));
 foreach (sort(@files)){
   print "Testing ", $_, ": ";
   my $input_file = $_;
