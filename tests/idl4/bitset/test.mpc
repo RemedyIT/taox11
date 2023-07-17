@@ -1,0 +1,20 @@
+// -*- MPC -*-
+
+project(*bitset_gen_idl): ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+    idlflags += --idl-version=4
+  }
+  custom_only = 1
+}
+
+project(*bitset_client): taox11_client {
+  after += *bitset_gen_idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}
+
