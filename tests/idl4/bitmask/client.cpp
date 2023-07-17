@@ -15,7 +15,7 @@ int main (int /*argc*/, char* /*argv*/[])
 
   MyBitMask my_bitmask;
   MyBitMaskBit my_bitmaskbit;
-  ACE_UNUSED_ARG(my_bitmask);
-  ACE_UNUSED_ARG(my_bitmaskbit);
+  X11_UNUSED_ARG(my_bitmask);
+  X11_UNUSED_ARG(my_bitmaskbit);
   return 0;
 }
