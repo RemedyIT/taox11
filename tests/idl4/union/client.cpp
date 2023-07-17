@@ -13,7 +13,7 @@ int main (int /*argc*/, char* /*argv*/[])
 {
   // Just compilation test
 
-  Test::StringLongMap mymap;
-  //Test::StringLongMap5 mymap5;
+  TestUnion_Octet myunion_octet;
+  TestUnion_WChar myunion_wchar;
   return 0;
 }
