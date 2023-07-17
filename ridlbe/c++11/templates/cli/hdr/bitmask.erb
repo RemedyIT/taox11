@@ -4,7 +4,7 @@
 enum <%= cxxname %>Bit : uint32_t
 {
   <%= bitvalues.collect {|e| "/// @copydoc #{doc_scoped_name}::#{e.name}\n  #{e.cxxname} = #{e.value}" }.join(",\n  ") %>
-};// <%= cxxname %>
+};// <%= cxxname %>Bit
 using <%= cxxname %> = uint32_t;
 
 % visit_template('typecode') if generate_typecode_support?
