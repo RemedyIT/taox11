@@ -1,0 +1,20 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+union TestUnion_Octet switch(octet) {
+  case 1:
+    short FirstCase;
+  case 2:
+    long SecondCase;
+};
+
+union TestUnion_WChar switch(wchar) {
+  case L'X':
+    short FirstCase;
+  case L'\\':
+    long SecondCase;
+};
