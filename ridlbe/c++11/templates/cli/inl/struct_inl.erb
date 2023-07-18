@@ -26,7 +26,7 @@ inline <%= scoped_cxxtype %>::<%= cxxname %> (
 }
 
 % end
-inline void <%= scoped_cxxtype %>::swap (<%= scoped_cxx_out_type %> s)
+inline void <%= scoped_cxxtype %>::swap (<%= scoped_cxx_out_type %><% if member_count > 0 %> s<% end %>)
 {
 % members.each do |_m|
   std::swap (this-><%= _m.cxxname %>_, s.<%= _m.cxxname %>_);

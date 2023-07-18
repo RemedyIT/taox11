@@ -1,0 +1,21 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+struct Point2D
+{
+  long x;
+  long y;
+};
+
+struct Point3D : Point2D
+{
+  long z;
+};
+
+struct EmptyStruct
+{
+};
