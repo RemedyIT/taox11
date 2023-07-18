@@ -15,5 +15,5 @@ bitset MyBitset2 : MyBitset {
 };
 
 bitset MyBitset3 : MyBitset2 {
-  bitfield<3, int8> c;
+  bitfield<3, int8> e;
 };
