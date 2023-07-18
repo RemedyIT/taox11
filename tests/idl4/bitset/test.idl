@@ -1,0 +1,21 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+bitset MyBitset {
+  bitfield<3> a;
+  bitfield<12, short> d;
+};
+
+bitset MyBitset2 : MyBitset {
+  bitfield<3> c;
+  bitfield<3>;
+};
+
+bitset MyBitset3 : MyBitset2 {
+  bitfield<3, int8> e;
+  bitfield<3, int8>;
+};

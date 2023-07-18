@@ -74,6 +74,8 @@ tests/hello/run_cross_tao_server.pl:
 tests/hello/run_test.pl:
 tests/hello_regen/run_test.pl:
 tests/idl_test/run_test.pl: !CORBA_E_MICRO
+tests/idl4/bitset/run_test.pl:
+tests/idl4/bitset/run_illegal_idl3_test.pl:
 tests/idl4/bitmask/run_test.pl:
 tests/idl4/bitmask/run_illegal_idl3_test.pl:
 tests/idl4/explicit_ints/run_test.pl:
