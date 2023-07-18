@@ -7,7 +7,7 @@
 
 bitset MyBitset {
   bitfield<3> a;
-  bitfield<12, short> d
+  bitfield<12, short> d;
 };
 
 bitset MyBitset2 : MyBitset {
