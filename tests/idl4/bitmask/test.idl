@@ -1,0 +1,12 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+bitmask MyBitMask {
+  flag0,
+  flag1,
+  flag2
+};

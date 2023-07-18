@@ -530,6 +530,10 @@ module IDL
 
       def visit_enumerator(node); end
 
+      def visit_bitmask(node); end
+
+      def visit_bitvalue(node); end
+
       def visit_typedef(node); end
     end # CodeWriterMethods
   end # Base

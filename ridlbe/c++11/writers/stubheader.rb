@@ -298,6 +298,10 @@ module IDL
         visitor(EnumVisitor).visit_enum(node)
       end
 
+      def visit_bitmask(node)
+        visitor(BitMaskVisitor).visit_bitmask(node)
+      end
+
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
 
