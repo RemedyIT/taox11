@@ -14,6 +14,7 @@ int main (int /*argc*/, char* /*argv*/[])
   // Just compilation test
 
   Test::StringLongMap mymap;
+  Test::StringLongMapTypeDef mymaptypedef;
   //Test::StringLongMap5 mymap5;
   return 0;
 }
