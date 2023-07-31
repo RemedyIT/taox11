@@ -19,3 +19,10 @@ bitset MyBitset3 : MyBitset2 {
   bitfield<3, int8> e;
   bitfield<3, int8>;
 };
+
+bitset MyBitset5
+{
+    bitfield<3> a;
+    bitfield<10> b;
+    bitfield<12, long> c;
+};
