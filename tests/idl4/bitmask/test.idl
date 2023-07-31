@@ -10,3 +10,5 @@ bitmask MyBitMask {
   flag1,
   flag2
 };
+
+// https://softwareengineering.stackexchange.com/questions/194412/using-scoped-enums-for-bit-flags-in-c
