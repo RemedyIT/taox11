@@ -53,12 +53,8 @@ namespace TAOX11_NAMESPACE
        : _Map(__a) { }
 
       explicit
-      bounded_map(size_type __n)
-       : _Map(__n) {}
-
-      bounded_map(size_type __n, const value_type& _value,
-             const allocator_type& __a = allocator_type())
-       : _Map(__n, _value, __a) { }
+      bounded_map(const _Comparep& __comp, const allocator_type& __a)
+       : _Map(__comp, __a) {}
 
       bounded_map(const bounded_map& __x)
        : _Map(__x) { }
@@ -71,9 +67,6 @@ namespace TAOX11_NAMESPACE
 
       bounded_map(_Map&& __x)
        : _Map(std::move(__x)) { }
-
-      bounded_map(const bounded_map& __x, const allocator_type& __a)
-       : _Map(__x, __a) { }
 
       bounded_map(bounded_map&& __rv, const allocator_type& __m)
        : _Map(std::move(__rv), __m) { }
