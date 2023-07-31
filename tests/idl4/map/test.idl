@@ -10,5 +10,6 @@ module Test
 {
   typedef map<string,long> StringLongMap;
   typedef StringLongMap StringLongMapTypeDef;
-  //typedef map<string,long,5> StringLongMap5;
+  typedef map<string,long,5> StringLongMap5;
+  typedef StringLongMap5 StringLongMap5TypeDef;
 };

@@ -428,7 +428,7 @@ module IDL
           check_idl_type(idl_type.basetype)
         when IDL::Type::Map
           add_include('map')
-          add_include('tao/x11/bounded_vector_t.h') if idl_type.size.to_i > 0
+          add_include('tao/x11/bounded_map_t.h') if idl_type.size.to_i > 0
           add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i > 0
           check_idl_type(idl_type.keytype)
           check_idl_type(idl_type.valuetype)

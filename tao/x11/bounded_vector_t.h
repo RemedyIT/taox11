@@ -44,7 +44,7 @@ namespace TAOX11_NAMESPACE
 
       using bound = std::integral_constant<uint32_t, _Bound>;
 
-      bounded_vector() { }
+      bounded_vector() = default;
 
       explicit
       bounded_vector(const allocator_type& __a)
