@@ -1,0 +1,9 @@
+/**
+ * @file    positive_int.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ * Chamber of commerce Rotterdam nr.276339, The Netherlands
+ */
+
+const unsigned short foo = -1;
