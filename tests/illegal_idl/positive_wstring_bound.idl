@@ -1,0 +1,10 @@
+/**
+ * @file positive_wstring_bound.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a negative bound
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+typedef wstring<-1> WStringNegative;
