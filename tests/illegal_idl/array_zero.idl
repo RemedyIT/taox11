@@ -1,0 +1,10 @@
+/**
+ * @file array_zero.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a array with size zero
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+typedef string StringLongMapZero[0];
