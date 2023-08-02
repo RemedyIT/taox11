@@ -29,6 +29,11 @@ module IDL
         false
       end
 
+      # Return the base of this struct, nil in case of no base struct
+      def base
+        node.base
+      end
+
       # template mapping
 
       map_template :typecode, :typecode
