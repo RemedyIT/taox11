@@ -1,0 +1,17 @@
+/**
+ * @file struct_inherit_interface.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject the inheritance of a non struct type
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+interface Foo
+{
+};
+
+struct Bar : Foo
+{
+  long x;
+};

@@ -16,6 +16,28 @@ struct Point3D : Point2D
   long z;
 };
 
+struct Point4D : Point3D
+{
+  long super;
+};
+
 struct EmptyStruct
+{
+};
+
+struct DeriveEmpty : EmptyStruct
+{
+};
+
+struct DeriveEmptyWithMember : EmptyStruct
+{
+  long x;
+};
+
+struct EmptyFromDerived : Point2D
+{
+};
+
+struct EmptyFromDerivedDerived : Point3D
 {
 };
