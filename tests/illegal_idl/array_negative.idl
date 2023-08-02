@@ -1,0 +1,10 @@
+/**
+ * @file array_negative.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a negative bound
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+typedef string StringArray[-1];

@@ -5,7 +5,6 @@
  * Illegal IDL example as reported on TAO_IDL_FE by Clayton Calabrese
 
  * @copyright Copyright (c) Remedy IT Expertise BV
- * Chamber of commerce Rotterdam nr.276339, The Netherlands
  */
 
 enum EnumType {VALUE1, VALUE2};

@@ -1,0 +1,10 @@
+/**
+ * @file map_bound_zero.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a bound with value zero
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+typedef map<string,long,0> StringLongMapZero;
