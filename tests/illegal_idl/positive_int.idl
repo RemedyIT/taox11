@@ -1,8 +1,8 @@
 /**
- * @file    positive_string_bound.idl
+ * @file    positive_int.idl
  * @author  Johnny Willemsen
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-typedef string<-1> bound_string;
+const unsigned short foo = -1;
