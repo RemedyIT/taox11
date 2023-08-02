@@ -1,14 +1,18 @@
   // generated from <%= ridl_template_path %>
   <%= cxxname %> () = default;
   ~<%= cxxname %> () = default;
-  <% unless base.nil? %> using <%= base.cxxname %>::<%= base.cxxname %>;<% end %>
+% unless base.nil?
+  using <%= base.cxxname %>::<%= base.cxxname %>;
+% end
   <%= cxxname %> (<%= cxx_in_type %>) = default;
   <%= cxxname %> (<%= cxx_move_type %>) = default;
 % if member_count > 0 || !base.nil?
 %   _ms = members.dup
   /// Constructor which accepts value for all members
   explicit inline <%= cxxname %> (
-    <% unless base.nil? %><%= base.cxxname %> _base<%= _ms.empty? ? ');' : ',' %><% end %>
+%   unless base.nil?
+    <%= base.cxxname %> _base<%= _ms.empty? ? ');' : ',' %>
+%   end
 %   unless _ms.empty?
 %     while !_ms.empty?
 %       _m = _ms.shift

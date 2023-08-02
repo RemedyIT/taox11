@@ -7,7 +7,9 @@
 % if member_count > 0 || !base.nil?
 %   _ms = members.dup
 inline <%= scoped_cxxtype %>::<%= cxxname %> (
-  <% unless base.nil? %><%= base.cxxname %> _base<%= _ms.empty? ? ')' : ',' %><% end %>
+%   unless base.nil?
+  <%= base.cxxname %> _base<%= _ms.empty? ? ')' : ',' %>
+%   end
 %   unless _ms.empty?
 %     while !_ms.empty?
 %       _m = _ms.shift
