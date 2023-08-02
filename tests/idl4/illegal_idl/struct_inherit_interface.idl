@@ -1,5 +1,5 @@
 /**
- * @file struct_circular_inheritance.idl
+ * @file struct_inherit_interface.idl
  * @author Johnny Willemsen
  *
  * ridlc shall reject the inheritance of a non struct type
