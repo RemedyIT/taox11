@@ -38,7 +38,7 @@ foreach (sort(@files)){
   open (STDERR, ">&STDOUT");
 
   # Compile the IDL
-  system ("$ridl", "$input_file");
+  system ("$ridl", "--idl-version=3", "$input_file");
 
   #Redirect the null device output back to the screen
   open (STDOUT, ">&OLDOUT");
