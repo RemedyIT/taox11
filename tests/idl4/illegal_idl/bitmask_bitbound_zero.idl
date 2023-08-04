@@ -1,5 +1,5 @@
 /**
- * @file bitmask_missingboundvalue.idl
+ * @file bitmask_bitbound_zero.idl
  * @author Johnny Willemsen
  *
  * ridlc shall reject use of a bitmask with a bit_bound annotation with value zero

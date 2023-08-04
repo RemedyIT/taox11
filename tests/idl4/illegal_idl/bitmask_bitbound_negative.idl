@@ -1,5 +1,5 @@
 /**
- * @file bitmask_missingboundvalue.idl
+ * @file bitmask_bitbound_negative.idl
  * @author Johnny Willemsen
  *
  * ridlc shall reject use of a bitmask with a negative bit_bound value
