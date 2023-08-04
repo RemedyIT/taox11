@@ -1,0 +1,12 @@
+/**
+ * @file bitfield_65.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a bitfield with bits > 64
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+bitset MyBitset {
+  bitfield<65> x;
+};

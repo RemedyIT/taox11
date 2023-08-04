@@ -532,6 +532,8 @@ module IDL
 
       def visit_bitset(node); end
 
+      def visit_bitfield(node); end
+
       def visit_bitmask(node); end
 
       def visit_bitvalue(node); end

@@ -302,6 +302,10 @@ module IDL
         visitor(BitMaskVisitor).visit_bitmask(node)
       end
 
+      def visit_bitset(node)
+        visitor(BitSetVisitor).visit_bitset(node)
+      end
+
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
 
