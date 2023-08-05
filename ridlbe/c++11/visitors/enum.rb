@@ -17,6 +17,13 @@ module IDL
         }
       end
 
+      def bitbound
+        node.bitbound
+      end
+
+      def bitbound_bits
+        node.bitbound_bits
+      end
       # template mapping
 
       map_template :enum, :enum

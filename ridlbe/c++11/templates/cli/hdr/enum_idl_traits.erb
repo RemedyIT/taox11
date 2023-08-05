@@ -4,6 +4,12 @@ template<>
 struct traits <<%= scoped_cxxtype %>>
   : IDL::common_byval_traits<<%= scoped_cxxtype %>>
 {
+  /// Underlying type of the enum
+  using underlying_type = <%= bitbound.cxx_type %>;
+
+  /// bit_bound
+  using bit_bound = std::integral_constant<uint32_t, <%= bitbound_bits %>>;
+
   template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
   static inline OStrm_& write_on(OStrm_& os_, in_type val_, Formatter fmt_ = Formatter ())
   {
