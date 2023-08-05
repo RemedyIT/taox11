@@ -17,6 +17,10 @@ module IDL
         }
       end
 
+      def bitbound
+        node.bitbound
+      end
+
       # template mapping
 
       map_template :bitmask, :bitmask
