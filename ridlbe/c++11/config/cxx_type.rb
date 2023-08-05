@@ -860,6 +860,25 @@ module IDL
       end
     end
 
+    class BitSet
+      include IdlType_Mixin
+      def cxx_type(scope = nil)
+        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)
+      end
+
+      def proxy_cxxtype(scope = nil)
+        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::' + node.scoped_proxy_cxxname)
+      end
+
+      def value_to_s(v, scope = nil)
+        ((scope && (scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)) + '::' + node.bitvalues[v].cxxname
+      end
+
+      def is_pod?
+        false
+      end
+    end
+
     class Fixed
       def cxx_type(_scope = nil)
         digits.nil? ? 'TAOX11_NAMESPACE::IDL::Fixed' : "TAOX11_NAMESPACE::IDL::Fixed<#{digits}, #{scale}>"
