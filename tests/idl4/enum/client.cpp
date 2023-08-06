@@ -26,9 +26,13 @@ int main (int /*argc*/, char* /*argv*/[])
   {
     TAOX11_TEST_ERROR << "Type of MyEnumBound16 is not uint16_t" << std::endl;
   }
-  if (sizeof(uint32_t) != sizeof (MyEnumBound16))
+  if (sizeof(uint32_t) != sizeof (MyEnumBound32))
   {
     TAOX11_TEST_ERROR << "Type of MyEnumBound32 is not uint32_t" << std::endl;
+  }
+  if (sizeof(uint32_t) != sizeof (MyEnum))
+  {
+    TAOX11_TEST_ERROR << "Type of MyEnum is not uint32_t" << std::endl;
   }
 
   return 0;
