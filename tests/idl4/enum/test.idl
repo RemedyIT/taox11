@@ -1,0 +1,33 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+enum MyEnum {
+  flag0,
+  flag1,
+  flag2
+};
+
+@bit_bound(8)
+enum MyEnumBound8 {
+  flag8_1,
+  flag8_2,
+  flag8_3
+};
+
+@bit_bound(16)
+enum MyEnumBound16 {
+  flag16_1,
+  flag16_2,
+  flag16_3
+};
+
+@bit_bound(32)
+enum MyEnumBound32 {
+  flag32_1,
+  flag32_2,
+  flag32_3
+};

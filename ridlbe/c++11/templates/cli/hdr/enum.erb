@@ -1,7 +1,7 @@
 
 // generated from <%= ridl_template_path %>
 /// @copydoc <%= doc_scoped_name %>
-enum class <%= cxxname %> : uint32_t
+enum class <%= cxxname %> : <%= bitbound.cxx_type %>
 {
   <%= enumerators.collect {|e| "/// @copydoc #{doc_scoped_name}::#{e.name}\n  #{e.cxxname}" }.join(",\n  ") %>
 };// <%= cxxname %>

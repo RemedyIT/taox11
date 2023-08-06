@@ -1,0 +1,15 @@
+/**
+ * @file enum_bitbound_zero.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a enum with a bit_bound annotation with value zero
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+@bit_bound(0)
+enum MyBitMask {
+  flag0,
+  flag1,
+  flag2
+};
