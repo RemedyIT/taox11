@@ -35,5 +35,22 @@ int main (int /*argc*/, char* /*argv*/[])
     TAOX11_TEST_ERROR << "Type of MyEnum is not uint32_t" << std::endl;
   }
 
+  if (IDL::traits<MyEnumBound8>::bit_bound::value != 8)
+  {
+    TAOX11_TEST_ERROR << "bit_bound traits MyEnumBound8 is 8" << std::endl;
+  }
+  if (IDL::traits<MyEnumBound16>::bit_bound::value != 16)
+  {
+    TAOX11_TEST_ERROR << "bit_bound traits MyEnumBound16 is 16" << std::endl;
+  }
+  if (IDL::traits<MyEnumBound32>::bit_bound::value != 32)
+  {
+    TAOX11_TEST_ERROR << "bit_bound traits MyEnumBound32 is 32" << std::endl;
+  }
+  if (IDL::traits<MyEnum>::bit_bound::value != 32)
+  {
+    TAOX11_TEST_ERROR << "bit_bound traits MyEnum is 32" << std::endl;
+  }
+
   return 0;
 }
