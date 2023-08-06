@@ -4,14 +4,14 @@ TAO_CORBA::Boolean operator<< (
     TAO_OutputCDR &strm,
     const <%= scoped_cxxname %> &_tao_enumerator)
 {
-  return strm << static_cast<uint32_t> (_tao_enumerator);
+  return strm << static_cast<<%= bitbound.cxx_type %>> (_tao_enumerator);
 }
 
 TAO_CORBA::Boolean operator>> (
     TAO_InputCDR &strm,
     <%= scoped_cxxname %> &_tao_enumerator)
 {
-  uint32_t _tao_temp {};
+  <%= bitbound.cxx_type %> _tao_temp {};
   bool const _tao_success = strm >> _tao_temp;
 
   if (_tao_success)

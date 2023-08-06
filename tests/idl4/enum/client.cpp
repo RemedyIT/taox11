@@ -18,14 +18,18 @@ int main (int /*argc*/, char* /*argv*/[])
   MyEnum my_bitenum;
   X11_UNUSED_ARG(my_bitenum);
 
-  // if (!std::is_base_of<uint8_t, MyEnumBound8>::value)
-  // {
-  //   TAOX11_TEST_ERROR << "Type of MyEnumBound8 is not uint8_t" << std::endl;
-  // }
-  // if (!std::is_base_of<uint16_t, MyEnumBound16>::value)
-  // {
-  //   TAOX11_TEST_ERROR << "Type of MyEnumBound16 is not uint16_t" << std::endl;
-  // }
+  if (sizeof(uint8_t) !=  sizeof(MyEnumBound8))
+  {
+    TAOX11_TEST_ERROR << "Type of MyEnumBound8 is not uint8_t" << std::endl;
+  }
+  if (sizeof(uint16_t) != sizeof (MyEnumBound16))
+  {
+    TAOX11_TEST_ERROR << "Type of MyEnumBound16 is not uint16_t" << std::endl;
+  }
+  if (sizeof(uint32_t) != sizeof (MyEnumBound16))
+  {
+    TAOX11_TEST_ERROR << "Type of MyEnumBound32 is not uint32_t" << std::endl;
+  }
 
   return 0;
 }
