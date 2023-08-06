@@ -79,7 +79,6 @@ tests/idl4/bitset/run_illegal_idl3_test.pl:
 tests/idl4/bitmask/run_test.pl:
 tests/idl4/bitmask/run_illegal_idl3_test.pl:
 tests/idl4/enum/run_test.pl:
-tests/idl4/enum/run_illegal_idl3_test.pl:
 tests/idl4/explicit_ints/run_test.pl:
 tests/idl4/explicit_ints/run_illegal_idl3_test.pl:
 tests/idl4/illegal_idl/run_test.pl:
