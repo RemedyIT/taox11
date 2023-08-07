@@ -17,6 +17,8 @@ int main (int /*argc*/, char* /*argv*/[])
 
   MyBitMask my_bitmask = MyBitMask::flag0;
 
+  // static_cast is necessary when we map to an `enum class`, when we map to an `enum` the static_cast
+  // is not necessary but that puts the enum members into the containing namespace
   if (static_cast<bool>(my_bitmask & MyBitMask::flag0))
   {
     TAOX11_TEST_INFO << "Flag my_bitmask correctly set" << std::endl;
