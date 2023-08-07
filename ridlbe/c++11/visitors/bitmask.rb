@@ -9,7 +9,7 @@
 
 module IDL
   module Cxx11
-    class BitMaskVisitor < NodeVisitorBase
+    class BitmaskVisitor < NodeVisitorBase
       def bitvalues
         @bitvalues ||= node.bitvalues.collect { |en|
           (ev = visitor(BitValueVisitor)).visit(en)
@@ -28,7 +28,7 @@ module IDL
 
       map_template :bitmask, :bitmask
       map_template :typecode, :typecode
-      map_template :tao_typecode, :enum_typecode
+      map_template :tao_typecode, :bitmask_typecode
     end
 
     class BitValueVisitor < NodeVisitorBase

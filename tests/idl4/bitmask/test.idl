@@ -25,4 +25,16 @@ bitmask MyBitMaskBound16 {
   flag16_3
 };
 
-// https://softwareengineering.stackexchange.com/questions/194412/using-scoped-enums-for-bit-flags-in-c
+@bit_bound(32)
+bitmask MyBitMaskBound32 {
+  flag32_1,
+  flag32_2,
+  flag32_3
+};
+
+@bit_bound(64)
+bitmask MyBitMaskBound64 {
+  flag64_1,
+  flag64_2,
+  flag64_3
+};
