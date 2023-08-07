@@ -1,10 +1,17 @@
 
 // generated from <%= ridl_template_path %>
 /// @copydoc <%= doc_scoped_name %>
-enum <%= cxxname %>Bit : <%= bitbound.cxx_type %>
+enum class <%= cxxname %> : <%= bitbound.cxx_type %>
 {
   <%= bitvalues.collect {|e| "/// @copydoc #{doc_scoped_name}::#{e.name}\n  #{e.cxxname} = #{e.value}" }.join(",\n  ") %>
-};// <%= cxxname %>Bit
-using <%= cxxname %> = <%= bitbound.cxx_type %>;
+};// <%= cxxname %>
+
+inline <%= cxx_return_type %> operator~ (<%= cxx_in_type %> _taox11_t) { return static_cast<<%= cxxname %>>(~static_cast<<%= bitbound.cxx_type %>>(_taox11_t)); }
+inline <%= cxx_return_type %> operator| (<%= cxx_in_type %> _taox11_t, <%= cxx_in_type %> _taox11_y) { return static_cast<<%= cxxname %>>(static_cast<<%= bitbound.cxx_type %>>(_taox11_t) | static_cast<<%= bitbound.cxx_type %>>(_taox11_y)); }
+inline <%= cxx_return_type %> operator^ (<%= cxx_in_type %> _taox11_t, <%= cxx_in_type %> _taox11_y) { return static_cast<<%= cxxname %>>(static_cast<<%= bitbound.cxx_type %>>(_taox11_t) ^ static_cast<<%= bitbound.cxx_type %>>(_taox11_y)); }
+inline <%= cxx_return_type %> operator& (<%= cxx_in_type %> _taox11_t, <%= cxx_in_type %> _taox11_y) { return static_cast<<%= cxxname %>>(static_cast<<%= bitbound.cxx_type %>>(_taox11_t) & static_cast<<%= bitbound.cxx_type %>>(_taox11_y)); }
+inline <%= cxx_return_type %> operator |= (<%= cxx_inout_type %> _taox11_lhs, <%= cxx_in_type %> _taox11_rhs) { _taox11_lhs = _taox11_lhs | _taox11_rhs; return _taox11_lhs; }
+inline <%= cxx_return_type %> operator &= (<%= cxx_inout_type %> _taox11_lhs, <%= cxx_in_type %> _taox11_rhs) { _taox11_lhs = _taox11_lhs & _taox11_rhs; return _taox11_lhs; }
+inline <%= cxx_return_type %> operator ^= (<%= cxx_inout_type %> _taox11_lhs, <%= cxx_in_type %> _taox11_rhs) { _taox11_lhs = _taox11_lhs ^ _taox11_rhs; return _taox11_lhs; }
 
 % visit_template('typecode') if generate_typecode_support?

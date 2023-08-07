@@ -495,7 +495,7 @@ module IDL
           true
         when IDL::Type::Object, IDL::Type::Any, IDL::Type::Valuetype
           true
-        when IDL::Type::Enum
+        when IDL::Type::Enum, IDL::Type::BitMask
           false
         else
           self._idltype.is_pod?

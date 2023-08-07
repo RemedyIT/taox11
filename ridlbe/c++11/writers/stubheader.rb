@@ -299,11 +299,11 @@ module IDL
       end
 
       def visit_bitmask(node)
-        visitor(BitMaskVisitor).visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_bitmask(node)
       end
 
       def visit_bitset(node)
-        visitor(BitSetVisitor).visit_bitset(node)
+        visitor(BitsetVisitor).visit_bitset(node)
       end
 
       def visit_typedef(node)
@@ -512,6 +512,10 @@ module IDL
 
       def visit_enum(node)
         visitor(EnumVisitor).visit_idl_traits(node)
+      end
+
+      def visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_idl_traits(node)
       end
 
       def declare_struct(node)

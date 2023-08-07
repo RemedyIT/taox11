@@ -841,7 +841,7 @@ module IDL
       end
     end
 
-    class BitMask
+    class Bitmask
       include IdlType_Mixin
       def cxx_type(scope = nil)
         (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)
@@ -860,7 +860,7 @@ module IDL
       end
     end
 
-    class BitSet
+    class Bitset
       include IdlType_Mixin
       def cxx_type(scope = nil)
         (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)

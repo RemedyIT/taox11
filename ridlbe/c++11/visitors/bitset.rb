@@ -9,7 +9,7 @@
 
 module IDL
   module Cxx11
-    class BitSetVisitor < NodeVisitorBase
+    class BitsetVisitor < NodeVisitorBase
       def bitfields
         @bitfields ||= node.bitfields.collect { |en|
           (ev = visitor(BitFieldVisitor)).visit(en)
@@ -21,7 +21,7 @@ module IDL
 
       map_template :bitset, :bitset
       map_template :typecode, :typecode
-      map_template :tao_typecode, :enum_typecode
+      map_template :tao_typecode, :bitset_typecode
     end
 
     class BitFieldVisitor < NodeVisitorBase
