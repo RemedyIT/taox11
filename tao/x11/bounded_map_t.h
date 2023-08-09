@@ -44,8 +44,10 @@ namespace TAOX11_NAMESPACE
       using size_type = typename _Map::size_type;
       using difference_type = typename _Map::difference_type;
       using allocator_type = typename _Map::allocator_type;
+#if defined (ACE_HAS_CPP17)
       using node_type = typename _Map::node_type;
       using insert_return_type = typename _Map::insert_return_type;
+#endif /* ACE_HAS_CPP17 */
 
       using bound = std::integral_constant<uint32_t, _Bound>;
 
