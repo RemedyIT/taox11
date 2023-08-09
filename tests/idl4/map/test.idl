@@ -12,4 +12,17 @@ module Test
   typedef StringLongMap StringLongMapTypeDef;
   typedef map<string,long,5> StringLongMap5;
   typedef StringLongMap5 StringLongMap5TypeDef;
+
+  interface Foo
+  {
+    StringLongMap test_string_long_map (in StringLongMap sin,
+      inout StringLongMap sinout,
+      out StringLongMap sout);
+    StringLongMap5 test_string_long_map5 (in StringLongMap5 sin,
+      inout StringLongMap5 sinout,
+      out StringLongMap5 sout);
+
+    /// A method to shutdown the ORB
+    oneway void shutdown ();
+  };
 };

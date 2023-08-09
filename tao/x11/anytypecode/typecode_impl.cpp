@@ -59,14 +59,14 @@ marshal_TAOX11_NAMESPACE_CORBA_TypeCode_sequence (
   if (_bound > 0 && length > _bound)
     return false;
 
-  if (! (_strm << length))
+  if (!(_strm << length))
   {
     return false;
   }
 
   for (const _elem_type& _el : _seq)
   {
-    if (! (_strm << _el))
+    if (!(_strm << _el))
     {
       return false;
     }
@@ -85,7 +85,7 @@ demarshal_TAOX11_NAMESPACE_CORBA_TypeCode_sequence (
 
   uint32_t length {};
 
-  if (! (_strm >> length))
+  if (!(_strm >> length))
   {
     return false;
   }
@@ -97,7 +97,7 @@ demarshal_TAOX11_NAMESPACE_CORBA_TypeCode_sequence (
 
   for (_elem_type& _el : _seq)
   {
-    if (! (_strm >> _el))
+    if (!(_strm >> _el))
     {
       return false;
     }

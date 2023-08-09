@@ -441,7 +441,7 @@ module IDL
         when IDL::Type::Map
           # stub arg template included in P.h
           add_include('tao/x11/portable_server/basic_sargument_t.h')
-          add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/map_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type.basetype)
         when IDL::Type::Array
           # stub arg template included in P.h

@@ -370,7 +370,8 @@ module IDL
           check_idl_type(idl_type.basetype)
         when IDL::Type::Map
           # arg template included in P.h
-          check_idl_type(idl_type.basetype)
+          check_idl_type(idl_type.keytype)
+          check_idl_type(idl_type.valuetype)
         when IDL::Type::Array
           # arg template included in P.h
           check_idl_type(idl_type.basetype)

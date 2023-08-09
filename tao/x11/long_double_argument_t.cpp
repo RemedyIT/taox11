@@ -73,7 +73,7 @@ TAO_CORBA::Boolean
 Inout_Basic_Argument_T<long double, Insert_Policy>::demarshal (TAO_InputCDR & cdr)
 {
   TAO_CORBA::LongDouble ld;
-  if (! (cdr >> ld))
+  if (!(cdr >> ld))
     return false;
   this->x_ = ld;
   return true;
@@ -97,7 +97,7 @@ TAO_CORBA::Boolean
 Out_Basic_Argument_T<long double, Insert_Policy>::demarshal (TAO_InputCDR & cdr)
 {
   TAO_CORBA::LongDouble ld;
-  if (! (cdr >> ld))
+  if (!(cdr >> ld))
     return false;
   this->x_ = ld;
   return true;
@@ -121,7 +121,7 @@ TAO_CORBA::Boolean
 Ret_Basic_Argument_T<long double, Insert_Policy>::demarshal (TAO_InputCDR & cdr)
 {
   TAO_CORBA::LongDouble ld;
-  if (! (cdr >> ld))
+  if (!(cdr >> ld))
     return false;
   this->x_ = ld;
   return true;

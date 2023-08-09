@@ -207,7 +207,7 @@ module IDL
           add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type)
         when IDL::Type::Map
-          add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/map_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type)
         when IDL::Type::Array
           add_include('tao/x11/array_cdr_t.h') unless params[:no_cdr_streaming]

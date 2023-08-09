@@ -29,7 +29,7 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR & strm,
 {
   TAO_CORBA::Object_ptr _obj_ptr {};
 
-  if (! (strm >> _obj_ptr))
+  if (!(strm >> _obj_ptr))
   {
     return false;
   }

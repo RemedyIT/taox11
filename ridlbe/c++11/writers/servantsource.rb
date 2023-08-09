@@ -247,7 +247,7 @@ module IDL
         when IDL::Type::Map
           add_include('tao/x11/portable_server/basic_sargument_t.h')
           add_include('tao/x11/basic_argument_t.h')
-          add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/map_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type.keytype)
           check_idl_type(idl_type.valuetype)
         when IDL::Type::Array

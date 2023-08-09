@@ -19,7 +19,7 @@ namespace TAOX11_NAMESPACE
 {
   namespace IDL
   {
-    template<typename _Keyp, typename _Tp, const uint32_t _Bound, typename _Comparep = std::less<_Keyp>, typename _Alloc = std::allocator<_Tp> >
+    template<typename _Keyp, typename _Tp, const uint32_t _Bound, typename _Comparep = std::less<_Keyp>, typename _Alloc = std::allocator<std::pair<const _Keyp, _Tp>> >
     class bounded_map
       : public std::map<_Keyp, _Tp, _Comparep, _Alloc>
     {
@@ -32,6 +32,7 @@ namespace TAOX11_NAMESPACE
       using key_type = _Keyp;
       using mapped_type = _Tp;
       using value_type = std::pair<const _Keyp, _Tp>;
+      using key_compare = _Comparep;
       using pointer = typename _Map::pointer;
       using const_pointer = typename _Map::const_pointer;
       using reference = typename _Map::reference;
@@ -40,9 +41,13 @@ namespace TAOX11_NAMESPACE
       using const_iterator = typename _Map::const_iterator;
       using const_reverse_iterator = typename _Map::const_reverse_iterator;
       using reverse_iterator = typename _Map::reverse_iterator;
-      using size_type = size_t;
-      using difference_type = std::ptrdiff_t;
-      using allocator_type = _Alloc;
+      using size_type = typename _Map::size_type;
+      using difference_type = typename _Map::difference_type;
+      using allocator_type = typename _Map::allocator_type;
+#if defined (ACE_HAS_CPP17)
+      using node_type = typename _Map::node_type;
+      using insert_return_type = typename _Map::insert_return_type;
+#endif /* ACE_HAS_CPP17 */
 
       using bound = std::integral_constant<uint32_t, _Bound>;
 
