@@ -27,7 +27,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_map.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -67,7 +67,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -76,7 +76,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
       for (uint32_t i = 0; i < length; ++i)
       {
         _Tp key {};
-        _Tp mapped_type {};
+        _Tx mapped_type {};
         if (!(_strm >> key))
         {
           return false;
@@ -85,7 +85,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
         {
           return false;
         }
-        _new_map.insert(std::move(key), std::move(mapped_type));
+        _new_map.insert({std::move(key), std::move(mapped_type)});
       }
 
       _map.swap (_new_map);
@@ -98,7 +98,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -112,7 +112,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
       for (uint32_t i = 0; i < length; ++i)
       {
         _Tp key {};
-        _Tp mapped_type {};
+        _Tx mapped_type {};
         if (!(_strm >> key))
         {
           return false;
@@ -121,7 +121,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
         {
           return false;
         }
-        _new_map.insert(std::move(key), std::move(mapped_type));
+        _new_map.insert({std::move(key), std::move(mapped_type)});
       }
 
       _map.swap (_new_map);

@@ -329,14 +329,14 @@ bool marshal_TAOX11_NAMESPACE_CORBA_Policy_sequence (
   if (_bound > 0 && length > _bound)
     return false;
 
-  if (! (_strm << length))
+  if (!(_strm << length))
   {
     return false;
   }
 
   for (const _elem_type& _el : _seq)
   {
-    if (! (_strm << _el))
+    if (!(_strm << _el))
     {
       return false;
     }
@@ -352,7 +352,7 @@ bool demarshal_TAOX11_NAMESPACE_CORBA_Policy_sequence (
 
   uint32_t length {};
 
-  if (! (_strm >> length))
+  if (!(_strm >> length))
   {
     return false;
   }
@@ -364,7 +364,7 @@ bool demarshal_TAOX11_NAMESPACE_CORBA_Policy_sequence (
 
   for (_elem_type& _el : _seq)
   {
-    if (! (_strm >> _el))
+    if (!(_strm >> _el))
     {
       return false;
     }

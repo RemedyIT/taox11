@@ -29,14 +29,14 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
 
       for (const _Tp& _el : _seq)
       {
-        if (! (_strm << _el))
+        if (!(_strm << _el))
         {
           return false;
         }
@@ -69,7 +69,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -77,7 +77,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
       std::vector<_Tp>  _new_seq (length);
       for (_Tp& _el : _new_seq)
       {
-        if (! (_strm >> _el))
+        if (!(_strm >> _el))
         {
           return false;
         }
@@ -95,7 +95,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -108,7 +108,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
       std::vector<_Tp>  _new_seq (length);
       for (_Tp& _el : _new_seq)
       {
-        if (! (_strm >> _el))
+        if (!(_strm >> _el))
         {
           return false;
         }
@@ -131,7 +131,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -163,7 +163,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -183,7 +183,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -213,14 +213,14 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
 
       for (const bool& _el : _seq)
       {
-        if (! (_strm.write_boolean (_el)))
+        if (!(_strm.write_boolean (_el)))
         {
           return false;
         }
@@ -252,7 +252,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -261,7 +261,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
       for ( std::vector <bool>::size_type i = 0; i < length; ++i)
       {
         TAO_CORBA::Boolean v;
-        if (! (_strm.read_boolean (v)))
+        if (!(_strm.read_boolean (v)))
         {
           return false;
         }
@@ -280,7 +280,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -294,7 +294,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
       for ( std::vector <bool>::size_type i = 0; i < length; ++i)
       {
         TAO_CORBA::Boolean v;
-        if (! (_strm.read_boolean (v)))
+        if (!(_strm.read_boolean (v)))
         {
           return false;
         }
@@ -318,7 +318,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -350,7 +350,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -370,7 +370,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -400,7 +400,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -432,7 +432,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -452,7 +452,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -482,7 +482,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -514,7 +514,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -534,7 +534,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -564,7 +564,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -596,7 +596,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -616,7 +616,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -646,7 +646,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -678,7 +678,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -698,7 +698,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -728,7 +728,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -760,7 +760,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -780,7 +780,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -810,7 +810,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -842,7 +842,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -862,7 +862,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -892,7 +892,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -924,7 +924,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -944,7 +944,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -974,7 +974,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -1006,7 +1006,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -1026,7 +1026,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -1056,7 +1056,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -1088,7 +1088,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -1108,7 +1108,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -1138,7 +1138,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
-      if (! (_strm << length))
+      if (!(_strm << length))
       {
         return false;
       }
@@ -1148,7 +1148,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 #else
       for (const long double& _el : _seq)
       {
-        if (! (_strm << _el))
+        if (!(_strm << _el))
         {
           return false;
         }
@@ -1181,7 +1181,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -1193,7 +1193,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 #else
       for (long double& _el : _new_seq)
       {
-        if (! (_strm >> _el))
+        if (!(_strm >> _el))
         {
           return false;
         }
@@ -1211,7 +1211,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     {
       uint32_t length {};
 
-      if (! (_strm >> length))
+      if (!(_strm >> length))
       {
         return false;
       }
@@ -1228,7 +1228,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 #else
       for (long double& _el : _new_seq)
       {
-        if (! (_strm >> _el))
+        if (!(_strm >> _el))
         {
           return false;
         }

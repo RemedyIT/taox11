@@ -38,9 +38,9 @@ namespace TAOX11_NAMESPACE
       using const_iterator = typename _Vector::const_iterator;
       using const_reverse_iterator = typename _Vector::const_reverse_iterator;
       using reverse_iterator = typename _Vector::reverse_iterator;
-      using size_type = size_t;
-      using difference_type = std::ptrdiff_t;
-      using allocator_type = _Alloc;
+      using size_type = typename _Vector::size_type;
+      using difference_type = typename _Vector::difference_type;
+      using allocator_type = typename _Vector::allocator_type;
 
       using bound = std::integral_constant<uint32_t, _Bound>;
 
