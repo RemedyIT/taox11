@@ -11,7 +11,7 @@
 #if !defined (__IDL__BOUNDED_MAP_T_H_INCLUDED__)
 #define __IDL__BOUNDED_MAP_T_H_INCLUDED__
 
-#include <vector>
+#include <map>
 #include <initializer_list>
 #include "tao/x11/versioned_x11_namespace.h"
 
@@ -38,8 +38,8 @@ namespace TAOX11_NAMESPACE
       using const_reference = typename _Map::const_reference;
       using iterator = typename _Map::iterator;
       using const_iterator = typename _Map::const_iterator;
-      using const_reverse_iterator = std::reverse_iterator<const_iterator>;
-      using reverse_iterator = std::reverse_iterator<iterator>;
+      using const_reverse_iterator = typename _Map::const_reverse_iterator;
+      using reverse_iterator = typename _Map::reverse_iterator;
       using size_type = size_t;
       using difference_type = std::ptrdiff_t;
       using allocator_type = _Alloc;

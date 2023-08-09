@@ -12,6 +12,7 @@
 
 #include "tao/x11/stddef.h"
 #include "tao/x11/bounded_vector_t.h"
+#include "tao/x11/bounded_map_t.h"
 
 namespace TAOX11_NAMESPACE
 {
@@ -222,8 +223,8 @@ namespace TAOX11_NAMESPACE
         else
         {
           os_ << '<';
-          std::for_each (val_.begin (),
-                         val_.end () -1,
+          std::for_each (val_.cbegin (),
+                         --val_.cend (),
                          element_formatter<typename elem_traits::value_type> (os_));
           elem_traits::write_on (os_, val_.back ());
           os_ << '>';
@@ -260,11 +261,95 @@ namespace TAOX11_NAMESPACE
         else
         {
           os_ << '<';
-          std::for_each (val_.begin (),
-                         val_.end () -1,
+          std::for_each (val_.cbegin (),
+                         --val_.cend (),
                          element_formatter<typename elem_traits::value_type> (os_));
           elem_traits::write_on (os_, val_.back ());
           os_ << '>';
+        }
+        return os_;
+      }
+    };
+
+    template <typename X, typename Y, typename OStrm_>
+    struct formatter<std::map<X,Y>, OStrm_>
+    {
+      using traits = IDL::traits<std::map<X,Y>>;
+      using elem_traits = typename std::map<X,Y>::value_type;
+      using key_traits = IDL::traits<X>;
+      using value_traits = IDL::traits<Y>;
+
+      template <typename T_ELEM>
+      struct element_formatter
+      {
+        OStrm_& os_;
+        element_formatter (OStrm_& os)
+          : os_ (os) {}
+
+        inline OStrm_& operator ()(elem_traits el_)
+        { this->os_ << "<"; key_traits::write_on (this->os_, el_.first) << ','; value_traits::write_on (this->os_, el_.second) << ">"; return os_; }
+      };
+
+      inline OStrm_& operator ()(
+          OStrm_& os_,
+          typename traits::in_type val_)
+      {
+        if (val_.empty ())
+        {
+          os_ << "<>";
+        }
+        else
+        {
+          os_ << '<';
+          std::for_each (val_.cbegin (),
+                         --val_.cend (),
+                         element_formatter<elem_traits> (os_));
+          os_ << "<";
+          key_traits::write_on (os_, (--val_.cend ())->first) << ",";
+          value_traits::write_on (os_, (--val_.cend ())->second);
+          os_ << ">>";
+        }
+        return os_;
+      }
+    };
+
+    template <typename X, typename Y, typename OStrm_, const uint32_t B>
+    struct formatter<IDL::bounded_map<X, Y, B>, OStrm_>
+    {
+      using traits = IDL::traits<IDL::bounded_map<X, Y, B>>;
+      using elem_traits = typename IDL::bounded_map<X,Y,B>::value_type;
+      using key_traits = IDL::traits<X>;
+      using value_traits = IDL::traits<Y>;
+
+      template <typename T_ELEM>
+      struct element_formatter
+      {
+        OStrm_& os_;
+        element_formatter (OStrm_& os)
+          : os_ (os) {}
+
+        inline OStrm_& operator ()(elem_traits el_)
+        { this->os_ << "<"; key_traits::write_on (this->os_, el_.first) << ','; value_traits::write_on (this->os_, el_.second) << ">"; return os_; }
+      };
+
+      inline OStrm_& operator ()(
+          OStrm_& os_,
+          typename traits::in_type val_)
+      {
+        if (val_.empty ())
+        {
+          os_ << "<>";
+        }
+        else
+        {
+          os_ << '<';
+          std::for_each (val_.cbegin (),
+                         --val_.cend (),
+                         element_formatter<elem_traits> (os_));
+          os_ << "<";
+          key_traits::write_on (os_, (--val_.cend ())->first) << ",";
+          value_traits::write_on (os_, (--val_.cend ())->second);
+          os_ << ">>";
         }
         return os_;
       }
@@ -309,8 +394,8 @@ namespace TAOX11_NAMESPACE
         else
         {
           os_ << '[';
-          std::for_each (val_.begin (),
-                         val_.end () - 1,
+          std::for_each (val_.cbegin (),
+                         val_.cend () - 1,
                          element_formatter (os_));
           elem_formatter () (os_, val_.back());
           os_ << ']';
