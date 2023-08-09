@@ -305,6 +305,7 @@ project(taox11) : taox11_defaults, taolib {
     ifr_client_adapter_impl_base.h
     log.h
     long_double_argument_t.h
+    map_cdr_t.h
     nvlist_adapter.h
     object.h
     object_fwd.h
