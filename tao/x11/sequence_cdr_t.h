@@ -74,7 +74,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
         return false;
       }
 
-      std::vector<_Tp>  _new_seq (length);
+      std::vector<_Tp> _new_seq (length);
       for (_Tp& _el : _new_seq)
       {
         if (!(_strm >> _el))
@@ -105,7 +105,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
         throw TAO_CORBA::BAD_PARAM ();
       }
 
-      std::vector<_Tp>  _new_seq (length);
+      std::vector<_Tp> _new_seq (length);
       for (_Tp& _el : _new_seq)
       {
         if (!(_strm >> _el))
