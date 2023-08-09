@@ -19,14 +19,14 @@ namespace TAOX11_NAMESPACE
     std::string
     ObjectId_to_string (const TAOX11_NAMESPACE::PortableServer::ObjectId &id)
     {
-      std::string s (id.begin(), id.end());
+      std::string s (id.cbegin(), id.cend());
       return s;
     }
 
     std::wstring
     ObjectId_to_wstring (const TAOX11_NAMESPACE::PortableServer::ObjectId &id)
     {
-      std::string s (id.begin(), id.end());
+      std::string s (id.cbegin(), id.cend());
       std::wstring ws (ACE_Ascii_To_Wide (s.c_str ()).wchar_rep ());
       return ws;
     }
@@ -34,8 +34,7 @@ namespace TAOX11_NAMESPACE
     TAOX11_NAMESPACE::PortableServer::ObjectId
     string_to_ObjectId (const std::string& string)
     {
-      TAOX11_NAMESPACE::PortableServer::ObjectId
-        id (string.begin(), string.end());
+      TAOX11_NAMESPACE::PortableServer::ObjectId id (string.cbegin(), string.cend());
 
       return id;
     }
@@ -47,8 +46,7 @@ namespace TAOX11_NAMESPACE
       s_out << ACE_Wide_To_Ascii (wstring.c_str ()).char_rep ();
       std::string string = s_out.str ();
 
-      TAOX11_NAMESPACE::PortableServer::ObjectId
-        id (string.begin(), string.end());
+      TAOX11_NAMESPACE::PortableServer::ObjectId id (string.cbegin(), string.cend());
 
       return id;
     }

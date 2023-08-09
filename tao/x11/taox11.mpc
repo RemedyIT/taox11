@@ -289,6 +289,7 @@ project(taox11) : taox11_defaults, taolib {
     basic_argument_t.h
     basic_arguments.h
     basic_traits.h
+    bounded_map_t.h
     bounded_string_t.h
     bounded_type_traits_t.h
     bounded_vector_t.h
