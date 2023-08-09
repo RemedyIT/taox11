@@ -287,7 +287,7 @@ namespace TAOX11_NAMESPACE
           : os_ (os) {}
 
         inline OStrm_& operator ()(elem_traits el_)
-        { this->os_ << "<"; key_traits::write_on (this->os_, el_.first) << ','; value_traits::write_on (this->os_, el_.second) << ">"; return os_; }
+        { this->os_ << "{"; key_traits::write_on (this->os_, el_.first) << ','; return value_traits::write_on (this->os_, el_.second) << "},"; }
       };
 
       inline OStrm_& operator ()(
@@ -296,18 +296,18 @@ namespace TAOX11_NAMESPACE
       {
         if (val_.empty ())
         {
-          os_ << "<>";
+          os_ << "{}";
         }
         else
         {
-          os_ << '<';
+          os_ << '{';
           std::for_each (val_.cbegin (),
                          --val_.cend (),
                          element_formatter<elem_traits> (os_));
-          os_ << "<";
+          os_ << "{";
           key_traits::write_on (os_, (--val_.cend ())->first) << ",";
           value_traits::write_on (os_, (--val_.cend ())->second);
-          os_ << ">>";
+          os_ << "}}";
         }
         return os_;
       }
@@ -329,7 +329,7 @@ namespace TAOX11_NAMESPACE
           : os_ (os) {}
 
         inline OStrm_& operator ()(elem_traits el_)
-        { this->os_ << "<"; key_traits::write_on (this->os_, el_.first) << ','; value_traits::write_on (this->os_, el_.second) << ">"; return os_; }
+        { this->os_ << "{"; return key_traits::write_on (this->os_, el_.first) << ','; return value_traits::write_on (this->os_, el_.second) << "},"; }
       };
 
       inline OStrm_& operator ()(
@@ -338,18 +338,18 @@ namespace TAOX11_NAMESPACE
       {
         if (val_.empty ())
         {
-          os_ << "<>";
+          os_ << "{}";
         }
         else
         {
-          os_ << '<';
+          os_ << '{';
           std::for_each (val_.cbegin (),
                          --val_.cend (),
                          element_formatter<elem_traits> (os_));
-          os_ << "<";
+          os_ << "{";
           key_traits::write_on (os_, (--val_.cend ())->first) << ",";
           value_traits::write_on (os_, (--val_.cend ())->second);
-          os_ << ">>";
+          os_ << "}}";
         }
         return os_;
       }
