@@ -29,7 +29,7 @@ TAO_CORBA::Boolean operator<< (
   else
   {
 %     _m = _defmem || _ndefmem.shift # get other (non-)default member
-    result = strm < <<%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
+    result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
   }
 %     end
 %   end
