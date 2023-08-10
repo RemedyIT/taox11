@@ -551,6 +551,12 @@ module IDL
         visitor(EnumVisitor).visit_cdr(node)
       end
 
+      def visit_bitmask(node)
+        return if params[:no_cdr_streaming]
+
+        visitor(BitmaskVisitor).visit_cdr(node)
+      end
+
       def visit_typedef(node)
         return if node.is_local? || params[:no_cdr_streaming]
         # nothing to do if this is just an alias for another defined type

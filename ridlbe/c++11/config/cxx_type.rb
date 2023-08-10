@@ -212,7 +212,7 @@ module IDL
     end
 
     # for integer type classes
-    # (Octet,(U)Short,(U)Long,(U)LongLong)
+    # (Octet,(U)TinyShort,(U)Short,(U)Long,(U)LongLong)
     class Integer
       def is_pod?
         true
@@ -226,6 +226,14 @@ module IDL
 
       def idltype_name(_scope = nil)
         'int8'
+      end
+
+      def cdr_to_fmt
+        "ACE_InputCDR::to_int8 (#{super})"
+      end
+
+      def cdr_from_fmt
+        "ACE_OutputCDR::from_int8 (#{super})"
       end
     end
 
@@ -253,6 +261,14 @@ module IDL
 
       def idltype_name(_scope = nil)
         'uint8'
+      end
+
+      def cdr_to_fmt
+        "ACE_InputCDR::to_uint8 (#{super})"
+      end
+
+      def cdr_from_fmt
+        "ACE_OutputCDR::from_uint8 (#{super})"
       end
     end
 
