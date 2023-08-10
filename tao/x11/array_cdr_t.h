@@ -172,7 +172,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     }
   };
 
-  /// Octet array specialization
+  /// TinyShort array specialization
   template <const std::size_t _Nm>
   struct taox11_array_cdr<0U, int8_t, _Nm>
   {
