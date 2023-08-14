@@ -44,7 +44,7 @@ module IDL
 
       def dec_nest(in_ = 1)
         @nest -= in_
-        @nest = 0 if @nest < 0
+        @nest = 0 if @nest.negative?
       end
 
       def write_regen_section(sectionid, options = nil, proc = nil)

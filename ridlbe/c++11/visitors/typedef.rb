@@ -70,7 +70,7 @@ module IDL
              IDL::Type::Map,
              IDL::Type::String,
              IDL::Type::WString
-          self._resolved_idltype.size.to_i > 0
+          self._resolved_idltype.size.to_i.positive?
         else
           false
         end
@@ -86,7 +86,7 @@ module IDL
         when IDL::Type::Sequence,
              IDL::Type::String,
              IDL::Type::WString
-          _guard << "_#{self._resolved_idltype.size}" if self._resolved_idltype.size.to_i > 0
+          _guard << "_#{self._resolved_idltype.size}" if self._resolved_idltype.size.to_i.positive?
         when IDL::Type::Array
           _guard << "_#{self._resolved_idltype.sizes.join('_')}"
         end
