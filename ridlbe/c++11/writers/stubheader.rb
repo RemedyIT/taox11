@@ -714,6 +714,10 @@ module IDL
         visitor(StructVisitor).visit_inl(node)
       end
 
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_inl(node)
+      end
+
       def enter_union(node)
         visitor(UnionVisitor).visit_inl(node)
       end

@@ -1,0 +1,37 @@
+
+// generated from <%= ridl_template_path %>
+%#
+%#  Constructor inlines
+%#
+%#  Initializer CTOR
+%_ms = bitfields.dup.find_all {|bitf| !bitf.cxxname.empty? }
+inline <%= scoped_cxxtype %>::<%= cxxname %> (
+%  unless base.nil?
+  <%= base.cxxname %> _base<%= _ms.empty? ? ')' : ',' %>
+%  end
+%  unless _ms.empty?
+%    while !_ms.empty?
+%      _m = _ms.shift
+  <%= "#{_m.cxx_byval_type} #{_m.cxxname}" %><%= _ms.empty? ? ')' : ',' %>
+%    end
+%  end
+%  _pfx = nil
+%  unless base.nil?
+  : <%= base.cxxname %> (std::move(_base))<% unless _ms.empty? %>,<% end %>
+%  end
+% str = ""
+% bitfields.find_all {|bitf| !bitf.cxxname.empty? }.each do |_m|
+%   str = "#{str}#{_pfx}#{_m.cxxname}"
+%   _pfx = ', ' unless _pfx
+% end
+  <% if base.nil? %>:<% else %>,<% end %> _taox11_<%= cxxname.downcase %> { <%= str %> }
+{
+}
+
+inline void <%= scoped_cxxtype %>::swap (<%= scoped_cxx_out_type %> s)
+{
+%# Add support for base
+%# bitfields.each do |_m|
+  std::swap (this->_taox11_<%= cxxname.downcase %>, s._taox11_<%= cxxname.downcase %>);
+%# end
+}
