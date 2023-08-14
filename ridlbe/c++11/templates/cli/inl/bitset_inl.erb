@@ -4,30 +4,27 @@
 %#  Constructor inlines
 %#
 %#  Initializer CTOR
-%   _ms = bitfields.dup
+%_ms = bitfields.dup.find_all {|bitf| !bitf.cxxname.empty? }
 inline <%= scoped_cxxtype %>::<%= cxxname %> (
-%   unless base.nil?
+%  unless base.nil?
   <%= base.cxxname %> _base<%= _ms.empty? ? ')' : ',' %>
-%   end
-%   unless _ms.empty?
-%     while !_ms.empty?
-%       _m = _ms.shift
+%  end
+%  unless _ms.empty?
+%    while !_ms.empty?
+%      _m = _ms.shift
   <%= "#{_m.cxx_byval_type} #{_m.cxxname}" %><%= _ms.empty? ? ')' : ',' %>
-%     end
-%   end
-%   _pfx = nil
-%   unless base.nil?
+%    end
+%  end
+%  _pfx = nil
+%  unless base.nil?
   : <%= base.cxxname %> (std::move(_base))<% unless _ms.empty? %>,<% end %>
-%   end
-  <% if base.nil? %>:<% else %>,<% end %> _taox11_<%= cxxname.downcase %> {
-%# Change formatting
-%   bitfields.each do |_m|
-% unless _m.cxxname.empty?
- <%= _pfx %><%= _m.cxxname %>
+%  end
+% str = ""
+% bitfields.find_all {|bitf| !bitf.cxxname.empty? }.each do |_m|
+%   str = "#{str}#{_pfx}#{_m.cxxname}"
+%   _pfx = ', ' unless _pfx
 % end
-%     _pfx = ', ' unless _pfx
-%   end
-}
+  <% if base.nil? %>:<% else %>,<% end %> _taox11_<%= cxxname.downcase %> { <%= str %> }
 {
 }
 

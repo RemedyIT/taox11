@@ -14,7 +14,7 @@ public:
 %unless base.nil?
   using <%= base.cxxname %>::<%= base.cxxname %>;
 %end
-%_ms = bitfields.dup
+%_ms = bitfields.dup.find_all {|bitf| !bitf.cxxname.empty? }
   /// Constructor which accepts value for all members
   explicit inline <%= cxxname %> (
 %unless base.nil?
@@ -27,11 +27,9 @@ public:
 %  end
 %end
 
-%bitfields.each do |_m|
-% unless _m.cxxname.empty?
+%bitfields.find_all {|bitf| !bitf.cxxname.empty? }.each do |_m|
   inline void <%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11_<%= _m.cxxname %>) { this->_taox11_<%= cxxname.downcase %>.<%= _m.cxxname %> = _x11_<%= _m.cxxname %>; }
   inline <%= _m.cxx_in_type %> <%= _m.cxxname %> () const { return this->_taox11_<%= cxxname.downcase %>.<%= _m.cxxname %>; }
-% end
 %end
 
   /// Exchange the value of two bitsets in an efficient matter
@@ -46,5 +44,7 @@ private:
 %end
   } _taox11_<%= cxxname.downcase %>;
 }; // <%= cxxname %>
+
+inline void swap (<%= scoped_cxx_out_type %> m1, <%= scoped_cxx_out_type %> m2) { m1.swap (m2); }
 
 % visit_template('typecode') if generate_typecode_support?
