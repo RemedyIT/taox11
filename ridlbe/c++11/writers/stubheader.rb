@@ -518,6 +518,10 @@ module IDL
         visitor(BitmaskVisitor).visit_idl_traits(node)
       end
 
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_idl_traits(node)
+      end
+
       def declare_struct(node)
         visitor(StructVisitor).visit_idl_traits(node)
       end
