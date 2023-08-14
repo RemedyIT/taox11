@@ -172,6 +172,27 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     }
   };
 
+  /// TinyShort array specialization
+  template <const std::size_t _Nm>
+  struct taox11_array_cdr<0U, int8_t, _Nm>
+  {
+    template <typename _Stream>
+    static inline bool insert (
+        _Stream& strm ,
+        const std::array<int8_t, _Nm>& _v)
+    {
+      return strm.write_int8_array (_v.data (), _Nm);
+    }
+
+    template <typename _Stream>
+    static inline bool extract (
+        _Stream& strm ,
+        std::array<int8_t, _Nm>& _v)
+    {
+      return strm.read_int8_array (_v.data (), _Nm);
+    }
+  };
+
   /// Short array specialization
   template <const std::size_t _Nm>
   struct taox11_array_cdr<0U, int16_t, _Nm>

@@ -27,15 +27,11 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 //@{
 inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR &cdr, const IDL::traits<<%= scoped_cxxtype %>>::value_type &v)
 {
-  return taox11_array_cdr<<%= cxxdim_sizes.size-1 %>U,
-                          <%= scoped_cxxtype %>::value_type,
-                          <%= cxxdim_sizes.first %>>::insert (cdr, v);
+  return taox11_array_cdr<<%= cxxdim_sizes.size-1 %>U, <%= scoped_cxxtype %>::value_type, <%= cxxdim_sizes.first %>>::insert (cdr, v);
 }
 inline TAO_CORBA::Boolean operator>> (TAO_InputCDR &cdr, IDL::traits<<%= scoped_cxxtype %>>::value_type& v)
 {
-  return taox11_array_cdr<<%= cxxdim_sizes.size-1 %>U,
-                          <%= scoped_cxxtype %>::value_type,
-                          <%= cxxdim_sizes.first %>>::extract (cdr, v);
+  return taox11_array_cdr<<%= cxxdim_sizes.size-1 %>U, <%= scoped_cxxtype %>::value_type, <%= cxxdim_sizes.first %>>::extract (cdr, v);
 }
 //@}
 

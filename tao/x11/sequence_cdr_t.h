@@ -470,6 +470,88 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     }
   };
 
+  /// TinyShort sequence CDR streaming helper template
+  template <>
+  struct taox11_sequence_cdr<int8_t>
+  {
+    /// Unbounded insert
+    template <typename _Stream>
+    static inline bool insert (
+        _Stream& _strm,
+        const std::vector<int8_t>& _seq)
+    {
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+
+      if (!(_strm << length))
+      {
+        return false;
+      }
+
+      return _strm.write_int8_array (_seq.data (), length);
+    }
+
+    /// Bounded insert
+    template <const uint32_t _Bound, typename _Stream>
+    static inline bool insert (
+        _Stream& _strm,
+        const TAOX11_IDL::bounded_vector<int8_t, _Bound>& _seq)
+    {
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+
+      if (_Bound && length > _Bound)
+      {
+        throw TAO_CORBA::BAD_PARAM ();
+      }
+
+      return insert<_Stream> (_strm, _seq);
+    }
+
+    /// Unbounded extract
+    template <typename _Stream>
+    static inline bool extract (
+        _Stream& _strm,
+        std::vector<int8_t>& _seq)
+    {
+      uint32_t length {};
+
+      if (!(_strm >> length))
+      {
+        return false;
+      }
+
+      std::vector<int8_t> _new_seq (length);
+      if (!_strm.read_int8_array (_new_seq.data (), length))
+        return false;
+      _seq.swap (_new_seq);
+      return true;
+    }
+
+    /// Bounded extract
+    template <const uint32_t _Bound, typename _Stream>
+    static inline bool extract (
+        _Stream& _strm,
+        TAOX11_IDL::bounded_vector<int8_t, _Bound>& _seq)
+    {
+      uint32_t length {};
+
+      if (!(_strm >> length))
+      {
+        return false;
+      }
+
+      if (_Bound && length > _Bound)
+      {
+        throw TAO_CORBA::BAD_PARAM ();
+      }
+
+      std::vector<int8_t> _new_seq (length);
+      if (!_strm.read_int8_array (_new_seq.data (), length))
+        return false;
+      _seq.swap (_new_seq);
+      return true;
+    }
+  };
+
   /// Short sequence CDR streaming helper template
   template <>
   struct taox11_sequence_cdr<int16_t>
