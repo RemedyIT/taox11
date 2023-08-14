@@ -1,13 +1,32 @@
 
 // generated from <%= ridl_template_path %>
 /// @copydoc <%= doc_scoped_name %>
-/// THIS MAPPING IS NOT COMPLETE
-struct <%= cxxname %>
+/// @todo THIS MAPPING IS NOT COMPLETE
+class <%= cxxname %><% unless base.nil? %> : public <%= base.cxxname %><% end %>
 {
-%bitfields.each do |_bitfield|
-  /// @copydoc #{doc_scoped_name}::#{_bitfield.name}
-  <%= _bitfield.cxx_member_type %> <%= _bitfield.cxxname %> : <%= _bitfield.bits %>;
+public:
+  <%= cxxname %> () = default;
+  ~<%= cxxname %> () noexcept = default;
+  <%= cxxname %> (const <%= cxxname %>&) = default;
+  <%= cxxname %> (<%= cxxname %>&&) = default;
+  <%= cxxname %>& operator= (const <%= cxxname %>&) = default;
+  <%= cxxname %>& operator= (<%= cxxname %>&&) = default;
+
+%bitfields.each do |_m|
+% unless _m.cxxname.empty?
+  inline void <%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11_<%= _m.cxxname %>) { this->_taox11_<%= cxxname.downcase %>.<%= _m.cxxname %> = _x11_<%= _m.cxxname %>; }
+  inline <%= _m.cxx_in_type %> <%= _m.cxxname %> () const { return this->_taox11_<%= cxxname.downcase %>.<%= _m.cxxname %>; }
+% end
 %end
+
+private:
+  struct
+  {
+%bitfields.each do |bitfield|
+    /// @copydoc #{bitfield.doc_scoped_name}::#{bitfield.name}
+    <%= bitfield.cxx_member_type %> <%= bitfield.cxxname %> : <%= bitfield.bits %>;
+%end
+  } _taox11_<%= cxxname.downcase %>;
 }; // <%= cxxname %>
 
 % visit_template('typecode') if generate_typecode_support?

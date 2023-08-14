@@ -1,0 +1,20 @@
+/**
+ * @file bitset_multiple_inheritance.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a bitset which inherits from multiple bases
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+bitset Base1 {
+  bitfield<1> y;
+};
+
+bitset Base2 {
+  bitfield<1> z;
+};
+
+bitset MyBitset : Base1, Base2 {
+  bitfield<6> x;
+};
