@@ -2,7 +2,7 @@
 // generated from <%= ridl_template_path %>
 /// @copydoc <%= doc_scoped_name %>
 /// @todo THIS MAPPING IS NOT COMPLETE
-class <%= cxxname %>
+class <%= cxxname %><% unless base.nil? %> : public <%= base.cxxname %><% end %>
 {
 public:
   <%= cxxname %> () = default;

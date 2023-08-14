@@ -17,6 +17,11 @@ module IDL
         }
       end
 
+      # Return the base of this bitset, nil in case of no base bitset
+      def base
+        node.base
+      end
+
       # template mapping
 
       map_template :bitset, :bitset
