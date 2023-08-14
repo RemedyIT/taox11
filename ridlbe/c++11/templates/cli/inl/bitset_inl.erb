@@ -4,7 +4,7 @@
 %#  Constructor inlines
 %#
 %#  Initializer CTOR
-%   _ms = members.dup
+%   _ms = bitfields.dup
 inline <%= scoped_cxxtype %>::<%= cxxname %> (
 %   unless base.nil?
   <%= base.cxxname %> _base<%= _ms.empty? ? ')' : ',' %>
@@ -12,30 +12,29 @@ inline <%= scoped_cxxtype %>::<%= cxxname %> (
 %   unless _ms.empty?
 %     while !_ms.empty?
 %       _m = _ms.shift
-%       if _m.is_array?
-  <%= "#{_m.cxx_in_type} #{_m.cxxname}" %><%= _ms.empty? ? ')' : ',' %>
-%       else
   <%= "#{_m.cxx_byval_type} #{_m.cxxname}" %><%= _ms.empty? ? ')' : ',' %>
-%       end
 %     end
 %   end
 %   _pfx = nil
 %   unless base.nil?
   : <%= base.cxxname %> (std::move(_base))<% unless _ms.empty? %>,<% end %>
+%   end
+  <% if base.nil? %>:<% else %>,<% end %> _taox11_<%= cxxname.downcase %> {
+%# Change formatting
+%   bitfields.each do |_m|
+% unless _m.cxxname.empty?
+ <%= _pfx %><%= _m.cxxname %>
+% end
 %     _pfx = ', ' unless _pfx
 %   end
-%   members.each do |_m|
-  <%= _pfx || ': ' %><%= _m.cxxname %>_ (std::move (<%= _m.cxxname %>))
-%     _pfx = ', ' unless _pfx
-%   end
+}
 {
 }
 
-% end
-inline void <%= scoped_cxxtype %>::swap (<%= scoped_cxx_out_type %><% if member_count > 0 %> s<% end %>)
+inline void <%= scoped_cxxtype %>::swap (<%= scoped_cxx_out_type %> s)
 {
 %# Add support for base
-% members.each do |_m|
-  std::swap (this-><%= _m.cxxname %>_, s.<%= _m.cxxname %>_);
-% end
+%# bitfields.each do |_m|
+  std::swap (this->_taox11_<%= cxxname.downcase %>, s._taox11_<%= cxxname.downcase %>);
+%# end
 }

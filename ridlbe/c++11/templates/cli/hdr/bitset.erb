@@ -11,6 +11,21 @@ public:
   <%= cxxname %> (<%= cxxname %>&&) = default;
   <%= cxxname %>& operator= (const <%= cxxname %>&) = default;
   <%= cxxname %>& operator= (<%= cxxname %>&&) = default;
+%unless base.nil?
+  using <%= base.cxxname %>::<%= base.cxxname %>;
+%end
+%_ms = bitfields.dup
+  /// Constructor which accepts value for all members
+  explicit inline <%= cxxname %> (
+%unless base.nil?
+    <%= base.cxxname %> _base<%= _ms.empty? ? ');' : ',' %>
+%end
+%unless _ms.empty?
+%  while !_ms.empty?
+%    _m = _ms.shift
+    <%= "#{_m.cxx_byval_type} #{_m.cxxname}" %><%= _ms.empty? ? ');' : ',' %>
+%  end
+%end
 
 %bitfields.each do |_m|
 % unless _m.cxxname.empty?
@@ -18,6 +33,9 @@ public:
   inline <%= _m.cxx_in_type %> <%= _m.cxxname %> () const { return this->_taox11_<%= cxxname.downcase %>.<%= _m.cxxname %>; }
 % end
 %end
+
+  /// Exchange the value of two bitsets in an efficient matter
+  inline void swap (<%= cxx_inout_type %> s);
 
 private:
   struct
