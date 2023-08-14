@@ -1,5 +1,5 @@
 /**
- * @file bitfield_65.idl
+ * @file bitset_inherit_struct.idl
  * @author Johnny Willemsen
  *
  * ridlc shall reject use of a bitset which inherits from a struct
