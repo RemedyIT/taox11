@@ -4,6 +4,7 @@
 %#  Constructor inlines
 %#
 %#  Initializer CTOR
+% if member_count > 0 || !base.nil?
 %   _ms = members.dup
 inline <%= scoped_cxxtype %>::<%= cxxname %> (
 %   unless base.nil?
