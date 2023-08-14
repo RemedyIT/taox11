@@ -255,7 +255,7 @@ module IDL
             @__erb_out = __output__
             @__extra_props = __extra_props__
             @__template = __template__
-            _erb = if (RUBY_VERSION.split('.').map { |x| x.to_i } <=> [2, 6, 0]) < 0
+            _erb = if (RUBY_VERSION.split('.').map { |x| x.to_i } <=> [2, 6, 0]).negative?
                      # TODO: remove this as soon as we do not need to support ancient Ruby anymore
                      ERB.new(__template__.code, nil, '%', '@__erb_out.erbout')
                    else

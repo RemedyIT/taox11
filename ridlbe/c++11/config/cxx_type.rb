@@ -444,7 +444,7 @@ module IDL
 
     class String
       def cxx_type(_scope = nil)
-        (size.to_i > 0) ? "TAOX11_IDL::bounded_string<#{size}>" : 'std::string'
+        (size.to_i.positive?) ? "TAOX11_IDL::bounded_string<#{size}>" : 'std::string'
       end
 
       def proxy_cxxtype(_scope = nil)
@@ -460,7 +460,7 @@ module IDL
       end
 
       def cxx_member_type_name
-        (size.to_i > 0) ? "bounded_string<#{size}>" : 'string'
+        (size.to_i.positive?) ? "bounded_string<#{size}>" : 'string'
       end
 
       def value_to_s(v, _scope = nil)
@@ -468,7 +468,7 @@ module IDL
       end
 
       def is_standard_type?
-        self.size.to_i == 0
+        self.size.to_i.zero?
       end
 
       def os_fmt
@@ -478,7 +478,7 @@ module IDL
 
     class WString
       def cxx_type(_scope = nil)
-        (size.to_i > 0) ? "TAOX11_IDL::bounded_wstring<#{size}>" : 'std::wstring'
+        (size.to_i.positive?) ? "TAOX11_IDL::bounded_wstring<#{size}>" : 'std::wstring'
       end
 
       def proxy_cxxtype(_scope = nil)
@@ -494,7 +494,7 @@ module IDL
       end
 
       def cxx_member_type_name
-        (size.to_i > 0) ? "bounded_wstring<#{size}>" : 'wstring'
+        (size.to_i.positive?) ? "bounded_wstring<#{size}>" : 'wstring'
       end
 
       def value_to_s(v, _scope = nil)
@@ -517,7 +517,7 @@ module IDL
       end
 
       def is_standard_type?
-        self.size.to_i == 0
+        self.size.to_i.zero?
       end
 
       def os_fmt
@@ -911,15 +911,15 @@ module IDL
 
     class Sequence
       def cxx_type(scope = nil)
-        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.cxx_member_type(scope)}, #{size}>" : "std::vector<#{basetype.cxx_member_type(scope)}>"
+        (size.to_i.positive?) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.cxx_member_type(scope)}, #{size}>" : "std::vector<#{basetype.cxx_member_type(scope)}>"
       end
 
       def proxy_cxxtype(scope = nil)
-        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.proxy_cxxtype(scope)}, #{size}>" : "std::vector<#{basetype.proxy_cxxtype(scope)}>"
+        (size.to_i.positive?) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.proxy_cxxtype(scope)}, #{size}>" : "std::vector<#{basetype.proxy_cxxtype(scope)}>"
       end
 
       def resolved_cxx_type(scope = nil)
-        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::vector<#{basetype.resolved_cxx_member_type(scope)}>"
+        (size.to_i.positive?) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::vector<#{basetype.resolved_cxx_member_type(scope)}>"
       end
 
       def base_traits_cxx_typename
@@ -934,15 +934,15 @@ module IDL
 
     class Map
       def cxx_type(scope = nil)
-        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.cxx_member_type(scope)}, #{valuetype.cxx_member_type(scope)}, #{size}>" : "std::map<#{keytype.cxx_member_type(scope)}, #{valuetype.cxx_member_type(scope)}>"
+        (size.to_i.positive?) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.cxx_member_type(scope)}, #{valuetype.cxx_member_type(scope)}, #{size}>" : "std::map<#{keytype.cxx_member_type(scope)}, #{valuetype.cxx_member_type(scope)}>"
       end
 
       def proxy_cxxtype(scope = nil)
-        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.proxy_cxxtype(scope)}, #{valuetype.proxy_cxxtype(scope)}, #{size}>" : "std::map<#{keytype.proxy_cxxtype(scope)}, #{valuetype.proxy_cxxtype(scope)}>"
+        (size.to_i.positive?) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.proxy_cxxtype(scope)}, #{valuetype.proxy_cxxtype(scope)}, #{size}>" : "std::map<#{keytype.proxy_cxxtype(scope)}, #{valuetype.proxy_cxxtype(scope)}>"
       end
 
       def resolved_cxx_type(scope = nil)
-        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.resolved_cxx_member_type(scope)}, #{valuetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::map<#{keytype.resolved_cxx_member_type(scope)}, #{valuetype.resolved_cxx_member_type(scope)}>"
+        (size.to_i.positive?) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.resolved_cxx_member_type(scope)}, #{valuetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::map<#{keytype.resolved_cxx_member_type(scope)}, #{valuetype.resolved_cxx_member_type(scope)}>"
       end
 
       def key_traits_cxx_typename
