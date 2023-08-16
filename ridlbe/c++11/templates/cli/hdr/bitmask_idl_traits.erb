@@ -25,14 +25,15 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
 {
   inline OStrm_& operator ()(OStrm_& os_, <%= scoped_cxx_in_type %> val_)
   {
-% # TODO
-    switch (val_)
+    bool first_ {true};
+%bitvalues.each do |e|
+    if (static_cast<bool>(val_ & <%= scoped_cxxtype %>::<%=e.cxxname %>))
     {
-% bitvalues.each do |e|
-
-//      case <%= scoped_cxxtype %>::<%=e.cxxname %>: os_ << "<%= formatted_cxxname %>::<%=e.cxxname %>"; break;
-%end
+      if (!first_) os_ << "|";
+      os_ << "<%= formatted_cxxname %>::<%=e.cxxname %>";
+      first_ = false;
     }
+%end
     return os_;
   }
 };

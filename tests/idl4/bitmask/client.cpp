@@ -15,18 +15,29 @@ int main (int /*argc*/, char* /*argv*/[])
 {
   // Just compilation test
 
-  MyBitMask my_bitmask = MyBitMask::flag0;
+  MyBitMask my_bitmask1 = MyBitMask::flag0;
 
   // static_cast is necessary when we map to an `enum class`, when we map to an `enum` the static_cast
-  // is not necessary but that puts the enum members into the containing namespace
-  if (static_cast<bool>(my_bitmask & MyBitMask::flag0))
+  // is not necessary but that puts the enum members into the containing namespace. The IDL4 specification
+  // does put IDL enums in the containing namespace, but doesn't do that for bitmask members
+  if (static_cast<bool>(my_bitmask1 & MyBitMask::flag0))
   {
-    TAOX11_TEST_INFO << "Flag my_bitmask correctly set" << std::endl;
+    TAOX11_TEST_INFO << "Flag my_bitmask1 correctly set: " << my_bitmask1 << std::endl;
   }
   else
   {
-    TAOX11_TEST_ERROR << "Flag my_bitmask NOT set" << std::endl;
+    TAOX11_TEST_ERROR << "Flag my_bitmask1 NOT set" << my_bitmask1 << std::endl;
   }
+  my_bitmask1 = my_bitmask1 | MyBitMask::flag1;
+  if (static_cast<bool>(my_bitmask1 & MyBitMask::flag0) && static_cast<bool>(my_bitmask1 & MyBitMask::flag1))
+  {
+    TAOX11_TEST_INFO << "Flag my_bitmask1 correctly set: " << my_bitmask1 << std::endl;
+  }
+  else
+  {
+    TAOX11_TEST_ERROR << "Flag my_bitmask1 NOT set: " << static_cast<uint16_t>(my_bitmask1) << std::endl;
+  }
+
   if (!std::is_same<std::underlying_type_t<MyBitMaskBound8>, uint8_t>::value)
   {
     TAOX11_TEST_ERROR << "Type of MyBitMaskBound8 is not uint8_t" << std::endl;
