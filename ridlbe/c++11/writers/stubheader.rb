@@ -761,6 +761,10 @@ module IDL
         visitor(BitmaskVisitor).visit_os(node)
       end
 
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_os(node)
+      end
+
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
         # nothing to do if this is just an alias for another defined type

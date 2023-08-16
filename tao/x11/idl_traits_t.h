@@ -109,29 +109,30 @@ namespace TAOX11_NAMESPACE
     };
 
     template <typename OStrm_>
+    struct formatter<int8_t, OStrm_>
+    {
+      inline OStrm_& operator ()(OStrm_& os_, int8_t val_)
+      { os_ << std::hex << static_cast<int16_t> (val_) << std::dec; return os_;}
+    };
+
+    template <typename OStrm_>
     struct formatter<uint8_t, OStrm_>
     {
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          uint8_t val_)
+      inline OStrm_& operator ()(OStrm_& os_, uint8_t val_)
       { os_ << std::hex << static_cast<uint16_t> (val_) << std::dec; return os_;}
     };
 
     template <typename OStrm_>
     struct formatter<char, OStrm_>
     {
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          char val_)
+      inline OStrm_& operator ()(OStrm_& os_, char val_)
       { os_ << '\'' << val_ << '\''; return os_; }
     };
 
     template <>
     struct formatter<char, std::basic_ostream<wchar_t>>
     {
-      inline std::basic_ostream<wchar_t>& operator ()(
-          std::basic_ostream<wchar_t>& os_,
-          char val_)
+      inline std::basic_ostream<wchar_t>& operator ()(std::basic_ostream<wchar_t>& os_, char val_)
       { return os_ << L'\''
             << std::use_facet<std::ctype<wchar_t>> (os_.getloc ()).widen (val_)
             << L'\'';
@@ -141,18 +142,14 @@ namespace TAOX11_NAMESPACE
     template <typename OStrm_>
     struct formatter<wchar_t, OStrm_>
     {
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          wchar_t val_)
+      inline OStrm_& operator ()(OStrm_& os_, wchar_t val_)
       { os_ << L'\'' << val_ << L'\''; return os_; }
     };
 
     template <>
     struct formatter<wchar_t, std::basic_ostream<char>>
     {
-      inline std::basic_ostream<char>& operator ()(
-          std::basic_ostream<char>& os_,
-          wchar_t val_)
+      inline std::basic_ostream<char>& operator ()(std::basic_ostream<char>& os_, wchar_t val_)
       { return os_ << "L'"
                    << std::use_facet<std::ctype<wchar_t>> (os_.getloc ()).narrow (val_, '?')
                    << '\'';
@@ -162,36 +159,28 @@ namespace TAOX11_NAMESPACE
     template <typename OStrm_>
     struct formatter<std::string, OStrm_>
     {
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          std::string val_)
+      inline OStrm_& operator ()(OStrm_& os_, std::string val_)
       { os_ << '"' << val_ << '"'; return os_; }
     };
 
     template <>
     struct formatter<std::string, std::basic_ostream<wchar_t>>
     {
-      inline std::basic_ostream<wchar_t>& operator ()(
-          std::basic_ostream<wchar_t>& os_,
-          std::string val_)
+      inline std::basic_ostream<wchar_t>& operator ()(std::basic_ostream<wchar_t>& os_, std::string val_)
       { return os_ << '"' << ACE_Ascii_To_Wide (val_.c_str ()).wchar_rep () << '"'; }
     };
 
     template <typename OStrm_>
     struct formatter<std::wstring, OStrm_>
     {
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          std::string val_)
+      inline OStrm_& operator ()(OStrm_& os_, std::string val_)
       { os_ << L'"' << val_ << '"'; return os_; }
     };
 
     template <>
     struct formatter<std::wstring, std::basic_ostream<char>>
     {
-      inline std::basic_ostream<char>& operator ()(
-          std::basic_ostream<char>& os_,
-          std::wstring val_)
+      inline std::basic_ostream<char>& operator ()(std::basic_ostream<char>& os_, std::wstring val_)
       { return os_ << "L\"" << ACE_Wide_To_Ascii (val_.c_str ()).char_rep () << '"'; }
     };
 
@@ -212,9 +201,7 @@ namespace TAOX11_NAMESPACE
         { elem_traits::write_on (this->os_, el_) << ','; return os_;}
       };
 
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          typename traits::in_type val_)
+      inline OStrm_& operator ()(OStrm_& os_, typename traits::in_type val_)
       {
         if (val_.empty ())
         {
@@ -250,9 +237,7 @@ namespace TAOX11_NAMESPACE
         { elem_traits::write_on (this->os_, el_) << ','; return os_; }
       };
 
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          typename traits::in_type val_)
+      inline OStrm_& operator ()(OStrm_& os_, typename traits::in_type val_)
       {
         if (val_.empty ())
         {
@@ -290,9 +275,7 @@ namespace TAOX11_NAMESPACE
         { this->os_ << "{"; key_traits::write_on (this->os_, el_.first) << ','; return value_traits::write_on (this->os_, el_.second) << "},"; }
       };
 
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          typename traits::in_type val_)
+      inline OStrm_& operator ()(OStrm_& os_, typename traits::in_type val_)
       {
         if (val_.empty ())
         {
@@ -332,9 +315,7 @@ namespace TAOX11_NAMESPACE
         { this->os_ << "{"; return key_traits::write_on (this->os_, el_.first) << ','; return value_traits::write_on (this->os_, el_.second) << "},"; }
       };
 
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          typename traits::in_type val_)
+      inline OStrm_& operator ()(OStrm_& os_, typename traits::in_type val_)
       {
         if (val_.empty ())
         {
@@ -383,9 +364,7 @@ namespace TAOX11_NAMESPACE
         { elem_formatter () (this->os_, el_) << ','; return os_; }
       };
 
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          const std::array<T, N>& val_)
+      inline OStrm_& operator ()(OStrm_& os_, const std::array<T, N>& val_)
       {
         if (val_.empty ())
         {
