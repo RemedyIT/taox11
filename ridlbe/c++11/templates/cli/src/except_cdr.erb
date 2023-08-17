@@ -1,8 +1,6 @@
 
 // generated from <%= ridl_template_path %>
-TAO_CORBA::Boolean operator<< (
-    TAO_OutputCDR &strm,
-    const <%= scoped_cxxname %> &_tao_aggregate)
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> &_tao_aggregate)
 {
   // First marshal the repository ID and then all members
   return (strm << _tao_aggregate._rep_id ())<%= (member_count == 0 ? ';' : ' &&') %>

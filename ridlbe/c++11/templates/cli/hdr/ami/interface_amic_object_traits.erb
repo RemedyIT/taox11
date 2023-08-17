@@ -23,10 +23,7 @@ namespace TAOX11_NAMESPACE
     object_traits<<%= amic_scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
 %     end
 %   end
-  } // namespace CORBA
 
-  namespace CORBA
-  {
     template<>
     struct amic_traits <<%= scoped_cxxtype %>> :
       public IDL::common_byval_traits <CORBA::object_reference <<%= amic_scoped_cxxtype %>>>,

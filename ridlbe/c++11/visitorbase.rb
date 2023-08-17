@@ -491,11 +491,16 @@ module IDL
 
       def is_stdlib_type?
         case self._resolved_idltype
-        when IDL::Type::String, IDL::Type::WString
+        when IDL::Type::String,
+             IDL::Type::WString
           true
-        when IDL::Type::Object, IDL::Type::Any, IDL::Type::Valuetype
+        when IDL::Type::Object,
+             IDL::Type::Any,
+             IDL::Type::Valuetype
           true
-        when IDL::Type::Enum, IDL::Type::BitMask
+        when IDL::Type::Enum,
+             IDL::Type::BitMask,
+             IDL::Type::BitSet
           false
         else
           self._idltype.is_pod?

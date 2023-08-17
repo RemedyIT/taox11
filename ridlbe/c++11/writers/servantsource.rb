@@ -219,7 +219,9 @@ module IDL
              IDL::Type::Float,
           add_include('tao/x11/portable_server/basic_sarguments.h')
           add_include('tao/x11/basic_arguments.h')
-        when IDL::Type::Enum
+        when IDL::Type::Enum,
+             IDL::Type::BitMask,
+             IDL::Type::BitSet
           add_include('tao/x11/portable_server/basic_sargument_t.h')
           add_include('tao/x11/basic_argument_t.h')
         when IDL::Type::String,
@@ -330,6 +332,10 @@ module IDL
           visitor(StructVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Enum
           visitor(EnumVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
+        when IDL::Type::BitSet
+          visitor(BitsetVisitor).visit_sarg_traits(res_idl_type.node)# unless is_tracked?(res_idl_type.node)
+        when IDL::Type::BitMask
+          visitor(BitmaskVisitor).visit_sarg_traits(res_idl_type.node)# unless is_tracked?(res_idl_type.node)
         when IDL::Type::Union
           visitor(UnionVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Sequence

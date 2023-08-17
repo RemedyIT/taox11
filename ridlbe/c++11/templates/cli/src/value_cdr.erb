@@ -1,9 +1,7 @@
 
 // generated from <%= ridl_template_path %>
 // CDR streaming operator specializations
-TAO_CORBA::Boolean operator<< (
-  TAO_OutputCDR &strm,
-  <%= scoped_cxx_in_type %> _vbox)
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, <%= scoped_cxx_in_type %> _vbox)
 {
   return
     TAOX11_CORBA::ValueBase::_obv_marshal (
@@ -12,9 +10,7 @@ TAO_CORBA::Boolean operator<< (
       reinterpret_cast<ptrdiff_t> (std::addressof(<%= scoped_cxxname %>::_obv_unmarshal)));
 }
 
-TAO_CORBA::Boolean operator>> (
-  TAO_InputCDR &strm,
-  <%= scoped_cxx_out_type %> _vbox)
+TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxx_out_type %> _vbox)
 {
   return ::<%= scoped_cxxname %>::_obv_unmarshal (strm, _vbox);
 }

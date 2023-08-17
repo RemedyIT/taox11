@@ -360,6 +360,20 @@ module IDL
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
       end
 
+      def visit_bitmask(_node)
+        if generate_typecodes?
+          add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h')
+        end
+        add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
+      end
+
+      def visit_bitset(_node)
+        if generate_typecodes?
+          add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h')
+        end
+        add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
+      end
+
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
@@ -411,7 +425,9 @@ module IDL
              IDL::Type::Void
           add_include('tao/x11/basic_arguments.h')
           add_include('tao/x11/portable_server/basic_sarguments.h')
-        when IDL::Type::Enum
+        when IDL::Type::Enum,
+             IDL::Type::BitMask,
+             IDL::Type::BitSet
           add_include('tao/x11/portable_server/basic_sargument_t.h')
         when IDL::Type::String,
              IDL::Type::WString
@@ -893,6 +909,10 @@ module IDL
           visitor(StructVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Enum
           visitor(EnumVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
+        when IDL::Type::BitMask
+          visitor(BitmaskVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
+        when IDL::Type::BitSet
+          visitor(BitsetVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Union
           visitor(UnionVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Sequence

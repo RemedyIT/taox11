@@ -4,17 +4,14 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 #if !defined (_INTF_<%= _intf_traits_decl_incl_guard_ %>_OBJ_REF_TRAITS_)
 #define _INTF_<%= _intf_traits_decl_incl_guard_ %>_OBJ_REF_TRAITS_
 % unless is_abstract?
-namespace TAO
+template<>
+struct TAO::Objref_Traits<<%= scoped_proxy_cxxname %>>
 {
-  template<>
-  struct Objref_Traits<<%= scoped_proxy_cxxname %>>
-  {
-    static <%= scoped_proxy_cxxname %>_ptr duplicate (<%= scoped_proxy_cxxname %>_ptr p);
-    static void release (<%= scoped_proxy_cxxname %>_ptr p);
-    static <%= scoped_proxy_cxxname %>_ptr nil ();
-    static ::TAO_CORBA::Boolean marshal (const <%= scoped_proxy_cxxname %>_ptr p, TAO_OutputCDR & cdr);
-  };
-} // namespace TAO
+  static <%= scoped_proxy_cxxname %>_ptr duplicate (<%= scoped_proxy_cxxname %>_ptr p);
+  static void release (<%= scoped_proxy_cxxname %>_ptr p);
+  static <%= scoped_proxy_cxxname %>_ptr nil ();
+  static ::TAO_CORBA::Boolean marshal (const <%= scoped_proxy_cxxname %>_ptr p, TAO_OutputCDR & cdr);
+};
 % end
 #endif // !_INTF_<%= _intf_traits_decl_incl_guard_ %>_OBJ_REF_TRAITS_
 TAO_END_VERSIONED_NAMESPACE_DECL

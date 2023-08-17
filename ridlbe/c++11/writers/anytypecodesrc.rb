@@ -148,6 +148,16 @@ module IDL
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
       end
 
+      def visit_bitmask(_node)
+        add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h') if params[:gen_typecodes]
+        add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
+      end
+
+      def visit_bitset(_node)
+        add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h') if params[:gen_typecodes]
+        add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
+      end
+
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
@@ -191,7 +201,9 @@ module IDL
              IDL::Type::Double,
              IDL::Type::Float,
              IDL::Type::Void
-        when IDL::Type::Enum
+        when IDL::Type::Enum,
+             IDL::Type::BitMask,
+             IDL::Type::BitSet
         when IDL::Type::String
         when IDL::Type::WString
         when IDL::Type::Object,

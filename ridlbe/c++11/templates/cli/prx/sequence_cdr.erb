@@ -5,25 +5,12 @@
 // MD5            : <%= alias_md5 %>
 #if !defined (_ALIAS_<%= alias_md5 %>_ARG_TRAITS_)
 #define _ALIAS_<%= alias_md5 %>_ARG_TRAITS_
-namespace TAOX11_NAMESPACE
+/// Argument traits specializations for <%= name %>
+template<>
+class TAOX11_NAMESPACE::Arg_Traits<<%= scoped_cxxtype %>>
+  : public Basic_Arg_Traits_T<<%= scoped_cxxtype %>, <% if generate_any_support? %><% if generate_anyinsert_adapter? %>Any_Insert_Policy_AnyInsert_Adapter<% else %>Any_Insert_Policy_Stream<% end %><% else %>Any_Insert_Policy_Noop<% end %>>
 {
-  /// Argument traits specializations for <%= name %>
-  template<>
-  class Arg_Traits<<%= scoped_cxxtype %>>
-    : public Basic_Arg_Traits_T<
-        <%= scoped_cxxtype %>,
-% if generate_any_support?
-%   if generate_anyinsert_adapter?
-        Any_Insert_Policy_AnyInsert_Adapter>
-%   else
-        Any_Insert_Policy_Stream>
-%   end
-% else
-        Any_Insert_Policy_Noop>
-% end
-  {
-  };
-} // namespace TAOX11_NAMESPACE
+};
 
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 

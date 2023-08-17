@@ -198,6 +198,14 @@ module IDL
         add_include('tao/x11/basic_argument_t.h')
       end
 
+      def visit_bitmask(_node)
+        add_include('tao/x11/basic_argument_t.h')
+      end
+
+      def visit_bitset(_node)
+        add_include('tao/x11/basic_argument_t.h')
+      end
+
       def visit_typedef(node)
         return if node.is_local?
 
@@ -327,6 +335,12 @@ module IDL
         return if params[:no_cdr_streaming]
 
         visitor(BitmaskVisitor).visit_cdr(node)
+      end
+
+      def visit_bitset(node)
+        return if params[:no_cdr_streaming]
+
+        visitor(BitsetVisitor).visit_cdr(node)
       end
 
       def visit_typedef(node)
@@ -522,6 +536,14 @@ module IDL
 
       def visit_enum(node)
         visitor(EnumVisitor).visit_typecode(node)
+      end
+
+      def visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_typecode(node)
+      end
+
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_typecode(node)
       end
 
       def visit_typedef(node)

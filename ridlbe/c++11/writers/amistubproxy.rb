@@ -225,6 +225,14 @@ module IDL
         add_include('tao/x11/basic_argument_t.h')
       end
 
+      def visit_bitmask(_node)
+        add_include('tao/x11/basic_argument_t.h')
+      end
+
+      def visit_bitset(_node)
+        add_include('tao/x11/basic_argument_t.h')
+      end
+
       def visit_typedef(node)
         return if node.is_local?
 
@@ -250,7 +258,9 @@ module IDL
              IDL::Type::Double,
              IDL::Type::Float,
              IDL::Type::Void
-        when IDL::Type::Enum
+        when IDL::Type::Enum,
+             IDL::Type::BitMask
+             IDL::Type::BitSet
           add_include('tao/x11/basic_argument_t.h')
         when IDL::Type::String
         when IDL::Type::WString

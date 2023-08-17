@@ -3,7 +3,6 @@
 % _traits_incl_guard_ = scoped_cxxname.to_include_guard
 # if !defined (_<%= _traits_incl_guard_ %>_TRAITS_)
 # define _<%= _traits_incl_guard_ %>_TRAITS_
-/// Argument traits specializations for <%= name %>
 template<>
 class TAOX11_NAMESPACE::Arg_Traits<<%= scoped_cxxtype %>>
   : public Basic_Arg_Traits_T<<%= scoped_cxxtype %>, <% if generate_any_support? %>Any_Insert_Policy_Stream<% else %>Any_Insert_Policy_Noop<% end %>>
