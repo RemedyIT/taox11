@@ -9,12 +9,7 @@ namespace TAOX11_NAMESPACE
   template<>
   class Arg_Traits<<%= scoped_cxxtype %>>
     : public Basic_Arg_Traits_T<
-        <%= scoped_cxxtype %>,
-% if generate_any_support?
-        Any_Insert_Policy_Stream>
-% else
-        Any_Insert_Policy_Noop>
-% end
+        <%= scoped_cxxtype %>, <% if generate_any_support? %>Any_Insert_Policy_Stream<% else %>Any_Insert_Policy_Noop<% end %>>
   {
   };
 } // namespace TAOX11_NAMESPACE
