@@ -55,5 +55,66 @@ int main (int /*argc*/, char* /*argv*/[])
     TAOX11_TEST_ERROR << "Type of MyBitMaskBound64 is not uint64_t" << std::endl;
   }
 
-  return 0;
+  int error_count = 0;
+  try
+    {
+      IDL::traits<CORBA::ORB>::ref_type _orb = CORBA::ORB_init (argc, argv);
+
+      if (!_orb)
+      {
+          TAOX11_TEST_ERROR << "ERROR: CORBA::ORB_init (argc, argv) returned null ORB." << std::endl;
+          return 1;
+      }
+
+      IDL::traits<CORBA::Object>::ref_type obj = _orb->string_to_object ("file://test.ior");
+
+      if (!obj)
+        {
+          TAOX11_TEST_ERROR << "ERROR: string_to_object(<ior>) returned null reference." << std::endl;
+          return 1;
+        }
+
+      TAOX11_TEST_DEBUG << "retrieved object reference" << std::endl;
+
+      IDL::traits<Test::Foo>::ref_type foo = IDL::traits<Test::Foo>::narrow (obj);
+
+      if (!foo)
+        {
+          TAOX11_TEST_ERROR << "ERROR: IDL::traits<Test::Foo>::narrow (obj) returned null object." << std::endl;
+          return 1;
+        }
+      TAOX11_TEST_DEBUG << "narrowed Foo interface" << std::endl;
+
+      Test::MyBitMask sin {MyBitMask::flag0};
+      Test::MyBitMask sinout;
+      Test::MyBitMask sout;
+
+      TAOX11_TEST_DEBUG << "Sending MyBitMask sin: " << sin << " sinout: " << sinout << std::endl;
+      Test::MyBitMask sret = foo->test_mybitmask (sin, sinout, sout);
+      TAOX11_TEST_DEBUG << "Received MyBitMask sret: " << sret << " sinout: " << sinout << " sout: " << sout << std::endl;
+
+      Test::MyBitMaskBound8 sin5 {MyBitMaskBound8::flag16_2};
+      Test::MyBitMaskBound8 sinout5;
+      Test::MyBitMaskBound8 sout5;
+
+      TAOX11_TEST_DEBUG << "Sending MyBitMaskBound8 sin: " << sin5 << " sinout: " << sinout5 << std::endl;
+      Test::MyBitMask sret5 = foo->test_mybitmaskbound8 (sin5, sinout5, sout5);
+      TAOX11_TEST_DEBUG << "Received MyBitMaskBound8 sret: " << sret5 << " sinout: " << sinout5 << " sout: " << sout5 << std::endl;
+
+      TAOX11_TEST_DEBUG << "shutting down..." << std::endl;
+      foo->shutdown ();
+      _orb->destroy ();
+    }
+  catch (const CORBA::BAD_PARAM& e)
+    {
+      TAOX11_TEST_ERROR << "main - ERROR - Unexpected CORBA::BAD_PARAM exception caught"
+        << e << std::endl;
+      ++error_count;
+    }
+  catch (const std::exception& e)
+    {
+      TAOX11_TEST_ERROR << "main - ERROR - Unexpected exception caught: " << e << std::endl;
+      ++error_count;
+    }
+  return error_count;
 }

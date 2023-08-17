@@ -557,6 +557,12 @@ module IDL
         visitor(BitmaskVisitor).visit_cdr(node)
       end
 
+      def visit_bitset(node)
+        return if params[:no_cdr_streaming]
+
+        visitor(BitsetVisitor).visit_cdr(node)
+      end
+
       def visit_typedef(node)
         return if node.is_local? || params[:no_cdr_streaming]
         # nothing to do if this is just an alias for another defined type
@@ -625,6 +631,14 @@ module IDL
         visitor(EnumVisitor).visit_anyop(node)
       end
 
+      def visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_anyop(node)
+      end
+
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_anyop(node)
+      end
+
       def visit_typedef(node)
         # nothing to do if this is just an alias for another defined type
         return if node.idltype.is_a?(IDL::Type::ScopedName)
@@ -674,6 +688,14 @@ module IDL
 
       def visit_enum(node)
         visitor(EnumVisitor).visit_typecode(node)
+      end
+
+      def visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_typecode(node)
+      end
+
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_typecode(node)
       end
 
       def visit_typedef(node)
@@ -780,6 +802,14 @@ module IDL
 
       def visit_enum(node)
         visitor(EnumVisitor).visit_tao_typecode(node)
+      end
+
+      def visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_tao_typecode(node)
+      end
+
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_tao_typecode(node)
       end
 
       def visit_typedef(node)

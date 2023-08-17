@@ -191,7 +191,9 @@ module IDL
              IDL::Type::Double,
              IDL::Type::Float,
              IDL::Type::Void
-        when IDL::Type::Enum
+        when IDL::Type::Enum,
+             IDL::Type::Bitmask,
+             IDL::Type::Bitset
         when IDL::Type::String
         when IDL::Type::WString
         when IDL::Type::Object,

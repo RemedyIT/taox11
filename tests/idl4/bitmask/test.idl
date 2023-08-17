@@ -38,3 +38,19 @@ bitmask MyBitMaskBound64 {
   flag64_2,
   flag64_3
 };
+
+module Test
+{
+  interface Foo
+  {
+    MyBitMask test_mybitmask (in MyBitMask sin,
+      inout MyBitMask sinout,
+      out MyBitMask sout);
+    MyBitMaskBound8 test_mybitmaskbound8 (in MyBitMaskBound8 sin,
+      inout MyBitMaskBound8 sinout,
+      out MyBitMaskBound8 sout);
+
+    /// A method to shutdown the ORB
+    oneway void shutdown ();
+  };
+};
