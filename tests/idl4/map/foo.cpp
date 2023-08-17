@@ -15,25 +15,25 @@ Foo::Foo (IDL::traits<CORBA::ORB>::ref_type orb,
 {
 }
 
-Test::MyBitMask
-Foo::test_mybitmask (const Test::MyBitMask & sin,
-  Test::MyBitMask & sinout,
-  Test::MyBitMask & sout)
+Test::StringLongMap
+Foo::test_string_long_map (const Test::StringLongMap & sin,
+  Test::StringLongMap & sinout,
+  Test::StringLongMap & sout)
 {
   sout = sin;
   sinout = sin;
-  Test::MyBitMask sret = sin;
+  Test::StringLongMap sret = sin;
   return sret;
 }
 
-Test::MyBitMaskBound8
-Foo::test_mybitmaskbound8 (const Test::MyBitMaskBound8 & sin,
-  Test::MyBitMaskBound8 & sinout,
-  Test::MyBitMaskBound8 & sout)
+Test::StringLongMap5
+Foo::test_string_long_map5 (const Test::StringLongMap5 & sin,
+  Test::StringLongMap5 & sinout,
+  Test::StringLongMap5 & sout)
 {
   sout = sin;
   sinout = sin;
-  Test::MyBitMaskBound8 sret = sin;
+  Test::StringLongMap5 sret = sin;
   return sret;
 }
 
