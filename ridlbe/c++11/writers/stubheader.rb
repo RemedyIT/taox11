@@ -677,6 +677,14 @@ module IDL
         visitor(EnumVisitor).visit_anyop(node)
       end
 
+      def visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_anyop(node)
+      end
+
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_anyop(node)
+      end
+
       def visit_typedef(node)
         # nothing to do if this is just an alias for another defined type
         return if node.idltype.is_a?(IDL::Type::ScopedName)

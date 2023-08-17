@@ -360,6 +360,20 @@ module IDL
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
       end
 
+      def visit_bitmask(_node)
+        if generate_typecodes?
+          add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h')
+        end
+        add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
+      end
+
+      def visit_bitset(_node)
+        if generate_typecodes?
+          add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h')
+        end
+        add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
+      end
+
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
