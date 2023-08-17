@@ -1,8 +1,6 @@
 
 // generated from <%= ridl_template_path %>
-TAO_CORBA::Boolean operator<< (
-    TAO_OutputCDR &strm,
-    const <%= scoped_cxxname %> &_tao_union)
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> &_tao_union)
 {
   if (!(strm <<<%= switchtype.cdr_from_fmt % "_tao_union._d ()" %>))
   {
@@ -62,9 +60,7 @@ TAO_CORBA::Boolean operator<< (
   return result;
 }
 
-TAO_CORBA::Boolean operator>> (
-    TAO_InputCDR &strm,
-    <%= scoped_cxxname %> &_tao_union)
+TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxxname %> &_tao_union)
 {
   <%= scoped_switch_cxxtype %> _tao_discriminant<%= switchtype.zero_initializer %>;
   if (!(strm >> <%= switchtype.cdr_to_fmt % "_tao_discriminant" %>))

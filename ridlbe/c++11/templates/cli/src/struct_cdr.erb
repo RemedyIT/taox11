@@ -1,8 +1,6 @@
 
 // generated from <%= ridl_template_path %>
-TAO_CORBA::Boolean operator<< (
-    TAO_OutputCDR &<% if member_count > 0 %>strm<% end %>,
-    const <%= scoped_cxxname %> &<% if member_count > 0 %>_tao_aggregate<% end %>)
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR &<% if member_count > 0 %>strm<% end %>, const <%= scoped_cxxname %> &<% if member_count > 0 %>_tao_aggregate<% end %>)
 {
 % if member_count > 0
   return
@@ -15,9 +13,7 @@ TAO_CORBA::Boolean operator<< (
 % end
 }
 
-TAO_CORBA::Boolean operator>> (
-    TAO_InputCDR &<% if member_count > 0 %>strm<% end %>,
-    <%= scoped_cxxname %> &<% if member_count > 0 %>_tao_aggregate<% end %>)
+TAO_CORBA::Boolean operator>> (TAO_InputCDR &<% if member_count > 0 %>strm<% end %>, <%= scoped_cxxname %> &<% if member_count > 0 %>_tao_aggregate<% end %>)
 {
 % if member_count > 0
   return

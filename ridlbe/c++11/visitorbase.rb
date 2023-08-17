@@ -500,7 +500,7 @@ module IDL
           true
         when IDL::Type::Enum,
              IDL::Type::BitMask,
-             IDL::Type::Bitset
+             IDL::Type::BitSet
           false
         else
           self._idltype.is_pod?

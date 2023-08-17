@@ -11,7 +11,7 @@
 #include "testlib/taox11_testlog.h"
 #include <type_traits>
 
-int main (int /*argc*/, char* /*argv*/[])
+int main (int argc, char* argv[])
 {
   // Just compilation test
 
@@ -85,20 +85,20 @@ int main (int /*argc*/, char* /*argv*/[])
         }
       TAOX11_TEST_DEBUG << "narrowed Foo interface" << std::endl;
 
-      Test::MyBitMask sin {MyBitMask::flag0};
-      Test::MyBitMask sinout;
-      Test::MyBitMask sout;
+      MyBitMask sin {MyBitMask::flag0};
+      MyBitMask sinout {};
+      MyBitMask sout {};
 
       TAOX11_TEST_DEBUG << "Sending MyBitMask sin: " << sin << " sinout: " << sinout << std::endl;
-      Test::MyBitMask sret = foo->test_mybitmask (sin, sinout, sout);
+      MyBitMask sret = foo->test_mybitmask (sin, sinout, sout);
       TAOX11_TEST_DEBUG << "Received MyBitMask sret: " << sret << " sinout: " << sinout << " sout: " << sout << std::endl;
 
-      Test::MyBitMaskBound8 sin5 {MyBitMaskBound8::flag16_2};
-      Test::MyBitMaskBound8 sinout5;
-      Test::MyBitMaskBound8 sout5;
+      MyBitMaskBound8 sin5 {MyBitMaskBound8::flag8_2};
+      MyBitMaskBound8 sinout5 {};
+      MyBitMaskBound8 sout5 {};
 
       TAOX11_TEST_DEBUG << "Sending MyBitMaskBound8 sin: " << sin5 << " sinout: " << sinout5 << std::endl;
-      Test::MyBitMask sret5 = foo->test_mybitmaskbound8 (sin5, sinout5, sout5);
+      MyBitMaskBound8 sret5 = foo->test_mybitmaskbound8 (sin5, sinout5, sout5);
       TAOX11_TEST_DEBUG << "Received MyBitMaskBound8 sret: " << sret5 << " sinout: " << sinout5 << " sout: " << sout5 << std::endl;
 
       TAOX11_TEST_DEBUG << "shutting down..." << std::endl;
