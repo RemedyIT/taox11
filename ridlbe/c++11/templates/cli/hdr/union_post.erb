@@ -66,8 +66,7 @@ private:
   <%= switch_cxxtype %> disc_ {<% if has_default?() || has_implicit_default?() %><%= default_label %><% else %><%= members.first.nondefault_labels.first %><% end %>};
   union u_type_
   {
-// Compilation with c++11 standard gives errors on  the ' = default' declaration
-#if !defined (ACE_HAS_CPP14) || (defined (_MSC_VER) && (_MSC_VER < 1930))
+#if defined (_MSC_VER) && (_MSC_VER < 1930)
     u_type_ ();
 #else
     u_type_ () = default;
@@ -78,7 +77,7 @@ private:
 % # Visual Studio 2019 doesn't seem to like using default, this leads to
 % # an internal compiler error, see SW331
 % if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
-#if !defined (ACE_HAS_CPP14) || (defined (_MSC_VER) && (_MSC_VER < 1930))
+#if defined (_MSC_VER) && (_MSC_VER < 1930)
     <%= _m.cxx_member_type %> <%= _m.cxxname %>_;
 #else
     <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first) %> <%= _m.zero_initializer %><% end %>;
