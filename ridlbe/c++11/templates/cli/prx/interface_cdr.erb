@@ -3,16 +3,12 @@
 % _traits_incl_guard_ = scoped_proxy_cxxname.to_include_guard
 #if !defined (_<%= _traits_incl_guard_ %>_ARG_TRAITS_)
 #define _<%= _traits_incl_guard_ %>_ARG_TRAITS_
-namespace TAOX11_NAMESPACE
+/// Arg traits specializations.
+template<>
+class TAOX11_NAMESPACE::Arg_Traits<<%= scoped_cxxtype %>>
+  : public Basic_Arg_Traits_T<<%= scoped_cxx_traits_type %>::ref_type, <% if generate_any_support? %>Any_Insert_Policy_Stream<% else %>Any_Insert_Policy_Noop<% end %>>
 {
-  // Arg traits specializations.
-  template<>
-  class  Arg_Traits<<%= scoped_cxxtype %>>
-    : public Basic_Arg_Traits_T<
-        <%= scoped_cxx_traits_type %>::ref_type, <% if generate_any_support? %>Any_Insert_Policy_Stream<% else %>Any_Insert_Policy_Noop<% end %>>
-  {
-  };
-} // namespace TAOX11_NAMESPACE
+};
 #endif // !_<%= _traits_incl_guard_ %>_ARG_TRAITS_
 
 % _cdr_incl_guard_ = scoped_cxxname.to_include_guard

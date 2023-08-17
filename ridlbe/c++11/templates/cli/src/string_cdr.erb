@@ -2,8 +2,8 @@
 // generated from <%= ridl_template_path %>
 #if defined(_ALIAS_<%= scoped_cxxname.scope_to_cxxname %>_CDR_OPS_IMPL_)
 bool _cdr_in_<%= scoped_cxxname.scope_to_cxxname %> (
-    TAO_OutputCDR &strm,
-    const IDL::traits<<%= scoped_cxxtype %>>::value_type &_bstr)
+  TAO_OutputCDR &strm,
+  const IDL::traits<<%= scoped_cxxtype %>>::value_type &_bstr)
 {
 % if is_wstring?
   return (strm << ACE_OutputCDR::from_std_wstring (_bstr, <%= bound %>));
@@ -13,8 +13,8 @@ bool _cdr_in_<%= scoped_cxxname.scope_to_cxxname %> (
 }
 
 bool _cdr_out_<%= scoped_cxxname.scope_to_cxxname %> (
-    TAO_InputCDR &strm,
-    IDL::traits<<%= scoped_cxxtype %>>::value_type &_bstr)
+  TAO_InputCDR &strm,
+  IDL::traits<<%= scoped_cxxtype %>>::value_type &_bstr)
 {
 % if is_wstring?
   return (strm >> ACE_InputCDR::to_std_wstring (_bstr, <%= bound %>));
