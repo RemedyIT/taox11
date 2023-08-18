@@ -282,13 +282,13 @@ module IDL
         super
         println
         printiln('// generated from ServantSourceSArgTraitsWriter#pre_visit')
-        printiln('namespace TAOX11_NAMESPACE')
+        printiln('namespace TAOX11_NAMESPACE::PS')
         printiln('{')
       end
 
       def post_visit(parser)
         println
-        println('} // namespace TAOX11_NAMESPACE')
+        println('} // namespace TAOX11_NAMESPACE:PS')
         super
       end
 

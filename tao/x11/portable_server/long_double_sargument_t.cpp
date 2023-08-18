@@ -15,11 +15,8 @@
 
 #if (ACE_SIZEOF_LONG_DOUBLE != 16)
 
-namespace TAOX11_NAMESPACE
+namespace TAOX11_NAMESPACE::PS
 {
-
-namespace PS {
-
 template<template <typename> class Insert_Policy>
 TAO_CORBA::Boolean
 In_Basic_SArgument_T<long double, Insert_Policy>::demarshal (TAO_InputCDR &cdr)
@@ -115,9 +112,7 @@ Ret_Basic_SArgument_T<long double,Insert_Policy>::interceptor_value (TAO_CORBA::
 }
 
 #endif /* TAO_HAS_INTERCEPTORS */
-
-} // namespace PS
-} // namespace TAOX11_NAMESPACE
+} // namespace TAOX11_NAMESPACE::PS
 
 #endif /* ACE_SIZEOF_LONG_DOUBLE != 16 */
 

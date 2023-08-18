@@ -16,20 +16,18 @@
 
 #include "tao/x11/stddef.h"
 
-namespace TAOX11_NAMESPACE
+namespace TAOX11_NAMESPACE::PS
 {
-  namespace PS {
-    /**
-    *
-    * @brief Base class for all skeleton arg traits specializations.
-    *
-    */
-    template<typename T>
-    class SArg_Traits
-    {
-    };
-  } // namespace PS
-} // namespace TAOX11_NAMESPACE
+  /**
+  *
+  * @brief Base class for all skeleton arg traits specializations.
+  *
+  */
+  template<typename T>
+  class SArg_Traits
+  {
+  };
+} // namespace TAOX11_NAMESPACE::PS
 
 
 #include /**/ "ace/post.h"
