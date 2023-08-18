@@ -4,7 +4,7 @@
 #if !defined (_<%= _traits_incl_guard_ %>_SARG_TRAITS_)
 #define _<%= _traits_incl_guard_ %>_SARG_TRAITS_
 template<>
-class PS::SArg_Traits<<%= scoped_cxxtype %>>
+class SArg_Traits<<%= scoped_cxxtype %>>
   : public Basic_SArg_Traits_T<<%= scoped_cxx_traits_type %>::ref_type, <% if generate_any_support? %>Any_Insert_Policy_Stream<% else %>Any_Insert_Policy_Noop<% end %>>
 {
 };
