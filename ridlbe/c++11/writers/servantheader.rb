@@ -152,17 +152,13 @@ module IDL
       def pre_visit(_parser)
         println
         printiln('// generated from ServantHeaderSrvTraitsWriter#pre_visit')
-        printiln('namespace TAOX11_NAMESPACE {')
-        inc_nest
-        printiln('namespace CORBA {')
+        printiln('namespace TAOX11_NAMESPACE::CORBA {')
         inc_nest
       end
 
       def post_visit(_parser)
         dec_nest
-        printiln('} // namespace CORBA')
-        dec_nest
-        printiln('} // namespace TAOX11_NAMESPACE')
+        printiln('} // namespace TAOX11_NAMESPACE::CORBA')
       end
 
       def enter_interface(node)

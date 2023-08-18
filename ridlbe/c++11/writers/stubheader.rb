@@ -475,19 +475,14 @@ module IDL
       def pre_visit(_parser)
         println
         printiln('// generated from StubHeaderIDLTraitsWriter#pre_visit')
-        printiln('namespace TAOX11_NAMESPACE')
+        printiln('namespace TAOX11_NAMESPACE::IDL')
         println('{')
-        inc_nest
-        printiln('namespace IDL')
-        printiln('{')
         inc_nest
       end
 
       def post_visit(_parser)
         dec_nest
-        printiln('} // namespace IDL')
-        dec_nest
-        printiln('} // namespace TAOX11_NAMESPACE')
+        printiln('} // namespace TAOX11_NAMESPACE::IDL')
       end
 
       def declare_interface(node)
@@ -570,19 +565,14 @@ module IDL
       def pre_visit(_parser)
         println
         printiln('// generated from StubHeaderIDLTraitsDefWriter#pre_visit')
-        printiln('namespace TAOX11_NAMESPACE')
+        printiln('namespace TAOX11_NAMESPACE::IDL')
         println('{')
-        inc_nest
-        printiln('namespace IDL')
-        printiln('{')
         inc_nest
       end
 
       def post_visit(_parser)
         dec_nest
-        printiln('} // namespace IDL')
-        dec_nest
-        printiln('} // namespace TAOX11_NAMESPACE')
+        printiln('} // namespace TAOX11_NAMESPACE::IDL')
       end
 
       def enter_interface(node)
@@ -615,21 +605,15 @@ module IDL
         super
         println
         printiln('// generated from StubHeaderAnyOpWriter#pre_visit')
-        println('namespace TAOX11_NAMESPACE')
+        println('namespace TAOX11_NAMESPACE::CORBA')
         println('{')
-        inc_nest
-        println('  namespace CORBA')
-        println('  {')
         inc_nest
       end
 
       def post_visit(parser)
         dec_nest
         println
-        println('  } // namespace CORBA')
-        dec_nest
-        println
-        println('} // namespace TAOX11_NAMESPACE')
+        println('  } // namespace TAOX11_NAMESPACE::CORBA')
         super
       end
 

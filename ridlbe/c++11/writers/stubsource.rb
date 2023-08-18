@@ -451,21 +451,14 @@ module IDL
       def pre_visit(_parser)
         println
         printiln('// generated from StubSourceObjTraitsWriter#pre_visit')
-        printiln('namespace TAOX11_NAMESPACE')
-        printiln('{')
-        inc_nest
-        println
-        printiln('namespace CORBA')
+        printiln('namespace TAOX11_NAMESPACE::CORBA')
         printiln('{')
         inc_nest
       end
 
       def post_visit(_parser)
         dec_nest
-        printiln('} // namespace CORBA')
-        println
-        dec_nest
-        printiln('} // namespace TAOX11_NAMESPACE')
+        printiln('} // namespace TAOX11_NAMESPACE::CORBA')
       end
 
       def enter_interface(node)
@@ -599,21 +592,15 @@ module IDL
         super
         println
         printiln('// generated from StubSourceAnyOpWriter#pre_visit')
-        println('namespace TAOX11_NAMESPACE')
+        println('namespace TAOX11_NAMESPACE::CORBA')
         println('{')
-        inc_nest
-        println('  namespace CORBA')
-        println('  {')
         inc_nest
       end
 
       def post_visit(parser)
         dec_nest
         println
-        println('  } // namespace CORBA')
-        dec_nest
-        println
-        println('} // namespace TAOX11_NAMESPACE')
+        println('  } // namespace TAOX11_NAMESPACE::CORBA')
         super
       end
 
