@@ -511,14 +511,14 @@ module IDL
       def pre_visit(_parser)
         println
         printiln('// generated from AmiStubHeaderAmicTraitsWriter#pre_visit')
-        printiln('namespace TAOX11_NAMESPACE')
+        printiln('namespace TAOX11_NAMESPACE::IDL')
         printiln('{')
         inc_nest
       end
 
       def post_visit(_parser)
         dec_nest
-        printiln('} // namespace TAOX11_NAMESPACE')
+        printiln('} // namespace TAOX11_NAMESPACE::IDL')
       end
 
       def enter_interface(node)

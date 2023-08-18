@@ -846,13 +846,13 @@ module IDL
         super
         println
         printiln('// generated from AmiStubSourceSArgTraitsWriter#pre_visit')
-        println('namespace TAOX11_NAMESPACE {')
+        println('namespace TAOX11_NAMESPACE::PS {')
         gen_exceptionholder_traits
       end
 
       def post_visit(parser)
         println
-        println('} // namespace TAOX11_NAMESPACE')
+        println('} // namespace TAOX11_NAMESPACE::PS')
         super
       end
 

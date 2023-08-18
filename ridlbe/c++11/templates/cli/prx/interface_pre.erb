@@ -3,7 +3,7 @@
 class <%= stub_export_macro %><%= proxy_cxxname %>
 % if is_derived?
 %   if !has_concrete_base?
-    : public virtual <%= proxy_root_base %>
+  : public virtual <%= proxy_root_base %>
 %     _first = false
 %   else
 %     _first = true
@@ -13,7 +13,7 @@ class <%= stub_export_macro %><%= proxy_cxxname %>
 %     _first = false
 %   end
 % else
-    : public virtual <%= proxy_root_base %>
+  : public virtual <%= proxy_root_base %>
 % end
 {
 public:
