@@ -5,15 +5,17 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
 {
   inline OStrm_& operator ()(
       OStrm_& os_,
-% if member_count > 0 && (!is_exception? || members.any? { |_m| !_m.is_object? })
+% if (member_count > 0 && (!is_exception? || members.any? { |_m| !_m.is_object? })) || !base.nil?
       <%= scoped_cxx_in_type %> val_)
 % else
       <%= scoped_cxx_in_type %>)
 % end
   {
-    os_ << "<%= formatted_cxxname %>"<% if member_count == 0 %>;<% end %>
-% if member_count > 0
+    os_ << "<%= formatted_cxxname %>"
         << '{'
+% unless base.nil?
+        << IDL::traits<<%= base.cxxname %>>::write(val_)<% if member_count > 0 %> << "," <% end %>
+% end
 %   _sep = nil
 %   members.each do |_m|
 %# NOTE: This special path is necessary since user exception code uses this formatter
@@ -37,7 +39,6 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
 %     _sep = ',' unless _sep
 %   end
         << '}';
-% end
     return os_;
   }
 };

@@ -1,7 +1,6 @@
 // -*- MPC -*-
 
-// No ostream ridl_ostream_defaults
-project(*struct_inheritance_gen_idl): ridl_defaults {
+project(*struct_inheritance_gen_idl): ridl_ostream_defaults {
   IDL_Files {
     test.idl
     idlflags += --idl-version=4

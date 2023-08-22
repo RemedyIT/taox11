@@ -289,7 +289,7 @@ namespace TAOX11_NAMESPACE
           OStrm_& os_,
           IDL::traits<CORBA::Object>::in_type o_)
       {
-        return os_ << "IDL::traits<CORBA::Object>::ref_type {object:"
+        return os_ << "IDL::traits<CORBA::Object>::ref_type{object:"
 #if (TAO_HAS_MINIMUM_CORBA == 0)
             << (o_ ? o_->_repository_id () : std::string("nil"))
 #endif
