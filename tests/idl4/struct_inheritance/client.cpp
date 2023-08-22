@@ -29,5 +29,9 @@ int main (int /*argc*/, char* /*argv*/[])
   TAOX11_TEST_DEBUG << "EmptyFromDerived: " << efd << std::endl;
   EmptyFromDerivedDerived efdd;
   TAOX11_TEST_DEBUG << "EmptyFromDerivedDerived: " << efdd << std::endl;
+  ObjectStruct os;
+  TAOX11_TEST_DEBUG << "ObjectStruct: " << os << std::endl;
+  ObjectStructDerived osd;
+  TAOX11_TEST_DEBUG << "ObjectStructDerived: " << osd << std::endl;
   return 0;
 }

@@ -41,3 +41,16 @@ struct EmptyFromDerived : Point2D
 struct EmptyFromDerivedDerived : Point3D
 {
 };
+
+interface Bar
+{
+};
+
+struct ObjectStruct : EmptyStruct
+{
+  Bar foo;
+};
+
+struct ObjectStructDerived : ObjectStruct
+{
+};
