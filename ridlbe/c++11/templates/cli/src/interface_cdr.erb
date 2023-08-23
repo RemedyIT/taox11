@@ -30,8 +30,7 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxx_out_type %> _t
     }
 
   // Narrow to the right type.
-  <%= scoped_proxy_cxxname %>::_ptr_type const _proxy_ptr =
-    TAO_TAO::Narrow_Utils<<%= scoped_proxy_cxxtype %>>::unchecked_narrow (obj.in ());
+  <%= scoped_proxy_cxxname %>::_ptr_type const _proxy_ptr = TAO_TAO::Narrow_Utils<<%= scoped_proxy_cxxtype %>>::unchecked_narrow (obj.in ());
 
   if (!TAO_CORBA::is_nil (_proxy_ptr))
     {

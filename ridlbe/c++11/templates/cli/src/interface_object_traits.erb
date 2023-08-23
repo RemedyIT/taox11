@@ -3,10 +3,9 @@
 % if is_abstract?
 template <>
 abstractbase_traits<<%= scoped_cxxtype %>>::ref_type
-abstractbase_traits<<%= scoped_cxxtype %>>::narrow (
-  abstractbase_reference<CORBA::AbstractBase> abref)
+abstractbase_traits<<%= scoped_cxxtype %>>::narrow (abstractbase_reference<CORBA::AbstractBase> abref)
 {
-  abstractbase_traits<<%= scoped_cxxtype %>>::ref_type abref_t;
+  abstractbase_traits<<%= scoped_cxxtype %>>::ref_type abref_t {};
 
   if (abref)
   {
@@ -18,8 +17,7 @@ abstractbase_traits<<%= scoped_cxxtype %>>::narrow (
       }
       else
       {
-        abref_t = abstractbase_reference<ab_type_t> (
-            std::dynamic_pointer_cast<ab_type_t> (abref.abs_));
+        abref_t = abstractbase_reference<ab_type_t> (std::dynamic_pointer_cast<ab_type_t> (abref.abs_));
       }
     }
     catch_tao_system_ex(_ex)
@@ -29,8 +27,7 @@ abstractbase_traits<<%= scoped_cxxtype %>>::narrow (
 % else
 template<>
 object_traits<<%= scoped_cxxtype %>>::shared_ptr_type
-object_traits<<%= scoped_cxxtype %>>::lock_shared (
-  <%= scoped_cxxtype %>* p)
+object_traits<<%= scoped_cxxtype %>>::lock_shared (<%= scoped_cxxtype %>* p)
 {
   return std::dynamic_pointer_cast<<%= scoped_cxxtype %>> (p->_lock_shared ());
 }
@@ -38,8 +35,7 @@ object_traits<<%= scoped_cxxtype %>>::lock_shared (
 
 template<>
 object_reference<<%= scoped_cxxtype %>>
-object_traits<<%= scoped_cxxtype %>>::narrow (
-  object_reference<TAOX11_NAMESPACE::CORBA::Object> obj)
+object_traits<<%= scoped_cxxtype %>>::narrow (object_reference<TAOX11_NAMESPACE::CORBA::Object> obj)
 {
   if (obj)
   {
@@ -50,12 +46,10 @@ object_traits<<%= scoped_cxxtype %>>::narrow (
     // remote
     try
     {
-      <%= scoped_proxy_cxxtype %>_ptr const _pp =
-        <%= scoped_proxy_cxxtype %>::_narrow (obj->get_proxy ()->get ());
+      <%= scoped_proxy_cxxtype %>_ptr const _pp = <%= scoped_proxy_cxxtype %>::_narrow (obj->get_proxy ()->get ());
       if (!TAO_CORBA::is_nil (_pp))
       {
-        return object_reference<<%= scoped_cxxtype %>> (
-          new <%= scoped_cxxtype %> (_pp));
+        return object_reference<<%= scoped_cxxtype %>> (new <%= scoped_cxxtype %> (_pp));
       }
     }
     catch_tao_system_ex(_ex)
