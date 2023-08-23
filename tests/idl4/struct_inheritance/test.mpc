@@ -18,3 +18,14 @@ project(*struct_inheritance_client): taox11_client {
   }
 }
 
+project(*struct_inheritance_server): taox11_server {
+  after += *struct_inheritance_gen_idl
+  Source_Files {
+    foo.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
