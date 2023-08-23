@@ -8,7 +8,7 @@ project(*map_gen_idl): ridl_ostream_defaults {
   custom_only = 1
 }
 
-project(*map_gen_Server): taox11_server {
+project(*map_server): taox11_server {
   after += *map_gen_idl
   Source_Files {
     foo.cpp

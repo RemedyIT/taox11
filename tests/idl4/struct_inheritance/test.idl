@@ -54,3 +54,16 @@ struct ObjectStruct : EmptyStruct
 struct ObjectStructDerived : ObjectStruct
 {
 };
+
+interface Foo
+{
+  Point2D test_Point2D (in Point2D sin,
+    inout Point2D sinout,
+    out Point2D sout);
+  Point3D test_Point3D (in Point3D sin,
+    inout Point3D sinout,
+    out Point3D sout);
+
+  /// A method to shutdown the ORB
+  oneway void shutdown ();
+};
