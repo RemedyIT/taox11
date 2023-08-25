@@ -43,7 +43,7 @@ bitmask MyBitMaskBound64 {
 bitmask MyBitMaskBound8_position {
   @position(3) flag64_3,
   flag64_4,
-  flag64_5
+  @position(7) flag64_7
 };
 
 module Test

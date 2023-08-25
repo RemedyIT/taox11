@@ -46,6 +46,14 @@ int main (int argc, char* argv[])
   {
     TAOX11_TEST_ERROR << "MyBitMaskBound8_position::flag64_3 has wrong value, position annotation not correctly handled" << std::endl;
   }
+  if (static_cast<std::underlying_type_t<MyBitMaskBound8_position>>(MyBitMaskBound8_position::flag64_4) != (0x01 << 4))
+  {
+    TAOX11_TEST_ERROR << "MyBitMaskBound8_position::flag64_4 has wrong value, position annotation not correctly handled" << std::endl;
+  }
+  if (static_cast<std::underlying_type_t<MyBitMaskBound8_position>>(MyBitMaskBound8_position::flag64_7) != (0x01 << 7))
+  {
+    TAOX11_TEST_ERROR << "MyBitMaskBound8_position::flag64_7 has wrong value, position annotation not correctly handled" << std::endl;
+  }
   if (!std::is_same<std::underlying_type_t<MyBitMaskBound8>, uint8_t>::value)
   {
     TAOX11_TEST_ERROR << "Type of MyBitMaskBound8 is not uint8_t" << std::endl;
