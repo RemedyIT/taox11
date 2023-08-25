@@ -14,7 +14,7 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
     os_ << "<%= formatted_cxxname %>"
         << '{'
 % unless base.nil?
-        << IDL::traits<<%= base.cxxname %>>::write(val_)<% if member_count > 0 %> << "," <% end %>
+        << IDL::traits<<%= base.cxxname %>>::write(val_)<% if member_count > 0 %> << ","<% end %>
 % end
 %   _sep = nil
 %   members.each do |_m|
