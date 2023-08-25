@@ -32,9 +32,6 @@ module IDL
     end
 
     class BitValueVisitor < NodeVisitorBase
-      def value
-        node.value
-      end
       def position
         node.position
       end
