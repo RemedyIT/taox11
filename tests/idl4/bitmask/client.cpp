@@ -38,6 +38,14 @@ int main (int argc, char* argv[])
     TAOX11_TEST_ERROR << "Flag my_bitmask1 NOT set: " << static_cast<uint16_t>(my_bitmask1) << std::endl;
   }
 
+  if (static_cast<std::underlying_type_t<MyBitMask>>(MyBitMask::flag1) != (0x01 << 1))
+  {
+    TAOX11_TEST_ERROR << "MyBitMask::flag1 has wrong value" << std::endl;
+  }
+  if (static_cast<std::underlying_type_t<MyBitMaskBound8_position>>(MyBitMaskBound8_position::flag64_3) != (0x01 << 3))
+  {
+    TAOX11_TEST_ERROR << "MyBitMaskBound8_position::flag64_3 has wrong value, position annotation not correctly handled" << std::endl;
+  }
   if (!std::is_same<std::underlying_type_t<MyBitMaskBound8>, uint8_t>::value)
   {
     TAOX11_TEST_ERROR << "Type of MyBitMaskBound8 is not uint8_t" << std::endl;

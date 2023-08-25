@@ -35,6 +35,9 @@ module IDL
       def value
         node.value
       end
+      def position
+        node.position
+      end
     end
   end
 end

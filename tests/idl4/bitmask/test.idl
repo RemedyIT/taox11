@@ -39,6 +39,13 @@ bitmask MyBitMaskBound64 {
   flag64_3
 };
 
+@bit_bound(8)
+bitmask MyBitMaskBound8_position {
+  @position(3) flag64_3,
+  flag64_4,
+  flag64_5
+};
+
 module Test
 {
   interface Foo
