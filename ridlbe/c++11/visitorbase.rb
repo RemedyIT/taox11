@@ -523,6 +523,10 @@ module IDL
         self._idltype.zero_initializer
       end
 
+      def value_initializer
+        self._idltype.value_initializer
+      end
+
       # template mapping
 
       # this seems nonsensical but this prevents prefixing

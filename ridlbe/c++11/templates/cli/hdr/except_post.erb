@@ -39,7 +39,7 @@ protected:
 
 private:
 % members.each do |_m|
-  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<%= _m.zero_initializer %>;
+  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<%= _m.value_initializer %>;
 % end
 }; // class <%= cxxname %>
 % visit_template('typecode') if generate_typecode_support?
