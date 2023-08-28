@@ -9,7 +9,7 @@ TAO_CORBA::Boolean operator<< (TAO_OutputCDR &/*strm*/, const <%= scoped_cxxname
 TAO_CORBA::Boolean operator>> (TAO_InputCDR &/*strm*/, <%= scoped_cxxname %> & /*_tao_bitset*/)
 {
   return true;
-%#  <%= bitbound.cxx_member_type %> _tao_temp <%= bitbound.zero_initializer %>;
+%#  <%= bitbound.cxx_member_type %> _tao_temp <%= bitbound.value_initializer %>;
 %#  bool const _tao_success = strm >> <%= bitbound.cdr_to_fmt % "_tao_temp" %>;
 %#
 %#  if (_tao_success)

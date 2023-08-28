@@ -73,14 +73,14 @@ private:
 #endif
     ~u_type_ ();
 % members.each do |_m|
-% # The default member or the first member should use the zero_initializer
+% # The default member or the first member should use the value_initializer
 % # Visual Studio 2019 doesn't seem to like using default, this leads to
 % # an internal compiler error, see SW331
 % if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
 #if defined (_MSC_VER) && (_MSC_VER < 1930)
     <%= _m.cxx_member_type %> <%= _m.cxxname %>_;
 #else
-    <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first) %> <%= _m.zero_initializer %><% end %>;
+    <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first) %> <%= _m.value_initializer %><% end %>;
 #endif
 % else
     <%= _m.cxx_member_type %> <%= _m.cxxname %>_;

@@ -155,6 +155,11 @@ module IDL
       '{}'
     end
 
+    # Construct for value initialization
+    def value_initializer
+      zero_initializer
+    end
+
     # define cxxtype methods for 'primitive' types
     {
       Char => 'char',
