@@ -33,6 +33,11 @@ int main (int /*argc*/, char* /*argv*/[])
     TAOX11_TEST_ERROR << "mybar.short_8() not 8 but: " << mybar.short_8() << std::endl;
     ++retval;
   }
+  if (mybar.typedef_short_8() != 8)
+  {
+    TAOX11_TEST_ERROR << "mybar.typedef_short_8() not 8 but: " << mybar.typedef_short_8() << std::endl;
+    ++retval;
+  }
 
   return retval;
 }

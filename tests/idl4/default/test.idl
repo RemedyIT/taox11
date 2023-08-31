@@ -6,11 +6,13 @@
  */
 
 @default(8) typedef short short_type_8;
+typedef short_type_8 typedef_short_type_8;
 
 struct bar
 {
   short short_no_default;
   @default(5) short short_5;
   short_type_8 short_8;
+  typedef_short_type_8 typedef_short_8;
 };
 
