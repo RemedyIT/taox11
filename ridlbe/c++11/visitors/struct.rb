@@ -56,6 +56,14 @@ module IDL
       def is_array?
         _resolved_idltype.is_a?(IDL::Type::Array)
       end
+
+      def value_initializer
+        unless node.default.nil?
+          "{#{node.default}}"
+        else
+          _resolved_idltype.value_initializer
+        end
+      end
     end
   end
 end
