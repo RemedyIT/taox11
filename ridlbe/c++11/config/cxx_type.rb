@@ -157,7 +157,7 @@ module IDL
 
     # Construct for value initialization
     def value_initializer
-      '{}'
+      zero_initializer
     end
 
     # define cxxtype methods for 'primitive' types
@@ -194,9 +194,6 @@ module IDL
         end
         def is_standard_type?
           true
-        end
-        def default
-          0
         end
       }
     end
