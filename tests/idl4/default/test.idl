@@ -14,5 +14,6 @@ struct bar
   @default(5) short short_5;
   short_type_8 short_8;
   typedef_short_type_8 typedef_short_8;
+  @default(9) typedef_short_type_8 typedef_short_9;
 };
 
