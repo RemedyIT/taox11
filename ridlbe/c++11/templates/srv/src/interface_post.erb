@@ -71,17 +71,12 @@ TAOX11_NAMESPACE::PortableServer::Servant* <%= srvproxy_cxxname %>::_get_skel ()
 {
   try {
     TAO_Stub_Auto_Ptr safe_stub (this->_create_stub ());
-
-    TAO_CORBA::Boolean const _tao_opt_colloc =
-      safe_stub->servant_orb_var ()->orb_core ()->optimize_collocation_objects ();
-
-    TAO_CORBA::Object_var obj =
-      new (std::nothrow) TAO_CORBA::Object (safe_stub.get (), _tao_opt_colloc, this);
+    TAO_CORBA::Boolean const _tao_opt_colloc = safe_stub->servant_orb_var ()->orb_core ()->optimize_collocation_objects ();
+    TAO_CORBA::Object_var obj = new (std::nothrow) TAO_CORBA::Object (safe_stub.get (), _tao_opt_colloc, this);
 
     if (obj.ptr ())
       {
         (void) safe_stub.release ();
-
         return TAO_TAO::Narrow_Utils<<%= scoped_proxy_cxxtype %>>::unchecked_narrow (obj.in ());
       }
   }
