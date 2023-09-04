@@ -1,9 +1,9 @@
 % unless is_inherited?
 // generated from <%= ridl_template_path %>
 void <%= interface.scoped_srvproxy_cxxname %>::<%= name %>_skel (
-    TAO_ServerRequest & server_request,
-    TAO::Portable_Server::Servant_Upcall * TAO_INTERCEPTOR (servant_upcall),
-    <%= interface.scoped_srvproxy_cxxname %>::skel_type & servant)
+  TAO_ServerRequest & server_request,
+  TAO::Portable_Server::Servant_Upcall * TAO_INTERCEPTOR (servant_upcall),
+  <%= interface.scoped_srvproxy_cxxname %>::skel_type & servant)
 {
 %   if has_raises? && generate_typecode_support?
 #if TAO_HAS_INTERCEPTORS == 1
