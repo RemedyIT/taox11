@@ -41,9 +41,7 @@ inline OStrm_& operator <<(
                           std::false_type>::value,
                         formatter<<%= scoped_cxxtype %>, OStrm_>,
                         typename writer_t::formatter_t>::type;
-  return IDL::traits<<%= scoped_cxxtype %>>::write_on (
-      os, w.val_,
-      formatter_t ());
+  return IDL::traits<<%= scoped_cxxtype %>>::write_on (os, w.val_, formatter_t ());
 }
 
 #endif
