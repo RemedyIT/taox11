@@ -1,9 +1,8 @@
 % unless interface.is_local?
 
 // generated from <%= ridl_template_path %>
-void
-<%= interface.amic_scoped_cxxname %>::<%= sendc_prefix_get %><%= name %>(
-    <%= interface.handler_scoped_cxx_in_type %> ami_handler)
+void <%= interface.amic_scoped_cxxname %>::<%= sendc_prefix_get %><%= name %>(
+  <%= interface.handler_scoped_cxx_in_type %> ami_handler)
 {
 %   if interface.is_abstract?
   if (!this->_is_object ())
@@ -58,10 +57,9 @@ void
 }
 
 %   unless is_readonly?
-void
-<%= interface.amic_scoped_cxxname %>::<%= sendc_prefix_set %><%= name %>(
-    <%= interface.handler_scoped_cxx_in_type %> ami_handler,
-    <%= cxx_in_type %> _x11_<%= cxxname %>)
+void <%= interface.amic_scoped_cxxname %>::<%= sendc_prefix_set %><%= name %>(
+  <%= interface.handler_scoped_cxx_in_type %> ami_handler,
+  <%= cxx_in_type %> _x11_<%= cxxname %>)
 {
 %   if interface.is_abstract?
   if (!this->_is_object ())

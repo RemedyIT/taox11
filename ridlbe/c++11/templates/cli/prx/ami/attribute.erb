@@ -1,14 +1,14 @@
 
 // generated from <%= ridl_template_path %>
 static void get_<%= name %>_reply_stub (
-      TAO_InputCDR &_tao_reply_cdr,
-      TAO_MESSAGING::ReplyHandler_ptr _tao_reply_handler,
-      TAO_CORBA::ULong reply_status);
+  TAO_InputCDR &_tao_reply_cdr,
+  TAO_MESSAGING::ReplyHandler_ptr _tao_reply_handler,
+  TAO_CORBA::ULong reply_status);
 % unless is_readonly?
 
 static void set_<%= name %>_reply_stub (
-      TAO_InputCDR &_tao_reply_cdr,
-      TAO_MESSAGING::ReplyHandler_ptr _reply_handler,
-      TAO_CORBA::ULong reply_status);
+  TAO_InputCDR &_tao_reply_cdr,
+  TAO_MESSAGING::ReplyHandler_ptr _reply_handler,
+  TAO_CORBA::ULong reply_status);
 
 % end
