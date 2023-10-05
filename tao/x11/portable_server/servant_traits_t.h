@@ -35,7 +35,7 @@ namespace TAOX11_NAMESPACE
 
     template <typename T, typename = typename
       std::enable_if<std::is_base_of<PortableServer::Servant, T>::value>::type, typename ...Args>
-    servant_reference<T> make_reference(Args&& ...args);
+    constexpr servant_reference<T> make_reference(Args&& ...args);
 
     template <typename T>
     class weak_servant_reference;
@@ -133,7 +133,7 @@ namespace TAOX11_NAMESPACE
       template <typename _Tp1> friend class valuetype_reference;
       template <typename _Tp1> friend class weak_valuetype_reference;
       template <typename _Tp1, typename, typename ...Args>
-      friend servant_reference<_Tp1> make_reference(Args&& ...args);
+      friend constexpr servant_reference<_Tp1> make_reference(Args&& ...args);
       friend class PortableServer::Servant;
 
       template <typename _Tp1>
@@ -232,7 +232,7 @@ namespace TAOX11_NAMESPACE
     };
 
     template <typename T, typename, typename ...Args>
-    inline servant_reference<T> make_reference(Args&& ...args)
+    inline constexpr servant_reference<T> make_reference(Args&& ...args)
     {
       return servant_reference<T> (new T (std::forward<Args> (args)...));
     }
