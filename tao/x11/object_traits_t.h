@@ -34,7 +34,7 @@ namespace TAOX11_NAMESPACE
 
     template <typename T, typename = typename
       std::enable_if<std::is_base_of<CORBA::Object, T>::value>::type, typename ...Args>
-    object_reference<T> make_reference(Args&& ...args);
+    constexpr object_reference<T> make_reference(Args&& ...args);
 
     template <typename T>
     class weak_object_reference;
@@ -56,7 +56,7 @@ namespace TAOX11_NAMESPACE
           typename = typename
             std::enable_if<std::is_base_of<T, TInst>::value>::type,
           typename ...Args>
-      static inline object_reference<T> make_reference(Args&& ...args)
+      static inline constexpr object_reference<T> make_reference(Args&& ...args)
       {
         return TAOX11_CORBA::make_reference<TInst>(std::forward<Args> (args)...);
       }
@@ -131,7 +131,7 @@ namespace TAOX11_NAMESPACE
       template <typename _Tp1> friend class abstractbase_reference;
       template <typename _Tp1> friend class weak_abstractbase_reference;
       template <typename _Tp1, typename, typename ...Args>
-      friend object_reference<_Tp1> make_reference(Args&& ...args);
+      friend constexpr object_reference<_Tp1> make_reference(Args&& ...args);
       friend class Object;
 
       template<typename _Tp1, typename = typename
@@ -239,7 +239,7 @@ namespace TAOX11_NAMESPACE
     }
 
     template <typename T, typename, typename ...Args>
-    inline object_reference<T> make_reference(Args&& ...args)
+    inline constexpr object_reference<T> make_reference(Args&& ...args)
     {
       return object_reference<T> (new T (std::forward<Args> (args)...));
     }

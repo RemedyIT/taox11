@@ -147,7 +147,7 @@ namespace TAOX11_NAMESPACE
 
       template <typename T> friend struct object_traits;
       template <typename _Tp1, typename, typename ...Args>
-      friend object_reference<_Tp1> make_reference(Args&& ...args);
+      friend constexpr object_reference<_Tp1> make_reference(Args&& ...args);
 
       explicit Object (Object_proxy_ptr op = nullptr);
       Object(const Object&) = delete;

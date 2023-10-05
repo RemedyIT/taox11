@@ -357,7 +357,7 @@ namespace TAOX11_NAMESPACE
       friend ORB_Registry;
 
       template <typename _Tp1, typename, typename ...Args>
-      friend object_reference<_Tp1> make_reference(Args&& ...args);
+      friend constexpr object_reference<_Tp1> make_reference(Args&& ...args);
 
       explicit ORB (ORB_Proxy_ptr op);
 
