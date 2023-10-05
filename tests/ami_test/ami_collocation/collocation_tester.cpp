@@ -109,10 +109,8 @@ Collocation_Test::init (int argc, char *argv[])
     return 1;
   }
 
-
   CORBA::servant_traits<A::AMI_Test>::ref_type hello_impl =
      CORBA::make_reference<AMI_Test_i> ();
-
 
   TAOX11_TEST_INFO << "created A::AMI_Test servant" << std::endl;
 
@@ -128,7 +126,6 @@ Collocation_Test::init (int argc, char *argv[])
                       << std::endl;
     return 1;
   }
-
 
   CORBA::amic_traits<A::AMI_Test>::replyhandler_servant_ref_type test_handler_impl =
           CORBA::make_reference<Handler> ();

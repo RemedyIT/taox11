@@ -69,7 +69,6 @@ main(int argc, ACE_TCHAR *argv[])
       CORBA::servant_traits<A::AMI_Test>::ref_type hello_impl =
         CORBA::make_reference<AMI_Test_i> (_orb);
 
-
       TAOX11_TEST_INFO << "created A::AMI_Test servant" << std::endl;
 
       PortableServer::ObjectId id = root_poa->activate_object (hello_impl);
