@@ -18,7 +18,7 @@ namespace TAOX11_NAMESPACE
       static ref_type narrow (valuetype_reference<ValueBase>);
 
       template <typename ...Args>
-      inline static ref_type make_reference(Args&& ...args)
+      inline static constexpr ref_type make_reference(Args&& ...args)
       {
         return TAOX11_CORBA::make_reference<<%= scoped_cxxtype %>> (std::forward<Args> (args)...);
       }
