@@ -43,7 +43,7 @@ namespace Test
       template <typename T> friend class CORBA::servant_reference;
 
       template <typename _Tp1, typename, typename ...Args>
-      friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+      friend constexpr CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
 
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[User Protected]
       // your protected definitions
@@ -89,7 +89,7 @@ namespace Test
       template <typename T> friend class CORBA::servant_reference;
 
       template <typename _Tp1, typename, typename ...Args>
-      friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+      friend constexpr CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
 
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[User Protected]
       // your protected definitions
@@ -100,8 +100,7 @@ namespace Test
       int32_t
       int_prop () override;
 
-      void
-      int_prop (int32_t _v) override;
+      void int_prop (int32_t _v) override;
 
       // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::get_string

@@ -39,12 +39,12 @@ namespace Test
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo_impl[Constructors]
 
     /// Destructor
-    virtual ~Foo_impl ();
+    ~Foo_impl () override;
 
     template <typename T> friend class CORBA::servant_reference;
 
     template <typename _Tp1, typename, typename ...Args>
-    friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+    friend constexpr CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
 
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo_impl[User Protected]
     // your protected definitions
