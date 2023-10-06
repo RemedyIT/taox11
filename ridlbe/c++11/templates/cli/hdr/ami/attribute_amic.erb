@@ -1,12 +1,10 @@
 
 // generated from <%= ridl_template_path %>
-void
-<%= sendc_prefix_get %><%= name %> (
-    <%= interface.handler_scoped_cxx_in_type %> ami_handler);
+void <%= sendc_prefix_get %><%= name %> (
+  <%= interface.handler_scoped_cxx_in_type %> ami_handler);
 % unless is_readonly?
 
-void
-<%= sendc_prefix_set %><%= name %> (
-    <%= interface.handler_scoped_cxx_in_type %> ami_handler,
-    <%= cxx_in_type %> _x11_<%= cxxname %>);
+void <%= sendc_prefix_set %><%= name %> (
+  <%= interface.handler_scoped_cxx_in_type %> ami_handler,
+  <%= cxx_in_type %> _x11_<%= cxxname %>);
 % end

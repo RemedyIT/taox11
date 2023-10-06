@@ -46,7 +46,7 @@ namespace TAOX11_NAMESPACE
       std::enable_if<std::is_base_of<typename
         std::conditional<std::is_base_of<PortableServer::Servant, T>::value, void, CORBA::ValueBase>::type, T>::value>::type,
               typename ...Args>
-    valuetype_reference<T> make_reference(Args&& ...args);
+    constexpr valuetype_reference<T> make_reference(Args&& ...args);
 
     template <typename T>
     class weak_valuetype_reference;
@@ -65,7 +65,7 @@ namespace TAOX11_NAMESPACE
       }
 
       template <typename TInst = T, typename ...Args>
-      inline static valuetype_reference<T> make_reference(Args&& ...args)
+      inline static constexpr valuetype_reference<T> make_reference(Args&& ...args)
       {
         return TAOX11_CORBA::make_reference<TInst> (std::forward<Args> (args)...);
       }
@@ -160,7 +160,7 @@ namespace TAOX11_NAMESPACE
       template <typename _Tp1> friend class abstractbase_reference;
       template <typename _Tp1> friend class weak_abstractbase_reference;
       template <typename _Tp1, typename, typename ...Args>
-      friend valuetype_reference<_Tp1> make_reference(Args&& ...args);
+      friend constexpr valuetype_reference<_Tp1> make_reference(Args&& ...args);
       friend class ValueBase;
 
       template<typename _Tp1, typename = typename
@@ -253,10 +253,8 @@ namespace TAOX11_NAMESPACE
       weak_ptr_type vtp_;
     };
 
-    template <typename T,
-              typename,
-              typename ...Args>
-    inline valuetype_reference<T> make_reference(Args&& ...args)
+    template <typename T, typename, typename ...Args>
+    inline constexpr valuetype_reference<T> make_reference(Args&& ...args)
     {
       return valuetype_reference<T> (new T (std::forward<Args> (args)...));
     }

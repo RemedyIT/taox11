@@ -59,7 +59,7 @@ namespace TAOX11_NAMESPACE
                 typename = typename
                   std::enable_if<std::is_base_of<<%= scoped_cxxtype %>, TInst>::value>::type,
                 typename ...Args>
-      inline static ref_type make_reference(Args&& ...args)
+      inline static constexpr ref_type make_reference(Args&& ...args)
       {
         return TAOX11_CORBA::make_reference<TInst> (std::forward<Args> (args)...);
       }

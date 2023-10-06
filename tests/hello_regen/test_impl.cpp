@@ -19,7 +19,6 @@ namespace Test
   // generated from ImplSourceWriter#enter_interface
 
   // generated from c++11/templates/impl/src/interface_pre
-
   namespace _impl {
 
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[Constructors]
@@ -38,7 +37,6 @@ namespace Test
     }
 
     // generated from c++11/templates/impl/src/interface_post
-
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[User Public]
     // your public implementations
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo[User Public]
@@ -57,7 +55,6 @@ namespace Test
   // generated from ImplSourceWriter#enter_interface
 
   // generated from c++11/templates/impl/src/interface_pre
-
   namespace _impl {
 
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[Constructors]
@@ -137,7 +134,6 @@ namespace Test
   }
 
     // generated from c++11/templates/impl/src/interface_post
-
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[User Public]
     // your public implementations
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[User Public]

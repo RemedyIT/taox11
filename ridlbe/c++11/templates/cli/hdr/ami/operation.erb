@@ -11,5 +11,4 @@ void
     <%= _arg.direction == :out ? _arg.scoped_cxx_in_type : _arg.scoped_cxx_inout_type%> <%= _arg.cxxname %><%= _args.empty? ? ');' : ',' %>
 %   end
 
-void
-<%= name %>_excep (IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder);
+void <%= name %>_excep (IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder);

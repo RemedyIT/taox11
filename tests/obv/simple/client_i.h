@@ -26,10 +26,6 @@ public:
 
   void shutdown () override;
 
-  template <typename _Tp1, typename, typename ...Args>
-  friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
-
-protected:
   using base_type = CORBA::servant_traits<Test::Client>::base_type;
 
   Client_i (CORBA::ORB::_ref_type orb)
@@ -43,7 +39,6 @@ private:
   Client_i (Client_i&&) = delete;
   Client_i& operator= (const Client_i&) = delete;
   Client_i& operator= (Client_i&&) = delete;
-
 };
 
 #endif

@@ -3,34 +3,34 @@
 %all_operations.each do |_op|
 %   unless _op.is_inherited?
   static void <%= _op.name %>_skel (
-      TAO_ServerRequest & server_request,
-      TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall,
-      skel_type& servant);
+    TAO_ServerRequest & server_request,
+    TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall,
+    skel_type& servant);
   static void <%= _op.name %>_excep_skel (
-      TAO_ServerRequest & server_request,
-      TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall,
-      skel_type& servant);
+    TAO_ServerRequest & server_request,
+    TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall,
+    skel_type& servant);
 %   end
 %end
 %all_attributes.each do |_att|
 %   unless _att.is_inherited?
   static void get_<%= _att.name %>_skel (
-      TAO_ServerRequest & server_request,
-      TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall,
-      skel_type& servant);
+    TAO_ServerRequest & server_request,
+    TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall,
+    skel_type& servant);
   static void get_<%= _att.name %>_excep_skel (
-      TAO_ServerRequest & server_request,
-      TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall,
-      skel_type& servant);
+    TAO_ServerRequest & server_request,
+    TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall,
+    skel_type& servant);
 %   unless _att.is_readonly?
   static void set_<%= _att.name %>_skel (
-      TAO_ServerRequest & server_request,
-      TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall,
-      skel_type& servant);
+    TAO_ServerRequest & server_request,
+    TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall,
+    skel_type& servant);
   static void set_<%= _att.name %>_excep_skel (
-      TAO_ServerRequest & server_request,
-      TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall,
-      skel_type& servant);
+    TAO_ServerRequest & server_request,
+    TAO_TAO::Portable_Server::Servant_Upcall * servant_upcall,
+    skel_type& servant);
 %     end
 %   end
 %end

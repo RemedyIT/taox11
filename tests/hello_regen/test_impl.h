@@ -31,7 +31,7 @@ namespace Test
     // your base classes
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo[Base List]
     {
-    protected:
+    public:
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[Constructors]
       /// Constructor(s)
       Foo ();
@@ -40,15 +40,10 @@ namespace Test
       /// Destructor
       ~Foo () override;
 
-      template <typename T> friend class CORBA::servant_reference;
-
-      template <typename _Tp1, typename, typename ...Args>
-      friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
-
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[User Protected]
       // your protected definitions
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo[User Protected]
-    public:
+
 
       // generated from c++11/templates/impl/hdr/interface_post
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[User Public]
@@ -77,7 +72,7 @@ namespace Test
     // your base classes
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[Base List]
     {
-    protected:
+    public:
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[Constructors]
       /// Constructor(s)
       Hello (IDL::traits<CORBA::ORB>::ref_type orb);
@@ -86,22 +81,16 @@ namespace Test
       /// Destructor
       ~Hello () override;
 
-      template <typename T> friend class CORBA::servant_reference;
-
-      template <typename _Tp1, typename, typename ...Args>
-      friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
-
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[User Protected]
       // your protected definitions
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[User Protected]
-    public:
+
 
       // generated from c++11/templates/impl/hdr/attribute
       int32_t
       int_prop () override;
 
-      void
-      int_prop (int32_t _v) override;
+      void int_prop (int32_t _v) override;
 
       // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::get_string
