@@ -508,8 +508,7 @@ void TAOX11_NAMESPACE::CORBA::TypeCode::Bounds::_tao_decode (TAO_InputCDR &cdr)
 
 TAOX11_NAMESPACE::CORBA::Exception *TAOX11_NAMESPACE::CORBA::TypeCode::Bounds::_tao_duplicate () const
 {
-  TAOX11_NAMESPACE::CORBA::Exception * result = nullptr;
-  ACE_NEW_NORETURN (result, Bounds (*this));
+  TAOX11_NAMESPACE::CORBA::Exception * result = new (std::nothrow) Bounds (*this);
   if (!result)
     throw TAO_CORBA::NO_MEMORY ();
   return result;
@@ -544,8 +543,7 @@ void TAOX11_NAMESPACE::CORBA::TypeCode::BadKind::_tao_decode (TAO_InputCDR &cdr)
 
 TAOX11_NAMESPACE::CORBA::Exception *TAOX11_NAMESPACE::CORBA::TypeCode::BadKind::_tao_duplicate () const
 {
-  TAOX11_NAMESPACE::CORBA::Exception * result = nullptr;
-  ACE_NEW_NORETURN (result, BadKind (*this));
+  TAOX11_NAMESPACE::CORBA::Exception * result = new (std::nothrow) BadKind (*this);
   if (!result)
     throw TAO_CORBA::NO_MEMORY ();
   return result;

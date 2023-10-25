@@ -91,8 +91,7 @@ namespace TAOX11_NAMESPACE
 
     TAOX11_NAMESPACE::CORBA::Exception *ORB::InvalidName::_tao_duplicate () const
     {
-      TAOX11_NAMESPACE::CORBA::Exception * result = 0;
-      ACE_NEW_NORETURN (result, InvalidName (*this));
+      TAOX11_NAMESPACE::CORBA::Exception * result = new (std::nothrow) InvalidName (*this);
       if (!result)
         throw TAO_CORBA::NO_MEMORY ();
       return result;
