@@ -126,7 +126,7 @@ namespace TAOX11_NAMESPACE
     if (!retval)
       throw TAO_CORBA::NO_MEMORY ();
     return retval;
-}
+  }
 
   template<typename TRAITS, template <typename T> class MARSHAL_POLICY>
   void
