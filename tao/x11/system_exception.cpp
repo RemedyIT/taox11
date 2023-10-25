@@ -193,9 +193,9 @@ namespace TAOX11_NAMESPACE {
   void \
   CORBA::_nam_ ::_raise_tao () const \
   { \
-    TAO_CORBA::_nam_ * result {}; \
-    ACE_NEW_NORETURN (result, TAO_CORBA::_nam_ (TAO_CORBA::ULong (this->minor ()), \
-                                                TAO_CORBA::CompletionStatus (this->completed ()))); \
+    TAO_CORBA::_nam_ * result = new (std::nothrow) \
+      TAO_CORBA::_nam_ (TAO_CORBA::ULong (this->minor ()), \
+      TAO_CORBA::CompletionStatus (this->completed ())); \
     if (!result) \
     { \
       throw TAO_CORBA::NO_MEMORY (); \
@@ -218,9 +218,7 @@ namespace TAOX11_NAMESPACE {
   CORBA::Exception * \
   CORBA::name ::_tao_duplicate () const \
   { \
-    CORBA::Exception * result {}; \
-    ACE_NEW_NORETURN (result, CORBA::name (*this)); \
-    return result; \
+    return new (std::nothrow) CORBA::name (*this); \
   }
 
   // expand the list

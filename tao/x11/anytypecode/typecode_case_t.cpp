@@ -53,20 +53,16 @@ template <typename DiscriminatorType,
           typename StringType,
           typename TypeCodeType>
 TAO_TAO::TypeCode::Case<StringType, TypeCodeType> *
-TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType,
-                      StringType,
-                      TypeCodeType>::clone () const
+TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType, StringType, TypeCodeType>::clone () const
 {
-  TAO_TAO::TypeCode::Case<StringType, TypeCodeType> * p {};
-
   using case_type = Case_T<DiscriminatorType,
                  StringType,
                  TypeCodeType>;
 
   // The compiler generated memberwise copy constructor is sufficient.
-  ACE_NEW_NORETURN (p,
-                    case_type (*this));
-
+  TAO_TAO::TypeCode::Case<StringType, TypeCodeType> * p = new (std::nothrow) case_type (*this);
+  if (!p)
+    throw TAO_CORBA::NO_MEMORY ();
   return p;
 }
 
@@ -74,9 +70,7 @@ template <typename DiscriminatorType,
           typename StringType,
           typename TypeCodeType>
 bool
-TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType,
-                      StringType,
-                      TypeCodeType>::marshal_label (TAO_OutputCDR & cdr) const
+TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType, StringType, TypeCodeType>::marshal_label (TAO_OutputCDR & cdr) const
 {
   return
     (cdr <<
