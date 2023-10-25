@@ -29,8 +29,7 @@ test_bar_object (IDL::traits<Test::Foo>::ref_type foo)
   catch (const Test::BarEx &x)
     {
       uint16_t const prev_result = result;
-      IDL::traits<Test::Bar>::ref_type bar =
-        x.bar_i();
+      IDL::traits<Test::Bar>::ref_type bar = x.bar_i();
       if (!bar)
         {
           TAOX11_TEST_ERROR << "test_bar_object - ERROR : catching a Test::BarEx but "
@@ -62,6 +61,13 @@ test_bar_object (IDL::traits<Test::Foo>::ref_type foo)
                   TAOX11_TEST_ERROR << "test_bar_object - ERROR : Correct exception caught "
                     << "but 'id' seems to contain a wrong message. expected <do_something> - "
                     << "found <" << ex.struct_i ().msg () << ">" << std::endl;
+                  ++result;
+                }
+              if (std::strcmp(ex._name (), "StructEx") != 0)
+                {
+                  TAOX11_TEST_ERROR << "test_bar_object - ERROR : Correct exception caught "
+                    << "but '_name' seems to contain a wrong value. expected <StructEx> - "
+                    << "found <" << ex._name () << ">" << std::endl;
                   ++result;
                 }
             }
