@@ -64,6 +64,13 @@ module IDL
         else
           # Check whether it is a typedef, if so, we need to see if there is an annotation applied to the typedef (or its typedef)
           if _idltype.is_a?(IDL::Type::ScopedName)
+            res_idl_type = _idltype
+            while res_idl_type.node.idltype.is_a?(IDL::Type::ScopedName)
+              res_idl_type = res_idl_type.node.idltype
+              unless res_idl_type.node.default.nil?
+                return "{#{res_idl_type.node.default}}"
+              end
+            end
             _resolved_idltype.value_initializer
           else
             _resolved_idltype.zero_initializer
