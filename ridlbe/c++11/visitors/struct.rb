@@ -60,14 +60,14 @@ module IDL
       def value_initializer
         # When we have an annotation directly applied to this node we are using it
         unless node.default.nil?
-          "{#{node.default}}"
+          "{#{_idltype.value_to_s(node.default)}}"
         else
           # Check whether it is a typedef, if so, we need to see if there is an annotation applied to the typedef (or its typedef)
           if _idltype.is_a?(IDL::Type::ScopedName)
             res_idl_type = _idltype
             while res_idl_type.is_a?(IDL::Type::ScopedName)
               unless res_idl_type.node.default.nil?
-                return "{#{res_idl_type.node.default}}"
+                return "{#{res_idl_type.value_to_s(res_idl_type.node.default)}}"
               end
               res_idl_type = res_idl_type.node.idltype
             end
