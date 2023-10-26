@@ -31,8 +31,7 @@ namespace TAOX11_NAMESPACE
   TAO_CORBA::Exception *
   UserExceptionProxy::in<USEREX>::_tao_duplicate () const
   {
-    TAO_CORBA::Exception *result;
-    ACE_NEW_NORETURN (result, UserExceptionProxy::in<USEREX> (*this));
+    TAO_CORBA::Exception *result = new (std::nothrow) UserExceptionProxy::in<USEREX> (*this);
     if (!result)
       throw TAO_CORBA::NO_MEMORY ();
     return result;
