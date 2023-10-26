@@ -195,9 +195,6 @@ module IDL
         def is_standard_type?
           true
         end
-        def default
-          0
-        end
       }
     end
 
