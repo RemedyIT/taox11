@@ -71,10 +71,8 @@ module IDL
               end
               res_idl_type = res_idl_type.node.idltype
             end
-            _resolved_idltype.value_initializer
-          else
-            _resolved_idltype.zero_initializer
           end
+          _resolved_idltype.zero_initializer
         end
       end
     end
