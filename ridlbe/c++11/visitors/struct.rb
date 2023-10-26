@@ -58,10 +58,16 @@ module IDL
       end
 
       def value_initializer
+        # When we have an annotation directly applied to this node we are using it
         unless node.default.nil?
           "{#{node.default}}"
         else
-          _resolved_idltype.value_initializer
+          # Check whether it is a typedef, if so, we need to see if there is an annotation applied to the typedef (or its typedef)
+          if _idltype.is_a?(IDL::Type::ScopedName)
+            _resolved_idltype.value_initializer
+          else
+            _resolved_idltype.zero_initializer
+          end
         end
       end
     end
