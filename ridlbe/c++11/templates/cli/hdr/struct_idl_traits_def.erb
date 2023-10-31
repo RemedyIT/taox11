@@ -35,8 +35,10 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
 %       end
 %     else
 % unless _m.optional?
-%# TODO Add optional support
         << "<%= _sep %><%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write(val_.<%= _m.cxxname %> ())
+% else
+%# TODO
+%#         << "<%= _sep %><%= _m.cxxname %>=" << (val_.<%= _m.cxxname() %> ().has_value () ? IDL::traits<<%= _m.scoped_cxxtype %>>::write(val_.<%= _m.cxxname %> ().value ()) : "<empty>")
 % end
 %     end
 %     _sep = ',' unless _sep
