@@ -18,7 +18,7 @@ namespace TAOX11_NAMESPACE
 {
   namespace IDL
   {
-    template<class T>
+    template<typename T>
     using optional = std::optional<T>;
   } // namespace IDL
 } // namespace TAOX11_NAMESPACE
