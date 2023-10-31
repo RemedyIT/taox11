@@ -407,7 +407,7 @@ module IDL
 
       def enter_struct(node)
         node.members.each { |m| check_idl_type(m.idltype) }
-        node.members.each { |m| add_post_include('optional') if member_optional(m) }
+        node.members.each { |m| add_post_include('tao/x11/optional_t.h') if member_optional(m) }
       end
 
       def enter_union(node)

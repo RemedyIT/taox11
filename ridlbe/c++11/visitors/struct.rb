@@ -98,7 +98,7 @@ module IDL
         unless optional?
           super
         else
-          "std::optional<#{cxx_return_type}>"
+          "IDL::optional<#{cxx_return_type}>"
         end
       end
 
@@ -106,7 +106,7 @@ module IDL
         unless optional?
           super
         else
-          "std::optional<#{cxx_return_type}>&"
+          "IDL::optional<#{cxx_return_type}>&"
         end
       end
 
@@ -114,7 +114,7 @@ module IDL
         unless optional?
           super
         else
-          "const std::optional<#{super}>&"
+          "const IDL::optional<#{super}>&"
         end
       end
 
@@ -122,7 +122,7 @@ module IDL
         unless optional?
           super
         else
-          "std::optional<#{cxx_return_type}>&&"
+          "IDL::optional<#{cxx_return_type}>&&"
         end
       end
 
@@ -130,7 +130,7 @@ module IDL
         unless optional?
           super
         else
-          "std::optional<#{super}>"
+          "IDL::optional<#{super}>"
         end
       end
     end
