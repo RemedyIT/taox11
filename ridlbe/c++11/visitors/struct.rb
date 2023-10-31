@@ -73,6 +73,66 @@ module IDL
           _resolved_idltype.zero_initializer
         end
       end
+
+      def optional?
+        !node.annotations[:optional].first.nil?
+      end
+
+      def is_reference?
+        if optional?
+          false
+        else
+          super
+        end
+      end
+
+      def is_pod?
+        if optional?
+          false
+        else
+          super
+        end
+      end
+
+      def cxx_byval_type
+        unless optional?
+          super
+        else
+          "std::optional<#{cxx_return_type}>"
+        end
+      end
+
+      def cxx_out_type
+        unless optional?
+          super
+        else
+          "std::optional<#{cxx_return_type}>&"
+        end
+      end
+
+      def cxx_in_type
+        unless optional?
+          super
+        else
+          "const std::optional<#{super}>&"
+        end
+      end
+
+      def cxx_move_type
+        unless optional?
+          super
+        else
+          "std::optional<#{cxx_return_type}>&&"
+        end
+      end
+
+      def cxx_member_type
+        unless optional?
+          super
+        else
+          "std::optional<#{super}>"
+        end
+      end
     end
   end
 end
