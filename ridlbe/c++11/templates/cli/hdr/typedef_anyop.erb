@@ -8,17 +8,11 @@
 
 #define _ALIAS_ANYOP_<%= scoped_cxxname.scope_to_cxxname %>_IMPL_
 <%= anytypecode_export_macro %> void
-_any_cp_in_<%= scoped_cxxname.scope_to_cxxname %> (
-    TAOX11_CORBA::Any&,
-    <%= scoped_cxx_in_type %>);
+_any_cp_in_<%= scoped_cxxname.scope_to_cxxname %> (TAOX11_CORBA::Any&, <%= scoped_cxx_in_type %>);
 <%= anytypecode_export_macro %> void
-_any_mv_in_<%= scoped_cxxname.scope_to_cxxname %> (
-    TAOX11_CORBA::Any&,
-    <%= scoped_cxx_move_type %>);
+_any_mv_in_<%= scoped_cxxname.scope_to_cxxname %> (TAOX11_CORBA::Any&, <%= scoped_cxx_move_type %>);
 <%= anytypecode_export_macro %> bool
-_any_out_<%= scoped_cxxname.scope_to_cxxname %> (
-    const TAOX11_CORBA::Any&,
-    <%= scoped_cxx_out_type %>);
+_any_out_<%= scoped_cxxname.scope_to_cxxname %> (const TAOX11_CORBA::Any&, <%= scoped_cxx_out_type %>);
 
 /// Copying any insertion operator
 inline void operator<<= (TAOX11_CORBA::Any& any, <%= scoped_cxx_in_type %> _val)
