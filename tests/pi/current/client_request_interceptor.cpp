@@ -127,8 +127,20 @@ ClientRequestInterceptor::receive_reply (
 
 void
 ClientRequestInterceptor::receive_exception (
-    IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type)
+    IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type ri)
 {
+  TAOX11_TEST_INFO << "ClientRequestInterceptor::receive_exception (" << ri->operation () << ") with id " << ri->request_id () << std::endl;
+
+  std::string const op = ri->operation ();
+
+  if (op == "test_exception")
+  {
+    TAOX11_TEST_INFO << "ClientRequestInterceptor::receive_exception, exception: (" << ri->received_exception () << ") id: (" << ri->received_exception_id () << ")" << std::endl;
+  }
+  else
+  {
+    TAOX11_TEST_ERROR << "ClientRequestInterceptor::receive_exception called for operation " << op << std::endl;
+  }
 }
 
 void

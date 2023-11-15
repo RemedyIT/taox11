@@ -46,6 +46,9 @@ public:
   /// Shutdown the ORB.
   void shutdown () override;
 
+  /// Test exceptions
+  void test_exception () override;
+
 private:
   /// Reference to the PICurrent object.
   IDL::traits<PortableInterceptor::Current>::ref_type current_;
