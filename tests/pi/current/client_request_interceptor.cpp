@@ -135,7 +135,7 @@ ClientRequestInterceptor::receive_exception (
 
   if (op == "test_exception")
   {
-    TAOX11_TEST_INFO << "ClientRequestInterceptor::receive_exception, id: (" << ri->received_exception_id () << ")" << std::endl;
+    TAOX11_TEST_INFO << "ClientRequestInterceptor::receive_exception, exception: (" << ri->received_exception () << ") id: (" << ri->received_exception_id () << ")" << std::endl;
   }
   else
   {

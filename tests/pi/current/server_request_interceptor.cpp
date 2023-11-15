@@ -199,6 +199,7 @@ ServerRequestInterceptor::send_exception (
 
   if (op == "test_exception")
   {
+    TAOX11_TEST_INFO << "ServerRequestInterceptor::send_exception, exception: (" << ri->sending_exception () << ")" << std::endl;
   }
   else
   {
