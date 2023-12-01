@@ -14,6 +14,8 @@
 #include <optional>
 #include "tao/x11/versioned_x11_namespace.h"
 
+#if defined (ACE_HAS_CPP17)
+
 namespace TAOX11_NAMESPACE
 {
   namespace IDL
@@ -22,5 +24,21 @@ namespace TAOX11_NAMESPACE
     using optional = std::optional<T>;
   } // namespace IDL
 } // namespace TAOX11_NAMESPACE
+
+#else
+
+namespace TAOX11_NAMESPACE
+{
+  namespace IDL
+  {
+    template<typename T>
+    class optional
+    {
+    public:
+      T value_;
+    };
+  }
+}
+#endif
 
 #endif // __IDL__OPTIONAL_T_H_INCLUDED__
