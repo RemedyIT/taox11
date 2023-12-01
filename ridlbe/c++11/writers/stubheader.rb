@@ -407,6 +407,7 @@ module IDL
 
       def enter_struct(node)
         node.members.each { |m| check_idl_type(m.idltype) }
+        node.members.each { |m| add_post_include('tao/x11/optional_t.h') if member_optional(m) }
       end
 
       def enter_union(node)
@@ -445,6 +446,10 @@ module IDL
       end
 
       private
+
+      def member_optional(node)
+        !node.annotations[:optional].first.nil?
+      end
 
       def check_idl_type(idl_type)
         idl_type = idl_type.resolved_type
