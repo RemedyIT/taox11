@@ -39,7 +39,7 @@ uint16_t test_registering (IDL::traits<CORBA::ORB>::ref_type orb)
 
   if (!invalid_name)
     {
-      errors++;
+      ++errors;
       TAOX11_TEST_ERROR << "ERROR: Registering with an empty string with the ORB"
         << "didn't throw an exception" << std::endl;
     }
@@ -63,7 +63,7 @@ uint16_t test_registering (IDL::traits<CORBA::ORB>::ref_type orb)
 
   if (!duplicate_name)
     {
-      errors++;
+      ++errors;
       TAOX11_TEST_ERROR << "ERROR: Registering with a duplicate with ORB "
         << "didn't throw the expected exception" << std::endl;
     }
@@ -73,7 +73,7 @@ uint16_t test_registering (IDL::traits<CORBA::ORB>::ref_type orb)
 
   if (!resolved_object->_is_equivalent (object))
     {
-      errors++;
+      ++errors;
       TAOX11_TEST_ERROR << "ERROR : resolved reference seems unequal to the "
         << "initial reference" << std::endl;
     }
@@ -100,7 +100,7 @@ uint16_t test_registering (IDL::traits<CORBA::ORB>::ref_type orb)
 
   if (!invalid_object)
     {
-      errors++;
+      ++errors;
       TAOX11_TEST_ERROR << "ERROR: Registering with a nil object to ORB "
         << "didn't throw bad param with minor code 27" << std::endl;
     }
@@ -120,7 +120,7 @@ uint16_t test_registering (IDL::traits<CORBA::ORB>::ref_type orb)
     }
   if (!reference_found)
     {
-      errors++;
+      ++errors;
       TAOX11_TEST_ERROR << "ERROR : ORBMyService could not be found in the "
         << "initial services list" << std::endl;
     }
@@ -151,7 +151,7 @@ uint16_t test_unregistering (IDL::traits<CORBA::ORB>::ref_type orb)
 
   if (!empty_name)
     {
-      errors++;
+      ++errors;
       TAOX11_TEST_ERROR << "ERROR : Unregistering with an empty name didn't "
         << "throw an InvalidName exception." << std::endl;
     }
@@ -175,7 +175,7 @@ uint16_t test_unregistering (IDL::traits<CORBA::ORB>::ref_type orb)
 
   if (!invalid_name)
     {
-      errors++;
+      ++errors;
       TAOX11_TEST_ERROR << "ERROR : Unregistering with 'ORBNilServer' didn't "
         << "throw an InvalidName exception." << std::endl;
     }
@@ -186,13 +186,13 @@ uint16_t test_unregistering (IDL::traits<CORBA::ORB>::ref_type orb)
     }
   catch (const CORBA::ORB::InvalidName&)
     {
-      errors++;
+      ++errors;
       TAOX11_TEST_ERROR << "ERROR: Caught unexpected InvalidName exception "
         "whilst unregistering ORBMyService" << std::endl;
     }
   catch (const CORBA::Exception& ex)
     {
-      errors++;
+      ++errors;
       TAOX11_TEST_ERROR << "ERROR: Caught unexpected exception whilst "
         "unregistering ORBMyService."
         << ex << std::endl;
@@ -207,7 +207,7 @@ uint16_t test_unregistering (IDL::traits<CORBA::ORB>::ref_type orb)
     }
   if (reference_found)
     {
-      errors++;
+      ++errors;
       TAOX11_TEST_ERROR << "ERROR : ORBMyService shouldn't be in the "
         << "initial services list anymore" << std::endl;
     }
@@ -230,8 +230,8 @@ main (int argc, char *argv[])
       retval = test_registering (orb);
       retval += test_registering (second_orb);
 
-      retval = test_unregistering (orb);
-      retval = test_unregistering (second_orb);
+      retval += test_unregistering (orb);
+      retval += test_unregistering (second_orb);
 
       second_orb->destroy ();
 

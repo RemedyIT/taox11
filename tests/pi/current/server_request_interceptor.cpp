@@ -185,15 +185,26 @@ ServerRequestInterceptor::send_reply (
     throw CORBA::INTERNAL ();
   }
 
-
   TAOX11_TEST_INFO << "Server side RSC/TSC semantics appear " \
               "to be correct." << std::endl;
 }
 
 void
 ServerRequestInterceptor::send_exception (
-    IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type)
+    IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri)
 {
+  TAOX11_TEST_INFO << "ServerRequestInterceptor::send_exception (" << ri->operation () << ")" << std::endl;
+
+  std::string const op = ri->operation ();
+
+  if (op == "test_exception")
+  {
+    TAOX11_TEST_INFO << "ServerRequestInterceptor::send_exception, exception: (" << ri->sending_exception () << ")" << std::endl;
+  }
+  else
+  {
+    TAOX11_TEST_ERROR << "ServerRequestInterceptor::send_exception called for operation " << op << std::endl;
+  }
 }
 
 void
