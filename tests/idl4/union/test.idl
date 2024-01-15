@@ -7,7 +7,7 @@
 
 union TestUnion_Octet switch(octet) {
   case 1:
-    short FirstCase;
+    @default(5) short FirstCase;
   case 2:
     long SecondCase;
 };
