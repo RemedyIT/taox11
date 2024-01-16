@@ -16,6 +16,11 @@ test_data_union (IDL::traits<Test::Foo>::ref_type foo)
   uint16_t retval = 0;
 
   Test::Data data;
+  if (data._d() != Test::DataType::dtEmpty)
+  {
+    TAOX11_TEST_ERROR << "Default constructed data should have implicit default disc dtEmpty" << std::endl;
+    ++retval;
+  }
   data._default ();
   retval += check_union (data, Test::DataType::dtEmpty, "after default");
   data.pointData (Test::Point (12, 34));
@@ -25,7 +30,7 @@ test_data_union (IDL::traits<Test::Foo>::ref_type foo)
   if (!std::is_swappable<Test::Data>())
   {
     TAOX11_TEST_ERROR << "ERROR: V is not swappable." << std::endl;
-    return 1;
+    ++retval;
   }
   else
   {
