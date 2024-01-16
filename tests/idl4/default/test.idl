@@ -29,7 +29,7 @@ exception foo
 };
 
 union TestUnion_Octet switch(short) {
-  case 0:
+  default:
     @default(5) short FirstCase;
   case 1:
     long SecondCase;
