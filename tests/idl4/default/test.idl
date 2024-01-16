@@ -27,3 +27,10 @@ exception foo
   @default(9) typedef_short_type_8 typedef_short_9;
   @default(5) unsigned short ushort_5;
 };
+
+union TestUnion_Octet switch(octet) {
+  case 1:
+    @default(5) short FirstCase;
+  case 2:
+    long SecondCase;
+};
