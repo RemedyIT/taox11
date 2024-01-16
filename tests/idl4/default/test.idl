@@ -28,9 +28,9 @@ exception foo
   @default(5) unsigned short ushort_5;
 };
 
-union TestUnion_Octet switch(octet) {
-  case 1:
+union TestUnion_Octet switch(short) {
+  case 0:
     @default(5) short FirstCase;
-  case 2:
+  case 1:
     long SecondCase;
 };

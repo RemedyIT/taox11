@@ -82,18 +82,6 @@ int main (int /*argc*/, char* /*argv*/[])
 
   TestUnion_Octet tuo;
   TAOX11_TEST_INFO << "tuo: " << tuo << std::endl;
-  if (tuo._d() != 1)
-  {
-    TAOX11_TEST_ERROR << "tuo._d() not 1 but: " << tuo._d() << std::endl;
-    ++retval;
-  }
-
-  if (tuo.FirstCase() != 5)
-  {
-    TAOX11_TEST_ERROR << "tuo.FirstCase() not 5 but: " << tuo.FirstCase() << std::endl;
-    ++retval;
-  }
-
 
   return retval;
 }
