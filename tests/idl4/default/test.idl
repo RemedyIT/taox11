@@ -34,3 +34,13 @@ union TestUnion_Octet switch(short) {
   case 1:
     long SecondCase;
 };
+
+enum Color {
+  GREEN,
+  @default_literal RED,
+  BLUE
+};
+
+struct Shape {
+    Color color_red;
+};
