@@ -43,7 +43,16 @@ enum Color {
 
 typedef Color ColorArray[5];
 
+enum ColorNoDefaultLiteral {
+  BLACK,
+  WHITE,
+  YELLOW
+};
+typedef ColorNoDefaultLiteral ColorNoDefaultLiteralArray[5];
+
 struct Shape {
     Color color_red;
     ColorArray color_red_array;
+    ColorNoDefaultLiteral color_no_default_literal;
+    ColorNoDefaultLiteralArray color_no_default_literal_array;
 };

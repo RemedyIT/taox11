@@ -155,6 +155,10 @@ module IDL
       '{}'
     end
 
+    def default_value
+      nil
+    end
+
     # define cxxtype methods for 'primitive' types
     {
       Char => 'char',
@@ -797,6 +801,10 @@ module IDL
       def value_initializer
         resolved_type.value_initializer
       end
+
+      def default_value
+        resolved_type.default_value
+      end
     end
 
     class Interface
@@ -857,13 +865,16 @@ module IDL
       end
 
       def value_initializer
-        res = '{}'
+        '{' + default_value.to_s + '}'
+      end
+
+      def default_value
         node.enumerators.each do |e|
           unless e.annotations[:default_literal].first.nil?
-            res = '{' + cxx_type + '::' + e.scoped_cxxname + '}'
+            return cxx_type + '::' + e.scoped_cxxname
           end
         end
-        return res
+        nil
       end
     end
 
@@ -996,7 +1007,12 @@ module IDL
       end
 
       def value_initializer
-        '{' + basetype.value_initializer + '}'
+        df = basetype.default_value
+        if df == nil
+          return '{}'
+        else
+          '{' + (basetype.default_value + ', ') * sizes.first + '}'
+        end
       end
     end
   end # Type
