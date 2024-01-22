@@ -860,6 +860,16 @@ module IDL
       def is_pod?
         true
       end
+
+      def value_initializer
+        res = '{}'
+        node.enumerators.each do |e|
+          unless e.annotations[:default_literal].first.nil?
+            res = '{' + cxx_type + '::' + e.scoped_cxxname + '}'
+          end
+        end
+        return res
+      end
     end
 
     class Bitmask

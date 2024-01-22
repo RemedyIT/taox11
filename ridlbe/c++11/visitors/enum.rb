@@ -24,8 +24,8 @@ module IDL
       def bitbound_bits
         node.bitbound_bits
       end
-      # template mapping
 
+      # template mapping
       map_template :enum, :enum
       map_template :typecode, :typecode
       map_template :tao_typecode, :enum_typecode

@@ -88,5 +88,13 @@ int main (int /*argc*/, char* /*argv*/[])
     ++retval;
   }
 
+  Shape shape;
+  TAOX11_TEST_INFO << "shape: " << shape << std::endl;
+  if (shape.color_red() != Color::RED)
+  {
+    TAOX11_TEST_ERROR << "shape.color_red() not RED but: " << shape.color_red() << std::endl;
+    ++retval;
+  }
+
   return retval;
 }
