@@ -519,10 +519,6 @@ module IDL
         self._resolved_idltype.cxx_anyop_arg_typename
       end
 
-      def zero_initializer
-        self._idltype.zero_initializer
-      end
-
       def value_initializer
         self._idltype.value_initializer
       end

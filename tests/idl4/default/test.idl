@@ -41,6 +41,9 @@ enum Color {
   BLUE
 };
 
+typedef Color ColorArray[5];
+
 struct Shape {
     Color color_red;
+    ColorArray color_red_array;
 };

@@ -150,14 +150,9 @@ module IDL
       '%s'
     end
 
-    # Construct for triggering zero initialization
-    def zero_initializer
-      '{}'
-    end
-
     # Construct for value initialization
     def value_initializer
-      zero_initializer
+      '{}'
     end
 
     # define cxxtype methods for 'primitive' types
@@ -746,10 +741,6 @@ module IDL
         is_reference? ? resolved_type.cxx_member_type_name : super
       end
 
-      def zero_initializer
-        resolved_type.zero_initializer
-      end
-
       def cxx_return_type(scope = nil)
         is_reference? ? resolved_type.cxx_member_type(scope, self) : super
       end
@@ -801,6 +792,10 @@ module IDL
 
       def cdr_from_fmt
         resolved_type.cdr_from_fmt
+      end
+
+      def value_initializer
+        resolved_type.value_initializer
       end
     end
 
@@ -1000,8 +995,8 @@ module IDL
         resolved_cxx_type(scope)
       end
 
-      def zero_initializer
-        '{{}}'
+      def value_initializer
+        '{' + basetype.value_initializer + '}'
       end
     end
   end # Type
