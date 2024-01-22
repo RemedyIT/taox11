@@ -1001,7 +1001,7 @@ module IDL
       end
 
       def zero_initializer
-        '{{}}'
+        '{}'
       end
     end
   end # Type
