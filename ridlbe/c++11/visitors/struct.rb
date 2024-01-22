@@ -133,6 +133,14 @@ module IDL
           "IDL::optional<#{super}>"
         end
       end
+
+      def value_initializer
+        unless optional?
+          super
+        else
+          '{std::nullopt}'
+        end
+      end
     end
   end
 end
