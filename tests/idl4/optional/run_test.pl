@@ -22,7 +22,7 @@ $SV = $target->CreateProcess ("client");
 $server = $SV->SpawnWaitKill ($target->ProcessStartWaitInterval());
 
 if ($server != 0) {
-    print STDERR "ERROR: const returned $server\n";
+    print STDERR "ERROR: client returned $server\n";
     $status = 1;
 }
 
