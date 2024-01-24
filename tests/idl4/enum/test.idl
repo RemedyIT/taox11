@@ -31,3 +31,9 @@ enum MyEnumBound32 {
   flag32_2,
   flag32_3
 };
+
+enum MyValueEnum {
+  @value(4) myv4,
+  @value(5) myv5,
+  @value(6) myv6
+};

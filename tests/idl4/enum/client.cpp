@@ -60,5 +60,23 @@ int main (int /*argc*/, char* /*argv*/[])
     TAOX11_TEST_ERROR << "bit_bound traits MyEnum is 32" << std::endl;
   }
 
+  if (static_cast<int32_t>(MyValueEnum::myv4) != 4)
+  {
+    ++retval;
+    TAOX11_TEST_ERROR << "myValueEnum::myv4 is not 4 but " << static_cast<int32_t>(MyValueEnum::myv4) << std::endl;
+  }
+
+  if (static_cast<int32_t>(MyValueEnum::myv5) != 5)
+  {
+    ++retval;
+    TAOX11_TEST_ERROR << "myValueEnum::myv5 is not 5 but " << static_cast<int32_t>(MyValueEnum::myv5) << std::endl;
+  }
+
+  if (static_cast<int32_t>(MyValueEnum::myv6) != 6)
+  {
+    ++retval;
+    TAOX11_TEST_ERROR << "myValueEnum::myv6 is not 6 but " << static_cast<int32_t>(MyValueEnum::myv6) << std::endl;
+  }
+
   return retval;
 }
