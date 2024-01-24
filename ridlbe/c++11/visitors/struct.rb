@@ -78,6 +78,10 @@ module IDL
         !node.annotations[:optional].first.nil?
       end
 
+      def external?
+        !node.annotations[:external].first.nil?
+      end
+
       def is_reference?
         if optional?
           false
@@ -95,42 +99,52 @@ module IDL
       end
 
       def cxx_byval_type
-        unless optional?
-          super
-        else
+        if optional?
           "IDL::optional<#{cxx_return_type}>"
+        elsif external?
+          "std::shared_ptr<#{cxx_return_type}>"
+        else
+          super
         end
       end
 
       def cxx_out_type
-        unless optional?
-          super
-        else
+        if optional?
           "IDL::optional<#{cxx_return_type}>&"
+        elsif external?
+          "std::shared_ptr<#{cxx_return_type}>&"
+        else
+          super
         end
       end
 
       def cxx_in_type
-        unless optional?
-          super
-        else
+        if optional?
           "const IDL::optional<#{super}>&"
+        elsif external?
+          "const std::shared_ptr<#{super}>&"
+        else
+          super
         end
       end
 
       def cxx_move_type
-        unless optional?
-          super
-        else
+        if optional?
           "IDL::optional<#{cxx_return_type}>&&"
+        elsif external?
+          "std::shared_ptr<#{cxx_return_type}>&&"
+        else
+          super
         end
       end
 
       def cxx_member_type
-        unless optional?
-          super
-        else
+        if optional?
           "IDL::optional<#{super}>"
+        elsif external?
+          "std::shared_ptr<#{super}>"
+        else
+          super
         end
       end
     end
