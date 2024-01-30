@@ -74,8 +74,7 @@ ACE_TMAIN(int argc, ACE_TCHAR *argv[])
 
     server->invoke_me ();
 
-    CORBA::Any new_data =
-      pi_current->get_slot (::slot_id);
+    CORBA::Any new_data = pi_current->get_slot (::slot_id);
 
     // The original data in the TSC was of type uint32_t.  If the
     // following extraction from the CORBA::Any fails, then the
@@ -96,6 +95,15 @@ ACE_TMAIN(int argc, ACE_TCHAR *argv[])
 
     server->invoke_we ();
 
+    try
+    {
+      server->test_exception ();
+    }
+    catch (const PICurrentTest::bar&)
+    {
+      TAOX11_TEST_INFO << "Caught correct exception" << std::endl;
+    }
+
     server->shutdown ();
 
     std::this_thread::sleep_for (std::chrono::seconds (1));
@@ -104,7 +112,7 @@ ACE_TMAIN(int argc, ACE_TCHAR *argv[])
   }
   catch (const std::exception& e)
   {
-    TAOX11_TEST_ERROR << "client exception caught: " << e.what () << std::endl;
+    TAOX11_TEST_ERROR << "client exception caught: " << e << std::endl;
     return 1;
   }
 

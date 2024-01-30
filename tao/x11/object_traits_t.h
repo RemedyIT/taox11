@@ -34,7 +34,7 @@ namespace TAOX11_NAMESPACE
 
     template <typename T, typename = typename
       std::enable_if<std::is_base_of<CORBA::Object, T>::value>::type, typename ...Args>
-    object_reference<T> make_reference(Args&& ...args);
+    constexpr object_reference<T> make_reference(Args&& ...args);
 
     template <typename T>
     class weak_object_reference;
@@ -42,24 +42,33 @@ namespace TAOX11_NAMESPACE
     template <typename T>
     struct object_traits
     {
-      typedef T                         stub_type;
-      typedef object_reference<T>       ref_type;
-      typedef weak_object_reference<T>  weak_ref_type;
+      using stub_type =  T;
+      using ref_type = object_reference<T>;
+      using weak_ref_type = weak_object_reference<T>;
 
       static ref_type narrow (object_reference<Object> obj);
 
-      typedef std::shared_ptr<T>    shared_ptr_type;
+      using shared_ptr_type = std::shared_ptr<T>;
 
       static shared_ptr_type lock_shared (stub_type*);
+
+      template <typename TInst,
+          typename = typename
+            std::enable_if<std::is_base_of<T, TInst>::value>::type,
+          typename ...Args>
+      static inline constexpr object_reference<T> make_reference(Args&& ...args)
+      {
+        return TAOX11_CORBA::make_reference<TInst>(std::forward<Args> (args)...);
+      }
     };
 
     template <typename T>
     class object_reference final
     {
     public:
-      typedef T                     value_type;
-      typedef T*                    ptr_type;
-      typedef object_traits<T>      traits_type;
+      using value_type = T;
+      using ptr_type =  T*;
+      using traits_type = object_traits<T>;
 
       object_reference (std::nullptr_t = nullptr)
       {}
@@ -114,7 +123,7 @@ namespace TAOX11_NAMESPACE
       { return weak_object_reference<T> (*this); }
 
     protected:
-      typedef std::shared_ptr<T>    shared_ptr_type;
+      using shared_ptr_type = std::shared_ptr<T>;
 
       template <typename _Tp1> friend class object_reference;
       template <typename _Tp1> friend struct object_traits;
@@ -122,7 +131,7 @@ namespace TAOX11_NAMESPACE
       template <typename _Tp1> friend class abstractbase_reference;
       template <typename _Tp1> friend class weak_abstractbase_reference;
       template <typename _Tp1, typename, typename ...Args>
-      friend object_reference<_Tp1> make_reference(Args&& ...args);
+      friend constexpr object_reference<_Tp1> make_reference(Args&& ...args);
       friend class Object;
 
       template<typename _Tp1, typename = typename
@@ -197,7 +206,7 @@ namespace TAOX11_NAMESPACE
       { return object_reference<T> (this->stub_.lock ()); }
 
     protected:
-      typedef std::weak_ptr<T>  weak_ptr_type;
+      using weak_ptr_type = std::weak_ptr<T>;
 
       template <typename _Tp1> friend class weak_abstractbase_reference;
 
@@ -226,12 +235,11 @@ namespace TAOX11_NAMESPACE
     inline typename object_traits<T>::ref_type
     object_traits<T>::narrow (object_reference<Object> obj)
     {
-      return ref_type (
-          std::dynamic_pointer_cast<T> (obj.stub_));
+      return ref_type (std::dynamic_pointer_cast<T> (obj.stub_));
     }
 
     template <typename T, typename, typename ...Args>
-    inline object_reference<T> make_reference(Args&& ...args)
+    inline constexpr object_reference<T> make_reference(Args&& ...args)
     {
       return object_reference<T> (new T (std::forward<Args> (args)...));
     }

@@ -10,12 +10,12 @@ require 'ridlbe/c++11/writerbase'
 
 module IDL
   module Cxx11
-
     class ImplSourceBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
         self.template_root = File.join('impl', 'src')
       end
+
       def generate_servant_implementation?
         params[:gen_impl_servant]
       end
@@ -38,7 +38,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from ImplSourceWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -48,17 +48,18 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
       def enter_interface(node)
         return if node.is_abstract?
+
         super
         if node.is_local? || node.is_pseudo?
         else
           if generate_servant_implementation?
-            println()
+            println
             printiln('// generated from ImplSourceWriter#enter_interface')
             visitor(InterfaceVisitor).visit_pre(node)
             inc_nest
@@ -68,6 +69,7 @@ module IDL
 
       def leave_interface(node)
         return if node.is_abstract?
+
         if node.is_local? || node.is_pseudo?
         else
           if generate_servant_implementation?
@@ -81,7 +83,7 @@ module IDL
               visitor(AttributeVisitor) { |v| v.interface(node); v.visit_attribute(_att) }
             end
             visitor(InterfaceVisitor).visit_post(node)
-            println()
+            println
           end
         end
         super
@@ -93,8 +95,6 @@ module IDL
 #        return if node.is_local? || !node.supports_concrete_interface?
 #        visitor(ValuetypeVisitor).visit_pre(node)
 #      end
-
     end # ImplSourceWriter
-
   end # Cxx11
 end # IDL

@@ -16,10 +16,8 @@
 // In other cases though we have to define a new trait specialization.
 #if (ACE_SIZEOF_LONG_DOUBLE != 16)
 
-namespace TAOX11_NAMESPACE
+namespace TAOX11_NAMESPACE::PS
 {
-  namespace PS
-  {
   /**
    * @class In_Basic_SArgument_T
    *
@@ -112,10 +110,7 @@ namespace TAOX11_NAMESPACE
   private:
     long double x_;
   };
-
-  } // namespace PS
-
-} // namespace TAOX11_NAMESPACE
+} // namespace TAOX11_NAMESPACE::PS
 
 #if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
 #include "tao/x11/portable_server/long_double_sargument_t.cpp"

@@ -167,10 +167,10 @@ namespace TAOX11_NAMESPACE
   //================================================================
 
   TypeCode_ref const
-  BasicTypeTraits<CORBA::object_reference< CORBA::Object> >::tc_value = CORBA::_tc_Object;
+  BasicTypeTraits<CORBA::object_reference<CORBA::Object> >::tc_value = CORBA::_tc_Object;
 
   CORBA::TCKind const
-  BasicTypeTraits<CORBA::object_reference< CORBA::Object>>::tckind_value = CORBA::TCKind::tk_objref;
+  BasicTypeTraits<CORBA::object_reference<CORBA::Object>>::tckind_value = CORBA::TCKind::tk_objref;
 
   //================================================================
 

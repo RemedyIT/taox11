@@ -113,7 +113,6 @@ resolve_name (IDL::traits<CosNaming::NamingContext>::ref_type nc,
 //----------------------------------------------------------------
 
 // Show the details for a thermometer or thermostat.
-
 void
 dump_thermometer (IDL::traits<CCS::Thermometer>::ref_type t)
 {
@@ -151,7 +150,6 @@ dump_badtemp (const CCS::Thermostat::BtData &btd)
 //----------------------------------------------------------------
 
 // Change the temperature of a thermostat.
-
 static void
 set_temp (IDL::traits<CCS::Thermostat>::ref_type tmstat,
   CCS::TempType new_temp, bool should_fail=false)

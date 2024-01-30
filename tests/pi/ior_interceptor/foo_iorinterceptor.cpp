@@ -36,14 +36,12 @@ FOO_IORInterceptor::establish_components (
   // exception.  We check for exceptions despite this fact.  The ORB
   // does the right thing, and ignores any IOR interceptors that throw
   // an exception.
-
   std::string name = this->name ();
 
   CORBA::Any data;
   data <<= name;
 
-  CORBA::OctetSeq encoded_data =
-    std::move (this->codec_->encode_value (data));
+  CORBA::OctetSeq encoded_data = this->codec_->encode_value (data);
 
   // Construct a tagged component.
   IOP::TaggedComponent component;
@@ -62,10 +60,8 @@ FOO_IORInterceptor::establish_components (
   info->add_ior_component_to_profile (component,
                                       IOP::TAG_INTERNET_IOP);
 
-
   TAOX11_TEST_INFO << "Added tagged component containing the string \"" <<
       name << "\" to all IIOP profiles." << std::endl;
-
 
   try
   {
@@ -80,6 +76,49 @@ FOO_IORInterceptor::establish_components (
   {
     if (ex.minor () != (CORBA::OMGVMCID | 3))
       throw;
+  }
+
+  TAOX11_TEST_INFO << "Testing IORInfo accessors"<< std::endl;
+  PortableInterceptor::AdapterManagerId manager_id = info->manager_id ();
+  if (manager_id != "RootPOAManager")
+  {
+    TAOX11_TEST_ERROR << "ERROR: manager_id is " << manager_id << std::endl;
+  }
+  PortableInterceptor::AdapterState adapter_state = info->state ();
+  if (adapter_state != 0)
+  {
+    TAOX11_TEST_ERROR << "ERROR: adapter_state is " << adapter_state << std::endl;
+  }
+  IDL::traits<PortableInterceptor::ObjectReferenceTemplate>::ref_type at = info->adapter_template ();
+  if (!at)
+  {
+    TAOX11_TEST_ERROR << "ERROR: adapter template is nil " << std::endl;
+  }
+  IDL::traits<PortableInterceptor::ObjectReferenceFactory>::ref_type cf = info->current_factory ();
+  if (!cf)
+  {
+    TAOX11_TEST_ERROR << "ERROR: current factory is nil " << std::endl;
+  }
+
+  IDL::traits<PortableInterceptor::IORInfo>::ref_type nil_iorinfo =
+      IDL::traits<PortableInterceptor::IORInfo>::narrow (nullptr);
+
+  if (nil_iorinfo)
+  {
+    TAOX11_TEST_ERROR << "Narrow nil PortableInterceptor::IORInfo should return nil"
+        << std::endl;
+  }
+
+  // Test widening and narrowing back
+  IDL::traits<CORBA::Object>::ref_type base_iorinfo = info;
+
+  IDL::traits<PortableInterceptor::IORInfo>::ref_type narrowed_iorinfo =
+      IDL::traits<PortableInterceptor::IORInfo>::narrow (base_iorinfo);
+
+  if (!narrowed_iorinfo)
+  {
+    TAOX11_TEST_ERROR << "Widening and narrow PortableInterceptor::IORInfo failed"
+        << std::endl;
   }
 }
 

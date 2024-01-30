@@ -90,7 +90,7 @@ public:
 
   }
 
-  void foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+  void foo_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO
        << "Callback method <foo_excep> called: Testing proper exception handling."
@@ -144,7 +144,7 @@ public:
       }
   }
 
-  void get_yadda_get_r_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+  void get_yadda_get_r_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <get_yadda_get_r_excep> called."
                 << std::endl;
@@ -190,7 +190,7 @@ public:
   }
 
   void set_yadda_get_r_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <set_yadda_get_r_excep> called:"
                 << std::endl;
@@ -209,7 +209,7 @@ public:
       {
         callback_excep++;
         TAOX11_TEST_INFO << "Callback method <set_yadda_get_r_excep> caught exception -> "
-                    << exc.what() << std::endl;
+                    << exc << std::endl;
       }
   }
 
@@ -227,7 +227,7 @@ public:
   }
 
   void get_yadda_set_r_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <get_yadda_set_r_excep> called."
                 << std::endl;
@@ -247,7 +247,7 @@ public:
       {
         callback_excep++;
         TAOX11_TEST_INFO << "Callback method <get_yadda_set_r_excep> caught exception -> "
-                    << exc.what() << std::endl;
+                    << exc << std::endl;
       }
   }
 
@@ -258,7 +258,7 @@ public:
   }
 
   void set_yadda_set_r_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <set_yadda_set_r_excep> called:" << std::endl;
     try
@@ -305,7 +305,7 @@ public:
   }
 
   void get_yadda_get_set_r_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <get_yadda_get_set_r_excep> called." << std::endl;
     try
@@ -344,7 +344,7 @@ public:
     TAOX11_TEST_INFO << "Callback method <set_yadda_get_set_r> called:"<< std::endl;
   }
 
-  void set_yadda_get_set_r_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+  void set_yadda_get_set_r_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <set_yadda_get_set_r_excep> called:" << std::endl;
     try
@@ -390,7 +390,7 @@ public:
   }
 
   void get_yadda_no_r_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <get_yadda_no_r_excep> called." << std::endl;
     try
@@ -407,7 +407,7 @@ public:
       {
         callback_excep++;
         TAOX11_TEST_INFO << "Callback method <get_yadda_no_r_excep> caught exception -> "
-                    << exc.what() << std::endl;
+                    << exc << std::endl;
       }
   }
 
@@ -417,7 +417,7 @@ public:
     TAOX11_TEST_INFO << "Callback method <set_yadda_no_r> called:"<< std::endl;
   }
 
-  void set_yadda_no_r_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+  void set_yadda_no_r_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <set_yadda_no_r_excep> called:" << std::endl;
     try
@@ -434,7 +434,7 @@ public:
       {
         callback_excep++;
         TAOX11_TEST_INFO << "Callback method <set_yadda_no_r_excep> caught exception -> "
-                    << exc.what() << std::endl;
+                    << exc << std::endl;
       }
   }
 
@@ -453,7 +453,7 @@ public:
    }
 
    void get_yadda_readonly_r_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
    {
      TAOX11_TEST_INFO << "Callback method <get_yadda_readonly_r_excep> called." << std::endl;
      try
@@ -482,7 +482,7 @@ public:
        {
          result = 1;
          TAOX11_TEST_INFO << "Callback method <get_yadda_readonly_r_excep> caught the wrong exception -> ERROR "
-                     << exc.what() << std::endl;
+                     << exc << std::endl;
        }
    }
 
@@ -500,7 +500,7 @@ public:
    }
 
    void get_yadda_readonly_no_r_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
    {
      TAOX11_TEST_INFO << "Callback method <get_yadda_readonly_no_r_excep> called:" << std::endl;
      try
@@ -518,7 +518,7 @@ public:
        {
          callback_excep++;
          TAOX11_TEST_INFO << "Callback method <get_yadda_readonly_no_r_excep> caught exception -> "
-             << exc.what() << std::endl;
+             << exc << std::endl;
        }
    }
 
@@ -535,7 +535,7 @@ public:
       }
     }
 
-  void foo_no_arg_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+  void foo_no_arg_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 
@@ -544,7 +544,7 @@ public:
   }
 
   void shutdown_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };
@@ -758,7 +758,7 @@ int main(int argc, char* argv[])
 
       if ((callback_foo != 3) || (callback_excep != 11 ) || (callback_attrib != 11 ))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected callbacks. Foo : expected -3- , received -" << callback_foo << "-"
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected callbacks. Foo : expected -3- , received -" << callback_foo << "-"
           << " Attrib : expected -11-, received -" << callback_attrib << "-"
           << " Exceptions: expected -11-, received -" << callback_excep << "-."<< std::endl;
           result = 1;
@@ -772,7 +772,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+        TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
         return 1;
       }
   return result;

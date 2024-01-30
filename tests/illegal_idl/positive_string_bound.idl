@@ -1,0 +1,8 @@
+/**
+ * @file    positive_string_bound.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+typedef string<-1> bound_string;

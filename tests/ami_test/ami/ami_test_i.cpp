@@ -10,13 +10,13 @@
 #include "ami_test_i.h"
 
 AMI_Test_i::AMI_Test_i (IDL::traits<CORBA::ORB>::ref_type orb)
-  :  orb_ (orb),
-     yadda_ ((int32_t) 140474),
-     in_l_ ((int32_t) 931247),
-     in_l_last_ ((int32_t) 931235),
-     attr_bool_(true),
-     in_str_("Let's talk AMI."),
-     in_str_last_("Let's talk AMI the last time.")
+  : orb_ (std::move(orb)),
+    yadda_ ((int32_t) 140474),
+    in_l_ ((int32_t) 931247),
+    in_l_last_ ((int32_t) 931235),
+    attr_bool_(true),
+    in_str_("Let's talk AMI."),
+    in_str_last_("Let's talk AMI the last time.")
 {
 }
 

@@ -2,17 +2,13 @@
 // generated from <%= ridl_template_path %>
 /// @copydoc <%= doc_scoped_name %>
 //@{
-void
-get_<%= name %> (<%= scoped_cxx_in_type %> ami_return_val);
+void get_<%= name %> (<%= scoped_cxx_in_type %> ami_return_val);
 
-void
-get_<%= name %>_excep (IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder);
+void get_<%= name %>_excep (IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder);
 % unless is_readonly?
 
-void
-set_<%= name %> ();
+void set_<%= name %> ();
 
-void
-set_<%= name %>_excep (IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder);
+void set_<%= name %>_excep (IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type excep_holder);
 % end
 //@}

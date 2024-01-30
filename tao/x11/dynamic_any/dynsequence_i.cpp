@@ -36,7 +36,7 @@ namespace TAOX11_NAMESPACE
       this->component_count_ = component_count;
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynSequence_i::init (const CORBA::Any& any)
     {
       TAOX11_LOG_TRACE ("DynSequence_i::init with any");
@@ -54,7 +54,7 @@ namespace TAOX11_NAMESPACE
       TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
       uint32_t length;
       TAO_OutputCDR out;
-      TAO_InputCDR cdr (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR cdr (static_cast<ACE_Message_Block *> (nullptr));
 
       if (impl->encoded ())
       {
@@ -117,7 +117,7 @@ namespace TAOX11_NAMESPACE
       return this->_this();
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynSequence_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynSequence_i::init with typecode");
@@ -139,12 +139,12 @@ namespace TAOX11_NAMESPACE
       return this->_this();
     }
 
-    IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type
+    IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type
     DynSequence_i::get_element_type ()
     {
       TAOX11_LOG_TRACE ("DynSequence_i::get_element_type");
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type element_type = this->type_;
+      IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type element_type = this->type_;
 
       // Strip away aliases (if any) on top of the outer type.
       CORBA::TCKind kind = element_type->kind ();
@@ -157,7 +157,7 @@ namespace TAOX11_NAMESPACE
       }
 
       // Return the content type.
-      IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type retval = element_type->content_type ();
+      IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type retval = element_type->content_type ();
 
       return retval;
     }
@@ -188,7 +188,7 @@ namespace TAOX11_NAMESPACE
       }
 
       // CORBA::TypeCode::length() does not accept aliased type codes.
-      IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type stripped_tc =
+      IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type stripped_tc =
         DynAnyFactory_i::strip_alias (this->type_);
 
       const uint32_t bound = stripped_tc->length ();
@@ -224,13 +224,13 @@ namespace TAOX11_NAMESPACE
 
       if (length > this->component_count_)
       {
-        IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type elemtype =
+        IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type elemtype =
            stripped_tc->content_type ();
 
         for (uint32_t i = this->component_count_; i < length; ++i)
         {
           this->da_members_.push_back(
-            MakeDynAnyUtils::make_dyn_any_t<IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type> (
+            MakeDynAnyUtils::make_dyn_any_t<IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type> (
               elemtype,
               elemtype,
               this->allow_truncation_ ));
@@ -260,7 +260,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (this->da_members_.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (this->da_members_.size ());
 
       DynamicAny::AnySeq elements(length);
       if (elements.size() != length)
@@ -287,11 +287,11 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type stripped_tc =
+      IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type stripped_tc =
         DynamicAny::DynAnyFactory_i::strip_alias (this->type_);
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (value.size ());
-      const uint32_t bound = stripped_tc->length ();
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (value.size ());
+      uint32_t const bound = stripped_tc->length ();
 
       if (bound > 0 && length > bound)
       {
@@ -314,10 +314,10 @@ namespace TAOX11_NAMESPACE
         this->da_members_.resize (length);
       }
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type element_type =
+      IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type element_type =
           this->get_element_type ();
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type value_tc;
+      IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type value_tc;
 
       for (uint32_t i = 0; i < length; ++i)
       {
@@ -397,11 +397,11 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type stripped_tc =
+      IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type stripped_tc =
         DynAnyFactory_i::strip_alias (this->type_);
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
-      const uint32_t bound = stripped_tc->length ();
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const bound = stripped_tc->length ();
 
       if (bound > 0 && length > bound)
       {
@@ -414,10 +414,10 @@ namespace TAOX11_NAMESPACE
         this->da_members_.resize (length);
       }
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type element_type =
+      IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type element_type =
         this->get_element_type ();
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type val_type;
+      IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type val_type;
 
       DynamicAny::DynAnySeq &nc_values = const_cast<DynamicAny::DynAnySeq &> (values);
 
@@ -471,7 +471,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type tc = any.type ();
+      IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type tc = any.type ();
       bool equivalent =
         this->type_->equivalent (tc);
 
@@ -480,7 +480,7 @@ namespace TAOX11_NAMESPACE
         // Get the CDR stream of the Any, if there isn't one, make one.
         TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
         TAO_OutputCDR out;
-        TAO_InputCDR cdr (static_cast<ACE_Message_Block *> (0));
+        TAO_InputCDR cdr (static_cast<ACE_Message_Block *> (nullptr));
 
         if (impl->encoded ())
         {
@@ -511,7 +511,7 @@ namespace TAOX11_NAMESPACE
           this->da_members_.resize (arg_length);
         }
 
-        IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type field_tc =
+        IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type field_tc =
           this->get_element_type ();
 
         for (uint32_t i = 0; i < arg_length; ++i)
@@ -585,7 +585,7 @@ namespace TAOX11_NAMESPACE
 
 
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type field_tc =
+      IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type field_tc =
         this->get_element_type ();
 
       for (uint32_t i = 0; i < this->component_count_; ++i)
@@ -596,7 +596,7 @@ namespace TAOX11_NAMESPACE
 
         TAOX11_CORBA::Any::impl_ref_type field_impl = field_any.impl ();
         TAO_OutputCDR field_out;
-        TAO_InputCDR field_cdr (static_cast<ACE_Message_Block *> (0));
+        TAO_InputCDR field_cdr (static_cast<ACE_Message_Block *> (nullptr));
 
         if (field_impl->encoded ())
         {
@@ -639,7 +639,7 @@ namespace TAOX11_NAMESPACE
     }
 
     bool
-    DynSequence_i::equal (IDL::traits< DynamicAny::DynAny>::ref_type rhs)
+    DynSequence_i::equal (IDL::traits<DynamicAny::DynAny>::ref_type rhs)
     {
       TAOX11_LOG_TRACE ("DynSequence_i::equal");
 
@@ -662,7 +662,7 @@ namespace TAOX11_NAMESPACE
         return false;
       }
 
-      IDL::traits< DynamicAny::DynAny>::ref_type tmp;
+      IDL::traits<DynamicAny::DynAny>::ref_type tmp;
       bool member_equal;
 
       for (uint32_t i = 0; i < this->component_count_; ++i)
@@ -695,14 +695,14 @@ namespace TAOX11_NAMESPACE
         // Do a deep destroy.
         for (uint32_t i = 0; i < this->component_count_; ++i)
         {
-          this->set_flag (da_members_[i], 1);
+          this->set_flag (da_members_[i], true);
           this->da_members_[i]->destroy ();
         }
         this->destroyed_ = true;
       }
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynSequence_i::current_component ()
     {
       TAOX11_LOG_TRACE ("DynSequence_i::current_component");
@@ -719,7 +719,7 @@ namespace TAOX11_NAMESPACE
 
       uint32_t index = static_cast<uint32_t> (this->current_position_);
 
-      this->set_flag (this->da_members_[index], 0);
+      this->set_flag (this->da_members_[index], false);
 
       return this->da_members_[index];
     }

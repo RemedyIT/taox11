@@ -28,7 +28,7 @@ namespace TAOX11_NAMESPACE {
     \
     protected: \
       template <typename _Tp1, typename, typename ...Args> \
-      friend CORBA::object_reference<_Tp1> CORBA::make_reference(Args&& ...args); \
+      friend constexpr CORBA::object_reference<_Tp1> CORBA::make_reference(Args&& ...args); \
       \
       explicit name ## _impl (TAO_PORTABLE_SERVER::name ## _ptr _pol); \
       ~name ## _impl () = default; \

@@ -40,7 +40,7 @@ namespace TAOX11_NAMESPACE
             true );  //  Allow truncation
     }
 
-    TAOX11_IDL::traits< DynAny>::ref_type
+    TAOX11_IDL::traits<DynAny>::ref_type
     DynAnyFactory_i::create_dyn_any_from_type_code (CORBA::object_reference<CORBA::TypeCode> type)
     {
       TAOX11_LOG_TRACE ("DynAnyFactory_i::create_dyn_any_from_type_code ");
@@ -54,7 +54,7 @@ namespace TAOX11_NAMESPACE
            true );  // Allow truncation
    }
 
-    TAOX11_IDL::traits< DynAny>::ref_type
+    TAOX11_IDL::traits<DynAny>::ref_type
     DynAnyFactory_i::create_dyn_any_without_truncation (
         const TAOX11_NAMESPACE::CORBA::Any& value)
     {
@@ -80,7 +80,7 @@ namespace TAOX11_NAMESPACE
       // within each any, indirection will occur if a DynValue
       // self references with one of its own members.
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
       DynamicAny::DynAnySeq retseq;
       retseq.reserve(length);
       for (uint32_t i = 0; i < length ;++i)
@@ -106,8 +106,7 @@ namespace TAOX11_NAMESPACE
     // self references with one of its own members .
        DynamicAny::DynAnySeq &nc_values = const_cast<DynamicAny::DynAnySeq &> (values);
 
-
-       const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (nc_values.size ());
+       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (nc_values.size ());
        DynamicAny::AnySeq retseq;
        retseq.reserve(length);
        for (uint32_t i = 0; i < length ;++i)
@@ -129,16 +128,16 @@ namespace TAOX11_NAMESPACE
 
       while (tck == CORBA::TCKind::tk_alias)
       {
-        CORBA::object_reference< CORBA::TypeCode> temp = tc->content_type ();
+        CORBA::object_reference<CORBA::TypeCode> temp = tc->content_type ();
         tck = DynAnyFactory_i::unalias (temp);
       }
       TAOX11_LOG_DEBUG ("DynAnyFactory_i::unalias tck:" << tck);
 
       return tck;
     }
-    /// Same as above, but returns type code instead of  TCKind. Caller
+    /// Same as above, but returns type code instead of TCKind. Caller
     /// must release the return value.
-    CORBA::object_reference< CORBA::TypeCode>
+    CORBA::object_reference<CORBA::TypeCode>
     DynAnyFactory_i::strip_alias (CORBA::object_reference<CORBA::TypeCode> tc)
     {
       IDL::traits<CORBA::TypeCode>::ref_type retval = IDL::traits<CORBA::TypeCode>::narrow(tc);

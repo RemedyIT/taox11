@@ -9,7 +9,7 @@ static const Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array[] =
     {"<%= _op.name %>",
      [] (TAO_ServerRequest & server_request, TAO::Portable_Server::Servant_Upcall * servant_upcall, TAO_ServantBase * servant)
      {
-      <%= scoped_srvproxy_cxxtype %> * const impl = dynamic_cast< <%= scoped_srvproxy_cxxtype %> *> (servant);
+      <%= scoped_srvproxy_cxxtype %> * const impl = dynamic_cast<<%= scoped_srvproxy_cxxtype %> *> (servant);
 % unless _op.defining_interface.is_abstract?
       <%= _op.defining_interface.scoped_srvproxy_cxxtype %>::<%= _op.name %>_skel (server_request, servant_upcall, impl->skel ());
 % else
@@ -23,7 +23,7 @@ static const Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array[] =
     {"_get_<%= _att.name %>",
      [] (TAO_ServerRequest & server_request, TAO::Portable_Server::Servant_Upcall * servant_upcall, TAO_ServantBase * servant)
      {
-      <%= scoped_srvproxy_cxxtype %> * const impl = dynamic_cast< <%= scoped_srvproxy_cxxtype %> *> (servant);
+      <%= scoped_srvproxy_cxxtype %> * const impl = dynamic_cast<<%= scoped_srvproxy_cxxtype %> *> (servant);
 % unless _att.defining_interface.is_abstract?
       <%= _att.defining_interface.scoped_srvproxy_cxxtype %>::_get_<%= _att.name %>_skel (server_request, servant_upcall, impl->skel ());
 % else
@@ -36,7 +36,7 @@ static const Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array[] =
     {"_set_<%= _att.name %>",
      [] (TAO_ServerRequest & server_request, TAO::Portable_Server::Servant_Upcall * servant_upcall, TAO_ServantBase * servant)
      {
-      <%= scoped_srvproxy_cxxtype %> * const impl = dynamic_cast< <%= scoped_srvproxy_cxxtype %> *> (servant);
+      <%= scoped_srvproxy_cxxtype %> * const impl = dynamic_cast<<%= scoped_srvproxy_cxxtype %> *> (servant);
 % unless _att.defining_interface.is_abstract?
       <%= _att.defining_interface.scoped_srvproxy_cxxtype %>::_set_<%= _att.name %>_skel (server_request, servant_upcall, impl->skel ());
 % else
@@ -71,18 +71,13 @@ TAOX11_NAMESPACE::PortableServer::Servant* <%= srvproxy_cxxname %>::_get_skel ()
 {
   try {
     TAO_Stub_Auto_Ptr safe_stub (this->_create_stub ());
-
-    TAO_CORBA::Boolean const _tao_opt_colloc =
-      safe_stub->servant_orb_var ()->orb_core ()->optimize_collocation_objects ();
-
-    TAO_CORBA::Object_var obj =
-      new (std::nothrow) TAO_CORBA::Object (safe_stub.get (), _tao_opt_colloc, this);
+    TAO_CORBA::Boolean const _tao_opt_colloc = safe_stub->servant_orb_var ()->orb_core ()->optimize_collocation_objects ();
+    TAO_CORBA::Object_var obj = new (std::nothrow) TAO_CORBA::Object (safe_stub.get (), _tao_opt_colloc, this);
 
     if (obj.ptr ())
       {
         (void) safe_stub.release ();
-
-        return TAO_TAO::Narrow_Utils< <%= scoped_proxy_cxxtype %>>::unchecked_narrow (obj.in ());
+        return TAO_TAO::Narrow_Utils<<%= scoped_proxy_cxxtype %>>::unchecked_narrow (obj.in ());
       }
   }
   catch (const TAO_PORTABLE_SERVER::POA::WrongPolicy&) {

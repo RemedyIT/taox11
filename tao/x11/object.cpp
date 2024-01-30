@@ -30,7 +30,8 @@ namespace TAOX11_NAMESPACE
         bool amic)
     {
       std::string objstr = amic ? "CORBA::amic_traits<" : "IDL::traits<";
-      objstr += objtype; objstr += ">::ref_type {";
+      objstr += objtype;
+      objstr += ">::ref_type{";
       if (!obj)
       {
         objstr += "nil";
@@ -212,7 +213,7 @@ namespace TAOX11_NAMESPACE
     }
 #endif
 
-    std::string Object::_interface_repository_id ()
+    std::string Object::_interface_repository_id () const
     {
       if (this->proxy_)
       {

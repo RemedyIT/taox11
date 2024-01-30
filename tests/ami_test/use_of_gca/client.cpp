@@ -89,7 +89,7 @@ public:
       }
   }
 
-  void foo_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+  void foo_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO
       << "Callback method <foo_excep> called: Testing proper exception handling."
@@ -144,7 +144,7 @@ public:
   }
 
   void get_yadda_no_r_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <get_yadda_no_r_excep> called..." << std::endl;
     try
@@ -159,7 +159,7 @@ public:
     catch (const CORBA::Exception& exc)
       {
         callback_excep++;
-        TAOX11_TEST_INFO << "... caught exception -> " << exc.what() << std::endl;
+        TAOX11_TEST_INFO << "... caught exception -> " << exc << std::endl;
       }
   }
 
@@ -169,7 +169,7 @@ public:
     TAOX11_TEST_INFO << "Callback method <set_yadda_no_r> called."<< std::endl;
   }
 
-  void set_yadda_no_r_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+  void set_yadda_no_r_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <set_yadda_no_r_excep> called..." << std::endl;
     try
@@ -184,7 +184,7 @@ public:
     catch (const CORBA::Exception& ex)
       {
         callback_excep++;
-        TAOX11_TEST_INFO << "... caught exception -> " << ex.what() << std::endl;
+        TAOX11_TEST_INFO << "... caught exception -> " << ex << std::endl;
       }
   }
 
@@ -193,7 +193,7 @@ public:
   }
 
   void shutdown_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };
@@ -358,7 +358,7 @@ int main(int argc, char* argv[])
 
       if ((callback_foo != 2) || (callback_excep != 3 ) || (callback_attrib != 2 ))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected callbacks. Foo : expected -2- , received -" << callback_foo << "-"
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected callbacks. Foo : expected -2- , received -" << callback_foo << "-"
           << " Attrib : expected -2-, received -" << callback_attrib << "-"
           << " Exceptions: expected -3-, received -" << callback_excep << "-."<< std::endl;
           result = 1;
@@ -372,7 +372,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+        TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
         return 1;
       }
   return result;

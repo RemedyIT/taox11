@@ -13,11 +13,8 @@
 #include "tao/x11/portable_server/basic_sargument_t.h"
 #endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 
-namespace TAOX11_NAMESPACE
+namespace TAOX11_NAMESPACE::PS
 {
-
-namespace PS {
-
 template<typename S,
          template <typename> class Insert_Policy>
 TAO_CORBA::Boolean
@@ -112,8 +109,6 @@ Ret_Basic_SArgument_T<S,Insert_Policy>::interceptor_value (TAO_CORBA::Any *any) 
 
 #endif /* TAO_HAS_INTERCEPTORS */
 
-} // namespace PS
-
-} // namespace TAOX11_NAMESPACE
+} // namespace TAOX11_NAMESPACE::PS
 
 #endif /* TAOX11_BASIC_SARGUMENT_T_CPP */

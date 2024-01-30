@@ -17,7 +17,7 @@ main(int argc, ACE_TCHAR *argv[])
     {
       IDL::traits<CORBA::ORB>::ref_type _orb = CORBA::ORB_init (argc, argv);
 
-      if (_orb == nullptr)
+      if (!_orb)
       {
         TAOX11_TEST_ERROR << "ERROR: CORBA::ORB_init (argc, argv) returned null ORB." << std::endl;
         return 1;
@@ -75,7 +75,7 @@ main(int argc, ACE_TCHAR *argv[])
         return 1;
       }
 
-      std::string ior = _orb->object_to_string (hello);
+      std::string const ior = _orb->object_to_string (hello);
 
       // Output the IOR to the <ior_output_file>
       std::ofstream fos("test.ior");
@@ -97,6 +97,46 @@ main(int argc, ACE_TCHAR *argv[])
 
       TAOX11_TEST_DEBUG << "event loop finished" << std::endl;
 
+      // Testing the TestUnion_U1 type
+      Test::TestUnion_U1 u1_1;
+      Test::TestUnion_U1 u1_2 (u1_1); // make a copy
+      // Validate that u1_1 and u1_2 are the same
+      if (u1_1._d() != u1_2._d())
+      {
+        TAOX11_TEST_ERROR << "u1_1._d() != u1_2._d()" << std::endl;
+        return 1;
+      }
+      Test::TestUnion_U1 u1_3 (std::move(u1_1)); // do a move, u1_1 is now nil
+      // Validate that u1_2 and u1_3 are the same
+      if (u1_2._d() != u1_3._d())
+      {
+        TAOX11_TEST_ERROR << "u1_2._d() != u1_3._d()" << std::endl;
+        return 1;
+      }
+      // Swap the content of u1_2 and u1_3, some gcc compilers give an invalid warning
+      // here
+      u1_2.swap (u1_3);
+      // Validate that u1_2 and u1_3 are the same
+      if (u1_2._d() != u1_3._d())
+      {
+        TAOX11_TEST_ERROR << "u1_2._d() != u1_3._d()" << std::endl;
+        return 1;
+      }
+
+      // Testing the TestUnion_U2 type
+      Test::TestUnion_U2 u2_1;
+      Test::TestUnion_U2 u2_2 (u2_1); // make a copy
+      // Swap the content of u1_1 and u2_2, commenting this swap operation
+      // will trigger the warnings given by some gcc versions above. Also
+      // commenting out the call `CORBA::ORB_init (argc, argv)` will remove
+      // the warning given by some gcc compilers on the swap above
+      u2_1.swap (u2_2);
+      // Validate that u1_2 and u2_2 are the same
+      if (u2_1._d() != u2_2._d())
+      {
+        TAOX11_TEST_ERROR << "u2_1._d() != u2_2._d()" << std::endl;
+        return 1;
+      }
       root_poa->destroy (true, true);
 
       _orb->destroy ();
@@ -105,7 +145,7 @@ main(int argc, ACE_TCHAR *argv[])
     }
   catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+      TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
       return 1;
     }
 

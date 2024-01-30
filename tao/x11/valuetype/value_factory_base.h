@@ -39,8 +39,8 @@ namespace TAOX11_NAMESPACE
       public IDL::common_byval_traits <CORBA::object_reference <CORBA::ValueFactoryBase>>,
       public CORBA::object_traits <CORBA::ValueFactoryBase>
     {
-      typedef std::true_type is_local;
-      typedef std::false_type is_abstract;
+      using is_local = std::true_type;
+      using is_abstract = std::false_type;
 
       template <typename OStrm_, typename Formatter = formatter<CORBA::ValueFactoryBase, OStrm_>>
       static inline OStrm_& write_on(
@@ -62,20 +62,21 @@ namespace TAOX11_NAMESPACE
     {
     protected:
       ValueFactoryBase () = default;
-       virtual ~ValueFactoryBase ()= default;
+      ~ValueFactoryBase () override = default;
 
       friend struct object_traits<ValueFactoryBase>;
 
     private:
+      ValueFactoryBase (ValueFactoryBase&&) = delete;
       ValueFactoryBase (const ValueFactoryBase&) = delete;
       ValueFactoryBase& operator =(const ValueFactoryBase&) = delete;
       ValueFactoryBase& operator =(ValueFactoryBase&&) = delete;
 
     public:
-      typedef IDL::traits<ValueFactoryBase>           _traits_type;
-      typedef IDL::traits<ValueFactoryBase>::ref_type _ref_type;
+      using _traits_type = IDL::traits<ValueFactoryBase>;
+      using _ref_type = IDL::traits<ValueFactoryBase>::ref_type;
 
-      virtual const std::string& _interface_repository_id () const;
+      std::string _interface_repository_id () const override;
 
       virtual CORBA::valuetype_reference<CORBA::ValueBase> create_for_unmarshal () = 0;
 
@@ -104,13 +105,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<CORBA::ValueFactoryBase>::__Writer<Fmt> w)
     {
-      typedef IDL::traits<CORBA::ValueFactoryBase>::__Writer<Fmt> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<CORBA::ValueFactoryBase>::__Writer<Fmt>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<CORBA::ValueFactoryBase, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type ;
       return IDL::traits<CORBA::ValueFactoryBase>::write_on (
           os, w.val_,
           formatter_t ());

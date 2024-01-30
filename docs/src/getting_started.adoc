@@ -16,7 +16,7 @@ capabilities.
 
 TAOX11 has the following major features:
 
-. Compliant with the IDL to {cxx11} v1.3 language mapping
+. Compliant with the IDL to {cxx11} v1.4 language mapping
 . CORBA v3.3 compliant
 . Full support of the IDL type system (basic types, constant, enum,
 string, wide string, sequence, array, struct, union, typedef, exception)
@@ -137,6 +137,7 @@ TAOX11 has been tested with the following compilers
 * GCC version 4.8 or newer
 * Microsoft Visual Studio 2015
 * Microsoft Visual Studio 2017
+* Microsoft Visual Studio 2019
 * Clang C++ version 5 or newer
 * Intel C++ 2016
 
@@ -144,7 +145,7 @@ TAOX11 has been tested with the following compilers
 
 TAOX11 is currently actively supported on
 
-* CentOS 7.3 x86_64 using GCC 4.8.5
+* RHEL 7.5 x86_64 using GCC 4.8.5
 
 TAOX11 is using at least the following {cxx11} features
 
@@ -311,10 +312,14 @@ For GNU Make invoke `mwc.pl -type gnuace` (on Windows use
 This will create the GNU makefiles. MPC will iterate through all sub
 directories and parse the MPC files. Once the GNU makefiles are generated, invoke `make`.
 
-For Visual Studio 2015 invoke
-`perl %TAOX11_ROOT%/bin/mwc.pl -type vc14` and for Visual Studio 2017
-invoke `perl %TAOX11_ROOT%/bin/mwc.pl -type vs2017`.
-This will create the Visual Studio solutions. MPC will iterate through all sub
+Execute the following commands to create the Visual Studio solutions for
+your version.
+
+- `perl %TAOX11_ROOT%/bin/mwc.pl -type vc14` for Visual Studio 2015
+- `perl %TAOX11_ROOT%/bin/mwc.pl -type vs2017` for Visual Studio 2017
+- `perl %TAOX11_ROOT%/bin/mwc.pl -type vs2019` for Visual Studio 2019
+
+MPC will iterate through all sub
 directories and parse the MPC files. Once the Visual Studio solutions
 are generated start Visual Studio and build the generated solution.
 

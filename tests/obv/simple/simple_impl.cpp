@@ -38,12 +38,12 @@ void Event_impl::amount(double _v)
 IDL::traits<Test::Event>::ref_type
 Event_init_impl::create_val (int32_t value)
 {
-  return CORBA::make_reference< Event_impl> (value, value, std::string(), 0.0);
+  return CORBA::make_reference<Event_impl> (value, value, std::string(), 0.0);
 }
 
 IDL::traits<CORBA::ValueBase>::ref_type Event_init_impl::create_for_unmarshal ()
 {
   TAOX11_TEST_DEBUG << "Event_init_impl::create_for_unmarshal() called" << std::endl;
 
-  return CORBA::make_reference< Event_impl> ();
+  return CORBA::make_reference<Event_impl> ();
 }

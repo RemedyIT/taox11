@@ -4,7 +4,7 @@
 TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
 <%= factory_cxxname %>::create_for_unmarshal ()
 {
-  return TAOX11_CORBA::make_reference< <%= scoped_cxx_traits_type %>::obv_type> ();
+  return TAOX11_CORBA::make_reference<<%= scoped_cxx_traits_type %>::obv_type> ();
 }
 
 % end

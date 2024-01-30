@@ -1,0 +1,8 @@
+/**
+ * @file    positive_sequence_bound.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+typedef sequence<long, -1> long_sequence;

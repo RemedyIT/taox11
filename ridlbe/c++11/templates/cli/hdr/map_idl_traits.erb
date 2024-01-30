@@ -1,0 +1,51 @@
+
+// generated from <%= ridl_template_path %>
+// Unaliased type : <%= resolved_cxxtype %>
+% alias_md5 =  resolved_cxxtype.to_md5
+// MD5            : <%= alias_md5 %>
+#if !defined(_ALIAS_<%= alias_md5 %>_TRAITS_DECL_)
+#define _ALIAS_<%= alias_md5 %>_TRAITS_DECL_
+
+template<>
+struct traits <<%= scoped_cxxtype %>>
+  : IDL::common_traits<<%= scoped_cxxtype %>>
+% if is_bounded?
+  , IDL::bounded_traits<<%= scoped_cxxtype %>>
+% end
+{
+  /// std::false_type or std::true_type type indicating whether
+  /// this sequence is declared as bounded
+  using is_bounded = std::<%= is_bounded? %>_type;
+  /// IDL::traits<> for the key type of the sequence
+  using key_traits = IDL::traits<<%= scoped_key_traits_cxx_typename %>>;
+  /// IDL::traits<> for the value type of the sequence
+  using value_traits = IDL::traits<<%= scoped_value_traits_cxx_typename %>>;
+
+  template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
+  static inline OStrm_& write_on(
+      OStrm_& os_, in_type val_,
+      Formatter fmt_ = Formatter ())
+  {
+    return fmt_ (os_, val_);
+  }
+
+  template <typename Formatter = std::false_type>
+  static inline __Writer<Formatter> write (in_type val) { return {val}; }
+};
+
+template <typename OStrm_, typename Fmt>
+inline OStrm_& operator <<(
+    OStrm_& os,
+    IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt> w)
+{
+  using writer_t = IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt>;
+  using formatter_t = typename std::conditional<
+                        std::is_same<
+                          typename writer_t::formatter_t,
+                          std::false_type>::value,
+                        formatter<<%= scoped_cxxtype %>, OStrm_>,
+                        typename writer_t::formatter_t>::type;
+  return IDL::traits<<%= scoped_cxxtype %>>::write_on (os, w.val_, formatter_t ());
+}
+
+#endif

@@ -10,15 +10,13 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class RunTest < Command::Base
-
       DESC = 'Run test runner script for project.'.freeze
 
       OPTIONS = {
-          name: 'run_test',
-          runopts: { },
-          tool: nil
+        name: 'run_test',
+        runopts: {},
+        tool: nil
       }
 
       TOOLS = {
@@ -31,10 +29,10 @@ module BRIX11
       def self.setup(optparser, options)
         options[:runtest] = OPTIONS.dup
 
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} run test|script [options] [TEST [test-options]]|[-- test-options]\n\n"+
-                           "       TEST := Path to project folder or test script (extension guessed if not supplied).\n"+
-                           "               Default script name = 'run_test.pl'\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} run test|script [options] [TEST [test-options]]|[-- test-options]\n\n" +
+                           "       TEST := Path to project folder or test script (extension guessed if not supplied).\n" +
+                           "               Default script name = 'run_test.pl'\n" +
                            "       (any test-options will be passed unchecked to the script)\n\n"
 
         optparser.on('--program', '=TOOL',
@@ -45,7 +43,7 @@ module BRIX11
       private
 
       def find_tool(cmd)
-        TOOLS.fetch(File.extname(cmd)) {|_| log_error("Do not know how to run #{cmd}"); nil }
+        TOOLS.fetch(File.extname(cmd)) { |_| log_error("Do not know how to run #{cmd}"); nil }
       end
 
       public
@@ -70,7 +68,7 @@ module BRIX11
           options[:runtest][:runopts][:chdir] = File.dirname(options[:runtest][:test])
           options[:runtest][:test] = File.basename(options[:runtest][:test])
           # attempt to guess extension
-          if _ext = TOOLS.keys.find { |ext| File.file?(File.join(options[:runtest][:runopts][:chdir], options[:runtest][:test]+ext)) }
+          if _ext = TOOLS.keys.find { |ext| File.file?(File.join(options[:runtest][:runopts][:chdir], options[:runtest][:test] + ext)) }
             options[:runtest][:test] += _ext
           end
         end
@@ -94,7 +92,6 @@ module BRIX11
       end
 
       Command.register('run:test|script', DESC, TAOX11::RunTest)
-    end # RunTest
-
-  end # Common
-end # BRIX11
+    end
+  end
+end

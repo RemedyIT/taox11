@@ -138,7 +138,7 @@ namespace x11_logger
   {
     std::basic_stringstream<ACE_TCHAR> logbuf(ACE_TEXT (""));
 
-    uint32_t vmask = _lm->verbosity_mask();
+    uint32_t const vmask = _lm->verbosity_mask();
 
     if (ACE_BIT_ENABLED(vmask, X11_Verbose::V_CATEGORY))
     {
@@ -147,7 +147,7 @@ namespace x11_logger
 
     if (ACE_BIT_ENABLED(vmask, X11_Verbose::V_PRIO))
     {
-      const std::basic_string<ACE_TCHAR> name =
+      std::basic_string<ACE_TCHAR> const name =
         ACE_TEXT ("[") + priority_name(priority) + ACE_TEXT ("]");
       // setw to strlen LM_CRITICAL + 2 brackets.
       logbuf << std::left << std::setw (13) << name << ACE_TEXT (" - ");
@@ -203,8 +203,8 @@ namespace x11_logger
 
   void trim(std::string& str)
   {
-    std::string::size_type pos1 = str.find_first_not_of(' ');
-    std::string::size_type pos2 = str.find_last_not_of(' ');
+    std::string::size_type const pos1 = str.find_first_not_of(' ');
+    std::string::size_type const pos2 = str.find_last_not_of(' ');
     str = str.substr(pos1 == std::string::npos ? 0 : pos1,
                      pos2 == std::string::npos ? str.length() - 1 : pos2 - pos1 + 1);
   }
@@ -216,18 +216,13 @@ namespace x11_logger
   {
     static Log_Module instance_;
 
-    return &instance_;
+    return std::addressof(instance_);
   }
 
-  Log_Module::Log_Module()
-  : category_ ("X11"),
+  Log_Module::Log_Module() :
+    category_ ("X11"),
     priority_mask_ (LP_PANIC),
-    verbosity_mask_ (0),
-    output_mask_ (OS_STDERR),
-    file_max_size_ (0),
-    file_count_ (0),
-    file_flags_ (0),
-    file_stream_ (nullptr)
+    output_mask_ (OS_STDERR)
   {
     // set default
     this->verbosity_mask_ =
@@ -410,47 +405,31 @@ namespace x11_logger
   /// Get the current priority mask.
   uint32_t Log_Module::priority_mask () const
   {
-    ACE_Log_Guard __guard (ACE_Log_Msg::instance ());
-
     return this->priority_mask_;
   }
 
   /// Get the current verbosity mask.
   uint32_t Log_Module::verbosity_mask () const
   {
-    ACE_Log_Guard __guard (ACE_Log_Msg::instance ());
-
     return this->verbosity_mask_;
   }
 
   /// Get the category name
   const std::string& Log_Module::category () const
   {
-    ACE_Log_Guard __guard (ACE_Log_Msg::instance ());
-
     return this->category_;
   }
 
   /// Set the priority mask, returns original mask.
   uint32_t Log_Module::priority_mask (uint32_t new_mask)
   {
-    ACE_Log_Guard __guard (ACE_Log_Msg::instance ());
-
-    uint32_t old_mask;
-    old_mask = this->priority_mask_;
-    this->priority_mask_ = new_mask;
-    return old_mask;
+    return this->priority_mask_.exchange(new_mask);
   }
 
   /// Set the verbosity mask, returns original mask.
   uint32_t Log_Module::verbosity_mask (uint32_t new_mask)
   {
-    ACE_Log_Guard __guard (ACE_Log_Msg::instance ());
-
-    uint32_t old_mask;
-    old_mask = this->verbosity_mask_;
-    this->verbosity_mask_ = new_mask;
-    return old_mask;
+    return this->verbosity_mask_.exchange(new_mask);
   }
 
   // Set the priority mask with value of environment variable category + "_LOG_MASK"
@@ -958,7 +937,7 @@ namespace x11_logger
   {
     static TAOX11_Test_Log_Module instance_;
 
-    return &instance_;
+    return std::addressof(instance_);
   }
 
   TAOX11_Test_Log_Module::TAOX11_Test_Log_Module ()
@@ -1293,7 +1272,7 @@ namespace x11_logger
     uint32_t const max = (hp.len_ / 16) + ((hp.len_ % 16) > 0 ? 1 : 0);
     for (uint32_t l=0; l<max ;++l)
     {
-      uint32_t off = l*16;
+      uint32_t const off = l*16;
       uint32_t c=0;
       for (; c<16 && (off+c)<hp.len_ ;++c)
       {

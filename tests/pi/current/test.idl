@@ -11,6 +11,9 @@
 
 module PICurrentTest
 {
+  exception bar
+  {
+  };
 
   interface test
   {
@@ -19,6 +22,8 @@ module PICurrentTest
     void invoke_you ();
 
     void invoke_we ();
+
+    void test_exception () raises (bar);
 
     oneway void shutdown ();
   };

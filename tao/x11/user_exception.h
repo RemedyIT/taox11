@@ -19,7 +19,7 @@ namespace TAOX11_NAMESPACE {
     {
     public:
       /// Destructor.
-      virtual ~UserException () throw() = default;
+      ~UserException () noexcept override = default;
 
       /// noop
       void _tao_encode (TAO_OutputCDR &) const override;
@@ -38,8 +38,7 @@ namespace TAOX11_NAMESPACE {
       /// Constructor using a repository id.
       UserException (const char *repository_id,
                      const char *local_name)
-        : CORBA::Exception (repository_id,
-                            local_name)
+        : CORBA::Exception (repository_id, local_name)
       {
       }
 

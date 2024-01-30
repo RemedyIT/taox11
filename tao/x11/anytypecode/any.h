@@ -62,7 +62,7 @@ namespace TAOX11_NAMESPACE
     class TAOX11_AnyTypeCode_Export Any
     {
     public:
-      typedef std::shared_ptr<Any_Impl>  impl_ref_type;
+      using impl_ref_type = std::shared_ptr<Any_Impl>;
 
       Any () = default;
       Any (const Any &);
@@ -109,62 +109,61 @@ namespace TAOX11_NAMESPACE
       impl_ref_type impl_ {};
     };
 
-  } // namespace CORBA
+    /// Typesafe insertion.
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, uint8_t);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, bool);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, char);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, int16_t);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, uint16_t);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, int32_t);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, uint32_t);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, int64_t);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, uint64_t);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, float);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, double);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, long double);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, const CORBA::Any &);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, CORBA::Any&&);
 
-  /// Typesafe insertion.
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, uint8_t);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, bool);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, char);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, int16_t);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, uint16_t);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, int32_t);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, uint32_t);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, int64_t);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, uint64_t);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, float);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, double);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, long double);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, const CORBA::Any &);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, CORBA::Any&&);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &any, const std::string &s);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &any, std::string &&s); //move, non copying
 
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &any, const std::string &s);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &any, std::string &&s); //move, non copying
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, wchar_t);
 
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, wchar_t);
-
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, CORBA::typecode_reference);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, IDL::traits<CORBA::Object>::ref_type);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, CORBA::typecode_reference);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &, IDL::traits<CORBA::Object>::ref_type);
 
 #if !defined(ACE_LACKS_STD_WSTRING)
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &any, const std::wstring &s);
-  TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &any, std::wstring &&s); //move, non copying
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &any, const std::wstring &s);
+    TAOX11_AnyTypeCode_Export void operator<<= (CORBA::Any &any, std::wstring &&s); //move, non copying
 #endif
 
-  /// Typesafe extraction.
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, uint8_t &);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, bool &);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, char &);
+    /// Typesafe extraction.
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, uint8_t &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, bool &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, char &);
 
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, int16_t &);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, uint16_t &);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, int32_t &);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, uint32_t &);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, int64_t &);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, uint64_t &);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, float &);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, double &);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, long double &);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, CORBA::Any &);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, CORBA::typecode_reference &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, int16_t &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, uint16_t &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, int32_t &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, uint32_t &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, int64_t &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, uint64_t &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, float &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, double &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, long double &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, CORBA::Any &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, CORBA::typecode_reference &);
 
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, IDL::traits<CORBA::Object>::ref_type&);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, IDL::traits<CORBA::Object>::ref_type&);
 
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, wchar_t &);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &, wchar_t &);
 
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &any, std::string &s);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &any, std::string &s);
 #if !defined(ACE_LACKS_STD_WSTRING)
-  TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &any, std::wstring &s);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const CORBA::Any &any, std::wstring &s);
 #endif
+  } // CORBA
 
   namespace IDL
   {
@@ -185,13 +184,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<CORBA::Any>::__Writer<Fmt> w)
     {
-      typedef IDL::traits<CORBA::Any>::__Writer<Fmt> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<CORBA::Any>::__Writer<Fmt>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<CORBA::Any, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       IDL::traits<CORBA::Any>::write_on (os, w.val_, formatter_t ());
       return os;
     }

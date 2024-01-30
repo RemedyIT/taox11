@@ -41,20 +41,15 @@ public:
 
   void destroy () override;
 
-  void receive_request_service_contexts (
-      IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
+  void receive_request_service_contexts (IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
 
-  void receive_request (
-      IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
+  void receive_request (IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
 
-  void send_reply (
-      IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
+  void send_reply (IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
 
-  void send_exception (
-      IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
+  void send_exception (IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
 
-  void send_other (
-      IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
+  void send_other (IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type ri) override;
   //@}
 
 private:

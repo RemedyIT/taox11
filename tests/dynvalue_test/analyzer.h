@@ -18,14 +18,13 @@
 class DynAnyAnalyzer
 {
 public:
-  DynAnyAnalyzer ( IDL::traits< DynamicAny::DynAnyFactory>::ref_type dany_fact);
-  ~DynAnyAnalyzer ();
-  void analyze (
-    IDL::traits<DynamicAny::DynAny>::ref_type da);
+  DynAnyAnalyzer ( IDL::traits<DynamicAny::DynAnyFactory>::ref_type dany_fact);
+  ~DynAnyAnalyzer () = default;
+  void analyze (IDL::traits<DynamicAny::DynAny>::ref_type da);
 
 private:
   /// List of base types.
-  typedef std::vector<IDL::traits<CORBA::TypeCode>::ref_type> BaseTypesList_t;
+  using BaseTypesList_t = std::vector<IDL::traits<CORBA::TypeCode>::ref_type>;
 
   void tab ();
 
@@ -45,8 +44,8 @@ private:
     const BaseTypesList_t &base_types,
     uint32_t &index);
 
-  unsigned int level_;
-  IDL::traits< DynamicAny::DynAnyFactory>::ref_type dany_fact_;
+  BaseTypesList_t::size_type level_ { 1u} ;
+  IDL::traits<DynamicAny::DynAnyFactory>::ref_type dany_fact_;
 };
 
 #endif // DYNVALUE_T_INCLUDE_ANALYZER_H

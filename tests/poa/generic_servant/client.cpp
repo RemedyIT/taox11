@@ -107,7 +107,7 @@ print_stats(ACE_Profile_Timer::ACE_Elapsed_Time &elapsed_time,
     return true;
   } else
   {
-    TAOX11_TEST_ERROR << "\tNo time stats printed. Zero iterations or error ocurred."
+    TAOX11_TEST_ERROR << "\tNo time stats printed. Zero iterations or error occurred."
         << std::endl;
     return false;
   }

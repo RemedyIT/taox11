@@ -45,7 +45,7 @@ MyFoo_i::my_foo_attrib (int32_t )
 
 Hello::Hello(IDL::traits<CORBA::ORB>::ref_type orb,
     IDL::traits<PortableServer::POA>::ref_type poa) :
-  orb_(orb), poa_(poa)
+  orb_(std::move(orb)), poa_(std::move(poa))
 {
 }
 IDL::traits<A::AmiMyFoo>::ref_type Hello::get_iAmiMyFoo()

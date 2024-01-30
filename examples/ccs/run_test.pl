@@ -30,7 +30,6 @@ $debug_level = 0;
 $cdebug_level = 0;
 $nsdebug_level = 0;
 
-
 my $nstest = PerlACE::TestTarget::create_target (1) || die "Create target 1 failed\n";
 my $server = PerlACE::TestTarget::create_target (2) || die "Create target 2 failed\n";
 my $client = PerlACE::TestTarget::create_target (3) || die "Create target 3 failed\n";

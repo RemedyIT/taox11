@@ -113,7 +113,7 @@ namespace TAOX11_NAMESPACE
       return local_type_id == this->AbstractBase::_obv_repository_id ();
     }
 
-    std::string AbstractBase::_interface_repository_id ()
+    std::string AbstractBase::_interface_repository_id () const
     {
       // make sure to always call the base version here
       return this->AbstractBase::_obv_repository_id ();

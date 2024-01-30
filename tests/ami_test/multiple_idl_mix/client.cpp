@@ -70,7 +70,7 @@ public:
   }
 
   void op_A_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     try
       {
@@ -275,7 +275,7 @@ int main(int argc, char* argv[])
 
       if ((nr_of_replies != 0) || (cb_a != 1))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected replies. Expected -2- , received -"
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected replies. Expected -2- , received -"
           << (2 - nr_of_replies) << "-. " << " Expected A callbacks <1> , received <"
           << cb_a << ">." << std::endl;
           result = 1;
@@ -283,7 +283,7 @@ int main(int argc, char* argv[])
 
       if (cb_a_excep != 1)
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected  exceptions. "
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected  exceptions. "
             << "Expected A callbacks exceptions <1> , received <"
             << cb_a_excep << ">." << std::endl;
             result = 1;
@@ -297,7 +297,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+        TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
         return 1;
       }
   return result;

@@ -36,7 +36,7 @@ inline CORBA::Boolean operator>> (TAO_InputCDR &is,
                                   long double &x)
 {
   CORBA::LongDouble ld;
-  if (! (static_cast<ACE_InputCDR &> (is) >> ld))
+  if (!(static_cast<ACE_InputCDR &> (is) >> ld))
     return false;
   x = ld;
   return true;

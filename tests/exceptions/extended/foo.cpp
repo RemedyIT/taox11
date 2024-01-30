@@ -12,7 +12,6 @@ Bar::a_bar (int32_t)
 {
 }
 
-
 int32_t
 Bar::a_bar ()
 {
@@ -25,10 +24,11 @@ Bar::do_something ()
   throw Test::StructEx (Test::MessageStruct (12345, "do_something"));
 }
 
-Foo::Foo (IDL::traits<CORBA::ORB>::ref_type orb,
+Foo::Foo (
+  IDL::traits<CORBA::ORB>::ref_type orb,
   IDL::traits<Test::Bar>::ref_type bar)
-  : orb_ (orb)
-  , bar_ (bar)
+  : orb_ (std::move(orb))
+  , bar_ (std::move(bar))
 {
 }
 
@@ -113,7 +113,7 @@ void Foo::do_throw_struct ()
   catch (const Test::StructEx &ex)
   {
     TAOX11_TEST_DEBUG << "Foo::do_throw_struct - "
-      << "Correct exception caught : " << ex << std::endl;
+      << "Correct exception caught: " << ex << std::endl;
     if (ex.struct_i ().id () != 12345)
       {
         TAOX11_TEST_ERROR << "Foo::do_throw_struct - ERROR : Correct exception caught "
@@ -129,13 +129,13 @@ void Foo::do_throw_struct ()
   }
   catch (const std::exception& ex)
   {
-    TAOX11_TEST_ERROR << "Foo::do_throw_struct - ERROR : "
-      << "Unexpected exception caught: " << ex.what() << std::endl;
+    TAOX11_TEST_ERROR << "Foo::do_throw_struct - ERROR: "
+      << "Unexpected exception caught: " << ex << std::endl;
     throw;
   }
   catch (...)
   {
-    TAOX11_TEST_ERROR << "Foo::do_throw_struct - ERROR : "
+    TAOX11_TEST_ERROR << "Foo::do_throw_struct - ERROR: "
       << "Unexpected exception caught" << std::endl;
     throw;
   }

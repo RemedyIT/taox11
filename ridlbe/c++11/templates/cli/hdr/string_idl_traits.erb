@@ -7,15 +7,15 @@
 #define _ALIAS_<%= alias_md5 %>_TRAITS_DECL_
 
 template<>
-struct traits < <%= scoped_cxxtype %>>
-  : IDL::common_traits< <%= scoped_cxxtype %>>
-  , IDL::bounded_traits< <%= scoped_cxxtype %>>
+struct traits <<%= scoped_cxxtype %>>
+  : IDL::common_traits<<%= scoped_cxxtype %>>
+  , IDL::bounded_traits<<%= scoped_cxxtype %>>
 {
   /// std::false_type or std::true_type type indicating whether
   /// this string is declared as bounded
-  typedef std::true_type is_bounded;
+  using is_bounded = std::true_type ;
   /// IDL::traits<> for the element of the string
-  typedef IDL::traits<<% if is_wstring? %>wchar_t<% else %>char<% end %>> element_traits;
+  using element_traits = IDL::traits<<% if is_wstring? %>wchar_t<% else %>char<% end %>>;
 
   template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
   static inline OStrm_& write_on(
@@ -32,18 +32,16 @@ struct traits < <%= scoped_cxxtype %>>
 template <typename OStrm_, typename Fmt>
 inline OStrm_& operator <<(
     OStrm_& os,
-    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> w)
+    IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt> w)
 {
-  typedef IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt> writer_t;
-  typedef typename std::conditional<
-                      std::is_same<
-                        typename writer_t::formatter_t,
-                        std::false_type>::value,
-                      formatter< <%= scoped_cxxtype %>, OStrm_>,
-                      typename writer_t::formatter_t>::type formatter_t;
-  return IDL::traits< <%= scoped_cxxtype %>>::write_on (
-      os, w.val_,
-      formatter_t ());
+  using writer_t = IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt>;
+  using formatter_t = typename std::conditional<
+                        std::is_same<
+                          typename writer_t::formatter_t,
+                          std::false_type>::value,
+                        formatter<<%= scoped_cxxtype %>, OStrm_>,
+                        typename writer_t::formatter_t>::type;
+  return IDL::traits<<%= scoped_cxxtype %>>::write_on (os, w.val_, formatter_t ());
 }
 
 #endif

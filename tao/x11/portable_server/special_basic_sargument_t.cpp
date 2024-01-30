@@ -13,11 +13,8 @@
 #include "tao/x11/portable_server/special_basic_sargument_t.h"
 #endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 
-namespace TAOX11_NAMESPACE
+namespace TAOX11_NAMESPACE::PS
 {
-
-namespace PS {
-
 template<typename S,
          typename to_S,
          typename from_S,
@@ -134,8 +131,6 @@ interceptor_value (TAO_CORBA::Any *any) const
 
 #endif /* TAO_HAS_INTERCEPTORS */
 
-} // namespace PS
-
-} // namespace TAOX11_NAMESPACE
+} // namespace TAOX11_NAMESPACE::PS
 
 #endif /* TAO_SPECIAL_BASIC_SARGUMENT_T_CPP */

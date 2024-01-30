@@ -13,12 +13,13 @@
 #include "testS.h"
 
 /// Implement the Test::Hello interface
-class Hello:
+class Hello :
     public virtual CORBA::servant_traits<Test::Hello>::base_type
 {
 public:
   /// Constructor
-  Hello(IDL::traits<CORBA::ORB>::ref_type orb);
+  Hello (IDL::traits<CORBA::ORB>::ref_type orb);
+  ~Hello () override = default;
 
   IDL::traits<Test::Bar>::ref_type get_bar () override;
   void with_bar (IDL::traits<Test::Bar>::ref_type bar_in,
@@ -26,6 +27,7 @@ public:
       IDL::traits<Test::Bar>::ref_type& bar_inout) override;
 
   void shutdown() override;
+
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;
 };

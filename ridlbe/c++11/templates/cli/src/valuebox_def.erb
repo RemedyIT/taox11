@@ -5,7 +5,7 @@ const std::string <%= scoped_cxxname %>::__<%= cxxname.downcase %>_repository_id
 TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type
 <%= scoped_cxxname %>::_copy_value () const
 {
-  return TAOX11_CORBA::make_reference< <%= scoped_cxxtype %>> (*this);
+  return TAOX11_CORBA::make_reference<<%= scoped_cxxtype %>> (*this);
 }
 
 bool <%= scoped_cxxname %>::_obv_unmarshal (
@@ -34,7 +34,7 @@ bool <%= scoped_cxxname %>::_obv_unmarshal (
       return <%= scoped_cxxname %>::_obv_unmarshal (indrected_strm, vbox);
     }
 
-  vbox = TAOX11_CORBA::make_reference< <%= scoped_cxxtype %>> ();
+  vbox = TAOX11_CORBA::make_reference<<%= scoped_cxxtype %>> ();
 
   return(strm >> <%= boxed_cdr_to_fmt % "vbox->_value ()" %>);
 }
@@ -46,7 +46,7 @@ const std::string& <%= scoped_cxxname %>::_obv_repository_id () const
 
 bool <%= scoped_cxxname %>::_obv_marshal_v (TAO_OutputCDR &strm) const
 {
-  return (strm << <%= boxed_cdr_from_fmt % "this->_value ()" %>);
+  return (strm <<<%= boxed_cdr_from_fmt % "this->_value ()" %>);
 }
 % if generate_typecode_support?
 

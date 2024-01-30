@@ -45,6 +45,8 @@ configure :taox11 do
 
     include '$TAOX11_ROOT/bin/MPC/config'
 
+    dynamic_type '$TAOX11_ROOT/bin/MPC'
+
     mwc_include %w{
       $(TAOX11_ROOT)/tao/x11
       $(TAOX11_ROOT)/orbsvcs/orbsvcs

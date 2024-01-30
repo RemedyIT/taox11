@@ -11,7 +11,7 @@
 #include "testlib/taox11_testlog.h"
 
 Callback_i::Callback_i (IDL::traits<CORBA::ORB>::ref_type orb)
-  :  orb_ (orb)
+  :  orb_ (std::move(orb))
 {
 }
 
@@ -32,7 +32,7 @@ Callback_i::callback_method ()
 // ****************************************************************
 Simple_Server_i::Simple_Server_i (IDL::traits<CORBA::ORB>::ref_type orb,
                                   int no_iterations)
-  :  orb_ (orb),
+  :  orb_ (std::move(orb)),
      flag_ (false),
      callback_ (0),
      no_iterations_ (no_iterations)

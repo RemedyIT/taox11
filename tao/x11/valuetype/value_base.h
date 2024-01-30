@@ -33,7 +33,7 @@ namespace TAOX11_NAMESPACE
   class TAOX11_DynCommon; // forward
 
   class Valuetype_proxy;
-  typedef Valuetype_proxy *Valuetype_proxy_ptr;
+  using Valuetype_proxy_ptr = Valuetype_proxy *;
   class ValueFactory_proxy;
 
   namespace CORBA
@@ -45,8 +45,8 @@ namespace TAOX11_NAMESPACE
     class TAOX11_Valuetype_Export ValueBase
     {
     public:
-      typedef CORBA::valuetype_traits<ValueBase>     _traits_type;
-      typedef CORBA::valuetype_reference<ValueBase>  _ref_type;
+      using _traits_type = CORBA::valuetype_traits<ValueBase>;
+      using _ref_type = CORBA::valuetype_reference<ValueBase>;
 
       virtual valuetype_reference<ValueBase> _copy_value () const;
 
@@ -61,7 +61,7 @@ namespace TAOX11_NAMESPACE
       virtual CORBA::typecode_reference _obv_typecode () const;
 
     protected:
-      typedef std::shared_ptr<CORBA::ValueBase>      _shared_ptr_type;
+      using _shared_ptr_type = std::shared_ptr<CORBA::ValueBase>;
 
       template <typename T>
       friend class CORBA::valuetype_reference;
@@ -126,8 +126,7 @@ namespace TAOX11_NAMESPACE
       ValueBase& operator =(const ValueBase&) = delete;
       ValueBase& operator =(ValueBase&&) = delete;
 
-
-      typedef std::weak_ptr<ValueBase> _weak_reference_type;
+      using _weak_reference_type = std::weak_ptr<ValueBase>;
       _weak_reference_type self_ref_;
       Valuetype_proxy_ptr proxy_;
     }; // ValueBase
@@ -135,10 +134,8 @@ namespace TAOX11_NAMESPACE
     template<>
     struct TAOX11_Valuetype_Export valuetype_traits<CORBA::ValueBase>
     {
-      typedef valuetype_reference< CORBA::ValueBase>
-          ref_type;
-      typedef weak_valuetype_reference< CORBA::ValueBase>
-          weak_ref_type;
+      using ref_type = valuetype_reference<CORBA::ValueBase>;
+      using weak_ref_type = weak_valuetype_reference<CORBA::ValueBase>;
 
       static inline ref_type narrow (valuetype_reference<CORBA::ValueBase> vtref)
       {
@@ -158,8 +155,8 @@ namespace TAOX11_NAMESPACE
       public IDL::common_byval_traits <CORBA::valuetype_reference <CORBA::ValueBase>>,
       public CORBA::valuetype_traits <CORBA::ValueBase>
     {
-      typedef std::true_type is_abstract;
-      typedef std::false_type is_truncatable;
+      using is_abstract = std::true_type;
+      using is_truncatable = std::false_type ;
 
       template <typename OStrm_, typename Formatter = formatter<CORBA::ValueBase, OStrm_>>
       static inline OStrm_& write_on(
@@ -191,13 +188,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<CORBA::ValueBase>::__Writer<Fmt> w)
     {
-      typedef IDL::traits<CORBA::ValueBase>::__Writer<Fmt> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<CORBA::ValueBase>::__Writer<Fmt>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<CORBA::ValueBase, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<CORBA::ValueBase>::write_on (
           os, w.val_,
           formatter_t ());

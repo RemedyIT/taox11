@@ -6,11 +6,9 @@
 #if !defined (_ALIAS_OSTREAM_<%= alias_md5 %>_DECL_)
 #define _ALIAS_OSTREAM_<%= alias_md5 %>_DECL_
 
-inline std::ostream& operator<< (
-    std::ostream& strm,
-    <%= scoped_cxx_in_type %> _v)
+inline std::ostream& operator<< (std::ostream& strm, <%= scoped_cxx_in_type %> _v)
 {
-  return IDL::traits< <%= scoped_cxxtype %>>::write_on (strm, _v);
+  return IDL::traits<<%= scoped_cxxtype %>>::write_on (strm, _v);
 }
 
 #endif // _ALIAS_OSTREAM_<%= alias_md5 %>_DECL_

@@ -37,7 +37,7 @@ namespace TAOX11_NAMESPACE
   class TAOX11_AnyTypeCode_Export Any_Impl
   {
   public:
-    typedef std::shared_ptr<Any_Impl> ref_type;
+    using ref_type = std::shared_ptr<Any_Impl>;
 
     bool marshal (TAO_OutputCDR &);
     virtual bool marshal_type (TAO_OutputCDR &);

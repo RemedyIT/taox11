@@ -1,0 +1,11 @@
+/**
+ * @file bitmask_nobitfields.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a bitmask with no bitfields
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+bitmask MyBitMask {
+};

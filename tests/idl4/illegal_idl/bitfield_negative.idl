@@ -1,0 +1,12 @@
+/**
+ * @file bitfield_negative.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a bitfield with a negative amount of bits
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+bitset MyBitset {
+  bitfield<-1> x;
+};

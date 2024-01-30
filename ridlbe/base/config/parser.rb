@@ -9,7 +9,6 @@
 require 'ridlbe/base/config/concern'
 
 module IDL
-
   class Parser
     def has_interfaces?
       @d.has_interfaces?
@@ -38,9 +37,10 @@ module IDL
   module AST
     class Leaf
       def scoped_unescaped_name
-        @scopes.collect{|s| s.unescaped_name}.join('::').freeze
+        @scopes.collect { |s| s.unescaped_name }.join('::').freeze
       end
     end
+
     class Node
       # prevents 'hanging' RIDL after exceptions due to Nodes
       # being inspected;
@@ -50,12 +50,12 @@ module IDL
   end
 
   module Base
-
     extend Concern
 
     module ClassMethods
       def resolve(scoped_name, ctx_node, root_namespace = nil)
         return nil unless ctx_node
+
         names = scoped_name.split('::')
         _n = ctx_node
         if names.first.empty? # did we have '::XXX'?
@@ -68,13 +68,11 @@ module IDL
           end
         end
         # resolve scoped name
-        names.each {|nm| _n = _n.resolve(nm); break unless _n }
+        names.each { |nm| _n = _n.resolve(nm); break unless _n }
         _n
       end
     end # ClassMethods
 
     extend ClassMethods
-
   end # Base
-
 end # IDL

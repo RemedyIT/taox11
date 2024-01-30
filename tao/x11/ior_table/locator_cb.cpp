@@ -15,8 +15,8 @@ namespace TAOX11_NAMESPACE
   namespace IORTable_impl
   {
     Locator_Callback::Locator_Callback (
-      const IDL::traits<TAOX11_NAMESPACE::IORTable::Locator>::ref_type locator)
-      : locator_ (locator)
+      IDL::traits<TAOX11_NAMESPACE::IORTable::Locator>::ref_type locator)
+      : locator_ (std::move(locator))
     {
     }
 
@@ -39,7 +39,7 @@ namespace TAOX11_NAMESPACE
       return TAO_CORBA::string_dup (ret.c_str ());
     }
 
-    IDL::traits< TAOX11_NAMESPACE::IORTable::Locator>::ref_type
+    IDL::traits<TAOX11_NAMESPACE::IORTable::Locator>::ref_type
     Locator_Callback::get_impl () const
     {
       return this->locator_;

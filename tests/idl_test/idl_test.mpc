@@ -4,7 +4,7 @@ project(*IDL): ridl_ostream_defaults, taox11_messaging {
   custom_only=1
   //Use of -GCa i.o. -GC, because -GC expects with taox11 ami pragma's or annotations
   //and we don't want to change all idl files of this test, so use
-  //-GCa wich is added to taox11 for backwards compatibility.
+  //-GCa which is added to taox11 for backwards compatibility.
   idlflags += -GCa -Gd
   //-GH
   //-GT
@@ -25,6 +25,7 @@ project(*IDL): ridl_ostream_defaults, taox11_messaging {
 
   IDL_Files {
     gendir = .
+    $(TAO_ROOT)/tests/IDL_Test/array.idl
     $(TAO_ROOT)/tests/IDL_Test/Bug_2350_Regression.idl
     $(TAO_ROOT)/tests/IDL_Test/Bug_2577_Regression.idl
     $(TAO_ROOT)/tests/IDL_Test/Bug_2582_Regression.idl
@@ -36,6 +37,8 @@ project(*IDL): ridl_ostream_defaults, taox11_messaging {
     // Disabled because it uses component
     //$(TAO_ROOT)/tests/IDL_Test/Bug_3819_Regression.idl
     $(TAO_ROOT)/tests/IDL_Test/Bug_3821_Regression.idl
+    $(TAO_ROOT)/tests/IDL_Test/expressions.idl
+
     $(TAO_ROOT)/tests/IDL_Test/full.idl
     $(TAO_ROOT)/tests/IDL_Test/fwd.idl
     $(TAO_ROOT)/tests/IDL_Test/gperf.idl
@@ -57,7 +60,9 @@ project(*IDL): ridl_ostream_defaults, taox11_messaging {
     $(TAO_ROOT)/tests/IDL_Test/struct.idl
     $(TAO_ROOT)/tests/IDL_Test/reopen_include1.idl
     $(TAO_ROOT)/tests/IDL_Test/reopen_include2.idl
+    $(TAO_ROOT)/tests/IDL_Test/sequence.idl
     $(TAO_ROOT)/tests/IDL_Test/typeprefix.idl
+    $(TAO_ROOT)/tests/IDL_Test/union.idl
   }
 
   IDL_Files {
@@ -65,12 +70,12 @@ project(*IDL): ridl_ostream_defaults, taox11_messaging {
     // Disabled because they use anonymous types
     //idlflags += -as
     //$(TAO_ROOT)/tests/IDL_Test/enum_in_struct.idl
-    //$(TAO_ROOT)/tests/IDL_Test/array.idl
+    //$(TAO_ROOT)/tests/IDL_Test/array_anonymous.idl
     //$(TAO_ROOT)/tests/IDL_Test/array_anon_nested.idl
     //$(TAO_ROOT)/tests/IDL_Test/included.idl
     //$(TAO_ROOT)/tests/IDL_Test/including.idl
-    //$(TAO_ROOT)/tests/IDL_Test/sequence.idl
-    //$(TAO_ROOT)/tests/IDL_Test/union.idl
+    //$(TAO_ROOT)/tests/IDL_Test/sequence_anonymous.idl
+    //$(TAO_ROOT)/tests/IDL_Test/union_anonymous.idl
     //$(TAO_ROOT)/tests/IDL_Test/anyunion.idl
     //$(TAO_ROOT)/tests/IDL_Test/valuetype.idl
   }
@@ -112,7 +117,8 @@ project(*DLL): ridl_ostream_defaults, taox11_lib, taox11_messaging, taox11_porta
   Source_Files {
     attributeC.cpp
     attributeS.cpp
-    //array_onlyA.cpp
+    arrayC.cpp
+    arrayS.cpp
     array_onlyC.cpp
     array_onlyS.cpp
     Bug_2350_RegressionC.cpp
@@ -183,6 +189,8 @@ project(*DLL): ridl_ostream_defaults, taox11_lib, taox11_messaging, taox11_porta
     reopen_include2S.cpp
     repo_id_modC.cpp
     repo_id_modS.cpp
+    sequenceC.cpp
+    sequenceS.cpp
     simple2C.cpp
     simple2S.cpp
     simpleC.cpp
@@ -195,8 +203,10 @@ project(*DLL): ridl_ostream_defaults, taox11_lib, taox11_messaging, taox11_porta
     typedefS.cpp
     typeprefixC.cpp
     typeprefixS.cpp
+    unionC.cpp
+    unionS.cpp
     attributeAmiC.cpp
-    //array_onlyA.cpp
+    arrayAmiC.cpp
     array_onlyAmiC.cpp
     Bug_2350_RegressionAmiC.cpp
     Bug_2577_RegressionAmiC.cpp
@@ -235,13 +245,14 @@ project(*DLL): ridl_ostream_defaults, taox11_lib, taox11_messaging, taox11_porta
     reopen_include1AmiC.cpp
     reopen_include2AmiC.cpp
     repo_id_modAmiC.cpp
+    sequenceAmiC.cpp
     simple2AmiC.cpp
     simpleAmiC.cpp
     structAmiC.cpp
     typecodeAmiC.cpp
     typedefAmiC.cpp
     typeprefixAmiC.cpp
-
+    unionAmiC.cpp
   }
 
   Template_Files {

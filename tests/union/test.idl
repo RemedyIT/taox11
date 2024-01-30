@@ -14,6 +14,85 @@ struct Global
 
 module Test
 {
+  enum State {
+    STATE_PASS,
+    STATE_FAIL
+  };
+
+  enum Color {
+    COLOR_RED,
+    COLOR_BLUE
+  };
+
+  typedef string<512> BoundedString;
+  typedef sequence <long> LongSeq;
+  typedef long LongArray[12];
+  typedef LongArray LongArrayArray[12];
+
+  struct TestStruct {
+    Test::LongSeq testSeq;
+    long willFailHere;
+  };
+
+  struct TestStructArray {
+    Test::LongArray testArray;
+    long willFailHere;
+  };
+
+  struct TestStructArrayArray {
+    Test::LongArrayArray testArray;
+    long willFailHere;
+  };
+
+  union TestUnion_U1 switch(Color) {
+    case COLOR_BLUE:
+      Test::State FirstCase;
+    case COLOR_RED:
+      Test::TestStruct SecondCase;
+  };
+
+  union TestUnion_U2 switch(Color) {
+    case COLOR_RED:
+      Test::TestStruct SecondCase;
+    case COLOR_BLUE:
+      Test::State FirstCase;
+  };
+
+  union TestUnion_U3 switch(Color) {
+    default:
+      Test::State FirstCase;
+    case COLOR_RED:
+      Test::TestStruct SecondCase;
+  };
+
+  union TestUnion_U4 switch(Color) {
+    case COLOR_BLUE:
+      Test::State FirstCase;
+    case COLOR_RED:
+      Test::TestStructArray SecondCase;
+  };
+
+  union TestUnion_U5 switch(Color) {
+    case COLOR_RED:
+      Test::TestStructArray SecondCase;
+    case COLOR_BLUE:
+      Test::State FirstCase;
+  };
+
+  union TestUnion_U6 switch(Color) {
+    default:
+      Test::TestStructArray SecondCase;
+    case COLOR_BLUE:
+      Test::State FirstCase;
+  };
+
+  union TestUnion_U7 switch(Color) {
+    case COLOR_RED:
+      Test::TestStructArrayArray SecondCase;
+    case COLOR_BLUE:
+      Test::State FirstCase;
+  };
+
   typedef string<25> first_name_t;
   typedef string<10> middle_name_t;
   typedef string<40> last_name_t;
@@ -142,6 +221,94 @@ module Test
       case 4: boolean z_bool;
     };
 
+  enum Assignment
+  {
+    NONE,
+    A,
+    B,
+    C,
+    D
+  };
+
+  struct B01 {
+    long b01_1;
+  };
+
+  struct B02 {
+    string b02_1;
+  };
+
+  union B03 switch (long)
+  {
+    case 0: B01 b_03_1;
+    case 1: B02 b_03_2;
+    case 2: short b_03_3;
+    case 3: long b_03_4;
+    case 4: string b_03_5;
+    default: short b_03_d;
+  };
+
+  struct UnionMessage {
+    Assignment a;
+    B03 b_03;
+    Data d;
+  };
+
+  enum enumType
+  {
+    g,
+    h,
+    i
+  };
+  typedef enumType arrayofenum[5];
+  typedef long arrayoflong[5];
+  typedef arrayofenum arrayarrayofenum[5];
+  typedef arrayoflong arrayarrayoflong[5];
+  typedef arrayarrayoflong arrayarrayarrayoflong[5];
+
+  union unionarrayarrayarrayoflong switch (long)
+  {
+    default: arrayarrayarrayoflong aaal;
+    case 1: long b;
+  };
+
+  union unionarrayarrayoflong switch (long)
+  {
+    default: arrayarrayoflong aal;
+    case 1: long b;
+  };
+
+  union unionarrayoflong switch (long)
+  {
+    default: arrayoflong al;
+    case 1: long b;
+  };
+
+  union unionarrayarrayofenum switch (long)
+  {
+    default: arrayarrayofenum aae;
+    case 1: long b;
+  };
+
+  union unionarrayofenum switch (long)
+  {
+    default: arrayofenum ae;
+    case 1: long b;
+  };
+
+  typedef string arrayofstring[5];
+  union unionarrayofstring switch (long)
+  {
+    default: arrayofstring as;
+    case 1: long b;
+  };
+  typedef string multidimarrayofstring[1][2][3];
+  union uniondimarrayofstring switch (long)
+  {
+    default: multidimarrayofstring mdas;
+    case 1: long b;
+  };
+
   /// A very simple interface
   interface Foo
   {
@@ -159,6 +326,8 @@ module Test
 
     boolean update_union (inout Data s);
     boolean update_default_union (inout DefaultData dd);
+
+    boolean send_unionmessage(in UnionMessage msg);
 
     /// A method to shutdown the ORB
     /**

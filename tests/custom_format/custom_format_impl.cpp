@@ -27,7 +27,7 @@ namespace Test
   // your constructor(s)
   Foo_impl::Foo_impl (IDL::traits<CORBA::ORB>::ref_type orb)
     :  CORBA::servant_traits< ::Test::Foo>::base_type (),
-       orb_ (orb)
+       orb_ (std::move(orb))
   {
     // your constructor body
   }
@@ -48,7 +48,7 @@ namespace Test
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo_impl::write_on_servant[Body]
     // your code here
 
-    TAOX11_TEST_DEBUG << "server - writing received record -> " << IDL::traits< ::Test::Person>::write (record) << std::endl;
+    TAOX11_TEST_DEBUG << "server - writing received record -> " << IDL::traits<::Test::Person>::write (record) << std::endl;
 
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo_impl::write_on_servant[Body]
   }

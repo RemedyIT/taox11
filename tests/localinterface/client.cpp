@@ -31,7 +31,7 @@ int
 test_this ()
 {
   int result = 0;
-  IDL::traits<Test::FooFactory>::ref_type factory = CORBA::make_reference <Foo_Factory> ();
+  IDL::traits<Test::FooFactory>::ref_type factory = IDL::traits<Test::FooFactory>::make_reference <Foo_Factory> ();
   IDL::traits<Test::Foo>::ref_type foo = factory->get_foo ();
   IDL::traits<Test::FooFactory>::ref_type foo_factory = foo->get_factory ();
   if (factory->factory_name () != foo_factory->factory_name ())
@@ -221,10 +221,10 @@ int main (int argc, char* argv[])
       TAOX11_TEST_DEBUG << "Test in/out local." << std::endl;
       try
       {
-        IDL::traits<Test::iLocal_A>::ref_type in_v = CORBA::make_reference<iLocal_A_impl> ();
+        IDL::traits<Test::iLocal_A>::ref_type in_v = IDL::traits<Test::iLocal_A>::make_reference<iLocal_A_impl> ();
         IDL::traits<Test::iLocal_A>::ref_type out_v;
         IDL::traits<Test::iA>::ref_type out_vA = out_v;
-        IDL::traits<Test::iLocal_A>::ref_type inout_v = CORBA::make_reference<iLocal_A_impl> ();
+        IDL::traits<Test::iLocal_A>::ref_type inout_v = IDL::traits<Test::iLocal_A>::make_reference<iLocal_A_impl> ();
         IDL::traits<Test::iA>::ref_type inout_vA = inout_v;
         ia = hello->inout_local (in_v, out_vA, inout_vA);
         ++result_;
@@ -299,7 +299,7 @@ int main (int argc, char* argv[])
   }
   catch (const std::exception& e)
   {
-    TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+    TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
     ++result_;
   }
   return result_;

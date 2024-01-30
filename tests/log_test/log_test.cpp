@@ -237,6 +237,16 @@ test_log ()
   TAOX11_TEST_INFO << "2 lines expected: first line & second line" << std::endl;
   TAOX11_LOG_INFO ("first line" << std::endl << "second line");
   TAOX11_TEST_INFO << " end 2 in 1 message testcase: 1 " << std::endl;
+
+  // std::exception logging test
+  try
+  {
+    throw std::logic_error("std exception test");
+  }
+  catch (const std::exception& x)
+  {
+    TAOX11_LOG_INFO ("Logging caught std exception: " << x);
+  }
 }
 
 int main(int /*argc*/, char** /*argv[]*/)
@@ -252,7 +262,7 @@ int main(int /*argc*/, char** /*argv[]*/)
   }
   catch (const std::exception& e)
   {
-    TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+    TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
     return 1;
   }
   return 0;

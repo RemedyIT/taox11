@@ -1,0 +1,8 @@
+/**
+ * @file    positive_ushort.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+const unsigned short foo = -1;

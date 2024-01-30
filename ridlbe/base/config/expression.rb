@@ -9,9 +9,7 @@
 
 module IDL
   module Base
-
     module ExpressionConverter
-
       def value_to_s(exp)
         exp.idltype.value_to_s(exp.value)
       end
@@ -23,9 +21,9 @@ module IDL
         when Expression::Operation
           operation_to_idl_s(exp)
         when Expression::ScopedName
-          (scope && (scope == exp.node.enclosure)) ? exp.node.unescaped_name : '::'+exp.node.scoped_unescaped_name
+          (scope && (scope == exp.node.enclosure)) ? exp.node.unescaped_name : '::' + exp.node.scoped_unescaped_name
         when Expression::Enumerator
-          ((scope && (scope == exp.node.enclosure)) ? exp.node.enclosure.unescaped_name : '::'+exp.node.enclosure.scoped_unescaped_name) +'::'+exp.node.unescaped_name
+          ((scope && (scope == exp.node.enclosure)) ? exp.node.enclosure.unescaped_name : '::' + exp.node.enclosure.scoped_unescaped_name) + '::' + exp.node.unescaped_name
         else
           raise "unknown expression type: #{exp.class.name}"
         end
@@ -38,34 +36,34 @@ module IDL
         when Expression::Operation::UnaryPlus
           s = expression_to_idl_s(op[0], scope)
         when Expression::Operation::UnaryMinus
-          s = "-" + expression_to_idl_s(op[0], scope)
+          s = '-' + expression_to_idl_s(op[0], scope)
         when Expression::Operation::UnaryNot
-          s = "~" + expression_to_idl_s(op[0], scope)
+          s = '~' + expression_to_idl_s(op[0], scope)
+        when Expression::Operation::Xor
+          s = expression_to_idl_s(op[0], scope) + ' ^ ' + expression_to_idl_s(op[1], scope)
         when Expression::Operation::Or
-          s = expression_to_idl_s(op[0], scope) + " | " + expression_to_idl_s(op[1], scope)
+          s = expression_to_idl_s(op[0], scope) + ' | ' + expression_to_idl_s(op[1], scope)
         when Expression::Operation::And
-          s = expression_to_idl_s(op[0], scope) + " & " + expression_to_idl_s(op[1], scope)
+          s = expression_to_idl_s(op[0], scope) + ' & ' + expression_to_idl_s(op[1], scope)
         when Expression::Operation::LShift
-          s = expression_to_idl_s(op[0], scope) + " << " + expression_to_idl_s(op[1], scope)
+          s = expression_to_idl_s(op[0], scope) + ' << ' + expression_to_idl_s(op[1], scope)
         when Expression::Operation::RShift
-          s = expression_to_idl_s(op[0], scope) + " >> " + expression_to_idl_s(op[1], scope)
+          s = expression_to_idl_s(op[0], scope) + ' >> ' + expression_to_idl_s(op[1], scope)
         when Expression::Operation::Add
-          s = expression_to_idl_s(op[0], scope) + " + " + expression_to_idl_s(op[1], scope)
+          s = expression_to_idl_s(op[0], scope) + ' + ' + expression_to_idl_s(op[1], scope)
         when Expression::Operation::Minus
-          s = expression_to_idl_s(op[0], scope) + " - " + expression_to_idl_s(op[1], scope)
+          s = expression_to_idl_s(op[0], scope) + ' - ' + expression_to_idl_s(op[1], scope)
         when Expression::Operation::Mult
-          s = expression_to_idl_s(op[0], scope) + " * " + expression_to_idl_s(op[1], scope)
+          s = expression_to_idl_s(op[0], scope) + ' * ' + expression_to_idl_s(op[1], scope)
         when Expression::Operation::Div
-          s = expression_to_idl_s(op[0], scope) + " / " + expression_to_idl_s(op[1], scope)
+          s = expression_to_idl_s(op[0], scope) + ' / ' + expression_to_idl_s(op[1], scope)
         when Expression::Operation::Mod
-          s = expression_to_idl_s(op[0], scope) + " % " + expression_to_idl_s(op[1], scope)
+          s = expression_to_idl_s(op[0], scope) + ' % ' + expression_to_idl_s(op[1], scope)
         else
           raise "unknown operation: #{exp.type.name}"
         end
-        "(" + s + ")"
+        '(' + s + ')'
       end
-
     end
-
   end
 end

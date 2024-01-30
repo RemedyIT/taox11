@@ -12,7 +12,6 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class StubHeaderBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
@@ -23,7 +22,6 @@ module IDL
     end
 
     class StubHeaderWriter < StubHeaderBaseWriter
-
       helper Cxx11::IncludeGuardHelper
 
       def initialize(output = STDOUT, opts = {})
@@ -32,8 +30,8 @@ module IDL
           'tao/x11/stddef.h',
           'tao/x11/basic_traits.h',
           'tao/x11/corba.h',
-          'tao/x11/system_exception.h',
-          ]
+          'tao/x11/system_exception.h'
+        ]
         @default_pre_includes << 'tao/x11/orb.h' unless params[:no_orb_include]
         @default_post_includes = []
         @default_post_includes << 'tao/x11/anytypecode/any.h' if params[:gen_any_ops]
@@ -80,18 +78,19 @@ module IDL
 
       def visit_include(node)
         return if File.basename(node.filename) == 'orb.idl'
+
         at_global_scope do
           visitor(IncludeVisitor).visit(node)
         end
       end
 
       def doc_scoped_name(node)
-        visitor(Cxx11::NodeVisitorBase) {|v| v.visit(node) }.doc_scoped_name
+        visitor(Cxx11::NodeVisitorBase) { |v| v.visit(node) }.doc_scoped_name
       end
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from StubHeaderWriter#enter_module')
         printiln("/// @copydoc #{self.doc_scoped_name node}")
         printiln('namespace ' + node.cxxname)
@@ -102,21 +101,23 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
       def declare_interface(node)
         sn = node.scoped_cxxname
         return if @fwd_decl_cache.has_key?(sn)
+
         @fwd_decl_cache[sn] = true
         visitor(InterfaceVisitor).visit_fwd(node)
         at_global_scope do
           visitor(InterfaceVisitor).visit_object_traits(node)
         end unless params[:no_object_traits]
       end
+
       def enter_interface(node)
-        println()
+        println
         printiln('// generated from StubHeaderWriter#enter_interface')
         sn = node.scoped_cxxname
         unless @fwd_decl_cache.has_key?(sn)
@@ -130,6 +131,7 @@ module IDL
         visitor(InterfaceVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_interface(node)
         dec_nest
         visitor(InterfaceVisitor).visit_post(node)
@@ -147,14 +149,17 @@ module IDL
       def declare_struct(node)
         sn = node.scoped_cxxname
         return if @fwd_decl_cache.has_key?(sn)
+
         @fwd_decl_cache[sn] = true
         visitor(StructVisitor).visit_fwd(node)
       end
+
       def enter_struct(node)
         super
         visitor(StructVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_struct(node)
         dec_nest
         visitor(StructVisitor).visit_post(node)
@@ -164,12 +169,14 @@ module IDL
       def declare_valuetype(node)
         sn = node.scoped_cxxname
         return if @fwd_decl_cache.has_key?(sn)
+
         @fwd_decl_cache[sn] = true
         visitor(ValuetypeVisitor).visit_fwd(node)
         at_global_scope do
           visitor(ValuetypeVisitor).visit_traits(node)
         end
       end
+
       def enter_valuetype(node)
         sn = node.scoped_cxxname
         unless @fwd_decl_cache.has_key?(sn)
@@ -187,6 +194,7 @@ module IDL
         visitor(ValuetypeVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_valuetype(node)
         dec_nest
         (vtv = visitor(ValuetypeVisitor)).visit_post(node)
@@ -215,6 +223,7 @@ module IDL
         visitor(ExceptionVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_exception(node)
         dec_nest
         visitor(ExceptionVisitor).visit_post(node)
@@ -224,14 +233,17 @@ module IDL
       def declare_union(node)
         sn = node.scoped_cxxname
         return if @fwd_decl_cache.has_key?(sn)
+
         @fwd_decl_cache[sn] = true
         visitor(UnionVisitor).visit_fwd(node)
       end
+
       def enter_union(node)
         super
         visitor(UnionVisitor).visit_pre(node)
         inc_nest
       end
+
       def leave_union(node)
         dec_nest
         visitor(UnionVisitor).visit_post(node)
@@ -239,7 +251,7 @@ module IDL
       end
 
       def visit_const(node)
-        println()
+        println
         printiln('// generated from StubHeaderWriter#visit_const')
         printiln("/// @copydoc #{self.doc_scoped_name node}")
         case node.expression.idltype
@@ -267,7 +279,7 @@ module IDL
           end
         end
         if node.enclosure.is_a?(IDL::AST::Module) || ![Type::String, Type::WString].include?(node.expression.idltype.class)
-          if IDL::Expression::Value === node.expression
+          if node.expression.is_a?(IDL::Expression::Value)
             case node.idltype.resolved_type
             when IDL::Type::Fixed
               println("#{node.cxxname};")
@@ -286,15 +298,24 @@ module IDL
         visitor(EnumVisitor).visit_enum(node)
       end
 
+      def visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_bitmask(node)
+      end
+
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_bitset(node)
+      end
+
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type && params[:no_gen_native]
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
+
         visitor(TypedefVisitor).visit_typedef(node)
       end
 
       def visit_includes(parser)
         writer(StubHeaderIncludeWriter,
-               { :default_pre_includes => @default_pre_includes,
-                 :default_post_includes => @default_post_includes }) do |w|
+               { default_pre_includes: @default_pre_includes,
+                 default_post_includes: @default_post_includes }) do |w|
           w.include_guard = @include_guard
           w.visit_nodes(parser)
         end
@@ -319,11 +340,9 @@ module IDL
       def visit_os(parser)
         writer(StubHeaderOSWriter).visit_nodes(parser)
       end
-
     end # StubHeaderWriter
 
     class StubHeaderIncludeWriter < StubHeaderBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -336,7 +355,7 @@ module IDL
 
       attr_reader :includes
 
-      def post_visit(parser)
+      def post_visit(_parser)
         properties[:includes] = @includes
         properties[:pre_includes] = @default_pre_includes
         properties[:post_includes] = @default_post_includes
@@ -345,11 +364,13 @@ module IDL
 
       def declare_interface(node)
         return if node.is_pseudo?
+
         add_include('tao/x11/valuetype/abstractbase_traits_t.h') if node.is_abstract?
       end
 
       def enter_interface(node)
         return if node.is_pseudo?
+
         unless node.is_abstract?
           add_include('tao/x11/object.h')
         else
@@ -367,14 +388,14 @@ module IDL
         check_idl_type(node.idltype)
       end
 
-      def declare_valuetype(node)
+      def declare_valuetype(_node)
         add_include('tao/x11/valuetype/valuetype_traits_t.h')
       end
 
       def enter_valuetype(node)
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
-        add_post_include('tao/x11/valuetype/value_base.h')  # after typecode include
-        add_post_include('tao/x11/valuetype/value_factory_base.h') unless node.is_abstract?  # after typecode include
+        add_post_include('tao/x11/valuetype/value_base.h') # after typecode include
+        add_post_include('tao/x11/valuetype/value_factory_base.h') unless node.is_abstract? # after typecode include
         node.state_members.each { |m| check_idl_type(m.idltype) }
       end
 
@@ -386,6 +407,7 @@ module IDL
 
       def enter_struct(node)
         node.members.each { |m| check_idl_type(m.idltype) }
+        node.members.each { |m| add_post_include('tao/x11/optional_t.h') if member_optional(m) }
       end
 
       def enter_union(node)
@@ -398,25 +420,37 @@ module IDL
       end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type && params[:no_gen_native]
-        return if IDL::Type::ScopedName === node.idltype # alias typedef
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
+        return if node.idltype.is_a?(IDL::Type::ScopedName) # alias typedef
+
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::Fixed
           add_include('tao/x11/fixed_t.h')
         when IDL::Type::Sequence
-          add_include('tao/x11/bounded_vector_t.h') if idl_type.size.to_i>0
-          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i>0
+          add_include('tao/x11/bounded_vector_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
           check_idl_type(idl_type.basetype)
+        when IDL::Type::Map
+          add_include('map')
+          add_include('tao/x11/bounded_map_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
+          check_idl_type(idl_type.keytype)
+          check_idl_type(idl_type.valuetype)
         when IDL::Type::Array
           check_idl_type(idl_type.basetype)
         when IDL::Type::String, IDL::Type::WString
-          add_include('tao/x11/bounded_string_t.h') if idl_type.size.to_i>0
-          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i>0
+          add_include('tao/x11/bounded_string_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
         end
       end
 
       private
+
+      def member_optional(node)
+        !node.annotations[:optional].first.nil?
+      end
+
       def check_idl_type(idl_type)
         idl_type = idl_type.resolved_type
         case idl_type
@@ -443,22 +477,17 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
-        println()
+      def pre_visit(_parser)
+        println
         printiln('// generated from StubHeaderIDLTraitsWriter#pre_visit')
-        printiln('namespace TAOX11_NAMESPACE')
+        printiln('namespace TAOX11_NAMESPACE::IDL')
         println('{')
-        inc_nest
-        printiln('namespace IDL')
-        printiln('{')
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
-        printiln('} // namespace IDL')
-        dec_nest
-        printiln('} // namespace TAOX11_NAMESPACE')
+        printiln('} // namespace TAOX11_NAMESPACE::IDL')
       end
 
       def declare_interface(node)
@@ -485,6 +514,14 @@ module IDL
         visitor(EnumVisitor).visit_idl_traits(node)
       end
 
+      def visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_idl_traits(node)
+      end
+
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_idl_traits(node)
+      end
+
       def declare_struct(node)
         visitor(StructVisitor).visit_idl_traits(node)
       end
@@ -506,16 +543,19 @@ module IDL
       end
 
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type && params[:no_gen_native]
-        return if IDL::Type::ScopedName === node.idltype # alias typedef
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
+        return if node.idltype.is_a?(IDL::Type::ScopedName) # alias typedef
+
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::Sequence
           visitor(SequenceVisitor).visit_idl_traits(node)
+        when IDL::Type::Map
+          visitor(MapVisitor).visit_idl_traits(node)
         when IDL::Type::Array
           visitor(ArrayVisitor).visit_idl_traits(node)
         when IDL::Type::String, IDL::Type::WString
-          visitor(StringVisitor).visit_idl_traits(node) if idl_type.size.to_i>0 # only for bounded strings
+          visitor(StringVisitor).visit_idl_traits(node) if idl_type.size.to_i.positive? # only for bounded strings
         when IDL::Type::Fixed
           visitor(FixedVisitor).visit_idl_traits(node)
         end
@@ -527,22 +567,17 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
-        println()
+      def pre_visit(_parser)
+        println
         printiln('// generated from StubHeaderIDLTraitsDefWriter#pre_visit')
-        printiln('namespace TAOX11_NAMESPACE')
+        printiln('namespace TAOX11_NAMESPACE::IDL')
         println('{')
-        inc_nest
-        printiln('namespace IDL')
-        printiln('{')
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
-        printiln('} // namespace IDL')
-        dec_nest
-        printiln('} // namespace TAOX11_NAMESPACE')
+        printiln('} // namespace TAOX11_NAMESPACE::IDL')
       end
 
       def enter_interface(node)
@@ -575,7 +610,7 @@ module IDL
         super
         println
         printiln('// generated from StubHeaderAnyOpWriter#pre_visit')
-        println('namespace TAOX11_NAMESPACE')
+        println('namespace TAOX11_NAMESPACE::CORBA')
         println('{')
         inc_nest
       end
@@ -583,13 +618,14 @@ module IDL
       def post_visit(parser)
         dec_nest
         println
-        println('} // namespace TAOX11_NAMESPACE')
+        println('  } // namespace TAOX11_NAMESPACE::CORBA')
         super
       end
 
       def declare_interface(node)
         visitor(InterfaceVisitor).visit_anyop(node)
       end
+
       def enter_interface(node)
         visitor(InterfaceVisitor).visit_anyop(node)
       end
@@ -617,6 +653,7 @@ module IDL
       def declare_union(node)
         visitor(UnionVisitor).visit_anyop(node)
       end
+
       def enter_union(node)
         visitor(UnionVisitor).visit_anyop(node)
       end
@@ -629,15 +666,24 @@ module IDL
         visitor(EnumVisitor).visit_anyop(node)
       end
 
-      def visit_typedef(node)
-        # nothing to do if this is just an alias for another defined type
-        return if IDL::Type::ScopedName === node.idltype
-        _resolved_type = node.idltype.resolved_type
-        return if IDL::Type::Native === _resolved_type ||
-                  _resolved_type.is_standard_type?
-        visitor(TypedefVisitor).visit_anyop(node)
+      def visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_anyop(node)
       end
 
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_anyop(node)
+      end
+
+      def visit_typedef(node)
+        # nothing to do if this is just an alias for another defined type
+        return if node.idltype.is_a?(IDL::Type::ScopedName)
+
+        _resolved_type = node.idltype.resolved_type
+        return if _resolved_type.is_a?(IDL::Type::Native) ||
+                  _resolved_type.is_standard_type?
+
+        visitor(TypedefVisitor).visit_anyop(node)
+      end
     end # StubHeaderAnyOpWriter
 
     class StubInlineWriter < CxxCodeWriterBase
@@ -655,16 +701,18 @@ module IDL
         super
       end
 
-      def enter_interface(node)
-      end
-      def leave_interface(node)
-      end
+      def enter_interface(node); end
 
-      def enter_valuetype(node)
-      end
+      def leave_interface(node); end
+
+      def enter_valuetype(node); end
 
       def enter_struct(node)
         visitor(StructVisitor).visit_inl(node)
+      end
+
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_inl(node)
       end
 
       def enter_union(node)
@@ -674,7 +722,6 @@ module IDL
       def enter_exception(node)
         visitor(ExceptionVisitor).visit_inl(node)
       end
-
     end # StubInlineWriter
 
     class StubHeaderOSWriter < StubHeaderBaseWriter
@@ -707,13 +754,24 @@ module IDL
         visitor(EnumVisitor).visit_os(node)
       end
 
+      def visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_os(node)
+      end
+
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_os(node)
+      end
+
       def visit_typedef(node)
-        return if IDL::Type::Native === node.idltype.resolved_type
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
         # nothing to do if this is just an alias for another defined type
-        return if IDL::Type::ScopedName === node.idltype
+        return if node.idltype.is_a?(IDL::Type::ScopedName)
+
         case node.idltype.resolved_type
         when IDL::Type::Sequence
           visitor(SequenceVisitor).visit_os(node)
+        when IDL::Type::Map
+          visitor(MapVisitor).visit_os(node)
         when IDL::Type::Array
           visitor(ArrayVisitor).visit_os(node)
         when IDL::Type::Fixed
@@ -722,6 +780,7 @@ module IDL
       end
 
       private
+
       # by keeping track of nodes for which we generated an os op we avoid
       # generating multiple code blocks for the same type
       def is_tracked?(node)
@@ -733,9 +792,6 @@ module IDL
           true
         end
       end
-
     end # StubHeaderOSWriter
-
 end # Cxx11
-
 end # IDL

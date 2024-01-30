@@ -22,12 +22,12 @@ public:
   {
   }
 
-  ~test_i () = default;
+  ~test_i () override = default;
 
   void deactivate_self () override;
 
   IDL::traits<PortableServer::POA>::ref_type _default_POA () override;
-
+private:
   IDL::traits<PortableServer::POA>::ref_type& poa_;
   PortableServer::ObjectId& id_;
 };
@@ -191,7 +191,7 @@ int ACE_TMAIN(int argc, ACE_TCHAR *argv[])
     }
   catch (const std::exception& ex)
     {
-      TAOX11_TEST_ERROR << "Exception! " << ex.what () << std::endl;
+      TAOX11_TEST_ERROR << "Exception! " << ex << std::endl;
       return 1;
     }
 

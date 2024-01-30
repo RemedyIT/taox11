@@ -4,27 +4,26 @@
 %##### Abstract interface #####
 %#
 protected:
-#if (defined (_MSC_VER) && (_MSC_VER < 1910)) || (defined __clang__ && __clang_major__ <= 8)
-  // vc14 has a problem with friend, issue #4015
+#if (defined __clang__ && __clang_major__ <= 11)
   // Clang doesn't support this friend construct, issue #4476
-  friend TAOX11_CORBA::abstractbase_traits< <%= cxxname %>>::ref_type
-    TAOX11_CORBA::abstractbase_traits< <%= cxxname %>>::narrow (
+  friend TAOX11_CORBA::abstractbase_traits<<%= cxxname %>>::ref_type
+    TAOX11_CORBA::abstractbase_traits<<%= cxxname %>>::narrow (
       TAOX11_CORBA::abstractbase_reference<TAOX11_CORBA::AbstractBase>);
 #else
   template<typename T>
   friend typename TAOX11_CORBA::abstractbase_traits<T>::ref_type
     TAOX11_CORBA::abstractbase_traits<T>::narrow (
       TAOX11_CORBA::abstractbase_reference<TAOX11_CORBA::AbstractBase>);
-#endif /* _MSC_VER < 1910 || clang <= 8 */
+#endif /* clang <= 11 */
 
-#if defined (_MSC_VER) && (_MSC_VER < 1920)
-    // msvc 14.(0|1) have a problem with defaulted constructors, issue #4005
+%# msvc14.{0|1|2} have a problem with defaulted constructors, issue #4005
+#if defined (_MSC_VER) && (_MSC_VER < 1930)
   <%= cxxname %> () {}
 #else
   <%= cxxname %> () = default;
-#endif /* _MSC_VER < 1920 */
+#endif /* _MSC_VER < 1930 */
   <%= cxxname %> (TAOX11_NAMESPACE::Abstractbase_proxy_ptr prx);
-  virtual ~<%= cxxname %> () = default;
+  ~<%= cxxname %> () override = default;
   /// Required for derived value types
   <%= cxxname %>(const <%= cxxname %>&) = default;
   <%= cxxname %>(<%= cxxname %>&&) = default;
@@ -41,16 +40,16 @@ private:
   TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type _to_value () override;
 %   end
 protected:
-  typedef std::shared_ptr<<%= cxxname %>> _shared_ptr_type;
+  using _shared_ptr_type = std::shared_ptr<<%= cxxname %>>;
 
   template <typename _Tp1, typename, typename ...Args>
-  friend TAOX11_CORBA::object_reference<_Tp1> TAOX11_CORBA::make_reference(Args&& ...args);
+  friend constexpr TAOX11_CORBA::object_reference<_Tp1> TAOX11_CORBA::make_reference(Args&& ...args);
 
   explicit <%= cxxname %> (<%= proxy_cxxname %>_ptr p, bool inherited = false);
   /// Default constructor
   <%= cxxname %> () = default;
   /// Destructor
-  virtual ~<%= cxxname %> () = default;
+  ~<%= cxxname %> () override = default;
 
 %   if needs_abstract_base_overrides?
   // from CORBA::AbstractBase
@@ -71,19 +70,19 @@ private:
 %##### Local interface #####
 %#
 protected:
-  typedef std::shared_ptr<<%= cxxname %>> _shared_ptr_type;
+  using _shared_ptr_type = std::shared_ptr<<%= cxxname %>>;
 
-%# msvc14.(0|1) have a bug that when using a defaulted constructor here we get a crash in the portableserver library
+%# msvc14.{0|1|2} have a bug that when using a defaulted constructor here we get a crash in the portableserver library
 %# for the POA
-#if defined (_MSC_VER) && (_MSC_VER < 1920)
+#if defined (_MSC_VER) && (_MSC_VER < 1930)
   /// Default constructor
   <%= cxxname %> () {};
 #else
   /// Default constructor
   <%= cxxname %> () = default;
-#endif /* _MSC_VER < 1920 */
+#endif /* _MSC_VER < 1930 */
   /// Destructor
-  virtual ~<%= cxxname %> () = default;
+  ~<%= cxxname %> () override = default;
 
   /// Returns a strong client reference for the local object you are calling
   <%= scoped_cxx_return_type %> _this ();

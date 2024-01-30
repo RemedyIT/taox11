@@ -13,11 +13,9 @@
 
 #include "testS.h"
 
-class A_i
-: public virtual CORBA::servant_traits< Test::A>::base_type
+class A_i : public virtual CORBA::servant_traits<Test::A>::base_type
 {
 public:
-  /// ctor
   A_i (IDL::traits<CORBA::ORB>::ref_type orb);
 
   // The methods of interface A.

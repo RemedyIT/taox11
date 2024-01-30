@@ -31,7 +31,7 @@ namespace TAOX11_NAMESPACE
     * Implementation of Dynamic Any type for enums
     */
     class TAOX11_DynamicAny_Export DynEnum_i final
-      : public virtual IDL::traits< DynEnum>::base_type,
+      : public virtual IDL::traits<DynEnum>::base_type,
         public virtual TAOX11_DynCommon
      {
     public:
@@ -42,11 +42,11 @@ namespace TAOX11_NAMESPACE
       ~DynEnum_i () = default;
 
       /// Initialize using just a TypeCode.
-      IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
+      IDL::traits<::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
       init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       /// Initialize using an Any.
-      IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
+      IDL::traits<::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
       init (const CORBA::Any& any);
 
       // = Functions specific to DynEnum.
@@ -66,11 +66,11 @@ namespace TAOX11_NAMESPACE
       CORBA::Any to_any () override;
 
       bool equal (
-          IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type dyn_any) override;
+          IDL::traits<::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type dyn_any) override;
 
       void destroy () override;
 
-      IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
+      IDL::traits<::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
       current_component () override;
 
     private:

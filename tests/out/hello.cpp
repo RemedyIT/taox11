@@ -10,11 +10,7 @@
 #include "testlib/taox11_testlog.h"
 
 Hello::Hello (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb)
-{
-}
-
-Hello::~Hello()
+  : orb_ (std::move(orb))
 {
 }
 
@@ -30,11 +26,8 @@ Hello::shutdown ()
   this->orb_->shutdown (false);
 }
 
-
-
-
 Hello2::Hello2 (IDL::traits<PortableServer::POA>::ref_type poa)
-  : poa_ (poa)
+  : poa_ (std::move(poa))
 {
 }
 
@@ -51,12 +44,8 @@ Hello2::get_string (IDL::traits<Test::StringInterface>::ref_type& si)
 
 Hello_Factory::Hello_Factory (IDL::traits<CORBA::ORB>::ref_type orb,
     IDL::traits<PortableServer::POA>::ref_type poa)
- : orb_ (orb),
-   poa_ (poa)
-{
-}
-
-Hello_Factory::~Hello_Factory()
+ : orb_ (std::move(orb)),
+   poa_ (std::move(poa))
 {
 }
 

@@ -15,13 +15,7 @@
 #include "analyzer.h"
 
 Test_DynEnum::Test_DynEnum (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb),
-    test_name_ ("test_dynenum"),
-    error_count_ (0)
-{
-}
-
-Test_DynEnum::~Test_DynEnum ()
+  : orb_ (std::move(orb))
 {
 }
 
@@ -38,6 +32,15 @@ Test_DynEnum::run_test ()
 
   try
   {
+    IDL::traits<DynamicAny::DynEnum>::ref_type dyn_nil =
+      IDL::traits<DynamicAny::DynEnum>::narrow (nullptr);
+
+    if (dyn_nil)
+    {
+      ++this->error_count_;
+      TAOX11_TEST_ERROR << "DynEnum::narrow(nil) should return nil" << std::endl;
+    }
+
     IDL::traits<CORBA::Object>::ref_type factory_obj =
           this->orb_->resolve_initial_references ("DynAnyFactory");
 
@@ -48,9 +51,8 @@ Test_DynEnum::run_test ()
      return -1;
     }
 
-
-    IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory =
-        IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);
+    IDL::traits<DynamicAny::DynAnyFactory>::ref_type dynany_factory =
+        IDL::traits<DynamicAny::DynAnyFactory>::narrow (factory_obj);
 
     if (dynany_factory == nullptr)
     {
@@ -64,13 +66,13 @@ Test_DynEnum::run_test ()
                              dynany_factory);
 
     {
-      TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[18] << " =*=*=*=*" << std::endl;
+      TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[19] << " =*=*=*=*" << std::endl;
       TAOX11_TEST_DEBUG << "testing: constructor(Any)/set_as_string/get_as_ulong" << std::endl;
 
       DynAnyTests::test_enum te = DynAnyTests::test_enum::TE_ZEROTH;
       CORBA::Any in_any1;
       in_any1 <<= te;
-      IDL::traits< DynamicAny::DynAny>::ref_type dp1 =
+      IDL::traits<DynamicAny::DynAny>::ref_type dp1 =
         dynany_factory->create_dyn_any (in_any1);
 
       IDL::traits<DynamicAny::DynEnum>::ref_type  de1 =
@@ -118,7 +120,7 @@ Test_DynEnum::run_test ()
 
       TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
 
-      IDL::traits< DynamicAny::DynAny>::ref_type de2_base =
+      IDL::traits<DynamicAny::DynAny>::ref_type de2_base =
         dynany_factory->create_dyn_any_from_type_code (DynAnyTests::_tc_test_enum);
 
       IDL::traits<DynamicAny::DynEnum>::ref_type  de2 =
@@ -182,21 +184,21 @@ Test_DynEnum::run_test ()
       CORBA::Any l_any_struct_typedef_enum;
       l_any_struct_typedef_enum <<= l_struct_typedef_enum;
 
-      IDL::traits< DynamicAny::DynAny>::ref_type da
+      IDL::traits<DynamicAny::DynAny>::ref_type da
         = dynany_factory->create_dyn_any (l_any_struct_typedef_enum);
 
-      IDL::traits< DynamicAny::DynStruct>::ref_type ds =
-          IDL::traits< DynamicAny::DynStruct>::narrow (da);
+      IDL::traits<DynamicAny::DynStruct>::ref_type ds =
+          IDL::traits<DynamicAny::DynStruct>::narrow (da);
 
       ds->seek(2);
 
-      IDL::traits< DynamicAny::DynAny>::ref_type cc
+      IDL::traits<DynamicAny::DynAny>::ref_type cc
         = ds->current_component();
 
       DynamicAny::FieldName fn = ds->current_member_name();
 
-      IDL::traits< DynamicAny::DynEnum>::ref_type member
-         = IDL::traits< DynamicAny::DynEnum>::narrow(cc);
+      IDL::traits<DynamicAny::DynEnum>::ref_type member
+         = IDL::traits<DynamicAny::DynEnum>::narrow(cc);
 
       uint32_t ul_out1 = member->get_as_ulong ();
 

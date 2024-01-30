@@ -61,7 +61,7 @@ public:
   }
 
   void amifoo_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     nr_of_replies--;
   }
@@ -74,7 +74,7 @@ public:
    }
 
    void get_my_amifoo_attrib_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
    {
      TAOX11_TEST_INFO << "Callback method <get_my_foo_attrib_excep> called."
                  << std::endl;
@@ -87,7 +87,7 @@ public:
      nr_of_replies--;
    }
 
-   void set_my_amifoo_attrib_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
+   void set_my_amifoo_attrib_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
    {
      TAOX11_TEST_INFO << "Callback method <set_my_foo_attrib_excep> called:"
                  << std::endl;
@@ -269,7 +269,7 @@ int main(int argc, char* argv[])
 
       if ((nr_of_replies != 0) || (ami_myfoo_foo != 1) || (myfoo_foo != 1))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected replies. Expected -3- , received -"
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected replies. Expected -3- , received -"
           << (3 - nr_of_replies) << "-. " << " Expected AmiMyFoo- foo <1> , received <"
           << ami_myfoo_foo << ">. Expected MyFoo- foo <1>, received <" << myfoo_foo << ">." << std::endl;
           result = 1;
@@ -284,7 +284,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+        TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
         return 1;
       }
   return result;

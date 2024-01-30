@@ -1,0 +1,21 @@
+
+// generated from <%= ridl_template_path %>
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR &/*strm*/, const <%= scoped_cxxname %> & /*_tao_bitset*/)
+{
+%#   return strm << static_cast<<%= bitbound.cxx_type %>> (_tao_bitmask);
+  return true;
+}
+
+TAO_CORBA::Boolean operator>> (TAO_InputCDR &/*strm*/, <%= scoped_cxxname %> & /*_tao_bitset*/)
+{
+  return true;
+%#  <%= bitbound.cxx_member_type %> _tao_temp <%= bitbound.value_initializer %>;
+%#  bool const _tao_success = strm >> <%= bitbound.cdr_to_fmt % "_tao_temp" %>;
+%#
+%#  if (_tao_success)
+%#    {
+%#      _tao_bitmask = static_cast<<%= scoped_cxxtype %>> (_tao_temp);
+%#    }
+%#
+%#  return _tao_success;
+}

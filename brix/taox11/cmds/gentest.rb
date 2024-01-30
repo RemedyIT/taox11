@@ -10,42 +10,40 @@ require 'brix11/command'
 
 module BRIX11
   module TAOX11
-
     class GenerateTest < Command::Base
-
       DESC = 'Generate a CORBA (test) project for TAOX11.'.freeze
 
       OPTIONS = {
-          name: 'test',
-          client: 'client',
-          server: 'server',
-          modules: [],
-          interface: 'MyTest',
-          folder: true,
-          chdir: nil,
-          build: false
+        name: 'test',
+        client: 'client',
+        server: 'server',
+        modules: [],
+        interface: 'MyTest',
+        folder: true,
+        chdir: nil,
+        build: false
       }
 
       def self.setup(optparser, options)
         options[:gentest] = OPTIONS.dup
 
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} gen[erate] test [options] NAME\n\n"+
-                           "       NAME := Name to use for test (MPC base and folder). If NAME == '.' than\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} gen[erate] test [options] NAME\n\n" +
+                           "       NAME := Name to use for test (MPC base and folder). If NAME == '.' than\n" +
                            "               create project in working dir with default name 'test'.\n\n"
 
         optparser.on('-S', '--server', '=NAME',
                      'Defines name to use for server executable (no extension).',
-                     "Default: #{options[:gentest][:server]}") {|v| options[:gentest][:server] = v }
+                     "Default: #{options[:gentest][:server]}") { |v| options[:gentest][:server] = v }
         optparser.on('-C', '--client', '=NAME',
                      'Defines name to use for client executable (no extension).',
-                     "Default: #{options[:gentest][:client]}") {|v| options[:gentest][:client] = v }
+                     "Default: #{options[:gentest][:client]}") { |v| options[:gentest][:client] = v }
         optparser.on('-i', '--interface', '=NAME',
                      'Defines name to use for test interface.',
                      'Use scoped name (i.e. <name>::[<name>::]::<name>) to generate enclosing module(s).',
-                     "Default: #{options[:gentest][:interface]}") {|v|
-                        options[:gentest][:modules] = v.split('::');
-                        options[:gentest][:interface] = options[:gentest][:modules].pop
+                     "Default: #{options[:gentest][:interface]}") { |v|
+                       options[:gentest][:modules] = v.split('::')
+                       options[:gentest][:interface] = options[:gentest][:modules].pop
                      }
         optparser.on('--no-folder',
                      'Do NOT create a test folder but create test in working directory.',
@@ -84,12 +82,12 @@ module BRIX11
         Sys.in_dir(test_root) do
           # generate IDL file
           options[:genidl] = GenerateIDL::OPTIONS.merge(options[:gentest].merge(name: File.basename(options[:gentest][:name])))
-          GenFile.transaction { rc = GenerateIDL.new(entry,options).run(nil) }
+          GenFile.transaction { rc = GenerateIDL.new(entry, options).run(nil) }
           # generate server main
-          options[:gensrv] = GenerateServer::OPTIONS.merge(options[:gentest]).merge({name: options[:gentest][:server]})
+          options[:gensrv] = GenerateServer::OPTIONS.merge(options[:gentest]).merge({ name: options[:gentest][:server] })
           GenFile.transaction { rc = GenerateServer.new(entry, options).run(nil) } if rc
           # generate client main
-          options[:gencli] = GenerateClient::OPTIONS.merge(options[:gentest]).merge({name: options[:gentest][:client]})
+          options[:gencli] = GenerateClient::OPTIONS.merge(options[:gentest]).merge({ name: options[:gentest][:client] })
           GenFile.transaction { rc = GenerateClient.new(entry, options).run(nil) } if rc
           # generate servant
           options[:gensvt] = GenerateServant::OPTIONS.dup
@@ -98,9 +96,9 @@ module BRIX11
           options[:genmpc] = GenerateMPC::OPTIONS.dup
           options[:genmpc][:name] = File.basename(options[:gentest][:name])
           options[:genmpc][:client] = [options[:gentest][:client]]
-          unless options[:gentest][:server] == OPTIONS[:server]  # default?
+          unless options[:gentest][:server] == OPTIONS[:server] # default?
             options[:genmpc][:server] = [options[:gentest][:server]] +
-                                        Dir.glob('*.idl').collect {|i| "#{File.basename(i, '.*')}_impl" }
+                                        Dir.glob('*.idl').collect { |i| "#{File.basename(i, '.*')}_impl" }
           end
           GenFile.transaction { rc = GenerateMPC.new(entry, options).run(nil) } if rc
           # generate run script
@@ -116,7 +114,6 @@ module BRIX11
       end
 
       Command.register('generate:test|project|prj', DESC, TAOX11::GenerateTest)
-    end # GenerateTest
-
-  end # Common
-end # BRIX11
+    end
+  end
+end

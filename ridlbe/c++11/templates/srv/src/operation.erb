@@ -1,9 +1,9 @@
 % unless is_inherited?
 // generated from <%= ridl_template_path %>
 void <%= interface.scoped_srvproxy_cxxname %>::<%= name %>_skel (
-    TAO_ServerRequest & server_request,
-    TAO::Portable_Server::Servant_Upcall * TAO_INTERCEPTOR (servant_upcall),
-    <%= interface.scoped_srvproxy_cxxname %>::skel_type & servant)
+  TAO_ServerRequest & server_request,
+  TAO::Portable_Server::Servant_Upcall * TAO_INTERCEPTOR (servant_upcall),
+  <%= interface.scoped_srvproxy_cxxname %>::skel_type & servant)
 {
 %   if has_raises? && generate_typecode_support?
 #if TAO_HAS_INTERCEPTORS == 1
@@ -19,18 +19,18 @@ void <%= interface.scoped_srvproxy_cxxname %>::<%= name %>_skel (
 
 % end
 %     unless is_oneway? || is_void?
-  PS::SArg_Traits< <%= scoped_cxx_arg_type %>>::ret_val _taox11_retval;
+  PS::SArg_Traits<<%= scoped_cxx_arg_type %>>::ret_val _taox11_retval;
 %     else
   PS::SArg_Traits<void>::ret_val _taox11_retval;
 %     end
 %     arguments.each do |_arg|
 %       case _arg.direction
 %       when :in
-  PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %>;
+  PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %>;
 %       when :out
-  PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::out_arg_val _taox11_<%= _arg.cxxname %>;
+  PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::out_arg_val _taox11_<%= _arg.cxxname %>;
 %       when :inout
-  PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::inout_arg_val _taox11_<%= _arg.cxxname %>;
+  PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::inout_arg_val _taox11_<%= _arg.cxxname %>;
 %       end
 %     end
 
@@ -45,36 +45,36 @@ void <%= interface.scoped_srvproxy_cxxname %>::<%= name %>_skel (
   TAOX11_NAMESPACE::Upcall_Command command (
     [&]() {
 %   unless is_oneway? || is_void?
-      PS::SArg_Traits< <%= scoped_cxx_arg_type %>>::ret_arg_type retval =
+      PS::SArg_Traits<<%= scoped_cxx_arg_type %>>::ret_arg_type retval =
 %     if generate_thrupoa_collocation?
-        PS::get_ret_arg< <%= scoped_cxx_arg_type %>> (server_request.operation_details (), args);
+        PS::get_ret_arg<<%= scoped_cxx_arg_type %>> (server_request.operation_details (), args);
 %     else
         _taox11_retval.arg ();
 %     end
 %   end
-%   arguments.each_with_index do |_arg, _ix|
+%   arguments.each.with_index(1) do |_arg, _ix|
 %     if generate_thrupoa_collocation?
 %       case _arg.direction
 %       when :in
-      PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_type <%= _arg.cxxname %> =
-        std::move (PS::get_in_arg< <%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix+1 %>));
+      PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::in_arg_type <%= _arg.cxxname %> =
+        std::move (PS::get_in_arg<<%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>));
 %       when :out
-      PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::out_arg_type <%= _arg.cxxname %> =
-        PS::get_out_arg< <%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix+1 %>);
+      PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::out_arg_type <%= _arg.cxxname %> =
+        PS::get_out_arg<<%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>);
 %       when :inout
-      PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::inout_arg_type <%= _arg.cxxname %> =
-        PS::get_inout_arg< <%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix+1 %>);
+      PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::inout_arg_type <%= _arg.cxxname %> =
+        PS::get_inout_arg<<%= _arg.scoped_cxx_arg_type %>> (server_request.operation_details (), args, <%= _ix %>);
 %       end
 %     else
 %       case _arg.direction
 %       when :in
-      PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_type <%= _arg.cxxname %> =
+      PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::in_arg_type <%= _arg.cxxname %> =
         std::move (_taox11_<%= _arg.cxxname %>.arg ());
 %       when :out
-      PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::out_arg_type <%= _arg.cxxname %> =
+      PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::out_arg_type <%= _arg.cxxname %> =
         _taox11_<%= _arg.cxxname %>.arg ();
 %       when :inout
-      PS::SArg_Traits< <%= _arg.scoped_cxx_arg_type %>>::inout_arg_type <%= _arg.cxxname %> =
+      PS::SArg_Traits<<%= _arg.scoped_cxx_arg_type %>>::inout_arg_type <%= _arg.cxxname %> =
         _taox11_<%= _arg.cxxname %>.arg ();
 %       end
 %     end

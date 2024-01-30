@@ -65,46 +65,46 @@ public:
   struct_bounded  (const Test::SimpleBounded & sin, Test::SimpleBounded & sinout,
     Test::SimpleBounded & sout) override;
 
-  IDL::traits< ::Test::TestOctetBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestOctetBounded::Bounded>::ref_type
   get_octet_bounded () override;
 
-  IDL::traits< ::Test::TestShortBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestShortBounded::Bounded>::ref_type
   get_short_bounded () override;
 
-  IDL::traits< ::Test::TestLongBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestLongBounded::Bounded>::ref_type
   get_long_bounded () override;
 
-  IDL::traits< ::Test::TestLongLongBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestLongLongBounded::Bounded>::ref_type
   get_longlong_bounded () override;
 
-  IDL::traits< ::Test::TestDoubleBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestDoubleBounded::Bounded>::ref_type
   get_double_bounded () override;
 
-  IDL::traits< ::Test::TestLongDoubleBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestLongDoubleBounded::Bounded>::ref_type
   get_long_double_bounded () override;
 
-  IDL::traits< ::Test::TestFloatBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestFloatBounded::Bounded>::ref_type
   get_float_bounded () override;
 
-  IDL::traits< ::Test::TestBoolBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestBoolBounded::Bounded>::ref_type
   get_bool_bounded () override;
 
-  IDL::traits< ::Test::TestUShortBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestUShortBounded::Bounded>::ref_type
   get_ushort_bounded () override;
 
-  IDL::traits< ::Test::TestULongBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestULongBounded::Bounded>::ref_type
   get_ulong_bounded () override;
 
-  IDL::traits< ::Test::TestULongLongBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestULongLongBounded::Bounded>::ref_type
   get_ulonglong_bounded () override;
 
-  IDL::traits< ::Test::TestStringBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestStringBounded::Bounded>::ref_type
   get_string_bounded () override;
 
-  IDL::traits< ::Test::TestCharBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestCharBounded::Bounded>::ref_type
   get_char_bounded () override;
 
-  IDL::traits< ::Test::TestWCharBounded::Bounded>::ref_type
+  IDL::traits<::Test::TestWCharBounded::Bounded>::ref_type
   get_wchar_bounded () override;
 
   ::Test::CorbaSequences

@@ -37,7 +37,7 @@ namespace TAOX11_NAMESPACE
       : public TAO_CORBA::UserException
     {
     public:
-      virtual ~in () = default;
+      ~in () override = default;
 
       in &operator= (const in &uex)
       {
@@ -54,9 +54,7 @@ namespace TAOX11_NAMESPACE
 
       static TAO_CORBA::Exception *_alloc ()
       {
-        TAO_CORBA::Exception *result = nullptr;
-        ACE_NEW_NORETURN (result,
-                          UserExceptionProxy::in<USEREX> ());
+        TAO_CORBA::Exception *result = new (std::nothrow) UserExceptionProxy::in<USEREX> ();
         if (!result)
           throw TAO_CORBA::NO_MEMORY ();
         return result;

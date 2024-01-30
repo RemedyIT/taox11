@@ -24,7 +24,7 @@ namespace TAOX11_NAMESPACE
   {
     // forward
     class DomainManager;
-    typedef std::vector<object_reference<DomainManager>> DomainManagerList;
+    using DomainManagerList = std::vector<object_reference<DomainManager>>;
 
     // forwards
     class ORB;
@@ -34,17 +34,17 @@ namespace TAOX11_NAMESPACE
     class InterfaceDef;
     class NVList;
     class NamedValue;
-    typedef std::vector<TypeCode> ExceptionList;
+    using ExceptionList = std::vector<TypeCode>;
     class Request;
     class Context;
-    typedef std::vector<object_reference<Context>> ContextList;
+    using ContextList = std::vector<object_reference<Context>>;
 #endif
 
     class TAOX11_Export Object
     {
     public:
-      typedef IDL::traits <Object>      _traits_type;
-      typedef _traits_type::ref_type    _ref_type;
+      using _traits_type = IDL::traits <Object>;
+      using _ref_type = _traits_type::ref_type;
 
       virtual bool _is_a (const std::string& local_type_id);
 
@@ -76,7 +76,7 @@ namespace TAOX11_NAMESPACE
 #endif
 
       /// Get the (local) repository id.
-      virtual std::string _interface_repository_id ();
+      virtual std::string _interface_repository_id () const;
 
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO)
       // DII operations to create a request.
@@ -143,11 +143,11 @@ namespace TAOX11_NAMESPACE
 
       static object_traits<Object>::ref_type _narrow (Object_proxy&& op);
     protected:
-      typedef std::shared_ptr<Object>   _shared_ptr_type;
+      using _shared_ptr_type = std::shared_ptr<Object>;
 
       template <typename T> friend struct object_traits;
       template <typename _Tp1, typename, typename ...Args>
-      friend object_reference<_Tp1> make_reference(Args&& ...args);
+      friend constexpr object_reference<_Tp1> make_reference(Args&& ...args);
 
       explicit Object (Object_proxy_ptr op = nullptr);
       Object(const Object&) = delete;
@@ -176,7 +176,7 @@ namespace TAOX11_NAMESPACE
       friend class dtor;
 
       Object_proxy_ref proxy_;
-      typedef std::weak_ptr<Object> _weak_reference_type;
+      using _weak_reference_type = std::weak_ptr<Object>;
       _weak_reference_type self_ref_;
     };
 
@@ -184,8 +184,8 @@ namespace TAOX11_NAMESPACE
       : public virtual CORBA::Object
     {
     public:
-      typedef IDL::traits< LocalObject>     _traits_type;
-      typedef _traits_type::ref_type        _ref_type;
+      using _traits_type = IDL::traits<LocalObject>;
+      using _ref_type =  _traits_type::ref_type;
 
       bool _is_a (const std::string& local_type_id) override;
       bool _is_equivalent (object_traits<Object>::ref_type other_obj) override;
@@ -289,7 +289,7 @@ namespace TAOX11_NAMESPACE
           OStrm_& os_,
           IDL::traits<CORBA::Object>::in_type o_)
       {
-        return os_ << "IDL::traits<CORBA::Object>::ref_type {object:"
+        return os_ << "IDL::traits<CORBA::Object>::ref_type{object:"
 #if (TAO_HAS_MINIMUM_CORBA == 0)
             << (o_ ? o_->_repository_id () : std::string("nil"))
 #endif
@@ -302,13 +302,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<CORBA::Object>::__Writer<Fmt> w)
     {
-      typedef IDL::traits<CORBA::Object>::__Writer<Fmt> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<CORBA::Object>::__Writer<Fmt>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<CORBA::Object, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<CORBA::Object>::write_on (
           os, w.val_,
           formatter_t ());
@@ -331,13 +331,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<CORBA::LocalObject>::__Writer<Fmt> w)
     {
-      typedef IDL::traits<CORBA::LocalObject>::__Writer<Fmt> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<CORBA::LocalObject>::__Writer<Fmt>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<CORBA::LocalObject, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<CORBA::LocalObject>::write_on (
           os, w.val_,
           formatter_t ());

@@ -25,8 +25,8 @@ namespace TAOX11_NAMESPACE
     class Valuebox_T : public ValueBase
     {
     public:
-      typedef CORBA::valuetype_traits<Valuebox_T<T>>     _traits_type;
-      typedef CORBA::valuetype_reference<Valuebox_T<T>>  _ref_type;
+      using _traits_type = CORBA::valuetype_traits<Valuebox_T<T>>;
+      using _ref_type = CORBA::valuetype_reference<Valuebox_T<T>>;
 
       void swap(Valuebox_T<T>& r)
       {
@@ -34,7 +34,7 @@ namespace TAOX11_NAMESPACE
       }
 
     protected:
-      typedef std::shared_ptr<Valuebox_T<T>>             _shared_ptr_type;
+      using _shared_ptr_type = std::shared_ptr<Valuebox_T<T>>;
 
       Valuebox_T () = default;
       Valuebox_T (const Valuebox_T<T>&) = default;
@@ -43,23 +43,22 @@ namespace TAOX11_NAMESPACE
         : value_ (std::move(v))
       {}
       ~Valuebox_T () = default;
+      Valuebox_T<T>& operator =(const Valuebox_T<T>&) = delete;
+      Valuebox_T<T>& operator =(Valuebox_T<T>&&) = delete;
 
       _ref_type _lock ()
       { return _traits_type::narrow (this->ValueBase::_lock ()); }
 
-      virtual void _obv_get_truncatable_repo_ids (std::vector<std::string const*>& _ids) const
+      void _obv_get_truncatable_repo_ids (std::vector<std::string const*>& _ids) const override
       { _ids.push_back (std::addressof(this->_obv_repository_id ())); }
 
-      virtual bool _obv_match_formal_type (ptrdiff_t ) const
+      bool _obv_match_formal_type (ptrdiff_t ) const override
       { return true; }
 
-      virtual bool _obv_unmarshal_v (TAO_InputCDR &)
+      bool _obv_unmarshal_v (TAO_InputCDR &) override
       { return true; }
 
       T value_;
-    private:
-      Valuebox_T<T>& operator =(const Valuebox_T<T>&) = delete;
-      Valuebox_T<T>& operator =(Valuebox_T<T>&&) = delete;
     };
   } // namespace CORBA
 

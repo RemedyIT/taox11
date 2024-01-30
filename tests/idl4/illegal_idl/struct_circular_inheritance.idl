@@ -1,0 +1,15 @@
+/**
+ * @file struct_circular_inheritance.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject the use of circular inheritance
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+struct Foo;
+
+struct Foo : Foo
+{
+  long x;
+};

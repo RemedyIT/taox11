@@ -7,7 +7,7 @@
 #include "foo.h"
 
 Foo::Foo (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb)
+  : orb_ (std::move(orb))
 {
 }
 

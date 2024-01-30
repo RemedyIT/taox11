@@ -6,18 +6,16 @@ class <%= stub_export_macro %><%= cxxname %> final
 {
 public:
   void _raise () const override;
-
 % if generate_cdr_streaming?
-  void _tao_encode (TAO_OutputCDR &cdr) const override;
 
+  void _tao_encode (TAO_OutputCDR &cdr) const override;
   void _tao_decode (TAO_InputCDR &cdr) override;
 % end
-
 % if generate_any_support?
-  void _any_insert (TAOX11_CORBA::Any &) const override;
 
+  void _any_insert (TAOX11_CORBA::Any &) const override;
   void _any_insert (TAOX11_CORBA::Any &) override;
 % end
 
-  /// Deep copy
+  /// Make a deep copy of this exception
   TAOX11_NAMESPACE::CORBA::Exception *_tao_duplicate () const override;

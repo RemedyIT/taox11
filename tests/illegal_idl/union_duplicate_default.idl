@@ -1,0 +1,15 @@
+/**
+ * @file    union_duplicate_default.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+enum EnumType {VALUE1, VALUE2};
+
+union NestedUnion switch (EnumType) {
+case VALUE1: boolean u_b;
+default: short u_c;
+default: short u_e;
+};
+

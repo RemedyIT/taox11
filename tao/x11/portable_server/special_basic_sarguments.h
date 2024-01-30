@@ -19,10 +19,8 @@
 
 #include "ace/CDR_Stream.h"
 
-namespace TAOX11_NAMESPACE
+namespace TAOX11_NAMESPACE::PS
 {
-
-  namespace PS {
   /**
    *
    * @brief Specializations for (w)char, octet and boolean.
@@ -65,8 +63,6 @@ namespace TAOX11_NAMESPACE
 
   {
   };
-
-  } // namespace PS
-} // namespace TAOX11_NAMESPACE
+} // namespace TAOX11_NAMESPACE::PS
 
 #endif /* TAOX11_SPECIAL_BASIC_SARGUMENTS_H */

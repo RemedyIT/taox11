@@ -10,8 +10,10 @@ project(x11_logger) : x11_logger_base {
   }
 
   Header_Files {
-    X11_logger_export.h
+    x11_logger_export.h
+    log_type.h
     log_base.h
+    log_bits.h
     logstream_t.h
   }
 

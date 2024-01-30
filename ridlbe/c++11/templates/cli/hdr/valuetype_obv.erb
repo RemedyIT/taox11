@@ -11,13 +11,13 @@ namespace obv
 % end
   {
   protected:
+%# msvc14.{0|1} have a problem with defaulted constructors, issue #4005
 #if defined (_MSC_VER) && (_MSC_VER < 1920)
-    // msvc14.(0|1) have a problem with defaulted constructors, issue #4005
     <%= cxxname %> () {}
 #else
     <%= cxxname %> () = default;
 #endif /* _MSC_VER < 1920 */
-    virtual ~<%= cxxname %> () = default;
+    ~<%= cxxname %> () override = default;
     <%= cxxname %> (const <%= cxxname %>&) = default;
     <%= cxxname %> (<%= cxxname %>&&) = default;
 % if member_count > 0
@@ -44,7 +44,7 @@ namespace obv
   public:
 % if is_concrete?
     template <typename _Tp1, typename, typename ...Args>
-    friend TAOX11_CORBA::valuetype_reference<_Tp1> TAOX11_CORBA::make_reference(Args&& ...args);
+    friend constexpr TAOX11_CORBA::valuetype_reference<_Tp1> TAOX11_CORBA::make_reference(Args&& ...args);
 
     TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type _copy_value () const override;
 
@@ -87,7 +87,7 @@ namespace obv
 
   private:
 % members.each do |_m|
-    <%= _m.scoped_cxx_member_type %> <%= _m.cxxname %>_<% if _m.is_pod? %> {}<% end %>;
+    <%= _m.scoped_cxx_member_type %> <%= _m.cxxname %>_<%= _m.value_initializer %>;
 % end
   }; // class <%= cxxname %>
 } // namespace obv

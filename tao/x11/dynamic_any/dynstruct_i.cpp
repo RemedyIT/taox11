@@ -47,7 +47,7 @@ namespace TAOX11_NAMESPACE
       this->current_position_ = this->component_count_ ? 0 : -1;
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynStruct_i::init (const CORBA::Any& any)
     {
       IDL::traits<CORBA::TypeCode>::ref_type tc = any.type();
@@ -81,7 +81,7 @@ namespace TAOX11_NAMESPACE
       // Get the CDR stream of the Any, if there isn't one, make one.
        CORBA::Any::impl_ref_type impl = any.impl ();
         TAO_OutputCDR out;
-       TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+       TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
 
        if (impl->encoded ())
        {
@@ -142,7 +142,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynStruct_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       this->check_typecode (tc);
@@ -285,7 +285,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
 
       // Check for length match.
       if (length != this->component_count_)
@@ -351,7 +351,7 @@ namespace TAOX11_NAMESPACE
 
         // A deep copy is made only by copy() (CORBA 3.2.).
         // Set the flag so the caller can't destroy.
-        this->set_flag (this->da_members_[i], 0);
+        this->set_flag (this->da_members_[i], false);
 
         members[i].value ( this->da_members_[i]);
       }
@@ -368,7 +368,7 @@ namespace TAOX11_NAMESPACE
         throw CORBA::OBJECT_NOT_EXIST ();
       }
 
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
 
       // Check for length match.
       if (length != this->component_count_)
@@ -423,7 +423,7 @@ namespace TAOX11_NAMESPACE
         // Get the CDR stream of the Any, if there isn't one, make one.
         CORBA::Any::impl_ref_type impl = any.impl ();
         TAO_OutputCDR out;
-        TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+        TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
 
         if (impl->encoded ())
         {
@@ -514,7 +514,7 @@ namespace TAOX11_NAMESPACE
 
 
       CORBA::Any::impl_ref_type field_impl {};
-      TAO_InputCDR field_in_cdr (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR field_in_cdr (static_cast<ACE_Message_Block *> (nullptr));
 
       for (uint32_t i = 0; i < this->component_count_; ++i)
       {
@@ -569,7 +569,7 @@ namespace TAOX11_NAMESPACE
     }
 
     bool
-    DynStruct_i::equal (IDL::traits< DynamicAny::DynAny>::ref_type rhs)
+    DynStruct_i::equal (IDL::traits<DynamicAny::DynAny>::ref_type rhs)
     {
       if (this->destroyed_)
       {
@@ -616,14 +616,14 @@ namespace TAOX11_NAMESPACE
         // Do a deep destroy.
         for (uint32_t i = 0; i < this->component_count_; ++i)
         {
-          this->set_flag (da_members_[i], 1);
+          this->set_flag (da_members_[i], true);
            this->da_members_[i]->destroy ();
          }
          this->destroyed_ = true;
       }
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynStruct_i::current_component ()
     {
       if (this->destroyed_)
@@ -644,7 +644,7 @@ namespace TAOX11_NAMESPACE
 
       uint32_t index = static_cast <uint32_t> (this->current_position_);
 
-      this->set_flag (this->da_members_[index], 0);
+      this->set_flag (this->da_members_[index], false);
 
       return this->da_members_[index];
     }

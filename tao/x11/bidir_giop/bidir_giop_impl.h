@@ -38,6 +38,7 @@ namespace TAOX11_NAMESPACE
     private:
       TAO_BIDIR_GIOP::BidirectionalPolicy_ptr pol_;
 
+      BidirectionalPolicy () = delete;
       BidirectionalPolicy (const BidirectionalPolicy&) = delete;
       BidirectionalPolicy (BidirectionalPolicy&&) = delete;
       BidirectionalPolicy& operator= (const BidirectionalPolicy&) = delete;

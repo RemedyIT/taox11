@@ -2,15 +2,15 @@
 void
 <%= scoped_cxxname %>::_info (std::ostream& user_exception_info) const
 {
-  TAOX11_IDL::traits< <%= scoped_cxxtype %>>::write_on(user_exception_info, *this);
+  TAOX11_IDL::traits<<%= scoped_cxxtype %>>::write_on(user_exception_info, *this);
 }
 
 void <%= scoped_cxxname %>::_raise () const
 {
   throw *this;
 }
-
 % if generate_cdr_streaming?
+
 void <%= scoped_cxxname %>::_tao_encode (TAO_OutputCDR &cdr) const
 {
   if (!(cdr << *this))
@@ -28,6 +28,7 @@ void <%= scoped_cxxname %>::_tao_decode (TAO_InputCDR &cdr)
 }
 % end
 % if generate_any_support?
+
 void <%= scoped_cxxname %>::_any_insert (TAOX11_CORBA::Any &any) const
 {
   any <<= *this;

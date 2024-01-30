@@ -1,11 +1,10 @@
 
 // generated from <%= ridl_template_path %>
-
-// copying version
-void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _struct )
+/// Copying any insertion operator for <%= scoped_cxxname %>
+void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _struct)
 {
   TAOX11_NAMESPACE::Any_Dual_Impl_T<
-      IDL::traits< <%= scoped_cxxtype %>>,
+      IDL::traits<<%= scoped_cxxtype %>>,
 % if is_local?
       TAOX11_NAMESPACE::NULL_Marshal_Policy
 % else
@@ -14,11 +13,11 @@ void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _struct )
         >::insert_copy (any, <%= scoped_cxx_typecode %>, _struct);
 }
 
-// non copying version
-void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_move_type %> _struct )
+/// Non copying any insertion operator for <%= scoped_cxxname %>
+void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_move_type %> _struct)
 {
    Any_Dual_Impl_T<
-      IDL::traits< <%= scoped_cxxtype %>>,
+      IDL::traits<<%= scoped_cxxtype %>>,
 % if is_local?
       TAOX11_NAMESPACE::NULL_Marshal_Policy
 % else
@@ -27,11 +26,11 @@ void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_move_type %> _struct )
         >::insert (any, <%= scoped_cxx_typecode %>, std::move(_struct));
 }
 
-// extraction
+/// Any extraction operator for <%= scoped_cxxname %>
 bool operator>>= (const TAOX11_CORBA::Any &any, <%= scoped_cxx_out_type %> _struct)
 {
   return Any_Dual_Impl_T<
-      IDL::traits< <%= scoped_cxxtype %>>,
+      IDL::traits<<%= scoped_cxxtype %>>,
 % if is_local?
       TAOX11_NAMESPACE::NULL_Marshal_Policy
 % else

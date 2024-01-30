@@ -33,7 +33,7 @@ namespace TAOX11_NAMESPACE
   //===================================================================
 
   class Valuetype_proxy;
-  typedef Valuetype_proxy* Valuetype_proxy_ptr;
+  using Valuetype_proxy_ptr = Valuetype_proxy*;
   typedef
     TAO_VERSIONED_NAMESPACE_NAME::TAO_Value_Var_T<
       Valuetype_proxy
@@ -62,7 +62,7 @@ namespace TAOX11_NAMESPACE
       static void _tao_any_destructor (void *);
       TAO_CORBA::TypeCode_ptr _tao_type () const override;
 
-      virtual void truncation_hook ();
+      void truncation_hook () override;
 
       static Valuetype_proxy* _downcast (TAO_CORBA::ValueBase *v)
       { return dynamic_cast<Valuetype_proxy*> (v); }
@@ -116,7 +116,7 @@ namespace TAOX11_NAMESPACE
       }
 
     private:
-      typedef std::string const*  truncation_mark_t;
+      using truncation_mark_t = std::string const*;
 
       TAOX11_CORBA::ValueBase* value_;
       TAOX11_CORBA::ValueBase::_ref_type locked_value_;

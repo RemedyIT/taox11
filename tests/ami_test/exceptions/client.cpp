@@ -65,7 +65,7 @@ public:
   }
 
   void foo_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <foo_excep> called: "
                 << "Testing proper exception handling."<< std::endl;
@@ -109,7 +109,7 @@ public:
   }
 
   void foo_no_raises_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO
        << "Callback method <foo_no_raises_excep> called: "
@@ -152,7 +152,7 @@ public:
     }
 
   void bar_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     TAOX11_TEST_INFO << "Callback method <bar_excep> called: "
                 << "Testing proper exception handling ..."<< std::endl;
@@ -201,7 +201,7 @@ public:
   }
 
   void shutdown_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };
@@ -365,7 +365,7 @@ int main(int argc, char* argv[])
 
       if ((callback != 4) || (callback_excep != 3 ))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected callbacks. Callbacks expected -4- , received -" << callback << "-"
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected callbacks. Callbacks expected -4- , received -" << callback << "-"
           << " Exceptions: expected -3-, received -" << callback_excep << "-."<< std::endl;
           result = 1;
         }
@@ -378,7 +378,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+        TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
         return 1;
       }
   return result;

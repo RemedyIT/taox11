@@ -32,24 +32,18 @@ namespace Test
   // your base classes
   //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo_impl[Base List]
   {
-  protected:
+  public:
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo_impl[Constructors]
     /// Constructor(s)'
     Foo_impl (IDL::traits<CORBA::ORB>::ref_type orb);
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo_impl[Constructors]
 
     /// Destructor
-    virtual ~Foo_impl ();
-
-    template <typename T> friend class CORBA::servant_reference;
-
-    template <typename _Tp1, typename, typename ...Args>
-    friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+    ~Foo_impl () override;
 
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo_impl[User Protected]
     // your protected definitions
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo_impl[User Protected]
-  public:
 
     // generated from c++11/templates/impl/hdr/operation.erb
     /// @copydoc Test::Foo::write_on_servant

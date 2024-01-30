@@ -16,6 +16,11 @@ test_data_union (IDL::traits<Test::Foo>::ref_type foo)
   uint16_t retval = 0;
 
   Test::Data data;
+  if (data._d() != Test::DataType::dtEmpty)
+  {
+    TAOX11_TEST_ERROR << "Default constructed data should have implicit default disc dtEmpty" << std::endl;
+    ++retval;
+  }
   data._default ();
   retval += check_union (data, Test::DataType::dtEmpty, "after default");
   data.pointData (Test::Point (12, 34));
@@ -25,7 +30,7 @@ test_data_union (IDL::traits<Test::Foo>::ref_type foo)
   if (!std::is_swappable<Test::Data>())
   {
     TAOX11_TEST_ERROR << "ERROR: V is not swappable." << std::endl;
-    return 1;
+    ++retval;
   }
   else
   {
@@ -370,6 +375,153 @@ test_data_z (IDL::traits<Test::Foo>::ref_type foo)
     TAOX11_TEST_DEBUG << "successfully called Foo::test_data_z: <"
       << data << "> - <" << ret << ">." << std::endl;
   }
+
+  // Check that passing an invalid discriminator will result in an exception
+  Test::Z_Union data2;
+  try
+  {
+    data2.z_string("Hello", 4);
+    TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 4 should result in an exception"
+      << std::endl;
+    ++retval;
+  }
+  catch (const CORBA::BAD_PARAM&)
+  {
+    TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 4 resulted in correct exception" << std::endl;
+  }
+
+  // Check that we can set a legal different discriminator
+  Test::Z_Union data_z_1;
+  Test::Z_Union data_z_2;
+  Test::Z_Union data_z_3;
+  data_z_1.z_string("Hello", 1);
+  data_z_2.z_string("Hello", 2);
+  data_z_3.z_string("Hello", 3);
+  if (data_z_1._d () != 1)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 1 didn't work" << std::endl;
+    ++retval;
+  }
+  else
+  {
+    TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 1 worked" << std::endl;
+  }
+  if (data_z_2._d () != 2)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 2 didn't work" << std::endl;
+    ++retval;
+  }
+  else
+  {
+    TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 2 worked" << std::endl;
+  }
+  if (data_z_3._d () != 3)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Setting Z_Union::z_string with discriminator 3 didn't work" << std::endl;
+    ++retval;
+  }
+  else
+  {
+    TAOX11_TEST_DEBUG << "Setting Z_Union::z_string with discriminator 3 worked" << std::endl;
+  }
+  return retval;
+}
+
+uint16_t
+test_union_message (IDL::traits<Test::Foo>::ref_type foo)
+{
+  uint16_t retval = 0;
+
+  Test::Data dt_d;
+  Test::B03 b_d;
+
+  // Set the last item
+  b_d.b_03_5 ("XX");
+  dt_d.globalData (Global (4));
+
+  Test::UnionMessage msg_d { Test::Assignment::D, b_d, dt_d };
+
+  TAOX11_TEST_DEBUG << "Sending <" << msg_d << ">" << std::endl;
+
+  bool const ret = foo->send_unionmessage (msg_d);
+
+  if (!ret)
+  {
+    TAOX11_TEST_ERROR << "ERROR: send_unionmessage returned false "
+      << std::endl;
+    ++retval;
+  }
+
+  return retval;
+}
+
+uint16_t
+test_value_initialization ()
+{
+  TAOX11_TEST_DEBUG << "Test test_value_initialization" << std::endl;
+
+  uint16_t retval {};
+
+  TAOX11_TEST_DEBUG << "Test test_value_initialization Test::unionarrayarrayarrayoflong" << std::endl;
+
+  Test::unionarrayarrayarrayoflong uaaal;
+  int32_t default_int32_t {};
+  for (const auto& aaal_member : uaaal.aaal()) {
+    for (const auto& aal_member : aaal_member) {
+      for (const auto& al_member : aal_member) {
+        if (al_member != default_int32_t) {
+          TAOX11_TEST_ERROR << "Array member of uaaal not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
+          return 1;
+        }
+      }
+    }
+  }
+
+  TAOX11_TEST_DEBUG << "Test test_value_initialization Test::unionarrayarrayoflong" << std::endl;
+
+  Test::unionarrayarrayoflong uaal;
+  for (const auto& aal_member : uaal.aal()) {
+    for (const auto& al_member : aal_member) {
+      if (al_member != default_int32_t) {
+        TAOX11_TEST_ERROR << "Array member of uaal not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
+        return 1;
+      }
+    }
+  }
+
+  TAOX11_TEST_DEBUG << "Test test_value_initialization Test::unionarrayoflong" << std::endl;
+
+  Test::unionarrayoflong ual;
+  for (const auto& al_member : ual.al()) {
+    if (al_member != default_int32_t) {
+      TAOX11_TEST_ERROR << "Array member of ual not value initialized, " << al_member << " instead of " << default_int32_t << std::endl;
+      return 1;
+    }
+  }
+
+  TAOX11_TEST_DEBUG << "Test test_value_initialization Test::unionarrayarrayofenum" << std::endl;
+
+  Test:: enumType default_enumType {};
+  Test::unionarrayarrayofenum uaae;
+  for (const auto& aae_member : uaae.aae()) {
+    for (const auto& ae_member : aae_member) {
+      if (ae_member != default_enumType) {
+        TAOX11_TEST_ERROR << "Array member of uaae not value initialized, " << ae_member << " instead of " << default_enumType << std::endl;
+        return 1;
+      }
+    }
+  }
+
+  TAOX11_TEST_DEBUG << "Test test_value_initialization Test::unionarrayofenum" << std::endl;
+
+  Test::unionarrayofenum uae;
+  for (const auto& ae_member : uae.ae()) {
+    if (ae_member != default_enumType) {
+      TAOX11_TEST_ERROR << "Array member of uae not value initialized, " << ae_member << " instead of " << default_enumType << std::endl;
+      return 1;
+    }
+  }
+
   return retval;
 }
 
@@ -407,6 +559,8 @@ int main (int argc, char* argv[])
       retval += test_data_x (foo);
       retval += test_data_y (foo);
       retval += test_data_z (foo);
+      retval += test_union_message (foo);
+      retval += test_value_initialization ();
 
       TAOX11_TEST_DEBUG << "shutting down..." << std::endl;
 
@@ -415,7 +569,7 @@ int main (int argc, char* argv[])
     }
   catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+      TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
       return 1;
     }
   return retval;

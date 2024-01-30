@@ -65,7 +65,7 @@ public:
   }
 
   void foo_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     try
       {
@@ -116,7 +116,7 @@ public:
    }
 
    void get_my_foo_attrib_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
    {
      TAOX11_TEST_INFO << "Callback method <get_my_foo_attrib_excep> called." << std::endl;
    }
@@ -128,7 +128,7 @@ public:
      myfoo_attrib++;
    }
 
-   void set_my_foo_attrib_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
+   void set_my_foo_attrib_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
    {
      TAOX11_TEST_INFO << "Callback method <set_my_foo_attrib_excep> called:" << std::endl;
    }
@@ -153,7 +153,7 @@ public:
   }
 
   void bye_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <bye_excep> called."<< std::endl;
   }
@@ -167,7 +167,7 @@ public:
   }
 
   void foo_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     try
       {
@@ -219,7 +219,7 @@ public:
   }
 
   void get_my_foo_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <get_my_foo_attrib_excep> called." << std::endl;
   }
@@ -232,7 +232,7 @@ public:
   }
 
   void set_my_foo_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <set_my_foo_attrib_excep> called:" << std::endl;
   }
@@ -242,7 +242,7 @@ public:
   }
 
   void do_something_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <do_someting_excep> called."<< std::endl;
   }
@@ -253,7 +253,7 @@ public:
   }
 
   void get_my_derived_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <get_my_derived_attrib_excep> called." << std::endl;
   }
@@ -264,7 +264,7 @@ public:
   }
 
   void set_my_derived_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <set_my_derived_attrib_excep> called:" << std::endl;
   }
@@ -283,7 +283,7 @@ public:
   }
 
   void get_my_bar_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO << "Callback method <get_my_bar_attrib_excep> called." << std::endl;
   }
@@ -295,7 +295,7 @@ public:
   }
 
   void set_my_bar_attrib_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
      TAOX11_TEST_INFO << "Callback method <set_my_bar_attrib_excep> called:" << std::endl;
   }
@@ -523,7 +523,7 @@ int main(int argc, char* argv[])
 
       if ((nr_of_replies != 0) || (myfoo_foo != 1) || (mybar_foo != 1))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected replies. Expected -12- , received -"
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected replies. Expected -12- , received -"
           << (5 - nr_of_replies) << "-. " << " Expected MyFoo- foo <1> , received <"
           << myfoo_foo << ">. Expected MyBar- foo <1>, received <" << mybar_foo << ">." << std::endl;
           result = 1;
@@ -531,7 +531,7 @@ int main(int argc, char* argv[])
 
       if ((myfoo_attrib != 2) || (mybar_attrib != 2))
          {
-           TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected replies on my_foo_attrib. "
+           TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected replies on my_foo_attrib. "
            << "Expected MyFoo- my_foo_attrib <2> , received <"
            << myfoo_attrib << ">. Expected MyBar- my_foo_attrib <2>, received <"
            << mybar_attrib << ">." << std::endl;
@@ -540,7 +540,7 @@ int main(int argc, char* argv[])
 
       if ((myfoo_foo_excep != 1) || (mybar_foo_excep != 2))
           {
-            TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected exceptions on my_foo. "
+            TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected exceptions on my_foo. "
             << "Expected MyFoo- my_foo_excep <1> , received <"
             << myfoo_foo_excep << ">. Expected MyBar- my_foo_excep <2>, received <"
             << mybar_foo_excep << ">." << std::endl;
@@ -555,7 +555,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+        TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
         return 1;
       }
   return result;

@@ -1,0 +1,15 @@
+/**
+ * @file enum_bitbound_33.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a enum with a bit_bound annotation with value 33
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+@bit_bound(33)
+enum MyBitMask {
+  flag0,
+  flag1,
+  flag2
+};

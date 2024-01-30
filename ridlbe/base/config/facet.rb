@@ -10,28 +10,25 @@ require 'ridlbe/base/config/core'
 require 'ridlbe/base/config/concern'
 
 module IDL
-
   class Backend
-
     class Facet
-
       class Configurator
         def initialize(facet_klass)
           @facet_klass = facet_klass
         end
 
-      private
+        private
 
         def facet_config
           @facet_klass.__send__(:config)
         end
 
-      public
+        public
 
         def depends_on(*args)
           deplist = args.inject([]) do |l, a|
-            if Hash === a
-              l.concat(a.collect {|b,f| {backend: b, facet: f.to_sym}})
+            if a.is_a?(Hash)
+              l.concat(a.collect { |b, f| { backend: b, facet: f.to_sym } })
             else
               l << { facet: a.to_sym }
             end
@@ -43,8 +40,8 @@ module IDL
 
         def ignore_on_missing(*args)
           deplist = args.inject([]) do |l, a|
-            if Hash === a
-              l.concat(a.collect {|b,f| {backend: b, facet: f.to_sym}})
+            if a.is_a?(Hash)
+              l.concat(a.collect { |b, f| { backend: b, facet: f.to_sym } })
             else
               l << { facet: a.to_sym }
             end
@@ -56,12 +53,12 @@ module IDL
 
         def setup_before(*args)
           facet_config[:ordering] ||= []
-          facet_config[:ordering].concat args.collect {|a| [:before, a.to_sym]}
+          facet_config[:ordering].concat args.collect { |a| [:before, a.to_sym] }
         end
 
         def setup_after(*args)
           facet_config[:ordering] ||= []
-          facet_config[:ordering].concat args.collect {|a| [:after, a.to_sym]}
+          facet_config[:ordering].concat args.collect { |a| [:after, a.to_sym] }
         end
 
         def on_setup(&block)
@@ -79,7 +76,6 @@ module IDL
         end
 
         module ClassMethods
-
           private
 
           def config(cfg = nil)
@@ -90,7 +86,6 @@ module IDL
       end
 
       class << self
-
         def black_list
           @black_list ||= []
         end
@@ -113,7 +108,7 @@ module IDL
             end
           end
           # set basic configuration
-          fct_klass.__send__(:config, {name: facet_name.to_sym, root: root, title: title, copyright: copyright, version: version})
+          fct_klass.__send__(:config, { name: facet_name.to_sym, root: root, title: title, copyright: copyright, version: version })
           # get other config
           block.call(Configurator.new(fct_klass))
           # determine klass constant name from root path : last 3 segments should be <backend>/facets/<facet>
@@ -122,7 +117,6 @@ module IDL
           benm = File.basename(File.dirname(File.dirname(root)))
           Facet.const_set(make_facet_constant(benm, fctnm).to_sym, fct_klass)
         end
-
       end # << self
 
       # initialize black list from environment if defined
@@ -136,10 +130,10 @@ module IDL
         @title = facet_config_[:title]
         @copyright = facet_config_[:copyright]
         ver = facet_config_[:version]
-        @version = (Hash === ver ? ver : { :major => ver.to_i, :minor => 0, :release => 0 })
-        self.class.__send__(:define_method, :_setup_facet, &(facet_config_[:setup] || Proc.new {|_,_| }))
+        @version = (ver.is_a?(Hash) ? ver : { major: ver.to_i, minor: 0, release: 0 })
+        self.class.__send__(:define_method, :_setup_facet, &(facet_config_[:setup] || Proc.new { |_, _| }))
         self.class.__send__(:private, :_setup_facet)
-        self.class.__send__(:define_method, :_process_input, &(facet_config_[:process_input] || Proc.new {|_,_| }))
+        self.class.__send__(:define_method, :_process_input, &(facet_config_[:process_input] || Proc.new { |_, _| }))
         self.class.__send__(:private, :_process_input)
       end
 
@@ -168,7 +162,6 @@ module IDL
       def process_input(parser, params)
         return _process_input(parser, params)
       end
-
     end # Facet
 
     class FacetSorter
@@ -197,10 +190,10 @@ module IDL
       def order_facets
         unless @orderedset
           # first collect all facets without ordering deps
-          @orderedset = @facets.values.select {|fct| fct.facet_config[:ordering].nil? }
+          @orderedset = @facets.values.select { |fct| fct.facet_config[:ordering].nil? }
           IDL.log(4, "[#{@be.name}] > collected these unordered facets #{@orderedset}")
           # next insert/append facets *with* ordering deps
-          @facets.values.select {|fct| fct.facet_config[:ordering] }.each do |fct|
+          @facets.values.select { |fct| fct.facet_config[:ordering] }.each do |fct|
             @orderedset.insert(find_ordered_pos(fct), fct)
             IDL.log(4, "[#{@be.name}] > facet order is now #{@orderedset}")
           end
@@ -208,7 +201,7 @@ module IDL
         @orderedset
       end
 
-    private
+      private
 
       def find_ordered_pos(fct)
         # start with all possible positions in the ordered set
@@ -227,7 +220,7 @@ module IDL
               end
             end
           end
-        end unless @orderedset.empty?   # no need to check if ordered set still empty
+        end unless @orderedset.empty? # no need to check if ordered set still empty
         # now check if remaining range matches dependencies that the already ordered facets
         # may have on the to be ordered facet
         @orderedset.each_with_index do |ofct, oix|
@@ -254,15 +247,14 @@ module IDL
           return (range.min..(range.max < dix ? range.max : dix))
         when :after
           # fct should be ordered after ofct so fct should be inserted at dix+1 at a minimum
-          unless range.include?(dix+1)   # dix+1 should be in possible range
+          unless range.include?(dix + 1) # dix+1 should be in possible range
             IDL.fatal("Conflicting ordering dependency for facet #{fct} : #{dpos}:#{dfct}")
           end
           # just return the original (maximum range)
-          return range #(range.min..dix+1)
+          return range # (range.min..dix+1)
         end
         range # this should never be reached
       end
-
     end
 
     module FacetMixin
@@ -318,14 +310,14 @@ module IDL
                 if ignore
                   IDL.log(1,
                           "INFO: Ignoring RIDL :#{name} backend facet #{fct.name}. Cannot find dependency" +
-                          " [#{fdep[:backend] ? "#{fdep[:backend]}/#{fdep[:facet]}": fdep[:facet]}]")
+                          " [#{fdep[:backend] ? "#{fdep[:backend]}/#{fdep[:facet]}" : fdep[:facet]}]")
                   # remove facet
                   _facets.delete(fct.name)
                   # stop checking this facets deps
                   break
                 else
-                  IDL.error "ERROR: Cannot find dependency" +
-                            " [#{fdep[:backend] ? "#{fdep[:backend]}/#{fdep[:facet]}": fdep[:facet]}]" +
+                  IDL.error 'ERROR: Cannot find dependency' +
+                            " [#{fdep[:backend] ? "#{fdep[:backend]}/#{fdep[:facet]}" : fdep[:facet]}]" +
                             " for RIDL :#{name} backend facet #{fct.name}"
                   exit(1)
                 end
@@ -334,7 +326,6 @@ module IDL
           end
           true
         end
-
       end
 
       def print_version_with_facets
@@ -343,13 +334,13 @@ module IDL
       end
 
       def lookup_path_with_facets
-        (_ordered_facets.collect {|fct| fct.root }).concat(lookup_path_without_facets)
+        (_ordered_facets.collect { |fct| fct.root }).concat(lookup_path_without_facets)
       end
 
       def setup_be_with_facets(optlist, idl_options)
         # load any facets available on the backend search path
-        _facet_list = (idl_options[:be_path] || []).collect {|p| Dir[File.join(p, 'ridlbe', "#{name}", 'facets', '*')]}.flatten
-        #_facet_list = Dir[File.join(root, 'facets', '*')]
+        _facet_list = (idl_options[:be_path] || []).collect { |p| Dir[File.join(p, 'ridlbe', "#{name}", 'facets', '*')] }.flatten
+        # _facet_list = Dir[File.join(root, 'facets', '*')]
         IDL.log(2, "[#{name}] > found these Facet folders #{_facet_list}")
         _facet_list.select { |p| File.directory?(p) }.each do |p|
           # get facet dirname
@@ -380,11 +371,8 @@ module IDL
         process_input_without_facets(parser, params)
         _ordered_facets.each { |fct| fct.process_input(parser, params) }
       end
-
     end # FacetMixin
 
     include FacetMixin
-
   end # Backend
-
 end # IDL

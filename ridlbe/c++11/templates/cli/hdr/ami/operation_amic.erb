@@ -1,9 +1,8 @@
 // generated from <%= ridl_template_path %>
 %   _args = in_arguments.dup
-void
-<%= sendc_prefix %><%= name %> (
-    <%= interface.handler_scoped_cxx_in_type %> ami_handler<%= _args.empty? ? ');' : ',' %>
+void <%= sendc_prefix %><%= name %> (
+  <%= interface.handler_scoped_cxx_in_type %> ami_handler<%= _args.empty? ? ');' : ',' %>
 %   while !_args.empty?
 %     _arg = _args.shift
-    <%= _arg.stub_arg_type %> <%= _arg.cxxname %><%= _args.empty? ? ');' : ',' %>
+  <%= _arg.stub_arg_type %> <%= _arg.cxxname %><%= _args.empty? ? ');' : ',' %>
 %   end

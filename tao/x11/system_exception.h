@@ -35,7 +35,7 @@ namespace TAOX11_NAMESPACE
     {
     public:
       /// Destructor.
-      virtual ~SystemException () throw() = default;
+      ~SystemException () noexcept override = default;
 
       /// Get the minor status.
       uint32_t minor () const
@@ -91,6 +91,8 @@ namespace TAOX11_NAMESPACE
                        const char *local_name,
                        uint32_t code,
                        CORBA::CompletionStatus completed);
+
+      template <typename T, typename OStrm_> friend struct IDL::formatter;
 
       void _info (std::ostream& strm) const override;
 
@@ -198,10 +200,9 @@ namespace TAOX11_NAMESPACE
     class TAOX11_Export name final : public SystemException \
     { \
     public: \
-      virtual ~name () throw () = default; \
+      ~name () noexcept override = default; \
       name (); \
-      name (uint32_t code, \
-            CORBA::CompletionStatus completed); \
+      name (uint32_t code, CORBA::CompletionStatus completed); \
       name (const name &) = default; \
       name (name &&) = default; \
       name & operator = (const name &) = default; \
@@ -256,13 +257,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os, \
         IDL::traits<CORBA::name>::__Writer<Fmt> w) \
     { \
-      typedef IDL::traits<CORBA::name>::__Writer<Fmt> writer_t; \
-      typedef typename std::conditional< \
+      using writer_t = IDL::traits<CORBA::name>::__Writer<Fmt>; \
+      using formatter_t = typename std::conditional< \
                           std::is_same< \
                             typename writer_t::formatter_t, \
                             std::false_type>::value, \
                           formatter<CORBA::name, OStrm_>, \
-                          typename writer_t::formatter_t>::type formatter_t; \
+                          typename writer_t::formatter_t>::type; \
       return IDL::traits<CORBA::name>::write_on ( \
           os, w.val_, \
           formatter_t ()); \

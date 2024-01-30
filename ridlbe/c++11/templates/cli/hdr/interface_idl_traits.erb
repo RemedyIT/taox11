@@ -4,15 +4,11 @@
 #if !defined (_INTF_FMT_<%= _intf_fmt_traits_decl_incl_guard_ %>_TRAITS_DECL_)
 #define _INTF_FMT_<%= _intf_fmt_traits_decl_incl_guard_ %>_TRAITS_DECL_
 template <typename OStrm_>
-struct formatter< <%= scoped_cxxtype %>, OStrm_>
+struct formatter<<%= scoped_cxxtype %>, OStrm_>
 {
-  OStrm_& operator ()(
-      OStrm_& ,
-      <%= scoped_cxx_in_type %>);
+  OStrm_& operator ()(OStrm_& , <%= scoped_cxx_in_type %>);
 };
 
 template <typename OStrm_, typename Fmt>
-OStrm_& operator <<(
-    OStrm_&,
-    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt>);
+OStrm_& operator <<(OStrm_&, IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt>);
 #endif // !_INTF_FMT_<%= _intf_fmt_traits_decl_incl_guard_ %>_TRAITS_DECL_

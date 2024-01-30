@@ -10,10 +10,9 @@
 module RIDL
   module CoreExt
     module String
-
       ACRONYMS = %w{CORBA CCM DDS IDL}
 
-      @@acronyms = ACRONYMS.inject({}) {|h, a| h[a.downcase] = a; h}
+      @@acronyms = ACRONYMS.inject({}) { |h, a| h[a.downcase] = a; h }
       @@acronyms_regex = /#{@@acronyms.values.join('|')}/
 
       def self.acronyms_regex(reset = false)
@@ -62,9 +61,9 @@ module RIDL
 
       def underscore!
         self.gsub!(/::/, '_')
-        self.gsub!(/(?:([A-Za-z\d])|^)(#{RIDL::CoreExt::String.acronyms_regex})(?=\b|[^a-z])/) { "#{$1}#{$1 && '_'}#{$2.downcase}" }
-        self.gsub!(/([A-Z\d]+)([A-Z][a-z])/,'\1_\2')
-        self.gsub!(/([a-z\d])([A-Z])/,'\1_\2')
+        self.gsub!(/(?:([A-Za-z\d])|^)(#{RIDL::CoreExt::String.acronyms_regex})(?=\b|[^a-z])/) { "#{::Regexp.last_match(1)}#{::Regexp.last_match(1) && '_'}#{::Regexp.last_match(2).downcase}" }
+        self.gsub!(/([A-Z\d]+)([A-Z][a-z])/, '\1_\2')
+        self.gsub!(/([a-z\d])([A-Z])/, '\1_\2')
         self.tr!('-', '_')
         self.downcase!
         self
@@ -85,18 +84,20 @@ module RIDL
       #   'dds_data_writer'.camelize(:lower)        # => "ddsDataWriter"
       #   'test/my-foo'.camelize                    # => "Test::MyFoo"
       #
-      def camelize(uppercase_first_letter = true)
+      def camelize(_uppercase_first_letter = true)
         self.dup.camelize!
       end
 
       def camelize!(uppercase_first_letter = true)
         self.gsub!(/[^a-zA-Z0-9_]/, '_')
         if uppercase_first_letter
-          self.sub!(/^[a-z\d]*/) { RIDL::CoreExt::String.acronyms[$&] || $&.capitalize }
+          self.sub!(/^[a-z\d]*/) { RIDL::CoreExt::String.acronyms[::Regexp.last_match(0)] || ::Regexp.last_match(0).capitalize }
         else
-          self.sub!(/^(?:#{RIDL::CoreExt::String.acronyms_regex}(?=\b|[A-Z_])|\w)/) { $&.downcase }
+          self.sub!(/^(?:#{RIDL::CoreExt::String.acronyms_regex}(?=\b|[A-Z_])|\w)/) { ::Regexp.last_match(0).downcase }
         end
-        self.gsub!(/(?:_|(\/))([a-z\d]*)/i) { "#{$1}#{RIDL::CoreExt::String.acronyms[$2] || $2.capitalize}" }.gsub('/', '::')
+        self.gsub!(/(?:_|(\/))([a-z\d]*)/i) { "#{::Regexp.last_match(1)}#{RIDL::CoreExt::String.acronyms[::Regexp.last_match(2)] || ::Regexp.last_match(2).capitalize}" }
+        self.gsub!('/', '::')
+        self
       end
 
       # Removes the module part from the expression in the string:
@@ -110,7 +111,7 @@ module RIDL
 
       def demodulize!
         if i = self.rindex('::')
-          self.slice!(0, i+2)
+          self.slice!(0, i + 2)
         end
         self
       end

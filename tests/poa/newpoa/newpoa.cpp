@@ -48,6 +48,8 @@ void print_poa(IDL::traits<PortableServer::POA>::ref_type poa)
 
 int main (int argc, char *argv[])
 {
+  int retval = 0;
+
   try
   {
     // The first step Initialize the ORB
@@ -113,6 +115,20 @@ int main (int argc, char *argv[])
     IDL::traits<PortableServer::POA>::ref_type fourth_poa =
       IDL::traits<PortableServer::POA>::narrow (object_poa);
 
+    // Creating fifthPOA, should fail because there is already
+    // a POA with this name
+    try
+    {
+      IDL::traits<PortableServer::POA>::ref_type fifth_poa =
+        root_poa->create_POA(name, a_POAManager, policies);
+      ++retval;
+      TAOX11_TEST_ERROR << "creating " << name << " successfully, should have failed" << std::endl;
+    }
+    catch (const PortableServer::POA::AdapterAlreadyExists&)
+    {
+      TAOX11_TEST_DEBUG << "creating " << name << " successfully failed" << std::endl;
+    }
+
     // Creation of the _new_ POAs over, so destroy the policies
     for (IDL::traits<CORBA::Policy>::ref_type policy : policies)
     {
@@ -143,5 +159,5 @@ int main (int argc, char *argv[])
     return 1;
   }
 
-  return 0;
+  return retval;
 }

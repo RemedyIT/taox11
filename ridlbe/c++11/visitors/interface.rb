@@ -11,9 +11,7 @@ require 'ridlbe/c++11/visitors/attribute'
 
 module IDL
   module Cxx11
-
     class InterfaceVisitor < NodeVisitorBase
-
       def is_forward?
         node.is_forward?
       end
@@ -43,7 +41,7 @@ module IDL
       end
 
       def is_concrete?
-        !(is_abstract?)
+        !is_abstract?
       end
 
       def has_concrete_base?
@@ -92,6 +90,7 @@ module IDL
 
       def collect_ancestors(list_, node_)
         return [] unless node_
+
         node_.bases.inject(list_) do |lst, base|
           collect_ancestors(lst, base)
           lst << base unless lst.include?(base)
@@ -103,7 +102,7 @@ module IDL
       public
 
       def supported_interface_ids
-        @sup_intf_ids ||= (collect_ancestors([], node).collect {|ancestor| ancestor.repository_id } <<  node.repository_id)
+        @sup_intf_ids ||= (collect_ancestors([], node).collect { |ancestor| ancestor.repository_id } << node.repository_id)
       end
 
       # return all operations declared in this interface
@@ -161,7 +160,7 @@ module IDL
             if _base.is_abstract?
               # add all abstract attributes (incl. inherited)
               @abs_attributes.concat(_base.attributes(true).collect do |att|
-                visitor(AttributeVisitor) {|v| v.visit(att); v.interface(node) }
+                visitor(AttributeVisitor) { |v| v.visit(att); v.interface(node) }
               end)
             end
           end unless node.is_abstract? # do not add if this node is abstract itself
@@ -173,19 +172,19 @@ module IDL
         abstractbase_attributes.size
       end
 
-      def all_operations (inc_implicit = false)  # incl. inherited
+      def all_operations (_inc_implicit = false) # incl. inherited
         @all_operations ||= node.operations(true).collect do |op|
           visitor(OperationVisitor) { |v| v.interface(node); v.visit(op) }
         end
       end
 
-      def all_attributes  # incl. inherited
+      def all_attributes # incl. inherited
         @all_attributes ||= node.attributes(true).collect do |att|
-          visitor(AttributeVisitor) {|v| v.visit(att); v.interface(node) }
+          visitor(AttributeVisitor) { |v| v.visit(att); v.interface(node) }
         end
       end
 
-      def all_attribute_count  # incl. inherited
+      def all_attribute_count # incl. inherited
         self.all_attributes.size
       end
 
@@ -206,11 +205,11 @@ module IDL
       end
 
       def scoped_skel_cxxtype
-        '::'+node.scoped_skel_cxxname
+        '::' + node.scoped_skel_cxxname
       end
 
       def scoped_tie_cxxtype
-        '::'+node.scoped_tie_cxxname
+        '::' + node.scoped_tie_cxxname
       end
 
       def proxy_cxxname
@@ -234,7 +233,7 @@ module IDL
       end
 
       def scoped_srvproxy_cxxtype
-        '::'+node.scoped_srvproxy_cxxname
+        '::' + node.scoped_srvproxy_cxxname
       end
 
       def scoped_var_name
@@ -246,6 +245,5 @@ module IDL
       map_template :typecode, :typecode
       map_template :tao_typecode, :interface_typecode
     end
-
   end
 end

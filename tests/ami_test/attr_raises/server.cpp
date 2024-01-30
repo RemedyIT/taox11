@@ -68,7 +68,6 @@ main(int argc, ACE_TCHAR *argv[])
       CORBA::servant_traits<A::AMI_Test>::ref_type hello_impl =
         CORBA::make_reference<AMI_Test_i> (_orb);
 
-
       TAOX11_TEST_INFO << "created Hello servant" << std::endl;
 
       PortableServer::ObjectId id = root_poa->activate_object (hello_impl);
@@ -125,7 +124,7 @@ main(int argc, ACE_TCHAR *argv[])
     }
   catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+      TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
       return 1;
     }
 

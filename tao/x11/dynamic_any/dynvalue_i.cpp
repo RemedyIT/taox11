@@ -27,7 +27,7 @@ namespace TAOX11_NAMESPACE
     {
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynValue_i::init (const CORBA::Any & any)
     {
       TAOX11_LOG_TRACE ("DynValue_i::init with any");
@@ -44,7 +44,7 @@ namespace TAOX11_NAMESPACE
       return ret->_this ();
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynValue_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc, TAO_InputCDR &in)
     {
       TAOX11_LOG_TRACE ("DynValue_i::init with tc and cdr");
@@ -60,7 +60,7 @@ namespace TAOX11_NAMESPACE
       return ret->_this ();
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynValue_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynValue_i::init with tc");
@@ -112,7 +112,7 @@ namespace TAOX11_NAMESPACE
         this->component_count_);
       this->da_members_.resize (this->component_count_);
 
-      // And initalize all of the DynCommon mix-in
+      // And initialize all of the DynCommon mix-in
 
       this->init_common ();
     }
@@ -125,7 +125,7 @@ namespace TAOX11_NAMESPACE
     {
       TAOX11_LOG_TRACE ("DynValue_i::get_base_types");
 
-      // First initalize to the fully derived type we are
+      // First initialize to the fully derived type we are
       // starting with.
 
       base_types.push_back (DynAnyFactory_i::strip_alias (tc));
@@ -201,7 +201,7 @@ namespace TAOX11_NAMESPACE
       return base->member_type (index);
     }
 
-    const std::string
+    std::string
     DynValue_i::get_member_name (
       const BaseTypesList_t &base_types,
       uint32_t index)
@@ -321,7 +321,7 @@ namespace TAOX11_NAMESPACE
       }
 
       // Check lengths match.
-      const uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
       if (length !=  static_cast <uint32_t>(this->da_members_.size ()))
       {
         throw DynamicAny::DynAny::InvalidValue ();
@@ -380,7 +380,7 @@ namespace TAOX11_NAMESPACE
         // A deep copy is made only by copy()
         // (CORBA 2.4.2 section 9.2.3.6).
         // Set the flag so the caller can't destroy.
-        this->set_flag (this->da_members_[i], 0);
+        this->set_flag (this->da_members_[i], false);
 
         members[i].value(this->da_members_[i]);
       }
@@ -399,7 +399,7 @@ namespace TAOX11_NAMESPACE
       }
 
       // Check lengths match.
-      uint32_t length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
+      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (values.size ());
       if (length !=
           static_cast <uint32_t> (
             this->da_members_.size ()))
@@ -451,7 +451,7 @@ namespace TAOX11_NAMESPACE
     }
 
     bool
-    DynValue_i::equal (IDL::traits< DynAny>::ref_type rhs)
+    DynValue_i::equal (IDL::traits<DynAny>::ref_type rhs)
     {
       TAOX11_LOG_TRACE ("DynValue_i::equal");
 
@@ -468,8 +468,8 @@ namespace TAOX11_NAMESPACE
         return false;
       }
 
-      IDL::traits< DynValue_i>::ref_type rhs_v=
-          IDL::traits< DynValue_i>::narrow (rhs);
+      IDL::traits<DynValue_i>::ref_type rhs_v=
+          IDL::traits<DynValue_i>::narrow (rhs);
 
       if (!rhs_v || this->is_null () != rhs_v->is_null ())
         {
@@ -515,7 +515,7 @@ namespace TAOX11_NAMESPACE
              i < this->component_count_;
              ++i)
         {
-          this->set_flag (da_members_[i], 1);
+          this->set_flag (da_members_[i], true);
           this->da_members_[i]->destroy ();
         }
 
@@ -523,7 +523,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< DynAny>::ref_type
+    IDL::traits<DynAny>::ref_type
     DynValue_i::current_component ()
     {
       TAOX11_LOG_TRACE ("DynValue_i::current_component");
@@ -540,7 +540,7 @@ namespace TAOX11_NAMESPACE
 
       const uint32_t index =
         static_cast <uint32_t> (this->current_position_);
-      this->set_flag (this->da_members_[index], 0);
+      this->set_flag (this->da_members_[index], false);
 
       return this->da_members_[index] ;
     }
@@ -551,7 +551,7 @@ namespace TAOX11_NAMESPACE
     // (even though we are a constructed type and should do
     // so with any other type of input). If we don't assume
     // the value type is for us, it will get passed down
-    // (recursivly) to the terminal non-valuetype member
+    // (recursively) to the terminal non-valuetype member
     // which then will be wrong type for the valuetype input
     // we started with.
     void
@@ -604,7 +604,7 @@ namespace TAOX11_NAMESPACE
     // (even though we are a constructed type and should
     // do so with any other type of output). If we don't
     // assume the value type is us, it will get passed down
-    // (recursivly) to the terminal non-valuetype member
+    // (recursively) to the terminal non-valuetype member
     // which then will be wrong type for the valuetype
     // output we want.
     IDL::traits<CORBA::ValueBase>::ref_type
@@ -679,7 +679,7 @@ namespace TAOX11_NAMESPACE
       // make one by marshalling the value into a new stream.
 
       TAO_OutputCDR out;
-      TAO_InputCDR in (static_cast<ACE_Message_Block *> (0));
+      TAO_InputCDR in (static_cast<ACE_Message_Block *> (nullptr));
       TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
       if (impl->encoded ())
       {
@@ -708,7 +708,7 @@ namespace TAOX11_NAMESPACE
       // with DynValue * instead. However the pointer isn't
       // actually dereferanced by the _tao_write_special_value()
       // call, its address (as a void *) is just used to
-      // check for the null value and any previous writen
+      // check for the null value and any previous written
       // value for the indirection header and the saving of
       // this current location for this new valuetype if it
       // is not indirected (this time).
@@ -857,7 +857,7 @@ namespace TAOX11_NAMESPACE
           }
 
           // Recursive step - Add this member to the out_cdr
-          IDL::traits< DynValue_i>::ref_type member =
+          IDL::traits<DynValue_i>::ref_type member =
               IDL::traits<DynValue_i>::narrow (this->da_members_[currentMember]);
           if (member)
           {
@@ -906,7 +906,7 @@ namespace TAOX11_NAMESPACE
               <= ++currentBaseMember)
           {
             // Remind us to start again with the next derived type
-            // for the next member to be writen.
+            // for the next member to be written.
             currentBaseMember= 0u;
 
             // We must end the chunk we started for this
@@ -921,7 +921,7 @@ namespace TAOX11_NAMESPACE
           }
         }
         // Write out the end chunking markers for the number
-        // of base types we have writen.
+        // of base types we have written.
         for (i= 1u; i < trunc_ids; ++i)
         {
           if (!ci.end_chunk (out_cdr))
@@ -975,7 +975,7 @@ namespace TAOX11_NAMESPACE
       }
       if (is_indirected)
       {
-        // Effectivly this member? is the same ValueType as previous
+        // Effectively this member? is the same ValueType as previous
         // seen either in another member of this container OR the
         // whole container itself. (Possiably can happen as a
         // circular linked list?)
@@ -1000,7 +1000,7 @@ namespace TAOX11_NAMESPACE
         // and find the address of the original DynValue_i that we
         // created last time and stored in the map.
         void *pos = strm.rd_ptr () + offset - sizeof (TAO_CORBA::Long);
-        void *original = 0;
+        void *original = nullptr;
         if (strm.get_value_map()->get()->find (pos, original))
         {
           TAOX11_LOG_ERROR ("DynValue_i::from_inputCDR() "
@@ -1181,7 +1181,7 @@ namespace TAOX11_NAMESPACE
               <= ++currentBaseMember)
         {
           // Remind us to start again with the next derived type
-          // for the next member to be writen.
+          // for the next member to be written.
           currentBaseMember= 0u;
           if (currentBase < num_ids)
           {

@@ -1,3 +1,0 @@
-// -*- MPC -*-
-
-conditional_include "gnudll"

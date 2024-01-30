@@ -1,17 +1,18 @@
-
   // generated from <%= ridl_template_path %>
-  /// Default constructor
   <%= cxxname %> () = default;
-  /// Destructor
   ~<%= cxxname %> () = default;
-  /// Copy constructor
+% unless base.nil?
+  using <%= base.cxxname %>::<%= base.cxxname %>;
+% end
   <%= cxxname %> (<%= cxx_in_type %>) = default;
-  /// Move constructor
   <%= cxxname %> (<%= cxx_move_type %>) = default;
-% if member_count > 0
+% if member_count > 0 || !base.nil?
 %   _ms = members.dup
   /// Constructor which accepts value for all members
   explicit inline <%= cxxname %> (
+%   unless base.nil?
+    <%= base.cxxname %> _base<%= _ms.empty? ? ');' : ',' %>
+%   end
 %   unless _ms.empty?
 %     while !_ms.empty?
 %       _m = _ms.shift
@@ -23,9 +24,7 @@
 %     end
 %   end
 % end
-  /// Copy assignment operator
   <%= cxx_out_type %> operator= (<%= cxx_in_type %>) = default;
-  /// Move assignment operator
   <%= cxx_out_type %> operator= (<%= cxx_move_type %>) = default;
 % members.each do |_m|
 
@@ -40,12 +39,12 @@
   //@}
 % end
 
-  /// Exchange the value of two structs in an efficient matter
+  /// Exchange the value of two structures in an efficient matter
   inline void swap (<%= cxx_inout_type %> s);
 
 private:
 % members.each do |_m|
-  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if _m.is_pod? %> {}<% end %><% if _m.is_array_of_pod? %> {{}}<% end %>;
+  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<%= _m.value_initializer %>;
 % end
 };// <%= cxxname %>
 

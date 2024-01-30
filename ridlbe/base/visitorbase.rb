@@ -11,20 +11,15 @@ require 'erb'
 require 'delegate'
 
 module IDL
-
   module Base
-
     # Generic visitor base class providing template
     # access to parameters and properties and template
     # driving methods.
     #
     class Visitor
-
       module TemplateMap
-
         def self.included(base)
           base.singleton_class.class_eval do
-
             def visitor_type_id(id = nil)
               @visitor_type_id = id.to_sym unless id.blank?
               @visitor_type_id
@@ -45,10 +40,8 @@ module IDL
             def optional_template(id)
               template_optionals << id.to_sym unless template_optionals.include?(id.to_sym)
             end
-
           end
         end
-
       end # TemplateMap
 
       include TemplateMap
@@ -77,7 +70,7 @@ module IDL
         template_prefix.gsub!(/Visitor$/, '')
         template_prefix.underscore!
         subclass.send(:include, TemplateMap)
-        subclass.module_eval <<-EOT, __FILE__, __LINE__+1
+        subclass.module_eval <<-EOT, __FILE__, __LINE__ + 1
           protected
           def resolve_template(sym)
             IDL.log(3, "#{subclass.name}: resolving template \#{sym}")
@@ -150,7 +143,7 @@ module IDL
       end
 
       def write_regen_section(sectionid, options = nil, &_block)
-        #@output.erbout.flush
+        # @output.erbout.flush
         @output.write_regen_section(sectionid, options, block_given? ? _block : nil)
       end
 
@@ -218,7 +211,7 @@ module IDL
       def exec_template_visit(tpl, name, extra_props, bases = nil)
         yield(self, name) if block_given?
         if tpl
-          if Array === tpl
+          if tpl.is_a?(Array)
             tpl.each { |t| visit_resolved_template(t, extra_props) }
           else
             visit_resolved_template(tpl, extra_props, bases)
@@ -234,10 +227,10 @@ module IDL
         # only match regular visit_ methods (no ?,!,= decorations)
         if VISIT_METHOD_RE =~ method
           IDL.log(3, "VisitorBase: captured call to #{method}")
-          Kernel.raise ArgumentError, "Incorrect number of arguments; #{args.size} for 0 - 1" if args.size>1
-          sym = $1
+          Kernel.raise ArgumentError, "Incorrect number of arguments; #{args.size} for 0 - 1" if args.size > 1
+          sym = ::Regexp.last_match(1)
           tpl, tpl_bases = resolve_template(sym)
-          Kernel.raise "Fatal: cannot resolve RIDL template #{$1}" unless tpl || optional_template?(sym)
+          Kernel.raise "Fatal: cannot resolve RIDL template #{::Regexp.last_match(1)}" unless tpl || optional_template?(sym)
           exec_template_visit(tpl, sym, args.shift || {}, tpl_bases, &block)
         else
           super
@@ -247,7 +240,7 @@ module IDL
       ###
       # Also support automagic respond_to? for templates but
       # we do not check if the template actually exists.
-      def respond_to_missing?(method, include_private)
+      def respond_to_missing?(method, _include_private)
         VISIT_METHOD_RE =~ method ? true : false
       end
 
@@ -262,7 +255,12 @@ module IDL
             @__erb_out = __output__
             @__extra_props = __extra_props__
             @__template = __template__
-            _erb = ERB.new(__template__.code, nil, '%', '@__erb_out.erbout')
+            _erb = if (RUBY_VERSION.split('.').map { |x| x.to_i } <=> [2, 6, 0]).negative?
+                     # TODO: remove this as soon as we do not need to support ancient Ruby anymore
+                     ERB.new(__template__.code, nil, '%', '@__erb_out.erbout')
+                   else
+                     ERB.new(__template__.code, trim_mode: '%', eoutvar: '@__erb_out.erbout')
+                   end
             _erb.filename = __template__.path
             _erb.result(Kernel.binding)
           end
@@ -362,7 +360,7 @@ module IDL
       end
 
       def scoped_enclosure_name
-        @scoped_enclosure_name ||= @node.enclosure.scopes.collect {|s| s.name }.join('::')
+        @scoped_enclosure_name ||= @node.enclosure.scopes.collect { |s| s.name }.join('::')
       end
 
       def in_module_scope?
@@ -382,7 +380,8 @@ module IDL
         # check for included IDL
         enc = @node.enclosure
         while enc
-          return File.basename(enc.fullpath) if IDL::AST::Include === enc
+          return File.basename(enc.fullpath) if enc.is_a?(IDL::AST::Include)
+
           enc = enc.enclosure
         end
         # not from include but from IDL source file
@@ -394,7 +393,7 @@ module IDL
       end
 
       def has_annotations?
-        !@node.annotations().empty?
+        !@node.annotations.empty?
       end
 
       def annotations
@@ -418,17 +417,17 @@ module IDL
         # only match regular visit_ methods (no ?,!,= decorations)
         if Visitor::VISIT_METHOD_RE =~ method
           IDL.log(3, "NodeVisitorMethods: captured call to #{method}")
-          Kernel.raise ArgumentError, "Incorrect number of arguments; #{args.size} for 0 - 2" if args.size>2
+          Kernel.raise ArgumentError, "Incorrect number of arguments; #{args.size} for 0 - 2" if args.size > 2
           node, extra_props = *args
-          if Hash === node
+          if node.is_a?(Hash)
             Kernel.raise ArgumentError, 'Invalid argument following extra_props Hash' if extra_props
             extra_props = node
             node = extra_props.delete(:node)
           end
-          Kernel.raise ArgumentError, 'Invalid node argument' unless node.nil? || IDL::AST::Leaf === node
-          sym = $1
+          Kernel.raise ArgumentError, 'Invalid node argument' unless node.nil? || node.is_a?(IDL::AST::Leaf)
+          sym = ::Regexp.last_match(1)
           tpl, tpl_bases = resolve_template(sym)
-          Kernel.raise "Fatal: cannot resolve RIDL template #{$1}" unless tpl || optional_template?(sym)
+          Kernel.raise "Fatal: cannot resolve RIDL template #{::Regexp.last_match(1)}" unless tpl || optional_template?(sym)
           visit(node) if node
           exec_template_visit(tpl, sym, extra_props || {}, tpl_bases, &block)
         else
@@ -447,9 +446,6 @@ module IDL
       def _resolved_idltype
         @resolved_idltype ||= @node.idltype.resolved_type
       end
-
     end # NodeVisitorMethods
-
   end # Base
-
 end # IDL

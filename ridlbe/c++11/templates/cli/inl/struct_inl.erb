@@ -4,9 +4,12 @@
 %#  Constructor inlines
 %#
 %#  Initializer CTOR
-% if member_count > 0
+% if member_count > 0 || !base.nil?
 %   _ms = members.dup
 inline <%= scoped_cxxtype %>::<%= cxxname %> (
+%   unless base.nil?
+  <%= base.cxxname %> _base<%= _ms.empty? ? ')' : ',' %>
+%   end
 %   unless _ms.empty?
 %     while !_ms.empty?
 %       _m = _ms.shift
@@ -18,6 +21,10 @@ inline <%= scoped_cxxtype %>::<%= cxxname %> (
 %     end
 %   end
 %   _pfx = nil
+%   unless base.nil?
+  : <%= base.cxxname %> (std::move(_base))<% unless _ms.empty? %>,<% end %>
+%     _pfx = ', ' unless _pfx
+%   end
 %   members.each do |_m|
   <%= _pfx || ': ' %><%= _m.cxxname %>_ (std::move (<%= _m.cxxname %>))
 %     _pfx = ', ' unless _pfx
@@ -26,8 +33,9 @@ inline <%= scoped_cxxtype %>::<%= cxxname %> (
 }
 
 % end
-inline void <%= scoped_cxxtype %>::swap (<%= scoped_cxx_out_type %> s)
+inline void <%= scoped_cxxtype %>::swap (<%= scoped_cxx_out_type %><% if member_count > 0 %> s<% end %>)
 {
+%# Add support for base
 % members.each do |_m|
   std::swap (this-><%= _m.cxxname %>_, s.<%= _m.cxxname %>_);
 % end

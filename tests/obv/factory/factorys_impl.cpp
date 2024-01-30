@@ -11,7 +11,7 @@
 #include "factorys_impl.h"
 
 Factory_impl::Factory_impl(IDL::traits<CORBA::ORB>::ref_type orb) :
-    orb_(orb)
+    orb_(std::move(orb))
 {
 }
 

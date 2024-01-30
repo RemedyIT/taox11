@@ -30,7 +30,7 @@ namespace TAOX11_NAMESPACE
      * @brief Implementation of the DynValueBox class.
      */
     class TAOX11_DynamicAny_Export DynValueBox_i final
-    : public virtual IDL::traits< DynValueBox>::base_type,
+    : public virtual IDL::traits<DynValueBox>::base_type,
       public virtual DynValueCommon_i
     {
     public:
@@ -41,30 +41,30 @@ namespace TAOX11_NAMESPACE
       ~DynValueBox_i () = default;
 
       /// Initialize using just a TypeCode.
-      IDL::traits< DynamicAny::DynAny>::ref_type init (IDL::traits<CORBA::TypeCode>::ref_type tc);
+      IDL::traits<DynamicAny::DynAny>::ref_type init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       /// Initialize using an Any.
-      IDL::traits< DynamicAny::DynAny>::ref_type init (const CORBA::Any& any);
+      IDL::traits<DynamicAny::DynAny>::ref_type init (const CORBA::Any& any);
 
       // = Functions specific to DynValueBox.
       CORBA::Any get_boxed_value () override;
 
       void set_boxed_value (const CORBA::Any & boxed) override;
 
-      IDL::traits< DynAny>::ref_type get_boxed_value_as_dyn_any () override;
+      IDL::traits<DynAny>::ref_type get_boxed_value_as_dyn_any () override;
 
-      void set_boxed_value_as_dyn_any (IDL::traits< DynAny>::ref_type boxed) override;
+      void set_boxed_value_as_dyn_any (IDL::traits<DynAny>::ref_type boxed) override;
 
       // = DynAny common functions not implemented in class TAO_DynCommon.
       void from_any (const CORBA::Any & value) override;
 
       CORBA::Any to_any () override;
 
-      bool equal (IDL::traits< DynAny>::ref_type dyn_any) override;
+      bool equal (IDL::traits<DynAny>::ref_type dyn_any) override;
 
       void destroy () override;
 
-      IDL::traits< DynAny>::ref_type current_component () override;
+      IDL::traits<DynAny>::ref_type current_component () override;
 
       // = DynValueCommon needed to be provided here
       void set_to_value () override;
@@ -83,7 +83,7 @@ namespace TAOX11_NAMESPACE
       DynValueBox_i &operator= (DynValueBox_i&&) = delete;
 
       /// The boxed component of DynValueBox is another DynAny.
-      IDL::traits< DynAny>::ref_type boxed_;
+      IDL::traits<DynAny>::ref_type boxed_;
     };
   }
 }

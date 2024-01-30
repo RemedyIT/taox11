@@ -24,7 +24,7 @@ main(int argc, ACE_TCHAR *argv[])
     {
       IDL::traits<CORBA::ORB>::ref_type _orb = CORBA::ORB_init (argc, argv);
 
-      if (_orb == nullptr)
+      if (!_orb)
         {
           taox11_error
             << "ERROR: CORBA::ORB_init (argc, argv) returned null ORB."
@@ -71,7 +71,6 @@ main(int argc, ACE_TCHAR *argv[])
       CORBA::servant_traits<Test::A>::ref_type a_impl =
         CORBA::make_reference<A_i> (_orb);
 
-
       taox11_info << "created Test::A servant" << std::endl;
 
       PortableServer::ObjectId id = root_poa->activate_object (a_impl);
@@ -81,7 +80,7 @@ main(int argc, ACE_TCHAR *argv[])
       IDL::traits<CORBA::Object>::ref_type a_obj =
         root_poa->id_to_reference (id);
 
-      if (a_obj == nullptr)
+      if (!a_obj)
         {
           taox11_error
             << "ERROR: root_poa->id_to_reference (id) returned null reference."
@@ -128,7 +127,7 @@ main(int argc, ACE_TCHAR *argv[])
     }
   catch (const std::exception& e)
     {
-      taox11_error << "exception caught: " << e.what() << std::endl;
+      taox11_error << "exception caught: " << e << std::endl;
       return 1;
     }
 

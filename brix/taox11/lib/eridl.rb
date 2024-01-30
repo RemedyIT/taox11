@@ -12,11 +12,8 @@ require 'ridl/runner'
 require 'ridlbe/base/require'
 
 module BRIX11
-
   module ERIDL
-
     self.singleton_class.class_eval do
-
       private
 
       def engines
@@ -36,7 +33,6 @@ module BRIX11
         end
         engines[backend]
       end
-
     end
 
     def self.run(backend, argv, beopts = {})
@@ -56,7 +52,7 @@ module BRIX11
       path_base = File.basename(path)
       if (path_base != path)
         # include paths should always end with '/'
-        ridl_opts[:xincludepaths] << (File.dirname(path)+'/')
+        ridl_opts[:xincludepaths] << (File.dirname(path) + '/')
       end
       # backup current engine (if any)
       cur_engine = Thread.current[:ridl_engine]
@@ -64,13 +60,11 @@ module BRIX11
       Thread.current[:ridl_engine] = ridl_engine
       begin
         File.open(path) do |f|
-         return ridl_engine.parse(f, ridl_opts)
+          return ridl_engine.parse(f, ridl_opts)
         end
       ensure
         Thread.current[:ridl_engine] = cur_engine
       end
-   end
-
-  end # ERIDL
-
-end # BRIX11
+    end
+  end
+end

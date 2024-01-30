@@ -15,30 +15,30 @@
 #define CASEE(type,CT,str) case CORBA::TCKind::tk_##type: {\
   CT b = da->get_##type() ; \
   tab (level_); \
-  TAOX11_TEST_INFO << str << b << std::endl;; \
+  TAOX11_TEST_INFO << str << b << std::endl; \
   } break;
 
 #define CASEBS(type,CT,str,elem) case CORBA::TCKind::tk_##type: \
   {\
     CORBA::CT##Seq seq = da->get_##type##_seq (); \
     ++level_; \
-    uint32_t len = ACE_Utils::truncate_cast<uint32_t> (seq.size ()); \
+    uint32_t const len = ACE_Utils::truncate_cast<uint32_t> (seq.size ()); \
     tab (level_); \
     TAOX11_TEST_INFO <<  "length = " << len << std::endl; \
     for (uint32_t i = 0; i < len; ++i) \
       { \
         elem b = seq[i]; \
         tab (level_); \
-        TAOX11_TEST_INFO <<  "[" << i << "] "<< str << b << std::endl;; \
+        TAOX11_TEST_INFO <<  "[" << i << "] "<< str << b << std::endl; \
       } \
     --level_; \
   } \
   break;
 
 DynAnyAnalyzer::DynAnyAnalyzer ( IDL::traits<CORBA::ORB>::ref_type orb,
-    IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory)
-  : orb_ (orb),
-    dynany_factory_ (dynany_factory),
+    IDL::traits<DynamicAny::DynAnyFactory>::ref_type dynany_factory)
+  : orb_ (std::move(orb)),
+    dynany_factory_ (std::move(dynany_factory)),
     level_ (0)
 {
 }
@@ -51,16 +51,12 @@ void DynAnyAnalyzer::tab (int t)
   }
 }
 
-DynAnyAnalyzer::~DynAnyAnalyzer ()
-{
-}
-
 void DynAnyAnalyzer::resetTab ()
 {
   level_ = 0;
 }
 
-void DynAnyAnalyzer::analyze (IDL::traits< DynamicAny::DynAny>::ref_type da)
+void DynAnyAnalyzer::analyze (IDL::traits<DynamicAny::DynAny>::ref_type da)
 {
   IDL::traits<CORBA::TypeCode>::ref_type tc = da->type ();
 
@@ -79,18 +75,18 @@ void DynAnyAnalyzer::analyze (IDL::traits< DynamicAny::DynAny>::ref_type da)
   {
     case CORBA::TCKind::tk_struct:
     {
-      IDL::traits< DynamicAny::DynStruct>::ref_type ds =
-                   IDL::traits< DynamicAny::DynStruct>::narrow (da);
+      IDL::traits<DynamicAny::DynStruct>::ref_type ds =
+                   IDL::traits<DynamicAny::DynStruct>::narrow (da);
       tab (level_);
 
       TAOX11_TEST_INFO << "STRUCT" << std::endl;
 
       if (da->seek (0) )
       {
-        level_++;
+        ++level_;
         do
         {
-          IDL::traits< DynamicAny::DynAny>::ref_type cc =
+          IDL::traits<DynamicAny::DynAny>::ref_type cc =
                   ds->current_component ();
 
           DynamicAny::FieldName fn =
@@ -118,8 +114,8 @@ void DynAnyAnalyzer::analyze (IDL::traits< DynamicAny::DynAny>::ref_type da)
       }
       else
       {
-        IDL::traits< DynamicAny::DynSequence>::ref_type ds =
-              IDL::traits< DynamicAny::DynSequence>::narrow (da);
+        IDL::traits<DynamicAny::DynSequence>::ref_type ds =
+              IDL::traits<DynamicAny::DynSequence>::narrow (da);
 
         int i = 0;
         tab(level_);
@@ -128,11 +124,11 @@ void DynAnyAnalyzer::analyze (IDL::traits< DynamicAny::DynAny>::ref_type da)
 
         if (ds->seek (0UL))
         {
-          level_++;
+          ++level_;
           do {
             tab(level_);
             TAOX11_TEST_DEBUG << "[" << i << "]" << std::endl;
-            IDL::traits< DynamicAny::DynAny>::ref_type cc =ds->current_component ();
+            IDL::traits<DynamicAny::DynAny>::ref_type cc =ds->current_component ();
 
             if (cc)
               analyze (cc);
@@ -148,7 +144,7 @@ void DynAnyAnalyzer::analyze (IDL::traits< DynamicAny::DynAny>::ref_type da)
     {
       tab (level_);
       TAOX11_TEST_DEBUG <<"ARRAY" << std::endl;
-      level_++;
+      ++level_;
 
       uint32_t const len = dup->length ();
 
@@ -156,7 +152,7 @@ void DynAnyAnalyzer::analyze (IDL::traits< DynamicAny::DynAny>::ref_type da)
       {
         tab (level_);
         TAOX11_TEST_DEBUG <<  "[" << i << "]" << std::endl;
-        IDL::traits< DynamicAny::DynAny>::ref_type cc = da->current_component();
+        IDL::traits<DynamicAny::DynAny>::ref_type cc = da->current_component();
         if (cc)
           analyze (cc);
         da->next ();
@@ -167,12 +163,12 @@ void DynAnyAnalyzer::analyze (IDL::traits< DynamicAny::DynAny>::ref_type da)
 
     case CORBA::TCKind::tk_union:
     {
-      IDL::traits< DynamicAny::DynUnion>::ref_type value =
-          IDL::traits< DynamicAny::DynUnion>::narrow (da);
+      IDL::traits<DynamicAny::DynUnion>::ref_type value =
+          IDL::traits<DynamicAny::DynUnion>::narrow (da);
 
       if (!value->has_no_active_member ())
       {
-        IDL::traits< DynamicAny::DynAny>::ref_type disc = value->member ();
+        IDL::traits<DynamicAny::DynAny>::ref_type disc = value->member ();
         if (disc)
           this->analyze (disc);
       }
@@ -181,7 +177,7 @@ void DynAnyAnalyzer::analyze (IDL::traits< DynamicAny::DynAny>::ref_type da)
 
     case CORBA::TCKind::tk_any:
     {
-      IDL::traits< DynamicAny::DynAny>::ref_type dynany;
+      IDL::traits<DynamicAny::DynAny>::ref_type dynany;
       CORBA::Any any = da->get_any ();
 
       dynany =
@@ -195,8 +191,8 @@ void DynAnyAnalyzer::analyze (IDL::traits< DynamicAny::DynAny>::ref_type da)
 
     case CORBA::TCKind::tk_enum:
     {
-      IDL::traits< DynamicAny::DynEnum>::ref_type value =
-          IDL::traits< DynamicAny::DynEnum>::narrow (da);
+      IDL::traits<DynamicAny::DynEnum>::ref_type value =
+          IDL::traits<DynamicAny::DynEnum>::narrow (da);
 
       std::string s = value->get_as_string ();
       tab (level_);
@@ -207,10 +203,10 @@ void DynAnyAnalyzer::analyze (IDL::traits< DynamicAny::DynAny>::ref_type da)
     {
       tab (level_);
       TAOX11_TEST_DEBUG <<"VALUEBOX" << std::endl;
-      level_++;
+      ++level_;
 
-      IDL::traits< DynamicAny::DynValueBox>::ref_type  box =
-         IDL::traits< DynamicAny::DynValueBox>::narrow (da);
+      IDL::traits<DynamicAny::DynValueBox>::ref_type  box =
+         IDL::traits<DynamicAny::DynValueBox>::narrow (da);
       if (box->is_null ())
       {
         TAOX11_TEST_DEBUG << "Value = {NULL} " << std::endl;
@@ -229,10 +225,10 @@ void DynAnyAnalyzer::analyze (IDL::traits< DynamicAny::DynAny>::ref_type da)
     {
       tab (level_);
       TAOX11_TEST_DEBUG <<"VALUE" << std::endl;
-      level_++;
+      ++level_;
 
-      IDL::traits< DynamicAny::DynValue>::ref_type  dvt =
-              IDL::traits< DynamicAny::DynValue>::narrow (da);
+      IDL::traits<DynamicAny::DynValue>::ref_type  dvt =
+              IDL::traits<DynamicAny::DynValue>::narrow (da);
 
       if (dvt->is_null ())
       {

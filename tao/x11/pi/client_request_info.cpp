@@ -75,11 +75,8 @@ namespace TAOX11_NAMESPACE
       IOP::TaggedProfile rc {};
       try
       {
-        TAO_IOP::TaggedProfile_var tao_tp =
-            this->reqinf_->effective_profile ();
-        rc = IOP::TaggedProfile (
-              tao_tp->tag,
-              seq_to_x11<CORBA::OctetSeq> (tao_tp->profile_data));
+        TAO_IOP::TaggedProfile_var tao_tp = this->reqinf_->effective_profile ();
+        rc = IOP::TaggedProfile (tao_tp->tag, seq_to_x11<CORBA::OctetSeq> (tao_tp->profile_data));
       }
       catch_tao_system_ex (_sx)
       return rc;

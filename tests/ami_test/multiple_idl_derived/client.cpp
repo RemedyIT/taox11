@@ -69,7 +69,7 @@ public:
   }
 
   void op_A_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
     TAOX11_TEST_INFO
        << "ERROR:: Callback method <AHandler::op_A_excep> called unexpectedly."
@@ -92,7 +92,7 @@ public:
    }
 
    void op_B_excep (
-       IDL::traits< ::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
+       IDL::traits<::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
    {
      TAOX11_TEST_INFO
         << "ERROR:: Callback method <AHandler::op_B_excep> called unexpectedly."
@@ -127,7 +127,7 @@ public:
   }
 
   void op_B_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type  /*excep_holder*/) override
   {
     TAOX11_TEST_INFO
        << "ERROR:: Callback method <BHandler::op_B_excep> called unexpectedly."
@@ -343,7 +343,7 @@ int main(int argc, char* argv[])
 
       if ((nr_of_replies != 0) || (cb_a != 2) || (cb_b != 1))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client didn't recieve expected replies. Expected -3- , received -"
+          TAOX11_TEST_ERROR << "ERROR: Client didn't receive expected replies. Expected -3- , received -"
           << (3 - nr_of_replies) << "-. " << " Expected A callbacks <2> , received <"
           << cb_a << ">. Expected B callbacks <1>, received <" << cb_b << ">." << std::endl;
           result = 1;
@@ -357,7 +357,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        TAOX11_TEST_ERROR << "exception caught: " << e.what() << std::endl;
+        TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
         return 1;
       }
   return result;

@@ -2,12 +2,11 @@
 
 // generated from <%= ridl_template_path %>
 %     _args = in_arguments.dup
-void
-<%= interface.amic_scoped_cxxname %>::<%= sendc_prefix %><%= name %> (
-    <%= interface.handler_scoped_cxx_in_type %> ami_handler<%= _args.empty? ? ')' : ',' %>
+void <%= interface.amic_scoped_cxxname %>::<%= sendc_prefix %><%= name %> (
+  <%= interface.handler_scoped_cxx_in_type %> ami_handler<%= _args.empty? ? ')' : ',' %>
 %     while !_args.empty?
 %       _arg = _args.shift
-    <%= _arg.stub_arg_type %> <%= _arg.cxxname %><%= _args.empty? ? ')' : ',' %>
+  <%= _arg.stub_arg_type %> <%= _arg.cxxname %><%= _args.empty? ? ')' : ',' %>
 %     end
 {
 %     if interface.is_abstract?
@@ -40,9 +39,9 @@ void
 %     in_arguments.each do |_arg|
 %       case _arg.direction
 %       when :in
-    TAOX11_NAMESPACE::Arg_Traits< <%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
+    TAOX11_NAMESPACE::Arg_Traits<<%= _arg.scoped_cxx_arg_type %>>::in_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
 %       when :inout
-    TAOX11_NAMESPACE::Arg_Traits< <%= _arg.scoped_cxx_arg_type %>>::inout_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
+    TAOX11_NAMESPACE::Arg_Traits<<%= _arg.scoped_cxx_arg_type %>>::inout_arg_val _taox11_<%= _arg.cxxname %> {<%= _arg.cxxname %>};
 %       end
 %     end
 %     if nr_arguments > 0
@@ -86,8 +85,7 @@ void
     if (ami_handler)
     {
       TAO_CORBA::Object_ptr _tao_ami_handler_obj = ami_handler->get_proxy ()->get ();
-      _tao_ami_handler =
-        <%= interface.handler_proxy_cxxname %>::_narrow (_tao_ami_handler_obj);
+      _tao_ami_handler = <%= interface.handler_proxy_cxxname %>::_narrow (_tao_ami_handler_obj);
 
       if (TAO_CORBA::is_nil (_tao_ami_handler))
       {

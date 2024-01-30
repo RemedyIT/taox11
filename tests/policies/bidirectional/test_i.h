@@ -17,13 +17,12 @@ class Callback_i
 public:
   Callback_i (IDL::traits<CORBA::ORB>::ref_type orb);
 
-  void shutdown ();
+  void shutdown () override;
 
-  void callback_method ();
+  void callback_method () override;
 
 private:
   IDL::traits<CORBA::ORB>::ref_type orb_;
-
 };
 
 class Simple_Server_i

@@ -17,11 +17,11 @@ class MyAdapterActivator: public PortableServer::AdapterActivator
 {
 public:
   explicit MyAdapterActivator(IDL::traits<PortableServer::POAManager>::ref_type manager) :
-      poa_manager_(manager)
+      poa_manager_(std::move(manager))
   {
   }
 
-  virtual ~MyAdapterActivator() = default;
+  ~MyAdapterActivator() override = default;
 
   bool unknown_adapter(
       IDL::traits<PortableServer::POA>::ref_type parent,

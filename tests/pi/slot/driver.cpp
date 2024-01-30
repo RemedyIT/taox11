@@ -18,13 +18,11 @@ class ORB_Initializer final
   : public IDL::traits<PortableInterceptor::ORBInitializer>::base_type
 {
 public:
-  void
-  pre_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type) override
+  void pre_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type) override
   {
   }
 
-  void
-  post_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override
+  void post_init (IDL::traits<PortableInterceptor::ORBInitInfo>::ref_type info) override
   {
     slot_id = info->allocate_slot_id ();
     TAOX11_TEST_INFO << "Allocated slot with id " << slot_id << std::endl;
@@ -34,7 +32,6 @@ public:
 int
 main(int argc, ACE_TCHAR *argv[])
 {
-
   try
   {
     IDL::traits<PortableInterceptor::ORBInitializer>::ref_type orb_initializer =
@@ -72,7 +69,7 @@ main(int argc, ACE_TCHAR *argv[])
   }
   catch (const CORBA::Exception& ex)
   {
-    TAOX11_TEST_ERROR << "Exception caught: " << ex.what () << std::endl;
+    TAOX11_TEST_ERROR << "Exception caught: " << ex << std::endl;
     return 1;
   }
 

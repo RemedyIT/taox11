@@ -4,10 +4,8 @@
 #if !defined (_VALUETYPE_<%= _vt_idl_traits_decl_incl_guard_ %>_IDL_TRAITS_DECL_)
 #define _VALUETYPE_<%= _vt_idl_traits_decl_incl_guard_ %>_IDL_TRAITS_DECL_
 template <typename OStrm_>
-struct formatter< <%= scoped_cxxtype %>, OStrm_>;
+struct formatter<<%= scoped_cxxtype %>, OStrm_>;
 
 template <typename OStrm_, typename Fmt>
-OStrm_& operator <<(
-    OStrm_&,
-    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt>);
+OStrm_& operator <<(OStrm_&, IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt>);
 #endif // !_VALUETYPE_<%= _vt_idl_traits_decl_incl_guard_ %>_IDL_TRAITS_DECL_

@@ -12,7 +12,6 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class ServantHeaderBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
@@ -23,7 +22,6 @@ module IDL
     end
 
     class ServantHeaderWriter < ServantHeaderBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -52,6 +50,7 @@ module IDL
 
       def visit_include(node)
         return if File.basename(node.filename) == 'orb.idl'
+
         at_global_scope do
           visitor(IncludeVisitor).visit(node)
         end
@@ -59,7 +58,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from ServantHeaderWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -69,19 +68,22 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
       def enter_interface(node)
         return if node.is_local? || node.is_abstract?
+
         super
         visitor(InterfaceVisitor).visit_pre(node)
         inc_nest  # POA
         inc_nest  # servant skeleton class
       end
+
       def leave_interface(node)
         return if node.is_local? || node.is_abstract?
+
         dec_nest
         dec_nest
         visitor(InterfaceVisitor).visit_post(node)
@@ -91,16 +93,19 @@ module IDL
       def enter_valuetype(node)
         super
         return if node.is_local? || !node.supports_concrete_interface?
+
         visitor(ValuetypeVisitor).visit_pre(node)
       end
 
       def visit_operation(node)
         return if node.enclosure.is_local? || node.enclosure.is_abstract?
+
         visitor(OperationVisitor).visit_operation(node)
       end
 
       def visit_attribute(node)
         return if node.enclosure.is_local? || node.enclosure.is_abstract?
+
         visitor(AttributeVisitor).visit_attribute(node)
       end
 
@@ -121,24 +126,22 @@ module IDL
     end
 
     class ServantHeaderIncludeWriter < ServantHeaderBaseWriter
-
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
       def initialize(output = STDOUT, opts = {})
         super
         @includes = []
-        @includes << 'tao/x11/portable_server/servantbase.h' if !params[:no_servant_code]
+        @includes << 'tao/x11/portable_server/servantbase.h' unless params[:no_servant_code]
       end
 
       attr_reader :includes
 
-      def post_visit(parser)
+      def post_visit(_parser)
         properties[:includes] = @includes
 
         visitor(PreVisitor).visit
       end
-
     end # ServantHeaderIncludeWriter
 
     class ServantHeaderSrvTraitsWriter < ServantHeaderBaseWriter
@@ -146,31 +149,29 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
-        println();
+      def pre_visit(_parser)
+        println
         printiln('// generated from ServantHeaderSrvTraitsWriter#pre_visit')
-        printiln('namespace TAOX11_NAMESPACE {')
-        inc_nest
-        printiln('namespace CORBA {')
+        printiln('namespace TAOX11_NAMESPACE::CORBA {')
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
-        printiln('} // namespace CORBA')
-        dec_nest
-        printiln('} // namespace TAOX11_NAMESPACE')
+        printiln('} // namespace TAOX11_NAMESPACE::CORBA')
       end
 
       def enter_interface(node)
         super
         return if node.is_local? || node.is_abstract?
+
         visitor(InterfaceVisitor).visit_servant_traits(node)
       end
 
       def enter_valuetype(node)
         super
         return if node.is_local? || !node.supports_concrete_interface?
+
         visitor(ValuetypeVisitor).visit_servant_traits(node)
       end
     end
@@ -183,7 +184,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from ServantHeaderTieWriter#pre_visit')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -193,19 +194,22 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
       def enter_interface(node)
         super
         return if node.is_local? || node.is_abstract?
+
         visitor(InterfaceVisitor).visit_pre(node)
         inc_nest  # POA
         inc_nest  # servant tie template
       end
+
       def leave_interface(node)
         return if node.is_local? || node.is_abstract?
+
         dec_nest
         dec_nest
         visitor(InterfaceVisitor).visit_post(node)
@@ -214,14 +218,15 @@ module IDL
 
       def visit_operation(node)
         return if node.enclosure.is_local? || node.enclosure.is_abstract?
+
         visitor(OperationVisitor).visit_operation(node)
       end
 
       def visit_attribute(node)
         return if node.enclosure.is_local? || node.enclosure.is_abstract?
+
         visitor(AttributeVisitor).visit_attribute(node)
       end
     end
-
   end # Cxx11
 end # IDL

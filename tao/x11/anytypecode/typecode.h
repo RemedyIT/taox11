@@ -33,8 +33,8 @@ namespace TAOX11_NAMESPACE
 
   namespace CORBA
   {
-    typedef int16_t Visibility; // forward
-    typedef int16_t ValueModifier; // forward
+    using Visibility = int16_t; // forward
+    using ValueModifier = int16_t; // forward
     enum class TCKind : uint32_t; // forward
 
     class TypeCode_impl;
@@ -59,7 +59,7 @@ namespace TAOX11_NAMESPACE
         TAOX11_NAMESPACE::CORBA::Exception *_tao_duplicate () const override;
 
         Bounds ();
-        virtual ~Bounds () throw ();
+        ~Bounds () noexcept override = default;
         Bounds (const Bounds&) = default;
         Bounds (Bounds&&) = default;
         Bounds& operator= (const Bounds& x);
@@ -84,7 +84,7 @@ namespace TAOX11_NAMESPACE
           TAOX11_NAMESPACE::CORBA::Exception *_tao_duplicate () const override;
 
           BadKind ();
-          virtual ~BadKind () throw ();
+          ~BadKind () noexcept override = default;
           BadKind (const BadKind&) = default;
           BadKind (BadKind&&) = default;
           BadKind& operator= (const BadKind& x);
@@ -95,8 +95,8 @@ namespace TAOX11_NAMESPACE
 
       static TAOX11_NAMESPACE::CORBA::typecode_reference const _tc_BadKind;
 
-      typedef typecode_traits       _traits_type;
-      typedef typecode_reference    _ref_type;
+      using _traits_type = typecode_traits;
+      using _ref_type = typecode_reference;
 
       virtual bool equal (typecode_reference tc) const = 0;
 
@@ -313,13 +313,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<CORBA::TypeCode>::__Writer<Fmt> w)
     {
-      typedef IDL::traits<CORBA::TypeCode>::__Writer<Fmt> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<CORBA::TypeCode>::__Writer<Fmt>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<CORBA::TypeCode, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<CORBA::TypeCode>::write_on (
           os, w.val_,
           formatter_t ());
@@ -358,13 +358,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<CORBA::TypeCode::Bounds>::__Writer<Fmt> w)
     {
-      typedef IDL::traits<CORBA::TypeCode::Bounds>::__Writer<Fmt> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<CORBA::TypeCode::Bounds>::__Writer<Fmt>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<CORBA::TypeCode::Bounds, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<CORBA::TypeCode::Bounds>::write_on (
           os, w.val_,
           formatter_t ());
@@ -403,13 +403,13 @@ namespace TAOX11_NAMESPACE
         OStrm_& os,
         IDL::traits<CORBA::TypeCode::BadKind>::__Writer<Fmt> w)
     {
-      typedef IDL::traits<CORBA::TypeCode::BadKind>::__Writer<Fmt> writer_t;
-      typedef typename std::conditional<
+      using writer_t = IDL::traits<CORBA::TypeCode::BadKind>::__Writer<Fmt>;
+      using formatter_t = typename std::conditional<
                           std::is_same<
                             typename writer_t::formatter_t,
                             std::false_type>::value,
                           formatter<CORBA::TypeCode::BadKind, OStrm_>,
-                          typename writer_t::formatter_t>::type formatter_t;
+                          typename writer_t::formatter_t>::type;
       return IDL::traits<CORBA::TypeCode::BadKind>::write_on (
           os, w.val_,
           formatter_t ());

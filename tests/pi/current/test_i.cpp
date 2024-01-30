@@ -118,7 +118,6 @@ test_i::invoke_you ()
 {
   // Nothing to be tested here.  This method is here just so that we
   // have a different method
-
   TAOX11_TEST_INFO << "test_i::invoke_you method invoked." << std::endl;
 }
 
@@ -128,7 +127,7 @@ test_i::invoke_we ()
   TAOX11_TEST_INFO << "test_i::invoke_we method invoked." << std::endl;
 
   // Insert some data into the TSC PICurrent object.
-  const std::string str = "We drink milk!";
+  std::string const str = "We drink milk!";
 
   CORBA::Any data;
 
@@ -157,4 +156,12 @@ test_i::shutdown ()
   TAOX11_TEST_INFO << "Server is shutting down." << std::endl;
 
   this->orb_->shutdown (false);
+}
+
+void
+test_i::test_exception ()
+{
+  TAOX11_TEST_INFO << "test_exception." << std::endl;
+
+  throw PICurrentTest::bar ();
 }

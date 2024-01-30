@@ -4,13 +4,11 @@
 #if !defined (_STRUCT_<%= _struct_traits_incl_guard_ %>_TRAITS_)
 #define _STRUCT_<%= _struct_traits_incl_guard_ %>_TRAITS_
 template<>
-struct traits < <%= scoped_cxxtype %>>
-  : IDL::common_traits< <%= scoped_cxxtype %>>
+struct traits <<%= scoped_cxxtype %>>
+  : IDL::common_traits<<%= scoped_cxxtype %>>
 {
   template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
-  static inline OStrm_& write_on(
-      OStrm_& os_, in_type val_,
-      Formatter fmt_ = Formatter ())
+  static inline OStrm_& write_on(OStrm_& os_, in_type val_, Formatter fmt_ = Formatter ())
   {
     return fmt_ (os_, val_);
   }
@@ -20,10 +18,8 @@ struct traits < <%= scoped_cxxtype %>>
 };
 
 template <typename OStrm_>
-struct formatter< <%= scoped_cxxtype %>, OStrm_>;
+struct formatter<<%= scoped_cxxtype %>, OStrm_>;
 
 template <typename OStrm_, typename Fmt>
-OStrm_& operator <<(
-    OStrm_&,
-    IDL::traits< <%= scoped_cxxtype %>>::__Writer<Fmt>);
+OStrm_& operator <<(OStrm_&, IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt>);
 #endif // _STRUCT_<%= _struct_traits_incl_guard_ %>_TRAITS_

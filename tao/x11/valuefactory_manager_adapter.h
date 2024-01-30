@@ -23,7 +23,7 @@ namespace TAOX11_NAMESPACE
   namespace CORBA
   {
     class ValueFactoryBase;
-    typedef object_reference<ValueFactoryBase> ValueFactory;
+    using ValueFactory = object_reference<ValueFactoryBase>;
   } // namespace CORBA
 
   class TAOX11_Export ValueFactoryManagerAdapter

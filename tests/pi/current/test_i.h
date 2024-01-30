@@ -30,7 +30,7 @@ public:
           IDL::traits<CORBA::ORB>::ref_type orb);
 
   /// Destructor.
-  virtual ~test_i () = default;
+  ~test_i () override = default;
 
   /// Main servant test method.
   void invoke_me () override;
@@ -46,6 +46,9 @@ public:
   /// Shutdown the ORB.
   void shutdown () override;
 
+  /// Test exceptions
+  void test_exception () override;
+
 private:
   /// Reference to the PICurrent object.
   IDL::traits<PortableInterceptor::Current>::ref_type current_;
@@ -55,7 +58,6 @@ private:
 
   /// Reference to the ORB.
   IDL::traits<CORBA::ORB>::ref_type orb_;
-
 };
 
 #endif  /* TEST_I_H */

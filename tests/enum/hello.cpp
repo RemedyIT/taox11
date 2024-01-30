@@ -24,11 +24,9 @@ TestEqual (Test::enumType a, Test::enumType exp)
 }
 
 Hello::Hello (IDL::traits<CORBA::ORB>::ref_type orb, int& result) :
-  orb_ (orb), result_ (result)
+  orb_ (std::move(orb)), result_ (result)
 {
 }
-
-// enum
 
 Test::enumType
 Hello::get_enum ()
@@ -52,8 +50,6 @@ Test::enumType Hello::inout_enum (Test::enumType pin,
 
   return p;
 }
-
-// End
 
 void
 Hello::shutdown ()

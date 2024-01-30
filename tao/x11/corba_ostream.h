@@ -21,7 +21,7 @@ namespace std
 {
   inline std::ostream&
         operator<< (std::ostream& _os,
-                    TAOX11_CORBA::object_reference< ::TAOX11_NAMESPACE::CORBA::Object> /*_ve*/)
+                    TAOX11_CORBA::object_reference<::TAOX11_NAMESPACE::CORBA::Object> /*_ve*/)
   {
     return _os << "CORBA:Object";
   }

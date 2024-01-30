@@ -45,7 +45,7 @@ namespace TAOX11_NAMESPACE
 
       ::TAOX11_NAMESPACE::CORBA::RepositoryId target_most_derived_interface () override;
 
-      IDL::traits< ::TAOX11_NAMESPACE::CORBA::Policy>::ref_type get_server_policy (
+      IDL::traits<::TAOX11_NAMESPACE::CORBA::Policy>::ref_type get_server_policy (
           ::TAOX11_NAMESPACE::CORBA::PolicyType type) override;
 
       void

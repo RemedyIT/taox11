@@ -11,19 +11,18 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-
     class ImplHeaderBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
         self.template_root = File.join('impl', 'hdr')
       end
+
       def generate_servant_implementation?
         params[:gen_impl_servant]
       end
     end
 
     class ImplHeaderWriter < ImplHeaderBaseWriter
-
       helper Cxx11::IncludeGuardHelper
 
       attr_reader :include_guard
@@ -49,7 +48,7 @@ module IDL
 
       def enter_module(node)
         super
-        println()
+        println
         printiln('// generated from ImplHeaderWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
@@ -59,23 +58,26 @@ module IDL
       def leave_module(node)
         dec_nest
         printiln("} // namespace #{node.cxxname}")
-        println()
+        println
         super
       end
 
       def enter_interface(node)
         return if node.is_abstract?
+
         super
         if node.is_local?
         else
           if generate_servant_implementation?
             visitor(InterfaceVisitor).visit_pre(node)
-            inc_nest  # servant implementation class
+            inc_nest # servant implementation class
           end
         end
       end
+
       def leave_interface(node)
         return if node.is_abstract?
+
         if node.is_local?
         else
           if generate_servant_implementation?
@@ -95,6 +97,7 @@ module IDL
 
       def visit_operation(node)
         return if node.enclosure.is_local?
+
         if node.enclosure.is_local?
         else
           if generate_servant_implementation?
@@ -105,6 +108,7 @@ module IDL
 
       def visit_attribute(node)
         return if node.enclosure.is_local?
+
         if node.enclosure.is_local?
         else
           if generate_servant_implementation?
@@ -113,6 +117,5 @@ module IDL
         end
       end
     end
-
   end # Cxx11
 end # IDL

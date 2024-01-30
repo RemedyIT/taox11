@@ -12,15 +12,17 @@
 
 int main (int argc, char *argv[])
 {
+  int retval {};
+
   try
   {
     Collocation_Test coll_test;
 
     TAOX11_TEST_DEBUG << "Init" << std::endl;
-    coll_test.init (argc, argv);
+    retval += coll_test.init (argc, argv);
 
     TAOX11_TEST_DEBUG << "Run" << std::endl;
-    coll_test.run ();
+    retval += coll_test.run ();
 
     TAOX11_TEST_DEBUG << "Shutdown" << std::endl;
     coll_test.shutdown ();
@@ -33,5 +35,5 @@ int main (int argc, char *argv[])
     return 1;
   }
 
-  return 0;
+  return retval;
 }

@@ -11,7 +11,7 @@
 #include "tao/x11/orb.h"
 
 Hello::Hello(IDL::traits<CORBA::ORB>::ref_type orb) :
-  orb_(orb)
+  orb_(std::move(orb))
 {
 }
 

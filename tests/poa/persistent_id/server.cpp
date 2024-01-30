@@ -23,7 +23,7 @@ public:
 
   void shutdown();
 
-  IDL::traits< ::Hello>::ref_type create_POA();
+  IDL::traits<::Hello>::ref_type create_POA();
 
   void destroy_POA();
 
@@ -38,7 +38,7 @@ protected:
 
 hello_i::hello_i(IDL::traits<CORBA::ORB>::ref_type orb,
     IDL::traits<PortableServer::POA>::ref_type poa) :
-  orb_(orb), poa_(poa)
+  orb_(std::move(orb)), poa_(std::move(poa))
 {
 }
 
@@ -61,7 +61,7 @@ IDL::traits<PortableServer::POA>::ref_type hello_i::_default_POA()
   return poa_;
 }
 
-IDL::traits< ::Hello>::ref_type hello_i::create_POA()
+IDL::traits<::Hello>::ref_type hello_i::create_POA()
 {
   CORBA::PolicyList policies(2);
   IDL::traits<PortableServer::IdAssignmentPolicy>::ref_type idas_pol =
@@ -110,9 +110,9 @@ IDL::traits< ::Hello>::ref_type hello_i::create_POA()
   }
 
   CORBA::servant_traits< ::Hello>::ref_type hello_servant =
-      CORBA::make_reference<hello_i> (this->orb_, this->child_poa_);;
+      CORBA::make_reference<hello_i> (this->orb_, this->child_poa_);
 
-  if (this->oid_.size() == 0)
+  if (this->oid_.empty ())
   {
     this->oid_ = this->child_poa_->activate_object(hello_servant);
   }
@@ -122,7 +122,7 @@ IDL::traits< ::Hello>::ref_type hello_i::create_POA()
   }
   PortableServer::ObjectId id = this->poa_->activate_object(hello_servant);
   IDL::traits<CORBA::Object>::ref_type object = this->poa_->id_to_reference(id);
-  ::Hello::_ref_type test_ref = IDL::traits< ::Hello>::narrow (object);
+  ::Hello::_ref_type test_ref = IDL::traits<::Hello>::narrow (object);
   return test_ref;
 }
 

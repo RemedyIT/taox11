@@ -30,7 +30,7 @@ namespace TAOX11_NAMESPACE
      * Implementation of Dynamic Any type for arrays
      */
     class TAOX11_DynamicAny_Export DynArray_i final
-      : public virtual IDL::traits< DynArray>::base_type,
+      : public virtual IDL::traits<DynArray>::base_type,
         //public virtual DynamicAny::DynArray,
         public virtual TAOX11_DynCommon
     {
@@ -42,11 +42,11 @@ namespace TAOX11_NAMESPACE
       ~DynArray_i () = default;
 
       /// Initialize using just a TypeCode.
-      IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
+      IDL::traits<::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
       init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
       /// Initialize using an Any.
-      IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
+      IDL::traits<::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type
       init (const CORBA::Any& any);
 
        // = Functions specific to DynArray.
@@ -65,11 +65,11 @@ namespace TAOX11_NAMESPACE
 
       CORBA::Any to_any () override;
 
-      bool equal (IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type dyn_any) override;
+      bool equal (IDL::traits<::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type dyn_any) override;
 
       void destroy () override;
 
-      IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type current_component () override;
+      IDL::traits<::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type current_component () override;
 
     private:
       /// Returns the type of elements contained in the array.
@@ -89,7 +89,7 @@ namespace TAOX11_NAMESPACE
 
     private:
       /// Each component is also a DynAny.
-      std::vector<IDL::traits< ::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type> da_members_;
+      std::vector<IDL::traits<::TAOX11_NAMESPACE::DynamicAny::DynAny>::ref_type> da_members_;
     };
   }
 }

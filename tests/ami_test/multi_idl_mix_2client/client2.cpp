@@ -69,7 +69,7 @@ public:
   }
 
   void op_B_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
     TAOX11_TEST_ERROR << "ERROR: client2 - unexpected exceptipn called: "
                  << std::endl;
@@ -248,7 +248,7 @@ int main(int argc, char* argv[])
 
       if ((nr_of_replies != 0))
         {
-          TAOX11_TEST_ERROR << "ERROR: Client2 didn't recieve expected replies. Expected -1- , received -"
+          TAOX11_TEST_ERROR << "ERROR: Client2 didn't receive expected replies. Expected -1- , received -"
           << (1 - nr_of_replies) << "-. " << std::endl;
           result = 1;
         }
@@ -261,7 +261,7 @@ int main(int argc, char* argv[])
     }
   catch (const std::exception& e)
       {
-        TAOX11_TEST_ERROR << "client2 - exception caught: " << e.what() << std::endl;
+        TAOX11_TEST_ERROR << "client2 - exception caught: " << e << std::endl;
         return 1;
       }
   return result;

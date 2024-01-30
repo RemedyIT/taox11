@@ -444,7 +444,7 @@ ACE_TMAIN(int argc, ACE_TCHAR *argv[])
            (callback_excep != 5 ) ||
            (callback_attrib != 4 ))
         {
-          ACE_ERROR ((LM_ERROR, "ERROR: Client didn't recieve expected callbacks. "
+          ACE_ERROR ((LM_ERROR, "ERROR: Client didn't receive expected callbacks. "
                     "Foo: expected -4- received -%d-, "
                     "Attrib: expected -4-, received -%d-, "
                     "Exceptions: expected -5-, received -%d-\n",

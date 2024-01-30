@@ -17,22 +17,22 @@ class DynAnyAnalyzer
 {
 public:
   DynAnyAnalyzer (IDL::traits<CORBA::ORB>::ref_type orb,
-                  IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory);
+                  IDL::traits<DynamicAny::DynAnyFactory>::ref_type dynany_factory);
 
   void tab (int t);
 
-  ~DynAnyAnalyzer ();
+  ~DynAnyAnalyzer () = default;
 
   void resetTab ();
 
-  void analyze (IDL::traits< DynamicAny::DynAny>::ref_type da);
+  void analyze (IDL::traits<DynamicAny::DynAny>::ref_type da);
 
   void analyze_basic_seq (IDL::traits<CORBA::TypeCode>::ref_type tc,
                           IDL::traits<DynamicAny::DynAny>::ref_type da);
 
 private:
- IDL::traits<CORBA::ORB>::ref_type orb_;
- IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory_;
+  IDL::traits<CORBA::ORB>::ref_type orb_;
+  IDL::traits<DynamicAny::DynAnyFactory>::ref_type dynany_factory_;
   int level_;
 };
 

@@ -32,21 +32,21 @@ namespace TAOX11_NAMESPACE
    *
    */
     class TAOX11_DynamicAny_Export DynAnyFactory_i final
-      : public IDL::traits< DynAnyFactory>::base_type
+      : public IDL::traits<DynAnyFactory>::base_type
     {
     public:
       /// Constructor.
       DynAnyFactory_i ();
 
       // = The DynamicAnyFactory methods.
-      IDL::traits< DynAny>::ref_type
+      IDL::traits<DynAny>::ref_type
         create_dyn_any (const CORBA::Any& value) override;
 
-      IDL::traits< DynAny>::ref_type
+      IDL::traits<DynAny>::ref_type
         create_dyn_any_from_type_code (
           CORBA::object_reference<CORBA::TypeCode> type) override;
 
-      IDL::traits< DynAny>::ref_type
+      IDL::traits<DynAny>::ref_type
         create_dyn_any_without_truncation (
             const CORBA::Any& value) override;
 
@@ -62,7 +62,7 @@ namespace TAOX11_NAMESPACE
 
       /// Same as above, but returns type code instead of TCKind. Caller
       /// must release the return value.
-      static CORBA::object_reference<CORBA::TypeCode> strip_alias (CORBA::object_reference< CORBA::TypeCode> tc);
+      static CORBA::object_reference<CORBA::TypeCode> strip_alias (CORBA::object_reference<CORBA::TypeCode> tc);
 
      private:
       DynAnyFactory_i (const DynAnyFactory_i&) = delete;

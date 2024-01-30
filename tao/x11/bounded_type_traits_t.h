@@ -2,7 +2,7 @@
  * @file    bounded_type_traits_t.h
  * @author  Martin Corino
  *
- * @brief   Helper traits templates for IDL typedefs of possibly bounded types (string, wstring or sequence)
+ * @brief   Helper traits templates for IDL typedefs of possibly bounded types (string, wstring, sequence, or map)
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
@@ -19,7 +19,7 @@ namespace TAOX11_NAMESPACE
     template <typename T>           // actual valuetype
     struct bounded_traits
     {
-      typedef std::integral_constant<uint32_t, T::bound::value> bound;
+      using bound = std::integral_constant<uint32_t, T::bound::value>;
     };
   } // namespace IDL
 } // namespace TAOX11_NAMESPACE

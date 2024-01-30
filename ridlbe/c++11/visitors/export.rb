@@ -9,14 +9,10 @@
 
 module IDL
   module Cxx11
-
     class ExportVisitor < VisitorBase
-
       def visit
         visit_template(:taox11_export)
       end
-
     end
-
   end
 end

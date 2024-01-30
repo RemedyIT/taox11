@@ -1,0 +1,16 @@
+/**
+ * @file bitset_inherit_struct.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a bitset which inherits from a struct
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+struct Base {
+  short Foo;
+};
+
+bitset MyBitset : Base {
+  bitfield<6> x;
+};

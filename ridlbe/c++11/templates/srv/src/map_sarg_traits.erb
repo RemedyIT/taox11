@@ -1,0 +1,14 @@
+
+// generated from <%= ridl_template_path %>
+// Unaliased type : <%= resolved_cxxtype %>
+% alias_md5 =  resolved_cxxtype.to_md5
+// MD5            : <%= alias_md5 %>
+#if !defined (_ALIAS_<%= alias_md5 %>_SARG_TRAITS_)
+#define _ALIAS_<%= alias_md5 %>_SARG_TRAITS_
+/// Argument traits specializations for <%= name %>
+template<>
+class SArg_Traits<<%= scoped_cxxtype %>>
+: public Basic_SArg_Traits_T<<%= scoped_cxxtype %>, <% if generate_any_support? %>Any_Insert_Policy_Stream<% else %>Any_Insert_Policy_Noop<% end %>>
+{
+};
+# endif // !_ALIAS_<%= alias_md5 %>_SARG_TRAITS_

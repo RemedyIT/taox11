@@ -16,19 +16,17 @@
 
 namespace
 {
-
   bool
   compare_string_sequence_elements(
       uint32_t i,
       DynamicAny::DynAnySeq & lhs,
       DynamicAny::DynAnySeq & rhs)
   {
-      std::string lhs_string = lhs[i]->get_string ();
+      std::string const lhs_string = lhs[i]->get_string ();
 
       TAOX11_TEST_DEBUG << "elem[" << i << "] = " << lhs_string <<std::endl;
 
-      bool match =
-          lhs[i]->equal (rhs[i]);
+      bool const match = lhs[i]->equal (rhs[i]);
 
       if (!match)
       {
@@ -44,13 +42,7 @@ namespace
 }
 
 Test_DynSequence::Test_DynSequence (IDL::traits<CORBA::ORB>::ref_type orb)
-  : orb_ (orb),
-    test_name_ ("test_dynsequence"),
-    error_count_ (0)
-{
-}
-
-Test_DynSequence::~Test_DynSequence ()
+  : orb_ (std::move(orb))
 {
 }
 
@@ -68,11 +60,19 @@ Test_DynSequence::run_test ()
 
   try
   {
+    IDL::traits<DynamicAny::DynSequence>::ref_type dyn_nil =
+      IDL::traits<DynamicAny::DynSequence>::narrow (nullptr);
+
+    if (dyn_nil)
+    {
+      ++this->error_count_;
+      TAOX11_TEST_ERROR << "DynSequence::narrow(nil) should return nil" << std::endl;
+    }
 
     IDL::traits<CORBA::Object>::ref_type factory_obj =
              this->orb_->resolve_initial_references ("DynAnyFactory");
 
-     if (factory_obj == nullptr)
+     if (!factory_obj)
      {
        TAOX11_TEST_ERROR << "Nil factory_obj after resolve_initial_references"
                          << std::endl;
@@ -80,10 +80,10 @@ Test_DynSequence::run_test ()
      }
 
 
-     IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory =
-         IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);
+     IDL::traits<DynamicAny::DynAnyFactory>::ref_type dynany_factory =
+         IDL::traits<DynamicAny::DynAnyFactory>::narrow (factory_obj);
 
-     if (dynany_factory == nullptr)
+     if (!dynany_factory)
      {
        TAOX11_TEST_ERROR << "Nil dynamic any factory after narrow dynany_factory"
                          << std::endl;
@@ -93,7 +93,6 @@ Test_DynSequence::run_test ()
 
      DynAnyAnalyzer analyzer (this->orb_,
                               dynany_factory);
-
 
     TAOX11_TEST_DEBUG <<"*=*=*=*= " << data.labels[11] << " =*=*=*=*" << std::endl;
 
@@ -159,7 +158,7 @@ Test_DynSequence::run_test ()
       "two"
     };
 
-    uint32_t length = 3;
+    uint32_t length { 3 };
     DynamicAny::DynAnySeq elem_ptr(3);
     uint32_t i {};
 

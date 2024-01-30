@@ -4,68 +4,135 @@ on:
   push:
     branches:
       - master
+      - v*
+    tags:
+      - AXCIOMA-v*
   pull_request:
     branches:
       - master
+      - v*
   schedule:
-    - cron: '0 7 * * SUN'
+    - cron: '0 1 * * SUN'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 env:
-  DOC_ROOT: ${{ github.workspace }}/ACE
-  ACE_ROOT: ${{ github.workspace }}/ACE/ACE
-  MPC_ROOT: ${{ github.workspace }}/ACE/MPC
-  TAO_ROOT: ${{ github.workspace }}/ACE/TAO
+  DOC_ROOT: ${{ github.workspace }}/ACE_TAO
+  ACE_ROOT: ${{ github.workspace }}/ACE_TAO/ACE
+  MPC_ROOT: ${{ github.workspace }}/ACE_TAO/MPC
+  TAO_ROOT: ${{ github.workspace }}/ACE_TAO/TAO
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
   RIDL_ROOT: ${{ github.workspace }}/ridl
   TAOX11_ROOT: ${{ github.workspace }}
+  INSTALL_PREFIX: ${{ github.workspace }}/stage
+  X11_BRANCH: master
+  ACETAOMPC_BRANCH: Latest_ACE7TAO3_Micro
 
 jobs:
   build:
+    permissions:
+      actions: read  # for github/codeql-action/init to get workflow details
+      contents: read  # for actions/checkout to fetch code
+      security-events: write  # for github/codeql-action/analyze to upload SARIF results
     strategy:
+      fail-fast: false
       matrix:
         include:
-          - os: ubuntu-16.04
-            CC: gcc-4.8
-            CXX: g++-4.8
-            ruby: 2.4
-            PackageDeps: g++-4.8
-          - os: ubuntu-18.04
-            CC: gcc-6
-            CXX: g++-6
-            ruby: 2.5
-            PackageDeps: g++-6
-          - os: ubuntu-18.04
+          - os: ubuntu-20.04
             CC: gcc-7
             CXX: g++-7
-            ruby: 2.6
+            ruby: '2.5'
             PackageDeps: g++-7
-          - os: ubuntu-18.04
+          - os: ubuntu-20.04
             CC: gcc-8
             CXX: g++-8
-            ruby: 2.7
+            ruby: '2.6'
             PackageDeps: g++-8
-          - os: ubuntu-18.04
+          - os: ubuntu-20.04
             CC: gcc-9
             CXX: g++-9
-            ruby: 2.7
+            ruby: '2.7'
             PackageDeps: g++-9
-          - os: ubuntu-20.04
+            feature: Codecov
+          - os: ubuntu-22.04
             CC: gcc-10
             CXX: g++-10
-            ruby: 2.7
+            ruby: '3.0'
             PackageDeps: g++-10
+          - os: ubuntu-22.04
+            CC: gcc-11
+            CXX: g++-11
+            ruby: '3.0'
+            PackageDeps: g++-11
+          - os: ubuntu-22.04
+            CC: gcc-12
+            CXX: g++-12
+            ruby: '3.1'
+            PackageDeps: g++-12
+          - os: ubuntu-22.04
+            CC: gcc-12
+            CXX: g++-12
+            ruby: '3.2'
+            PackageDeps: g++-12
+          - os: ubuntu-22.04
+            CC: gcc-13
+            CXX: g++-13
+            ruby: '3.2'
+            PackageDeps: g++-13
+          - os: ubuntu-22.04
+            CC: gcc-10
+            CXX: g++-10
+            ruby: '2.7'
+            PackageDeps: g++-10
+            feature: CodeQL
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} ${{ matrix.CXX }} ruby-${{ matrix.ruby }}
     env:
       CC: ${{ matrix.CC }}
       CXX: ${{ matrix.CXX }}
     steps:
-    - uses: actions/checkout@v2
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) && github.repository_owner == 'RemedyIT'
+      run: |
+        echo "X11_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false && github.repository_owner == 'RemedyIT'
+      run: |
+        echo "X11_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+    - uses: actions/checkout@v4
+    - name: checkout ACE_TAO
+      uses: actions/checkout@v4
+      with:
+        repository: DOCGroup/ACE_TAO
+        path: ${{ env.DOC_ROOT }}
+        ref: ${{ env.ACETAOMPC_BRANCH }}
+    - name: checkout MPC
+      uses: actions/checkout@v4
+      with:
+        repository: DOCGroup/MPC
+        path: ${{ env.MPC_ROOT }}
+        ref: ${{ env.ACETAOMPC_BRANCH }}
+    - name: checkout ridl
+      uses: actions/checkout@v4
+      with:
+        repository: RemedyIT/ridl
+        path: ${{ env.RIDL_ROOT }}
+        ref: ${{ env.X11_BRANCH }}
+    - name: checkout axcioma
+      uses: actions/checkout@v4
+      with:
+        repository: RemedyIT/axcioma
+        path: ${{ env.X11_BASE_ROOT }}
+        ref: ${{ env.X11_BRANCH }}
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
-    - name: Add repository $Repo
-      if: matrix.Repo != ''
+    - name: Add repository ${{ matrix.Repo }}
+      if: startsWith (matrix.Repo, 'llvm-toolchain')
       run:
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
         sudo apt-add-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ ${{ matrix.Repo }} main"
@@ -73,15 +140,18 @@ jobs:
       run: |
         sudo apt-get --yes update
         sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
-    - name: git clone dependent repositories
-      run: |
-        git clone --depth 1 --branch Latest_Micro  git://github.com/DOCGroup/ACE_TAO.git $DOC_ROOT
-        git clone --depth 1 --branch Latest_ACETAO_Micro  git://github.com/DOCGroup/MPC.git $MPC_ROOT
-        git clone --depth 1 git://github.com/RemedyIT/axcioma.git $X11_BASE_ROOT
-        git clone --depth 1 git://github.com/RemedyIT/ridl.git $RIDL_ROOT
+    - name: initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: cpp
+      if: matrix.feature == 'CodeQL'
     - name: Run brix11 configure
       run: |
         $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT
+    - name: Add gcov
+      run: |
+        sed -i '1igcov=1' $ACE_ROOT/include/makeinclude/platform_macros.GNU
+      if: matrix.feature == 'Codecov'
     - name: Print brix11 configuration
       run: |
         $X11_BASE_ROOT/bin/brix11 env -- configure -P
@@ -91,3 +161,18 @@ jobs:
     - name: Run brix11 make
       run: |
         $X11_BASE_ROOT/bin/brix11 make -N -d $X11_BASE_ROOT -- make -N -d $TAOX11_ROOT/examples -- make -N -d $TAOX11_ROOT/orbsvcs/tests -- make -N -d $TAOX11_ROOT/tests
+    - name: Run brix11 tests
+      run: |
+        $X11_BASE_ROOT/bin/brix11 run list -l $TAOX11_ROOT/bin/taox11_tests.lst -r $TAOX11_ROOT
+    - name: Run make install
+      run: |
+        make -j -C ${TAOX11_ROOT} install
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      if: matrix.feature == 'CodeQL'
+    - uses: codecov/codecov-action@v3
+      with:
+        gcov: true
+        verbose: true # optional (default = false)
+      if: matrix.feature == 'Codecov'
+

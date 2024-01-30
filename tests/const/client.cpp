@@ -26,8 +26,8 @@ const long double test_ld_val = 678.91L;
 const bool test_b_val = true;
 const std::string test_s_val = "text";
 const std::wstring test_ws_val = L"widestring\n \xbf \ufe0e";
-typedef long TCounter;
-typedef std::string TName;
+using TCounter = long;
+using TName = std::string;
 const TCounter test_count = 99;
 const TName test_name = "wilco";
 const TCounter test_double_count = test_count * 2;
@@ -164,7 +164,7 @@ int main(int, char*[])
   }
   catch (const std::exception& e)
   {
-    TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+    TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
     return 1;
   }
   if (result != 0)

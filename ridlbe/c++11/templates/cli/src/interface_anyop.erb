@@ -1,17 +1,16 @@
 
 // generated from <%= ridl_template_path %>
-
 /// Any insertion operator for <%= scoped_cxxname %>
 void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _val)
 {
 % if is_abstract?
   TAOX11_NAMESPACE::Any_AbstractBase_Impl_T<
-      IDL::traits< <%= scoped_cxxtype %>>,
+      IDL::traits<<%= scoped_cxxtype %>>,
       TAOX11_NAMESPACE::CDR_Marshal_Policy
         >::insert (any, <%= scoped_cxx_typecode %>, std::move(_val));
 % else
   TAOX11_NAMESPACE::Any_Object_Impl_T<
-      IDL::traits< <%= scoped_cxxtype %>>,
+      IDL::traits<<%= scoped_cxxtype %>>,
 %   if is_local?
       TAOX11_NAMESPACE::NULL_Marshal_Policy
 %   else
@@ -26,12 +25,12 @@ bool operator>>= (const TAOX11_CORBA::Any &any, <%= scoped_cxx_out_type %> _val)
 {
 % if is_abstract?
   return TAOX11_NAMESPACE::Any_AbstractBase_Impl_T<
-      IDL::traits< <%= scoped_cxxtype %>>,
+      IDL::traits<<%= scoped_cxxtype %>>,
       TAOX11_NAMESPACE::CDR_Marshal_Policy
         >::extract (any, <%= scoped_cxx_typecode %>, _val);
 % else
   return TAOX11_NAMESPACE::Any_Object_Impl_T<
-      IDL::traits< <%= scoped_cxxtype %>>,
+      IDL::traits<<%= scoped_cxxtype %>>,
 %   if is_local?
       TAOX11_NAMESPACE::NULL_Marshal_Policy
 %   else

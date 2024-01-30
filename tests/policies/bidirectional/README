@@ -1,4 +1,4 @@
-This is a test that exercises the birectional GIOP connection
+This is a test that exercises the bidirectional GIOP connection
 implementation in TAO. Start the server like this
 
 $ server -o <file.ior> -i <no_iterations>
@@ -10,8 +10,3 @@ server. Then it invokes a method on the server to indicate that it is
 ready for callback. The server then callsback the client on the same
 connection <no_iterations> times. If the server creates a new
 connection the server would crash itself.
-
-To test the fix for bug 3282, run run_test_bug3282.pl or use the commands
-
-$ server -ORBEndpoint iiop://localhost -o <file.ior> -i <no_iterations>
-$ client -k file://<file.ior> -x

@@ -19,7 +19,6 @@ namespace Test
   // generated from ImplSourceWriter#enter_interface
 
   // generated from c++11/templates/impl/src/interface_pre
-
   namespace _impl {
 
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[Constructors]
@@ -38,7 +37,6 @@ namespace Test
     }
 
     // generated from c++11/templates/impl/src/interface_post
-
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[User Public]
     // your public implementations
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo[User Public]
@@ -57,13 +55,12 @@ namespace Test
   // generated from ImplSourceWriter#enter_interface
 
   // generated from c++11/templates/impl/src/interface_pre
-
   namespace _impl {
 
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[Constructors]
     Hello::Hello (IDL::traits<CORBA::ORB>::ref_type orb)
       : CORBA::servant_traits< ::Test::Hello>::base_type ()
-      , orb_ (orb)
+      , orb_ (std::move(orb))
     {
     }
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[Constructors]
@@ -88,7 +85,7 @@ namespace Test
   // generated from c++11/templates/impl/src/operation
   void
   Hello::create_foo (
-      IDL::traits< ::Test::Foo>::ref_type& foo_inst)
+      IDL::traits<::Test::Foo>::ref_type& foo_inst)
   {
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello::create_foo[Body]
       // your code here
@@ -137,7 +134,6 @@ namespace Test
   }
 
     // generated from c++11/templates/impl/src/interface_post
-
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[User Public]
     // your public implementations
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[User Public]

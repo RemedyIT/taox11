@@ -37,6 +37,8 @@
     __DATE__ " " __TIME__
 #endif
 
+#include "ace/OS_NS_sys_utsname.h"
+
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
 /// @name CDR streaming operator specializations for TAOX11_CORBA::ORB::InvalidName
@@ -60,14 +62,10 @@ namespace TAOX11_NAMESPACE
    */
   namespace CORBA
   {
-    ORB::InvalidName::~InvalidName () throw ()
-    {
-    }
-
     void
     ORB::InvalidName::_info (std::ostream& user_exception_info) const
     {
-      TAOX11_IDL::traits< ORB::InvalidName>::write_on(user_exception_info, *this);
+      TAOX11_IDL::traits<ORB::InvalidName>::write_on(user_exception_info, *this);
     }
 
     void ORB::InvalidName::_raise () const
@@ -93,8 +91,7 @@ namespace TAOX11_NAMESPACE
 
     TAOX11_NAMESPACE::CORBA::Exception *ORB::InvalidName::_tao_duplicate () const
     {
-      TAOX11_NAMESPACE::CORBA::Exception * result = 0;
-      ACE_NEW_NORETURN (result, InvalidName (*this));
+      TAOX11_NAMESPACE::CORBA::Exception * result = new (std::nothrow) InvalidName (*this);
       if (!result)
         throw TAO_CORBA::NO_MEMORY ();
       return result;
@@ -835,7 +832,16 @@ namespace TAOX11_NAMESPACE
                                  << (uint32_t)TAOX11_MINOR_VERSION << '.'
                                  << (uint32_t)TAOX11_MICRO_VERSION
                                  << " (c) Remedy IT");
-      TAOX11_LOG_INFO ("Buildstamp : " << TAOX11_RELEASE_BUILDSTAMP);
+      ACE_utsname uname;
+      int const result = ACE_OS::uname (std::addressof(uname));
+      if (result != -1)
+      {
+        TAOX11_LOG_INFO ("TAOX11 machine: " << uname.nodename << ", " << uname.machine);
+        TAOX11_LOG_INFO ("TAOX11 platform: " << uname.sysname << ", " <<  uname.release << ", " << uname.version);
+      }
+      TAOX11_LOG_INFO ("TAOX11 compiler: " << ACE::compiler_name() << " version "
+                                           << ACE::compiler_major_version() << "." << ACE::compiler_minor_version () << "." << ACE::compiler_beta_version ());
+      TAOX11_LOG_INFO ("TAOX11 buildstamp: " << TAOX11_RELEASE_BUILDSTAMP);
 
       try {
         TAO_CORBA::ORB_var _orb;

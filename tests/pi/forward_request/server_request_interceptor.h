@@ -78,7 +78,7 @@ public:
 
 protected:
   /// Destructor.
-  virtual ~Server_Request_Interceptor () = default;
+  ~Server_Request_Interceptor () override = default;
 
 private:
   /// The number of requests intercepted by this interceptor.

@@ -26,7 +26,7 @@ namespace TAOX11_NAMESPACE
   class TAOX11_AnyTypeCode_Export Any_Basic_Impl : public Any_Impl
   {
   public:
-    typedef std::shared_ptr<Any_Basic_Impl> ref_type;
+    using ref_type = std::shared_ptr<Any_Basic_Impl>;
 
     Any_Basic_Impl (CORBA::typecode_reference,
                     void *value);

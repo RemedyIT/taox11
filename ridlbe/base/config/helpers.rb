@@ -121,12 +121,13 @@ module IDL
               when Module
                 arg
               else
-                raise ArgumentError, "helper must be a Module"
+                raise ArgumentError, 'helper must be a Module'
             end
           end
         end
 
         private
+
         # Makes all the (instance) methods in the helper module available to templates
         # rendered through this writer.
         #

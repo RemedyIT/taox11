@@ -17,14 +17,14 @@ class <%= stub_export_macro %><%= cxxname %>
 public:
   /// @name Member types
   //@{
-  typedef <%= cxx_traits_type %>               _traits_type;
+  using _traits_type = <%= cxx_traits_type %>;
   /// Strong reference type
-  typedef <%= cxx_traits_type %>::ref_type     _ref_type;
+  using _ref_type = <%= cxx_traits_type %>::ref_type;
 % if has_factory?
-  typedef <%= cxx_traits_type %>::factory_type _factory_type;
+  using _factory_type = <%= cxx_traits_type %>::factory_type;
 % end
 % unless is_abstract?
-  typedef <%= cxx_traits_type %>::obv_type     _obv_type;
+  using _obv_type = <%= cxx_traits_type %>::obv_type;
 % end
   //@}
 
@@ -45,7 +45,7 @@ protected:
   friend class <%= factory_cxxname %>;
 
 % end
-  typedef std::shared_ptr<<%= cxxname %>> _shared_ptr_type;
+  using _shared_ptr_type = std::shared_ptr<<%= cxxname %>>;
 
   static const std::string __<%= cxxname.downcase %>_repository_id;
 
@@ -54,7 +54,7 @@ protected:
 % else
   <%= cxxname %> () = default;
 % end
-  virtual ~<%= cxxname %> () = default;
+  ~<%= cxxname %> () override = default;
   <%= cxxname %> (const <%= cxxname %>&) = default;
   <%= cxxname %> (<%= cxxname %>&&) = default;
   <%= cxxname %>& operator= (const <%= cxxname %>&) = delete;

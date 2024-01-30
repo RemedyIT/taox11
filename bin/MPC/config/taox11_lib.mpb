@@ -1,5 +1,5 @@
 // -*- MPC -*-
 
-project : taolib, taox11_defaults {
+project : taox11_defaults, taolib {
   libs += taox11
 }

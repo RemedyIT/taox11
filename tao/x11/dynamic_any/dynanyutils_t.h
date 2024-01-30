@@ -25,10 +25,10 @@ namespace TAOX11_NAMESPACE
   {
     static void
     insert_value (const T &val,
-                  IDL::traits< DynamicAny::TAOX11_DynCommon>::ref_type the_dynany);
+                  IDL::traits<DynamicAny::TAOX11_DynCommon>::ref_type the_dynany);
 
     static typename BasicTypeTraits<T>::return_type
-    get_value (IDL::traits< DynamicAny::TAOX11_DynCommon>::ref_type the_dynany);
+    get_value (IDL::traits<DynamicAny::TAOX11_DynCommon>::ref_type the_dynany);
   };
 
   // Encapsulates code that would otherwise be repeated in
@@ -38,7 +38,7 @@ namespace TAOX11_NAMESPACE
   struct DynAnyFlagUtils
   {
     static void
-    set_flag_t (IDL::traits< DynamicAny::DynAny>::ref_type component,
+    set_flag_t (IDL::traits<DynamicAny::DynAny>::ref_type component,
                 bool destroying);
   };
 
@@ -64,7 +64,7 @@ namespace TAOX11_NAMESPACE
   namespace MakeDynAnyUtils
   {
     template<typename ANY_TC>
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
       make_dyn_any_t (
         IDL::traits<CORBA::TypeCode>::ref_type tc,
         ANY_TC any_tc,

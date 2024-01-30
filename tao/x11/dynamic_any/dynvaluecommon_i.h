@@ -30,7 +30,7 @@ namespace TAOX11_NAMESPACE
      * @brief Implementation of the DynValueCommon class.
      */
     class TAOX11_DynamicAny_Export DynValueCommon_i
-    : public virtual IDL::traits< DynValueCommon>::base_type,
+    : public virtual IDL::traits<DynValueCommon>::base_type,
       public virtual DynAny_i
     {
     public:

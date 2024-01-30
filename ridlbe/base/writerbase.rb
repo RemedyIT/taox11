@@ -10,9 +10,7 @@ require 'ridlbe/base/config/helpers'
 require 'ridlbe/base/visitorbase'
 
 module IDL
-
   module Base
-
     ###
     # Template generation output printer with indentation support.
     class IndentedOutput
@@ -23,12 +21,14 @@ module IDL
       end
 
       def print(str);       @os << str; end
-      def println(str="");  @os << str << "\n"; end
-      def printi(str="");   @os << indent << str; end
-      def printiln(str=""); @os << indent  << str << "\n"; end
+      def println(str = '');  @os << str << "\n"; end
+      def printi(str = '');   @os << indent << str; end
+      def printiln(str = ''); @os << indent << str << "\n"; end
+
       def indent()
         @indent * @nest
       end
+
       def nest(in_ = 1)
         @nest += in_
         begin
@@ -44,11 +44,11 @@ module IDL
 
       def dec_nest(in_ = 1)
         @nest -= in_
-        @nest = 0 if @nest < 0
+        @nest = 0 if @nest.negative?
       end
 
       def write_regen_section(sectionid, options = nil, proc = nil)
-        if IDL::GenFile === @os
+        if @os.is_a?(IDL::GenFile)
           options ||= {}
           options[:indent] = @indent * (@nest + options[:indent].to_i)
           if proc
@@ -68,6 +68,7 @@ module IDL
           @output = output
           @buf = ''
         end
+
         def concat(txt)
           @buf << txt
           if @buf =~ /\n/
@@ -82,13 +83,16 @@ module IDL
           @buf.split("\n").each { |ln| _pln(ln) }
           @buf = ''
         end
+
         # only needed for/called with Ruby >=1.9
         def force_encoding(encoding)
           @buf.force_encoding(encoding)
         end
+
         private
+
         def _pln(ln)
-          @output.print(@output.indent) if (!ln.empty?) && (ln =~ /^\s*\#/).nil?
+          @output.print(@output.indent) if !ln.empty? && (ln =~ /^\s*\#/).nil?
           @output.println(ln)
         end
       end
@@ -98,6 +102,7 @@ module IDL
       def erbout
         @erbout ||= ERBStream.new(self)
       end
+
       def erbout=(t)
         # noop
       end
@@ -106,7 +111,6 @@ module IDL
     # Generic output writer base class.
     #
     class Writer
-
       include Base::Helpers
 
       helper_method :idl_file
@@ -116,12 +120,12 @@ module IDL
       attr_reader :output
 
       def initialize(output = STDOUT, opts = {})
-        @output = IndentedOutput === output ? output : IndentedOutput.new(output)
+        @output = output.is_a?(IndentedOutput) ? output : IndentedOutput.new(output)
         @params = opts.dup
         @properties = {
-          :_context => {
-            :scopes => [],
-            :cur_scope => nil
+          _context: {
+            scopes: [],
+            cur_scope: nil
           }
         }
         @visitors = {}
@@ -218,8 +222,9 @@ module IDL
             tpl_list.concat(tpl_ext[:prepend]) if tpl_ext.has_key?(:prepend)
             tpl_list << tpl if Base::Template.exists?(File.join(params[:template_root], tpl.to_s))
             tpl_list.concat(tpl_ext[:append]) if tpl_ext.has_key?(:append)
-            return [tpl_list.collect {|_tpl| File.join(self.template_root, _tpl.to_s)}]
+            return [tpl_list.collect { |_tpl| File.join(self.template_root, _tpl.to_s) }]
           end
+
           return nil
         end
         tpl_ext
@@ -262,9 +267,10 @@ module IDL
       ## Direct output printing (no templating).
 
       def print(str);       @output.print(str); end
-      def println(str="");  @output.println(str); end
-      def printi(str="");   @output.printi(str); end
-      def printiln(str=""); @output.printiln(str); end
+      def println(str = '');  @output.println(str); end
+      def printi(str = '');   @output.printi(str); end
+      def printiln(str = ''); @output.printiln(str); end
+
       def nest(in_ = 1, &block)
         @output.nest(in_, &block)
       end
@@ -342,15 +348,14 @@ module IDL
     # This will only work for languages and scopes that
     # support re-opening (like c++ namespaces).
     module CodeWriterMethods
-
       protected
 
-      def write_open_scope(scope)
-        raise "class including Base::CodeWriterMethods needs to implement #_open_scope and #_close_scope"
+      def write_open_scope(_scope)
+        raise 'class including Base::CodeWriterMethods needs to implement #_open_scope and #_close_scope'
       end
 
-      def write_close_scope(scope)
-        raise "class including Base::CodeWriterMethods needs to implement #_open_scope and #_close_scope"
+      def write_close_scope(_scope)
+        raise 'class including Base::CodeWriterMethods needs to implement #_open_scope and #_close_scope'
       end
 
       public
@@ -365,9 +370,10 @@ module IDL
         @disable_scope_tracking || (@only_record_module_scopes && !node.is_a?(IDL::AST::Module))
       end
 
-      def at_global_scope(&block)
+      def at_global_scope()
         _cur_scope = @properties[:_context][:cur_scope]
         raise "cannot break out scope for #{_cur_scope.typename}" unless _cur_scope.nil? || _cur_scope.is_a?(IDL::AST::Module)
+
         if _cur_scope
           printiln('// generated from Base::CodeWriter#at_global_scope')
           @properties[:_context][:scopes].each do |_scope|
@@ -382,7 +388,7 @@ module IDL
         if _cur_scope
           @properties[:_context][:scopes] = _scopes_bak
           @properties[:_context][:cur_scope] = _scopes_bak.last
-          println()
+          println
           printiln('// leaving Base::CodeWriter#at_global_scope')
           @properties[:_context][:scopes].each do |_scope|
             write_open_scope(_scope)
@@ -410,118 +416,129 @@ module IDL
         parser.visit_nodes(self)
       end
 
-      def pre_visit(parser)
-      end
+      def pre_visit(parser); end
 
-      def post_visit(parser)
-      end
+      def post_visit(parser); end
 
-      def visit_include(node)
-      end
+      def visit_include(node); end
 
-      def enter_include(node)
-      end
+      def enter_include(node); end
 
-      def leave_include(node)
-      end
+      def leave_include(node); end
 
       def enter_module(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
+
       def leave_module(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].pop
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
 
-      def declare_interface(node)
-      end
+      def declare_interface(node); end
+
       def enter_interface(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
+
       def leave_interface(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].pop
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
 
-      def declare_valuetype(node)
-      end
+      def declare_valuetype(node); end
+
       def enter_valuetype(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
+
       def leave_valuetype(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].pop
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
 
-      def visit_valuebox(node)
-      end
+      def visit_valuebox(node); end
 
-      def visit_const(node)
-      end
+      def visit_const(node); end
 
-      def visit_operation(node)
-      end
+      def visit_operation(node); end
 
-      def visit_attribute(node)
-      end
+      def visit_attribute(node); end
 
-      def declare_struct(node)
-      end
+      def declare_struct(node); end
+
       def enter_struct(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
+
       def leave_struct(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].pop
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
 
       def enter_exception(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
+
       def leave_exception(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].pop
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
 
-      def declare_union(node)
-      end
+      def declare_union(node); end
+
       def enter_union(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].push(node)
         @properties[:_context][:cur_scope] = node
       end
+
       def leave_union(node)
         return if self.no_scope_tracking?(node)
+
         @properties[:_context][:scopes].pop
         @properties[:_context][:cur_scope] = @properties[:_context][:scopes].last
       end
 
-      def visit_enum(node)
-      end
+      def visit_enum(node); end
 
-      def visit_enumerator(node)
-      end
+      def visit_enumerator(node); end
 
-      def visit_typedef(node)
-      end
+      def visit_bitset(node); end
 
+      def visit_bitfield(node); end
+
+      def visit_bitmask(node); end
+
+      def visit_bitvalue(node); end
+
+      def visit_typedef(node); end
     end # CodeWriterMethods
-
   end # Base
-
 end # IDL

@@ -27,7 +27,7 @@ Hello::equal_const(const TimeBase::UtcT& utc, TimeBase::UtcT& utc2) const
 }
 
 Hello::Hello(IDL::traits<CORBA::ORB>::ref_type orb, int& result) :
-    orb_ (orb), result_ (result)
+    orb_ (std::move(orb)), result_ (result)
 {
 }
 

@@ -24,11 +24,10 @@ class test_i final :
 {
 public:
   /// Constructor.
-  test_i (int16_t num,
-          IDL::traits<CORBA::ORB>::ref_type orb);
+  test_i (int16_t num, IDL::traits<CORBA::ORB>::ref_type orb);
 
   /// Destructor.
-  virtual ~test_i () = default;
+  ~test_i () override = default;
 
   /// Return the number assigned to this object.
   int16_t number () override;

@@ -26,29 +26,24 @@ namespace Test
   namespace _impl
   {
     class Foo
-      : public CORBA::servant_traits< ::Test::Foo>::base_type
+      : public CORBA::servant_traits<::Test::Foo>::base_type
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[Base List]
     // your base classes
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo[Base List]
     {
-    protected:
+    public:
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[Constructors]
       /// Constructor(s)
       Foo ();
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo[Constructors]
 
       /// Destructor
-      virtual ~Foo ();
-
-      template <typename T> friend class CORBA::servant_reference;
-
-      template <typename _Tp1, typename, typename ...Args>
-      friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+      ~Foo () override;
 
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[User Protected]
       // your protected definitions
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Foo[User Protected]
-    public:
+
 
       // generated from c++11/templates/impl/hdr/interface_post
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Foo[User Public]
@@ -72,36 +67,30 @@ namespace Test
   namespace _impl
   {
     class Hello
-      : public CORBA::servant_traits< ::Test::Hello>::base_type
+      : public CORBA::servant_traits<::Test::Hello>::base_type
     //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[Base List]
     // your base classes
     //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[Base List]
     {
-    protected:
+    public:
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[Constructors]
       /// Constructor(s)
       Hello (IDL::traits<CORBA::ORB>::ref_type orb);
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[Constructors]
 
       /// Destructor
-      virtual ~Hello ();
-
-      template <typename T> friend class CORBA::servant_reference;
-
-      template <typename _Tp1, typename, typename ...Args>
-      friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+      ~Hello () override;
 
       //@@{__RIDL_REGEN_MARKER__} - BEGIN : Test::Hello[User Protected]
       // your protected definitions
       //@@{__RIDL_REGEN_MARKER__} - END : Test::Hello[User Protected]
-    public:
+
 
       // generated from c++11/templates/impl/hdr/attribute
       int32_t
       int_prop () override;
 
-      void
-      int_prop (int32_t _v) override;
+      void int_prop (int32_t _v) override;
 
       // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::get_string
@@ -112,7 +101,7 @@ namespace Test
       /// @copydoc test.idl::Test::Hello::create_foo
       void
       create_foo (
-          IDL::traits< ::Test::Foo>::ref_type& foo_inst) override;
+          IDL::traits<::Test::Foo>::ref_type& foo_inst) override;
 
       // generated from c++11/templates/impl/hdr/operation
       /// @copydoc test.idl::Test::Hello::update

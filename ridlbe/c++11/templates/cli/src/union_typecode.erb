@@ -4,7 +4,7 @@
 % case_lst << [default_member, default_label] if has_default? && !has_implicit_default?
 % case_lst.each_with_index do |(m, lbl), nr|
 %   tc = m.is_standard_typecode? ? "TAO_CORBA::#{m.cxx_typecode}" : "__tao::#{m.scoped_cxx_typecode}"
-static ::TAOX11_NAMESPACE::TypeCode::Case_T< <%= scoped_switch_cxxtype %>,
+static ::TAOX11_NAMESPACE::TypeCode::Case_T<<%= scoped_switch_cxxtype %>,
   char const *,
   TAO_CORBA::TypeCode_ptr const *> const
     _tao_cases<%= cxx_typecode %>_<%= nr %> (

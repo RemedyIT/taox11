@@ -1,7 +1,7 @@
 
   // generated from <%= ridl_template_path %>
   <%= cxxname %> ();
-  virtual ~<%= cxxname %> () throw () = default;
+  ~<%= cxxname %> () noexcept override = default;
   <%= cxxname %> (const <%= cxxname %>&) = default;
   <%= cxxname %> (<%= cxxname %>&&) = default;
 % if member_count > 0
@@ -39,7 +39,7 @@ protected:
 
 private:
 % members.each do |_m|
-  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if _m.is_pod? %> {}<% end %>;
+  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<%= _m.value_initializer %>;
 % end
 }; // class <%= cxxname %>
 % visit_template('typecode') if generate_typecode_support?

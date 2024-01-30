@@ -47,7 +47,7 @@ namespace TAOX11_NAMESPACE
 
       ::TAOX11_NAMESPACE::PortableInterceptor::ReplyStatus reply_status () override;
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type forward_reference () override;
+      IDL::traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type forward_reference () override;
 
       TAOX11_NAMESPACE::CORBA::Any get_slot (
           ::TAOX11_NAMESPACE::PortableInterceptor::SlotId id) override;

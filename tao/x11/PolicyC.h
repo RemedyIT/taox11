@@ -46,7 +46,7 @@ namespace TAOX11_NAMESPACE {
   namespace CORBA {
 
     // generated from c++/cli_hdr/typedef.erb
-    typedef int16_t PolicyErrorCode;
+    using PolicyErrorCode = int16_t;
 
     // generated from c++/anyop_hdr/typedef.erb
     extern TAOX11_AnyTypeCode_Export TAOX11_CORBA::typecode_reference const _tc_PolicyErrorCode;
@@ -84,7 +84,7 @@ namespace TAOX11_NAMESPACE {
 
       // generated from c++/cli_hdr/except_post.erb
       PolicyError ();
-      virtual ~PolicyError () throw ();
+      ~PolicyError () noexcept override = default;
       PolicyError (const PolicyError&) = default;
       PolicyError (PolicyError&&) = default;
       explicit PolicyError (TAOX11_CORBA::PolicyErrorCode reason);
@@ -122,7 +122,7 @@ namespace TAOX11_NAMESPACE {
 
       // generated from c++/cli_hdr/except_post.erb
       InvalidPolicies ();
-      virtual ~InvalidPolicies () throw ();
+      ~InvalidPolicies () noexcept override = default;
       InvalidPolicies (const InvalidPolicies&) = default;
       InvalidPolicies (InvalidPolicies&&) = default;
       explicit InvalidPolicies (TAOX11_CORBA::UShortSeq indices);
@@ -150,7 +150,7 @@ namespace TAOX11_NAMESPACE {
 #define _INTF_TAOX11_NAMESPACE__CORBA__POLICY_FWD_
     class TAOX11_Export Policy;
     class TAOX11_Export Policy_proxy;
-    typedef Policy_proxy* Policy_proxy_ptr;
+    using Policy_proxy_ptr = Policy_proxy*;
     namespace POA
     {
       class TAOX11_Export Policy;
@@ -181,7 +181,7 @@ namespace TAOX11_NAMESPACE
   {
     template<>
     struct traits < TAOX11_CORBA::Policy> :
-      public IDL::common_byval_traits <IDL::traits< TAOX11_CORBA::Policy>::ref_type>,
+      public IDL::common_byval_traits <IDL::traits<TAOX11_CORBA::Policy>::ref_type>,
       public CORBA::object_traits < TAOX11_CORBA::Policy>
     {
       static constexpr bool local = false;
@@ -215,10 +215,10 @@ namespace TAOX11_NAMESPACE
     public:
       friend struct TAOX11_CORBA::object_traits<Policy>;
 
-      typedef IDL::traits<Policy>                     _traits_type;
-      typedef _traits_type::ref_type                  _ref_type;
+      using _traits_type = IDL::traits<Policy>;
+      using _ref_type = _traits_type::ref_type;
 
-      virtual const std::string& _interface_repository_id () const;
+      std::string _interface_repository_id () const override;
 
       // generated from c++/cli_hdr/attribute.erb
       virtual TAOX11_CORBA::PolicyType policy_type();
@@ -234,7 +234,7 @@ namespace TAOX11_NAMESPACE
 
     protected:
       template <typename _Tp1, typename, typename ...Args>
-      friend object_reference<_Tp1> make_reference(Args&& ...args);
+      friend constexpr object_reference<_Tp1> make_reference(Args&& ...args);
 
       Policy ();
       explicit Policy (TAOX11_NAMESPACE::Object_proxy_ptr op);
@@ -308,13 +308,13 @@ namespace TAOX11_NAMESPACE {
          OStrm_& os,
          IDL::traits<TAOX11_CORBA::PolicyError>::__Writer<Fmt> w)
      {
-       typedef IDL::traits<TAOX11_CORBA::PolicyError>::__Writer<Fmt> writer_t;
-       typedef typename std::conditional<
+       using writer_t = IDL::traits<TAOX11_CORBA::PolicyError>::__Writer<Fmt>;
+       using formatter_t = typename std::conditional<
                            std::is_same<
                              typename writer_t::formatter_t,
                              std::false_type>::value,
                            formatter<TAOX11_CORBA::PolicyError, OStrm_>,
-                           typename writer_t::formatter_t>::type formatter_t;
+                           typename writer_t::formatter_t>::type;
        return IDL::traits<TAOX11_CORBA::PolicyError>::write_on (
            os, w.val_,
            formatter_t ());
@@ -356,13 +356,13 @@ namespace TAOX11_NAMESPACE {
          OStrm_& os,
          IDL::traits<TAOX11_CORBA::InvalidPolicies>::__Writer<Fmt> w)
      {
-       typedef IDL::traits<TAOX11_CORBA::InvalidPolicies>::__Writer<Fmt> writer_t;
-       typedef typename std::conditional<
+       using writer_t = IDL::traits<TAOX11_CORBA::InvalidPolicies>::__Writer<Fmt>;
+       using formatter_t = typename std::conditional<
                            std::is_same<
                              typename writer_t::formatter_t,
                              std::false_type>::value,
                            formatter<TAOX11_CORBA::InvalidPolicies, OStrm_>,
-                           typename writer_t::formatter_t>::type formatter_t;
+                           typename writer_t::formatter_t>::type;
        return IDL::traits<TAOX11_CORBA::InvalidPolicies>::write_on (
            os, w.val_,
            formatter_t ());
@@ -381,7 +381,7 @@ namespace TAOX11_NAMESPACE {
        OStrm_& os_,
        IDL::traits<CORBA::Policy>::in_type o_)
    {
-     return os_ << IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::_dump (o_, "CORBA::Policy");
+     return os_ << IDL::traits<TAOX11_NAMESPACE::CORBA::Object>::_dump (o_, "CORBA::Policy");
    }
 
    template <typename OStrm_, typename Fmt>
@@ -389,13 +389,13 @@ namespace TAOX11_NAMESPACE {
        OStrm_& os,
        IDL::traits<CORBA::Policy>::__Writer<Fmt> w)
    {
-     typedef IDL::traits<CORBA::Policy>::__Writer<Fmt> writer_t;
-     typedef typename std::conditional<
+     using writer_t = IDL::traits<CORBA::Policy>::__Writer<Fmt>;
+     using formatter_t = typename std::conditional<
                          std::is_same<
                            typename writer_t::formatter_t,
                            std::false_type>::value,
                          formatter<CORBA::Policy, OStrm_>,
-                         typename writer_t::formatter_t>::type formatter_t;
+                         typename writer_t::formatter_t>::type;
      return IDL::traits<CORBA::Policy>::write_on (
          os, w.val_,
          formatter_t ());
@@ -406,28 +406,30 @@ namespace TAOX11_NAMESPACE {
 
 namespace TAOX11_NAMESPACE
 {
+  namespace CORBA
+  {
    // generated from c++/cli_hdr/anyop.erb
 #if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICYERROR_DECL__)
 #define __TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICYERROR_DECL__
-  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::PolicyError&);
-  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&&);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&);
+    TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::PolicyError&);
+    TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&&);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::PolicyError&);
 #endif
 
 #if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__INVALIDPOLICIES_DECL__)
 #define __TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__INVALIDPOLICIES_DECL__
-  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::InvalidPolicies&);
-  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&&);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&);
+    TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, const TAOX11_CORBA::InvalidPolicies&);
+    TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&&);
+    TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, TAOX11_CORBA::InvalidPolicies&);
 #endif
 
    // generated from c++/cli_hdr/anyop.erb
 #if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICY_DECL__)
 #define __TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICY_DECL__
-  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::ref_type);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::_ref_type&);
+  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, IDL::traits<TAOX11_CORBA::Policy>::ref_type);
+  TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, IDL::traits<TAOX11_CORBA::Policy>::_ref_type&);
 #endif
-
+  } // namespac CORBA
 } // namespace TAOX11_NAMESPACE
 
 // generated from StubHeaderStdWriter#pre_visit
@@ -510,7 +512,7 @@ inline TAOX11_CORBA::InvalidPolicies& TAOX11_CORBA::InvalidPolicies::operator= (
 // generated from c++/cli_hdr/interface_os.erb
 TAOX11_Export std::ostream& operator<< (
     std::ostream& strm,
-    IDL::traits< TAOX11_CORBA::Policy>::ref_type);
+    IDL::traits<TAOX11_CORBA::Policy>::ref_type);
 
 #if defined (__TAOX11_INCLUDE_STUB_PROXY__)
 #include "PolicyP.h"

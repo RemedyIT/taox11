@@ -29,16 +29,16 @@ main (int argc, char* argv[])
 {
   try
     {
-      IDL::traits<CORBA::ORB>::ref_type _orb = CORBA::ORB_init (argc, argv);
+      IDL::traits<CORBA::ORB>::ref_type orb_ = CORBA::ORB_init (argc, argv);
 
-      if (!_orb)
+      if (!orb_)
         {
           TAOX11_TEST_ERROR << "ERROR: CORBA::ORB_init (argc, argv) returned null ORB."
             << std::endl;
           return 1;
         }
 
-      IDL::traits<CORBA::Object>::ref_type obj = _orb->string_to_object ("file://test.ior");
+      IDL::traits<CORBA::Object>::ref_type obj = orb_->string_to_object ("file://test.ior");
 
       if (!obj)
         {
@@ -75,12 +75,12 @@ main (int argc, char* argv[])
       TAOX11_TEST_DEBUG << "shutting down...";
 
       hello->shutdown();
-      _orb->destroy ();
+      orb_->destroy ();
       TAOX11_TEST_DEBUG << std::endl;
     }
   catch (const std::exception& e)
     {
-      TAOX11_TEST_ERROR << "exception caught: " << e.what () << std::endl;
+      TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
       ++result_;
     }
   return result_;
