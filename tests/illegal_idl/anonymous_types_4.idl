@@ -1,0 +1,9 @@
+/**
+ * @file    anonymous_types_4.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+// Anonymous fixed constants are illegal
+const fixed pi_double = 3.142857;
