@@ -172,7 +172,6 @@ jobs:
       if: matrix.feature == 'CodeQL'
     - uses: codecov/codecov-action@v4
       with:
-        gcov: true
         fail_ci_if_error: true 
         verbose: true # optional (default = false)
       env:
