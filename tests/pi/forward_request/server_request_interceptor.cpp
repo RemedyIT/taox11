@@ -152,7 +152,6 @@ Server_Request_Interceptor::send_exception (
 
     throw PortableInterceptor::ForwardRequest (this->obj_[0]);
   }
-
 }
 
 void
