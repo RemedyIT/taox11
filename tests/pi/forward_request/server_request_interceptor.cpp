@@ -50,8 +50,7 @@ Server_Request_Interceptor::receive_request_service_contexts (
 {
   ++this->request_count_;
 
-  bool const response_expected =
-    ri->response_expected ();
+  bool const response_expected = ri->response_expected ();
 
   if (!response_expected)   // A one-way request.
     return;
@@ -83,6 +82,13 @@ Server_Request_Interceptor::receive_request (
 
   if (!response_expected)   // A one-way request.
     return;
+
+  if (ri->server_id() != "testserver")
+  {
+    TAOX11_TEST_ERROR << "SERVER - Request " << (this->request_count_-1) << " invalid server id <"
+                      << ri->server_id() << ">" << std::endl;
+
+  }
 
   // Request 1 -- non-forwarded
   // Request 2 -- forwarded by client request interceptor
