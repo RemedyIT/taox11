@@ -276,7 +276,7 @@ module IDL
         s = '@' + id.to_s
         unless fields.empty?
           s += '('
-          fields.each_with_index do |f, index|
+          fields.each_with_index do |_, index|
             if fields.size > 1
               s += fields.keys[index].to_s  + '='
             end
