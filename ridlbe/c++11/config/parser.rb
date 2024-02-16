@@ -271,6 +271,37 @@ module IDL
       include ValuetypeMixin
     end
 
+    module AnnotationMixin
+      def idl_stringified
+        s = '@' + id.to_s
+        unless fields.empty?
+          s += '('
+          fields.each_with_index do |f, index|
+            if fields.size > 1
+              s += fields.keys[index].to_s  + '='
+            end
+            case fields.values[index]
+            when TrueClass
+              s += 'TRUE'
+            when FalseClass
+              s += 'FALSE'
+            else
+              s += fields.values[index].to_s
+            end
+            if index < fields.size - 1
+              s += ','
+            end
+          end
+          s += ')'
+        end
+        s
+      end
+    end
+
+    IDL::AST::Annotation.class_eval do
+      include AnnotationMixin
+    end
+
     module ScannerMixin
       CXXKW = [
         :alignas,
