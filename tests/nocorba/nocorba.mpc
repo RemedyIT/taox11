@@ -1,13 +1,14 @@
 // -*- MPC -*-
 
 project(*nocorba_gen_Idl): ridl_ostream_defaults {
+  idlflags += -Scdr -SS
   IDL_Files {
     test.idl
   }
   custom_only = 1
 }
 
-project(*nocorba_gen_Client): taox11_client {
+project(*nocorba_gen_Client) {
   after += *nocorba_gen_Idl
   Source_Files {
     client.cpp
@@ -15,5 +16,6 @@ project(*nocorba_gen_Client): taox11_client {
   Source_Files {
     testC.cpp
   }
+  includes += $(TAOX11_ROOT)
 }
 
