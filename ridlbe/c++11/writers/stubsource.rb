@@ -57,11 +57,13 @@ module IDL
 
         visit_anyops(parser) if params[:gen_any_ops] && !params[:gen_anytypecode_source]
 
-        # Object traits specializations
-        visit_object_traits_specializations(parser) if @object_traits_specializations
+        if @object_traits_specializations
+          # Object traits specializations
+          visit_object_traits_specializations(parser)
 
-        # Object ref traits specializations
-        visit_proxy_object_ref_traits_specializations(parser) unless params[:no_client_proxy]
+          # Object ref traits specializations
+          visit_proxy_object_ref_traits_specializations(parser) unless params[:no_client_proxy]
+        end
 
         # CDR operators
         visit_cdr(parser) unless params[:no_cdr_streaming]
@@ -158,7 +160,7 @@ module IDL
       end
 
       def visit_proxy(parser)
-        writer(StubProxySourceWriter).visit_nodes(parser)
+        writer(StubProxySourceWriter).visit_nodes(parser) unless params[:no_client_proxy]
       end
 
       def visit_anyops(parser)
