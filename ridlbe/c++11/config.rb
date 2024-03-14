@@ -184,6 +184,7 @@ module IDL
             params[:no_cdr_streaming] = true
             params[:gen_any_ops] = false
             params[:gen_typecodes] = false
+            params[:gen_ostream_operators] = false
           end
         end
         swcfg.define_group :suppress_flags_false, params: {
