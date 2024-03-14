@@ -14,5 +14,5 @@
 
 module Test
 {
-  //typedef short myshort;
+  typedef short myshort;
 };
