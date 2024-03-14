@@ -44,7 +44,7 @@ module IDL
           end
         end
         @default_post_includes << 'tao/x11/anytypecode/typecode_constants.h' if params[:gen_typecodes]
-        @default_post_includes << 'tao/x11/corba_ostream.h'
+        @default_post_includes << 'tao/x11/corba_ostream.h' if params[:gen_ostream_operators]
         @default_post_includes << 'tao/x11/messaging/messaging.h'
         @default_post_includes << 'tao/x11/amic_traits_t.h'
         @default_post_includes << 'tao/x11/portable_server/servantbase.h'

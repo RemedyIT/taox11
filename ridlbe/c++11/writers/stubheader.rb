@@ -43,7 +43,7 @@ module IDL
           end
         end
         @default_post_includes << 'tao/x11/anytypecode/typecode_constants.h' if params[:gen_typecodes]
-        @default_post_includes << 'tao/x11/corba_ostream.h'
+        @default_post_includes << 'tao/x11/corba_ostream.h' if params[:gen_ostream_operators]
 
         @include_guard = "__RIDL_#{File.basename(params[:output] || '').to_random_include_guard}_INCLUDED__"
 
