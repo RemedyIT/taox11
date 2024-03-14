@@ -119,6 +119,7 @@ tests/mt/mt_server/run_test.pl:
 tests/mt/mt_client/run_test.pl:
 tests/mt/mt_bidir/run_test.pl: !CORBA_E_MICRO
 tests/narrow/run_test.pl: !CORBA_E_MICRO
+tests/nocorba/run_test.pl:
 tests/objectreference/run_test.pl:
 tests/obv/abstract_interface/run_test.pl: !CORBA_E_MICRO
 tests/obv/any/run_test.pl: !CORBA_E_MICRO
