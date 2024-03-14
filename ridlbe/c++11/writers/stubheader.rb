@@ -29,9 +29,9 @@ module IDL
         @default_pre_includes = [
           'tao/x11/stddef.h',
           'tao/x11/basic_traits.h',
-          'tao/x11/corba.h',
-          'tao/x11/system_exception.h'
+          'tao/x11/corba.h'
         ]
+
         @default_pre_includes << 'tao/x11/orb.h' unless params[:no_orb_include]
         @default_post_includes = []
         @default_post_includes << 'tao/x11/anytypecode/any.h' if params[:gen_any_ops]
@@ -117,6 +117,7 @@ module IDL
       end
 
       def enter_interface(node)
+        add_include('tao/x11/system_exception.h')
         println
         printiln('// generated from StubHeaderWriter#enter_interface')
         sn = node.scoped_cxxname
@@ -178,6 +179,7 @@ module IDL
       end
 
       def enter_valuetype(node)
+        add_include('tao/x11/system_exception.h')
         sn = node.scoped_cxxname
         unless @fwd_decl_cache.has_key?(sn)
           @fwd_decl_cache[sn] = true
@@ -220,6 +222,7 @@ module IDL
 
       def enter_exception(node)
         super
+        add_include('tao/x11/system_exception.h')
         visitor(ExceptionVisitor).visit_pre(node)
         inc_nest
       end
@@ -240,6 +243,7 @@ module IDL
 
       def enter_union(node)
         super
+        add_include('tao/x11/system_exception.h')
         visitor(UnionVisitor).visit_pre(node)
         inc_nest
       end
