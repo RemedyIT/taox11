@@ -238,6 +238,10 @@ module IDL
       def proxy_suffix
         STUB_PROXY_SUFFIX
       end
+
+      def avoids_corba?
+        params[:no_corba] == true
+      end
     end # VisitorBase
 
     # Visitor base class for node visitors
