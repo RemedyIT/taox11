@@ -85,6 +85,7 @@ module IDL
           'tao/x11/portable_server/portableserver_proxies.h'
         ]
         @default_post_includes = [
+          'tao/x11/sequence_conversion_t.h',
           'tao/x11/portable_server/servant_proxy.h',
           'tao/x11/portable_server/operation_table_std_map.h',
           'tao/x11/portable_server/upcall_command.h',

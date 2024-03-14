@@ -17,6 +17,7 @@
 #include "tao/x11/log.h"
 #include "tao/x11/object_loader.h"
 #include "tao/x11/exception_macros.h"
+#include "tao/x11/sequence_conversion_t.h"
 
 #include "ace/Dynamic_Service.h"
 

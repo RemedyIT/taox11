@@ -117,7 +117,6 @@ module IDL
       end
 
       def enter_interface(node)
-        add_include('tao/x11/system_exception.h')
         println
         printiln('// generated from StubHeaderWriter#enter_interface')
         sn = node.scoped_cxxname
@@ -179,7 +178,6 @@ module IDL
       end
 
       def enter_valuetype(node)
-        add_include('tao/x11/system_exception.h')
         sn = node.scoped_cxxname
         unless @fwd_decl_cache.has_key?(sn)
           @fwd_decl_cache[sn] = true
@@ -222,7 +220,6 @@ module IDL
 
       def enter_exception(node)
         super
-        add_include('tao/x11/system_exception.h')
         visitor(ExceptionVisitor).visit_pre(node)
         inc_nest
       end
@@ -243,7 +240,6 @@ module IDL
 
       def enter_union(node)
         super
-        add_include('tao/x11/system_exception.h')
         visitor(UnionVisitor).visit_pre(node)
         inc_nest
       end
@@ -377,10 +373,15 @@ module IDL
 
         unless node.is_abstract?
           add_include('tao/x11/object.h')
+          add_include('tao/x11/system_exception.h')
         else
           add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
           add_post_include('tao/x11/valuetype/abstract_base.h') # after typecode include
         end
+      end
+
+      def visit_exception(node)
+        add_include('tao/x11/system_exception.h')
       end
 
       def visit_operation(node)
@@ -397,6 +398,7 @@ module IDL
       end
 
       def enter_valuetype(node)
+        add_include('tao/x11/system_exception.h')
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
         add_post_include('tao/x11/valuetype/value_base.h') # after typecode include
         add_post_include('tao/x11/valuetype/value_factory_base.h') unless node.is_abstract? # after typecode include
@@ -404,6 +406,7 @@ module IDL
       end
 
       def visit_valuebox(node)
+        add_include('tao/x11/system_exception.h')
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
         add_post_include('tao/x11/valuetype/value_box_t.h')
         check_idl_type(node.boxed_type)
@@ -415,6 +418,7 @@ module IDL
       end
 
       def enter_union(node)
+        add_include('tao/x11/system_exception.h')
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 

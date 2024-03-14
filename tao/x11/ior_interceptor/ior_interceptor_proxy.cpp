@@ -11,6 +11,7 @@
 #include "tao/x11/tao_corba.h"
 #include "tao/x11/pi/tao_pi.h"
 #include "tao/x11/ior_interceptor/tao_ior_interceptor.h"
+#include "tao/x11/sequence_conversion_t.h"
 #include "tao/ObjRefTemplate/ObjectReferenceTemplate.h"
 
 // TAOX11 dependencies

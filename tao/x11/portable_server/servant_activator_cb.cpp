@@ -13,6 +13,7 @@
 #include "tao/x11/portable_server/portableserver_impl.h"
 #include "tao/x11/portable_server/servantbase.h"
 #include "tao/x11/objproxy.h"
+#include "tao/x11/sequence_conversion_t.h"
 
 #include "tao/x11/log.h"
 
