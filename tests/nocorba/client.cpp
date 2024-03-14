@@ -10,6 +10,7 @@
 
 #include "testC.h"
 
+// Check for ACE define
 
 int
 main(int, char* [])
