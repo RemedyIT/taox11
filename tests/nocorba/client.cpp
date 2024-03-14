@@ -12,7 +12,7 @@
 
 
 int
-main(int argc, char* argv[])
+main(int, char* [])
 {
   int result {};
 
@@ -21,7 +21,7 @@ main(int argc, char* argv[])
   }
   catch (const std::exception& e)
   {
-    std::err << "exception caught: " << e << std::endl;
+    std::cout << "exception caught: " << e.what() << std::endl;
     return 1;
   }
   return result;
