@@ -1,7 +1,7 @@
 // -*- MPC -*-
 
 project(*nocorba_gen_Idl): ridl_ostream_defaults {
-  idlflags += -Scdr -SS
+  idlflags += -Scdr -SS -Scp
   IDL_Files {
     test.idl
   }
