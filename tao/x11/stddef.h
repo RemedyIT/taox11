@@ -74,7 +74,7 @@ namespace TAOX11_NAMESPACE {
   SEQ_0X seq_to_x11(const SEQ& seq_in)
   {
     SEQ_0X seq_out;
-    uint32_t len = seq_in.length ();
+    uint32_t const len = seq_in.length ();
     seq_out.resize (len);
     for (uint32_t i = 0; i < len ;++i)
     {
@@ -87,7 +87,7 @@ namespace TAOX11_NAMESPACE {
   SEQ_0X convert_seq_to_x11(const SEQ& seq_in)
   {
     SEQ_0X seq_out;
-    uint32_t len = seq_in.length ();
+    uint32_t const len = seq_in.length ();
     seq_out.resize (len);
     for (uint32_t i = 0; i < len ;++i)
     {
@@ -101,7 +101,7 @@ namespace TAOX11_NAMESPACE {
   SEQ* seq_from_x11(const SEQ_0X& seq_in)
   {
     SEQ* seq_out = new SEQ();
-    uint32_t len = seq_in.size ();
+    uint32_t const len = seq_in.size ();
     seq_out->length (len);
     for (uint32_t i = 0; i < len ;++i)
     {
@@ -113,7 +113,7 @@ namespace TAOX11_NAMESPACE {
   template <typename SEQ, typename SEQ_0X>
   void seq_from_x11(SEQ& seq_out, const SEQ_0X& seq_in)
   {
-    uint32_t len = ACE_Utils::truncate_cast<uint32_t> (seq_in.size ());
+    uint32_t const len = ACE_Utils::truncate_cast<uint32_t> (seq_in.size ());
     seq_out.length (len);
     for (uint32_t i = 0; i < len ;++i)
     {
