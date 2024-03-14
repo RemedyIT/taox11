@@ -15,4 +15,8 @@
 module Test
 {
   typedef short myshort;
+  struct Bar
+  {
+    short my1;
+  };
 };
