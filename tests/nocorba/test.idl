@@ -1,0 +1,17 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * Only use types that should be usable without a full CORBA implementation:
+ * - basic types
+ * - struct
+ * - union (be aware of the exception
+ * - (bounded) (w)string
+ * - (bounded) sequences
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+module Test
+{
+};
