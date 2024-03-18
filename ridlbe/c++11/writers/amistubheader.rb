@@ -365,7 +365,7 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         super
         println
         printiln('// generated from AmiStubHeaderAnyOpWriter#pre_visit')
@@ -374,7 +374,7 @@ module IDL
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
         println
         println('  } // namespace TAOX11_NAMESPACE::CORBA')
@@ -401,17 +401,17 @@ module IDL
         self.template_root = File.join('cli', 'inl')
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         super
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         super
       end
 
-      def enter_interface(node); end
+      def enter_interface(_node); end
 
-      def leave_interface(node); end
+      def leave_interface(_node); end
     end # AmiStubInlineWriter
 
     class AmiStubHeaderOSWriter < AmiStubHeaderBaseWriter
