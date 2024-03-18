@@ -380,7 +380,7 @@ module IDL
         end
       end
 
-      def visit_exception(node)
+      def visit_exception(_node)
         add_include('tao/x11/system_exception.h')
       end
 
@@ -614,7 +614,7 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         super
         println
         printiln('// generated from StubHeaderAnyOpWriter#pre_visit')
@@ -623,7 +623,7 @@ module IDL
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
         println
         println('  } // namespace TAOX11_NAMESPACE::CORBA')
