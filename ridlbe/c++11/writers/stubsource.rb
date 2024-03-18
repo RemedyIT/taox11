@@ -36,8 +36,9 @@ module IDL
         if params[:gen_any_ops] && !params[:gen_anytypecode_source]
           @default_pre_includes << 'tao/AnyTypeCode/Any_Impl_T.h'
         end
-        @default_post_includes = []
-        @default_post_includes << 'tao/x11/tao_corba.h' unless params[:no_corba]
+        @default_post_includes = [
+          'tao/x11/tao_corba.h'
+        ]
         @default_post_includes << 'tao/x11/anytypecode/typecode.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
         @default_post_includes << 'tao/x11/anytypecode/typecode_impl.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
       end
