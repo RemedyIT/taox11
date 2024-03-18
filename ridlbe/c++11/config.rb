@@ -78,8 +78,8 @@ module IDL
               'impl_export_macro' => { description: "-Wb,impl_export_macro=MACRO\tSet export macro for implementation files" },
               'impl_export_include' => { description: "-Wb,impl_export_include=FILE\tSet export include file for implementation files" },
               'impl_export_file' => { description: "-Wb,impl_export_file=FILE\t\tSet implementation export file to generate for -Gxhimpl" },
-              'anytypecode_export_macro' => { description: "-Wb,anytypecode_export_macro=MACRO\tSet export macro for Any ops en TypeCode" },
-              'anytypecode_export_include' => { description: "-Wb,anytypecode_export_include=FILE\tSet export include file for Any ops en TypeCode" },
+              'anytypecode_export_macro' => { description: "-Wb,anytypecode_export_macro=MACRO\tSet export macro for Any ops and TypeCode" },
+              'anytypecode_export_include' => { description: "-Wb,anytypecode_export_include=FILE\tSet export include file for Any ops and TypeCode" },
               'include_guard' => { description: "-Wb,include_guard=MACRO\t\tguard to prevent the generated client header file to be included" },
               'safe_include' => { description: "-Wb,safe_include=FILE\t\tinclude that should be used instead of the own generated client header file" },
               'unique_include' => { description: "-Wb,unique_include=FILE\t\tinclude that should be generated as only contents of the generated client header file" }

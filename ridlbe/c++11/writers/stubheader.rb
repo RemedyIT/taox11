@@ -29,9 +29,9 @@ module IDL
         @default_pre_includes = [
           'tao/x11/stddef.h',
           'tao/x11/basic_traits.h',
-          'tao/x11/corba.h',
-          'tao/x11/system_exception.h'
+          'tao/x11/corba.h'
         ]
+
         @default_pre_includes << 'tao/x11/orb.h' unless params[:no_orb_include]
         @default_post_includes = []
         @default_post_includes << 'tao/x11/anytypecode/any.h' if params[:gen_any_ops]
@@ -43,7 +43,7 @@ module IDL
           end
         end
         @default_post_includes << 'tao/x11/anytypecode/typecode_constants.h' if params[:gen_typecodes]
-        @default_post_includes << 'tao/x11/corba_ostream.h'
+        @default_post_includes << 'tao/x11/corba_ostream.h' if params[:gen_ostream_operators]
 
         @include_guard = "__RIDL_#{File.basename(params[:output] || '').to_random_include_guard}_INCLUDED__"
 
@@ -373,10 +373,15 @@ module IDL
 
         unless node.is_abstract?
           add_include('tao/x11/object.h')
+          add_include('tao/x11/system_exception.h')
         else
           add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
           add_post_include('tao/x11/valuetype/abstract_base.h') # after typecode include
         end
+      end
+
+      def visit_exception(_node)
+        add_include('tao/x11/system_exception.h')
       end
 
       def visit_operation(node)
@@ -393,6 +398,7 @@ module IDL
       end
 
       def enter_valuetype(node)
+        add_include('tao/x11/system_exception.h')
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
         add_post_include('tao/x11/valuetype/value_base.h') # after typecode include
         add_post_include('tao/x11/valuetype/value_factory_base.h') unless node.is_abstract? # after typecode include
@@ -400,6 +406,7 @@ module IDL
       end
 
       def visit_valuebox(node)
+        add_include('tao/x11/system_exception.h')
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
         add_post_include('tao/x11/valuetype/value_box_t.h')
         check_idl_type(node.boxed_type)
@@ -411,6 +418,7 @@ module IDL
       end
 
       def enter_union(node)
+        add_include('tao/x11/system_exception.h')
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
@@ -606,7 +614,7 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         super
         println
         printiln('// generated from StubHeaderAnyOpWriter#pre_visit')
@@ -615,7 +623,7 @@ module IDL
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
         println
         println('  } // namespace TAOX11_NAMESPACE::CORBA')

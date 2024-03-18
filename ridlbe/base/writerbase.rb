@@ -416,15 +416,15 @@ module IDL
         parser.visit_nodes(self)
       end
 
-      def pre_visit(parser); end
+      def pre_visit(_parser); end
 
-      def post_visit(parser); end
+      def post_visit(_parser); end
 
-      def visit_include(node); end
+      def visit_include(_node); end
 
-      def enter_include(node); end
+      def enter_include(_node); end
 
-      def leave_include(node); end
+      def leave_include(_node); end
 
       def enter_module(node)
         return if self.no_scope_tracking?(node)

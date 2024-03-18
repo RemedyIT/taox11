@@ -322,6 +322,7 @@ project(taox11) : taox11_defaults, taolib {
     orbproxy.h
     policyfactory_manager_adapter.h
     sequence_cdr_t.h
+    sequence_conversion_t.h
     special_basic_argument_t.h
     special_basic_arguments.h
     stddef.h

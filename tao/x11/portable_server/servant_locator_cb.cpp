@@ -12,6 +12,7 @@
 #include "tao/x11/portable_server/servant_locator_cb.h"
 #include "tao/x11/portable_server/servantbase.h"
 #include "tao/x11/objproxy.h"
+#include "tao/x11/sequence_conversion_t.h"
 
 #include "tao/x11/log.h"
 

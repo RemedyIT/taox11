@@ -299,12 +299,12 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         super
         printiln('// generated from AmiStubProxyCDRWriter#pre_visit')
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         println
         super
       end
