@@ -295,7 +295,6 @@ project(taox11) : taox11_defaults, taolib {
     bounded_vector_t.h
     cdr_long_double.h
     corba.h
-    corba_ostream.h
     dynamic_adapter.h
     exception.h
     exception_macros.h
@@ -310,6 +309,7 @@ project(taox11) : taox11_defaults, taolib {
     object.h
     object_fwd.h
     object_loader.h
+    object_ostream.h
     object_traits_t.h
     objproxy.h
     orb.h
@@ -339,6 +339,7 @@ project(taox11) : taox11_defaults, taolib {
     valuetype_adapter.h
     versioned_x11_namespace.h
     versionx11.h
+    wstringwchar_ostream.h
   }
 
   Header_Files {
