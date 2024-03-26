@@ -1,0 +1,24 @@
+// -*- MPC -*-
+
+project(*proxysource_gen_Idl): ridl_ostream_defaults {
+  //idlflags += -Scorba
+  //idlflags += -Scdr -SS -Scp -Sorb
+  //idlflags -= -Gos
+  idlflags += -Gps
+  IDL_Files {
+    test.idl
+  }
+  custom_only = 1
+}
+
+project(*proxysource_gen_Client) {
+  after += *proxysource_gen_Idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+  includes += $(TAOX11_ROOT)
+}
+
