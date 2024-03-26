@@ -37,6 +37,10 @@ module IDL
         File.basename(params[:output_prx_hdr] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + params[:proxy_pfx] + '.h'))
       end
 
+      def client_proxy_src
+        File.basename(params[:output_prx_src] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + params[:proxy_pfx] + '.cpp'))
+      end
+
       def no_client_proxy_hdr?
         params[:no_client_proxy_hdr] && params[:ami_stub_output_prx].nil?
       end
