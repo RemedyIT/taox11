@@ -435,7 +435,7 @@ module IDL
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::WChar
-          add_post_include('tao/x11/wstringwchar_ostream.h') if params[:gen_ostream_operators]
+          check_idl_type(idl_type)
         when IDL::Type::Fixed
           add_include('tao/x11/fixed_t.h')
         when IDL::Type::Sequence
@@ -456,7 +456,7 @@ module IDL
         when IDL::Type::WString
           add_include('tao/x11/bounded_string_t.h') if idl_type.size.to_i.positive?
           add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
-          add_post_include('tao/x11/wstringwchar_ostream.h') if params[:gen_ostream_operators]
+          check_idl_type(idl_type)
         end
       end
 
@@ -475,6 +475,9 @@ module IDL
           add_include('tao/x11/portable_server/servant_forward.h')
         when IDL::Type::AbstractBase
           add_post_include('tao/x11/valuetype/abstract_base.h')
+        when IDL::Type::WString
+             IDL::Type::WChar
+          add_post_include('tao/x11/wstringwchar_ostream.h') if params[:gen_ostream_operators]
         end
       end
 
