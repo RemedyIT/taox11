@@ -12,15 +12,13 @@
 
 #include "tao/x11/object_fwd.h"
 
-#include <sstream>
-#include <cstdlib>
 #include "iostream"
 
 namespace std
 {
   inline std::ostream&
-        operator<< (std::ostream& _os,
-                    TAOX11_CORBA::object_reference<::TAOX11_NAMESPACE::CORBA::Object> /*_ve*/)
+  operator<< (std::ostream& _os,
+              TAOX11_CORBA::object_reference<::TAOX11_NAMESPACE::CORBA::Object> /*_ve*/)
   {
     return _os << "CORBA:Object";
   }
