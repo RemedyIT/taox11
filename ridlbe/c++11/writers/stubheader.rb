@@ -370,7 +370,7 @@ module IDL
       def enter_interface(node)
         return if node.is_pseudo?
 
-        add_post_include('tao/x11/object_ostream.h') if params[:gen_ostream_operators]
+        add_post_include('tao/x11/object_ostream.h')
 
         unless node.is_abstract?
           add_include('tao/x11/object.h')
