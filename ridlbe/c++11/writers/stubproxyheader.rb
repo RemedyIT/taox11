@@ -1,8 +1,8 @@
 #--------------------------------------------------------------------
-# @file    stubproxy.rb
+# @file    stubproxyheader.rb
 # @author  Martin Corino
 #
-# @brief   walker class for stub header
+# @brief   walker class for stub proxy header
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
 #--------------------------------------------------------------------
@@ -31,7 +31,7 @@ module IDL
       end
 
       def visit_nodes(parser)
-        @include_guard = "__RIDL_#{File.basename(params[:output_prx_hdr] || '').to_random_include_guard}_INCLUDED__"
+        @include_guard = "__RIDL_#{File.basename(params[:output_client_proxy_header] || '').to_random_include_guard}_INCLUDED__"
         super
         visitor(PostVisitor).visit
       end

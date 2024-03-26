@@ -160,7 +160,7 @@ module IDL
       end
 
       def visit_proxy(parser)
-        writer(StubProxySourceWriter).visit_nodes(parser) unless params[:no_client_proxy_hdr]
+        writer(StubProxySourceWriter).visit_nodes(parser) unless params[:no_client_proxy_hdr] || params[:client_proxy_source]
       end
 
       def visit_anyops(parser)
@@ -176,7 +176,7 @@ module IDL
       end
 
       def visit_cdr(parser)
-        writer(StubSourceCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming]
+        writer(StubSourceCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming] || params[:client_proxy_source]
       end
 
       def visit_typecodes(parser)

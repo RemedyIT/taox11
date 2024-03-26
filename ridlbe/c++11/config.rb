@@ -384,7 +384,8 @@ module IDL
         options[:output] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:stub_pfx])
         options[:output_ami_incl] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:ami_pfx] + options[:stub_pfx] + options[:hdr_ext])
         options[:output_src] = options[:output] + options[:src_ext]
-        options[:output_prx_hdr] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:stub_pfx] + options[:proxy_pfx] + options[:hdr_ext])
+        options[:output_client_proxy_header] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:stub_pfx] + options[:proxy_pfx] + options[:hdr_ext])
+        options[:output_client_proxy_source] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:stub_pfx] + options[:proxy_pfx] + options[:src_ext])
         options[:output] << options[:hdr_ext]
         if options[:gen_typecodes] && options[:gen_anytypecode_source]
           options[:output_atc] = File.join(options[:outputdir], File.basename(options[:idlfile], idl_ext) + options[:anytypecode_pfx] + options[:src_ext])
@@ -465,14 +466,14 @@ module IDL
         end
       end
       unless options[:no_client_proxy_hdr]
-        if options[:output_prx_hdr]
-          co_prx = GenFile.new(options[:output_prx_hdr])
+        if options[:output_client_proxy_header]
+          co_prx = GenFile.new(options[:output_client_proxy_header])
           IDL.push_production(:stub_proxy_header, ::IDL::Cxx11::StubProxyHeaderWriter.new(co_prx, options))
         end
       end
-      if options[:client_proxy_src]
-        if options[:output_prx_src]
-          co_prx = GenFile.new(options[:output_prx_src])
+      if options[:client_proxy_source]
+        if options[:output_client_proxy_source]
+          co_prx = GenFile.new(options[:output_client_proxy_source])
           IDL.push_production(:stub_proxy_source, ::IDL::Cxx11::StubProxySourceWriter.new(co_prx, options))
         end
       end
