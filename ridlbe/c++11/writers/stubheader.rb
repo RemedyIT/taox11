@@ -43,7 +43,6 @@ module IDL
           end
         end
         @default_post_includes << 'tao/x11/anytypecode/typecode_constants.h' if params[:gen_typecodes]
-        @default_post_includes << 'tao/x11/corba_ostream.h' if params[:gen_ostream_operators]
 
         @include_guard = "__RIDL_#{File.basename(params[:output] || '').to_random_include_guard}_INCLUDED__"
 
@@ -371,6 +370,8 @@ module IDL
       def enter_interface(node)
         return if node.is_pseudo?
 
+        add_post_include('tao/x11/object_ostream.h')
+
         unless node.is_abstract?
           add_include('tao/x11/object.h')
           add_include('tao/x11/system_exception.h')
@@ -433,6 +434,8 @@ module IDL
 
         idl_type = node.idltype.resolved_type
         case idl_type
+        when IDL::Type::WChar
+          check_idl_type(idl_type)
         when IDL::Type::Fixed
           add_include('tao/x11/fixed_t.h')
         when IDL::Type::Sequence
@@ -447,9 +450,11 @@ module IDL
           check_idl_type(idl_type.valuetype)
         when IDL::Type::Array
           check_idl_type(idl_type.basetype)
-        when IDL::Type::String, IDL::Type::WString
+        when IDL::Type::String,
+             IDL::Type::WString
           add_include('tao/x11/bounded_string_t.h') if idl_type.size.to_i.positive?
           add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
+          check_idl_type(idl_type)
         end
       end
 
@@ -468,6 +473,9 @@ module IDL
           add_include('tao/x11/portable_server/servant_forward.h')
         when IDL::Type::AbstractBase
           add_post_include('tao/x11/valuetype/abstract_base.h')
+        when IDL::Type::WString,
+             IDL::Type::WChar
+          add_post_include('tao/x11/wstringwchar_ostream.h') if params[:gen_ostream_operators]
         end
       end
 

@@ -1,0 +1,25 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+#include "orb.idl"
+
+/// Put the interfaces in a module, to avoid global namespace pollution
+module Test
+{
+  typedef wstring<5> bounded_bar;
+
+  /// A wstring interface
+  interface Hello
+  {
+    /// Get and set a wstring
+    wchar getset_wchar (in wchar text);
+
+    /// A method to shutdown the ORB
+    /// This method is used to simplify the test shutdown process
+    oneway void shutdown ();
+  };
+};
