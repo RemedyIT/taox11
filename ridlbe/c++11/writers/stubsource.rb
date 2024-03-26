@@ -36,9 +36,8 @@ module IDL
         if params[:gen_any_ops] && !params[:gen_anytypecode_source]
           @default_pre_includes << 'tao/AnyTypeCode/Any_Impl_T.h'
         end
-        @default_post_includes = [
-          'tao/x11/tao_corba.h'
-        ]
+        @default_post_includes = []
+        @default_post_includes << 'tao/x11/tao_corba.h' unless params[:client_proxy_source]
         @default_post_includes << 'tao/x11/anytypecode/typecode.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
         @default_post_includes << 'tao/x11/anytypecode/typecode_impl.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
       end
@@ -370,21 +369,21 @@ module IDL
              IDL::Type::Boolean,
              IDL::Type::WChar,
              IDL::Type::Octet
-          add_include('tao/x11/special_basic_arguments.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/special_basic_arguments.h') unless params[:no_cdr_streaming] || params[:client_proxy_source]
         when IDL::Type::LongDouble
-          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming] || params[:client_proxy_source]
         when IDL::Type::Integer,
              IDL::Type::Double,
              IDL::Type::Float,
              IDL::Type::Void
-          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming] || params[:client_proxy_source]
         when IDL::Type::String,
              IDL::Type::WString
-          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming] || params[:client_proxy_source]
         when IDL::Type::Object,
              IDL::Type::Interface,
              IDL::Type::Component
-          add_include('tao/x11/stub_arg_traits.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/stub_arg_traits.h') unless params[:no_cdr_streaming] || params[:client_proxy_source]
         when IDL::Type::Sequence
           # arg template included in P.h
           check_idl_type(idl_type.basetype)
