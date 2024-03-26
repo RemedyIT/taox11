@@ -26,7 +26,7 @@ module IDL
         @object_traits_specializations = false
 
         @default_pre_includes = []
-        unless params[:no_cdr_streaming]
+        unless params[:no_cdr_streaming] || params[:client_proxy_source]
           @default_pre_includes << 'tao/CDR.h'
         end
         if params[:gen_typecodes] && !params[:gen_anytypecode_source]
