@@ -473,7 +473,7 @@ module IDL
           add_include('tao/x11/portable_server/servant_forward.h')
         when IDL::Type::AbstractBase
           add_post_include('tao/x11/valuetype/abstract_base.h')
-        when IDL::Type::WString
+        when IDL::Type::WString,
              IDL::Type::WChar
           add_post_include('tao/x11/wstringwchar_ostream.h') if params[:gen_ostream_operators]
         end
