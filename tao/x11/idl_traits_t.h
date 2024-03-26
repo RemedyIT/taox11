@@ -13,6 +13,8 @@
 #include "tao/x11/stddef.h"
 #include "tao/x11/bounded_vector_t.h"
 #include "tao/x11/bounded_map_t.h"
+#include <algorithm>
+#include "ace/ace_wchar.h"
 
 namespace TAOX11_NAMESPACE
 {
