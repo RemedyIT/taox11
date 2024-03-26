@@ -461,7 +461,7 @@ module IDL
       unless options[:no_client_proxy]
         if options[:output_prx]
           co_prx = GenFile.new(options[:output_prx])
-          IDL.push_production(:stub_proxy, ::IDL::Cxx11::StubProxyWriter.new(co_prx, options))
+          IDL.push_production(:stub_proxy, ::IDL::Cxx11::StubProxyHeaderWriter.new(co_prx, options))
         end
       end
       if ((options[:gen_anytypecode_source] || false) && options[:gen_typecodes])
@@ -540,7 +540,7 @@ module IDL
         end
         if options[:ami_stub_output_prx]
           co_prx = GenFile.new(options[:ami_stub_output_prx])
-          IDL.push_production(:ami_stub_proxy, ::IDL::Cxx11::AmiStubProxyWriter.new(co_prx, options))
+          IDL.push_production(:ami_stub_proxy, ::IDL::Cxx11::AmiStubProxyHeaderWriter.new(co_prx, options))
         end
       end
     end
