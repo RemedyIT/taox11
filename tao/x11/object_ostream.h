@@ -11,8 +11,7 @@
 #define TAOX11_OBJECT_OSTREAM_H
 
 #include "tao/x11/object_fwd.h"
-
-#include "iostream"
+#include <ostream>
 
 namespace std
 {

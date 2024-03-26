@@ -10,10 +10,10 @@
 #ifndef TAOX11_WTRINGWCHAR_OSTREAM_H
 #define TAOX11_WTRINGWCHAR_OSTREAM_H
 
-#include <sstream>
+#include <ostream>
 #include <cstdlib>
-#include "iostream"
-#include "ace/ace_wchar.h"
+#include <codecvt>
+#include <locale>
 
 namespace std
 {
@@ -21,7 +21,8 @@ namespace std
   inline std::ostream&
   operator<< (std::ostream& _os, const std::wstring& _v)
   {
-    return _os << "\"" << ACE_Wide_To_Ascii (_v.c_str ()).char_rep () << "\"";
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
+    return _os << "\"" << conv.to_bytes(_v) << "\"";
   }
 
   /// wchar_t to ostream insertion
