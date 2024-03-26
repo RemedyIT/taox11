@@ -180,6 +180,7 @@ tests/typecode_adapter/orb_create/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
 tests/typecode_adapter/resolve_ref/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
 tests/union/run_test.pl:
 tests/union/run_cross_tao_server.pl:
+tests/wchar/run_test.pl:
 tests/write_traits/run_test.pl:
 tests/wstring/run_cross_tao_client.pl:
 tests/wstring/run_cross_tao_server.pl:
