@@ -453,9 +453,6 @@ module IDL
         when IDL::Type::String
           add_include('tao/x11/bounded_string_t.h') if idl_type.size.to_i.positive?
           add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
-        when IDL::Type::WString
-          add_include('tao/x11/bounded_string_t.h') if idl_type.size.to_i.positive?
-          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
           check_idl_type(idl_type)
         end
       end
