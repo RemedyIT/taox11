@@ -53,7 +53,7 @@ module IDL
 
       def post_visit(parser)
         # stub proxy implementations
-        visit_proxy(parser) unless params[:no_client_proxy]
+        visit_proxy(parser) unless params[:no_client_proxy_hdr]
 
         visit_anyops(parser) if params[:gen_any_ops] && !params[:gen_anytypecode_source]
 
@@ -62,7 +62,7 @@ module IDL
           visit_object_traits_specializations(parser)
 
           # Object ref traits specializations
-          visit_proxy_object_ref_traits_specializations(parser) unless params[:no_client_proxy]
+          visit_proxy_object_ref_traits_specializations(parser) unless params[:no_client_proxy_hdr]
         end
 
         # CDR operators
@@ -160,7 +160,7 @@ module IDL
       end
 
       def visit_proxy(parser)
-        writer(StubProxySourceWriter).visit_nodes(parser) unless params[:no_client_proxy]
+        writer(StubProxySourceWriter).visit_nodes(parser) unless params[:no_client_proxy_hdr]
       end
 
       def visit_anyops(parser)

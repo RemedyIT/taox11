@@ -33,12 +33,12 @@ module IDL
         params[:no_client_inline]
       end
 
-      def client_proxy
-        File.basename(params[:output_prx] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + params[:proxy_pfx] + '.h'))
+      def client_proxy_hdr
+        File.basename(params[:output_prx_hdr] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + params[:proxy_pfx] + '.h'))
       end
 
-      def no_client_proxy?
-        params[:no_client_proxy] && params[:ami_stub_output_prx].nil?
+      def no_client_proxy_hdr?
+        params[:no_client_proxy_hdr] && params[:ami_stub_output_prx].nil?
       end
 
       def client_source

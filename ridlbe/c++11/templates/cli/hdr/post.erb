@@ -1,8 +1,8 @@
 
 // generated from <%= ridl_template_path %>
-% unless no_client_proxy?
+% unless no_client_proxy_hdr?
 #if defined (__TAOX11_INCLUDE_STUB_PROXY__)
-#include "<%= client_proxy %>"
+#include "<%= client_proxy_hdr %>"
 #endif
 % end
 
