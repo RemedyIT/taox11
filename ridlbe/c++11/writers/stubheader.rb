@@ -64,6 +64,8 @@ module IDL
 
         visit_anyops(parser) if params[:gen_any_ops]
 
+        visit_typecodes(parser) if params[:gen_typecodes]
+
         # generate inline methods
         visit_inlines(parser)
 
@@ -111,7 +113,6 @@ module IDL
         @fwd_decl_cache[sn] = true
         visitor(InterfaceVisitor).visit_fwd(node)
 
-        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
         at_global_scope do
           visitor(InterfaceVisitor).visit_object_traits(node)
         end unless params[:no_object_traits]
@@ -136,8 +137,6 @@ module IDL
       def leave_interface(node)
         dec_nest
         visitor(InterfaceVisitor).visit_post(node)
-
-        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
         super
       end
 
@@ -155,8 +154,6 @@ module IDL
 
         @fwd_decl_cache[sn] = true
         visitor(StructVisitor).visit_fwd(node)
-
-        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
       end
 
       def enter_struct(node)
@@ -168,8 +165,9 @@ module IDL
       def leave_struct(node)
         dec_nest
         visitor(StructVisitor).visit_post(node)
-
-        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
+        unless node.enclosure.is_a?(IDL::AST::Module)
+          visitor(TypedefVisitor).visit_typecode(node)
+        end
         super
       end
 
@@ -179,7 +177,6 @@ module IDL
 
         @fwd_decl_cache[sn] = true
         visitor(ValuetypeVisitor).visit_fwd(node)
-        visitor(TypedefVisitor).visit_typecode(node)
         at_global_scope do
           visitor(ValuetypeVisitor).visit_traits(node)
         end
@@ -190,7 +187,6 @@ module IDL
         unless @fwd_decl_cache.has_key?(sn)
           @fwd_decl_cache[sn] = true
           visitor(ValuetypeVisitor).visit_fwd(node)
-          visitor(TypedefVisitor).visit_typecode(node)
           at_global_scope do
             visitor(ValuetypeVisitor).visit_traits(node)
           end
@@ -213,19 +209,23 @@ module IDL
         # valuetype or the valuetype has no user defined initializers but does
         # have operations/attributes
         vtv.visit_init(node) unless node.is_abstract? || (node.initializers.empty? && node.has_operations_or_attributes?)
+        unless node.enclosure.is_a?(IDL::AST::Module)
+          visitor(TypedefVisitor).visit_typecode(node)
+        end
       end
 
       def visit_valuebox(node)
         super
         visitor(ValueboxVisitor).visit_fwd(node)
-        visitor(TypedefVisitor).visit_typecode(node)
         at_global_scope do
           visitor(ValueboxVisitor).visit_traits(node)
         end
         visitor(ValueboxVisitor).visit_def(node)
-        visitor(TypedefVisitor).visit_typecode(node)
         at_global_scope do
           visitor(ValueboxVisitor).visit_traits_def(node)
+        end
+        unless node.enclosure.is_a?(IDL::AST::Module)
+          visitor(TypedefVisitor).visit_typecode(node)
         end
       end
 
@@ -238,8 +238,9 @@ module IDL
       def leave_exception(node)
         dec_nest
         visitor(ExceptionVisitor).visit_post(node)
-
-        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
+        unless node.enclosure.is_a?(IDL::AST::Module)
+          visitor(TypedefVisitor).visit_typecode(node)
+        end
         super
       end
 
@@ -249,8 +250,6 @@ module IDL
 
         @fwd_decl_cache[sn] = true
         visitor(UnionVisitor).visit_fwd(node)
-
-        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
       end
 
       def enter_union(node)
@@ -262,8 +261,9 @@ module IDL
       def leave_union(node)
         dec_nest
         visitor(UnionVisitor).visit_post(node)
-
-        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
+        unless node.enclosure.is_a?(IDL::AST::Module)
+          visitor(TypedefVisitor).visit_typecode(node)
+        end
         super
       end
 
@@ -314,19 +314,25 @@ module IDL
       def visit_enum(node)
         visitor(EnumVisitor).visit_enum(node)
 
-        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
+        unless node.enclosure.is_a?(IDL::AST::Module)
+          visitor(TypedefVisitor).visit_typecode(node)
+        end
       end
 
       def visit_bitmask(node)
         visitor(BitmaskVisitor).visit_bitmask(node)
 
-        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
+        unless node.enclosure.is_a?(IDL::AST::Module)
+          visitor(TypedefVisitor).visit_typecode(node)
+        end
       end
 
       def visit_bitset(node)
         visitor(BitsetVisitor).visit_bitset(node)
 
-        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
+        unless node.enclosure.is_a?(IDL::AST::Module)
+          visitor(TypedefVisitor).visit_typecode(node)
+        end
       end
 
       def visit_typedef(node)
@@ -334,7 +340,9 @@ module IDL
 
         visitor(TypedefVisitor).visit_typedef(node)
 
-        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes] && !node.idltype.resolved_type.is_a?(IDL::Type::Native)
+        unless node.enclosure.is_a?(IDL::AST::Module)
+          visitor(TypedefVisitor).visit_typecode(node)
+        end
       end
 
       def visit_includes(parser)
@@ -348,6 +356,10 @@ module IDL
 
       def visit_anyops(parser)
         writer(StubHeaderAnyOpWriter).visit_nodes(parser)
+      end
+
+      def visit_typecodes(parser)
+        writer(StubHeaderTypecodeWriter).visit_nodes(parser)
       end
 
       def visit_idl_traits(parser)
@@ -643,6 +655,98 @@ module IDL
       end
     end # StubHeaderIDLTraitsDefWriter
 
+    class StubHeaderTypecodeWriter < StubHeaderBaseWriter
+      def initialize(output = STDOUT, opts = {})
+        super
+      end
+
+      def enter_module(node)
+        super
+        println
+        printiln('// generated from StubHeaderTypecodeWriter#enter_module')
+        printiln('namespace ' + node.cxxname)
+        printiln('{')
+        inc_nest
+      end
+
+      def leave_module(node)
+        dec_nest
+        printiln("} // namespace #{node.cxxname}")
+        println
+        super
+      end
+
+      def declare_interface(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+        super
+      end
+
+      def leave_interface(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+        super
+      end
+
+      def declare_struct(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+        super
+      end
+
+      def leave_struct(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+        super
+      end
+
+      def declare_valuetype(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+        super
+      end
+
+      def enter_valuetype(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+        super
+      end
+
+      def visit_valuebox(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+        super
+      end
+
+      def leave_exception(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+        super
+      end
+
+      def declare_union(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+        super
+      end
+
+      def leave_union(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+        super
+      end
+
+      def visit_enum(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+      end
+
+      def visit_bitmask(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+      end
+
+      def visit_bitset(node)
+        visitor(TypedefVisitor).visit_typecode(node)
+      end
+
+      def visit_typedef(node)
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
+
+        if node.enclosure.is_a?(IDL::AST::Module)
+          visitor(TypedefVisitor).visit_typecode(node)
+        end
+      end
+    end # StubHeaderTypecodeWriter
+
     class StubHeaderAnyOpWriter < StubHeaderBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
@@ -660,7 +764,7 @@ module IDL
       def post_visit(_parser)
         dec_nest
         println
-        println('  } // namespace TAOX11_NAMESPACE::CORBA')
+        println('} // namespace TAOX11_NAMESPACE::CORBA')
         super
       end
 
