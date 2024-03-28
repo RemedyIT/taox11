@@ -309,6 +309,8 @@ module IDL
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
 
         visitor(TypedefVisitor).visit_typedef(node)
+
+        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes] && !node.idltype.resolved_type.is_a?(IDL::Type::Native)
       end
 
       def visit_includes(parser)
