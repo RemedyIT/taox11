@@ -1,7 +1,6 @@
 
   // generated from <%= ridl_template_path %>
 %##### Remote interface #####
-%#
 
 protected:
   using _shared_ptr_type = std::shared_ptr<<%= cxxname %>>;
@@ -23,5 +22,3 @@ private:
   <%= proxy_cxxname %>_ptr <%= proxy_cxxname.downcase %>_{};
   //@}
 }; // class <%= amic_cxxname %>
-%#
-% visit_template('typecode') if generate_typecode_support?

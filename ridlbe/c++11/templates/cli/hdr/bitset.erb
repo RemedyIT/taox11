@@ -46,5 +46,3 @@ private:
 }; // <%= cxxname %>
 
 inline void swap (<%= scoped_cxx_out_type %> m1, <%= scoped_cxx_out_type %> m2) { m1.swap (m2); }
-
-% visit_template('typecode') if generate_typecode_support?

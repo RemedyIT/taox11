@@ -42,4 +42,3 @@ private:
   <%= _m.cxx_member_type %> <%= _m.cxxname %>_<%= _m.value_initializer %>;
 % end
 }; // class <%= cxxname %>
-% visit_template('typecode') if generate_typecode_support?

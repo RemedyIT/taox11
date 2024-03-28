@@ -110,6 +110,8 @@ module IDL
 
         @fwd_decl_cache[sn] = true
         visitor(InterfaceVisitor).visit_fwd(node)
+
+        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
         at_global_scope do
           visitor(InterfaceVisitor).visit_object_traits(node)
         end unless params[:no_object_traits]
@@ -134,6 +136,8 @@ module IDL
       def leave_interface(node)
         dec_nest
         visitor(InterfaceVisitor).visit_post(node)
+
+        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
         super
       end
 
@@ -151,6 +155,8 @@ module IDL
 
         @fwd_decl_cache[sn] = true
         visitor(StructVisitor).visit_fwd(node)
+
+        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
       end
 
       def enter_struct(node)
@@ -162,6 +168,8 @@ module IDL
       def leave_struct(node)
         dec_nest
         visitor(StructVisitor).visit_post(node)
+
+        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
         super
       end
 
@@ -171,6 +179,7 @@ module IDL
 
         @fwd_decl_cache[sn] = true
         visitor(ValuetypeVisitor).visit_fwd(node)
+        visitor(TypedefVisitor).visit_typecode(node)
         at_global_scope do
           visitor(ValuetypeVisitor).visit_traits(node)
         end
@@ -181,6 +190,7 @@ module IDL
         unless @fwd_decl_cache.has_key?(sn)
           @fwd_decl_cache[sn] = true
           visitor(ValuetypeVisitor).visit_fwd(node)
+          visitor(TypedefVisitor).visit_typecode(node)
           at_global_scope do
             visitor(ValuetypeVisitor).visit_traits(node)
           end
@@ -208,10 +218,12 @@ module IDL
       def visit_valuebox(node)
         super
         visitor(ValueboxVisitor).visit_fwd(node)
+        visitor(TypedefVisitor).visit_typecode(node)
         at_global_scope do
           visitor(ValueboxVisitor).visit_traits(node)
         end
         visitor(ValueboxVisitor).visit_def(node)
+        visitor(TypedefVisitor).visit_typecode(node)
         at_global_scope do
           visitor(ValueboxVisitor).visit_traits_def(node)
         end
@@ -226,6 +238,8 @@ module IDL
       def leave_exception(node)
         dec_nest
         visitor(ExceptionVisitor).visit_post(node)
+
+        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
         super
       end
 
@@ -235,6 +249,8 @@ module IDL
 
         @fwd_decl_cache[sn] = true
         visitor(UnionVisitor).visit_fwd(node)
+
+        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
       end
 
       def enter_union(node)
@@ -246,6 +262,8 @@ module IDL
       def leave_union(node)
         dec_nest
         visitor(UnionVisitor).visit_post(node)
+
+        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
         super
       end
 
@@ -295,14 +313,20 @@ module IDL
 
       def visit_enum(node)
         visitor(EnumVisitor).visit_enum(node)
+
+        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
       end
 
       def visit_bitmask(node)
         visitor(BitmaskVisitor).visit_bitmask(node)
+
+        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
       end
 
       def visit_bitset(node)
         visitor(BitsetVisitor).visit_bitset(node)
+
+        visitor(TypedefVisitor).visit_typecode(node) if params[:gen_typecodes]
       end
 
       def visit_typedef(node)
