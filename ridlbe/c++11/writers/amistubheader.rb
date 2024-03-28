@@ -197,7 +197,7 @@ module IDL
       end
 
       def visit_typecodes(parser)
-        writer(StubHeaderTypecodeWriter).visit_nodes(parser)
+        # No separate writer for typecodes
       end
 
       def visit_traits_specializations(parser)

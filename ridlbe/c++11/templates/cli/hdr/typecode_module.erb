@@ -1,5 +1,6 @@
 %# Generate the typecode for any type at module level
 %if in_module_scope?
+
 // generated from <%= ridl_template_path %>
 #if !defined (__TAOX11_TYPECODE_<%= scoped_cxxname.to_include_guard %>_DECL__)
 #define __TAOX11_TYPECODE_<%= scoped_cxxname.to_include_guard %>_DECL__
