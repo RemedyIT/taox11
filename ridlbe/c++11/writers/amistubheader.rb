@@ -67,6 +67,8 @@ module IDL
 
         visit_anyops(parser) if params[:gen_any_ops]
 
+        visit_typecodes(parser) if params[:gen_typecodes]
+
         # generate inline methods
         visit_inlines(parser)
 
@@ -162,6 +164,8 @@ module IDL
 
         dec_nest
         ami_handler_interface.visit_post(node)
+
+        ami_handler_interface.visit_typecode_module(node) if params[:gen_typecodes]
         super
       end
 
@@ -190,6 +194,10 @@ module IDL
 
       def visit_anyops(parser)
         writer(AmiStubHeaderAnyOpWriter).visit_nodes(parser)
+      end
+
+      def visit_typecodes(parser)
+        # No separate writer for typecodes
       end
 
       def visit_traits_specializations(parser)
@@ -389,7 +397,7 @@ module IDL
 
       def enter_interface(node)
         if needs_ami_generation?(node)
-        ami_handler_interface.visit_anyop(node)
+          ami_handler_interface.visit_anyop(node)
         end
       end
     end # AmiStubHeaderAnyOpWriter

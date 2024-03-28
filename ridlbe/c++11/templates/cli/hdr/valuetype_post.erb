@@ -58,5 +58,3 @@ protected:
   _obv_unmarshal_<%= scoped_cxxname.scope_to_cxxname %>_v (TAO_InputCDR &, TAO_ChunkInfo &) = 0;
 % end
 }; // class <%= cxxname %>
-%#
-% visit_template('typecode') if generate_typecode_support?

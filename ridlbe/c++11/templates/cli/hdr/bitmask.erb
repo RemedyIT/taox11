@@ -13,5 +13,3 @@ inline <%= cxx_return_type %> operator& (<%= cxx_in_type %> _taox11_t, <%= cxx_i
 inline <%= cxx_return_type %> operator |= (<%= cxx_inout_type %> _taox11_lhs, <%= cxx_in_type %> _taox11_rhs) { _taox11_lhs = _taox11_lhs | _taox11_rhs; return _taox11_lhs; }
 inline <%= cxx_return_type %> operator &= (<%= cxx_inout_type %> _taox11_lhs, <%= cxx_in_type %> _taox11_rhs) { _taox11_lhs = _taox11_lhs & _taox11_rhs; return _taox11_lhs; }
 inline <%= cxx_return_type %> operator ^= (<%= cxx_inout_type %> _taox11_lhs, <%= cxx_in_type %> _taox11_rhs) { _taox11_lhs = _taox11_lhs ^ _taox11_rhs; return _taox11_lhs; }
-
-% visit_template('typecode') if generate_typecode_support?
