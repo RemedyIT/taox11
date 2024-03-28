@@ -165,7 +165,7 @@ module IDL
         dec_nest
         ami_handler_interface.visit_post(node)
 
-        ami_handler_interface.visit_typecode(node) if params[:gen_typecodes]
+        ami_handler_interface.visit_typecode_module(node) if params[:gen_typecodes]
         super
       end
 

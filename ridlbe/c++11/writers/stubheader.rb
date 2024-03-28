@@ -165,9 +165,7 @@ module IDL
       def leave_struct(node)
         dec_nest
         visitor(StructVisitor).visit_post(node)
-        unless node.enclosure.is_a?(IDL::AST::Module)
-          visitor(TypedefVisitor).visit_typecode(node)
-        end
+        visitor(TypedefVisitor).visit_typecode(node)
         super
       end
 
@@ -209,9 +207,7 @@ module IDL
         # valuetype or the valuetype has no user defined initializers but does
         # have operations/attributes
         vtv.visit_init(node) unless node.is_abstract? || (node.initializers.empty? && node.has_operations_or_attributes?)
-        unless node.enclosure.is_a?(IDL::AST::Module)
-          visitor(TypedefVisitor).visit_typecode(node)
-        end
+        visitor(TypedefVisitor).visit_typecode(node)
       end
 
       def visit_valuebox(node)
@@ -224,9 +220,7 @@ module IDL
         at_global_scope do
           visitor(ValueboxVisitor).visit_traits_def(node)
         end
-        unless node.enclosure.is_a?(IDL::AST::Module)
-          visitor(TypedefVisitor).visit_typecode(node)
-        end
+        visitor(TypedefVisitor).visit_typecode(node)
       end
 
       def enter_exception(node)
@@ -238,9 +232,7 @@ module IDL
       def leave_exception(node)
         dec_nest
         visitor(ExceptionVisitor).visit_post(node)
-        unless node.enclosure.is_a?(IDL::AST::Module)
-          visitor(TypedefVisitor).visit_typecode(node)
-        end
+        visitor(TypedefVisitor).visit_typecode(node)
         super
       end
 
@@ -261,9 +253,7 @@ module IDL
       def leave_union(node)
         dec_nest
         visitor(UnionVisitor).visit_post(node)
-        unless node.enclosure.is_a?(IDL::AST::Module)
-          visitor(TypedefVisitor).visit_typecode(node)
-        end
+        visitor(TypedefVisitor).visit_typecode(node)
         super
       end
 
@@ -313,26 +303,17 @@ module IDL
 
       def visit_enum(node)
         visitor(EnumVisitor).visit_enum(node)
-
-        unless node.enclosure.is_a?(IDL::AST::Module)
-          visitor(TypedefVisitor).visit_typecode(node)
-        end
+        visitor(TypedefVisitor).visit_typecode(node)
       end
 
       def visit_bitmask(node)
         visitor(BitmaskVisitor).visit_bitmask(node)
-
-        unless node.enclosure.is_a?(IDL::AST::Module)
-          visitor(TypedefVisitor).visit_typecode(node)
-        end
+        visitor(TypedefVisitor).visit_typecode(node)
       end
 
       def visit_bitset(node)
         visitor(BitsetVisitor).visit_bitset(node)
-
-        unless node.enclosure.is_a?(IDL::AST::Module)
-          visitor(TypedefVisitor).visit_typecode(node)
-        end
+        visitor(TypedefVisitor).visit_typecode(node)
       end
 
       def visit_typedef(node)
@@ -340,9 +321,7 @@ module IDL
 
         visitor(TypedefVisitor).visit_typedef(node)
 
-        unless node.enclosure.is_a?(IDL::AST::Module)
-          visitor(TypedefVisitor).visit_typecode(node)
-        end
+        visitor(TypedefVisitor).visit_typecode(node)
       end
 
       def visit_includes(parser)
@@ -677,73 +656,71 @@ module IDL
       end
 
       def declare_interface(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
         super
       end
 
       def leave_interface(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
         super
       end
 
       def declare_struct(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
         super
       end
 
       def leave_struct(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
         super
       end
 
       def declare_valuetype(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
         super
       end
 
       def enter_valuetype(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
         super
       end
 
       def visit_valuebox(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
         super
       end
 
       def leave_exception(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
         super
       end
 
       def declare_union(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
         super
       end
 
       def leave_union(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
         super
       end
 
       def visit_enum(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
       end
 
       def visit_bitmask(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
       end
 
       def visit_bitset(node)
-        visitor(TypedefVisitor).visit_typecode(node)
+        visitor(TypedefVisitor).visit_typecode_module(node)
       end
 
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
-        if node.enclosure.is_a?(IDL::AST::Module)
-          visitor(TypedefVisitor).visit_typecode(node)
-        end
+        visitor(TypedefVisitor).visit_typecode_module(node)
       end
     end # StubHeaderTypecodeWriter
 
