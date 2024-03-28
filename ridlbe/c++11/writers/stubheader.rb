@@ -656,65 +656,65 @@ module IDL
       end
 
       def declare_interface(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(InterfaceVisitor).visit_typecode_module(node)
         super
       end
 
       def leave_interface(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(InterfaceVisitor).visit_typecode_module(node)
         super
       end
 
       def declare_struct(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(StructVisitor).visit_typecode_module(node)
         super
       end
 
       def leave_struct(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(StructVisitor).visit_typecode_module(node)
         super
       end
 
       def declare_valuetype(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(ValuetypeVisitor).visit_typecode_module(node)
         super
       end
 
       def enter_valuetype(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(ValuetypeVisitor).visit_typecode_module(node)
         super
       end
 
       def visit_valuebox(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(ValueboxVisitor).visit_typecode_module(node)
         super
       end
 
       def leave_exception(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(ExceptionVisitor).visit_typecode_module(node)
         super
       end
 
       def declare_union(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(UnionVisitor).visit_typecode_module(node)
         super
       end
 
       def leave_union(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(UnionVisitor).visit_typecode_module(node)
         super
       end
 
       def visit_enum(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(EnumVisitor).visit_typecode_module(node)
       end
 
       def visit_bitmask(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(BitmaskVisitor).visit_typecode_module(node)
       end
 
       def visit_bitset(node)
-        visitor(TypedefVisitor).visit_typecode_module(node)
+        visitor(BitsetVisitor).visit_typecode_module(node)
       end
 
       def visit_typedef(node)
