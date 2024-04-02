@@ -28,10 +28,10 @@ module IDL
         super
         @default_pre_includes = [
           'tao/x11/stddef.h',
-          'tao/x11/basic_traits.h',
-#          'tao/x11/corba.h'
+          'tao/x11/basic_traits.h'
         ]
 
+        @default_pre_includes << 'tao/x11/corba.h' unless params[:client_proxy_source]
         @default_pre_includes << 'tao/x11/orb.h' unless params[:no_orb_include]
         @default_post_includes = []
 
