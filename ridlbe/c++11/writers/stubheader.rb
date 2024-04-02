@@ -334,11 +334,11 @@ module IDL
       end
 
       def visit_anyops(parser)
-        writer(StubHeaderAnyOpWriter).visit_nodes(parser)
+        writer(StubHeaderAnyOpWriter).visit_nodes(parser) unless params[:gen_anytypecode_header]
       end
 
       def visit_typecodes(parser)
-        writer(StubHeaderTypecodeWriter).visit_nodes(parser)
+        writer(StubHeaderTypecodeWriter).visit_nodes(parser) unless params[:gen_anytypecode_header]
       end
 
       def visit_idl_traits(parser)

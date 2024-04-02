@@ -10,14 +10,14 @@ require 'ridlbe/c++11/writers/stubsource'
 
 module IDL
   module Cxx11
-    class AnyTypeCodeBaseWriter < CxxCodeWriterBase
+    class AnyTypeCodeSourceBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
         self.template_root = File.join('cli', 'src', 'anytc')
       end
     end
 
-    class AnyTypeCodeWriter < AnyTypeCodeBaseWriter
+    class AnyTypeCodeWriter < AnyTypeCodeSourceBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
         @default_pre_includes = [
@@ -58,7 +58,7 @@ module IDL
       end
 
       def visit_includes(parser)
-        writer(AnyTypeCodeIncludeWriter,
+        writer(AnyTypeCodeSourceIncludeWriter,
                { default_pre_includes: @default_pre_includes,
                  default_post_includes: @default_post_includes }).visit_nodes(parser)
       end
@@ -72,7 +72,7 @@ module IDL
       end
     end # AnyTypeCodeWriter
 
-    class AnyTypeCodeIncludeWriter < AnyTypeCodeBaseWriter
+    class AnyTypeCodeSourceIncludeWriter < AnyTypeCodeSourceBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
         @default_pre_includes = params[:default_pre_includes]

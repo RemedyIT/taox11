@@ -4,7 +4,7 @@ project(*proxysource_gen_Idl): ridl_ostream_defaults {
   //idlflags += -Scorba
   //idlflags += -Scdr -SS -Scp -Sorb
   //idlflags -= -Gos
-  idlflags += -Gcps -Sorb -Gatc
+  idlflags += -Gcps -Sorb -Gatc -Gath
   idlflags -= -Sa -St
   IDL_Files {
     test.idl
