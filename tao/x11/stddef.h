@@ -53,7 +53,9 @@
  * as well as user code get build according to the
  * macros that get tested and defined inside this file.
  */
-#include "tao/orbconf.h"
+#if __has_include("tao/orbconf.h")
+# include "tao/orbconf.h"
+#endif
 #include "tao/x11/taox11_export.h"
 #include "tao/x11/versioned_x11_namespace.h"
 

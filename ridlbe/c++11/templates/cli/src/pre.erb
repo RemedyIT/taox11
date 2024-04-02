@@ -6,7 +6,9 @@
  *        https://www.remedy.nl
  */
 
+% unless client_proxy_src?
 #define __TAOX11_INCLUDE_STUB_PROXY__
+% end
 
 % pre_includes.each do |incfile|
 #include "<%= incfile %>"
