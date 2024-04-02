@@ -12,8 +12,6 @@
 
 #pragma once
 
-#include /**/ "ace/pre.h"
-
 #include "tao/x11/dynamic_any/dyn_common.h"
 
 #if defined (_MSC_VER)
@@ -85,5 +83,4 @@ namespace TAOX11_NAMESPACE
 # pragma warning(pop)
 #endif /* _MSC_VER */
 
-#include /**/ "ace/post.h"
 #endif /* TAOX11_DYNANY_I_H */

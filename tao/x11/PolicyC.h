@@ -18,7 +18,7 @@
 #ifndef __RIDL_POLICYC_H_INCLUDED__
 #define __RIDL_POLICYC_H_INCLUDED__
 
-#include /**/ "ace/pre.h"
+#include /**/ "tao/x11/pre.h"
 
 #include "tao/x11/stddef.h"
 #include "tao/x11/basic_traits.h"
@@ -518,7 +518,7 @@ TAOX11_Export std::ostream& operator<< (
 #include "PolicyP.h"
 #endif
 
-#include /**/ "ace/post.h"
+#include /**/ "tao/x11/post.h"
 
 #endif // __RIDL_POLICYC_H_INCLUDED__
 

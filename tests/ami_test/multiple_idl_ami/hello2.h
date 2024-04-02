@@ -9,8 +9,6 @@
 #ifndef TAOX11_HELLO2_H
 #define TAOX11_HELLO2_H
 
-#include /**/ "ace/pre.h"
-
 #include "testlib/taox11_testlog.h"
 
 #include "hello2S.h"
@@ -44,6 +42,5 @@ private:
   IDL::traits<CORBA::ORB>::ref_type orb_;
   IDL::traits<PortableServer::POA>::ref_type poa_;
 };
-#include /**/ "ace/post.h"
 #endif /* TAOX11_HELLO2_H */
 
