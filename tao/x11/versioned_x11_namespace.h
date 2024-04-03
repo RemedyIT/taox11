@@ -10,11 +10,6 @@
 #ifndef TAOX11_VERSIONED_X11_NAMESPACE_H
 #define TAOX11_VERSIONED_X11_NAMESPACE_H
 
-#if !defined (TAO_ORBCONF_H) && !defined (ACE_CONFIG_MACROS_H)
-# error This header is only meant to be included after "tao/orbconf.h".
-#endif  /* !TAO_ORBCONF_H */
-
-
 #if !defined (TAOX11_HAS_VERSIONED_NAMESPACE)
 # define TAOX11_HAS_VERSIONED_NAMESPACE 0
 #endif  /* !TAOX11_HAS_VERSIONED_NAMESPACE */
