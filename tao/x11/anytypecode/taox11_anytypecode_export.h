@@ -35,26 +35,6 @@
 #  define TAOX11_ANYTYPECODE_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK)
 #endif /* TAOX11_ANYTYPECODE_HAS_DLL == 1 */
 
-// Set TAOX11_ANYTYPECODE_NTRACE = 0 to turn on library specific tracing even if
-// tracing is turned off for ACE.
-#if !defined (TAOX11_ANYTYPECODE_NTRACE)
-#  if (ACE_NTRACE == 1)
-#    define TAOX11_ANYTYPECODE_NTRACE 1
-#  else /* (ACE_NTRACE == 1) */
-#    define TAOX11_ANYTYPECODE_NTRACE 0
-#  endif /* (ACE_NTRACE == 1) */
-#endif /* !TAOX11_ANYTYPECODE_NTRACE */
-
-#if (TAOX11_ANYTYPECODE_NTRACE == 1)
-#  define TAOX11_ANYTYPECODE_TRACE(X)
-#else /* (TAOX11_ANYTYPECODE_NTRACE == 1) */
-#  if !defined (ACE_HAS_TRACE)
-#    define ACE_HAS_TRACE
-#  endif /* ACE_HAS_TRACE */
-#  define TAOX11_ANYTYPECODE_TRACE(X) ACE_TRACE_IMPL(X)
-#  include "ace/Trace.h"
-#endif /* (TAOX11_ANYTYPECODE_NTRACE == 1) */
-
 #endif /* TAOX11_ANYTYPECODE_EXPORT_H */
 
 // End of auto generated file.
