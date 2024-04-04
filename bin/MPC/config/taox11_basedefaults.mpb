@@ -4,6 +4,7 @@ project : taox11_rules {
   requires += taox11_build
   includes += $(TAOX11_ROOT)
   libpaths += $(X11_BASE_ROOT)/lib
+  staticflags += TAOX11_AS_STATIC_LIBS
 
   verbatim(gnuace,macros,1) {
     taox11_build?=1

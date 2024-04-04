@@ -73,12 +73,6 @@ namespace TAOX11_NAMESPACE
 }//TAOX11_NAMESPACE
 
 
-#if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
 #include "tao/x11/dynamic_any/dynanyutils_t.cpp"
-#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
-
-#if defined (ACE_TEMPLATES_REQUIRE_PRAGMA)
-#pragma implementation ("tao/x11/dynamic_any/dynanyutils_t.cpp")
-#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 
 #endif /* TAOX11_DYNANYUTILS_T_H */

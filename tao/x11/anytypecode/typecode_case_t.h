@@ -124,12 +124,6 @@ namespace TAOX11_NAMESPACE
   } // namespace TypeCode
 } // namespace TAOX11_NAMESPACE
 
-#ifdef ACE_TEMPLATES_REQUIRE_SOURCE
 # include "tao/x11/anytypecode/typecode_case_t.cpp"
-#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
-
-#ifdef ACE_TEMPLATES_REQUIRE_PRAGMA
-# pragma implementation ("typecode_case_t.cpp")
-#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 
 #endif /* TAOX11_TYPECODE_CASE_T_H */

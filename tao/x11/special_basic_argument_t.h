@@ -184,12 +184,6 @@ namespace TAOX11_NAMESPACE
   };
 } // namespace TAOX11_NAMESPACE
 
-#if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
 #include "tao/x11/special_basic_argument_t.cpp"
-#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
-
-#if defined (ACE_TEMPLATES_REQUIRE_PRAGMA)
-#pragma implementation ("special_basic_argument_t.cpp")
-#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 
 #endif /* TAOX11_SPECIAL_BASIC_ARGUMENT_T_H */
