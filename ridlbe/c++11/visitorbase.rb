@@ -33,6 +33,10 @@ module IDL
         params[:no_client_inline]
       end
 
+      def anytypecode_hdr
+        File.basename(params[:output_anytypecode_header] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + params[:anytypecode_pfx] + '.h'))
+      end
+
       def client_proxy_hdr
         File.basename(params[:output_client_proxy_header] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + params[:proxy_pfx] + '.h'))
       end
@@ -47,6 +51,10 @@ module IDL
 
       def client_proxy_src?
         params[:client_proxy_source]
+      end
+
+      def anytypecode_hdr?
+        params[:gen_anytypecode_header]
       end
 
       def client_source
