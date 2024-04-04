@@ -47,7 +47,7 @@ module IDL
           'tao/x11/anytypecode/typecode.h'
         ]
 
-        @include_guard = "__RIDL_#{File.basename(params[:output] || '').to_random_include_guard}_INCLUDED__"
+        @include_guard = "__RIDL_#{File.basename(params[:output_anytypecode_header] || '').to_random_include_guard}_INCLUDED__"
       end
 
       def pre_visit(parser)
