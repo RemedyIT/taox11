@@ -135,13 +135,7 @@ namespace x11_logger
 } /* x11_logger */
 
 
-#if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
 #include "tao/x11/logger/logstream_t.cpp"
-#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
-
-#if defined (ACE_TEMPLATES_REQUIRE_PRAGMA)
-#pragma implementation ("logstream_t.cpp")
-#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 
 #endif /* !X11_NLOGGING */
 
