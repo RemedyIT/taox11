@@ -74,9 +74,6 @@ module IDL
         #visit_proxy(parser)
 
         if @object_traits_specializations
-          # Object traits specializations
-          visit_object_traits_specializations(parser)
-
           # Object ref traits specializations
           visit_proxy_object_ref_traits_specializations(parser) unless params[:no_client_proxy_hdr]
         end
@@ -96,6 +93,10 @@ module IDL
         writer(StubProxySourceIncludeWriter,
                { default_pre_includes: @default_pre_includes,
                  default_post_includes: @default_post_includes }).visit_nodes(parser)
+      end
+
+      def visit_proxy_object_ref_traits_specializations(parser)
+        writer(StubSourceProxyObjRefTraitsWriter).visit_nodes(parser)
       end
     end # StubProxySourceWriter
 
