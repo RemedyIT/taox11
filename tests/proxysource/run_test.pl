@@ -22,7 +22,18 @@ $SV = $target->CreateProcess ("client");
 $server = $SV->SpawnWaitKill ($target->ProcessStartWaitInterval());
 
 if ($server != 0) {
-    print STDERR "ERROR: const returned $server\n";
+    print STDERR "ERROR: client returned $server\n";
+    $status = 1;
+}
+
+$target->GetStderrLog();
+
+$SV = $target->CreateProcess ("taox11client");
+
+$server = $SV->SpawnWaitKill ($target->ProcessStartWaitInterval());
+
+if ($server != 0) {
+    print STDERR "ERROR: taox11 returned $server\n";
     $status = 1;
 }
 
