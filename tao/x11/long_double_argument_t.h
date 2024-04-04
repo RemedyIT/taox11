@@ -145,13 +145,7 @@ namespace TAOX11_NAMESPACE
 
 } // namespace TAOX11_NAMESPACE
 
-#if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
 #include "tao/x11/long_double_argument_t.cpp"
-#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
-
-#if defined (ACE_TEMPLATES_REQUIRE_PRAGMA)
-#pragma implementation ("long_double_argument_t.cpp")
-#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 
 #endif /* ACE_SIZEOF_LONG_DOUBLE != 16 */
 
