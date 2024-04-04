@@ -61,6 +61,7 @@ module IDL
         writer(AnyTypeCodeHeaderIncludeWriter,
                { default_pre_includes: @default_pre_includes,
                  default_post_includes: @default_post_includes }) do |w|
+          w.include_guard = @include_guard
           w.visit_nodes(parser)
         end
       end
@@ -75,6 +76,8 @@ module IDL
     end # AnyTypeCodeHeaderWriter
 
     class AnyTypeCodeHeaderIncludeWriter < AnyTypeCodeHeaderBaseWriter
+      helper Cxx11::VersionHelper
+      helper Cxx11::IncludeGuardHelper
 
       def initialize(output = STDOUT, opts = {})
         super
@@ -99,6 +102,7 @@ module IDL
         properties[:includes] = @includes
         properties[:pre_includes] = @default_pre_includes
         properties[:post_includes] = @default_post_includes
+        visitor(PreVisitor).visit
       end
 
       def default_pre_includes
