@@ -19,4 +19,16 @@ module Test
   {
     short my1;
   };
+
+  enum Color {
+    COLOR_RED,
+    COLOR_BLUE
+  };
+  union TestUnion_U3 switch(Color)
+  {
+  case COLOR_BLUE:
+    short myshort;
+  case COLOR_RED:
+    long mylong;
+  };
 };
