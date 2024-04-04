@@ -7,6 +7,8 @@
 # @copyright Copyright (c) Remedy IT Expertise BV
 #--------------------------------------------------------------------
 require 'ridlbe/c++11/writers/stubheader'
+require 'ridlbe/c++11/writers/helpers/version_helper'
+require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
@@ -44,6 +46,8 @@ module IDL
           'tao/x11/anytypecode/typecode_impl.h',
           'tao/x11/anytypecode/typecode.h'
         ]
+
+        @include_guard = "__RIDL_#{File.basename(params[:output] || '').to_random_include_guard}_INCLUDED__"
       end
 
       def pre_visit(parser)
@@ -64,7 +68,10 @@ module IDL
       def visit_includes(parser)
         writer(AnyTypeCodeHeaderIncludeWriter,
                { default_pre_includes: @default_pre_includes,
-                 default_post_includes: @default_post_includes }).visit_nodes(parser)
+                 default_post_includes: @default_post_includes }) do |w|
+          w.include_guard = @include_guard
+          w.visit_nodes(parser)
+        end
       end
 
       def visit_anyops(parser)
