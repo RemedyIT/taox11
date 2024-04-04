@@ -26,26 +26,18 @@ module IDL
 
       def initialize(output = STDOUT, opts = {})
         super
-        @default_pre_includes = [
-          'tao/CDR.h',
-          'tao/Invocation_Adapter.h',
-          'tao/Object_T.h'
-        ]
-        if params[:gen_typecodes]
-          @default_pre_includes << 'tao/AnyTypeCode/TypeCode.h'
-          @default_pre_includes << 'tao/AnyTypeCode/TypeCode_Constants.h'
-        end
-        if params[:gen_any_ops]
-          @default_pre_includes << 'tao/AnyTypeCode/Any_Impl_T.h'
-        end
+        @default_pre_includes = []
         @default_post_includes = [
-          'tao/x11/tao_corba.h',
-          'tao/x11/objproxy.h',
           'tao/x11/system_exception_x11.h',
-          'tao/x11/exception_macros.h',
-          'tao/x11/anytypecode/typecode_impl.h',
-          'tao/x11/anytypecode/typecode.h'
+          'tao/x11/exception_macros.h'
         ]
+        if params[:gen_any_ops]
+          @default_post_includes << 'tao/x11/anytypecode/any.h'
+        end
+        if params[:gen_typecodes]
+          @default_post_includes << 'tao/x11/anytypecode/typecode.h'
+          @default_post_includes << 'tao/x11/anytypecode/typecode_constants.h'
+        end
 
         @include_guard = "__RIDL_#{File.basename(params[:output_anytypecode_header] || '').to_random_include_guard}_INCLUDED__"
       end
