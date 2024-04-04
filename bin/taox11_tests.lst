@@ -161,6 +161,7 @@ tests/policies/manipulation/run_test.pl: !CORBA_E_MICRO
 tests/policies/oneway_timeouts/run_test.pl: !CORBA_E_MICRO
 tests/policies/mt_timeout/run_test.pl: !CORBA_E_MICRO
 tests/policies/reliable_oneways/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+tests/proxysource:
 tests/pt_throughput/run_test.pl:
 tests/reactor/run_test.pl:
 tests/sequence/run_test.pl:
