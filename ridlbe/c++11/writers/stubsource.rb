@@ -175,7 +175,7 @@ module IDL
       end
 
       def visit_cdr(parser)
-        writer(StubSourceCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming] || params[:client_proxy_source]
+        #writer(StubSourceCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming] || params[:client_proxy_source]
       end
 
       def visit_typecodes(parser)
@@ -418,35 +418,35 @@ module IDL
       end
     end
 
-    class StubProxySourceWriter < StubSourceBaseWriter
-      def initialize(output = STDOUT, opts = {})
-        super
-      end
-
-      def enter_module(node)
-        super
-        println
-        printiln('// generated from StubProxySourceWriter#enter_module')
-        printiln('namespace ' + node.cxxname)
-        printiln('{')
-        inc_nest
-      end
-
-      def leave_module(node)
-        dec_nest
-        printiln("} // namespace #{node.cxxname}")
-        println
-        super
-      end
-
-      def enter_interface(node)
-        super
-        return if node.is_local? || node.is_pseudo? || node.is_abstract?
-
-        visitor(InterfaceVisitor).visit_proxy(node)
-        println
-      end
-    end # StubProxySourceWriter
+    # class StubProxySourceWriter1 < StubSourceBaseWriter
+    #   def initialize(output = STDOUT, opts = {})
+    #     super
+    #   end
+    #
+    #   def enter_module(node)
+    #     super
+    #     println
+    #     printiln('// generated from StubProxySourceWriter1#enter_module')
+    #     printiln('namespace ' + node.cxxname)
+    #     printiln('{')
+    #     inc_nest
+    #   end
+    #
+    #   def leave_module(node)
+    #     dec_nest
+    #     printiln("} // namespace #{node.cxxname}")
+    #     println
+    #     super
+    #   end
+    #
+    #   def enter_interface(node)
+    #     super
+    #     return if node.is_local? || node.is_pseudo? || node.is_abstract?
+    #
+    #     visitor(InterfaceVisitor).visit_proxy(node)
+    #     println
+    #   end
+    # end # StubProxySourceWriter
 
     class StubSourceObjTraitsWriter < StubSourceBaseWriter
       def initialize(output = STDOUT, opts = {})

@@ -122,7 +122,6 @@ module IDL
         properties[:pre_includes] = @default_pre_includes
         properties[:post_includes] = @default_post_includes
         properties[:includes] = @includes
-        visitor(PreVisitor).visit
       end
 
       def enter_interface(node)
