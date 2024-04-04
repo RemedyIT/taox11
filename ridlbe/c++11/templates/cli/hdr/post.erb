@@ -6,7 +6,7 @@
 #endif
 %end
 %if anytypecode_hdr?
-#if __has_include("<%= anytypecode_hdr %>")
+#if !defined (TAOX11_DISABLE_INCLUDE_ANYTYPECODE) && __has_include("<%= anytypecode_hdr %>")
 # include "<%= anytypecode_hdr %>"
 #endif
 %end

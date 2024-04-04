@@ -21,5 +21,6 @@ project(*proxysource_gen_Client) {
     testC.cpp
   }
   includes += $(TAOX11_ROOT)
+  macros += TAOX11_DISABLE_INCLUDE_ANYTYPECODE
 }
 
