@@ -432,7 +432,8 @@ module IDL
       end
 
       def enter_union(node)
-        add_include('tao/x11/system_exception.h')
+        add_include('tao/x11/system_exception.h') unless params[:client_proxy_source]
+        add_pre_include('stdexcept') if params[:client_proxy_source]
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
@@ -498,6 +499,10 @@ module IDL
 
       def add_post_include(inc_file)
         @default_post_includes << inc_file unless @default_post_includes.include?(inc_file)
+      end
+
+      def add_pre_include(inc_file)
+        @default_pre_includes << inc_file unless @default_pre_includes.include?(inc_file)
       end
     end
 

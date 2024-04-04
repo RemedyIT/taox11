@@ -108,7 +108,7 @@ inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
 % # single member
 % _ndefmem = non_default_members
 % if all_labels_single? || (switchtype_boolean? && (!_ndefmem.empty? && _ndefmem.first.labels.size==1))
-    throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+    throw <%= invalid_argument_exception %>;
 % # with any other boolean switch (single member for all labels) all label changes are valid
 % elsif switchtype_boolean?
     this->disc_ = discval;
@@ -128,7 +128,7 @@ inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
 %       end
             break;
           default:
-            throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+            throw <%= invalid_argument_exception %>;
         }
       }
       break;
@@ -144,7 +144,7 @@ inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
           case <%= _lbl %>:
 %       end unless _m.is_default?
 %     end
-            throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+            throw <%= invalid_argument_exception %>;
           default:
             break;
         }
@@ -172,7 +172,7 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11
 %       _lbl = _m.labels.first
   if (<%= _lbl == 'true' ? '!' : '' %>_x11_disc)
   {
-    throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+    throw <%= invalid_argument_exception %>;
   }
 %     end
 %   else
@@ -184,7 +184,7 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11
     case <%= _lbl %>:
 %         end unless _m2.is_default?
 %       end
-      throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+      throw <%= invalid_argument_exception %>;
     default:
       break;
 %     else
@@ -193,7 +193,7 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11
 %       end
       break;
     default:
-      throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+      throw <%= invalid_argument_exception %>;
 %     end
   }
 %   end
@@ -234,7 +234,7 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_move_type %> _x
 %       _lbl = _m.labels.first
   if (<%= _lbl == 'true' ? '!' : '' %>_x11_disc)
   {
-    throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+    throw <%= invalid_argument_exception %>;
   }
 %     end
 %   else
@@ -246,7 +246,7 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_move_type %> _x
     case <%= _lbl %>:
 %         end unless _m2.is_default?
 %       end
-      throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+      throw <%= invalid_argument_exception %>;
     default:
       break;
 %     else
@@ -255,7 +255,7 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_move_type %> _x
 %       end
       break;
     default:
-      throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+      throw <%= invalid_argument_exception %>;
 %     end
   }
 %   end
@@ -293,7 +293,7 @@ inline <%= _m.scoped_cxx_in_type %> <%= scoped_cxxname %>::<%= _m.cxxname %> () 
 %       _lbl = _m.labels.first
   if (<%= _lbl == 'true' ? '!' : '' %>this->disc_)
   {
-    throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+    throw <%= invalid_argument_exception %>;
   }
 %     end
 %   else
@@ -305,7 +305,7 @@ inline <%= _m.scoped_cxx_in_type %> <%= scoped_cxxname %>::<%= _m.cxxname %> () 
     case <%= _lbl %>:
 %         end unless _m2.is_default?
 %       end
-      throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+      throw <%= invalid_argument_exception %>;
     default:
       break;
 %     else
@@ -314,7 +314,7 @@ inline <%= _m.scoped_cxx_in_type %> <%= scoped_cxxname %>::<%= _m.cxxname %> () 
 %       end
       break;
     default:
-      throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+      throw <%= invalid_argument_exception %>;
 %     end
   }
 %   end
@@ -328,7 +328,7 @@ inline <%= _m.scoped_cxx_out_type %> <%= scoped_cxxname %>::<%= _m.cxxname %> ()
 %       _lbl = _m.labels.first
   if (<%= _lbl == 'true' ? '!' : '' %>this->disc_)
   {
-    throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+    throw <%= invalid_argument_exception %>;
   }
 %     end
 %   else
@@ -340,7 +340,7 @@ inline <%= _m.scoped_cxx_out_type %> <%= scoped_cxxname %>::<%= _m.cxxname %> ()
     case <%= _lbl %>:
 %         end unless _m2.is_default?
 %       end
-      throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+      throw <%= invalid_argument_exception %>;
     default:
       break;
 %     else
@@ -349,7 +349,7 @@ inline <%= _m.scoped_cxx_out_type %> <%= scoped_cxxname %>::<%= _m.cxxname %> ()
 %       end
       break;
     default:
-      throw TAOX11_NAMESPACE::CORBA::BAD_PARAM ();
+      throw <%= invalid_argument_exception %>;
 %     end
   }
 %   end

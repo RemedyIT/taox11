@@ -122,6 +122,14 @@ module IDL
         node.switchtype
       end
 
+      def invalid_argument_exception
+        if params[:client_proxy_source]
+          'std::invalid_argument ("")'
+        else
+          'TAOX11_NAMESPACE::CORBA::BAD_PARAM ()'
+        end
+      end
+
       # template mapping
 
       map_template :typecode, :typecode
