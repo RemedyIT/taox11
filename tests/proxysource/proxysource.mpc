@@ -24,13 +24,15 @@ project(*proxysource_gen_Client) {
   macros += TAOX11_DISABLE_INCLUDE_ANYTYPECODE
 }
 
-project(*proxysource_taox11_Client): taox11_client {
+project(*proxysource_taox11_Client): taox11_client, taox11_anytypecode {
   after += *proxysource_gen_Idl
   Source_Files {
     taox11client.cpp
   }
   Source_Files {
     testC.cpp
+    testA.cpp
+    testCP.cpp
   }
   includes += $(TAOX11_ROOT)
 }

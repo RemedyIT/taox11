@@ -22,10 +22,10 @@ module IDL
         super
 
         @default_pre_includes = []
+        @default_pre_includes << 'tao/x11/tao_corba.h'
         @default_pre_includes << 'tao/x11/corba.h'
         @default_post_includes = []
         @default_pre_includes << 'tao/CDR.h' unless params[:no_cdr_streaming]
-        @default_post_includes << 'tao/x11/tao_corba.h'
       end
 
       # Object traits are only required for interfaces and valuetypes
@@ -63,7 +63,7 @@ module IDL
 
       def pre_visit(parser)
         properties[:pre_includes] = @default_pre_includes
-        properties[:post_includes] = []
+        properties[:post_includes] = @default_post_includes
         properties[:includes] = []
         visitor(PreVisitor).visit
         super
