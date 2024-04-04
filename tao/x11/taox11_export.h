@@ -38,5 +38,3 @@
 #endif /* TAOX11_HAS_DLL == 1 */
 
 #endif /* TAOX11_EXPORT_H */
-
-// End of auto generated file.

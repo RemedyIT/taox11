@@ -36,5 +36,3 @@
 #endif /* MY_LOGGER_HAS_DLL == 1 */
 
 #endif /* TEST_LOG_MODULE_EXPORT_H */
-
-// End of auto generated file.

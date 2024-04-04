@@ -36,5 +36,3 @@
 #endif /* TAOX11_OBJREF_TEMPLATE_HAS_DLL == 1 */
 
 #endif /* TAOX11_OBJREF_TEMPLATE_EXPORT_H */
-
-// End of auto generated file.

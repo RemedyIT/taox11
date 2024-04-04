@@ -36,5 +36,3 @@
 #endif /* TAOX11_ANYTYPECODE_HAS_DLL == 1 */
 
 #endif /* TAOX11_ANYTYPECODE_EXPORT_H */
-
-// End of auto generated file.

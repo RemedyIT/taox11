@@ -36,5 +36,3 @@
 #endif /* TAOX11_IOR_INTERCEPTOR_HAS_DLL == 1 */
 
 #endif /* TAOX11_IOR_INTERCEPTOR_EXPORT_H */
-
-// End of auto generated file.

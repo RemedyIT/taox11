@@ -36,5 +36,3 @@
 #endif /* GENERIC_SERVANT_HAS_DLL == 1 */
 
 #endif /* GENERIC_SERVANT_EXPORT_H */
-
-// End of auto generated file.

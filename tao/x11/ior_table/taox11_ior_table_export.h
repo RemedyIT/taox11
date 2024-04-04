@@ -36,5 +36,3 @@
 #endif /* TAOX11_IOR_TABLE_HAS_DLL == 1 */
 
 #endif /* TAOX11_IOR_TABLE_EXPORT_H */
-
-// End of auto generated file.

@@ -36,5 +36,3 @@
 #endif /* X11_LOGGER_HAS_DLL == 1 */
 
 #endif /* X11_LOGGER_EXPORT_H */
-
-// End of auto generated file.
