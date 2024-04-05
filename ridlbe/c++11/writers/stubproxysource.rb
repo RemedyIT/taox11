@@ -79,7 +79,7 @@ module IDL
         end
 
         # CDR operators
-        visit_cdr(parser) unless params[:no_cdr_streaming]
+        visit_cdr(parser)
 
         super
         visitor(PostVisitor).visit
