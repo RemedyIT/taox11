@@ -17,7 +17,7 @@ module IDL
       end
     end
 
-    class StubProxySourceWriter < StubSourceBaseWriter
+    class StubProxySourceWriter < StubProxySourceBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
 
