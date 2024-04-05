@@ -1,18 +1,11 @@
 
 // generated from <%= ridl_template_path %>
-static char const * const
-  _tao_enumerators<%= cxx_typecode %>[]=
+static char const * const _tao_enumerators<%= cxx_typecode %>[]=
   {
     "<%= enumerators.collect {|e| e.cxxname }.join(%Q{",\n    "}) %>"
   };
 
-static TAO_TAO::TypeCode::Enum<char const *,
-  char const * const *,
-  TAO_TAO::Null_RefCount_Policy>
-    _tao<%= cxx_typecode %> (
-      "<%= repository_id %>",
-      "<%= cxxname %>",
-      _tao_enumerators<%= cxx_typecode %>,
-      <%= enumerators.size() %>);
+static TAO_TAO::TypeCode::Enum<char const *, char const * const *, TAO_TAO::Null_RefCount_Policy>
+  _tao<%= cxx_typecode %> ("<%= repository_id %>", "<%= cxxname %>", _tao_enumerators<%= cxx_typecode %>, <%= enumerators.size() %>);
 
-TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> = std::addressof(_tao<%= cxx_typecode %>);
+TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> { std::addressof(_tao<%= cxx_typecode %>) };

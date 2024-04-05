@@ -1,10 +1,6 @@
 
 // generated from <%= ridl_template_path %>
-static TAO_TAO::TypeCode::Objref<char const *,
-  TAO_TAO::Null_RefCount_Policy>
-    _tao<%= cxx_typecode %> (
-      TAO_CORBA::<% if is_abstract? %>tk_abstract_interface<% elsif is_remote? %>tk_objref<% else %>tk_local_interface<% end %>,
-      "<%= repository_id %>",
-      "<%= cxxname %>");
+static TAO_TAO::TypeCode::Objref<char const *, TAO_TAO::Null_RefCount_Policy>
+  _tao<%= cxx_typecode %> (TAO_CORBA::<% if is_abstract? %>tk_abstract_interface<% elsif is_remote? %>tk_objref<% else %>tk_local_interface<% end %>, "<%= repository_id %>", "<%= cxxname %>");
 
-TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> = std::addressof(_tao<%= cxx_typecode %>);
+TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> { std::addressof(_tao<%= cxx_typecode %>) };

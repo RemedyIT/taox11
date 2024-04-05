@@ -1,22 +1,11 @@
 
 // generated from <%= ridl_template_path %>
-static TAO_TAO::TypeCode::Sequence<TAO_CORBA::TypeCode_ptr const *,
-  TAO_TAO::Null_RefCount_Policy>
-    _tao<%= cxx_typecode %>_seqtc (
-      TAO_CORBA::tk_sequence,
-      std::addressof(<%= basetype_scoped_cxx_typecode %>),
-      <%= bound || 0 %>U);
+static TAO_TAO::TypeCode::Sequence<TAO_CORBA::TypeCode_ptr const *, TAO_TAO::Null_RefCount_Policy>
+  _tao<%= cxx_typecode %>_seqtc (TAO_CORBA::tk_sequence, std::addressof(<%= basetype_scoped_cxx_typecode %>), <%= bound || 0 %>U);
 
-static TAO_CORBA::TypeCode_ptr const _tao<%= cxx_typecode %>_seqtc_ptr =
-  std::addressof(_tao<%= cxx_typecode %>_seqtc);
+static TAO_CORBA::TypeCode_ptr const _tao<%= cxx_typecode %>_seqtc_ptr { std::addressof(_tao<%= cxx_typecode %>_seqtc) };
 
-static TAO_TAO::TypeCode::Alias<char const *,
-                            TAO_CORBA::TypeCode_ptr const *,
-                            TAO_TAO::Null_RefCount_Policy>
-  _tao<%= cxx_typecode %> (
-    TAO_CORBA::tk_alias,
-    "<%= repository_id %>",
-    "<%= cxxname %>",
-    std::addressof(_tao<%= cxx_typecode %>_seqtc_ptr));
+static TAO_TAO::TypeCode::Alias<char const *, TAO_CORBA::TypeCode_ptr const *, TAO_TAO::Null_RefCount_Policy>
+  _tao<%= cxx_typecode %> (TAO_CORBA::tk_alias, "<%= repository_id %>", "<%= cxxname %>", std::addressof(_tao<%= cxx_typecode %>_seqtc_ptr));
 
-TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> = std::addressof(_tao<%= cxx_typecode %>);
+TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> { std::addressof(_tao<%= cxx_typecode %>) };
