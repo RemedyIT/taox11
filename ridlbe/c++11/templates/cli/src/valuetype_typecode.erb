@@ -1,16 +1,13 @@
 
 // generated from <%= ridl_template_path %>
 % if member_count > 0
-static TAO_TAO::TypeCode::Value_Field<
-  char const *,
-  TAO_CORBA::TypeCode_ptr const *> const
-    _tao_fields<%= cxx_typecode %>[] =
-      {
+static TAO_TAO::TypeCode::Value_Field<char const *, TAO_CORBA::TypeCode_ptr const *> const _tao_fields<%= cxx_typecode %>[] =
+  {
 %   members.each_with_index do |m, nr|
 %     tc = m.is_standard_typecode? ? "TAO_CORBA::#{m.cxx_typecode}" : "__tao::#{m.scoped_cxx_typecode}"
-        {"<%= m.cxxname %>", std::addressof(<%= tc %>), TAO_CORBA::<% if m.is_public? %>PUBLIC<% else %>PRIVATE<% end %>_MEMBER }<% if nr < (member_count-1) %>,<% end %>
+    {"<%= m.cxxname %>", std::addressof(<%= tc %>), TAO_CORBA::<% if m.is_public? %>PUBLIC<% else %>PRIVATE<% end %>_MEMBER }<% if nr < (member_count-1) %>,<% end %>
 %   end
-      };
+  };
 
 % end
 % if is_recursive?
@@ -20,30 +17,11 @@ static TAO_TAO::TypeCode::Recursive_Type<
 % else
 static TAO_TAO::TypeCode::Value<
 % end
-  char const *,
-  TAO_CORBA::TypeCode_ptr const *,
-  TAO_TAO::TypeCode::Value_Field<
-    char const *,
-    TAO_CORBA::TypeCode_ptr const *> const *,
-  TAO_TAO::Null_RefCount_Policy>
+  char const *, TAO_CORBA::TypeCode_ptr const *, TAO_TAO::TypeCode::Value_Field<char const *, TAO_CORBA::TypeCode_ptr const *> const *, TAO_TAO::Null_RefCount_Policy>
 % if is_recursive?
 %   dec_nest
-  , TAO_CORBA::TypeCode_ptr const *
-  , TAO_TAO::TypeCode::Value_Field<
-      char const *,
-      TAO_CORBA::TypeCode_ptr const *> const *>
+  , TAO_CORBA::TypeCode_ptr const *, TAO_TAO::TypeCode::Value_Field<char const *, TAO_CORBA::TypeCode_ptr const *> const *>
 % end
-_tao<%= cxx_typecode %> (
-  TAO_CORBA::tk_value,
-  "<%= repository_id %>",
-  "<%= cxxname %>",
-  TAO_CORBA::<%= value_modifier_const %>,
-% if has_concrete_base?
-  std::addressof(__tao::<%= bases.first.scoped_cxx_typecode %>),
-% else
-  std::addressof(TAO_CORBA::_tc_null),
-% end
-  <% if member_count > 0 %>_tao_fields<%= cxx_typecode %><% else %>nullptr<% end %>,
-  <%= member_count %>);
+  _tao<%= cxx_typecode %> (TAO_CORBA::tk_value, "<%= repository_id %>", "<%= cxxname %>", TAO_CORBA::<%= value_modifier_const %>, <% if has_concrete_base? %>std::addressof(__tao::<%= bases.first.scoped_cxx_typecode %>)<% else %>std::addressof(TAO_CORBA::_tc_null)<% end %>, <% if member_count > 0 %>_tao_fields<%= cxx_typecode %><% else %>nullptr<% end %>, <%= member_count %>);
 
-TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> = std::addressof(_tao<%= cxx_typecode %>);
+TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> { std::addressof(_tao<%= cxx_typecode %>) };
