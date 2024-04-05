@@ -343,12 +343,6 @@ project(taox11) : taox11_defaults, taolib {
   }
 
   Header_Files {
-    ext/std_condition_variable.h
-    ext/std_mutex.h
-    ext/std_str_to.h
-    ext/std_thread.h
-    ext/std_to_string.h
-    ext/stdext.h
   }
 
   Template_Files {

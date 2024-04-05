@@ -16,14 +16,6 @@
 #include "ace/OS_NS_string.h"
 #include "ace/OS_NS_stdlib.h"
 #include "ace/Singleton.h"
-#if defined(__MINGW32__)
-# if defined (ACE_HAS_THREADS)
-#  include "ace/Thread_Mutex.h"
-# else
-#  include "ace/Null_Mutex.h"
-# endif
-# include "ace/Synch_Traits.h"
-#endif
 #include <algorithm>
 #include <array>
 #include <vector>
@@ -955,20 +947,7 @@ namespace x11_logger
   /**
    * Helpers
    */
-#if defined(__MINGW32__)
-  //FUZZ: disable check_for_ACE_Thread_Mutex
   static thread_local log_streams __x11_loggers;
-# if defined (ACE_HAS_THREADS)
-# define  __x11_loggers \
-    (*ACE_TSS_Singleton<log_streams, ACE_Thread_Mutex>::instance ())
-# else
-  static log_streams     __x11_loggers_var;
-  static log_streams    &__x11_loggers = __x11_loggers_var;
-# endif
-  //FUZZ: enable check_for_ACE_Thread_Mutex
-#else
-  static thread_local log_streams __x11_loggers;
-#endif
 
   log_ostream_t<char>& trace ()
   {

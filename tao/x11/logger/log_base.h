@@ -18,7 +18,6 @@
 #include "tao/x11/logger/log_type.h"
 #include "tao/x11/logger/logstream_t.h"
 #include "tao/x11/logger/x11_logger_export.h"
-#include "tao/x11/ext/stdext.h"
 #include "ace/OS_NS_unistd.h"
 #include <thread>
 #include <atomic>

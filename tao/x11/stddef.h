@@ -27,11 +27,6 @@
 #include <iostream>
 #include <cstring>
 
-/*
- * Provide std namespace extensions/additions for older/crippled platforms.
- */
-#include "tao/x11/ext/stdext.h"
-
 // undefine GNU dev macro
 #if defined(minor)
 # undef minor
