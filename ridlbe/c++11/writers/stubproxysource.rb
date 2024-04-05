@@ -188,7 +188,7 @@ module IDL
       end
     end # StubProxySourceCDRWriter
 
-    class StubSourceProxyObjRefTraitsWriter < StubSourceBaseWriter
+    class StubSourceProxyObjRefTraitsWriter < StubProxySourceBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
       end
@@ -207,7 +207,7 @@ module IDL
       end
     end
 
-    class StubProxySourceIncludeWriter < StubSourceBaseWriter
+    class StubProxySourceIncludeWriter < StubProxySourceBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
         @default_pre_includes = params[:default_pre_includes]
