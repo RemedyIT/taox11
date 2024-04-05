@@ -24,7 +24,7 @@ project: taox11_basedefaults, taobaseidldefaults {
     optional(source_pre_extension) {
       commandflags(-GC) += AmiC
       commandflags(-GCa) += AmiC
-      commandflags(-Gcps) += CP
+      commandflags(-Gcp) += CP
       commandflags(-Gath) += A
     }
 
