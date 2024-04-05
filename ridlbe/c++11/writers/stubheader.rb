@@ -35,6 +35,18 @@ module IDL
         @default_pre_includes << 'tao/x11/orb.h' unless params[:no_orb_include]
         @default_post_includes = []
 
+        unless params[:output_anytypecode_header]
+          @default_post_includes << 'tao/x11/anytypecode/any.h' if params[:gen_any_ops]
+          if params[:gen_typecodes]
+            if params[:gen_anytypecode_source]
+              @default_post_includes << 'tao/x11/anytypecode/typecode_ref.h'
+            else
+              @default_post_includes << 'tao/x11/anytypecode/typecode.h'
+            end
+          end
+          @default_post_includes << 'tao/x11/anytypecode/typecode_constants.h' if params[:gen_typecodes]
+        end
+
         @include_guard = "__RIDL_#{File.basename(params[:output] || '').to_random_include_guard}_INCLUDED__"
 
         @fwd_decl_cache = {}
@@ -316,15 +328,15 @@ module IDL
       end
 
       def visit_includes(parser)
-        unless params[:gen_anytypecode_header]
-          writer(AnyTypeCodeHeaderIncludeWriter,
-                { default_pre_includes: @default_pre_includes,
-                  default_post_includes: @default_post_includes }) do |w|
-            w.visit_nodes(parser)
-            @default_pre_includes = w.default_pre_includes
-            @default_post_includes = w.default_post_includes
-          end
-        end
+        # unless params[:gen_anytypecode_header]
+        #   writer(AnyTypeCodeHeaderIncludeWriter,
+        #         { default_pre_includes: @default_pre_includes,
+        #           default_post_includes: @default_post_includes }) do |w|
+        #     w.visit_nodes(parser)
+        #     @default_pre_includes = w.default_pre_includes
+        #     @default_post_includes = w.default_post_includes
+        #   end
+        # end
         writer(StubHeaderIncludeWriter,
                { default_pre_includes: @default_pre_includes,
                  default_post_includes: @default_post_includes }) do |w|

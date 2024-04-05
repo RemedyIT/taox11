@@ -100,6 +100,25 @@ module IDL
       end
     end # StubProxySourceWriter
 
+    class StubSourceProxyObjRefTraitsWriter < StubSourceBaseWriter
+      def initialize(output = STDOUT, opts = {})
+        super
+      end
+
+      def pre_visit(_parser)
+        println
+        printiln('// generated from StubSourceProxyObjRefTraitsWriter#pre_visit')
+      end
+
+      def post_visit(parser); end
+
+      def enter_interface(node)
+        return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
+        visitor(InterfaceVisitor).visit_object_ref_traits(node)
+      end
+    end
+
     class StubProxySourceIncludeWriter < StubSourceBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
