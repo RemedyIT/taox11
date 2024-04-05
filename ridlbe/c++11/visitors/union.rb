@@ -123,6 +123,7 @@ module IDL
       end
 
       def invalid_argument_exception
+        # todo, add ridlc argument, also make a distinction which include to add
         if params[:client_proxy_source]
           'std::invalid_argument ("")'
         else
