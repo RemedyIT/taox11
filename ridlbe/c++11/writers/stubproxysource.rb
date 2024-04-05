@@ -86,7 +86,7 @@ module IDL
       end
 
       def visit_cdr(parser)
-        writer(StubSourceCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming]
+        writer(StubProxySourceCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming]
       end
 
       def visit_includes(parser)
@@ -99,6 +99,94 @@ module IDL
         writer(StubSourceProxyObjRefTraitsWriter).visit_nodes(parser)
       end
     end # StubProxySourceWriter
+
+    class StubProxySourceCDRWriter < StubProxySourceBaseWriter
+      def initialize(output = STDOUT, opts = {})
+        super
+        # CDR operators are generated outside the scopes of the IDL defined types
+        # in a common naming scope so do not track scopes such that all typenames
+        # will always be generated fully scoped.
+        self.disable_scope_tracking = true
+      end
+
+      def pre_visit(parser)
+        super
+        printiln('// generated from StubProxySourceCDRWriter#pre_visit')
+        println('TAO_BEGIN_VERSIONED_NAMESPACE_DECL')
+      end
+
+      def post_visit(parser)
+        println
+        println('TAO_END_VERSIONED_NAMESPACE_DECL')
+        super
+      end
+
+      def enter_interface(node)
+        return if node.is_local? || node.is_pseudo? || params[:no_cdr_streaming]
+
+        visitor(InterfaceVisitor).visit_cdr(node)
+      end
+
+      def enter_valuetype(node)
+        return if node.is_local? || params[:no_cdr_streaming]
+
+        visitor(ValuetypeVisitor).visit_cdr(node)
+      end
+
+      def visit_valuebox(node)
+        return if node.is_local? || params[:no_cdr_streaming]
+
+        visitor(ValueboxVisitor).visit_cdr(node)
+      end
+
+      def enter_struct(node)
+        return if node.is_local? || params[:no_cdr_streaming]
+
+        visitor(StructVisitor).visit_cdr(node)
+      end
+
+      def enter_union(node)
+        return if node.is_local? || params[:no_cdr_streaming]
+
+        visitor(UnionVisitor).visit_cdr(node)
+      end
+
+      def enter_exception(node)
+        return if params[:no_cdr_streaming]
+
+        visitor(ExceptionVisitor).visit_cdr(node)
+      end
+
+      def visit_enum(node)
+        return if params[:no_cdr_streaming]
+
+        visitor(EnumVisitor).visit_cdr(node)
+      end
+
+      def visit_bitmask(node)
+        return if params[:no_cdr_streaming]
+
+        visitor(BitmaskVisitor).visit_cdr(node)
+      end
+
+      def visit_bitset(node)
+        return if params[:no_cdr_streaming]
+
+        visitor(BitsetVisitor).visit_cdr(node)
+      end
+
+      def visit_typedef(node)
+        return if node.is_local? || params[:no_cdr_streaming]
+        # nothing to do if this is just an alias for another defined type
+        return if node.idltype.is_a?(IDL::Type::ScopedName) || node.idltype.resolved_type.is_standard_type?
+
+        idl_type = node.idltype.resolved_type
+        case idl_type
+        when IDL::Type::String, IDL::Type::WString
+          visitor(StringVisitor).visit_cdr(node) # only bounded, unbounded is standard_type
+        end
+      end
+    end # StubProxySourceCDRWriter
 
     class StubSourceProxyObjRefTraitsWriter < StubSourceBaseWriter
       def initialize(output = STDOUT, opts = {})
