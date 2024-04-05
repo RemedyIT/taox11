@@ -4,23 +4,15 @@
 % case_lst << [default_member, default_label] if has_default? && !has_implicit_default?
 % case_lst.each_with_index do |(m, lbl), nr|
 %   tc = m.is_standard_typecode? ? "TAO_CORBA::#{m.cxx_typecode}" : "__tao::#{m.scoped_cxx_typecode}"
-static ::TAOX11_NAMESPACE::TypeCode::Case_T<<%= scoped_switch_cxxtype %>,
-  char const *,
-  TAO_CORBA::TypeCode_ptr const *> const
-    _tao_cases<%= cxx_typecode %>_<%= nr %> (
-        <%= lbl %>,
-        "<%= m.cxxname %>",
-        std::addressof(<%= tc %>));
+static ::TAOX11_NAMESPACE::TypeCode::Case_T<<%= scoped_switch_cxxtype %>, char const *, TAO_CORBA::TypeCode_ptr const *> const _tao_cases<%= cxx_typecode %>_<%= nr %> (<%= lbl %>, "<%= m.cxxname %>", std::addressof(<%= tc %>));
 % end
-static TAO_TAO::TypeCode::Case<
-  char const *,
-  TAO_CORBA::TypeCode_ptr const *> const * const  _tao_cases<%= cxx_typecode %>[] =
-    {
+static TAO_TAO::TypeCode::Case<char const *, TAO_CORBA::TypeCode_ptr const *> const * const  _tao_cases<%= cxx_typecode %>[] =
+  {
 % _last = case_lst.size-1
 % case_lst.each_with_index do |(m, lbl), nr|
-      std::addressof(_tao_cases<%= cxx_typecode %>_<%= nr %>)<% if nr < _last %>,<% end %>
+    std::addressof(_tao_cases<%= cxx_typecode %>_<%= nr %>)<% if nr < _last %>,<% end %>
 % end
-    };
+  };
 
 % if is_recursive?
 static TAO_TAO::TypeCode::Recursive_Type<
@@ -29,24 +21,11 @@ static TAO_TAO::TypeCode::Recursive_Type<
 % else
 static TAO_TAO::TypeCode::Union<
 % end
-  char const *,
-  TAO_CORBA::TypeCode_ptr const *,
-  TAO_TAO::TypeCode::Case<
-    char const *,
-    TAO_CORBA::TypeCode_ptr const *> const * const*,
-  TAO_TAO::Null_RefCount_Policy>
+  char const *, TAO_CORBA::TypeCode_ptr const *, TAO_TAO::TypeCode::Case<char const *, TAO_CORBA::TypeCode_ptr const *> const * const*, TAO_TAO::Null_RefCount_Policy>
 % if is_recursive?
 %   dec_nest
-  , TAO_CORBA::TypeCode_ptr const *
-  , TAO_TAO::TypeCode::Case<
-      char const *,
-      TAO_CORBA::TypeCode_ptr const *> const * const * >
+  , TAO_CORBA::TypeCode_ptr const *, TAO_TAO::TypeCode::Case<char const *, TAO_CORBA::TypeCode_ptr const *> const * const * >
 % end
-_tao<%= cxx_typecode %> (
-  "<%= repository_id %>",
-  "<%= cxxname %>",
-  std::addressof(<%= scoped_switch_cxx_typecode%>),
-  _tao_cases<%= cxx_typecode %>,
-  <%= case_lst.size %>, <%= (has_default? && !has_implicit_default?) ? case_lst.size-1 : -1 %>);
+  _tao<%= cxx_typecode %> ("<%= repository_id %>", "<%= cxxname %>", std::addressof(<%= scoped_switch_cxx_typecode%>), _tao_cases<%= cxx_typecode %>, <%= case_lst.size %>, <%= (has_default? && !has_implicit_default?) ? case_lst.size-1 : -1 %>);
 
-TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> = std::addressof(_tao<%= cxx_typecode %>);
+TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> { std::addressof(_tao<%= cxx_typecode %>) };
