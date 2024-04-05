@@ -80,6 +80,8 @@ module IDL
               'impl_export_file' => { description: "-Wb,impl_export_file=FILE\t\tSet implementation export file to generate for -Gxhimpl" },
               'anytypecode_export_macro' => { description: "-Wb,anytypecode_export_macro=MACRO\tSet export macro for Any ops and TypeCode" },
               'anytypecode_export_include' => { description: "-Wb,anytypecode_export_include=FILE\tSet export include file for Any ops and TypeCode" },
+              'stub_proxy_export_macro' => { description: "-Wb,stub_proxy_export_macro=MACRO\tSet export macro for stub proxy files" },
+              'stub_proxy_export_include' => { description: "-Wb,stub_proxy_export_include=FILE\tSet export include file for stub proxy files" },
               'include_guard' => { description: "-Wb,include_guard=MACRO\t\tguard to prevent the generated client header file to be included" },
               'safe_include' => { description: "-Wb,safe_include=FILE\t\tinclude that should be used instead of the own generated client header file" },
               'unique_include' => { description: "-Wb,unique_include=FILE\t\tinclude that should be generated as only contents of the generated client header file" }
@@ -340,6 +342,10 @@ module IDL
 
         IDL::Cxx11.check_impl_export_params(options)
 
+        IDL::Cxx11.check_anytypecode_export_params(options)
+
+        IDL::Cxx11.check_client_proxy_export_params(options)
+
         # generate client stubs if requested
         if options[:client_stubs]
           IDL::Cxx11.generate_client_stubs(options)
@@ -379,6 +385,14 @@ module IDL
 
         if options[:gen_export_impl]
           IDL::Cxx11.gen_impl_export(options)
+        end
+
+        if options[:gen_export_anytypecode]
+          IDL::Cxx11.gen_anytypecode_export(options)
+        end
+
+        if options[:gen_export_client_proxy]
+          IDL::Cxx11.gen_client_proxy_export(options)
         end
       end # becfg.on_process_input
     end # Backend.configure
@@ -456,6 +470,32 @@ module IDL
         # we derive missing export parameters from base parameters
         options.impl_export_macro = options.base_export_macro + '_STUB' + options.export_macro_pfx unless options.impl_export_macro || options.base_export_macro.nil?
         options.impl_export_include = options.base_export_include + '_stub' + options.export_header_pfx unless options.impl_export_include || options.base_export_include.nil?
+      end
+    end
+
+    def self.check_client_proxy_export_params(options)
+      if options.gen_export_client_proxy || options.export_client_proxy
+        unless options.client_proxy_export_macro || options.base_export_macro
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhcpr or -Xcpr without specifying the macro with -Wb,client_proxy_export_macro=MACRO " +
+                        'or with -Wb,base_export_macro=MACRO_PREFIX')
+        end
+        # only in case export header generation has been explicitly enabled will
+        # we derive missing export parameters from base parameters
+        options.client_proxy_export_macro = options.base_export_macro + '_STUB' + options.export_macro_pfx unless options.client_proxy_export_macro || options.base_export_macro.nil?
+        options.client_proxy_export_include = options.base_export_include + '_stub' + options.export_header_pfx unless options.client_proxy_export_include || options.base_export_include.nil?
+      end
+    end
+
+    def self.check_anytypecode_export_params(options)
+      if options.gen_export_anytypecode || options.export_anytypecode
+        unless options.anytypecode_export_macro || options.base_export_macro
+          IDL.fatal("ERROR: it isn't allowed to use -Gxhat or -Xat without specifying the macro with -Wb,anytypecode_export_macro=MACRO " +
+                        'or with -Wb,base_export_macro=MACRO_PREFIX')
+        end
+        # only in case export header generation has been explicitly enabled will
+        # we derive missing export parameters from base parameters
+        options.anytypecode_export_macro = options.base_export_macro + '_STUB' + options.export_macro_pfx unless options.anytypecode_export_macro || options.base_export_macro.nil?
+        options.anytypecode_export_include = options.base_export_include + '_stub' + options.export_header_pfx unless options.anytypecode_export_include || options.base_export_include.nil?
       end
     end
 
@@ -647,6 +687,36 @@ module IDL
         IDL.push_production(
             :impl_export_header,
             ::IDL::Cxx11::ExportHeaderWriter.new(options.impl_export_macro, export_file, so, options))
+      else
+        IDL.fatal('ERROR: it is not allowed to use -Gxhimpl without specifying the file with -Wb,impl_export_file=FILE, ' +
+                      '-Wb,impl_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
+      end
+    end
+
+    def self.gen_anytypecode_export(options)
+      return if IDL.has_production?(:anytypecode_export_header)
+
+      export_file = options.anytypecode_export_file || options.anytypecode_export_include
+      if export_file
+        so = GenFile.new(File.join(options.outputdir, export_file))
+        IDL.push_production(
+            :anytypecode_export_header,
+            ::IDL::Cxx11::ExportHeaderWriter.new(options.anytypecode_export_macro, export_file, so, options))
+      else
+        IDL.fatal('ERROR: it is not allowed to use -Gxhimpl without specifying the file with -Wb,impl_export_file=FILE, ' +
+                      '-Wb,impl_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
+      end
+    end
+
+    def self.gen_client_proxy_export(options)
+      return if IDL.has_production?(:client_proxy_export_header)
+
+      export_file = options.client_proxy_export_file || options.client_proxy_export_include
+      if export_file
+        so = GenFile.new(File.join(options.outputdir, export_file))
+        IDL.push_production(
+            :client_proxy_export_header,
+            ::IDL::Cxx11::ExportHeaderWriter.new(options.client_proxy_export_macro, export_file, so, options))
       else
         IDL.fatal('ERROR: it is not allowed to use -Gxhimpl without specifying the file with -Wb,impl_export_file=FILE, ' +
                       '-Wb,impl_export_include=FILE or -Wb,base_export_include=FILE_PREFIX')
