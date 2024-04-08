@@ -155,7 +155,7 @@ module IDL
                  default_post_includes: @default_post_includes }).visit_nodes(parser)
       end
 
-      def visit_proxy(parser)
+      def visit_proxy(parser) # TODO Probabably cause duplicate header
         writer(StubProxySourceWriter).visit_nodes(parser) unless params[:client_proxy_source]
       end
 
