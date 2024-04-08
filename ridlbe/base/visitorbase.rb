@@ -367,10 +367,6 @@ module IDL
         @node.enclosure.is_a?(IDL::AST::Module)
       end
 
-      def in_interface_scope?
-        @node.enclosure.is_a?(IDL::AST::Interface)
-      end
-
       def repository_id
         @node.repository_id
       end

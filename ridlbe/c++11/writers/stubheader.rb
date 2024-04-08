@@ -29,9 +29,9 @@ module IDL
         @default_pre_includes = [
           'tao/x11/stddef.h',
           'tao/x11/basic_traits.h',
-          'tao/x11/corba.h',
-          'tao/x11/system_exception.h'
+          'tao/x11/corba.h'
         ]
+
         @default_pre_includes << 'tao/x11/orb.h' unless params[:no_orb_include]
         @default_post_includes = []
         @default_post_includes << 'tao/x11/anytypecode/any.h' if params[:gen_any_ops]
@@ -43,7 +43,6 @@ module IDL
           end
         end
         @default_post_includes << 'tao/x11/anytypecode/typecode_constants.h' if params[:gen_typecodes]
-        @default_post_includes << 'tao/x11/corba_ostream.h'
 
         @include_guard = "__RIDL_#{File.basename(params[:output] || '').to_random_include_guard}_INCLUDED__"
 
@@ -64,6 +63,8 @@ module IDL
         visit_idl_traits_def(parser)
 
         visit_anyops(parser) if params[:gen_any_ops]
+
+        visit_typecodes(parser) if params[:gen_typecodes]
 
         # generate inline methods
         visit_inlines(parser)
@@ -111,6 +112,7 @@ module IDL
 
         @fwd_decl_cache[sn] = true
         visitor(InterfaceVisitor).visit_fwd(node)
+
         at_global_scope do
           visitor(InterfaceVisitor).visit_object_traits(node)
         end unless params[:no_object_traits]
@@ -163,6 +165,7 @@ module IDL
       def leave_struct(node)
         dec_nest
         visitor(StructVisitor).visit_post(node)
+        visitor(TypedefVisitor).visit_typecode(node)
         super
       end
 
@@ -204,6 +207,7 @@ module IDL
         # valuetype or the valuetype has no user defined initializers but does
         # have operations/attributes
         vtv.visit_init(node) unless node.is_abstract? || (node.initializers.empty? && node.has_operations_or_attributes?)
+        visitor(TypedefVisitor).visit_typecode(node)
       end
 
       def visit_valuebox(node)
@@ -216,6 +220,7 @@ module IDL
         at_global_scope do
           visitor(ValueboxVisitor).visit_traits_def(node)
         end
+        visitor(TypedefVisitor).visit_typecode(node)
       end
 
       def enter_exception(node)
@@ -227,6 +232,7 @@ module IDL
       def leave_exception(node)
         dec_nest
         visitor(ExceptionVisitor).visit_post(node)
+        visitor(TypedefVisitor).visit_typecode(node)
         super
       end
 
@@ -247,6 +253,7 @@ module IDL
       def leave_union(node)
         dec_nest
         visitor(UnionVisitor).visit_post(node)
+        visitor(TypedefVisitor).visit_typecode(node)
         super
       end
 
@@ -296,20 +303,25 @@ module IDL
 
       def visit_enum(node)
         visitor(EnumVisitor).visit_enum(node)
+        visitor(TypedefVisitor).visit_typecode(node)
       end
 
       def visit_bitmask(node)
         visitor(BitmaskVisitor).visit_bitmask(node)
+        visitor(TypedefVisitor).visit_typecode(node)
       end
 
       def visit_bitset(node)
         visitor(BitsetVisitor).visit_bitset(node)
+        visitor(TypedefVisitor).visit_typecode(node)
       end
 
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native) && params[:no_gen_native]
 
         visitor(TypedefVisitor).visit_typedef(node)
+
+        visitor(TypedefVisitor).visit_typecode(node)
       end
 
       def visit_includes(parser)
@@ -323,6 +335,10 @@ module IDL
 
       def visit_anyops(parser)
         writer(StubHeaderAnyOpWriter).visit_nodes(parser)
+      end
+
+      def visit_typecodes(parser)
+        writer(StubHeaderTypecodeWriter).visit_nodes(parser)
       end
 
       def visit_idl_traits(parser)
@@ -371,12 +387,19 @@ module IDL
       def enter_interface(node)
         return if node.is_pseudo?
 
+        add_post_include('tao/x11/object_ostream.h')
+
         unless node.is_abstract?
           add_include('tao/x11/object.h')
+          add_include('tao/x11/system_exception.h')
         else
           add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
           add_post_include('tao/x11/valuetype/abstract_base.h') # after typecode include
         end
+      end
+
+      def visit_exception(_node)
+        add_include('tao/x11/system_exception.h')
       end
 
       def visit_operation(node)
@@ -393,6 +416,7 @@ module IDL
       end
 
       def enter_valuetype(node)
+        add_include('tao/x11/system_exception.h')
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
         add_post_include('tao/x11/valuetype/value_base.h') # after typecode include
         add_post_include('tao/x11/valuetype/value_factory_base.h') unless node.is_abstract? # after typecode include
@@ -400,6 +424,7 @@ module IDL
       end
 
       def visit_valuebox(node)
+        add_include('tao/x11/system_exception.h')
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
         add_post_include('tao/x11/valuetype/value_box_t.h')
         check_idl_type(node.boxed_type)
@@ -411,6 +436,7 @@ module IDL
       end
 
       def enter_union(node)
+        add_include('tao/x11/system_exception.h')
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
@@ -425,6 +451,8 @@ module IDL
 
         idl_type = node.idltype.resolved_type
         case idl_type
+        when IDL::Type::WChar
+          check_idl_type(idl_type)
         when IDL::Type::Fixed
           add_include('tao/x11/fixed_t.h')
         when IDL::Type::Sequence
@@ -439,9 +467,11 @@ module IDL
           check_idl_type(idl_type.valuetype)
         when IDL::Type::Array
           check_idl_type(idl_type.basetype)
-        when IDL::Type::String, IDL::Type::WString
+        when IDL::Type::String,
+             IDL::Type::WString
           add_include('tao/x11/bounded_string_t.h') if idl_type.size.to_i.positive?
           add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
+          check_idl_type(idl_type)
         end
       end
 
@@ -460,6 +490,9 @@ module IDL
           add_include('tao/x11/portable_server/servant_forward.h')
         when IDL::Type::AbstractBase
           add_post_include('tao/x11/valuetype/abstract_base.h')
+        when IDL::Type::WString,
+             IDL::Type::WChar
+          add_post_include('tao/x11/wstringwchar_ostream.h') if params[:gen_ostream_operators]
         end
       end
 
@@ -601,12 +634,102 @@ module IDL
       end
     end # StubHeaderIDLTraitsDefWriter
 
+    class StubHeaderTypecodeWriter < StubHeaderBaseWriter
+      def initialize(output = STDOUT, opts = {})
+        super
+      end
+
+      def enter_module(node)
+        super
+        println
+        printiln('// generated from StubHeaderTypecodeWriter#enter_module')
+        printiln('namespace ' + node.cxxname)
+        printiln('{')
+        inc_nest
+      end
+
+      def leave_module(node)
+        dec_nest
+        printiln("} // namespace #{node.cxxname}")
+        println
+        super
+      end
+
+      def declare_interface(node)
+        visitor(InterfaceVisitor).visit_typecode_module(node)
+        super
+      end
+
+      def leave_interface(node)
+        visitor(InterfaceVisitor).visit_typecode_module(node)
+        super
+      end
+
+      def declare_struct(node)
+        visitor(StructVisitor).visit_typecode_module(node)
+        super
+      end
+
+      def leave_struct(node)
+        visitor(StructVisitor).visit_typecode_module(node)
+        super
+      end
+
+      def declare_valuetype(node)
+        visitor(ValuetypeVisitor).visit_typecode_module(node)
+        super
+      end
+
+      def enter_valuetype(node)
+        visitor(ValuetypeVisitor).visit_typecode_module(node)
+        super
+      end
+
+      def visit_valuebox(node)
+        visitor(ValueboxVisitor).visit_typecode_module(node)
+        super
+      end
+
+      def leave_exception(node)
+        visitor(ExceptionVisitor).visit_typecode_module(node)
+        super
+      end
+
+      def declare_union(node)
+        visitor(UnionVisitor).visit_typecode_module(node)
+        super
+      end
+
+      def leave_union(node)
+        visitor(UnionVisitor).visit_typecode_module(node)
+        super
+      end
+
+      def visit_enum(node)
+        visitor(EnumVisitor).visit_typecode_module(node)
+      end
+
+      def visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_typecode_module(node)
+      end
+
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_typecode_module(node)
+      end
+
+      def visit_typedef(node)
+        return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
+
+        visitor(TypedefVisitor).visit_typecode_module(node)
+      end
+    end # StubHeaderTypecodeWriter
+
     class StubHeaderAnyOpWriter < StubHeaderBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         super
         println
         printiln('// generated from StubHeaderAnyOpWriter#pre_visit')
@@ -615,10 +738,10 @@ module IDL
         inc_nest
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         dec_nest
         println
-        println('  } // namespace TAOX11_NAMESPACE::CORBA')
+        println('} // namespace TAOX11_NAMESPACE::CORBA')
         super
       end
 

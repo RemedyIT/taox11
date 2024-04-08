@@ -7,27 +7,27 @@
  */
 <%= include_guard_start %>
 
-#include /**/ "ace/config-all.h"
+#include "tao/x11/taox11_export_macros.h"
 
 <%= taox11_version_check %>
 
 #if !defined (<%= macro_base %>_HAS_DLL)
-# if defined (ACE_AS_STATIC_LIBS)
+# if defined (TAOX11_AS_STATIC_LIBS)
 #  define <%= macro_base %>_HAS_DLL 0
 # else
 #  define <%= macro_base %>_HAS_DLL 1
-# endif /* ACE_AS_STATIC_LIBS */
+# endif /* TAOX11_AS_STATIC_LIBS */
 #endif /* !<%= macro_base %>_HAS_DLL */
 
 #if <%= macro_base %>_HAS_DLL == 1
 #  if defined (<%= macro_base %>_BUILD_DLL)
-#    define <%= macro_base %>_Export ACE_Proper_Export_Flag
-#    define <%= macro_base %>_SINGLETON_DECLARATION(T) ACE_EXPORT_SINGLETON_DECLARATION (T)
-#    define <%= macro_base %>_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK) ACE_EXPORT_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK)
+#    define <%= macro_base %>_Export TAOX11_Proper_Export_Flag
+#    define <%= macro_base %>_SINGLETON_DECLARATION(T) TAOX11_EXPORT_SINGLETON_DECLARATION (T)
+#    define <%= macro_base %>_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK) TAOX11_EXPORT_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK)
 #  else /* <%= macro_base %>_BUILD_DLL */
-#    define <%= macro_base %>_Export ACE_Proper_Import_Flag
-#    define <%= macro_base %>_SINGLETON_DECLARATION(T) ACE_IMPORT_SINGLETON_DECLARATION (T)
-#    define <%= macro_base %>_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK) ACE_IMPORT_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK)
+#    define <%= macro_base %>_Export TAOX11_Proper_Import_Flag
+#    define <%= macro_base %>_SINGLETON_DECLARATION(T) TAOX11_IMPORT_SINGLETON_DECLARATION (T)
+#    define <%= macro_base %>_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK) TAOX11_IMPORT_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK)
 #  endif /* <%= macro_base %>_BUILD_DLL */
 #else /* <%= macro_base %>_HAS_DLL == 1 */
 #  define <%= macro_base %>_Export

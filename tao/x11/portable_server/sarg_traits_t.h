@@ -12,8 +12,6 @@
 
 #pragma once
 
-#include /**/ "ace/pre.h"
-
 #include "tao/x11/stddef.h"
 
 namespace TAOX11_NAMESPACE::PS
@@ -28,8 +26,5 @@ namespace TAOX11_NAMESPACE::PS
   {
   };
 } // namespace TAOX11_NAMESPACE::PS
-
-
-#include /**/ "ace/post.h"
 
 #endif /* TAOX11_SARG_TRAITS_T_H */

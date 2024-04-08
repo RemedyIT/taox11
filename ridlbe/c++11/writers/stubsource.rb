@@ -22,6 +22,8 @@ module IDL
         super
 
         self.only_record_module_scopes = true
+        # Object traits are only required for interfaces and valuetypes
+        @object_traits_specializations = false
 
         @default_pre_includes = []
         unless params[:no_cdr_streaming]
@@ -55,11 +57,13 @@ module IDL
 
         visit_anyops(parser) if params[:gen_any_ops] && !params[:gen_anytypecode_source]
 
-        # Object traits specializations
-        visit_object_traits_specializations(parser)
+        if @object_traits_specializations
+          # Object traits specializations
+          visit_object_traits_specializations(parser)
 
-        # Object ref traits specializations
-        visit_proxy_object_ref_traits_specializations(parser) unless params[:no_client_proxy]
+          # Object ref traits specializations
+          visit_proxy_object_ref_traits_specializations(parser) unless params[:no_client_proxy]
+        end
 
         # CDR operators
         visit_cdr(parser) unless params[:no_cdr_streaming]
@@ -103,6 +107,7 @@ module IDL
       end
 
       def enter_interface(node)
+        @object_traits_specializations = true
         return if node.is_abstract?
 
         visitor(InterfaceVisitor).visit_pre(node)
@@ -129,6 +134,7 @@ module IDL
       end
 
       def enter_valuetype(node)
+        @object_traits_specializations = true
         visitor(ValuetypeVisitor).visit_pre(node)
       end
 
@@ -154,7 +160,7 @@ module IDL
       end
 
       def visit_proxy(parser)
-        writer(StubProxySourceWriter).visit_nodes(parser)
+        writer(StubProxySourceWriter).visit_nodes(parser) unless params[:no_client_proxy]
       end
 
       def visit_anyops(parser)

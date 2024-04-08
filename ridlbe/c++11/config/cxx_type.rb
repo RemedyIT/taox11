@@ -150,14 +150,13 @@ module IDL
       '%s'
     end
 
-    # Construct for triggering zero initialization
-    def zero_initializer
+    # Construct for value initialization
+    def value_initializer
       '{}'
     end
 
-    # Construct for value initialization
-    def value_initializer
-      zero_initializer
+    def default_value
+      nil
     end
 
     # define cxxtype methods for 'primitive' types
@@ -746,10 +745,6 @@ module IDL
         is_reference? ? resolved_type.cxx_member_type_name : super
       end
 
-      def zero_initializer
-        resolved_type.zero_initializer
-      end
-
       def cxx_return_type(scope = nil)
         is_reference? ? resolved_type.cxx_member_type(scope, self) : super
       end
@@ -801,6 +796,14 @@ module IDL
 
       def cdr_from_fmt
         resolved_type.cdr_from_fmt
+      end
+
+      def value_initializer
+        resolved_type.value_initializer
+      end
+
+      def default_value
+        resolved_type.default_value
       end
     end
 
@@ -862,13 +865,16 @@ module IDL
       end
 
       def value_initializer
-        res = '{}'
+        '{' + default_value.to_s + '}'
+      end
+
+      def default_value
         node.enumerators.each do |e|
           unless e.annotations[:default_literal].first.nil?
-            res = '{' + cxx_type + '::' + e.scoped_cxxname + '}'
+            return cxx_type + '::' + e.scoped_cxxname
           end
         end
-        return res
+        nil
       end
     end
 
@@ -1000,8 +1006,13 @@ module IDL
         resolved_cxx_type(scope)
       end
 
-      def zero_initializer
-        '{}'
+      def value_initializer
+        df = basetype.default_value
+        if df == nil
+          return '{}'
+        else
+          '{' + (basetype.default_value + ', ') * sizes.first + '}'
+        end
       end
     end
   end # Type

@@ -82,6 +82,7 @@ tests/idl4/default/run_test.pl:
 tests/idl4/enum/run_test.pl:
 tests/idl4/explicit_ints/run_test.pl:
 tests/idl4/explicit_ints/run_illegal_idl3_test.pl:
+tests/idl4/external/run_test.pl:
 tests/idl4/illegal_idl/run_test.pl:
 tests/idl4/map/run_test.pl:
 tests/idl4/map/run_illegal_idl3_test.pl:
@@ -179,6 +180,7 @@ tests/typecode_adapter/orb_create/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
 tests/typecode_adapter/resolve_ref/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
 tests/union/run_test.pl:
 tests/union/run_cross_tao_server.pl:
+tests/wchar/run_test.pl:
 tests/write_traits/run_test.pl:
 tests/wstring/run_cross_tao_client.pl:
 tests/wstring/run_cross_tao_server.pl:

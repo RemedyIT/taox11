@@ -95,6 +95,27 @@ int main (int /*argc*/, char* /*argv*/[])
     TAOX11_TEST_ERROR << "shape.color_red() not RED but: " << shape.color_red() << std::endl;
     ++retval;
   }
+  for (const auto& arrayi : shape.color_red_array())
+  {
+    if (arrayi != Color::RED)
+    {
+      TAOX11_TEST_ERROR << "shape.color_red_array() not RED but: " << arrayi << std::endl;
+      ++retval;
+    }
+  }
+  if (shape.color_no_default_literal() != ColorNoDefaultLiteral::BLACK)
+  {
+    TAOX11_TEST_ERROR << "shape.color_no_default_literal() not BLACK but: " << shape.color_no_default_literal() << std::endl;
+    ++retval;
+  }
+  for (const auto& arrayi : shape.color_no_default_literal_array())
+  {
+    if (arrayi != ColorNoDefaultLiteral::BLACK)
+    {
+      TAOX11_TEST_ERROR << "shape.color_no_default_literal_array() not BLACK but: " << arrayi << std::endl;
+      ++retval;
+    }
+  }
 
   return retval;
 }

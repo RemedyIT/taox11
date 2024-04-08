@@ -13,6 +13,7 @@
 #include "tao/ObjRefTemplate/ObjectReferenceTemplate.h"
 #include "tao/x11/objproxy.h"
 #include "tao/x11/ior_interceptor/tao_ior_interceptor.h"
+#include "tao/x11/sequence_conversion_t.h"
 
 // X11 namespace dependencies
 #include "tao/x11/ort/object_reference_template.h"

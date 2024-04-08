@@ -22,6 +22,7 @@
 #include "tao/x11/anytypecode/any_util.h"
 
 #include "tao/x11/exception_macros.h"
+#include "tao/x11/sequence_conversion_t.h"
 
 namespace TAOX11_NAMESPACE
 {

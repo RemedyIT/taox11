@@ -34,7 +34,7 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
         << "object}"
 %       end
 %     else
-% unless _m.optional?
+% unless _m.optional? || _m.external?
         << "<%= _sep %><%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write(val_.<%= _m.cxxname %> ())
 % else
 %# TODO

@@ -13,6 +13,9 @@
 #include "tao/x11/stddef.h"
 #include "tao/x11/bounded_vector_t.h"
 #include "tao/x11/bounded_map_t.h"
+#include <algorithm>
+#include <codecvt>
+#include <locale>
 
 namespace TAOX11_NAMESPACE
 {
@@ -167,7 +170,10 @@ namespace TAOX11_NAMESPACE
     struct formatter<std::string, std::basic_ostream<wchar_t>>
     {
       inline std::basic_ostream<wchar_t>& operator ()(std::basic_ostream<wchar_t>& os_, std::string val_)
-      { return os_ << '"' << ACE_Ascii_To_Wide (val_.c_str ()).wchar_rep () << '"'; }
+      {
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+        return os_ << '"' << converter.from_bytes(val_) << '"';
+      }
     };
 
     template <typename OStrm_>
@@ -181,7 +187,10 @@ namespace TAOX11_NAMESPACE
     struct formatter<std::wstring, std::basic_ostream<char>>
     {
       inline std::basic_ostream<char>& operator ()(std::basic_ostream<char>& os_, std::wstring val_)
-      { return os_ << "L\"" << ACE_Wide_To_Ascii (val_.c_str ()).char_rep () << '"'; }
+      {
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
+        return os_ << "L\"" << conv.to_bytes(val_) << '"';
+      }
     };
 
     template <typename T, typename OStrm_>

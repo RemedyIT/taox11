@@ -39,12 +39,10 @@ private:
   struct
   {
 %bitfields.each do |bitfield|
-    /// @copydoc #{bitfield.doc_scoped_name}::#{bitfield.name}
+    /// @copydoc <%= bitfield.doc_scoped_name %>
     <%= bitfield.cxx_member_type %> <%= bitfield.cxxname %> : <%= bitfield.bits %>;
 %end
   } _taox11_<%= cxxname.downcase %>;
 }; // <%= cxxname %>
 
 inline void swap (<%= scoped_cxx_out_type %> m1, <%= scoped_cxx_out_type %> m2) { m1.swap (m2); }
-
-% visit_template('typecode') if generate_typecode_support?

@@ -8,6 +8,7 @@
  */
 #include "tao/x11/objproxy.h"
 #include "tao/x11/exception_macros.h"
+#include "tao/x11/sequence_conversion_t.h"
 #include "tao/x11/portable_server/portableserver_proxies.h"
 #include "tao/x11/portable_server/servant_proxy.h"
 #include "tao/x11/portable_server/servantbase.h"

@@ -38,7 +38,7 @@ $client->DeleteFile($iorbase2);
 $server->SetEnv ("X11_VERBOSE", "prio|thread|process|datetime");
 $client->SetEnv ("X11_VERBOSE", "prio|thread|process|datetime");
 
-my $SV = $server->CreateProcess ("server", "-ORBdebuglevel $debug_level");
+my $SV = $server->CreateProcess ("server", "-ORBdebuglevel $debug_level -ORBServerId testserver");
 my $CL = $client->CreateProcess ("client", "-ORBdebuglevel $debug_level");
 my $server_status = $SV->Spawn ();
 

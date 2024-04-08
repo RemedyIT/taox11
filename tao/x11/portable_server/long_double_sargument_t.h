@@ -112,13 +112,7 @@ namespace TAOX11_NAMESPACE::PS
   };
 } // namespace TAOX11_NAMESPACE::PS
 
-#if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
 #include "tao/x11/portable_server/long_double_sargument_t.cpp"
-#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
-
-#if defined (ACE_TEMPLATES_REQUIRE_PRAGMA)
-#pragma implementation ("long_double_sargument_t.cpp")
-#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 
 #endif /* ACE_SIZEOF_LONG_DOUBLE != 16 */
 

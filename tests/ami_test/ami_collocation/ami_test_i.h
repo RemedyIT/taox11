@@ -9,8 +9,6 @@
 #ifndef TAOX11_AMI_TEST_I_H
 #define TAOX11_AMI_TEST_I_H
 
-#include /**/ "ace/pre.h"
-
 #include "testlib/taox11_testlog.h"
 
 #include "ami_testS.h"
@@ -29,12 +27,8 @@ public:
 
 private:
   int32_t in_l_last_;
-
-  const std::string in_str_;
-
-  const std::string in_str_last_;
+  std::string const in_str_;
+  std::string const in_str_last_;
 
 };
-#include /**/ "ace/post.h"
 #endif /* TAOX11_AMI_TEST_I_H */
-

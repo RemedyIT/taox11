@@ -1,5 +1,5 @@
 /**
- * @file    corba_ostream.h
+ * @file    wstringwchar_ostream.h
  * @author  Marijke Hengstmengel
  *
  * @brief   CORBA C++11 Logging module
@@ -7,30 +7,22 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-#ifndef TAOX11_CORBA_OSTREAM_H
-#define TAOX11_CORBA_OSTREAM_H
+#ifndef TAOX11_WTRINGWCHAR_OSTREAM_H
+#define TAOX11_WTRINGWCHAR_OSTREAM_H
 
-#include "tao/x11/taox11_export.h"
-#include "tao/x11/corba.h"
-
-#include <sstream>
+#include <ostream>
 #include <cstdlib>
-#include "iostream"
+#include <codecvt>
+#include <locale>
 
 namespace std
 {
-  inline std::ostream&
-        operator<< (std::ostream& _os,
-                    TAOX11_CORBA::object_reference<::TAOX11_NAMESPACE::CORBA::Object> /*_ve*/)
-  {
-    return _os << "CORBA:Object";
-  }
-
   /// std::wstring to ostream insertion
   inline std::ostream&
   operator<< (std::ostream& _os, const std::wstring& _v)
   {
-    return _os << "\"" << ACE_Wide_To_Ascii (_v.c_str ()).char_rep () << "\"";
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
+    return _os << "\"" << conv.to_bytes(_v) << "\"";
   }
 
   /// wchar_t to ostream insertion
@@ -52,4 +44,4 @@ namespace std
   }
 }
 
-#endif /* TAOX11_CORBA_OSTREAM_H */
+#endif /* TAOX11_WTRINGWCHAR_OSTREAM_H */
