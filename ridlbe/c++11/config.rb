@@ -526,13 +526,13 @@ module IDL
           IDL.push_production(:stub_proxy_source, ::IDL::Cxx11::StubProxySourceWriter.new(co_prx, options))
         end
       end
-      if ((options[:gen_anytypecode_source] || false) && options[:gen_typecodes])
+      if options[:gen_anytypecode_source] && options[:gen_typecodes]
         if options[:output_anytypecode_source]
           co_atc = GenFile.new(options[:output_anytypecode_source])
           IDL.push_production(:any_typecode_source, ::IDL::Cxx11::AnyTypeCodeWriter.new(co_atc, options))
         end
       end
-      if ((options[:gen_anytypecode_header] || false) && options[:gen_typecodes])
+      if options[:gen_anytypecode_header] && options[:gen_typecodes]
         if options[:output_anytypecode_header]
           co_ath = GenFile.new(options[:output_anytypecode_header])
           IDL.push_production(:any_typecode_header, ::IDL::Cxx11::AnyTypeCodeHeaderWriter.new(co_ath, options))
