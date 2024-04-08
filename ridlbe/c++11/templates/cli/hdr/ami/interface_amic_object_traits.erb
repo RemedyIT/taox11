@@ -3,54 +3,48 @@
 % _intf_traits_decl_incl_guard_ = amic_scoped_cxxname.to_include_guard
 #if !defined (_INTF_<%= _intf_traits_decl_incl_guard_ %>_TRAITS_DECL_)
 #define _INTF_<%= _intf_traits_decl_incl_guard_ %>_TRAITS_DECL_
-namespace TAOX11_NAMESPACE
+namespace TAOX11_NAMESPACE::CORBA
 {
-  namespace CORBA
-  {
-    template<>
-    <%= amic_export_macro %>object_traits<<%= amic_scoped_cxxtype %>>::shared_ptr_type
-    object_traits<<%= amic_scoped_cxxtype %>>::lock_shared (<%= amic_scoped_cxxtype %>* p);
+  template<>
+  <%= amic_export_macro %>object_traits<<%= amic_scoped_cxxtype %>>::shared_ptr_type
+  object_traits<<%= amic_scoped_cxxtype %>>::lock_shared (<%= amic_scoped_cxxtype %>* p);
 %   if is_remote?
 
-    template<>
-    <%= amic_export_macro %>object_traits<<%= amic_scoped_cxxtype %>>::ref_type
-    object_traits<<%= amic_scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
+  template<>
+  <%= amic_export_macro %>object_traits<<%= amic_scoped_cxxtype %>>::ref_type
+  object_traits<<%= amic_scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
 %   else
 %     if declare_local_object_narrow_specialization?
 
-    template<>
-    <%= amic_export_macro %>object_traits<<%= amic_scoped_cxxtype %>>::ref_type
-    object_traits<<%= amic_scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
+  template<>
+  <%= amic_export_macro %>object_traits<<%= amic_scoped_cxxtype %>>::ref_type
+  object_traits<<%= amic_scoped_cxxtype %>>::narrow (object_traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type);
 %     end
 %   end
-  } // namespace CORBA
 
-  namespace CORBA
+  template<>
+  struct amic_traits <<%= scoped_cxxtype %>> :
+    public IDL::common_byval_traits <CORBA::object_reference <<%= amic_scoped_cxxtype %>>>,
+    public CORBA::object_traits <<%= amic_scoped_cxxtype %>>
   {
-    template<>
-    struct amic_traits <<%= scoped_cxxtype %>> :
-      public IDL::common_byval_traits <CORBA::object_reference <<%= amic_scoped_cxxtype %>>>,
-      public CORBA::object_traits <<%= amic_scoped_cxxtype %>>
+    using replyhandler_base_type = <%= handler_scoped_skel_cxxname %>;
+    using replyhandler_servant_traits = TAOX11_CORBA::servant_traits<<%= handler_scoped_skel_cxxname %>>;
+    using replyhandler_servant_ref_type = TAOX11_CORBA::servant_reference<<%=handler_scoped_skel_cxxname%>>;
+    using replyhandler_weak_servant_ref_type = TAOX11_CORBA::weak_servant_reference<<%=handler_scoped_skel_cxxname%>>;
+    using replyhandler_traits = IDL::traits<<%= handler_scoped_cxxname %>>;
+    using replyhandler_ref_type = replyhandler_traits::ref_type;
+    using replyhandler_weak_ref_type = replyhandler_traits::weak_ref_type ;
+
+    template <typename OStrm_, typename Formatter = IDL::formatter<<%= amic_scoped_cxxtype %>, OStrm_>>
+    static inline OStrm_& write_on(
+      OStrm_& os_, in_type val_,
+      Formatter fmt_ = Formatter ())
     {
-      using replyhandler_base_type = <%= handler_scoped_skel_cxxname %>;
-      using replyhandler_servant_traits = TAOX11_CORBA::servant_traits<<%= handler_scoped_skel_cxxname %>>;
-      using replyhandler_servant_ref_type = TAOX11_CORBA::servant_reference<<%=handler_scoped_skel_cxxname%>>;
-      using replyhandler_weak_servant_ref_type = TAOX11_CORBA::weak_servant_reference<<%=handler_scoped_skel_cxxname%>>;
-      using replyhandler_traits = IDL::traits<<%= handler_scoped_cxxname %>>;
-      using replyhandler_ref_type = replyhandler_traits::ref_type;
-      using replyhandler_weak_ref_type = replyhandler_traits::weak_ref_type ;
+      return fmt_ (os_, val_);
+    }
 
-      template <typename OStrm_, typename Formatter = IDL::formatter<<%= amic_scoped_cxxtype %>, OStrm_>>
-      static inline OStrm_& write_on(
-          OStrm_& os_, in_type val_,
-          Formatter fmt_ = Formatter ())
-      {
-        return fmt_ (os_, val_);
-      }
-
-      template <typename Formatter = std::false_type>
-      static inline __Writer<Formatter> write (in_type val) { return {val}; }
-    };
-  }  // namespace CORBA
-} // namespace TAOX11_NAMESPACE
+    template <typename Formatter = std::false_type>
+    static inline __Writer<Formatter> write (in_type val) { return {val}; }
+  };
+} // namespace TAOX11_NAMESPACE::CORBA
 #endif // !_INTF_<%= _intf_traits_decl_incl_guard_ %>_TRAITS_DECL_

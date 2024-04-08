@@ -52,7 +52,7 @@ ACE_TMAIN(int argc, ACE_TCHAR *argv[])
       IDL::traits<CORBA::Object>::ref_type object = root_poa->id_to_reference (id);
 
       OBV_AnyTest::Test::_ref_type server =
-        IDL::traits< OBV_AnyTest::Test >::narrow (object);
+        IDL::traits<OBV_AnyTest::Test >::narrow (object);
 
       std::string ior = orb->object_to_string (server);
 

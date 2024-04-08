@@ -1,0 +1,31 @@
+// -*- MPC -*-
+
+project(*bitmask_gen_idl): ridl_ostream_defaults {
+  IDL_Files {
+    test.idl
+    idlflags += --idl-version=4
+  }
+  custom_only = 1
+}
+
+project(*bitmask_client): taox11_client {
+  after += *bitmask_gen_idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+}
+
+project(*bitmask_gen_server): taox11_server {
+  after += *bitmask_gen_idl
+  Source_Files {
+    foo.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}

@@ -12,7 +12,7 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-    class StubProxyBaseWriter < CxxCodeWriterBase
+    class StubProxyHeaderBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
         self.template_root = File.join('cli', 'prx')
@@ -21,7 +21,7 @@ module IDL
       attr_accessor :include_guard
     end
 
-    class StubProxyWriter < StubProxyBaseWriter
+    class StubProxyHeaderWriter < StubProxyHeaderBaseWriter
       helper Cxx11::IncludeGuardHelper
 
       def initialize(output = STDOUT, opts = {})
@@ -56,7 +56,7 @@ module IDL
       def enter_module(node)
         super
         println
-        printiln('// generated from StubProxyWriter#enter_module')
+        printiln('// generated from StubProxyHeaderWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
         inc_nest
@@ -74,7 +74,7 @@ module IDL
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
 
         println
-        printiln('// generated from StubProxyWriter#enter_interface')
+        printiln('// generated from StubProxyHeaderWriter#enter_interface')
         visitor(InterfaceVisitor).visit_pre(node)
         inc_nest
       end
@@ -88,7 +88,7 @@ module IDL
       end
 
       def visit_includes(parser)
-        writer(StubProxyIncludeWriter,
+        writer(StubProxyHeaderIncludeWriter,
                { default_pre_includes: @default_pre_includes,
                  default_post_includes: @default_post_includes }) do |w|
           w.include_guard = @include_guard
@@ -97,23 +97,23 @@ module IDL
       end
 
       def visit_cdr(parser)
-        writer(StubProxyCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming]
+        writer(StubProxyHeaderCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming]
       end
 
       def visit_obj_var_out_specializations(parser)
-        writer(StubProxyVarOutWriter).visit_nodes(parser)
+        writer(StubProxyHeaderVarOutWriter).visit_nodes(parser)
       end
 
       def visit_obj_ref_traits_specializations(parser)
-        writer(StubProxyObjRefTraitsWriter).visit_nodes(parser)
+        writer(StubProxyHeaderObjRefTraitsWriter).visit_nodes(parser)
       end
 
       def visit_typecodes(parser)
-        writer(StubProxyTypecodeWriter).visit_nodes(parser)
+        writer(StubProxyHeaderTypecodeWriter).visit_nodes(parser)
       end
-    end # StubProxyWriter
+    end # StubProxyHeaderWriter
 
-    class StubProxyIncludeWriter < StubProxyBaseWriter
+    class StubProxyHeaderIncludeWriter < StubProxyHeaderBaseWriter
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -198,6 +198,14 @@ module IDL
         add_include('tao/x11/basic_argument_t.h')
       end
 
+      def visit_bitmask(_node)
+        add_include('tao/x11/basic_argument_t.h')
+      end
+
+      def visit_bitset(_node)
+        add_include('tao/x11/basic_argument_t.h')
+      end
+
       def visit_typedef(node)
         return if node.is_local?
 
@@ -205,6 +213,9 @@ module IDL
         case idl_type
         when IDL::Type::Sequence
           add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
+          check_idl_type(idl_type)
+        when IDL::Type::Map
+          add_include('tao/x11/map_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type)
         when IDL::Type::Array
           add_include('tao/x11/array_cdr_t.h') unless params[:no_cdr_streaming]
@@ -232,6 +243,10 @@ module IDL
         when IDL::Type::Sequence
           add_include('tao/x11/basic_argument_t.h')
           check_idl_type(idl_type.basetype)
+        when IDL::Type::Map
+          add_include('tao/x11/basic_argument_t.h')
+          check_idl_type(idl_type.keytype)
+          check_idl_type(idl_type.valuetype)
         when IDL::Type::Array
           add_include('tao/x11/basic_argument_t.h')
           check_idl_type(idl_type.basetype)
@@ -247,14 +262,14 @@ module IDL
       end
     end
 
-    class StubProxyCDRWriter < StubProxyBaseWriter
+    class StubProxyHeaderCDRWriter < StubProxyHeaderBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
       end
 
       def pre_visit(parser)
         super
-        printiln('// generated from StubProxyCDRWriter#pre_visit')
+        printiln('// generated from StubProxyHeaderCDRWriter#pre_visit')
       end
 
       def post_visit(parser)
@@ -316,6 +331,18 @@ module IDL
         visitor(EnumVisitor).visit_cdr(node)
       end
 
+      def visit_bitmask(node)
+        return if params[:no_cdr_streaming]
+
+        visitor(BitmaskVisitor).visit_cdr(node)
+      end
+
+      def visit_bitset(node)
+        return if params[:no_cdr_streaming]
+
+        visitor(BitsetVisitor).visit_cdr(node)
+      end
+
       def visit_typedef(node)
         return if node.is_local? || params[:no_cdr_streaming]
         # nothing to do if this is just an alias for another defined type
@@ -325,21 +352,23 @@ module IDL
         case idl_type
         when IDL::Type::Sequence
           visitor(SequenceVisitor).visit_cdr(node)
+        when IDL::Type::Map
+          visitor(MapVisitor).visit_cdr(node)
         when IDL::Type::Array
           visitor(ArrayVisitor).visit_cdr(node)
         when IDL::Type::String, IDL::Type::WString
           visitor(StringVisitor).visit_cdr(node) # only bounded, unbounded is standard_type
         end
       end
-    end # StubProxyCDRWriter
+    end # StubProxyHeaderCDRWriter
 
-    class StubProxyVarOutWriter < StubProxyBaseWriter
+    class StubProxyHeaderVarOutWriter < StubProxyHeaderBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
       end
 
       def pre_visit(_parser)
-        printiln('// generated from StubProxyVarOutWriter#pre_visit')
+        printiln('// generated from StubProxyHeaderVarOutWriter#pre_visit')
       end
 
       def post_visit(_parser)
@@ -363,7 +392,7 @@ module IDL
       private
 
       def enter_scope(node)
-        printiln('// generated from StubProxyVarOutWriter#enter_scope')
+        printiln('// generated from StubProxyHeaderVarOutWriter#enter_scope')
         printiln('namespace ' + node.cxxname)
         printiln('{')
         inc_nest
@@ -373,16 +402,16 @@ module IDL
         dec_nest
         printiln("} // namespace #{node.cxxname}")
       end
-    end # StubProxyVarOutWriter
+    end # StubProxyHeaderVarOutWriter
 
-    class StubProxyObjRefTraitsWriter < StubProxyBaseWriter
+    class StubProxyHeaderObjRefTraitsWriter < StubProxyHeaderBaseWriter
        def initialize(output = STDOUT, opts = {})
          super
        end
 
        def pre_visit(_parser)
          println
-         printiln('// generated from StubProxyObjRefTraitsWriter#pre_visit')
+         printiln('// generated from StubProxyHeaderObjRefTraitsWriter#pre_visit')
        end
 
        def post_visit(parser); end
@@ -392,9 +421,9 @@ module IDL
 
          visitor(InterfaceVisitor).visit_object_ref_traits(node)
        end
-    end # StubProxyObjRefTraitsWriter
+    end # StubProxyHeaderObjRefTraitsWriter
 
-    class StubProxyTypecodeWriter < StubProxyBaseWriter
+    class StubProxyHeaderTypecodeWriter < StubProxyHeaderBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
       end
@@ -402,7 +431,7 @@ module IDL
       def pre_visit(parser)
         super
         println
-        printiln('// generated from StubProxyTypecodeWriter#pre_visit')
+        printiln('// generated from StubProxyHeaderTypecodeWriter#pre_visit')
         println('namespace __tao')
         println('{')
         inc_nest
@@ -419,7 +448,7 @@ module IDL
 
       def enter_scope(node)
         println
-        printiln('// generated from StubProxyTypecodeWriter#enter_scope')
+        printiln('// generated from StubProxyHeaderTypecodeWriter#enter_scope')
         printiln('namespace ' + node.cxxname)
         printiln('{')
         inc_nest
@@ -509,11 +538,19 @@ module IDL
         visitor(EnumVisitor).visit_typecode(node)
       end
 
+      def visit_bitmask(node)
+        visitor(BitmaskVisitor).visit_typecode(node)
+      end
+
+      def visit_bitset(node)
+        visitor(BitsetVisitor).visit_typecode(node)
+      end
+
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
         visitor(TypedefVisitor).visit_typecode(node)
       end
-    end # StubProxyTypecodeWriter
+    end # StubProxyHeaderTypecodeWriter
   end # Cxx11
 end # IDL

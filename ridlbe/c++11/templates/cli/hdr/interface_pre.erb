@@ -43,7 +43,7 @@ public:
 %   end
 %   if has_abstract_base?
 
-  std::string _interface_repository_id () override;
+  std::string _interface_repository_id () const override;
 %     unless abstractbase_operations.empty?
 
   /** @name Inherited abstract interface operations */

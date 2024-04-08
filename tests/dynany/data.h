@@ -35,12 +35,14 @@ public:
   IDL::traits<CORBA::Object>::ref_type    m_objref1,    m_objref2;
   CORBA::ShortSeq   m_shortseq1 {0,1,2};
   CORBA::ShortSeq   m_shortseq2;
+  CORBA::UShortSeq  m_ushortseq1 {0,1,2};
+  CORBA::UShortSeq  m_ushortseq2;
   long double     m_longdouble1 {88888888888.8888}, m_longdouble2 {99999999999.9999};
 
-  std::string const labels[23] ={"type boolean","type octet","type char", "type short", "type long",
+  std::string const labels[24] ={"type boolean","type octet","type char", "type short", "type long",
                                  "type ushort", "type ulong","type float", "type double","type longlong",
                                  "type ulonglong","type string","type typecode","type wchar","type any",
-                                 "type objref","type short sequence", "type longdouble", "type enum",
+                                 "type objref","type short sequence", "type ushort sequence", "type longdouble", "type enum",
                                  "typedef'd enum in struct", "type ValueBox", "type Value", "type abstract"};
 
 private:

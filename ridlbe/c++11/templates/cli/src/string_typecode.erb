@@ -1,20 +1,11 @@
 
 // generated from <%= ridl_template_path %>
 static TAO_TAO::TypeCode::String<TAO_TAO::Null_RefCount_Policy>
-    _tao<%= cxx_typecode %>_str (
-      TAO_CORBA::<% if is_wstring? %>tk_wstring<% else %>tk_string<% end %>,
-      <%= bound %>U);
+  _tao<%= cxx_typecode %>_str (TAO_CORBA::<% if is_wstring? %>tk_wstring<% else %>tk_string<% end %>, <%= bound %>U);
 
-static TAO_CORBA::TypeCode_ptr const _tao<%= cxx_typecode %>_str_ptr =
-  std::addressof(_tao<%= cxx_typecode %>_str);
+static TAO_CORBA::TypeCode_ptr const _tao<%= cxx_typecode %>_str_ptr { std::addressof(_tao<%= cxx_typecode %>_str) } ;
 
-static TAO_TAO::TypeCode::Alias<char const *,
-                            TAO_CORBA::TypeCode_ptr const *,
-                            TAO_TAO::Null_RefCount_Policy>
-  _tao<%= cxx_typecode %> (
-    TAO_CORBA::tk_alias,
-    "<%= repository_id %>",
-    "<%= cxxname %>",
-    std::addressof(_tao<%= cxx_typecode %>_str_ptr));
+static TAO_TAO::TypeCode::Alias<char const *, TAO_CORBA::TypeCode_ptr const *, TAO_TAO::Null_RefCount_Policy>
+  _tao<%= cxx_typecode %> (TAO_CORBA::tk_alias, "<%= repository_id %>", "<%= cxxname %>", std::addressof(_tao<%= cxx_typecode %>_str_ptr));
 
-TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> = std::addressof(_tao<%= cxx_typecode %>);
+TAO_CORBA::TypeCode_ptr const <%= cxx_typecode %> { std::addressof(_tao<%= cxx_typecode %>) };

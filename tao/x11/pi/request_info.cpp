@@ -10,6 +10,7 @@
 // TAO namespace dependencies
 #include "tao/x11/tao_corba.h"
 #include "tao/x11/objproxy.h"
+#include "tao/x11/sequence_conversion_t.h"
 #include "tao/AnyTypeCode/DynamicC.h"
 
 #define TAO_DYN \

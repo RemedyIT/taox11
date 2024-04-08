@@ -22,6 +22,12 @@ the https://www.omg.org/spec/CORBA[CORBA specification], and the
 http://www.amazon.com/gp/product/0201379279/ref=as_li_tf_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0201379279&linkCode=as2&tag=theaceorb-20[Advanced
 CORBA Programming with C++] book.
 
+All https://www.omg.org/spec/IDL/4.2[IDL4] support is experimental.
+The IDL to {cxx11} language defines a mapping for the IDL4 extended datatypes, but
+there is only for DDS a standardized wire protocol for transferring these types through the wire.
+For CORBA this is standardized yet and need still a lot of
+research and standardization work.
+
 == Usage
 
 The basic command line for the RIDL compiler is:
@@ -57,11 +63,13 @@ nil
 Defines a preprocessor macro. By default the following macros are
 defined: +
 
-* `__RIDL__` set to the stringified version number of the RIDL frontend
-* `__RIDLBE__` set to the id of the active (main) RIDL backend; here
+* `\\__RIDL__` set to the stringified version number of the RIDL frontend
+* `\\__RIDLBE__` set to the id of the active (main) RIDL backend; here
 `{cxx11}`
-* `__RIDLBE_VER__` set to the stringified version of the active (main)
-RIDL backend|
+* `\\__RIDLBE_VER__` set to the stringified version of the active (main)
+RIDL backend
+* `\\__RIDL_IDL_VERSION__` set to the stringified version of the IDL
+version (3 or 4)|
 
 |-n|--namespace=NAMESPACE|
 
@@ -74,6 +82,12 @@ nil
 Set verbosity level. Repeat to increment.|
 
 0
+
+||--idl-version=VERSION|
+
+Select the IDL version, 3 or 4 |
+
+3
 
 ||--stdidl|
 

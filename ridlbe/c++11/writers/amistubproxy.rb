@@ -13,7 +13,7 @@ require 'ridlbe/c++11/writers/helpers/include_guard_helper'
 
 module IDL
   module Cxx11
-    class AmiStubProxyBaseWriter < AmiBaseWriter # CxxCodeWriterBase
+    class AmiStubProxyHeaderBaseWriter < AmiBaseWriter # CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
          self.template_root = File.join('cli', 'prx', 'ami')
@@ -22,7 +22,7 @@ module IDL
       attr_accessor :include_guard
     end
 
-    class AmiStubProxyWriter < AmiStubProxyBaseWriter
+    class AmiStubProxyHeaderWriter < AmiStubProxyHeaderBaseWriter
       helper Cxx11::IncludeGuardHelper
 
       def initialize(output = STDOUT, opts = {})
@@ -61,7 +61,7 @@ module IDL
       def enter_module(node)
         super
         println
-        printiln('// generated from AmiStubProxyWriter#enter_module')
+        printiln('// generated from AmiStubProxyHeaderWriter#enter_module')
         printiln('namespace ' + node.cxxname)
         printiln('{')
         inc_nest
@@ -79,7 +79,7 @@ module IDL
         return unless needs_ami_generation?(node)
 
         println
-        printiln('// generated from AmiStubProxyWriter#enter_interface')
+        printiln('// generated from AmiStubProxyHeaderWriter#enter_interface')
         ami_handler_interface_with_ami_inheritance.visit_pre(node)
         inc_nest
       end
@@ -107,7 +107,7 @@ module IDL
        end
 
       def visit_includes(parser)
-        writer(AmiStubProxyIncludeWriter,
+        writer(AmiStubProxyHeaderIncludeWriter,
                { default_pre_includes: @default_pre_includes,
                  default_post_includes: @default_post_includes }) do |w|
           w.include_guard = @include_guard
@@ -116,27 +116,27 @@ module IDL
       end
 
       def visit_cdr(parser)
-        writer(AmiStubProxyCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming]
+        writer(AmiStubProxyHeaderCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming]
       end
 
       def visit_typecodes(parser)
-        writer(AmiStubProxyTypecodeWriter).visit_nodes(parser)
+        writer(AmiStubProxyHeaderTypecodeWriter).visit_nodes(parser)
       end
 
       def visit_obj_var_out_specializations(parser)
-        writer(AmiStubProxyVarOutWriter).visit_nodes(parser)
+        writer(AmiStubProxyHeaderVarOutWriter).visit_nodes(parser)
       end
 
       def visit_obj_ref_traits_specializations(parser)
-         writer(AmiStubProxyObjRefTraitsWriter).visit_nodes(parser)
+         writer(AmiStubProxyHeaderObjRefTraitsWriter).visit_nodes(parser)
       end
 
       def visit_servant_proxy(parser)
-        writer(AmiStubProxySrvWriter).visit_nodes(parser)
+        writer(AmiStubProxyHeaderSrvWriter).visit_nodes(parser)
       end
-    end # AmiStubProxyWriter
+    end # AmiStubProxyHeaderWriter
 
-    class AmiStubProxyIncludeWriter < AmiStubProxyBaseWriter
+    class AmiStubProxyHeaderIncludeWriter < AmiStubProxyHeaderBaseWriter
       helper Cxx11::VersionHelper
       helper Cxx11::IncludeGuardHelper
 
@@ -225,13 +225,22 @@ module IDL
         add_include('tao/x11/basic_argument_t.h')
       end
 
+      def visit_bitmask(_node)
+        add_include('tao/x11/basic_argument_t.h')
+      end
+
+      def visit_bitset(_node)
+        add_include('tao/x11/basic_argument_t.h')
+      end
+
       def visit_typedef(node)
         return if node.is_local?
 
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::Sequence,
-             IDL::Type::Array
+             IDL::Type::Array,
+             IDL::Type::Map
           check_idl_type(idl_type)
         end
       end
@@ -249,7 +258,9 @@ module IDL
              IDL::Type::Double,
              IDL::Type::Float,
              IDL::Type::Void
-        when IDL::Type::Enum
+        when IDL::Type::Enum,
+             IDL::Type::BitMask
+             IDL::Type::BitSet
           add_include('tao/x11/basic_argument_t.h')
         when IDL::Type::String
         when IDL::Type::WString
@@ -263,6 +274,9 @@ module IDL
              IDL::AST::Valuebox
           add_include('tao/x11/basic_argument_t.h')
         when IDL::Type::Sequence
+          add_include('tao/x11/basic_argument_t.h')
+          check_idl_type(idl_type.basetype)
+        when IDL::Type::Map
           add_include('tao/x11/basic_argument_t.h')
           check_idl_type(idl_type.basetype)
         when IDL::Type::Array
@@ -280,17 +294,17 @@ module IDL
       end
     end
 
-    class AmiStubProxyCDRWriter < AmiStubProxyBaseWriter
+    class AmiStubProxyHeaderCDRWriter < AmiStubProxyHeaderBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
       end
 
-      def pre_visit(parser)
+      def pre_visit(_parser)
         super
-        printiln('// generated from AmiStubProxyCDRWriter#pre_visit')
+        printiln('// generated from AmiStubProxyHeaderCDRWriter#pre_visit')
       end
 
-      def post_visit(parser)
+      def post_visit(_parser)
         println
         super
       end
@@ -306,15 +320,15 @@ module IDL
 
         ami_handler_interface.visit_cdr(node)
       end
-    end # AmiStubProxyCDRWriter
+    end # AmiStubProxyHeaderCDRWriter
 
-    class AmiStubProxyVarOutWriter < AmiStubProxyBaseWriter
+    class AmiStubProxyHeaderVarOutWriter < AmiStubProxyHeaderBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
       end
 
       def pre_visit(_parser)
-        printiln('// generated from AmiStubProxyVarOutWriter#pre_visit')
+        printiln('// generated from AmiStubProxyHeaderVarOutWriter#pre_visit')
       end
 
       def post_visit(_parser)
@@ -338,7 +352,7 @@ module IDL
       private
 
       def enter_scope(node)
-        printiln('// generated from AmiStubProxyVarOutWriter#enter_scope')
+        printiln('// generated from AmiStubProxyHeaderVarOutWriter#enter_scope')
         printiln('namespace ' + node.cxxname)
         printiln('{')
         inc_nest
@@ -348,16 +362,16 @@ module IDL
         dec_nest
         printiln("} // namespace #{node.cxxname}")
       end
-    end # AmiStubProxyVarOutWriter
+    end # AmiStubProxyHeaderVarOutWriter
 
-    class AmiStubProxyObjRefTraitsWriter < AmiStubProxyBaseWriter
+    class AmiStubProxyHeaderObjRefTraitsWriter < AmiStubProxyHeaderBaseWriter
        def initialize(output = STDOUT, opts = {})
          super
        end
 
        def pre_visit(_parser)
          println
-         printiln('// generated from AmiStubProxyObjRefTraitsWriter#pre_visit')
+         printiln('// generated from AmiStubProxyHeaderObjRefTraitsWriter#pre_visit')
        end
 
        def post_visit(parser); end
@@ -367,9 +381,9 @@ module IDL
 
          ami_handler_interface.visit_object_ref_traits(node)
        end
-    end # AmiStubProxyObjRefTraitsWriter
+    end # AmiStubProxyHeaderObjRefTraitsWriter
 
-    class AmiStubProxyTypecodeWriter < AmiStubProxyBaseWriter
+    class AmiStubProxyHeaderTypecodeWriter < AmiStubProxyHeaderBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
       end
@@ -377,7 +391,7 @@ module IDL
       def pre_visit(parser)
         super
         println
-        printiln('// generated from AmiStubProxyTypecodeWriter#pre_visit')
+        printiln('// generated from AmiStubProxyHeaderTypecodeWriter#pre_visit')
         println('namespace __tao')
         println('{')
         inc_nest
@@ -394,7 +408,7 @@ module IDL
 
       def enter_scope(node)
         println
-        printiln('// generated from AmiStubProxyTypecodeWriter#enter_scope')
+        printiln('// generated from AmiStubProxyHeaderTypecodeWriter#enter_scope')
         printiln('namespace ' + node.cxxname)
         printiln('{')
         inc_nest
@@ -433,16 +447,16 @@ module IDL
           leave_scope(node)
         end
       end
-    end # AmiStubProxyTypecodeWriter
+    end # AmiStubProxyHeaderTypecodeWriter
 
-    class AmiStubProxySrvBaseWriter < AmiBaseWriter
+    class AmiStubProxyHeaderSrvBaseWriter < AmiBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
         self.template_root = File.join('srv', 'prx', 'ami')
       end
     end
 
-    class AmiStubProxySrvWriter < AmiStubProxySrvBaseWriter
+    class AmiStubProxyHeaderSrvWriter < AmiStubProxyHeaderSrvBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
       end
@@ -472,7 +486,7 @@ module IDL
 
         super
         println
-        printiln('// generated from AmiStubProxySrvWriter#enter_interface')
+        printiln('// generated from AmiStubProxyHeaderSrvWriter#enter_interface')
         printiln('namespace POA {')
         inc_nest
         ami_handler_interface.visit_pre(node)
@@ -489,6 +503,6 @@ module IDL
         println
         super
       end
-     end # AmiStubProxySrvWriter
+     end # AmiStubProxyHeaderSrvWriter
   end # Cxx11
 end # IDL

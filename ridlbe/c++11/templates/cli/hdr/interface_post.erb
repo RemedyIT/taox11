@@ -4,8 +4,7 @@
 %##### Abstract interface #####
 %#
 protected:
-#if (defined (_MSC_VER) && (_MSC_VER < 1910)) || (defined __clang__ && __clang_major__ <= 11)
-  // vc14 has a problem with friend, issue #4015
+#if (defined __clang__ && __clang_major__ <= 11)
   // Clang doesn't support this friend construct, issue #4476
   friend TAOX11_CORBA::abstractbase_traits<<%= cxxname %>>::ref_type
     TAOX11_CORBA::abstractbase_traits<<%= cxxname %>>::narrow (
@@ -15,7 +14,7 @@ protected:
   friend typename TAOX11_CORBA::abstractbase_traits<T>::ref_type
     TAOX11_CORBA::abstractbase_traits<T>::narrow (
       TAOX11_CORBA::abstractbase_reference<TAOX11_CORBA::AbstractBase>);
-#endif /* _MSC_VER < 1910 || clang <= 11 */
+#endif /* clang <= 11 */
 
 %# msvc14.{0|1|2} have a problem with defaulted constructors, issue #4005
 #if defined (_MSC_VER) && (_MSC_VER < 1930)
@@ -44,7 +43,7 @@ protected:
   using _shared_ptr_type = std::shared_ptr<<%= cxxname %>>;
 
   template <typename _Tp1, typename, typename ...Args>
-  friend TAOX11_CORBA::object_reference<_Tp1> TAOX11_CORBA::make_reference(Args&& ...args);
+  friend constexpr TAOX11_CORBA::object_reference<_Tp1> TAOX11_CORBA::make_reference(Args&& ...args);
 
   explicit <%= cxxname %> (<%= proxy_cxxname %>_ptr p, bool inherited = false);
   /// Default constructor
@@ -98,5 +97,3 @@ private:
   //@}
 % end
 }; // class <%= cxxname %>
-%#
-% visit_template('typecode') if generate_typecode_support?

@@ -12,8 +12,6 @@
 
 #pragma once
 
-#include /**/ "ace/pre.h"
-
 #include "tao/x11/dynamic_any/dyn_common.h"
 
 #if defined (_MSC_VER)
@@ -32,7 +30,7 @@ namespace TAOX11_NAMESPACE
      *
      */
     class TAOX11_DynamicAny_Export DynAny_i
-      : public virtual IDL::traits< DynAny>::base_type,
+      : public virtual IDL::traits<DynAny>::base_type,
         public virtual TAOX11_DynCommon
     {
     public:
@@ -40,11 +38,11 @@ namespace TAOX11_NAMESPACE
       ~DynAny_i () = default;
 
       /// Initialize using just a TypeCode
-      IDL::traits< DynamicAny::DynAny>::ref_type
+      IDL::traits<DynamicAny::DynAny>::ref_type
       init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
        /// Initialize using an Any.
-      IDL::traits< DynamicAny::DynAny>::ref_type
+      IDL::traits<DynamicAny::DynAny>::ref_type
       init (const CORBA::Any& any) ;
 
       void from_any (const CORBA::Any& value) override;
@@ -52,12 +50,12 @@ namespace TAOX11_NAMESPACE
       TAOX11_NAMESPACE::CORBA::Any to_any () override;
 
       bool equal (
-         TAOX11_IDL::traits< DynAny>::ref_type dyn_any) override;
+         TAOX11_IDL::traits<DynAny>::ref_type dyn_any) override;
 
       void destroy () override;
 
 
-      IDL::traits< DynAny>::ref_type
+      IDL::traits<DynAny>::ref_type
       current_component () override;
 
     private:
@@ -85,5 +83,4 @@ namespace TAOX11_NAMESPACE
 # pragma warning(pop)
 #endif /* _MSC_VER */
 
-#include /**/ "ace/post.h"
 #endif /* TAOX11_DYNANY_I_H */

@@ -164,7 +164,7 @@ namespace TAOX11_NAMESPACE {
 
     private:
       template <typename _Tp1, typename, typename ...Args>
-      friend CORBA::object_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+      friend constexpr CORBA::object_reference<_Tp1> CORBA::make_reference(Args&& ...args);
 
       explicit POA_impl (POA_proxy_ptr op);
 
@@ -213,7 +213,7 @@ namespace TAOX11_NAMESPACE {
 
     private:
       template <typename _Tp1, typename, typename ...Args>
-      friend CORBA::object_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+      friend constexpr CORBA::object_reference<_Tp1> CORBA::make_reference(Args&& ...args);
 
       explicit POAManager_impl (POAManager_proxy_ptr op);
 
@@ -254,7 +254,7 @@ namespace TAOX11_NAMESPACE {
 
     private:
       template <typename _Tp1, typename, typename ...Args>
-      friend CORBA::object_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+      friend constexpr CORBA::object_reference<_Tp1> CORBA::make_reference(Args&& ...args);
 
       explicit POAManagerFactory_impl (POAManagerFactory_proxy_ptr op);
 
@@ -293,7 +293,7 @@ namespace TAOX11_NAMESPACE {
 
     private:
       template <typename _Tp1, typename, typename ...Args>
-      friend CORBA::object_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+      friend constexpr CORBA::object_reference<_Tp1> CORBA::make_reference(Args&& ...args);
 
       explicit POA_Current_impl (POA_Current_proxy_ptr op);
 

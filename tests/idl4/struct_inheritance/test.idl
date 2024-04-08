@@ -1,0 +1,69 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+struct Point2D
+{
+  long x;
+  long y;
+};
+
+struct Point3D : Point2D
+{
+  long z;
+};
+
+struct Point4D : Point3D
+{
+  long super;
+};
+
+struct EmptyStruct
+{
+};
+
+struct DeriveEmpty : EmptyStruct
+{
+};
+
+struct DeriveEmptyWithMember : EmptyStruct
+{
+  long x;
+};
+
+struct EmptyFromDerived : Point2D
+{
+};
+
+struct EmptyFromDerivedDerived : Point3D
+{
+};
+
+interface Bar
+{
+};
+
+struct ObjectStruct : EmptyStruct
+{
+  Bar foo;
+};
+
+struct ObjectStructDerived : ObjectStruct
+{
+};
+
+interface Foo
+{
+  Point2D test_Point2D (in Point2D sin,
+    inout Point2D sinout,
+    out Point2D sout);
+  Point3D test_Point3D (in Point3D sin,
+    inout Point3D sinout,
+    out Point3D sout);
+
+  /// A method to shutdown the ORB
+  oneway void shutdown ();
+};

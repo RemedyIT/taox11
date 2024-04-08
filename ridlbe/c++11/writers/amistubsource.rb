@@ -85,6 +85,7 @@ module IDL
           'tao/x11/portable_server/portableserver_proxies.h'
         ]
         @default_post_includes = [
+          'tao/x11/sequence_conversion_t.h',
           'tao/x11/portable_server/servant_proxy.h',
           'tao/x11/portable_server/operation_table_std_map.h',
           'tao/x11/portable_server/upcall_command.h',
@@ -360,6 +361,20 @@ module IDL
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
       end
 
+      def visit_bitmask(_node)
+        if generate_typecodes?
+          add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h')
+        end
+        add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
+      end
+
+      def visit_bitset(_node)
+        if generate_typecodes?
+          add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h')
+        end
+        add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
+      end
+
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
@@ -375,6 +390,12 @@ module IDL
               add_pre_include('tao/AnyTypeCode/String_TypeCode_Static.h')
             when IDL::Type::Sequence,
                  IDL::Type::Array
+              add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h')
+              unless node.is_local?
+                check_idl_type(idl_type)
+                check_idl_type(idl_type.basetype)
+              end
+            when IDL::Type::Map
               add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h')
               unless node.is_local?
                 check_idl_type(idl_type)
@@ -405,7 +426,9 @@ module IDL
              IDL::Type::Void
           add_include('tao/x11/basic_arguments.h')
           add_include('tao/x11/portable_server/basic_sarguments.h')
-        when IDL::Type::Enum
+        when IDL::Type::Enum,
+             IDL::Type::BitMask,
+             IDL::Type::BitSet
           add_include('tao/x11/portable_server/basic_sargument_t.h')
         when IDL::Type::String,
              IDL::Type::WString
@@ -431,6 +454,11 @@ module IDL
           # stub arg template included in P.h
           add_include('tao/x11/portable_server/basic_sargument_t.h')
           add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
+          check_idl_type(idl_type.basetype)
+        when IDL::Type::Map
+          # stub arg template included in P.h
+          add_include('tao/x11/portable_server/basic_sargument_t.h')
+          add_include('tao/x11/map_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type.basetype)
         when IDL::Type::Array
           # stub arg template included in P.h
@@ -504,21 +532,14 @@ module IDL
       def pre_visit(_parser)
         println
         printiln('// generated from StubSourceObjTraitsWriter#pre_visit')
-        printiln('namespace TAOX11_NAMESPACE')
-        printiln('{')
-        inc_nest
-        println
-        printiln('namespace CORBA')
+        printiln('namespace TAOX11_NAMESPACE::CORBA')
         printiln('{')
         inc_nest
       end
 
       def post_visit(_parser)
         dec_nest
-        printiln('} // namespace CORBA')
-        println
-        dec_nest
-        printiln('} // namespace TAOX11_NAMESPACE')
+        printiln('} // namespace TAOX11_NAMESPACE::CORBA')
       end
 
       def enter_interface(node)
@@ -582,21 +603,15 @@ module IDL
         super
         println
         printiln('// generated from AmiStubSourceAnyOpWriter#pre_visit')
-        println('namespace TAOX11_NAMESPACE')
+        println('namespace TAOX11_NAMESPACE::CORBA')
         println('{')
-        inc_nest
-        println('  namespace CORBA')
-        println('  {')
         inc_nest
       end
 
       def post_visit(parser)
         dec_nest
         println
-        println('  } // namespace CORBA')
-        dec_nest
-        println
-        println('} // namespace TAOX11_NAMESPACE')
+        println('  } // namespace TAOX11_NAMESPACE::CORBA')
         super
       end
 
@@ -832,13 +847,13 @@ module IDL
         super
         println
         printiln('// generated from AmiStubSourceSArgTraitsWriter#pre_visit')
-        println('namespace TAOX11_NAMESPACE {')
+        println('namespace TAOX11_NAMESPACE::PS {')
         gen_exceptionholder_traits
       end
 
       def post_visit(parser)
         println
-        println('} // namespace TAOX11_NAMESPACE')
+        println('} // namespace TAOX11_NAMESPACE::PS')
         super
       end
 
@@ -882,6 +897,10 @@ module IDL
           visitor(StructVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Enum
           visitor(EnumVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
+        when IDL::Type::BitMask
+          visitor(BitmaskVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
+        when IDL::Type::BitSet
+          visitor(BitsetVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Union
           visitor(UnionVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Sequence
@@ -894,6 +913,16 @@ module IDL
             res_idl_type = res_idl_type.node.idltype
           end
           visitor(SequenceVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
+        when IDL::Type::Map
+          # find the base typedef for this map
+          return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous sequence types
+
+          # find base typedef for map
+          res_idl_type = idl_type
+          while !res_idl_type.node.idltype.is_a?(IDL::Type::Sequence)
+            res_idl_type = res_idl_type.node.idltype
+          end
+          visitor(MapVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Array
           # find the base typedef for this array
           return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous array types

@@ -1,0 +1,12 @@
+/**
+ * @file bitfield_zero.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a bitfield with bits zero
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+bitset MyBitset {
+  bitfield<0> x;
+};

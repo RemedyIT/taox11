@@ -27,7 +27,7 @@ namespace TAOX11_NAMESPACE
     {
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynValue_i::init (const CORBA::Any & any)
     {
       TAOX11_LOG_TRACE ("DynValue_i::init with any");
@@ -44,7 +44,7 @@ namespace TAOX11_NAMESPACE
       return ret->_this ();
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynValue_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc, TAO_InputCDR &in)
     {
       TAOX11_LOG_TRACE ("DynValue_i::init with tc and cdr");
@@ -60,7 +60,7 @@ namespace TAOX11_NAMESPACE
       return ret->_this ();
     }
 
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     DynValue_i::init (IDL::traits<CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_LOG_TRACE ("DynValue_i::init with tc");
@@ -451,7 +451,7 @@ namespace TAOX11_NAMESPACE
     }
 
     bool
-    DynValue_i::equal (IDL::traits< DynAny>::ref_type rhs)
+    DynValue_i::equal (IDL::traits<DynAny>::ref_type rhs)
     {
       TAOX11_LOG_TRACE ("DynValue_i::equal");
 
@@ -468,8 +468,8 @@ namespace TAOX11_NAMESPACE
         return false;
       }
 
-      IDL::traits< DynValue_i>::ref_type rhs_v=
-          IDL::traits< DynValue_i>::narrow (rhs);
+      IDL::traits<DynValue_i>::ref_type rhs_v=
+          IDL::traits<DynValue_i>::narrow (rhs);
 
       if (!rhs_v || this->is_null () != rhs_v->is_null ())
         {
@@ -523,7 +523,7 @@ namespace TAOX11_NAMESPACE
       }
     }
 
-    IDL::traits< DynAny>::ref_type
+    IDL::traits<DynAny>::ref_type
     DynValue_i::current_component ()
     {
       TAOX11_LOG_TRACE ("DynValue_i::current_component");
@@ -857,7 +857,7 @@ namespace TAOX11_NAMESPACE
           }
 
           // Recursive step - Add this member to the out_cdr
-          IDL::traits< DynValue_i>::ref_type member =
+          IDL::traits<DynValue_i>::ref_type member =
               IDL::traits<DynValue_i>::narrow (this->da_members_[currentMember]);
           if (member)
           {

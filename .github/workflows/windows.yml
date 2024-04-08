@@ -54,27 +54,27 @@ jobs:
     - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false && github.repository_owner == 'RemedyIT'
       run: |
         echo "X11_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: checkout ACE_TAO
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: DOCGroup/ACE_TAO
         path: ${{ env.DOC_ROOT }}
         ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout MPC
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: DOCGroup/MPC
         path: ${{ env.MPC_ROOT }}
         ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout ridl
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: RemedyIT/ridl
         path: ${{ env.RIDL_ROOT }}
         ref: ${{ env.X11_BRANCH }}
     - name: checkout axcioma
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}

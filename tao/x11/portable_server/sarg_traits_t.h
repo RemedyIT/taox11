@@ -12,26 +12,19 @@
 
 #pragma once
 
-#include /**/ "ace/pre.h"
-
 #include "tao/x11/stddef.h"
 
-namespace TAOX11_NAMESPACE
+namespace TAOX11_NAMESPACE::PS
 {
-  namespace PS {
-    /**
-    *
-    * @brief Base class for all skeleton arg traits specializations.
-    *
-    */
-    template<typename T>
-    class SArg_Traits
-    {
-    };
-  } // namespace PS
-} // namespace TAOX11_NAMESPACE
-
-
-#include /**/ "ace/post.h"
+  /**
+  *
+  * @brief Base class for all skeleton arg traits specializations.
+  *
+  */
+  template<typename T>
+  class SArg_Traits
+  {
+  };
+} // namespace TAOX11_NAMESPACE::PS
 
 #endif /* TAOX11_SARG_TRAITS_T_H */

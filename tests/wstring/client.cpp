@@ -164,11 +164,11 @@ int main(int argc, char* argv[])
 
     {
       // Test if bar is bounded and bounded correctly
-      if (IDL::traits<Test::bounded_bar >::is_bounded ())
+      if (IDL::traits<Test::bounded_bar>::is_bounded ())
       {
         TAOX11_TEST_DEBUG << "main - OK, is_bounded trait for <bounded_bar> set correctly"
           << std::endl;
-        if (IDL::traits<Test::bounded_bar >::bound () == 5)
+        if (IDL::traits<Test::bounded_bar>::bound () == 5)
         {
           TAOX11_TEST_DEBUG << "main - OK, Correct bound for "
             << "<bounded_bar> found." << std::endl;
@@ -177,7 +177,7 @@ int main(int argc, char* argv[])
         {
           TAOX11_TEST_ERROR << "main - ERROR, incorrect bound "
             << "found for <bounded_bar>. expected <5> - found <"
-            << IDL::traits<Test::bounded_bar >::bound () << ">."
+            << IDL::traits<Test::bounded_bar>::bound () << ">."
             << std::endl;
         }
       }

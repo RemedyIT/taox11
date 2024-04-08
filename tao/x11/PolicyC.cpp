@@ -43,7 +43,7 @@ namespace TAOX11_NAMESPACE {
     void
     TAOX11_CORBA::PolicyError::_info (std::ostream& strm) const
     {
-      TAOX11_IDL::traits< TAOX11_CORBA::PolicyError>::write_on(strm, *this);
+      TAOX11_IDL::traits<TAOX11_CORBA::PolicyError>::write_on(strm, *this);
     }
 
     void TAOX11_CORBA::PolicyError::_raise () const
@@ -84,7 +84,7 @@ namespace TAOX11_NAMESPACE {
     void
     TAOX11_CORBA::InvalidPolicies::_info (std::ostream& strm) const
     {
-      TAOX11_IDL::traits< TAOX11_CORBA::InvalidPolicies>::write_on(strm, *this);
+      TAOX11_IDL::traits<TAOX11_CORBA::InvalidPolicies>::write_on(strm, *this);
     }
 
     void TAOX11_CORBA::InvalidPolicies::_raise () const
@@ -119,7 +119,7 @@ namespace TAOX11_NAMESPACE {
     // generated from c++/cli_src/interface_pre.erb
     static const std::string TAOX11_NAMESPACE_corba_policy_stub_repo_id_ = "IDL:CORBA/Policy:1.0";
 
-    const std::string& Policy::_interface_repository_id () const
+    std::string Policy::_interface_repository_id () const
     {
       return TAOX11_NAMESPACE_corba_policy_stub_repo_id_;
     }
@@ -295,9 +295,9 @@ TAO_CORBA::Boolean operator>> (
 
 TAO_CORBA::Boolean operator<< (
     TAO_OutputCDR &strm,
-    IDL::traits< TAOX11_CORBA::Policy>::ref_type _tao_objref)
+    IDL::traits<TAOX11_CORBA::Policy>::ref_type _tao_objref)
 {
-  IDL::traits< TAOX11_CORBA::Object>::ref_type _x11_obj = _tao_objref;
+  IDL::traits<TAOX11_CORBA::Object>::ref_type _x11_obj = _tao_objref;
   return (strm << _x11_obj);
 }
 
@@ -329,14 +329,14 @@ bool marshal_TAOX11_NAMESPACE_CORBA_Policy_sequence (
   if (_bound > 0 && length > _bound)
     return false;
 
-  if (! (_strm << length))
+  if (!(_strm << length))
   {
     return false;
   }
 
   for (const _elem_type& _el : _seq)
   {
-    if (! (_strm << _el))
+    if (!(_strm << _el))
     {
       return false;
     }
@@ -352,7 +352,7 @@ bool demarshal_TAOX11_NAMESPACE_CORBA_Policy_sequence (
 
   uint32_t length {};
 
-  if (! (_strm >> length))
+  if (!(_strm >> length))
   {
     return false;
   }
@@ -364,7 +364,7 @@ bool demarshal_TAOX11_NAMESPACE_CORBA_Policy_sequence (
 
   for (_elem_type& _el : _seq)
   {
-    if (! (_strm >> _el))
+    if (!(_strm >> _el))
     {
       return false;
     }
@@ -378,7 +378,7 @@ TAO_END_VERSIONED_NAMESPACE_DECL
 // generated from c++/cli_src/interface_os.erb
 std::ostream& operator<< (
     std::ostream& strm ,
-    IDL::traits< TAOX11_CORBA::Policy>::ref_type _v)
+    IDL::traits<TAOX11_CORBA::Policy>::ref_type _v)
 {
   strm << "object_reference {";
   if (_v == nullptr)

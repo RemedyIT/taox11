@@ -66,7 +66,7 @@ namespace TAOX11_NAMESPACE {
     protected:
       using _shared_ptr_type =_ref_type::shared_ptr_type;
       template <typename _Tp1, typename, typename ...Args>
-      friend CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
+      friend constexpr CORBA::servant_reference<_Tp1> CORBA::make_reference(Args&& ...args);
 
       virtual ~Servant () = default;
 

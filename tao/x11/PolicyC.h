@@ -18,7 +18,7 @@
 #ifndef __RIDL_POLICYC_H_INCLUDED__
 #define __RIDL_POLICYC_H_INCLUDED__
 
-#include /**/ "ace/pre.h"
+#include /**/ "tao/x11/pre.h"
 
 #include "tao/x11/stddef.h"
 #include "tao/x11/basic_traits.h"
@@ -181,7 +181,7 @@ namespace TAOX11_NAMESPACE
   {
     template<>
     struct traits < TAOX11_CORBA::Policy> :
-      public IDL::common_byval_traits <IDL::traits< TAOX11_CORBA::Policy>::ref_type>,
+      public IDL::common_byval_traits <IDL::traits<TAOX11_CORBA::Policy>::ref_type>,
       public CORBA::object_traits < TAOX11_CORBA::Policy>
     {
       static constexpr bool local = false;
@@ -218,7 +218,7 @@ namespace TAOX11_NAMESPACE
       using _traits_type = IDL::traits<Policy>;
       using _ref_type = _traits_type::ref_type;
 
-      virtual const std::string& _interface_repository_id () const;
+      std::string _interface_repository_id () const override;
 
       // generated from c++/cli_hdr/attribute.erb
       virtual TAOX11_CORBA::PolicyType policy_type();
@@ -234,7 +234,7 @@ namespace TAOX11_NAMESPACE
 
     protected:
       template <typename _Tp1, typename, typename ...Args>
-      friend object_reference<_Tp1> make_reference(Args&& ...args);
+      friend constexpr object_reference<_Tp1> make_reference(Args&& ...args);
 
       Policy ();
       explicit Policy (TAOX11_NAMESPACE::Object_proxy_ptr op);
@@ -381,7 +381,7 @@ namespace TAOX11_NAMESPACE {
        OStrm_& os_,
        IDL::traits<CORBA::Policy>::in_type o_)
    {
-     return os_ << IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::_dump (o_, "CORBA::Policy");
+     return os_ << IDL::traits<TAOX11_NAMESPACE::CORBA::Object>::_dump (o_, "CORBA::Policy");
    }
 
    template <typename OStrm_, typename Fmt>
@@ -426,8 +426,8 @@ namespace TAOX11_NAMESPACE
    // generated from c++/cli_hdr/anyop.erb
 #if !defined (__TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICY_DECL__)
 #define __TAOX11_ANYOP_TAOX11_NAMESPACE__CORBA__POLICY_DECL__
-  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::ref_type);
-  TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, IDL::traits< TAOX11_CORBA::Policy>::_ref_type&);
+  TAOX11_AnyTypeCode_Export void operator<<= (TAOX11_CORBA::Any &, IDL::traits<TAOX11_CORBA::Policy>::ref_type);
+  TAOX11_AnyTypeCode_Export bool operator>>= (const TAOX11_CORBA::Any &, IDL::traits<TAOX11_CORBA::Policy>::_ref_type&);
 #endif
   } // namespac CORBA
 } // namespace TAOX11_NAMESPACE
@@ -512,13 +512,13 @@ inline TAOX11_CORBA::InvalidPolicies& TAOX11_CORBA::InvalidPolicies::operator= (
 // generated from c++/cli_hdr/interface_os.erb
 TAOX11_Export std::ostream& operator<< (
     std::ostream& strm,
-    IDL::traits< TAOX11_CORBA::Policy>::ref_type);
+    IDL::traits<TAOX11_CORBA::Policy>::ref_type);
 
 #if defined (__TAOX11_INCLUDE_STUB_PROXY__)
 #include "PolicyP.h"
 #endif
 
-#include /**/ "ace/post.h"
+#include /**/ "tao/x11/post.h"
 
 #endif // __RIDL_POLICYC_H_INCLUDED__
 

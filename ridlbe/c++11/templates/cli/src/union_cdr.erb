@@ -1,8 +1,6 @@
 
 // generated from <%= ridl_template_path %>
-TAO_CORBA::Boolean operator<< (
-    TAO_OutputCDR &strm,
-    const <%= scoped_cxxname %> &_tao_union)
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> &_tao_union)
 {
   if (!(strm <<<%= switchtype.cdr_from_fmt % "_tao_union._d ()" %>))
   {
@@ -16,20 +14,20 @@ TAO_CORBA::Boolean operator<< (
 %   if (_defmem && _ndefmem.empty?) || (!_ndefmem.empty? && _ndefmem.first.labels.size>1)
 %     # in these cases there is only a single member mapping all labels
 %     _m = _defmem || _ndefmem.shift
-  result = strm <<<%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
+  result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
 %   else
 %     # here we have 1 or 2 nondef members with or without a default
 %     _m = _ndefmem.shift # get first non-default member
 %     _lbl = _m.labels.first
   if (<%= _lbl == 'false' ? '!' : '' %>_tao_union._d ())
   {
-    result = strm <<<%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
+    result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
   }
 %     if _defmem || !_ndefmem.empty?
   else
   {
 %     _m = _defmem || _ndefmem.shift # get other (non-)default member
-    result = strm <<<%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
+    result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
   }
 %     end
 %   end
@@ -42,7 +40,7 @@ TAO_CORBA::Boolean operator<< (
     case <%= _lbl %>:
 %       end
     {
-      result = strm <<<%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
+      result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
     }
     break;
 %     end
@@ -52,7 +50,7 @@ TAO_CORBA::Boolean operator<< (
 %     if has_default?
 %       _m_def = default_member
     {
-      result = strm <<<%= _m_def.cdr_from_fmt % "_tao_union.#{_m_def.cxxname} ()" %>;
+      result = strm << <%= _m_def.cdr_from_fmt % "_tao_union.#{_m_def.cxxname} ()" %>;
     }
 %     end
     break;
@@ -62,11 +60,9 @@ TAO_CORBA::Boolean operator<< (
   return result;
 }
 
-TAO_CORBA::Boolean operator>> (
-    TAO_InputCDR &strm,
-    <%= scoped_cxxname %> &_tao_union)
+TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxxname %> &_tao_union)
 {
-  <%= scoped_switch_cxxtype %> _tao_discriminant;
+  <%= scoped_switch_cxxtype %> _tao_discriminant<%= switchtype.value_initializer %>;
   if (!(strm >> <%= switchtype.cdr_to_fmt % "_tao_discriminant" %>))
   {
     return false;
@@ -79,7 +75,7 @@ TAO_CORBA::Boolean operator>> (
 %     # in these cases there is only a single member mapping all labels
 %     _m = _defmem || _ndefmem.shift
   // initialize associated default value
-  <%= _m.cxx_member_type %> temp_val<%= _m.zero_initializer %>;
+  <%= _m.cxx_member_type %> temp_val<%= _m.value_initializer %>;
   // extract
   if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
   {
@@ -94,7 +90,7 @@ TAO_CORBA::Boolean operator>> (
   if (<%= _lbl == 'false' ? '!' : '' %>_tao_discriminant)
   {
     // initialize associated default value
-    <%= _m.cxx_member_type %> temp_val<%= _m.zero_initializer %>;
+    <%= _m.cxx_member_type %> temp_val<%= _m.value_initializer %>;
     // extract
     if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
     {
@@ -108,7 +104,7 @@ TAO_CORBA::Boolean operator>> (
   {
 %     _m = _defmem || _ndefmem.shift # get other (non-)default member
     // initialize associated default value
-    <%= _m.cxx_member_type %> temp_val<%= _m.zero_initializer %>;
+    <%= _m.cxx_member_type %> temp_val<%= _m.value_initializer %>;
     // extract
     if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
     {
@@ -129,7 +125,7 @@ TAO_CORBA::Boolean operator>> (
 %     end
     {
       // initialize associated default value
-      <%= _m.cxx_member_type %> temp_val<%= _m.zero_initializer %>;
+      <%= _m.cxx_member_type %> temp_val<%= _m.value_initializer %>;
       // extract
       if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
       {
@@ -147,7 +143,7 @@ TAO_CORBA::Boolean operator>> (
 %     _m_def = default_member
     {
       // initialize associated default value
-      <%= _m_def.cxx_member_type %> temp_val<%= _m_def.zero_initializer %>;
+      <%= _m_def.cxx_member_type %> temp_val<%= _m_def.value_initializer %>;
       // extract
       if (strm >> <%= _m_def.cdr_to_fmt % "temp_val" %>)
       {

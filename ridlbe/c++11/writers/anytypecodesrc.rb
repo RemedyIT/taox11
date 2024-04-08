@@ -148,6 +148,16 @@ module IDL
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
       end
 
+      def visit_bitmask(_node)
+        add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h') if params[:gen_typecodes]
+        add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
+      end
+
+      def visit_bitset(_node)
+        add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h') if params[:gen_typecodes]
+        add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
+      end
+
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
@@ -162,6 +172,12 @@ module IDL
             add_pre_include('tao/AnyTypeCode/String_TypeCode_Static.h') if params[:gen_typecodes]
           when IDL::Type::Sequence,
                IDL::Type::Array
+            add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h') if params[:gen_typecodes]
+            unless node.is_local?
+              check_idl_type(idl_type)
+              check_idl_type(idl_type.basetype)
+            end
+          when IDL::Type::Map
             add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h') if params[:gen_typecodes]
             unless node.is_local?
               check_idl_type(idl_type)
@@ -185,7 +201,9 @@ module IDL
              IDL::Type::Double,
              IDL::Type::Float,
              IDL::Type::Void
-        when IDL::Type::Enum
+        when IDL::Type::Enum,
+             IDL::Type::BitMask,
+             IDL::Type::BitSet
         when IDL::Type::String
         when IDL::Type::WString
         when IDL::Type::Object,
@@ -198,6 +216,9 @@ module IDL
              IDL::Type::Union
           # arg template included in P.h
         when IDL::Type::Sequence
+          # arg template included in P.h
+          check_idl_type(idl_type.basetype)
+        when IDL::Type::Map
           # arg template included in P.h
           check_idl_type(idl_type.basetype)
         when IDL::Type::Array

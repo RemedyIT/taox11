@@ -44,7 +44,7 @@ module IDL
 
       def dec_nest(in_ = 1)
         @nest -= in_
-        @nest = 0 if @nest < 0
+        @nest = 0 if @nest.negative?
       end
 
       def write_regen_section(sectionid, options = nil, proc = nil)
@@ -416,15 +416,15 @@ module IDL
         parser.visit_nodes(self)
       end
 
-      def pre_visit(parser); end
+      def pre_visit(_parser); end
 
-      def post_visit(parser); end
+      def post_visit(_parser); end
 
-      def visit_include(node); end
+      def visit_include(_node); end
 
-      def enter_include(node); end
+      def enter_include(_node); end
 
-      def leave_include(node); end
+      def leave_include(_node); end
 
       def enter_module(node)
         return if self.no_scope_tracking?(node)
@@ -529,6 +529,14 @@ module IDL
       def visit_enum(node); end
 
       def visit_enumerator(node); end
+
+      def visit_bitset(node); end
+
+      def visit_bitfield(node); end
+
+      def visit_bitmask(node); end
+
+      def visit_bitvalue(node); end
 
       def visit_typedef(node); end
     end # CodeWriterMethods

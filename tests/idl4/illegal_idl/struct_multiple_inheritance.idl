@@ -1,0 +1,23 @@
+/**
+ * @file struct_multiple_inheritance.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject the use of multiple inheritance
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+struct Base1
+{
+  long a;
+};
+
+struct Base2
+{
+  long b;
+};
+
+struct Foo : Base1, Base2
+{
+  long x;
+};

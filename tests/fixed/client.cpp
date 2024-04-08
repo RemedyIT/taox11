@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
           TAOX11_TEST_INFO << "f resolves as true" << std::endl;
         }
       // Checks the digits and scale traits
-      if (IDL::traits< ::V::pi_type>::digits () == 7)
+      if (IDL::traits<::V::pi_type>::digits () == 7)
         {
           TAOX11_TEST_INFO << "main - OK, correct number of digits found for "
             << "::V::pi_type" << std::endl;
@@ -72,10 +72,10 @@ int main(int argc, char* argv[])
         {
           TAOX11_TEST_ERROR << "main - ERROR, incorrect number of digits found for "
             "::V::pi_type. expected<7> - found <"
-            << IDL::traits< ::V::pi_type>::digits ()
+            << IDL::traits<::V::pi_type>::digits ()
             << ">" << std::endl;
         }
-      if (IDL::traits< ::V::pi_type>::scale () == 6)
+      if (IDL::traits<::V::pi_type>::scale () == 6)
         {
           TAOX11_TEST_INFO << "main - OK, correct scale found for "
             << "::V::pi_type" << std::endl;
@@ -84,11 +84,11 @@ int main(int argc, char* argv[])
         {
           TAOX11_TEST_ERROR << "main - ERROR, incorrect scale found for "
             "::V::pi_type. expected<6> - found <"
-            << IDL::traits< ::V::pi_type>::scale ()
+            << IDL::traits<::V::pi_type>::scale ()
             << ">" << std::endl;
         }
 
-      if (IDL::traits< ::pi_type>::digits () == 7)
+      if (IDL::traits<::pi_type>::digits () == 7)
         {
           TAOX11_TEST_INFO << "main - OK, correct number of digits found for "
             << "::pi_type" << std::endl;
@@ -97,10 +97,10 @@ int main(int argc, char* argv[])
         {
           TAOX11_TEST_ERROR << "main - ERROR, incorrect number of digits found for "
             "::pi_type. expected<7> - found <"
-            << IDL::traits< ::pi_type>::digits ()
+            << IDL::traits<::pi_type>::digits ()
             << ">" << std::endl;
         }
-      if (IDL::traits< ::pi_type>::scale () == 6)
+      if (IDL::traits<::pi_type>::scale () == 6)
         {
           TAOX11_TEST_INFO << "main - OK, correct scale found for "
             << "::pi_type" << std::endl;
@@ -109,7 +109,7 @@ int main(int argc, char* argv[])
         {
           TAOX11_TEST_ERROR << "main - ERROR, incorrect scale found for "
             "::pi_type. expected<7> - found <"
-            << IDL::traits< ::pi_type>::scale ()
+            << IDL::traits<::pi_type>::scale ()
             << ">" << std::endl;
         }
       pi_type p1 ("1234");

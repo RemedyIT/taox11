@@ -52,6 +52,10 @@ module IDL
         self._idltype.is_a?(IDL::Type::Sequence)
       end
 
+      def is_map_typedef?
+        self._idltype.is_a?(IDL::Type::Map)
+      end
+
       def is_string_typedef?
         self._idltype.is_a?(IDL::Type::String)
       end
@@ -63,9 +67,10 @@ module IDL
       def is_bounded_type?
         case self._resolved_idltype
         when IDL::Type::Sequence,
+             IDL::Type::Map,
              IDL::Type::String,
              IDL::Type::WString
-          self._resolved_idltype.size.to_i > 0
+          self._resolved_idltype.size.to_i.positive?
         else
           false
         end
@@ -81,7 +86,7 @@ module IDL
         when IDL::Type::Sequence,
              IDL::Type::String,
              IDL::Type::WString
-          _guard << "_#{self._resolved_idltype.size}" if self._resolved_idltype.size.to_i > 0
+          _guard << "_#{self._resolved_idltype.size}" if self._resolved_idltype.size.to_i.positive?
         when IDL::Type::Array
           _guard << "_#{self._resolved_idltype.sizes.join('_')}"
         end

@@ -30,7 +30,7 @@ namespace TAOX11_NAMESPACE
      * Implementation of Dynamic Any type for Sequences.
      */
     class TAOX11_DynamicAny_Export DynSequence_i final
-      : public virtual IDL::traits< DynSequence>::base_type,
+      : public virtual IDL::traits<DynSequence>::base_type,
         public virtual TAOX11_DynCommon
     {
     public:
@@ -41,11 +41,11 @@ namespace TAOX11_NAMESPACE
       ~DynSequence_i () = default;
 
       /// Initialize using just a TypeCode
-       IDL::traits< DynamicAny::DynAny>::ref_type
+       IDL::traits<DynamicAny::DynAny>::ref_type
        init (IDL::traits<CORBA::TypeCode>::ref_type tc);
 
         /// Initialize using an Any.
-       IDL::traits< DynamicAny::DynAny>::ref_type
+       IDL::traits<DynamicAny::DynAny>::ref_type
        init (const CORBA::Any& any);
 
       // = Functions specific to DynSequence.
@@ -69,11 +69,11 @@ namespace TAOX11_NAMESPACE
 
       CORBA::Any to_any () override;
 
-      bool equal (IDL::traits< DynamicAny::DynAny>::ref_type dyn_any) override;
+      bool equal (IDL::traits<DynamicAny::DynAny>::ref_type dyn_any) override;
 
       void destroy () override;
 
-      IDL::traits< DynamicAny::DynAny>::ref_type current_component () override;
+      IDL::traits<DynamicAny::DynAny>::ref_type current_component () override;
 
     private:
       // Utility, turns the type of elements contained in the sequence.
@@ -91,7 +91,7 @@ namespace TAOX11_NAMESPACE
 
     private:
       /// Each component is also a DynAny.
-      std::vector< IDL::traits< DynamicAny::DynAny>::ref_type> da_members_;
+      std::vector< IDL::traits<DynamicAny::DynAny>::ref_type> da_members_;
     };
   }
 }

@@ -41,8 +41,7 @@ FOO_IORInterceptor::establish_components (
   CORBA::Any data;
   data <<= name;
 
-  CORBA::OctetSeq encoded_data =
-    std::move (this->codec_->encode_value (data));
+  CORBA::OctetSeq encoded_data = this->codec_->encode_value (data);
 
   // Construct a tagged component.
   IOP::TaggedComponent component;

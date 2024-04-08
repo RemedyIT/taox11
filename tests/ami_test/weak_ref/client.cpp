@@ -73,7 +73,7 @@ public:
     }
 
   void foo_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
     {
       TAOX11_TEST_ERROR
          << "ERROR: Callback method <foo_excep> called."
@@ -86,7 +86,7 @@ public:
   }
 
   void shutdown_excep (
-    IDL::traits< ::Messaging::ExceptionHolder>::ref_type) override
+    IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 };

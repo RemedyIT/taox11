@@ -45,7 +45,7 @@ namespace TAOX11_NAMESPACE
       virtual bool _is_a (const std::string& local_type_id);
 
       /// Get the (local) repository id (overloaded in derived interfaces).
-      virtual std::string _interface_repository_id ();
+      virtual std::string _interface_repository_id () const;
 
       static bool _abs_marshal (TAO_OutputCDR&, _ref_type);
       static bool _abs_unmarshal (TAO_InputCDR&, _ref_type&);
@@ -55,9 +55,7 @@ namespace TAOX11_NAMESPACE
 
       friend class TAOX11_NAMESPACE::ValueFactory_proxy;
       template <typename T> friend class abstractbase_reference;
-#if (defined (_MSC_VER) && (_MSC_VER < 1910)) || (defined __clang__ && __clang_major__ <= 11)
-      // Visual C++ 14.0 has a problem with the narrow method as friend
-      // so make the full traits a friend, issue #4015
+#if (defined __clang__ && __clang_major__ <= 11)
       // Clang doesn't support this friend construct, issue #4476
       template<typename T>
       friend struct TAOX11_CORBA::abstractbase_traits;

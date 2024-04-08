@@ -1,0 +1,58 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+@default(8) typedef short short_type_8;
+typedef short_type_8 typedef_short_type_8;
+
+struct bar
+{
+  short short_no_default;
+  @default(5) short short_5;
+  short_type_8 short_8;
+  typedef_short_type_8 typedef_short_8;
+  @default(9) typedef_short_type_8 typedef_short_9;
+  @default(5) unsigned short ushort_5;
+};
+
+exception foo
+{
+  short short_no_default;
+  @default(5) short short_5;
+  short_type_8 short_8;
+  typedef_short_type_8 typedef_short_8;
+  @default(9) typedef_short_type_8 typedef_short_9;
+  @default(5) unsigned short ushort_5;
+};
+
+union TestUnion_Octet switch(short) {
+  default:
+    @default(5) short FirstCase;
+  case 1:
+    long SecondCase;
+};
+
+enum Color {
+  GREEN,
+  @default_literal RED,
+  BLUE
+};
+
+typedef Color ColorArray[5];
+
+enum ColorNoDefaultLiteral {
+  BLACK,
+  WHITE,
+  YELLOW
+};
+typedef ColorNoDefaultLiteral ColorNoDefaultLiteralArray[5];
+
+struct Shape {
+    Color color_red;
+    ColorArray color_red_array;
+    ColorNoDefaultLiteral color_no_default_literal;
+    ColorNoDefaultLiteralArray color_no_default_literal_array;
+};

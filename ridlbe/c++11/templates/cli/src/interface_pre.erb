@@ -16,8 +16,7 @@ bool
 % end
 % if has_abstract_base?
 
-std::string
-<%= cxxname %>::_interface_repository_id ()
+std::string <%= cxxname %>::_interface_repository_id () const
 {
   return "<%= repository_id %>";
 }

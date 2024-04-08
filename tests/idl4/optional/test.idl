@@ -1,0 +1,14 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+struct bar
+{
+  short x;
+  string y;
+  @optional short z;
+};
+

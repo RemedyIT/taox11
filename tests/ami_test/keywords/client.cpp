@@ -40,7 +40,7 @@ Handler::inout_bool (::Test::_cxx_bool ami_return_val,
 
 void
 Handler::inout_bool_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'inout_bool_excep'" << std::endl;
@@ -60,7 +60,7 @@ Handler::_cxx_uint32_t (int16_t ami_return_val)
 
 void
 Handler::uint32_t_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of '_cxx_uint32_t_excep'" << std::endl;
@@ -79,7 +79,7 @@ Handler::inout_int16_t (::Test::_cxx_int16_t ami_return_val,
 
 void
 Handler::inout_int16_t_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'inout_int16_t_excep'" << std::endl;
@@ -100,7 +100,7 @@ Handler::get_attr_int32_t (
 
 void
 Handler::get_attr_int32_t_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'get_attr_int32_t_excep'" << std::endl;
@@ -114,7 +114,7 @@ Handler::set_attr_int32_t ()
 
 void
 Handler::set_attr_int32_t_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'set_attr_int32_t_excep'" << std::endl;
@@ -136,7 +136,7 @@ Handler::get_attr_bool (
 
 void
 Handler::get_attr_bool_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'get_attr_bool_excep'" << std::endl;
@@ -150,7 +150,7 @@ Handler::set_attr_bool ()
 
 void
 Handler::set_attr_bool_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'set_attr_bool_excep'" << std::endl;
@@ -173,7 +173,7 @@ Handler::get_attr_int16_t (
 
 void
 Handler::get_attr_int16_t_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'get_attr_int16_t_excep'" << std::endl;
@@ -187,7 +187,7 @@ Handler::set_attr_int16_t ()
 
 void
 Handler::set_attr_int16_t_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'set_attr_int16_t_excep'" << std::endl;
@@ -210,7 +210,7 @@ Handler::get_attr_least8_t (
 
 void
 Handler::get_attr_least8_t_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'get_attr_least8_t_excep'" << std::endl;
@@ -224,7 +224,7 @@ Handler::set_attr_least8_t ()
 
 void
 Handler::set_attr_least8_t_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'set_attr_least8_t_excep'" << std::endl;
@@ -248,7 +248,7 @@ Handler::get_attr_cpplib_keyword_struct (
 
 void
 Handler::get_attr_cpplib_keyword_struct_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'get_attr_cpplib_keyword_struct_excep'" << std::endl;
@@ -262,7 +262,7 @@ Handler::set_attr_cpplib_keyword_struct ()
 
 void
 Handler::set_attr_cpplib_keyword_struct_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'set_attr_cpplib_keyword_struct_excep'" << std::endl;
@@ -284,7 +284,7 @@ Handler::get_attr_int_keyword_struct (
 
 void
 Handler::get_attr_int_keyword_struct_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'get_attr_int_keyword_struct_excep'" << std::endl;
@@ -298,7 +298,7 @@ Handler::set_attr_int_keyword_struct ()
 
 void
 Handler::set_attr_int_keyword_struct_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'set_attr_int_keyword_struct_excep'" << std::endl;
@@ -363,7 +363,7 @@ Handler::get_attr_cpp_keyword_struct (
 
 void
 Handler::get_attr_cpp_keyword_struct_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'get_attr_cpp_keyword_struct_excep'" << std::endl;
@@ -377,7 +377,7 @@ Handler::set_attr_cpp_keyword_struct ()
 
 void
 Handler::set_attr_cpp_keyword_struct_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'set_attr_cpp_keyword_struct_excep'" << std::endl;
@@ -390,7 +390,7 @@ Handler::bar ()
 
 void
 Handler::bar_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
 }
 
@@ -401,7 +401,7 @@ Handler::shutdown ()
 
 void
 Handler::shutdown_excep (
-  IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+  IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
 }
 
@@ -413,7 +413,7 @@ Handler::_cxx_class ()
 }
 
 void
-Handler::class_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+Handler::class_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'class_excep'" << std::endl;
@@ -429,7 +429,7 @@ Handler::_cxx_void (
 }
 
 void
-Handler::void_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+Handler::void_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'void_excep'" << std::endl;
@@ -443,7 +443,7 @@ Handler::get_private (::Test::_cxx_bool)
 }
 
 void
-Handler::get_private_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+Handler::get_private_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'get_private_excep'" << std::endl;
@@ -457,7 +457,7 @@ Handler::set_private ()
 }
 
 void
-Handler::set_private_excep (IDL::traits< ::Messaging::ExceptionHolder>::ref_type)
+Handler::set_private_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type)
 {
   ++result_;
   TAOX11_TEST_ERROR << "ERROR : Unexpected invocation of 'set_private_excep'" << std::endl;

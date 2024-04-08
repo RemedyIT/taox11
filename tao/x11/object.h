@@ -76,7 +76,7 @@ namespace TAOX11_NAMESPACE
 #endif
 
       /// Get the (local) repository id.
-      virtual std::string _interface_repository_id ();
+      virtual std::string _interface_repository_id () const;
 
 #if ! defined (CORBA_E_COMPACT) && ! defined (CORBA_E_MICRO)
       // DII operations to create a request.
@@ -147,7 +147,7 @@ namespace TAOX11_NAMESPACE
 
       template <typename T> friend struct object_traits;
       template <typename _Tp1, typename, typename ...Args>
-      friend object_reference<_Tp1> make_reference(Args&& ...args);
+      friend constexpr object_reference<_Tp1> make_reference(Args&& ...args);
 
       explicit Object (Object_proxy_ptr op = nullptr);
       Object(const Object&) = delete;
@@ -184,7 +184,7 @@ namespace TAOX11_NAMESPACE
       : public virtual CORBA::Object
     {
     public:
-      using _traits_type = IDL::traits< LocalObject>;
+      using _traits_type = IDL::traits<LocalObject>;
       using _ref_type =  _traits_type::ref_type;
 
       bool _is_a (const std::string& local_type_id) override;
@@ -289,7 +289,7 @@ namespace TAOX11_NAMESPACE
           OStrm_& os_,
           IDL::traits<CORBA::Object>::in_type o_)
       {
-        return os_ << "IDL::traits<CORBA::Object>::ref_type {object:"
+        return os_ << "IDL::traits<CORBA::Object>::ref_type{object:"
 #if (TAO_HAS_MINIMUM_CORBA == 0)
             << (o_ ? o_->_repository_id () : std::string("nil"))
 #endif

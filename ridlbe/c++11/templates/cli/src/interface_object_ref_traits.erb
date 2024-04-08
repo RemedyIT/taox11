@@ -1,15 +1,13 @@
 
 // generated from <%= ridl_template_path %>
 <%= scoped_proxy_cxxname %>_ptr
-TAO_TAO::Objref_Traits<<%= scoped_proxy_cxxname %>>::duplicate (
-  <%= scoped_proxy_cxxname %>_ptr p)
+TAO_TAO::Objref_Traits<<%= scoped_proxy_cxxname %>>::duplicate (<%= scoped_proxy_cxxname %>_ptr p)
 {
   return <%= scoped_proxy_cxxname %>::_duplicate (p);
 }
 
 void
-TAO_TAO::Objref_Traits<<%= scoped_proxy_cxxname %>>::release (
-  <%= scoped_proxy_cxxname %>_ptr p)
+TAO_TAO::Objref_Traits<<%= scoped_proxy_cxxname %>>::release (<%= scoped_proxy_cxxname %>_ptr p)
 {
   ::TAO_CORBA::release (p);
 }
@@ -21,10 +19,7 @@ TAO_TAO::Objref_Traits<<%= scoped_proxy_cxxname %>>::nil ()
 }
 
 ::TAO_CORBA::Boolean
-TAO_TAO::Objref_Traits<<%= scoped_proxy_cxxname %>>::marshal (
-  const <%= scoped_proxy_cxxname %>_ptr p,
-  TAO_OutputCDR & cdr)
+TAO_TAO::Objref_Traits<<%= scoped_proxy_cxxname %>>::marshal (const <%= scoped_proxy_cxxname %>_ptr p, TAO_OutputCDR & cdr)
 {
   return ::TAO_CORBA::Object::marshal (p, cdr);
 }
-

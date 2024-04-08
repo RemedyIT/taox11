@@ -29,7 +29,7 @@ namespace TAOX11_NAMESPACE
   template<typename T>
   void
   DynAnyBasicTypeUtils<T>::insert_value (const T &val,
-      IDL::traits< DynamicAny::TAOX11_DynCommon>::ref_type the_dynany)
+      IDL::traits<DynamicAny::TAOX11_DynCommon>::ref_type the_dynany)
   {
     TAOX11_LOG_TRACE("DynAnyBasicTypeUtils<T>::insert_value");
     if (the_dynany->destroyed ())
@@ -39,9 +39,9 @@ namespace TAOX11_NAMESPACE
     if (the_dynany->has_components ())
     {
       TAOX11_LOG_TRACE("DynAnyBasicTypeUtils<T>::insert_value");
-      IDL::traits< DynamicAny::DynAny>::ref_type cc = the_dynany->check_component ();
-      IDL::traits< DynamicAny::TAOX11_DynCommon>::ref_type dc =
-          IDL::traits< DynamicAny::TAOX11_DynCommon>::narrow(cc);
+      IDL::traits<DynamicAny::DynAny>::ref_type cc = the_dynany->check_component ();
+      IDL::traits<DynamicAny::TAOX11_DynCommon>::ref_type dc =
+          IDL::traits<DynamicAny::TAOX11_DynCommon>::narrow(cc);
       DynAnyBasicTypeUtils<T>::insert_value (val, dc);
     }
     else
@@ -54,7 +54,7 @@ namespace TAOX11_NAMESPACE
 
   template<typename T>
   typename BasicTypeTraits<T>::return_type
-  DynAnyBasicTypeUtils<T>::get_value (IDL::traits< DynamicAny::TAOX11_DynCommon>::ref_type the_dynany)
+  DynAnyBasicTypeUtils<T>::get_value (IDL::traits<DynamicAny::TAOX11_DynCommon>::ref_type the_dynany)
   {
     TAOX11_LOG_TRACE("DynAnyBasicTypeUtils<T>::get_value");
 
@@ -65,8 +65,8 @@ namespace TAOX11_NAMESPACE
 
     if (the_dynany->has_components ())
     {
-      IDL::traits< DynamicAny::DynAny>::ref_type cc = the_dynany->check_component ();
-      IDL::traits< DynamicAny::TAOX11_DynCommon>::ref_type dc = IDL::traits< DynamicAny::TAOX11_DynCommon>::narrow(cc);
+      IDL::traits<DynamicAny::DynAny>::ref_type cc = the_dynany->check_component ();
+      IDL::traits<DynamicAny::TAOX11_DynCommon>::ref_type dc = IDL::traits<DynamicAny::TAOX11_DynCommon>::narrow(cc);
       return DynAnyBasicTypeUtils<T>::get_value (dc);
     }
     else
@@ -84,7 +84,7 @@ namespace TAOX11_NAMESPACE
 
   template<typename T>
   void
-  DynAnyFlagUtils<T>::set_flag_t (IDL::traits< DynamicAny::DynAny>::ref_type component,
+  DynAnyFlagUtils<T>::set_flag_t (IDL::traits<DynamicAny::DynAny>::ref_type component,
                                   bool destroying)
   {
     typename IDL::traits<T>::ref_type tmp = IDL::traits<T>::narrow (std::move(component));
@@ -110,11 +110,11 @@ namespace TAOX11_NAMESPACE
     typename IDL::traits<DA_IMPL>::ref_type p = CORBA::make_reference<DA_IMPL>(allow_truncation);
     // To make the special case for DynValue_i also general,
     // we use always the return value of init
-    return IDL::traits< DA_IMPL>::narrow(p->init(any_tc));
+    return IDL::traits<DA_IMPL>::narrow(p->init(any_tc));
   }
 
   template<typename DA_IMPL, typename ANY_TC>
-  typename IDL::traits< DA_IMPL>::ref_type
+  typename IDL::traits<DA_IMPL>::ref_type
   CreateDynAnyUtils<DA_IMPL, ANY_TC>::create_dyn_any_t (
     IDL::traits<CORBA::TypeCode>::ref_type tc,
     ANY_TC any_tc,
@@ -124,13 +124,13 @@ namespace TAOX11_NAMESPACE
 
     typename IDL::traits<DA_IMPL>::ref_type p = CORBA::make_reference<DA_IMPL>(allow_truncation);
 
-    return IDL::traits< DA_IMPL>::narrow(p->init(tc,any_tc));
+    return IDL::traits<DA_IMPL>::narrow(p->init(tc,any_tc));
   }
 
   namespace MakeDynAnyUtils
   {
     template<typename ANY_TC>
-    IDL::traits< DynamicAny::DynAny>::ref_type
+    IDL::traits<DynamicAny::DynAny>::ref_type
     make_dyn_any_t (
         IDL::traits<CORBA::TypeCode>::ref_type tc,
       ANY_TC any_tc,

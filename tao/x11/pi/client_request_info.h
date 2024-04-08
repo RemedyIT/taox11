@@ -29,13 +29,13 @@ namespace TAOX11_NAMESPACE
 
       virtual ~ClientRequestInfo () = default;
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type
+      IDL::traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type
       target () override;
 
       bool
       _is_a (const std::string& local_type_id) override;
 
-      IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type
+      IDL::traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type
       effective_target () override;
 
       ::TAOX11_NAMESPACE::IOP::TaggedProfile
@@ -55,7 +55,7 @@ namespace TAOX11_NAMESPACE
       get_effective_components (
           ::TAOX11_NAMESPACE::IOP::ComponentId id) override;
 
-      IDL::traits< ::TAOX11_NAMESPACE::CORBA::Policy>::ref_type
+      IDL::traits<::TAOX11_NAMESPACE::CORBA::Policy>::ref_type
       get_request_policy (
           ::TAOX11_NAMESPACE::CORBA::PolicyType type) override;
 

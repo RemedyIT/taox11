@@ -196,6 +196,7 @@ module IDL
         idl_type = node.idltype.resolved_type
         case idl_type
         when IDL::Type::Sequence,
+             IDL::Type::Map,
              IDL::Type::Array
           check_idl_type(idl_type)
         end
@@ -218,7 +219,9 @@ module IDL
              IDL::Type::Float,
           add_include('tao/x11/portable_server/basic_sarguments.h')
           add_include('tao/x11/basic_arguments.h')
-        when IDL::Type::Enum
+        when IDL::Type::Enum,
+             IDL::Type::BitMask,
+             IDL::Type::BitSet
           add_include('tao/x11/portable_server/basic_sargument_t.h')
           add_include('tao/x11/basic_argument_t.h')
         when IDL::Type::String,
@@ -243,6 +246,12 @@ module IDL
           add_include('tao/x11/basic_argument_t.h')
           add_include('tao/x11/sequence_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type.basetype)
+        when IDL::Type::Map
+          add_include('tao/x11/portable_server/basic_sargument_t.h')
+          add_include('tao/x11/basic_argument_t.h')
+          add_include('tao/x11/map_cdr_t.h') unless params[:no_cdr_streaming]
+          check_idl_type(idl_type.keytype)
+          check_idl_type(idl_type.valuetype)
         when IDL::Type::Array
           add_include('tao/x11/portable_server/basic_sargument_t.h')
           add_include('tao/x11/basic_argument_t.h')
@@ -273,13 +282,13 @@ module IDL
         super
         println
         printiln('// generated from ServantSourceSArgTraitsWriter#pre_visit')
-        printiln('namespace TAOX11_NAMESPACE')
+        printiln('namespace TAOX11_NAMESPACE::PS')
         printiln('{')
       end
 
       def post_visit(parser)
         println
-        println('} // namespace TAOX11_NAMESPACE')
+        println('} // namespace TAOX11_NAMESPACE:PS')
         super
       end
 
@@ -323,6 +332,10 @@ module IDL
           visitor(StructVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Enum
           visitor(EnumVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
+        when IDL::Type::BitSet
+          visitor(BitsetVisitor).visit_sarg_traits(res_idl_type.node)# unless is_tracked?(res_idl_type.node)
+        when IDL::Type::BitMask
+          visitor(BitmaskVisitor).visit_sarg_traits(res_idl_type.node)# unless is_tracked?(res_idl_type.node)
         when IDL::Type::Union
           visitor(UnionVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Sequence
@@ -335,6 +348,16 @@ module IDL
             res_idl_type = res_idl_type.node.idltype
           end
           visitor(SequenceVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
+        when IDL::Type::Map
+          # find the base typedef for this map
+          return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous map types
+
+          # find base typedef for map
+          res_idl_type = idl_type
+          while res_idl_type.node.idltype.is_a?(IDL::Type::ScopedName)
+            res_idl_type = res_idl_type.node.idltype
+          end
+          visitor(MapVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Array
           # find the base typedef for this array
           return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous array types

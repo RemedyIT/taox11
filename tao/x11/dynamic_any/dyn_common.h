@@ -30,7 +30,7 @@ namespace TAOX11_NAMESPACE
  * DynAny implementation classes.
  */
     class TAOX11_DynamicAny_Export TAOX11_DynCommon
-      : public virtual IDL::traits< DynAny>::base_type
+      : public virtual IDL::traits<DynAny>::base_type
     {
     public:
       /// Constructor.
@@ -42,7 +42,7 @@ namespace TAOX11_NAMESPACE
       IDL::traits<CORBA::TypeCode>::ref_type
       type () override;
 
-      void assign (IDL::traits< DynAny>::ref_type dyn_any) override;
+      void assign (IDL::traits<DynAny>::ref_type dyn_any) override;
 
       void insert_boolean (bool value) override;
 
@@ -82,7 +82,7 @@ namespace TAOX11_NAMESPACE
       void insert_any (const CORBA::Any& value) override;
 
       void insert_dyn_any (
-          IDL::traits< DynAny>::ref_type value) override;
+          IDL::traits<DynAny>::ref_type value) override;
 
       void insert_val (IDL::traits<CORBA::ValueBase>::ref_type value) override;
 
@@ -122,7 +122,7 @@ namespace TAOX11_NAMESPACE
 
       CORBA::Any get_any () override;
 
-      IDL::traits< DynAny>::ref_type get_dyn_any () override;
+      IDL::traits<DynAny>::ref_type get_dyn_any () override;
 
       IDL::traits<CORBA::ValueBase>::ref_type get_val () override;
 
@@ -132,13 +132,13 @@ namespace TAOX11_NAMESPACE
 
       bool next () override;
 
-      IDL::traits< DynAny>::ref_type copy () override;
+      IDL::traits<DynAny>::ref_type copy () override;
 
       uint32_t component_count () override;
 
-      void insert_abstract (IDL::traits< ::TAOX11_CORBA::AbstractBase>::ref_type value) override;
+      void insert_abstract (IDL::traits<::TAOX11_CORBA::AbstractBase>::ref_type value) override;
 
-      IDL::traits< ::TAOX11_CORBA::AbstractBase>::ref_type get_abstract () override;
+      IDL::traits<::TAOX11_CORBA::AbstractBase>::ref_type get_abstract () override;
 
       void insert_boolean_seq (const CORBA::BooleanSeq& value) override;
 
@@ -206,7 +206,7 @@ namespace TAOX11_NAMESPACE
                                        bool destroying);
 
       // Utility functions.
-      IDL::traits< DynAny>::ref_type
+      IDL::traits<DynAny>::ref_type
       check_component (bool isValueType = false);
 
       void check_type (IDL::traits<CORBA::TypeCode>::ref_type tc);

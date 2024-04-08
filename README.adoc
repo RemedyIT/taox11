@@ -26,8 +26,7 @@ TAOX11 has the following major features:
 
 . Compliant with the https://www.omg.org/spec/CPP11/1.4[IDL to C++11 v1.4] language mapping
 . https://www.omg.org/spec/CORBA/3.3[CORBA v3.3] compliant
-. Full support of the IDL type system (basic types, constant, enum,
-string, wide string, sequence, array, struct, union, typedef, exception)
+. Full support of the IDL type system (basic types, constant, enum, string, wide string, sequence, array, struct, union, typedef, exception)
 . Full support for local and remote CORBA interfaces
 . Full POA support
 . Full support for valuetype and abstract interfaces
@@ -39,4 +38,5 @@ string, wide string, sequence, array, struct, union, typedef, exception)
 . CodecFactory support
 . DynamicAny and TypeCodeFactory support
 . Portable Interceptors
+. Experimental and partial support for https://www.omg.org/spec/IDL/4.2[IDL 4.2] map, int8/uint8, explicitly-named integer types, bitmask, bitset, empty struct, and struct inheritance extensions
 

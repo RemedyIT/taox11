@@ -78,8 +78,8 @@ module IDL
               'impl_export_macro' => { description: "-Wb,impl_export_macro=MACRO\tSet export macro for implementation files" },
               'impl_export_include' => { description: "-Wb,impl_export_include=FILE\tSet export include file for implementation files" },
               'impl_export_file' => { description: "-Wb,impl_export_file=FILE\t\tSet implementation export file to generate for -Gxhimpl" },
-              'anytypecode_export_macro' => { description: "-Wb,anytypecode_export_macro=MACRO\tSet export macro for Any ops en TypeCode" },
-              'anytypecode_export_include' => { description: "-Wb,anytypecode_export_include=FILE\tSet export include file for Any ops en TypeCode" },
+              'anytypecode_export_macro' => { description: "-Wb,anytypecode_export_macro=MACRO\tSet export macro for Any ops and TypeCode" },
+              'anytypecode_export_include' => { description: "-Wb,anytypecode_export_include=FILE\tSet export include file for Any ops and TypeCode" },
               'include_guard' => { description: "-Wb,include_guard=MACRO\t\tguard to prevent the generated client header file to be included" },
               'safe_include' => { description: "-Wb,safe_include=FILE\t\tinclude that should be used instead of the own generated client header file" },
               'unique_include' => { description: "-Wb,unique_include=FILE\t\tinclude that should be generated as only contents of the generated client header file" }
@@ -461,7 +461,7 @@ module IDL
       unless options[:no_client_proxy]
         if options[:output_prx]
           co_prx = GenFile.new(options[:output_prx])
-          IDL.push_production(:stub_proxy, ::IDL::Cxx11::StubProxyWriter.new(co_prx, options))
+          IDL.push_production(:stub_proxy, ::IDL::Cxx11::StubProxyHeaderWriter.new(co_prx, options))
         end
       end
       if ((options[:gen_anytypecode_source] || false) && options[:gen_typecodes])
@@ -540,7 +540,7 @@ module IDL
         end
         if options[:ami_stub_output_prx]
           co_prx = GenFile.new(options[:ami_stub_output_prx])
-          IDL.push_production(:ami_stub_proxy, ::IDL::Cxx11::AmiStubProxyWriter.new(co_prx, options))
+          IDL.push_production(:ami_stub_proxy, ::IDL::Cxx11::AmiStubProxyHeaderWriter.new(co_prx, options))
         end
       end
     end

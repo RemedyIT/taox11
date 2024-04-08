@@ -1,19 +1,12 @@
 
 // generated from <%= ridl_template_path %>
 % _traits_incl_guard_ = '_MESSAGING_EXCEPTIONHOLDER__SARG_TRAITS_'
-
 #if !defined (<%= _traits_incl_guard_ %>)
 #define <%= _traits_incl_guard_ %>
-  namespace PS
-  {
-    // Arg traits specializations.
-    template<>
-    class SArg_Traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>
-    : public
-        Basic_SArg_Traits_T<
-            TAOX11_IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type,
-            Any_Insert_Policy_Stream>
-    {
-    };
-  }  //namespace PS
+// Arg traits specializations.
+template<>
+class SArg_Traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>
+  : public Basic_SArg_Traits_T<TAOX11_IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type, Any_Insert_Policy_Stream>
+{
+};
 #endif // !<%= _traits_incl_guard_ %>

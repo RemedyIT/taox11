@@ -1,0 +1,47 @@
+
+%# TODO handle inheritance
+// generated from <%= ridl_template_path %>
+template<>
+struct traits <<%= scoped_cxxtype %>>
+  : IDL::common_byval_traits<<%= scoped_cxxtype %>>
+{
+  template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
+  static inline OStrm_& write_on(OStrm_& os_, in_type val_, Formatter fmt_ = Formatter ())
+  {
+    return fmt_ (os_, val_);
+  }
+
+  template <typename Formatter = std::false_type>
+  static inline __Writer<Formatter> write (in_type val) { return {val}; }
+};
+
+template <typename OStrm_>
+struct formatter<<%= scoped_cxxtype %>, OStrm_>
+{
+  inline OStrm_& operator ()(OStrm_& os_, <%= scoped_cxx_in_type %> val_)
+  {
+%_sep = nil
+    os_ << "<%= formatted_cxxname %>{"
+%bitfields.each do |_m|
+% unless _m.cxxname.empty?
+        << "<%= _sep %><%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write(val_.<%= _m.cxxname %> ())
+%     _sep = ',' unless _sep
+% end
+%end
+        << '}';
+    return os_;
+  }
+};
+
+template <typename OStrm_, typename Fmt>
+inline OStrm_& operator <<(OStrm_& os, IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt> w)
+{
+  using writer_t = IDL::traits<<%= scoped_cxxtype %>>::__Writer<Fmt>;
+  using formatter_t = typename std::conditional<
+                        std::is_same<
+                          typename writer_t::formatter_t,
+                          std::false_type>::value,
+                        formatter<<%= scoped_cxxtype %>, OStrm_>,
+                        typename writer_t::formatter_t>::type;
+  return IDL::traits<<%= scoped_cxxtype %>>::write_on (os, w.val_, formatter_t ());
+}

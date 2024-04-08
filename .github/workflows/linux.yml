@@ -81,6 +81,11 @@ jobs:
             ruby: '3.2'
             PackageDeps: g++-12
           - os: ubuntu-22.04
+            CC: gcc-13
+            CXX: g++-13
+            ruby: '3.2'
+            PackageDeps: g++-13
+          - os: ubuntu-22.04
             CC: gcc-10
             CXX: g++-10
             ruby: '2.7'
@@ -98,27 +103,27 @@ jobs:
     - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false && github.repository_owner == 'RemedyIT'
       run: |
         echo "X11_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: checkout ACE_TAO
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: DOCGroup/ACE_TAO
         path: ${{ env.DOC_ROOT }}
         ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout MPC
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: DOCGroup/MPC
         path: ${{ env.MPC_ROOT }}
         ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout ridl
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: RemedyIT/ridl
         path: ${{ env.RIDL_ROOT }}
         ref: ${{ env.X11_BRANCH }}
     - name: checkout axcioma
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
@@ -136,7 +141,7 @@ jobs:
         sudo apt-get --yes update
         sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
     - name: initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: cpp
       if: matrix.feature == 'CodeQL'
@@ -163,11 +168,13 @@ jobs:
       run: |
         make -j -C ${TAOX11_ROOT} install
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
       if: matrix.feature == 'CodeQL'
-    - uses: codecov/codecov-action@v3
+    - uses: codecov/codecov-action@v4
       with:
-        gcov: true
+        fail_ci_if_error: true 
         verbose: true # optional (default = false)
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       if: matrix.feature == 'Codecov'
 

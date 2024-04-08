@@ -1,26 +1,28 @@
 
 // generated from <%= ridl_template_path %>
-TAO_CORBA::Boolean operator<< (
-    TAO_OutputCDR &strm,
-    const <%= scoped_cxxname %> &_tao_aggregate)
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR &<% if member_count > 0 || !base.nil? %>strm<% end %>, const <%= scoped_cxxname %> &<% if member_count > 0 || !base.nil? %>_tao_aggregate<% end %>)
 {
-% if member_count > 0
+% if member_count > 0 || !base.nil?
   return
+% unless base.nil?
+    (strm << static_cast<<%= base.cxxname %>>(_tao_aggregate))<%= ((member_count > 0)  ? ' &&' : ';') %>
+% end
 %   _n = member_count-1
 %   members.each_with_index do |_m, _i|
-    (strm <<<%= _m.cdr_from_fmt % "_tao_aggregate.#{_m.cxxname} ()" %>)<%= ((_i < _n ) ? ' &&' : ';') %>
+    (strm << <%= _m.cdr_from_fmt % "_tao_aggregate.#{_m.cxxname} ()" %>)<%= ((_i < _n ) ? ' &&' : ';') %>
 %   end
 % else
   return true;
 % end
 }
 
-TAO_CORBA::Boolean operator>> (
-    TAO_InputCDR &strm,
-    <%= scoped_cxxname %> &_tao_aggregate)
+TAO_CORBA::Boolean operator>> (TAO_InputCDR &<% if member_count > 0 || !base.nil? %>strm<% end %>, <%= scoped_cxxname %> &<% if member_count > 0 || !base.nil? %>_tao_aggregate<% end %>)
 {
-% if member_count > 0
+% if member_count > 0 || !base.nil?
   return
+% unless base.nil?
+    (strm >> static_cast<<%= base.cxxname %>&>(_tao_aggregate))<%= ((member_count > 0)  ? ' &&' : ';') %>
+% end
 %   members.each_with_index do |_m, _i|
     (strm >> <%= _m.cdr_to_fmt % "_tao_aggregate.#{_m.cxxname} ()" %>)<%= ((_i < _n) ? ' &&' : ';') %>
 %   end

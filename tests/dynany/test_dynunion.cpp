@@ -53,8 +53,8 @@ Test_DynUnion::run_test ()
       return 1;
     }
 
-    IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory =
-       IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);
+    IDL::traits<DynamicAny::DynAnyFactory>::ref_type dynany_factory =
+       IDL::traits<DynamicAny::DynAnyFactory>::narrow (factory_obj);
 
     if (dynany_factory == nullptr)
     {
@@ -67,7 +67,7 @@ Test_DynUnion::run_test ()
     DynAnyAnalyzer analyzer (this->orb_,
                             dynany_factory);
 
-    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[18] << " =*=*=*=*" << std::endl;
+    TAOX11_TEST_DEBUG << "*=*=*=*= " << data.labels[19] << " =*=*=*=*" << std::endl;
     TAOX11_TEST_DEBUG << "testing: constructor(Any)/from_any/to_any with string" << std::endl;
 
     DynAnyTests::test_union tstring;
@@ -76,17 +76,17 @@ Test_DynUnion::run_test ()
     CORBA::Any in_any4;
     in_any4 <<= tstring;
 
-    IDL::traits< DynamicAny::DynAny>::ref_type dp4 =
+    IDL::traits<DynamicAny::DynAny>::ref_type dp4 =
       dynany_factory->create_dyn_any (in_any4);
 
-    IDL::traits< DynamicAny::DynUnion>::ref_type fa4 =
-        IDL::traits< DynamicAny::DynUnion>::narrow (dp4);
+    IDL::traits<DynamicAny::DynUnion>::ref_type fa4 =
+        IDL::traits<DynamicAny::DynUnion>::narrow (dp4);
 
     analyzer.analyze(fa4);
 
     CORBA::Any out_any5 = fa4->to_any ();
 
-    IDL::traits< DynamicAny::DynAny>::ref_type dp5 =
+    IDL::traits<DynamicAny::DynAny>::ref_type dp5 =
       dynany_factory->create_dyn_any (out_any5);
 
     TAOX11_TEST_DEBUG << "testing: constructor(Any)/insert/get" << std::endl;
@@ -94,10 +94,10 @@ Test_DynUnion::run_test ()
     tu.tc (data.m_typecode2);
     CORBA::Any in_any1;
     in_any1 <<= tu;
-    IDL::traits< DynamicAny::DynAny>::ref_type dp1 =
+    IDL::traits<DynamicAny::DynAny>::ref_type dp1 =
       dynany_factory->create_dyn_any (in_any1);
-    IDL::traits< DynamicAny::DynUnion>::ref_type fa1 =
-        IDL::traits< DynamicAny::DynUnion>::narrow (dp1);
+    IDL::traits<DynamicAny::DynUnion>::ref_type fa1 =
+        IDL::traits<DynamicAny::DynUnion>::narrow (dp1);
     fa1->seek (1);
     fa1->insert_typecode (data.m_typecode1);
 
@@ -121,11 +121,11 @@ Test_DynUnion::run_test ()
     analyzer.analyze (fa1);
 
     CORBA::Any out_any1 = fa1->to_any ();
-    IDL::traits< DynamicAny::DynAny>::ref_type ftc1_base =
+    IDL::traits<DynamicAny::DynAny>::ref_type ftc1_base =
       dynany_factory->create_dyn_any_from_type_code (DynAnyTests::_tc_test_union);
 
-    IDL::traits< DynamicAny::DynUnion>::ref_type ftc1 =
-        IDL::traits< DynamicAny::DynUnion>::narrow (ftc1_base);
+    IDL::traits<DynamicAny::DynUnion>::ref_type ftc1 =
+        IDL::traits<DynamicAny::DynUnion>::narrow (ftc1_base);
 
     if (!ftc1)
     {
@@ -163,12 +163,12 @@ Test_DynUnion::run_test ()
 
     try
     {
-      IDL::traits< DynamicAny::DynAny>::ref_type ftc2_base =
+      IDL::traits<DynamicAny::DynAny>::ref_type ftc2_base =
         dynany_factory->create_dyn_any_from_type_code
         (DynAnyTests::_tc_test_union_alias);
 
-      IDL::traits< DynamicAny::DynUnion>::ref_type ftc2 =
-        IDL::traits< DynamicAny::DynUnion>::narrow (ftc2_base);
+      IDL::traits<DynamicAny::DynUnion>::ref_type ftc2 =
+        IDL::traits<DynamicAny::DynUnion>::narrow (ftc2_base);
 
       if (!ftc2)
       {
@@ -210,7 +210,7 @@ Test_DynUnion::run_test ()
 
     TAOX11_TEST_DEBUG << "testing:discriminator/discriminator_kind" << std::endl;
 
-    IDL::traits< DynamicAny::DynAny>::ref_type dp2 =
+    IDL::traits<DynamicAny::DynAny>::ref_type dp2 =
       ftc1->get_discriminator ();
 
     IDL::traits<CORBA::TypeCode>::ref_type tc2 =
@@ -220,6 +220,8 @@ Test_DynUnion::run_test ()
       ftc1->discriminator_kind ();
 
     CORBA::TCKind tc2kind = tc2->kind ();
+
+    ftc1->set_discriminator (dp2);
 
     if (tc2kind == tc1kind)
     {
@@ -233,7 +235,7 @@ Test_DynUnion::run_test ()
 
     TAOX11_TEST_DEBUG << "testing:member/member_kind/member_name" << std::endl;
 
-    IDL::traits< DynamicAny::DynAny>::ref_type dp3 =
+    IDL::traits<DynamicAny::DynAny>::ref_type dp3 =
       ftc1->member ();
 
     std::string m_nm =
@@ -245,7 +247,7 @@ Test_DynUnion::run_test ()
     IDL::traits<CORBA::TypeCode>::ref_type tc3 =
       dp3->get_typecode ();
 
-    bool  const equal_tc3 =
+    bool const equal_tc3 =
       data.m_typecode1->equal (tc3);
 
     if (m_nm == "tc"
@@ -268,7 +270,7 @@ Test_DynUnion::run_test ()
 
     ftc1->insert_short (data.m_short1);
 
-    IDL::traits< DynamicAny::DynAny>::ref_type mem =
+    IDL::traits<DynamicAny::DynAny>::ref_type mem =
       ftc1->member ();
 
     int16_t out_s =
@@ -296,7 +298,7 @@ Test_DynUnion::run_test ()
 
     any_union <<= test_implicit_def_union;
 
-    IDL::traits< DynamicAny::DynAny>::ref_type da_union =
+    IDL::traits<DynamicAny::DynAny>::ref_type da_union =
       dynany_factory->create_dyn_any (any_union);
     TAOX11_TEST_DEBUG << "++ OK ++" <<std::endl;
 
@@ -307,7 +309,7 @@ Test_DynUnion::run_test ()
     CORBA::Any corba_union;
     corba_union <<= l_union_value_no_active_member;
 
-    IDL::traits< DynamicAny::DynAny>::ref_type l_dynany = dynany_factory->create_dyn_any (corba_union);
+    IDL::traits<DynamicAny::DynAny>::ref_type l_dynany = dynany_factory->create_dyn_any (corba_union);
     try
     {
       l_dynany->destroy ();
@@ -318,7 +320,6 @@ Test_DynUnion::run_test ()
       TAOX11_TEST_ERROR << "++ ERROR ++" << std::endl;
       ++this->error_count_;
     }
-
 
     // if we get here the create_dyn_any worked.
   }

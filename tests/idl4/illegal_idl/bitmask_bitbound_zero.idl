@@ -1,0 +1,15 @@
+/**
+ * @file bitmask_bitbound_zero.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a bitmask with a bit_bound annotation with value zero
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+@bit_bound(0)
+bitmask MyBitMask {
+  flag0,
+  flag1,
+  flag2
+};

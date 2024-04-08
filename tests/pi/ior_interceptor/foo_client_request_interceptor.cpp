@@ -38,8 +38,7 @@ FOO_ClientRequestInterceptor::send_request (
   // Verify that the tagged component that was supposed to be embedded
   // into the IOR by the FOO_IORInterceptor is actually in the IOR
   // profile.
-  IOP::TaggedComponent component =
-    std::move (ri->get_effective_component (FOO::COMPONENT_ID));
+  IOP::TaggedComponent component = ri->get_effective_component (FOO::COMPONENT_ID);
 
   // The correct tagged component appears to exist.  Display the
   // contents of the component data, which should be a NULL terminated

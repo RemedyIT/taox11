@@ -226,85 +226,85 @@ Foo::struct_bounded  (const Test::SimpleBounded & sin,
   return sret;
 }
 
-IDL::traits< ::Test::TestOctetBounded::Bounded>::ref_type
+IDL::traits<::Test::TestOctetBounded::Bounded>::ref_type
 Foo::get_octet_bounded ()
 {
   return make_reference< ::Test::TestOctetBounded::Bounded, Test::OctetBounded > (this->poa_);
 }
 
-IDL::traits< ::Test::TestShortBounded::Bounded>::ref_type
+IDL::traits<::Test::TestShortBounded::Bounded>::ref_type
 Foo::get_short_bounded ()
 {
   return make_reference< ::Test::TestShortBounded::Bounded, Test::ShortBounded > (this->poa_);
 }
 
-IDL::traits< ::Test::TestLongBounded::Bounded>::ref_type
+IDL::traits<::Test::TestLongBounded::Bounded>::ref_type
 Foo::get_long_bounded ()
 {
   return make_reference< ::Test::TestLongBounded::Bounded, Test::LongBounded > (this->poa_);
 }
 
-IDL::traits< ::Test::TestLongLongBounded::Bounded>::ref_type
+IDL::traits<::Test::TestLongLongBounded::Bounded>::ref_type
 Foo::get_longlong_bounded ()
 {
   return make_reference< ::Test::TestLongLongBounded::Bounded, Test::LongLongBounded > (this->poa_);
 }
 
-IDL::traits< ::Test::TestDoubleBounded::Bounded>::ref_type
+IDL::traits<::Test::TestDoubleBounded::Bounded>::ref_type
 Foo::get_double_bounded ()
 {
   return make_reference< ::Test::TestDoubleBounded::Bounded, Test::DoubleBounded > (this->poa_);
 }
 
-IDL::traits< ::Test::TestLongDoubleBounded::Bounded>::ref_type
+IDL::traits<::Test::TestLongDoubleBounded::Bounded>::ref_type
 Foo::get_long_double_bounded ()
 {
   return make_reference< ::Test::TestLongDoubleBounded::Bounded, Test::LongDoubleBounded > (this->poa_);
 }
 
-IDL::traits< ::Test::TestFloatBounded::Bounded>::ref_type
+IDL::traits<::Test::TestFloatBounded::Bounded>::ref_type
 Foo::get_float_bounded ()
 {
   return make_reference< ::Test::TestFloatBounded::Bounded, Test::FloatBounded > (this->poa_);
 }
 
-IDL::traits< ::Test::TestBoolBounded::Bounded>::ref_type
+IDL::traits<::Test::TestBoolBounded::Bounded>::ref_type
 Foo::get_bool_bounded ()
 {
   return make_reference< ::Test::TestBoolBounded::Bounded, Test::BoolBounded > (this->poa_);
 }
 
-IDL::traits< ::Test::TestUShortBounded::Bounded>::ref_type
+IDL::traits<::Test::TestUShortBounded::Bounded>::ref_type
 Foo::get_ushort_bounded ()
 {
   return make_reference< ::Test::TestUShortBounded::Bounded, Test::UShortBounded > (this->poa_);
 }
 
-IDL::traits< ::Test::TestULongBounded::Bounded>::ref_type
+IDL::traits<::Test::TestULongBounded::Bounded>::ref_type
 Foo::get_ulong_bounded ()
 {
   return make_reference< ::Test::TestULongBounded::Bounded, Test::ULongBounded> (this->poa_);
 }
 
-IDL::traits< ::Test::TestULongLongBounded::Bounded>::ref_type
+IDL::traits<::Test::TestULongLongBounded::Bounded>::ref_type
 Foo::get_ulonglong_bounded ()
 {
   return make_reference< ::Test::TestULongLongBounded::Bounded, Test::ULongLongBounded> (this->poa_);
 }
 
-IDL::traits< ::Test::TestStringBounded::Bounded>::ref_type
+IDL::traits<::Test::TestStringBounded::Bounded>::ref_type
 Foo::get_string_bounded ()
 {
   return make_reference< ::Test::TestStringBounded::Bounded, Test::StringBounded> (this->poa_);
 }
 
-IDL::traits< ::Test::TestCharBounded::Bounded>::ref_type
+IDL::traits<::Test::TestCharBounded::Bounded>::ref_type
 Foo::get_char_bounded ()
 {
   return make_reference< ::Test::TestCharBounded::Bounded, Test::CharBounded> (this->poa_);
 }
 
-IDL::traits< ::Test::TestWCharBounded::Bounded>::ref_type
+IDL::traits<::Test::TestWCharBounded::Bounded>::ref_type
 Foo::get_wchar_bounded ()
 {
   return make_reference< ::Test::TestWCharBounded::Bounded, Test::WCharBounded> (this->poa_);

@@ -1,14 +1,10 @@
 
 // generated from <%= ridl_template_path %>
-namespace TAOX11_NAMESPACE
+namespace TAOX11_NAMESPACE::CORBA
 {
-  namespace CORBA
+  inline valuetype_traits<<%= scoped_cxxtype %>>::ref_type
+  valuetype_traits<<%= scoped_cxxtype %>>::narrow (valuetype_reference<ValueBase> vbref)
   {
-    inline valuetype_traits<<%= scoped_cxxtype %>>::ref_type
-    valuetype_traits<<%= scoped_cxxtype %>>::narrow (
-          valuetype_reference<ValueBase> vbref)
-    {
-      return ref_type::_narrow (vbref);
-    }
-  } // namespace CORBA
-} // namespace TAOX11_NAMESPACE
+    return ref_type::_narrow (vbref);
+  }
+} // namespace TAOX11_NAMESPACE::CORBA

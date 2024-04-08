@@ -491,11 +491,16 @@ module IDL
 
       def is_stdlib_type?
         case self._resolved_idltype
-        when IDL::Type::String, IDL::Type::WString
+        when IDL::Type::String,
+             IDL::Type::WString
           true
-        when IDL::Type::Object, IDL::Type::Any, IDL::Type::Valuetype
+        when IDL::Type::Object,
+             IDL::Type::Any,
+             IDL::Type::Valuetype
           true
-        when IDL::Type::Enum
+        when IDL::Type::Enum,
+             IDL::Type::BitMask,
+             IDL::Type::BitSet
           false
         else
           self._idltype.is_pod?
@@ -514,8 +519,8 @@ module IDL
         self._resolved_idltype.cxx_anyop_arg_typename
       end
 
-      def zero_initializer
-        self._idltype.zero_initializer
+      def value_initializer
+        self._idltype.value_initializer
       end
 
       # template mapping

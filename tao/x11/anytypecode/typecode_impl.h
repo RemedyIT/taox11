@@ -140,7 +140,7 @@ namespace TAOX11_NAMESPACE
 TAOX11_AnyTypeCode_Export
 std::ostream& operator<< (
     std::ostream& strm,
-    TAOX11_NAMESPACE::IDL::traits< ::TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type tc);
+    TAOX11_NAMESPACE::IDL::traits<::TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type tc);
 
 // In case declarations already seen (from Typecode_typesP.h included from Typecode_typesC.h
 // included by some other *C.cpp) skip them here. MinGW issues warnings on repeated decls.

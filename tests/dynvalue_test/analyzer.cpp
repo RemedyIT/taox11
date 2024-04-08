@@ -15,7 +15,7 @@
 #include "tao/x11/dynamic_any/dynanyfactory.h"
 #include "testlib/taox11_testlog.h"
 
-DynAnyAnalyzer::DynAnyAnalyzer (IDL::traits< DynamicAny::DynAnyFactory>::ref_type dany_fact)
+DynAnyAnalyzer::DynAnyAnalyzer (IDL::traits<DynamicAny::DynAnyFactory>::ref_type dany_fact)
   : dany_fact_(std::move(dany_fact))
 {
 }
@@ -97,7 +97,7 @@ DynAnyAnalyzer::tab ()
 
 void
 DynAnyAnalyzer::analyze (
-    IDL::traits< DynamicAny::DynAny>::ref_type da)
+    IDL::traits<DynamicAny::DynAny>::ref_type da)
 {
   IDL::traits<CORBA::TypeCode>::ref_type tc  = da->type ();
   CORBA::TCKind kind = tc->kind ();
@@ -114,8 +114,8 @@ DynAnyAnalyzer::analyze (
   {
     case CORBA::TCKind::tk_value_box:
     {
-      IDL::traits< DynamicAny::DynValueBox>::ref_type  box =
-            IDL::traits< DynamicAny::DynValueBox>::narrow (da);
+      IDL::traits<DynamicAny::DynValueBox>::ref_type  box =
+            IDL::traits<DynamicAny::DynValueBox>::narrow (da);
 
       if (box->is_null ())
       {
@@ -134,8 +134,8 @@ DynAnyAnalyzer::analyze (
 
     case CORBA::TCKind::tk_value:
     {
-      IDL::traits< DynamicAny::DynValue>::ref_type  dvt =
-              IDL::traits< DynamicAny::DynValue>::narrow (da);
+      IDL::traits<DynamicAny::DynValue>::ref_type  dvt =
+              IDL::traits<DynamicAny::DynValue>::narrow (da);
 
       if (dvt->is_null ())
       {

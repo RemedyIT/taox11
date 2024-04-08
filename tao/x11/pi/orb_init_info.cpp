@@ -10,6 +10,7 @@
 // TAO namespace dependencies
 #include "tao/x11/orbproxy.h"
 #include "tao/x11/objproxy.h"
+#include "tao/x11/sequence_conversion_t.h"
 
 // X11 namespace dependencies
 #include "tao/x11/pi/orb_init_info.h"
@@ -134,7 +135,7 @@ namespace TAOX11_NAMESPACE
     {
       try {
         TAO_CORBA::StringSeq_var safe_args (this->orbii_->arguments ());
-        return std::move (seq_to_x11<CORBA::StringSeq> (safe_args.in ()));
+        return seq_to_x11<CORBA::StringSeq> (safe_args.in ());
       }
       catch_tao_system_ex (_sx)
       return {};
@@ -164,7 +165,7 @@ namespace TAOX11_NAMESPACE
     void
     ORBInitInfo::register_initial_reference (
         const ObjectId& id,
-        IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type obj)
+        IDL::traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type obj)
     {
       try
       {
@@ -179,11 +180,11 @@ namespace TAOX11_NAMESPACE
       catch_tao_system_ex (_sx)
     }
 
-    IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type
+    IDL::traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type
     ORBInitInfo::resolve_initial_references (
         const ObjectId& id)
     {
-      IDL::traits< TAOX11_NAMESPACE::CORBA::Object>::ref_type rc;
+      IDL::traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type rc;
       try
       {
         TAO_CORBA::Object_var tao_obj = this->orbii_->resolve_initial_references (
@@ -201,7 +202,7 @@ namespace TAOX11_NAMESPACE
 
     void
     ORBInitInfo::add_client_request_interceptor (
-        IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::ClientRequestInterceptor>::ref_type interceptor)
+        IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::ClientRequestInterceptor>::ref_type interceptor)
     {
 #if TAO_HAS_INTERCEPTORS == 1
       TAO_PI::ClientRequestInterceptor_ptr tao_ptr;
@@ -231,7 +232,7 @@ namespace TAOX11_NAMESPACE
 
     void
     ORBInitInfo::add_server_request_interceptor (
-        IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::ServerRequestInterceptor>::ref_type interceptor)
+        IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::ServerRequestInterceptor>::ref_type interceptor)
     {
 #if TAO_HAS_INTERCEPTORS == 1
       if (this->get_sri_proxy_adapter ())
@@ -262,7 +263,7 @@ namespace TAOX11_NAMESPACE
 
     void
     ORBInitInfo::add_ior_interceptor (
-        IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::IORInterceptor>::ref_type interceptor)
+        IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::IORInterceptor>::ref_type interceptor)
     {
 #if TAO_HAS_INTERCEPTORS == 1
       if (this->get_iorinterceptor_proxy_adapter ())
@@ -313,7 +314,7 @@ namespace TAOX11_NAMESPACE
     void
     ORBInitInfo::register_policy_factory (
         ::TAOX11_NAMESPACE::CORBA::PolicyType /*type*/,
-        IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::PolicyFactory>::ref_type /*policy_factory*/)
+        IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::PolicyFactory>::ref_type /*policy_factory*/)
     {
       // not supported yet
       // requires extending PolicyFactoryManager(Adapter) with C++11 PolicyFactory registry
@@ -326,7 +327,7 @@ namespace TAOX11_NAMESPACE
 
     void
     ORBInitInfo::add_client_request_interceptor_with_policy (
-        IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::ClientRequestInterceptor>::ref_type interceptor,
+        IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::ClientRequestInterceptor>::ref_type interceptor,
         const CORBA::PolicyList& policies)
     {
 #if TAO_HAS_INTERCEPTORS == 1
@@ -369,7 +370,7 @@ namespace TAOX11_NAMESPACE
 
     void
     ORBInitInfo::add_server_request_interceptor_with_policy (
-        IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::ServerRequestInterceptor>::ref_type interceptor,
+        IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::ServerRequestInterceptor>::ref_type interceptor,
         const CORBA::PolicyList& policies)
     {
 #if TAO_HAS_INTERCEPTORS == 1
@@ -413,7 +414,7 @@ namespace TAOX11_NAMESPACE
 
     void
     ORBInitInfo::add_ior_interceptor_with_policy (
-        IDL::traits< ::TAOX11_NAMESPACE::PortableInterceptor::IORInterceptor>::ref_type interceptor,
+        IDL::traits<::TAOX11_NAMESPACE::PortableInterceptor::IORInterceptor>::ref_type interceptor,
         const CORBA::PolicyList& policies)
     {
 #if TAO_HAS_INTERCEPTORS == 1

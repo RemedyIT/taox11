@@ -58,8 +58,8 @@ Test_DynStruct::run_test ()
     }
 
 
-    IDL::traits< DynamicAny::DynAnyFactory>::ref_type dynany_factory =
-        IDL::traits< DynamicAny::DynAnyFactory>::narrow (factory_obj);
+    IDL::traits<DynamicAny::DynAnyFactory>::ref_type dynany_factory =
+        IDL::traits<DynamicAny::DynAnyFactory>::narrow (factory_obj);
 
     if (dynany_factory == nullptr)
     {
@@ -80,11 +80,11 @@ Test_DynStruct::run_test ()
 
     CORBA::Any in_any1;
     in_any1 <<= ts;
-    IDL::traits< DynamicAny::DynAny>::ref_type dp1 =
+    IDL::traits<DynamicAny::DynAny>::ref_type dp1 =
       dynany_factory->create_dyn_any (in_any1);
 
-    IDL::traits< DynamicAny::DynStruct>::ref_type fa1 =
-        IDL::traits< DynamicAny::DynStruct>::narrow (dp1);
+    IDL::traits<DynamicAny::DynStruct>::ref_type fa1 =
+        IDL::traits<DynamicAny::DynStruct>::narrow (dp1);
 
     fa1->insert_char (data.m_char1);
 
@@ -94,7 +94,7 @@ Test_DynStruct::run_test ()
 
     fa1->next ();
 
-    IDL::traits< DynamicAny::DynAny>::ref_type cc =
+    IDL::traits<DynamicAny::DynAny>::ref_type cc =
       fa1->current_component ();
 
     cc->insert_float (data.m_float1);
@@ -171,12 +171,12 @@ Test_DynStruct::run_test ()
 
     TAOX11_TEST_DEBUG << "testing: constructor(TypeCode)/from_any/to_any" << std::endl;
 
-    IDL::traits< DynamicAny::DynAny>::ref_type ftc1_base =
+    IDL::traits<DynamicAny::DynAny>::ref_type ftc1_base =
       dynany_factory->create_dyn_any_from_type_code (
                           DynAnyTests::_tc_test_struct);
 
-    IDL::traits< DynamicAny::DynStruct>::ref_type ftc1 =
-        IDL::traits< DynamicAny::DynStruct>::narrow (ftc1_base);
+    IDL::traits<DynamicAny::DynStruct>::ref_type ftc1 =
+        IDL::traits<DynamicAny::DynStruct>::narrow (ftc1_base);
 
     if (!ftc1)
     {
@@ -215,16 +215,16 @@ Test_DynStruct::run_test ()
 
     DynAnyTests::test_struct ts_out2;
     CORBA::Any out_any2 ;
-    IDL::traits< DynamicAny::DynStruct>::ref_type ftc2;
+    IDL::traits<DynamicAny::DynStruct>::ref_type ftc2;
 
     try
     {
-      IDL::traits< DynamicAny::DynAny>::ref_type ftc2_base =
+      IDL::traits<DynamicAny::DynAny>::ref_type ftc2_base =
           dynany_factory->create_dyn_any_from_type_code (
                               DynAnyTests::_tc_test_struct_alias
                             );
 
-      ftc2 = IDL::traits< DynamicAny::DynStruct>::narrow (ftc2_base);
+      ftc2 = IDL::traits<DynamicAny::DynStruct>::narrow (ftc2_base);
 
       if (!ftc2)
       {
@@ -329,13 +329,13 @@ Test_DynStruct::run_test ()
     DynamicAny::NameValuePairSeq nvps =
       fa1->get_members ();
 
-    IDL::traits< DynamicAny::DynAny>::ref_type  sm_base =
+    IDL::traits<DynamicAny::DynAny>::ref_type  sm_base =
       dynany_factory->create_dyn_any_from_type_code (
           DynAnyTests::_tc_test_struct
         );
 
-    IDL::traits< DynamicAny::DynStruct>::ref_type  sm =
-        IDL::traits< DynamicAny::DynStruct>::narrow (sm_base);
+    IDL::traits<DynamicAny::DynStruct>::ref_type  sm =
+        IDL::traits<DynamicAny::DynStruct>::narrow (sm_base);
 
     if (!sm)
     {
@@ -382,13 +382,13 @@ Test_DynStruct::run_test ()
     DynamicAny::NameDynAnyPairSeq nvdaps =
       fa1->get_members_as_dyn_any ();
 
-    IDL::traits< DynamicAny::DynAny>::ref_type  sm_da_base =
+    IDL::traits<DynamicAny::DynAny>::ref_type  sm_da_base =
       dynany_factory->create_dyn_any_from_type_code (
           DynAnyTests::_tc_test_struct
         );
 
-    IDL::traits< DynamicAny::DynStruct>::ref_type  sm_da =
-        IDL::traits< DynamicAny::DynStruct>::narrow (sm_da_base);
+    IDL::traits<DynamicAny::DynStruct>::ref_type  sm_da =
+        IDL::traits<DynamicAny::DynStruct>::narrow (sm_da_base);
 
     if (!sm_da)
     {
@@ -431,7 +431,7 @@ Test_DynStruct::run_test ()
     CORBA::Any corba_long_double;
     corba_long_double <<= l_long_double_in_struct;
 
-    IDL::traits< DynamicAny::DynAny>::ref_type  l_dynany =
+    IDL::traits<DynamicAny::DynAny>::ref_type  l_dynany =
         dynany_factory->create_dyn_any (corba_long_double);
     try
     {

@@ -12,6 +12,7 @@
 #include "tao/x11/exception_macros.h"
 #include "tao/x11/anytypecode/any_util.h"
 #include "tao/x11/anytypecode/typecode_impl.h"
+#include "tao/x11/sequence_conversion_t.h"
 
 namespace TAOX11_NAMESPACE
 {
@@ -103,7 +104,7 @@ namespace TAOX11_NAMESPACE
 
     TAOX11_NAMESPACE::CORBA::Any
     Codec::decode_value (const TAOX11_NAMESPACE::CORBA::OctetSeq& data,
-      TAOX11_IDL::traits< TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type tc)
+      TAOX11_IDL::traits<TAOX11_NAMESPACE::CORBA::TypeCode>::ref_type tc)
     {
       TAOX11_NAMESPACE::CORBA::Any x11_ret;
 

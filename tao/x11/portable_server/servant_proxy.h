@@ -12,10 +12,6 @@
 
 #pragma once
 
-#include /**/ "ace/pre.h"
-
-#include /**/ "ace/config-all.h"
-
 #include "tao/x11/tao_corba.h"
 #include "tao/PortableServer/PortableServer.h"
 #include "tao/PortableServer/Servant_Base.h"
@@ -89,7 +85,5 @@ namespace TAOX11_NAMESPACE {
     //@}
   };
 } // namespace TAOX11_NAMESPACE
-
-#include /**/ "ace/post.h"
 
 #endif // TAOX11_SERVANT_PROXY_H_INCLUDED

@@ -1,0 +1,63 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+bitmask MyBitMask {
+  flag0,
+  flag1,
+  flag2
+};
+
+@bit_bound(8)
+bitmask MyBitMaskBound8 {
+  flag8_1,
+  flag8_2,
+  flag8_3
+};
+
+@bit_bound(16)
+bitmask MyBitMaskBound16 {
+  flag16_1,
+  flag16_2,
+  flag16_3
+};
+
+@bit_bound(32)
+bitmask MyBitMaskBound32 {
+  flag32_1,
+  flag32_2,
+  flag32_3
+};
+
+@bit_bound(64)
+bitmask MyBitMaskBound64 {
+  flag64_1,
+  flag64_2,
+  flag64_3
+};
+
+@bit_bound(8)
+bitmask MyBitMaskBound8_position {
+  @position(3) flag64_3,
+  flag64_4,
+  @position(7) flag64_7
+};
+
+module Test
+{
+  interface Foo
+  {
+    MyBitMask test_mybitmask (in MyBitMask sin,
+      inout MyBitMask sinout,
+      out MyBitMask sout);
+    MyBitMaskBound8 test_mybitmaskbound8 (in MyBitMaskBound8 sin,
+      inout MyBitMaskBound8 sinout,
+      out MyBitMaskBound8 sout);
+
+    /// A method to shutdown the ORB
+    oneway void shutdown ();
+  };
+};

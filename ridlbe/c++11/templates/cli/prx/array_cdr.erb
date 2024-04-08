@@ -5,21 +5,12 @@
 // MD5            : <%= alias_md5 %>
 #if !defined (_ALIAS_<%= alias_md5 %>_ARG_TRAITS_)
 #define _ALIAS_<%= alias_md5 %>_ARG_TRAITS_
-namespace TAOX11_NAMESPACE
+/// Argument traits specializations for <%= name %>
+template<>
+class TAOX11_NAMESPACE::Arg_Traits<<%= scoped_cxxtype %>>
+  : public Basic_Arg_Traits_T<<%= scoped_cxxtype %>, <% if generate_any_support? %>Any_Insert_Policy_Stream<% else %>Any_Insert_Policy_Noop<% end %>>
 {
-  /// Argument traits specializations for <%= name %>
-  template<>
-  class Arg_Traits<<%= scoped_cxxtype %>>
-    : public Basic_Arg_Traits_T<
-        <%= scoped_cxxtype %>,
-% if generate_any_support?
-        Any_Insert_Policy_Stream>
-% else
-        Any_Insert_Policy_Noop>
-% end
-  {
-  };
-} // namespace TAOX11_NAMESPACE
+};
 
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
@@ -27,15 +18,11 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 //@{
 inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR &cdr, const IDL::traits<<%= scoped_cxxtype %>>::value_type &v)
 {
-  return taox11_array_cdr<<%= cxxdim_sizes.size-1 %>U,
-                          <%= scoped_cxxtype %>::value_type,
-                          <%= cxxdim_sizes.first %>>::insert (cdr, v);
+  return taox11_array_cdr<<%= cxxdim_sizes.size-1 %>U, <%= scoped_cxxtype %>::value_type, <%= cxxdim_sizes.first %>>::insert (cdr, v);
 }
 inline TAO_CORBA::Boolean operator>> (TAO_InputCDR &cdr, IDL::traits<<%= scoped_cxxtype %>>::value_type& v)
 {
-  return taox11_array_cdr<<%= cxxdim_sizes.size-1 %>U,
-                          <%= scoped_cxxtype %>::value_type,
-                          <%= cxxdim_sizes.first %>>::extract (cdr, v);
+  return taox11_array_cdr<<%= cxxdim_sizes.size-1 %>U, <%= scoped_cxxtype %>::value_type, <%= cxxdim_sizes.first %>>::extract (cdr, v);
 }
 //@}
 

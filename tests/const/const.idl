@@ -32,6 +32,21 @@ module Test
   const TCounter double_count = count * 2;
   const long ALG_NONE = 0;
   const long ALG_LPC = ALG_NONE + 3;
+
+  const long long_e1 = 2;
+  const long long_e2 = long_e1 + 2;
+  const long long_e3 = long_e2 * 3;
+  const long long_e4 = long_e3 / 4;
+  const long long_e5 = long_e4 | 5;
+  const long long_e6 = long_e5 ^ 6;
+  const long long_e7 = long_e6 & 7;
+  const long long_e8 = long_e7 << 4;
+  const long long_e9 = long_e8 >> 1;
+  const long long_e10 = long_e9 % 5;
+  const long long_e11 = long_e10 - 5;
+  const long long_e12 = +long_e11;
+  const long long_e13 = -long_e12;
+  const long long_e14 = ~long_e13;
 };
 
 interface A

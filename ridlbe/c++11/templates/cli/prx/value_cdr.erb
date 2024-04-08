@@ -3,21 +3,12 @@
 % _traits_incl_guard_ = scoped_cxxname.to_include_guard
 # if !defined (_CDR_<%= _traits_incl_guard_ %>_TRAITS_)
 # define _CDR_<%= _traits_incl_guard_ %>_TRAITS_
-namespace TAOX11_NAMESPACE
+/// Argument traits specializations for <%= name %>
+template<>
+class TAOX11_NAMESPACE::Arg_Traits<<%= scoped_cxxtype %>>
+  : public Basic_Arg_Traits_T<TAOX11_CORBA::valuetype_reference<<%= scoped_cxxtype %>>, <% if generate_any_support? %>Any_Insert_Policy_Stream<% else %>Any_Insert_Policy_Noop<% end %>>
 {
-  /// Argument traits specializations for <%= name %>
-  template<>
-  class Arg_Traits<<%= scoped_cxxtype %>>
-    : public Basic_Arg_Traits_T<
-        TAOX11_CORBA::valuetype_reference<<%= scoped_cxxtype %>>,
-% if generate_any_support?
-        Any_Insert_Policy_Stream>
-% else
-        Any_Insert_Policy_Noop>
-% end
-  {
-  };
-} // namespace TAOX11_NAMESPACE
+};
 # endif // !_CDR_<%= _traits_incl_guard_ %>_TRAITS_
 
 # if !defined (_VALUETYPE_<%= _traits_incl_guard_ %>_CDR_OPS_)
@@ -27,12 +18,8 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
 /// @name CDR streaming operator specializations for <%= scoped_cxxname %>
 //@{
-<%= stub_export_macro %>TAO_CORBA::Boolean operator<< (
-    TAO_OutputCDR &,
-    <%= scoped_cxx_in_type %>);
-<%= stub_export_macro %>TAO_CORBA::Boolean operator>> (
-    TAO_InputCDR &,
-    <%= scoped_cxx_out_type %>);
+<%= stub_export_macro %>TAO_CORBA::Boolean operator<< (TAO_OutputCDR &, <%= scoped_cxx_in_type %>);
+<%= stub_export_macro %>TAO_CORBA::Boolean operator>> (TAO_InputCDR &, <%= scoped_cxx_out_type %>);
 //@}
 
 TAO_END_VERSIONED_NAMESPACE_DECL

@@ -35,8 +35,7 @@ bool <%= skel_cxxname %>::_is_a (const std::string& logical_type_id)
 
 <%= scoped_cxx_return_type %> <%= skel_cxxname %>::_this ()
 {
-  return TAOX11_CORBA::make_reference<<%= scoped_cxxtype %>> (
-    this-><%= srvproxy_cxxname.downcase %>_->_this ());
+  return TAOX11_CORBA::make_reference<<%= scoped_cxxtype %>> (this-><%= srvproxy_cxxname.downcase %>_->_this ());
 }
 
 const std::string &<%= skel_cxxname %>::_interface_repository_id () const

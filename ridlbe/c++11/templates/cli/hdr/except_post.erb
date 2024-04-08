@@ -36,10 +36,11 @@
 
 protected:
   void _info (std::ostream&) const override;
+% if member_count > 0
 
 private:
-% members.each do |_m|
-  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<%= _m.zero_initializer %>;
+%  members.each do |_m|
+  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<%= _m.value_initializer %>;
+%  end
 % end
 }; // class <%= cxxname %>
-% visit_template('typecode') if generate_typecode_support?

@@ -70,7 +70,7 @@ public:
   }
 
   void op_A_excep (
-      IDL::traits< ::Messaging::ExceptionHolder>::ref_type excep_holder) override
+      IDL::traits<::Messaging::ExceptionHolder>::ref_type excep_holder) override
   {
     try
       {

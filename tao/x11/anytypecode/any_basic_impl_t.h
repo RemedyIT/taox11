@@ -150,12 +150,6 @@ namespace TAOX11_NAMESPACE
   };
 }
 
-#if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
 #include "tao/x11/anytypecode/any_basic_impl_t.cpp"
-#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
-
-#if defined (ACE_TEMPLATES_REQUIRE_PRAGMA)
-#pragma implementation ("any_basic_impl_t.cpp")
-#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 
 #endif /* TAOX11_ANY_BASIC_IMPL_T_H */

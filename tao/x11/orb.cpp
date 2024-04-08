@@ -65,7 +65,7 @@ namespace TAOX11_NAMESPACE
     void
     ORB::InvalidName::_info (std::ostream& user_exception_info) const
     {
-      TAOX11_IDL::traits< ORB::InvalidName>::write_on(user_exception_info, *this);
+      TAOX11_IDL::traits<ORB::InvalidName>::write_on(user_exception_info, *this);
     }
 
     void ORB::InvalidName::_raise () const
@@ -91,8 +91,7 @@ namespace TAOX11_NAMESPACE
 
     TAOX11_NAMESPACE::CORBA::Exception *ORB::InvalidName::_tao_duplicate () const
     {
-      TAOX11_NAMESPACE::CORBA::Exception * result = 0;
-      ACE_NEW_NORETURN (result, InvalidName (*this));
+      TAOX11_NAMESPACE::CORBA::Exception * result = new (std::nothrow) InvalidName (*this);
       if (!result)
         throw TAO_CORBA::NO_MEMORY ();
       return result;

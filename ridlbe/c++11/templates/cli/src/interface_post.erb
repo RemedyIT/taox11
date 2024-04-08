@@ -84,7 +84,7 @@ TAOX11_CORBA::Object::_shared_ptr_type
 <%= scoped_cxx_return_type %>
 <%= cxxname %>::_this ()
 {
-  return IDL::traits<<%= cxxname %>>::narrow (std::move(this->Object::_lock ()));
+  return IDL::traits<<%= cxxname %>>::narrow (this->Object::_lock ());
 }
 % end
 

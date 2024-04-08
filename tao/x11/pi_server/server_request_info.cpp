@@ -10,6 +10,7 @@
 // TAO namespace dependencies
 #include "tao/x11/tao_corba.h"
 #include "tao/x11/objproxy.h"
+#include "tao/x11/sequence_conversion_t.h"
 
 // X11 namespace dependencies
 #include "tao/x11/pi_server/server_request_info.h"

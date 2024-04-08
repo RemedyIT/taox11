@@ -630,18 +630,12 @@ test_any_non_copying (Test::Hello::_ref_type hello)
   TAOX11_TEST_INFO << "Test move insertion operator for std::string" << std::endl;
   CORBA::Any any;
   any<<= std::string("abc"); // std::string &&
-#if !(defined (_MSC_VER) && (_MSC_VER < 1910))
-  // Doesn't work with vc14.0, issue 4009
   any<<= std::move("abc"); // std::string &&
-#endif /* !(_MSC_VER < 1910) */
 
   // Test move insertion operator for std::wstring
   TAOX11_TEST_INFO << "Test move insertion operator for std::wstring" << std::endl;
   any<<= std::wstring(L"abc"); // std::string &&
-#if !(defined (_MSC_VER) && (_MSC_VER < 1910))
-  // Doesn't work with vc14.0, issue 4009
   any<<= std::move(L"abc"); // std::string &&
-#endif /* !(_MSC_VER < 1910) */
 
   // in, out, inout
   TAOX11_TEST_INFO << "Test call TestAny3" << std::endl;

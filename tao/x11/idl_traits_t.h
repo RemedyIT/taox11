@@ -12,6 +12,10 @@
 
 #include "tao/x11/stddef.h"
 #include "tao/x11/bounded_vector_t.h"
+#include "tao/x11/bounded_map_t.h"
+#include <algorithm>
+#include <codecvt>
+#include <locale>
 
 namespace TAOX11_NAMESPACE
 {
@@ -108,29 +112,30 @@ namespace TAOX11_NAMESPACE
     };
 
     template <typename OStrm_>
+    struct formatter<int8_t, OStrm_>
+    {
+      inline OStrm_& operator ()(OStrm_& os_, int8_t val_)
+      { os_ << std::hex << static_cast<int16_t> (val_) << std::dec; return os_;}
+    };
+
+    template <typename OStrm_>
     struct formatter<uint8_t, OStrm_>
     {
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          uint8_t val_)
+      inline OStrm_& operator ()(OStrm_& os_, uint8_t val_)
       { os_ << std::hex << static_cast<uint16_t> (val_) << std::dec; return os_;}
     };
 
     template <typename OStrm_>
     struct formatter<char, OStrm_>
     {
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          char val_)
+      inline OStrm_& operator ()(OStrm_& os_, char val_)
       { os_ << '\'' << val_ << '\''; return os_; }
     };
 
     template <>
     struct formatter<char, std::basic_ostream<wchar_t>>
     {
-      inline std::basic_ostream<wchar_t>& operator ()(
-          std::basic_ostream<wchar_t>& os_,
-          char val_)
+      inline std::basic_ostream<wchar_t>& operator ()(std::basic_ostream<wchar_t>& os_, char val_)
       { return os_ << L'\''
             << std::use_facet<std::ctype<wchar_t>> (os_.getloc ()).widen (val_)
             << L'\'';
@@ -140,18 +145,14 @@ namespace TAOX11_NAMESPACE
     template <typename OStrm_>
     struct formatter<wchar_t, OStrm_>
     {
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          wchar_t val_)
+      inline OStrm_& operator ()(OStrm_& os_, wchar_t val_)
       { os_ << L'\'' << val_ << L'\''; return os_; }
     };
 
     template <>
     struct formatter<wchar_t, std::basic_ostream<char>>
     {
-      inline std::basic_ostream<char>& operator ()(
-          std::basic_ostream<char>& os_,
-          wchar_t val_)
+      inline std::basic_ostream<char>& operator ()(std::basic_ostream<char>& os_, wchar_t val_)
       { return os_ << "L'"
                    << std::use_facet<std::ctype<wchar_t>> (os_.getloc ()).narrow (val_, '?')
                    << '\'';
@@ -161,37 +162,35 @@ namespace TAOX11_NAMESPACE
     template <typename OStrm_>
     struct formatter<std::string, OStrm_>
     {
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          std::string val_)
+      inline OStrm_& operator ()(OStrm_& os_, std::string val_)
       { os_ << '"' << val_ << '"'; return os_; }
     };
 
     template <>
     struct formatter<std::string, std::basic_ostream<wchar_t>>
     {
-      inline std::basic_ostream<wchar_t>& operator ()(
-          std::basic_ostream<wchar_t>& os_,
-          std::string val_)
-      { return os_ << '"' << ACE_Ascii_To_Wide (val_.c_str ()).wchar_rep () << '"'; }
+      inline std::basic_ostream<wchar_t>& operator ()(std::basic_ostream<wchar_t>& os_, std::string val_)
+      {
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+        return os_ << '"' << converter.from_bytes(val_) << '"';
+      }
     };
 
     template <typename OStrm_>
     struct formatter<std::wstring, OStrm_>
     {
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          std::string val_)
+      inline OStrm_& operator ()(OStrm_& os_, std::string val_)
       { os_ << L'"' << val_ << '"'; return os_; }
     };
 
     template <>
     struct formatter<std::wstring, std::basic_ostream<char>>
     {
-      inline std::basic_ostream<char>& operator ()(
-          std::basic_ostream<char>& os_,
-          std::wstring val_)
-      { return os_ << "L\"" << ACE_Wide_To_Ascii (val_.c_str ()).char_rep () << '"'; }
+      inline std::basic_ostream<char>& operator ()(std::basic_ostream<char>& os_, std::wstring val_)
+      {
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
+        return os_ << "L\"" << conv.to_bytes(val_) << '"';
+      }
     };
 
     template <typename T, typename OStrm_>
@@ -211,9 +210,7 @@ namespace TAOX11_NAMESPACE
         { elem_traits::write_on (this->os_, el_) << ','; return os_;}
       };
 
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          typename traits::in_type val_)
+      inline OStrm_& operator ()(OStrm_& os_, typename traits::in_type val_)
       {
         if (val_.empty ())
         {
@@ -222,8 +219,8 @@ namespace TAOX11_NAMESPACE
         else
         {
           os_ << '<';
-          std::for_each (val_.begin (),
-                         val_.end () -1,
+          std::for_each (val_.cbegin (),
+                         --val_.cend (),
                          element_formatter<typename elem_traits::value_type> (os_));
           elem_traits::write_on (os_, val_.back ());
           os_ << '>';
@@ -249,9 +246,7 @@ namespace TAOX11_NAMESPACE
         { elem_traits::write_on (this->os_, el_) << ','; return os_; }
       };
 
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          typename traits::in_type val_)
+      inline OStrm_& operator ()(OStrm_& os_, typename traits::in_type val_)
       {
         if (val_.empty ())
         {
@@ -260,11 +255,91 @@ namespace TAOX11_NAMESPACE
         else
         {
           os_ << '<';
-          std::for_each (val_.begin (),
-                         val_.end () -1,
+          std::for_each (val_.cbegin (),
+                         --val_.cend (),
                          element_formatter<typename elem_traits::value_type> (os_));
           elem_traits::write_on (os_, val_.back ());
           os_ << '>';
+        }
+        return os_;
+      }
+    };
+
+    template <typename X, typename Y, typename OStrm_>
+    struct formatter<std::map<X,Y>, OStrm_>
+    {
+      using traits = IDL::traits<std::map<X,Y>>;
+      using elem_traits = typename std::map<X,Y>::value_type;
+      using key_traits = IDL::traits<X>;
+      using value_traits = IDL::traits<Y>;
+
+      template <typename T_ELEM>
+      struct element_formatter
+      {
+        OStrm_& os_;
+        element_formatter (OStrm_& os)
+          : os_ (os) {}
+
+        inline OStrm_& operator ()(elem_traits el_)
+        { this->os_ << "{"; key_traits::write_on (this->os_, el_.first) << ','; return value_traits::write_on (this->os_, el_.second) << "},"; }
+      };
+
+      inline OStrm_& operator ()(OStrm_& os_, typename traits::in_type val_)
+      {
+        if (val_.empty ())
+        {
+          os_ << "{}";
+        }
+        else
+        {
+          os_ << '{';
+          std::for_each (val_.cbegin (),
+                         --val_.cend (),
+                         element_formatter<elem_traits> (os_));
+          os_ << "{";
+          key_traits::write_on (os_, (--val_.cend ())->first) << ",";
+          value_traits::write_on (os_, (--val_.cend ())->second);
+          os_ << "}}";
+        }
+        return os_;
+      }
+    };
+
+    template <typename X, typename Y, typename OStrm_, const uint32_t B>
+    struct formatter<IDL::bounded_map<X, Y, B>, OStrm_>
+    {
+      using traits = IDL::traits<IDL::bounded_map<X, Y, B>>;
+      using elem_traits = typename IDL::bounded_map<X,Y,B>::value_type;
+      using key_traits = IDL::traits<X>;
+      using value_traits = IDL::traits<Y>;
+
+      template <typename T_ELEM>
+      struct element_formatter
+      {
+        OStrm_& os_;
+        element_formatter (OStrm_& os)
+          : os_ (os) {}
+
+        inline OStrm_& operator ()(elem_traits el_)
+        { this->os_ << "{"; return key_traits::write_on (this->os_, el_.first) << ','; return value_traits::write_on (this->os_, el_.second) << "},"; }
+      };
+
+      inline OStrm_& operator ()(OStrm_& os_, typename traits::in_type val_)
+      {
+        if (val_.empty ())
+        {
+          os_ << "{}";
+        }
+        else
+        {
+          os_ << '{';
+          std::for_each (val_.cbegin (),
+                         --val_.cend (),
+                         element_formatter<elem_traits> (os_));
+          os_ << "{";
+          key_traits::write_on (os_, (--val_.cend ())->first) << ",";
+          value_traits::write_on (os_, (--val_.cend ())->second);
+          os_ << "}}";
         }
         return os_;
       }
@@ -298,9 +373,7 @@ namespace TAOX11_NAMESPACE
         { elem_formatter () (this->os_, el_) << ','; return os_; }
       };
 
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          const std::array<T, N>& val_)
+      inline OStrm_& operator ()(OStrm_& os_, const std::array<T, N>& val_)
       {
         if (val_.empty ())
         {
@@ -309,8 +382,8 @@ namespace TAOX11_NAMESPACE
         else
         {
           os_ << '[';
-          std::for_each (val_.begin (),
-                         val_.end () - 1,
+          std::for_each (val_.cbegin (),
+                         val_.cend () - 1,
                          element_formatter (os_));
           elem_formatter () (os_, val_.back());
           os_ << ']';

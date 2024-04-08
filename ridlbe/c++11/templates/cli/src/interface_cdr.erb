@@ -4,32 +4,24 @@
 %# Abstract interfaces
 %#
 /// Abstract interface CDR streaming operator specializations
-TAO_CORBA::Boolean operator<< (
-  TAO_OutputCDR &cdr,
-  <%= scoped_cxx_in_type %> _absref)
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR &cdr, <%= scoped_cxx_in_type %> _absref)
 {
   return TAOX11_CORBA::AbstractBase::_abs_marshal (cdr, std::move(_absref));
 }
-TAO_CORBA::Boolean operator>> (
-  TAO_InputCDR &cdr,
-  <%= scoped_cxx_out_type %> _absref)
+TAO_CORBA::Boolean operator>> (TAO_InputCDR &cdr, <%= scoped_cxx_out_type %> _absref)
 {
   return ::<%= scoped_cxxname %>::_abs_unmarshal (cdr, _absref);
 }
 
 % else
 /// CDR streaming operator specializations for <%= scoped_cxxname %>
-TAO_CORBA::Boolean operator<< (
-  TAO_OutputCDR &strm,
-  <%= scoped_cxx_in_type %> _tao_objref)
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, <%= scoped_cxx_in_type %> _tao_objref)
 {
   TAOX11_IDL::traits<TAOX11_CORBA::Object>::ref_type _x11_obj { std::move(_tao_objref) };
   return (strm << _x11_obj);
 }
 
-TAO_CORBA::Boolean operator>> (
-  TAO_InputCDR &strm,
-  <%= scoped_cxx_out_type %> _tao_objref)
+TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxx_out_type %> _tao_objref)
 {
   TAO_CORBA::Object_var obj;
   if (!(strm >> obj.inout ()))
@@ -38,8 +30,7 @@ TAO_CORBA::Boolean operator>> (
     }
 
   // Narrow to the right type.
-  <%= scoped_proxy_cxxname %>::_ptr_type const _proxy_ptr =
-    TAO_TAO::Narrow_Utils<<%= scoped_proxy_cxxtype %>>::unchecked_narrow (obj.in ());
+  <%= scoped_proxy_cxxname %>::_ptr_type const _proxy_ptr = TAO_TAO::Narrow_Utils<<%= scoped_proxy_cxxtype %>>::unchecked_narrow (obj.in ());
 
   if (!TAO_CORBA::is_nil (_proxy_ptr))
     {

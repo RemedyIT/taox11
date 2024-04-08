@@ -1,10 +1,10 @@
 // generated from <%= ridl_template_path %>
-#if (!defined(ACE_HAS_CPP14) || (defined (_MSC_VER) && (_MSC_VER < 1930)))
+#if defined (_MSC_VER) && (_MSC_VER < 1930)
 inline <%= scoped_cxxname %>::u_type_::u_type_ ()
 % if has_default?()
-  : <%= default_member.cxxname %>_<%= default_member.zero_initializer %>
+  : <%= default_member.cxxname %>_<%= default_member.value_initializer %>
 % else
-  : <%= members.first.cxxname %>_<%= members.first.zero_initializer %>
+  : <%= members.first.cxxname %>_<%= members.first.value_initializer %>
 % end
 {
 }

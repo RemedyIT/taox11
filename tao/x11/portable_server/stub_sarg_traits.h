@@ -18,20 +18,17 @@
 #include "tao/x11/portable_server/basic_sargument_t.h"
 #include "tao/x11/object.h"
 
-namespace TAOX11_NAMESPACE
+namespace TAOX11_NAMESPACE::PS
 {
-  namespace PS
+  /// Used in generated code if CORBA::Object is an argument or
+  /// return type.
+  template<>
+  class SArg_Traits<TAOX11_NAMESPACE::CORBA::Object>
+    : public Basic_SArg_Traits_T<
+          TAOX11_CORBA::object_reference<TAOX11_NAMESPACE::CORBA::Object>,
+          Any_Insert_Policy_Stream>
   {
-    /// Used in generated code if CORBA::Object is an argument or
-    /// return type.
-    template<>
-    class SArg_Traits<TAOX11_NAMESPACE::CORBA::Object>
-      : public Basic_SArg_Traits_T<
-            TAOX11_CORBA::object_reference<TAOX11_NAMESPACE::CORBA::Object>,
-            Any_Insert_Policy_Stream>
-    {
-    };
-  } // namespace PS
-} // namespace TAOX11_NAMESPACE
+  };
+} // namespace TAOX11_NAMESPACE::PS
 
 #endif /* TAOX11_STUB_SARG_TRAITS_H */

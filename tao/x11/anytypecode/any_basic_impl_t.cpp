@@ -122,9 +122,9 @@ namespace TAOX11_NAMESPACE
   Any_Basic_Impl_T<TRAITS, MARSHAL_POLICY> *
   Any_Basic_Impl_T<TRAITS, MARSHAL_POLICY>::create_empty (CORBA::typecode_reference tc)
   {
-    impl_type * retval {};
-    ACE_NEW_NORETURN (retval,
-                      impl_type (std::move(tc), value_type (0)));
+    impl_type * retval = new (std::nothrow) impl_type (std::move(tc), value_type (0));
+    if (!retval)
+      throw TAO_CORBA::NO_MEMORY ();
     return retval;
   }
 
@@ -241,9 +241,9 @@ namespace TAOX11_NAMESPACE
   Any_Object_Impl_T<TRAITS, MARSHAL_POLICY> *
   Any_Object_Impl_T<TRAITS, MARSHAL_POLICY>::create_empty (CORBA::typecode_reference tc)
   {
-    impl_type * retval {};
-    ACE_NEW_NORETURN (retval,
-                      impl_type (std::move(tc), value_type (0)));
+    impl_type * retval =  new (std::nothrow) impl_type (std::move(tc), value_type (0));
+    if (!retval)
+      throw TAO_CORBA::NO_MEMORY ();
     return retval;
   }
 
@@ -359,9 +359,9 @@ namespace TAOX11_NAMESPACE
   Any_Value_Impl_T<TRAITS, MARSHAL_POLICY> *
   Any_Value_Impl_T<TRAITS, MARSHAL_POLICY>::create_empty (CORBA::typecode_reference tc)
   {
-    impl_type * retval {};
-    ACE_NEW_NORETURN (retval,
-                      impl_type (std::move(tc), value_type (0)));
+    impl_type * retval = new (std::nothrow) impl_type (std::move(tc), value_type (0));
+    if (!retval)
+      throw TAO_CORBA::NO_MEMORY ();
     return retval;
   }
 
@@ -470,9 +470,9 @@ namespace TAOX11_NAMESPACE
   Any_AbstractBase_Impl_T<TRAITS, MARSHAL_POLICY> *
   Any_AbstractBase_Impl_T<TRAITS, MARSHAL_POLICY>::create_empty (CORBA::typecode_reference tc)
   {
-    impl_type * retval {};
-    ACE_NEW_NORETURN (retval,
-                      impl_type (std::move(tc), value_type (0)));
+    impl_type * retval = new (std::nothrow) impl_type (std::move(tc), value_type (0));
+    if (!retval)
+      throw TAO_CORBA::NO_MEMORY ();
     return retval;
   }
 } // namespace TAOX11_NAMESPACE

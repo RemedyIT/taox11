@@ -1,0 +1,48 @@
+
+// generated from <%= ridl_template_path %>
+/// @copydoc <%= doc_scoped_name %>
+/// @todo THIS MAPPING IS NOT COMPLETE
+class <%= cxxname %><% unless base.nil? %> : public <%= base.cxxname %><% end %>
+{
+public:
+  <%= cxxname %> () = default;
+  ~<%= cxxname %> () noexcept = default;
+  <%= cxxname %> (const <%= cxxname %>&) = default;
+  <%= cxxname %> (<%= cxxname %>&&) = default;
+  <%= cxxname %>& operator= (const <%= cxxname %>&) = default;
+  <%= cxxname %>& operator= (<%= cxxname %>&&) = default;
+%unless base.nil?
+  using <%= base.cxxname %>::<%= base.cxxname %>;
+%end
+%_ms = bitfields.dup.find_all {|bitf| !bitf.cxxname.empty? }
+  /// Constructor which accepts value for all members
+  explicit inline <%= cxxname %> (
+%unless base.nil?
+    <%= base.cxxname %> _base<%= _ms.empty? ? ');' : ',' %>
+%end
+%unless _ms.empty?
+%  while !_ms.empty?
+%    _m = _ms.shift
+    <%= "#{_m.cxx_byval_type} #{_m.cxxname}" %><%= _ms.empty? ? ');' : ',' %>
+%  end
+%end
+
+%bitfields.find_all {|bitf| !bitf.cxxname.empty? }.each do |_m|
+  inline void <%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11_<%= _m.cxxname %>) { this->_taox11_<%= cxxname.downcase %>.<%= _m.cxxname %> = _x11_<%= _m.cxxname %>; }
+  inline <%= _m.cxx_in_type %> <%= _m.cxxname %> () const { return this->_taox11_<%= cxxname.downcase %>.<%= _m.cxxname %>; }
+%end
+
+  /// Exchange the value of two bitsets in an efficient matter
+  inline void swap (<%= cxx_inout_type %> s);
+
+private:
+  struct
+  {
+%bitfields.each do |bitfield|
+    /// @copydoc <%= bitfield.doc_scoped_name %>
+    <%= bitfield.cxx_member_type %> <%= bitfield.cxxname %> : <%= bitfield.bits %>;
+%end
+  } _taox11_<%= cxxname.downcase %>;
+}; // <%= cxxname %>
+
+inline void swap (<%= scoped_cxx_out_type %> m1, <%= scoped_cxx_out_type %> m2) { m1.swap (m2); }

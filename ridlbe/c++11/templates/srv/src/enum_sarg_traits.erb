@@ -3,21 +3,10 @@
 % _traits_incl_guard_ = scoped_cxxname.to_include_guard
 # if !defined (_<%= _traits_incl_guard_ %>_SARG_TRAITS_)
 # define _<%= _traits_incl_guard_ %>_SARG_TRAITS_
-namespace PS
+/// Argument traits specializations for <%= name %>
+template<>
+class SArg_Traits<<%= scoped_cxxtype %>>
+  : public Basic_SArg_Traits_T<<%= scoped_cxxtype %>,<% if generate_any_support? %>Any_Insert_Policy_Stream<% else %>Any_Insert_Policy_Noop<% end %>>
 {
-  /// Argument traits specializations for <%= name %>
-  template<>
-  class SArg_Traits<<%= scoped_cxxtype %>>
-    : public
-        Basic_SArg_Traits_T<
-            <%= scoped_cxxtype %>,
-% if generate_any_support?
-            Any_Insert_Policy_Stream>
-% else
-            Any_Insert_Policy_Noop>
-% end
-  {
-  };
-} // namespace PS
-
+};
 # endif // !_<%= _traits_incl_guard_ %>_SARG_TRAITS_

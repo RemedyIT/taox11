@@ -150,9 +150,13 @@ module IDL
       '%s'
     end
 
-    # Construct for triggering zero initialization
-    def zero_initializer
+    # Construct for value initialization
+    def value_initializer
       '{}'
+    end
+
+    def default_value
+      nil
     end
 
     # define cxxtype methods for 'primitive' types
@@ -160,6 +164,8 @@ module IDL
       Char => 'char',
       WChar => 'wchar_t',
       Octet => 'uint8_t',
+      TinyShort => 'int8_t',
+      UTinyShort => 'uint8_t',
       Short => 'int16_t',
       UShort => 'uint16_t',
       Long => 'int32_t',
@@ -210,10 +216,28 @@ module IDL
     end
 
     # for integer type classes
-    # (Octet,(U)Short,(U)Long,(U)LongLong)
+    # (Octet,(U)TinyShort,(U)Short,(U)Long,(U)LongLong)
     class Integer
       def is_pod?
         true
+      end
+    end
+
+    class TinyShort
+      def value_to_s(v, _scope = nil)
+        v.to_s
+      end
+
+      def idltype_name(_scope = nil)
+        'int8'
+      end
+
+      def cdr_to_fmt
+        "ACE_InputCDR::to_int8 (#{super})"
+      end
+
+      def cdr_from_fmt
+        "ACE_OutputCDR::from_int8 (#{super})"
       end
     end
 
@@ -231,6 +255,24 @@ module IDL
 
       def idltype_name(_scope = nil)
         'long long'
+      end
+    end
+
+    class UTinyShort
+      def value_to_s(v, _scope = nil)
+        v.to_s
+      end
+
+      def idltype_name(_scope = nil)
+        'uint8'
+      end
+
+      def cdr_to_fmt
+        "ACE_InputCDR::to_uint8 (#{super})"
+      end
+
+      def cdr_from_fmt
+        "ACE_OutputCDR::from_uint8 (#{super})"
       end
     end
 
@@ -278,7 +320,7 @@ module IDL
 
     class Double
       def value_to_s(v, _scope = nil)
-        "#{v}"
+        v.to_s
       end
     end
 
@@ -406,7 +448,7 @@ module IDL
 
     class String
       def cxx_type(_scope = nil)
-        (size.to_i > 0) ? "TAOX11_IDL::bounded_string<#{size}>" : 'std::string'
+        (size.to_i.positive?) ? "TAOX11_IDL::bounded_string<#{size}>" : 'std::string'
       end
 
       def proxy_cxxtype(_scope = nil)
@@ -422,7 +464,7 @@ module IDL
       end
 
       def cxx_member_type_name
-        (size.to_i > 0) ? "bounded_string<#{size}>" : 'string'
+        (size.to_i.positive?) ? "bounded_string<#{size}>" : 'string'
       end
 
       def value_to_s(v, _scope = nil)
@@ -430,7 +472,7 @@ module IDL
       end
 
       def is_standard_type?
-        self.size.to_i == 0
+        self.size.to_i.zero?
       end
 
       def os_fmt
@@ -440,7 +482,7 @@ module IDL
 
     class WString
       def cxx_type(_scope = nil)
-        (size.to_i > 0) ? "TAOX11_IDL::bounded_wstring<#{size}>" : 'std::wstring'
+        (size.to_i.positive?) ? "TAOX11_IDL::bounded_wstring<#{size}>" : 'std::wstring'
       end
 
       def proxy_cxxtype(_scope = nil)
@@ -456,7 +498,7 @@ module IDL
       end
 
       def cxx_member_type_name
-        (size.to_i > 0) ? "bounded_wstring<#{size}>" : 'wstring'
+        (size.to_i.positive?) ? "bounded_wstring<#{size}>" : 'wstring'
       end
 
       def value_to_s(v, _scope = nil)
@@ -479,7 +521,7 @@ module IDL
       end
 
       def is_standard_type?
-        self.size.to_i == 0
+        self.size.to_i.zero?
       end
 
       def os_fmt
@@ -703,10 +745,6 @@ module IDL
         is_reference? ? resolved_type.cxx_member_type_name : super
       end
 
-      def zero_initializer
-        resolved_type.zero_initializer
-      end
-
       def cxx_return_type(scope = nil)
         is_reference? ? resolved_type.cxx_member_type(scope, self) : super
       end
@@ -758,6 +796,14 @@ module IDL
 
       def cdr_from_fmt
         resolved_type.cdr_from_fmt
+      end
+
+      def value_initializer
+        resolved_type.value_initializer
+      end
+
+      def default_value
+        resolved_type.default_value
       end
     end
 
@@ -817,6 +863,57 @@ module IDL
       def is_pod?
         true
       end
+
+      def value_initializer
+        '{' + default_value.to_s + '}'
+      end
+
+      def default_value
+        node.enumerators.each do |e|
+          unless e.annotations[:default_literal].first.nil?
+            return cxx_type + '::' + e.scoped_cxxname
+          end
+        end
+        nil
+      end
+    end
+
+    class Bitmask
+      include IdlType_Mixin
+      def cxx_type(scope = nil)
+        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)
+      end
+
+      def proxy_cxxtype(scope = nil)
+        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::' + node.scoped_proxy_cxxname)
+      end
+
+      def value_to_s(v, scope = nil)
+        ((scope && (scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)) + '::' + node.bitvalues[v].cxxname
+      end
+
+      def is_pod?
+        true
+      end
+    end
+
+    class Bitset
+      include IdlType_Mixin
+      def cxx_type(scope = nil)
+        (scope && (scope == node || scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)
+      end
+
+      def proxy_cxxtype(scope = nil)
+        (scope && (scope == node || scope == node.enclosure)) ? node.proxy_cxxname : ('::' + node.scoped_proxy_cxxname)
+      end
+
+      def value_to_s(v, scope = nil)
+        ((scope && (scope == node.enclosure)) ? node.cxxname : ('::' + node.scoped_cxxname)) + '::' + node.bitvalues[v].cxxname
+      end
+
+      def is_pod?
+        false
+      end
     end
 
     class Fixed
@@ -835,15 +932,15 @@ module IDL
 
     class Sequence
       def cxx_type(scope = nil)
-        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.cxx_member_type(scope)}, #{size}>" : "std::vector<#{basetype.cxx_member_type(scope)}>"
+        (size.to_i.positive?) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.cxx_member_type(scope)}, #{size}>" : "std::vector<#{basetype.cxx_member_type(scope)}>"
       end
 
       def proxy_cxxtype(scope = nil)
-        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.proxy_cxxtype(scope)}, #{size}>" : "std::vector<#{basetype.proxy_cxxtype(scope)}>"
+        (size.to_i.positive?) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.proxy_cxxtype(scope)}, #{size}>" : "std::vector<#{basetype.proxy_cxxtype(scope)}>"
       end
 
       def resolved_cxx_type(scope = nil)
-        (size.to_i > 0) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::vector< #{basetype.resolved_cxx_member_type(scope)}>"
+        (size.to_i.positive?) ? "TAOX11_NAMESPACE::IDL::bounded_vector<#{basetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::vector<#{basetype.resolved_cxx_member_type(scope)}>"
       end
 
       def base_traits_cxx_typename
@@ -856,17 +953,44 @@ module IDL
       end
     end
 
-    class Array
+    class Map
       def cxx_type(scope = nil)
-        sizes.reverse.inject(basetype.cxx_member_type(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
+        (size.to_i.positive?) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.cxx_member_type(scope)}, #{valuetype.cxx_member_type(scope)}, #{size}>" : "std::map<#{keytype.cxx_member_type(scope)}, #{valuetype.cxx_member_type(scope)}>"
       end
 
       def proxy_cxxtype(scope = nil)
-        sizes.reverse.inject(basetype.proxy_cxxtype(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
+        (size.to_i.positive?) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.proxy_cxxtype(scope)}, #{valuetype.proxy_cxxtype(scope)}, #{size}>" : "std::map<#{keytype.proxy_cxxtype(scope)}, #{valuetype.proxy_cxxtype(scope)}>"
       end
 
       def resolved_cxx_type(scope = nil)
-        sizes.reverse.inject(basetype.resolved_cxx_member_type(scope)) { |typestr, siz| typestr = "std::array< #{typestr}, #{siz}>" }
+        (size.to_i.positive?) ? "TAOX11_NAMESPACE::IDL::bounded_map<#{keytype.resolved_cxx_member_type(scope)}, #{valuetype.resolved_cxx_member_type(scope)}, #{size}>" : "std::map<#{keytype.resolved_cxx_member_type(scope)}, #{valuetype.resolved_cxx_member_type(scope)}>"
+      end
+
+      def key_traits_cxx_typename
+        keytype.cxx_type
+      end
+
+      def value_traits_cxx_typename
+        valuetype.cxx_type
+      end
+
+      # any insertion/extraction operators arg typename
+      def cxx_anyop_arg_typename(scope = nil)
+        resolved_cxx_type(scope)
+      end
+    end
+
+    class Array
+      def cxx_type(scope = nil)
+        sizes.reverse.inject(basetype.cxx_member_type(scope)) { |typestr, siz| typestr = "std::array<#{typestr}, #{siz}>" }
+      end
+
+      def proxy_cxxtype(scope = nil)
+        sizes.reverse.inject(basetype.proxy_cxxtype(scope)) { |typestr, siz| typestr = "std::array<#{typestr}, #{siz}>" }
+      end
+
+      def resolved_cxx_type(scope = nil)
+        sizes.reverse.inject(basetype.resolved_cxx_member_type(scope)) { |typestr, siz| typestr = "std::array<#{typestr}, #{siz}>" }
       end
 
       def cxx_dim
@@ -882,8 +1006,13 @@ module IDL
         resolved_cxx_type(scope)
       end
 
-      def zero_initializer
-        '{{}}'
+      def value_initializer
+        df = basetype.default_value
+        if df == nil
+          return '{}'
+        else
+          '{' + (basetype.default_value + ', ') * sizes.first + '}'
+        end
       end
     end
   end # Type
