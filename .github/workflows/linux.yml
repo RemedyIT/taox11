@@ -32,7 +32,7 @@ env:
   TAOX11_ROOT: ${{ github.workspace }}
   INSTALL_PREFIX: ${{ github.workspace }}/stage
   X11_BRANCH: master
-  ACETAOMPC_BRANCH: Latest_ACE7TAO3_Micro
+  ACETAOMPC_BRANCH: master
 
 jobs:
   build:
@@ -172,7 +172,7 @@ jobs:
       if: matrix.feature == 'CodeQL'
     - uses: codecov/codecov-action@v4
       with:
-        fail_ci_if_error: true 
+        fail_ci_if_error: true
         verbose: true # optional (default = false)
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
