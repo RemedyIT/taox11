@@ -22,7 +22,6 @@ main(int, char* [])
   }
   catch (const std::exception& e)
   {
-    std::cout << "exception caught: " << e.what() << std::endl;
     return 1;
   }
   return result;
