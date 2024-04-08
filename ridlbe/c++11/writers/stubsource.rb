@@ -167,6 +167,7 @@ module IDL
         writer(StubSourceObjTraitsWriter).visit_nodes(parser)
       end
 
+      # todo, probably this is needed, StubProxySourceWriter should call this also
       def visit_proxy_object_ref_traits_specializations(parser)
         #writer(StubSourceProxyObjRefTraitsWriter).visit_nodes(parser)
       end
