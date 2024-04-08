@@ -24,12 +24,12 @@ project: taox11_basedefaults, taobaseidldefaults {
     optional(source_pre_extension) {
       commandflags(-GC) += AmiC
       commandflags(-GCa) += AmiC
-      commandflags(-Gcp) += CP
+      commandflags(-Gcpc) += CP
       commandflags(-Gatc) += A
     }
 
     optional(header_pre_extension) {
-      commandflags(!-Scp) += CP
+      commandflags(!-Scph) += CP
       commandflags(!-Ssh) += SP
       commandflags(-GC) += AmiC, AmiCP
       commandflags(-GCa) += AmiC, AmiCP

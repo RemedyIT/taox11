@@ -1,7 +1,7 @@
 // -*- MPC -*-
 
 project(*proxysource_gen_Idl): ridl_ostream_defaults {
-  idlflags += -Gcp -Gatc -Gath
+  idlflags += -Gcpc -Gatc -Gath
   idlflags -= -Sa -St
   IDL_Files {
     test.idl
