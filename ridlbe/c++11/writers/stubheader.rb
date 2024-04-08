@@ -32,7 +32,6 @@ module IDL
         ]
 
         @default_pre_includes << 'tao/x11/corba.h' unless params[:client_proxy_source]
-        @default_pre_includes << 'tao/x11/orb.h' unless params[:no_orb_include]
         @default_post_includes = []
 
         unless params[:output_anytypecode_header]
@@ -398,6 +397,8 @@ module IDL
 
       def enter_interface(node)
         return if node.is_pseudo?
+
+        add_pre_include('tao/x11/orb.h') unless params[:no_orb_include]
 
         add_post_include('tao/x11/object_ostream.h')
 
