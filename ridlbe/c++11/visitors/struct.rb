@@ -59,6 +59,9 @@ module IDL
 
       def value_initializer
         # When we have an annotation directly applied to this node we are using it
+        if optional?
+          return '{std::nullopt}'
+        end
         unless node.annotations[:default].first.nil?
           "{#{node.annotations[:default].first.fields[:value]}}"
         else
