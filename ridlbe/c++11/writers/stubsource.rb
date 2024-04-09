@@ -10,12 +10,6 @@ require 'ridlbe/c++11/writerbase'
 
 module IDL
   module Cxx11
-    class IncludeStubProxyDefineVisitor < VisitorBase
-      def visit
-        visit_template(:include_stub_proxy_define)
-      end
-    end
-
     class StubSourceBaseWriter < CxxCodeWriterBase
       def initialize(output = STDOUT, opts = {})
         super
