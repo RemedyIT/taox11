@@ -476,8 +476,7 @@ module IDL
 
       def post_visit(parser)
         dec_nest
-        println
-        println('  } // namespace TAOX11_NAMESPACE::CORBA')
+        println('} // namespace TAOX11_NAMESPACE::CORBA')
         super
       end
 
