@@ -157,6 +157,18 @@ module IDL
         params[:anytypecode_export_macro] ? params[:anytypecode_export_macro] + ' ' : self.stub_export_macro
       end
 
+      def client_proxy_export_include?
+        !params[:client_proxy_export_include].nil?
+      end
+
+      def client_proxy_export_include
+        params[:client_proxy_export_include]
+      end
+
+      def client_proxy_export_macro
+        params[:client_proxy_export_macro] ? params[:client_proxy_export_macro] + ' ' : self.stub_export_macro
+      end
+
       def skel_export_include?
         !(params[:skel_export_include] || params[:export_include]).nil? && params[:svnt_skeletons]
       end

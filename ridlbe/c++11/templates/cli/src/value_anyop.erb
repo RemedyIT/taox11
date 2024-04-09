@@ -1,13 +1,13 @@
 
 // generated from <%= ridl_template_path %>
 /// Any insertion operator for <%= scoped_cxxname %>
-void operator<<= (TAOX11_CORBA::Any &any, <%= scoped_cxx_in_type %> _val)
+void operator<<= (TAOX11_CORBA::Any& any, <%= scoped_cxx_in_type %> _val)
 {
   TAOX11_NAMESPACE::Any_Value_Impl_T<IDL::traits<<%= scoped_cxxtype %>>,<% if is_local? %>TAOX11_NAMESPACE::NULL_Marshal_Policy%<% else %>TAOX11_NAMESPACE::CDR_Marshal_Policy<% end %>>::insert (any, <%= scoped_cxx_typecode %>, std::move(_val));
 }
 
 /// Any extraction operator for <%= scoped_cxxname %>
-bool operator>>= (const TAOX11_CORBA::Any &any, <%= scoped_cxx_out_type %> _val)
+bool operator>>= (const TAOX11_CORBA::Any& any, <%= scoped_cxx_out_type %> _val)
 {
   return TAOX11_NAMESPACE::Any_Value_Impl_T<IDL::traits<<%= scoped_cxxtype %>>,<% if is_local? %>TAOX11_NAMESPACE::NULL_Marshal_Policy<% else %>TAOX11_NAMESPACE::CDR_Marshal_Policy<% end %>>::extract (any, <%= scoped_cxx_typecode %>, _val);
 }
