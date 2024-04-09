@@ -123,8 +123,7 @@ module IDL
       end
 
       def invalid_argument_exception
-        # todo, add ridlc argument, also make a distinction which include to add
-        if params[:client_proxy_source]
+        if params[:client_proxy_source] || params[:gen_union_invalid_argument]
           'std::invalid_argument ("")'
         else
           'TAOX11_NAMESPACE::CORBA::BAD_PARAM ()'
