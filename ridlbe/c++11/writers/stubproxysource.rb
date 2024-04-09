@@ -30,30 +30,17 @@ module IDL
 
       # Object traits are only required for interfaces and valuetypes
       @object_traits_specializations = false
-
-      def enter_module(node)
-        super
-        println
-        printiln('// generated from StubProxySourceWriter#enter_module')
-        printiln('namespace ' + node.cxxname)
-        printiln('{')
-        inc_nest
-      end
-
-      def leave_module(node)
-        dec_nest
-        printiln("} // namespace #{node.cxxname}")
-        println
-        super
-      end
+      # Proxy implementation is only required for interfaces
+      @proxy_impl = false
 
       def enter_interface(node)
         super
-        return if node.is_local? || node.is_pseudo? || node.is_abstract?
 
         @object_traits_specializations = true
-        visitor(InterfaceVisitor).visit_proxy(node)
-        println
+
+        return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
+        @proxy_impl = true
       end
 
       def enter_valuetype(node)
@@ -71,7 +58,9 @@ module IDL
 
       def post_visit(parser)
         # stub proxy implementations
-        #visit_proxy(parser)
+        if @proxy_impl
+          visit_proxy_implementation(parser)
+        end
 
         if @object_traits_specializations
           # Object ref traits specializations
@@ -79,14 +68,14 @@ module IDL
         end
 
         # CDR operators
-        visit_cdr(parser)
+        visit_cdr(parser) unless params[:no_cdr_streaming]
 
         super
         visitor(PostVisitor).visit
       end
 
       def visit_cdr(parser)
-        writer(StubProxySourceCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming]
+        writer(StubProxySourceCDRWriter).visit_nodes(parser)
       end
 
       def visit_includes(parser)
@@ -97,6 +86,10 @@ module IDL
 
       def visit_proxy_object_ref_traits_specializations(parser)
         writer(StubSourceProxyObjRefTraitsWriter).visit_nodes(parser)
+      end
+
+      def visit_proxy_implementation(parser)
+        writer(StubProxySourceProxyImplWriter).visit_nodes(parser)
       end
     end # StubProxySourceWriter
 
@@ -187,6 +180,36 @@ module IDL
         end
       end
     end # StubProxySourceCDRWriter
+
+    class StubProxySourceProxyImplWriter < StubProxySourceBaseWriter
+      def initialize(output = STDOUT, opts = {})
+        super
+      end
+
+      def enter_module(node)
+        super
+        println
+        printiln('// generated from StubProxySourceProxyImplWriter')
+        printiln('namespace ' + node.cxxname)
+        printiln('{')
+        inc_nest
+      end
+
+      def leave_module(node)
+        dec_nest
+        printiln("} // namespace #{node.cxxname}")
+        println
+        super
+      end
+
+      def enter_interface(node)
+        super
+        return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
+        visitor(InterfaceVisitor).visit_proxy(node)
+        println
+      end
+    end
 
     class StubSourceProxyObjRefTraitsWriter < StubProxySourceBaseWriter
       def initialize(output = STDOUT, opts = {})

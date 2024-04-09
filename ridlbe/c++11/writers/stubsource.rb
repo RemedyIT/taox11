@@ -25,6 +25,9 @@ module IDL
         # Object traits are only required for interfaces and valuetypes
         @object_traits_specializations = false
 
+        # Proxy implementation is only required for interfaces
+        @proxy_impl = false
+
         @default_pre_includes = []
         unless params[:no_cdr_streaming] || params[:client_proxy_source]
           @default_pre_includes << 'tao/CDR.h'
@@ -52,7 +55,7 @@ module IDL
 
       def post_visit(parser)
         # stub proxy implementations
-        visit_proxy(parser)
+        visit_proxy_implementation(parser) if @proxy_impl && !params[:client_proxy_source]
 
         visit_anyops(parser) if params[:gen_any_ops] && !params[:gen_anytypecode_source]
 
@@ -63,6 +66,9 @@ module IDL
           # Object ref traits specializations
           visit_proxy_object_ref_traits_specializations(parser) unless params[:no_client_proxy_hdr]
         end
+
+        # CDR operators
+        visit_cdr(parser) unless params[:client_proxy_source]
 
         super
         visitor(PostVisitor).visit
@@ -103,8 +109,13 @@ module IDL
       end
 
       def enter_interface(node)
-        @object_traits_specializations = true
         return if node.is_abstract?
+
+        if !node.is_local? && !node.is_pseudo? && !node.is_abstract?
+          @proxy_impl = true
+        end
+
+        @object_traits_specializations = true
 
         visitor(InterfaceVisitor).visit_pre(node)
       end
@@ -155,10 +166,6 @@ module IDL
                  default_post_includes: @default_post_includes }).visit_nodes(parser)
       end
 
-      def visit_proxy(parser) # TODO Probabably cause duplicate header
-        writer(StubProxySourceWriter).visit_nodes(parser) unless params[:client_proxy_source]
-      end
-
       def visit_anyops(parser)
         writer(StubSourceAnyOpWriter).visit_nodes(parser)
       end
@@ -167,13 +174,20 @@ module IDL
         writer(StubSourceObjTraitsWriter).visit_nodes(parser)
       end
 
-      # todo, probably this is needed, StubProxySourceWriter should call this also
+      def visit_proxy_implementation(parser)
+          writer(StubProxySourceProxyImplWriter).visit_nodes(parser) unless params[:client_proxy_source]
+      end
+
       def visit_proxy_object_ref_traits_specializations(parser)
-        #writer(StubSourceProxyObjRefTraitsWriter).visit_nodes(parser)
+        writer(StubSourceProxyObjRefTraitsWriter).visit_nodes(parser)
       end
 
       def visit_typecodes(parser)
         writer(StubSourceTypecodeWriter).visit_nodes(parser)
+      end
+
+      def visit_cdr(parser)
+        writer(StubProxySourceCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming]
       end
     end # StubSourceWriter
 
