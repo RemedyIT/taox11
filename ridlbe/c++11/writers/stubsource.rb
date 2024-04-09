@@ -214,7 +214,7 @@ module IDL
         properties[:post_includes] = @default_post_includes
         properties[:includes] = @includes
         visitor(HeaderVisitor).visit
-        visitor(IncludeStubProxyDefineVisitor).visit unless params[:gen_client_proxy_source]
+        visitor(IncludeStubProxyDefineVisitor).visit
         visitor(PreVisitor).visit
       end
 

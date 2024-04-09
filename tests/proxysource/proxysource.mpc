@@ -18,7 +18,7 @@ project(*proxysource_gen_Client) {
     testC.cpp
   }
   includes += $(TAOX11_ROOT)
-  macros += TAOX11_DISABLE_INCLUDE_ANYTYPECODE
+  macros += TAOX11_DISABLE_INCLUDE_ANYTYPECODE TAOX11_DISABLE_INCLUDE_STUB_PROXY_HDR
 }
 
 project(*proxysource_taox11_Client): taox11_client, taox11_anytypecode {
