@@ -20,5 +20,11 @@ module IDL
         visit_template(:post)
       end
     end
+
+    class HeaderVisitor < VisitorBase
+      def visit
+        visit_template(:header)
+      end
+    end
   end
 end

@@ -256,6 +256,7 @@ module IDL
         properties[:pre_includes] = @default_pre_includes
         properties[:post_includes] = @default_post_includes
         properties[:includes] = @includes
+        visitor(HeaderVisitor).visit
         visitor(IncludeStubProxyDefineVisitor).visit
         visitor(PreVisitor).visit
       end
