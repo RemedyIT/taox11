@@ -19,6 +19,9 @@
 % if pre_include?
 #include /**/ "<%= pre_include %>"
 % end
+#if __has_include("tao/x11/tao_corba.h")
+# include "tao/x11/tao_corba.h"
+#endif
 % if unique_include?
 #include "<%= unique_include %>"
 % else

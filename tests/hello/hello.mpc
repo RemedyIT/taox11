@@ -2,6 +2,7 @@
 
 project(*x11_Idl): ridl_ostream_defaults {
   idlflags += -Sp
+  idlflags -= -Sa -St
   IDL_Files {
     test.idl
   }

@@ -1,14 +1,21 @@
+%unless pre_includes.empty?
+
 % pre_includes.each do |incfile|
 #include "<%= incfile %>"
 % end
+%end
+%unless includes.empty?
 
 % includes.each do |incfile|
 #include "<%= incfile %>"
 % end
+%end
+%unless post_includes.empty?
 
 % post_includes.each do |incfile|
 #include "<%= incfile %>"
 % end
+%end
 
 % if safe_include?
 #include "<%= safe_include %>"
