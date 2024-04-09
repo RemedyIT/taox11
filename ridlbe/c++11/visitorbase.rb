@@ -50,7 +50,7 @@ module IDL
       end
 
       def client_proxy_src?
-        params[:client_proxy_source]
+        params[:gen_client_proxy_source]
       end
 
       def anytypecode_hdr?

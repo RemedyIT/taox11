@@ -1,10 +1,6 @@
 
 // generated from <%= ridl_template_path %>
-<%= proxy_cxxname %>::<%= proxy_cxxname %> (
-  TAO_Stub *objref,
-  TAO_CORBA::Boolean _tao_collocated,
-  TAO_Abstract_ServantBase *servant,
-  TAO_ORB_Core *oc) :
+<%= proxy_cxxname %>::<%= proxy_cxxname %> (TAO_Stub *objref, TAO_CORBA::Boolean _tao_collocated, TAO_Abstract_ServantBase *servant, TAO_ORB_Core *oc) :
     TAO_CORBA::Object (objref, _tao_collocated, servant, oc)
 % if is_derived?
 %   _bases = ancestors.dup.find_all { |_a| !_a.is_abstract? }
