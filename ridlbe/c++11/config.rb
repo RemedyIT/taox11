@@ -162,9 +162,9 @@ module IDL
               'impl' => { option_name: :export_impl,
                        description: "-Ximpl\t\t\tExport implementation code (not exported by default)" },
               'cp' => { option_name: :export_client_proxy,
-                       description: "-Xpr\t\t\tExport client proxy code (not exported by default)" },
+                       description: "-Xcp\t\t\tExport client proxy code (not exported by default)" },
               'at' => { option_name: :export_anytypecode,
-                       description: "-Xpr\t\t\tExport Any and Typecode code (not exported by default)" },
+                       description: "-Xat\t\t\tExport Any and Typecode code (not exported by default)" },
             }
       end
 
