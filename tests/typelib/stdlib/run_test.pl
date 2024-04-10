@@ -28,15 +28,4 @@ if ($server != 0) {
 
 $target->GetStderrLog();
 
-$SV = $target->CreateProcess ("taox11client");
-
-$server = $SV->SpawnWaitKill ($target->ProcessStartWaitInterval());
-
-if ($server != 0) {
-    print STDERR "ERROR: taox11 returned $server\n";
-    $status = 1;
-}
-
-$target->GetStderrLog();
-
 exit $status;

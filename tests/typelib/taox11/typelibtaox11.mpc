@@ -4,7 +4,7 @@ project(*proxysource_gen_Idl): ridl_ostream_defaults {
   idlflags += -Gcpc -Gatc -Gath
   idlflags -= -Sa -St
   IDL_Files {
-    test.idl
+    ../test.idl
   }
   custom_only = 1
 }
@@ -23,10 +23,9 @@ project(*proxysource_gen_Idl): ridl_ostream_defaults {
 
 
 project(*proxysource_taox11_Client): taox11_client, taox11_anytypecode {
-  exename = taox11client
   after += *proxysource_gen_Idl
   Source_Files {
-    taox11client.cpp
+    client.cpp
   }
   Source_Files {
     testC.cpp

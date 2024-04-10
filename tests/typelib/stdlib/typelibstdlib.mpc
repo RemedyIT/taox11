@@ -1,0 +1,23 @@
+// -*- MPC -*-
+
+project(*stdlib_gen_Idl): ridl_ostream_defaults {
+  idlflags += -Gcpc -Gatc -Gath
+  idlflags -= -Sa -St
+  IDL_Files {
+    ../test.idl
+  }
+  custom_only = 1
+}
+
+project(*stdlib_gen_Client) {
+  after += *stdlib_gen_Idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+  }
+  includes += $(TAOX11_ROOT)
+  macros += TAOX11_DISABLE_INCLUDE_ANYTYPECODE TAOX11_DISABLE_INCLUDE_STUB_PROXY_HDR
+}
+
