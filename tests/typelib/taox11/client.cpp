@@ -1,5 +1,5 @@
 /**
- * @file    taox11client.cpp
+ * @file    client.cpp
  * @author  Johnny Willemsen
  *
  * @brief   C++11 client application which uses IDL defines types
