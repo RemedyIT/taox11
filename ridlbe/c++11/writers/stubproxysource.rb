@@ -31,7 +31,10 @@ module IDL
         @default_pre_includes << 'tao/x11/tao_corba.h'
         @default_pre_includes << 'tao/x11/corba.h'
         @default_post_includes = []
-        @default_pre_includes << 'tao/CDR.h' unless params[:no_cdr_streaming]
+        unless params[:no_cdr_streaming]
+          @default_pre_includes << 'tao/CDR.h'
+          @default_post_includes << 'tao/x11/cdr_long_double.h'
+        end
       end
 
       # Object traits are only required for interfaces and valuetypes

@@ -29,8 +29,10 @@ module IDL
         @proxy_impl = false
 
         @default_pre_includes = []
+        @default_post_includes = []
         unless params[:no_cdr_streaming] || params[:gen_client_proxy_source]
           @default_pre_includes << 'tao/CDR.h'
+          @default_post_includes << 'tao/x11/cdr_long_double.h'
         end
         if params[:gen_typecodes] && !params[:gen_anytypecode_source]
           @default_pre_includes << 'tao/AnyTypeCode/TypeCode.h'
@@ -39,7 +41,6 @@ module IDL
         if params[:gen_any_ops] && !params[:gen_anytypecode_source]
           @default_pre_includes << 'tao/AnyTypeCode/Any_Impl_T.h'
         end
-        @default_post_includes = []
         @default_post_includes << 'tao/x11/tao_corba.h' unless params[:gen_client_proxy_source]
         @default_post_includes << 'tao/x11/anytypecode/typecode.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
         @default_post_includes << 'tao/x11/anytypecode/typecode_impl.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
