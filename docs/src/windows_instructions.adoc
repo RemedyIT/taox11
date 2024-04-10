@@ -16,7 +16,6 @@ compilers have been tested:
 
 * MinGW-w64 toolchain (a GNU compiler toolchain variant for the
 Windows platform)
-* Visual Studio 2015 Update 2 or newer
 * Visual Studio 2017 Update 3 or newer
 * Visual Studio 2019
 * Intel C++ 2016
@@ -122,7 +121,7 @@ http://www.7-zip.org/[here].
 
 === Visual Studio
 
-Development using Visual Studio 2015, 2017, and 2019 has been tested as well. When you use
+Development using Visual Studio 2017, and 2019 has been tested as well. When you use
 <<{parent_dir}/brix11/brix11.adoc#,BRIX11>> to compile the project, the project type will be set
 to _solution_ files by default and the _msbuild_ tool will
 be used to compile your application.
