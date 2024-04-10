@@ -17,6 +17,8 @@ main(int, char* [])
 {
   int result {};
 
+  Test::Bar mybar;
+
   try
   {
   }
