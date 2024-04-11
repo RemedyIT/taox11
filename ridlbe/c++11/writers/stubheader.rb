@@ -266,7 +266,7 @@ module IDL
           if node.enclosure.is_a?(IDL::AST::Module)
             printi("const #{node.idltype.cxx_type(node.enclosure)} ")
           else
-            printi("static const #{node.idltype.cxx_type(node.enclosure)} ")
+            printi("static inline const #{node.idltype.cxx_type(node.enclosure)} {#{expression_to_s(node.expression, node.enclosure)}}")
           end
         else
           if node.enclosure.is_a?(IDL::AST::Module)
