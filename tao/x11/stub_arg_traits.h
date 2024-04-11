@@ -13,7 +13,7 @@
 #pragma once
 
 #include "tao/CORBA_methods.h"
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/arg_traits_t.h"
 #include "tao/x11/basic_argument_t.h"
 #include "tao/x11/anyinsert_policy_t.h"

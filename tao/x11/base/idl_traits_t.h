@@ -10,9 +10,9 @@
 #ifndef TAOX11_IDL_TRAITS_T_H_INCLUDED
 #define TAOX11_IDL_TRAITS_T_H_INCLUDED
 
-#include "tao/x11/stddef.h"
-#include "tao/x11/bounded_vector_t.h"
-#include "tao/x11/bounded_map_t.h"
+#include "tao/x11/base/stddef.h"
+#include "tao/x11/base/bounded_vector_t.h"
+#include "tao/x11/base/bounded_map_t.h"
 #include <algorithm>
 #include <codecvt>
 #include <locale>

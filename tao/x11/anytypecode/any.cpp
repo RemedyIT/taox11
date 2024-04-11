@@ -8,7 +8,7 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/object.h"
 #include "tao/x11/stub_arg_traits.h"
 #include "tao/x11/anytypecode/any.h"

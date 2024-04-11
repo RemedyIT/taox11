@@ -14,7 +14,7 @@
 
 #include /**/ "ace/config-all.h"
 
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/ORB.h"
 #include "tao/SystemException.h"
 #include "tao/Basic_Types.h"
@@ -23,7 +23,7 @@
 #include "tao/Objref_VarOut_T.h"
 #include "tao/VarOut_T.h"
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 
 namespace TAOX11_NAMESPACE {
 

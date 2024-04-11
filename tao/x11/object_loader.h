@@ -12,7 +12,7 @@
 #pragma once
 
 #include "ace/Service_Object.h"
-#include "tao/x11/taox11_export.h"
+#include "tao/x11/base/taox11_export.h"
 #include "tao/x11/orb.h"
 
 namespace TAOX11_NAMESPACE

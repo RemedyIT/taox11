@@ -33,7 +33,7 @@ module IDL
           @default_pre_includes << 'tao/AnyTypeCode/Any_Impl_T.h'
         end
         @default_post_includes = [
-          'tao/x11/tao_corba.h',
+          'tao/x11/base/tao_corba.h',
           'tao/x11/objproxy.h',
           'tao/x11/system_exception_x11.h',
           'tao/x11/exception_macros.h',

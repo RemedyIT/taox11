@@ -28,7 +28,7 @@ module IDL
         super
 
         @default_pre_includes = []
-        @default_pre_includes << 'tao/x11/tao_corba.h'
+        @default_pre_includes << 'tao/x11/base/tao_corba.h'
         @default_pre_includes << 'tao/x11/corba.h'
         @default_post_includes = []
         unless params[:no_cdr_streaming]

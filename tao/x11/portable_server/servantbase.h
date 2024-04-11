@@ -14,7 +14,7 @@
 
 #include /**/ "ace/config-all.h"
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "tao/x11/portable_server/servant_traits_t.h"
 #include "tao/x11/portable_server/portableserver.h"
 #include "tao/x11/portable_server/servant_forward.h"

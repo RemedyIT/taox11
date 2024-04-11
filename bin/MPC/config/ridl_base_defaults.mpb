@@ -40,7 +40,7 @@ project: taox11_basedefaults, taobaseidldefaults {
   after -= TAO_IDL_EXE
   idlflags -= $(TAO_IDLFLAGS)
   idlflags -= -Sa -St
-  idlflags += -Wb,pre_include=tao/x11/pre.h \
-              -Wb,post_include=tao/x11/post.h -I$(TAOX11_ROOT)
+  idlflags += -Wb,pre_include=tao/x11/base/pre.h \
+              -Wb,post_include=tao/x11/base/post.h -I$(TAOX11_ROOT)
   idlflags += $(RIDLCFLAGS) -Sci -Ssi -Sa -St
 }

@@ -13,7 +13,7 @@
 
 #include /**/ "ace/config-all.h"
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "tao/x11/system_exception.h"
 #include "tao/x11/object_traits_t.h"
 #include "tao/x11/valuetype/valuetype_traits_t.h"

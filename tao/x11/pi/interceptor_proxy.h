@@ -10,7 +10,7 @@
 #define TAOX11_PI_INTERCEPTOR_PROXY_H_INCLUDED
 
 #include "tao/x11/pi/taox11_pi_export.h"
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/pi/tao_pi.h"
 
 #include "tao/x11/pi/pi.h"

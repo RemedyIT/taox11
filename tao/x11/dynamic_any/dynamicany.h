@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 
 #if !defined (CORBA_E_COMPACT) && !defined (CORBA_E_MICRO)
 

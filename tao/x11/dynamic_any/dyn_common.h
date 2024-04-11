@@ -16,7 +16,7 @@
 #include "tao/x11/dynamic_any/taox11_dynamicany_export.h"
 #include "tao/x11/anytypecode/any.h"
 #include "tao/x11/anytypecode/typecode.h"
-#include "tao/x11/versioned_x11_namespace.h"
+#include "tao/x11/base/versioned_x11_namespace.h"
 
 namespace TAOX11_NAMESPACE
 {

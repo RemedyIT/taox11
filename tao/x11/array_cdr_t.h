@@ -12,9 +12,9 @@
 
 #include <array>
 #include <iostream>
-#include "tao/x11/tao_corba.h"
-#include "tao/x11/taox11_export.h"
-#include "tao/x11/basic_traits.h"
+#include "tao/x11/base/tao_corba.h"
+#include "tao/x11/base/taox11_export.h"
+#include "tao/x11/base/basic_traits.h"
 
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 

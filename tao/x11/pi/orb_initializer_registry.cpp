@@ -6,7 +6,7 @@
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/pi/tao_pi.h"
 #include "tao/ORBInitializer_Registry.h"
 

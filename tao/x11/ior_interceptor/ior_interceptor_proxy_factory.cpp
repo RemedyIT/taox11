@@ -8,7 +8,7 @@
  */
 
 // pull in TAO dependencies first
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/ior_interceptor/tao_ior_interceptor.h"
 
 // TAOX11 dependencies

@@ -13,7 +13,7 @@
 
 #include "tao/x11/ior_table/tao_ior_table.h"
 #include "tao/x11/ior_table/taox11_ior_table_export.h"
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/ior_table/ior_table.h"
 
 namespace TAOX11_NAMESPACE

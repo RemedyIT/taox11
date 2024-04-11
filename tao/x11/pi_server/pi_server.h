@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "tao/x11/pi_server/taox11_pi_server_export.h"
 
 namespace TAOX11_NAMESPACE

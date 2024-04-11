@@ -14,9 +14,9 @@
 
 #include /**/ "ace/config-all.h"
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "tao/x11/object_fwd.h"
-#include "tao/x11/taox11_export.h"
+#include "tao/x11/base/taox11_export.h"
 
 #include "tao/x11/anytypecode/typecode_ref.h"
 #include "tao/x11/anytypecode/taox11_anytypecode_export.h"

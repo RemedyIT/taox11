@@ -19,6 +19,7 @@ module Test
   {
     short my1;
   };
+  typedef string<6> b_string;
 
   enum Color {
     COLOR_RED,

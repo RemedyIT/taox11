@@ -30,7 +30,7 @@
 # endif
 #endif
 #include "tao/x11/log.h"
-#include "tao/x11/versionx11.h"
+#include "tao/x11/base/versionx11.h"
 
 #if !defined (TAOX11_RELEASE_BUILDSTAMP)
 # define TAOX11_RELEASE_BUILDSTAMP \

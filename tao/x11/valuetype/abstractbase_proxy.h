@@ -14,7 +14,7 @@
 
 #include /**/ "ace/config-all.h"
 
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/Valuetype/AbstractBase.h"
 #include "tao/x11/valuetype/taox11_valuetype_export.h"
 #include "tao/x11/valuetype/abstract_base.h"

@@ -9,7 +9,7 @@
 #ifndef TAOX11_TAO_CODECFACTORY_H_INCLUDE
 #define TAOX11_TAO_CODECFACTORY_H_INCLUDE
 
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/CodecFactory/CodecFactory.h"
 #include "tao/OctetSeqC.h"
 

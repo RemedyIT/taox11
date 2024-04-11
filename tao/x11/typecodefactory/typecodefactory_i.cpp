@@ -7,7 +7,7 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/ORB_Core.h"
 #include "tao/TypeCodeFactory_Adapter.h"
 #include "tao/IFR_Client/IFR_BasicC.h"

@@ -12,7 +12,7 @@
 #include "ace/Get_Opt.h"
 #include "testlib/taox11_testlog.h"
 
-#include "tao/x11/basic_traits.h"
+#include "tao/x11/base/basic_traits.h"
 #include "tao/x11/corba.h"
 #include "tao/x11/orb.h"
 #include "tao/x11/object.h"

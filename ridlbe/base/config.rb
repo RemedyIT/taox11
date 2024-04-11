@@ -22,7 +22,7 @@ module IDL
           beta: 0
         }
 
-        base = File.join(File.dirname(__FILE__), '..', '..', 'tao', 'x11', 'versionx11.h')
+        base = File.join(File.dirname(__FILE__), '..', '..', 'tao', 'x11', 'base', 'versionx11.h')
         File.open(base, 'r') do |file|
           while (line = file.gets)
             if VERSION_REGEXP =~ line

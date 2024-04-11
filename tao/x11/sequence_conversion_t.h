@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "ace/Truncate.h"
 
 namespace TAOX11_NAMESPACE {

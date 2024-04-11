@@ -10,10 +10,10 @@
 #ifndef TAOX11_EXCEPTION_H_INCLUDED
 #define TAOX11_EXCEPTION_H_INCLUDED
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include /**/ "tao/Versioned_Namespace.h"
 #include "tao/x11/anytypecode/taox11_anytypecode_export.h"
-#include "tao/x11/idl_traits_t.h"
+#include "tao/x11/base/idl_traits_t.h"
 
 #include <sstream>
 

@@ -15,7 +15,7 @@
 #include "tao/AnyTypeCode/Struct_TypeCode_Static.h"
 #include "tao/AnyTypeCode/TypeCode_Struct_Field.h"
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "tao/x11/anytypecode/taox11_anytypecode_export.h"
 #include "tao/x11/object_traits_t.h"
 #include "tao/x11/anytypecode/any_util.h"

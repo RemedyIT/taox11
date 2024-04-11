@@ -21,13 +21,13 @@ endif
 # with different minor or major or beta versions to fail.
 #
 ifeq (cmd,$(findstring cmd,$(SHELL)))
-TAOX11_MAJOR_VERSION := $(shell awk "/TAOX11_MAJOR_VERSION/ { print $$3}" ${TAOX11_ROOT}/tao/x11/versionx11.h)
-TAOX11_MINOR_VERSION := $(shell awk "/TAOX11_MINOR_VERSION/ { print $$3}" ${TAOX11_ROOT}/tao/x11/versionx11.h)
-TAOX11_MICRO_VERSION := $(shell awk "/TAOX11_MICRO_VERSION/ { print $$3}" ${TAOX11_ROOT}/tao/x11/versionx11.h)
+TAOX11_MAJOR_VERSION := $(shell awk "/TAOX11_MAJOR_VERSION/ { print $$3}" ${TAOX11_ROOT}/tao/x11/base/versionx11.h)
+TAOX11_MINOR_VERSION := $(shell awk "/TAOX11_MINOR_VERSION/ { print $$3}" ${TAOX11_ROOT}/tao/x11/base/versionx11.h)
+TAOX11_MICRO_VERSION := $(shell awk "/TAOX11_MICRO_VERSION/ { print $$3}" ${TAOX11_ROOT}/tao/x11/base/versionx11.h)
 else
-TAOX11_MAJOR_VERSION := $(shell awk '/TAOX11_MAJOR_VERSION/ { print $$3}' ${TAOX11_ROOT}/tao/x11/versionx11.h)
-TAOX11_MINOR_VERSION := $(shell awk '/TAOX11_MINOR_VERSION/ { print $$3}' ${TAOX11_ROOT}/tao/x11/versionx11.h)
-TAOX11_MICRO_VERSION := $(shell awk '/TAOX11_MICRO_VERSION/ { print $$3}' ${TAOX11_ROOT}/tao/x11/versionx11.h)
+TAOX11_MAJOR_VERSION := $(shell awk '/TAOX11_MAJOR_VERSION/ { print $$3}' ${TAOX11_ROOT}/tao/x11/base/versionx11.h)
+TAOX11_MINOR_VERSION := $(shell awk '/TAOX11_MINOR_VERSION/ { print $$3}' ${TAOX11_ROOT}/tao/x11/base/versionx11.h)
+TAOX11_MICRO_VERSION := $(shell awk '/TAOX11_MICRO_VERSION/ { print $$3}' ${TAOX11_ROOT}/tao/x11/base/versionx11.h)
 endif
 
 GNUACE_PROJECT_VERSION ?= $(TAOX11_MAJOR_VERSION).$(TAOX11_MINOR_VERSION).$(TAOX11_MICRO_VERSION)

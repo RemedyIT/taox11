@@ -17,7 +17,7 @@
 #if defined (TAOX11_HAS_VERSIONED_NAMESPACE) && TAOX11_HAS_VERSIONED_NAMESPACE == 1
 
 # ifndef TAOX11_VERSIONED_NAMESPACE_NAME
-#  include "tao/x11/versionx11.h"
+#  include "tao/x11/base/versionx11.h"
 
 // Preprocessor symbols will not be expanded if they are
 // concatenated.  Force the preprocessor to expand them during the

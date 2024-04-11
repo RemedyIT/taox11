@@ -14,8 +14,8 @@
 
 #include "ace/Service_Object.h"
 
-#include "tao/x11/tao_corba.h"
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/tao_corba.h"
+#include "tao/x11/base/stddef.h"
 
 #include "tao/x11/object_traits_t.h"
 #include "tao/x11/system_exception.h"

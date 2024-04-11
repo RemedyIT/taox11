@@ -14,7 +14,7 @@
 
 #include "ace/Service_Object.h"
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "tao/x11/valuetype/abstractbase_traits_t.h"
 #include "tao/x11/valuetype/valuetype_traits_t.h"
 

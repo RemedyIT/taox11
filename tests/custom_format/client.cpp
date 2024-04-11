@@ -8,7 +8,7 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-#include "tao/x11/idl_traits_t.h"
+#include "tao/x11/base/idl_traits_t.h"
 
 // X11_FUZZ: disable check_taox11_namespaces
 namespace TAOX11_NAMESPACE

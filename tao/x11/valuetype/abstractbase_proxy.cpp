@@ -7,7 +7,7 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/anytypecode/typecode.h"
 #include "tao/x11/valuetype/abstractbase_proxy.h"
 

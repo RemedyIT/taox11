@@ -10,7 +10,7 @@
 #ifndef TAOX11_BASIC_TRAITS_H_INCLUDED
 #define TAOX11_BASIC_TRAITS_H_INCLUDED
 
-#include "tao/x11/idl_traits_t.h"
+#include "tao/x11/base/idl_traits_t.h"
 
 namespace TAOX11_NAMESPACE
 {
@@ -411,7 +411,6 @@ namespace TAOX11_NAMESPACE
                           typename writer_t::formatter_t>::type;
       return IDL::traits<std::wstring>::write_on (os, w.val_, formatter_t ());
     }
-
   } // namespace IDL
 } // namespace TAOX11_NAMESPACE
 

@@ -27,8 +27,8 @@ module IDL
       def initialize(output = STDOUT, opts = {})
         super
         @default_pre_includes = [
-          'tao/x11/stddef.h',
-          'tao/x11/basic_traits.h'
+          'tao/x11/base/stddef.h',
+          'tao/x11/base/basic_traits.h'
         ]
 
         @default_pre_includes << 'tao/x11/corba.h' unless params[:gen_stub_proxy_source]
@@ -470,13 +470,13 @@ module IDL
         when IDL::Type::Fixed
           add_include('tao/x11/fixed_t.h')
         when IDL::Type::Sequence
-          add_include('tao/x11/bounded_vector_t.h') if idl_type.size.to_i.positive?
-          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/base/bounded_vector_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/base/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
           check_idl_type(idl_type.basetype)
         when IDL::Type::Map
           add_include('map')
-          add_include('tao/x11/bounded_map_t.h') if idl_type.size.to_i.positive?
-          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/base/bounded_map_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/base/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
           check_idl_type(idl_type.keytype)
           check_idl_type(idl_type.valuetype)
         when IDL::Type::Array
@@ -484,7 +484,7 @@ module IDL
         when IDL::Type::String,
              IDL::Type::WString
           add_include('tao/x11/bounded_string_t.h') if idl_type.size.to_i.positive?
-          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/base/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
           check_idl_type(idl_type)
         end
       end

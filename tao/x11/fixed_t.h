@@ -12,7 +12,7 @@
 #define __IDL_FIXED_T_H_INCLUDED__
 
 #include <string>
-#include "tao/x11/versioned_x11_namespace.h"
+#include "tao/x11/base/versioned_x11_namespace.h"
 
 namespace TAOX11_NAMESPACE
 {

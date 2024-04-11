@@ -28,8 +28,8 @@ module IDL
       def initialize(output = STDOUT, opts = {})
         super
         @default_pre_includes = [
-          'tao/x11/stddef.h',
-          'tao/x11/basic_traits.h',
+          'tao/x11/base/stddef.h',
+          'tao/x11/base/basic_traits.h',
           'tao/x11/corba.h',
           'tao/x11/system_exception.h'
         ]
