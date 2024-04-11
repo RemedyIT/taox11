@@ -71,7 +71,7 @@ module IDL
 
         if @object_traits_specializations
           # Object ref traits specializations
-          visit_proxy_object_ref_traits_specializations(parser) unless params[:no_client_proxy_hdr]
+          visit_proxy_object_ref_traits_specializations(parser) unless params[:no_stub_proxy_hdr]
         end
 
         # CDR operators

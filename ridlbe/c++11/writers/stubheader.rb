@@ -31,7 +31,7 @@ module IDL
           'tao/x11/basic_traits.h'
         ]
 
-        @default_pre_includes << 'tao/x11/corba.h' unless params[:gen_client_proxy_source]
+        @default_pre_includes << 'tao/x11/corba.h' unless params[:gen_stub_proxy_source]
         @default_post_includes = []
 
         unless params[:output_anytypecode_header]
@@ -449,8 +449,8 @@ module IDL
       end
 
       def enter_union(node)
-        add_include('tao/x11/system_exception.h') unless params[:gen_client_proxy_source]
-        add_pre_include('stdexcept') if params[:gen_client_proxy_source]
+        add_include('tao/x11/system_exception.h') unless params[:gen_stub_proxy_source]
+        add_pre_include('stdexcept') if params[:gen_stub_proxy_source]
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 

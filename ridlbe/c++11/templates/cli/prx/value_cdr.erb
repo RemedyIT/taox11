@@ -18,8 +18,8 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
 /// @name CDR streaming operator specializations for <%= scoped_cxxname %>
 //@{
-<%= client_proxy_export_macro %>TAO_CORBA::Boolean operator<< (TAO_OutputCDR&, <%= scoped_cxx_in_type %>);
-<%= client_proxy_export_macro %>TAO_CORBA::Boolean operator>> (TAO_InputCDR&, <%= scoped_cxx_out_type %>);
+<%= stub_proxy_export_macro %>TAO_CORBA::Boolean operator<< (TAO_OutputCDR&, <%= scoped_cxx_in_type %>);
+<%= stub_proxy_export_macro %>TAO_CORBA::Boolean operator>> (TAO_InputCDR&, <%= scoped_cxx_out_type %>);
 //@}
 
 TAO_END_VERSIONED_NAMESPACE_DECL

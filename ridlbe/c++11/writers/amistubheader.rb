@@ -90,8 +90,8 @@ module IDL
         visitor(PostVisitor) do |v|
           v.class_eval do
             ###
-            # Overload standard #client_proxy for this visitor instance
-            def client_proxy_hdr
+            # Overload standard #stub_proxy for this visitor instance
+            def stub_proxy_hdr
               File.basename(params[:idlfile], params[:idlext]) + params[:ami_pfx] + params[:stub_pfx] + params[:proxy_pfx] + '.h'
             end
           end

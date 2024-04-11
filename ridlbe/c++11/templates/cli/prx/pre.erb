@@ -19,8 +19,8 @@
 % post_includes.each do |incfile|
 #include "<%= incfile %>"
 % end
-%   if client_proxy_export_include?
-#include /**/ "<%= client_proxy_export_include %>"
+%   if stub_proxy_export_include?
+#include /**/ "<%= stub_proxy_export_include %>"
 %   end
 
 <%= taox11_version_check %>

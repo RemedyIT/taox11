@@ -1,8 +1,8 @@
 
 // generated from <%= ridl_template_path %>
-%unless no_client_proxy_hdr?
-#if !defined (TAOX11_DISABLE_INCLUDE_STUB_PROXY_HDR) && defined (__TAOX11_INCLUDE_STUB_PROXY__) && __has_include("<%= client_proxy_hdr %>")
-# include "<%= client_proxy_hdr %>"
+%unless no_stub_proxy_hdr?
+#if !defined (TAOX11_DISABLE_INCLUDE_STUB_PROXY_HDR) && defined (__TAOX11_INCLUDE_STUB_PROXY__) && __has_include("<%= stub_proxy_hdr %>")
+# include "<%= stub_proxy_hdr %>"
 #endif
 %end
 %if anytypecode_hdr?

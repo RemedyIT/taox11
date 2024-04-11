@@ -30,7 +30,7 @@ module IDL
 
         @default_pre_includes = []
         @default_post_includes = []
-        unless params[:no_cdr_streaming] || params[:gen_client_proxy_source]
+        unless params[:no_cdr_streaming] || params[:gen_stub_proxy_source]
           @default_pre_includes << 'tao/CDR.h'
           @default_post_includes << 'tao/x11/cdr_long_double.h'
         end
@@ -41,7 +41,7 @@ module IDL
         if params[:gen_any_ops] && !params[:gen_anytypecode_source]
           @default_pre_includes << 'tao/AnyTypeCode/Any_Impl_T.h'
         end
-        @default_post_includes << 'tao/x11/tao_corba.h' unless params[:gen_client_proxy_source]
+        @default_post_includes << 'tao/x11/tao_corba.h' unless params[:gen_stub_proxy_source]
         @default_post_includes << 'tao/x11/anytypecode/typecode.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
         @default_post_includes << 'tao/x11/anytypecode/typecode_impl.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
       end
@@ -56,7 +56,7 @@ module IDL
 
       def post_visit(parser)
         # stub proxy implementations
-        visit_proxy_implementation(parser) if @proxy_impl && !params[:gen_client_proxy_source]
+        visit_proxy_implementation(parser) if @proxy_impl && !params[:gen_stub_proxy_source]
 
         visit_anyops(parser) if params[:gen_any_ops] && !params[:gen_anytypecode_source]
 
@@ -65,11 +65,11 @@ module IDL
           visit_object_traits_specializations(parser)
 
           # Object ref traits specializations
-          visit_proxy_object_ref_traits_specializations(parser) unless params[:no_client_proxy_hdr] || params[:gen_client_proxy_source]
+          visit_proxy_object_ref_traits_specializations(parser) unless params[:no_stub_proxy_hdr] || params[:gen_stub_proxy_source]
         end
 
         # CDR operators
-        visit_cdr(parser) unless params[:gen_client_proxy_source]
+        visit_cdr(parser) unless params[:gen_stub_proxy_source]
 
         super
         visitor(PostVisitor).visit
@@ -176,7 +176,7 @@ module IDL
       end
 
       def visit_proxy_implementation(parser)
-          writer(StubProxySourceProxyImplWriter).visit_nodes(parser) unless params[:gen_client_proxy_source]
+          writer(StubProxySourceProxyImplWriter).visit_nodes(parser) unless params[:gen_stub_proxy_source]
       end
 
       def visit_proxy_object_ref_traits_specializations(parser)
@@ -381,21 +381,21 @@ module IDL
              IDL::Type::Boolean,
              IDL::Type::WChar,
              IDL::Type::Octet
-          add_include('tao/x11/special_basic_arguments.h') unless params[:no_cdr_streaming] || params[:gen_client_proxy_source]
+          add_include('tao/x11/special_basic_arguments.h') unless params[:no_cdr_streaming] || params[:gen_stub_proxy_source]
         when IDL::Type::LongDouble
-          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming] || params[:gen_client_proxy_source]
+          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming] || params[:gen_stub_proxy_source]
         when IDL::Type::Integer,
              IDL::Type::Double,
              IDL::Type::Float,
              IDL::Type::Void
-          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming] || params[:gen_client_proxy_source]
+          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming] || params[:gen_stub_proxy_source]
         when IDL::Type::String,
              IDL::Type::WString
-          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming] || params[:gen_client_proxy_source]
+          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming] || params[:gen_stub_proxy_source]
         when IDL::Type::Object,
              IDL::Type::Interface,
              IDL::Type::Component
-          add_include('tao/x11/stub_arg_traits.h') unless params[:no_cdr_streaming] || params[:gen_client_proxy_source]
+          add_include('tao/x11/stub_arg_traits.h') unless params[:no_cdr_streaming] || params[:gen_stub_proxy_source]
         when IDL::Type::Sequence
           # arg template included in P.h
           check_idl_type(idl_type.basetype)
