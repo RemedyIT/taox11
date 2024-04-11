@@ -18,6 +18,8 @@ main(int, char* [])
   int result {};
 
   Test::Bar mybar;
+  CORBA::Any a;
+  a <<= mybar;
 
   try
   {
