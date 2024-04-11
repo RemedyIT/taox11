@@ -80,8 +80,10 @@ module IDL
               'impl_export_file' => { description: "-Wb,impl_export_file=FILE\t\tSet implementation export file to generate for -Gxhimpl" },
               'anytypecode_export_macro' => { description: "-Wb,anytypecode_export_macro=MACRO\tSet export macro for Any ops and TypeCode" },
               'anytypecode_export_include' => { description: "-Wb,anytypecode_export_include=FILE\tSet export include file for Any ops and TypeCode" },
+              'anytypecode_export_file' => { description: "-Wb,anytypecode_export_file=FILE\t\tSet implementation export file to generate for -Gxhat" },
               'stub_proxy_export_macro' => { description: "-Wb,stub_proxy_export_macro=MACRO\tSet export macro for stub proxy files" },
               'stub_proxy_export_include' => { description: "-Wb,stub_proxy_export_include=FILE\tSet export include file for stub proxy files" },
+              'stub_proxy_export_file' => { description: "-Wb,stub_proxy_export_file=FILE\t\tSet implementation export file to generate for -Gxhcp" },
               'include_guard' => { description: "-Wb,include_guard=MACRO\t\tguard to prevent the generated client header file to be included" },
               'safe_include' => { description: "-Wb,safe_include=FILE\t\tinclude that should be used instead of the own generated client header file" },
               'unique_include' => { description: "-Wb,unique_include=FILE\t\tinclude that should be generated as only contents of the generated client header file" }
@@ -483,8 +485,8 @@ module IDL
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
-        options.client_proxy_export_macro = options.base_export_macro + '_STUB' + options.export_macro_pfx unless options.client_proxy_export_macro || options.base_export_macro.nil?
-        options.client_proxy_export_include = options.base_export_include + '_stub' + options.export_header_pfx unless options.client_proxy_export_include || options.base_export_include.nil?
+        options.client_proxy_export_macro = options.base_export_macro + '_CLIENT_PROXY' + options.export_macro_pfx unless options.client_proxy_export_macro || options.base_export_macro.nil?
+        options.client_proxy_export_include = options.base_export_include + '_client_proxy' + options.export_header_pfx unless options.client_proxy_export_include || options.base_export_include.nil?
       end
     end
 
@@ -496,8 +498,8 @@ module IDL
         end
         # only in case export header generation has been explicitly enabled will
         # we derive missing export parameters from base parameters
-        options.anytypecode_export_macro = options.base_export_macro + '_STUB' + options.export_macro_pfx unless options.anytypecode_export_macro || options.base_export_macro.nil?
-        options.anytypecode_export_include = options.base_export_include + '_stub' + options.export_header_pfx unless options.anytypecode_export_include || options.base_export_include.nil?
+        options.anytypecode_export_macro = options.base_export_macro + '_ANYTYPECODE' + options.export_macro_pfx unless options.anytypecode_export_macro || options.base_export_macro.nil?
+        options.anytypecode_export_include = options.base_export_include + '_anytypecode' + options.export_header_pfx unless options.anytypecode_export_include || options.base_export_include.nil?
       end
     end
 

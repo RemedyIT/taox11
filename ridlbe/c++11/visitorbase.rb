@@ -146,11 +146,11 @@ module IDL
       end
 
       def anytypecode_export_include?
-        !params[:anytypecode_export_include].nil?
+        !(params[:anytypecode_export_include] || params[:export_include]).nil?
       end
 
       def anytypecode_export_include
-        params[:anytypecode_export_include]
+        params[:anytypecode_export_include] || params[:export_include]
       end
 
       def anytypecode_export_macro
