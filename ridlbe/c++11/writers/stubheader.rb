@@ -483,7 +483,7 @@ module IDL
           check_idl_type(idl_type.basetype)
         when IDL::Type::String,
              IDL::Type::WString
-          add_include('tao/x11/bounded_string_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/base/bounded_string_t.h') if idl_type.size.to_i.positive?
           add_include('tao/x11/base/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
           check_idl_type(idl_type)
         end
