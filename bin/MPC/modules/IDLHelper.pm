@@ -82,9 +82,9 @@ sub get_output {
     }
   }
   if ($flags =~ /--Gxhcpr/) {
-    if ($flags =~ /-Wb,client_proxy_export_file=(\S*)/) {
+    if ($flags =~ /-Wb,stub_proxy_export_file=(\S*)/) {
       push(@out, $1);
-    } elsif ($flags =~ /-Wb,client_proxy_export_include=(\S*)/) {
+    } elsif ($flags =~ /-Wb,stub_proxy_export_include=(\S*)/) {
       push(@out, $1);
     }
   }
