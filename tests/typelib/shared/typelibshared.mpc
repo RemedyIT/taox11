@@ -1,6 +1,6 @@
 // -*- MPC -*-
 
-project(*typelibshared_gen_Idl): ridl_ostream_defaults {
+project(*typelibshared_gen_idl): ridl_ostream_defaults {
   idlflags += -Gcpc -Gatc -Gath -Wb,base_export_macro=TYPELIB -Wb,base_export_include=TYPELIB -Gxhat -Gxhcp
   idlflags -= -Sa -St
   IDL_Files {
@@ -9,17 +9,8 @@ project(*typelibshared_gen_Idl): ridl_ostream_defaults {
   custom_only = 1
 }
 
-project(*typelibshared_anytypecode): taox11_lib, taox11_anytypecode {
-  after += *typelibshared_gen_Idl
-  sharedname    = typelibshared_anytypecode
-  dynamicflags += TYPELIB_ANYTYPECODE_BUILD_DLL
-  Source_Files {
-    testA.cpp
-  }
-}
-
 project(*typelibshared_clientproxy): taox11_lib {
-  after += *typelibshared_gen_Idl
+  after += *typelibshared_gen_idl
   sharedname    = typelibshared_clientproxy
   dynamicflags += TYPELIB_CLIENT_PROXY_BUILD_DLL
   Source_Files {
@@ -27,8 +18,18 @@ project(*typelibshared_clientproxy): taox11_lib {
   }
 }
 
+project(*typelibshared_anytypecode): taox11_lib, taox11_anytypecode {
+  after += *typelibshared_gen_idl *typelibshared_clientproxy
+  sharedname    = typelibshared_anytypecode
+  dynamicflags += TYPELIB_ANYTYPECODE_BUILD_DLL
+  libs += typelibshared_clientproxy
+  Source_Files {
+    testA.cpp
+  }
+}
+
 project(*typelibshared_client): taox11_client, taox11_anytypecode {
-  after += *typelibshared_gen_Idl *typelibshared_clientproxy *typelibshared_anytypecode
+  after += *typelibshared_gen_idl *typelibshared_clientproxy *typelibshared_anytypecode
   libs += typelibshared_anytypecode typelibshared_clientproxy
   Source_Files {
     client.cpp
