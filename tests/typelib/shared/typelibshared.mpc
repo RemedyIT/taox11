@@ -27,9 +27,9 @@ project(*typelibshared_clientproxy): taox11_lib {
   }
 }
 
-project(*typelibshared_taox11_Client): taox11_client, taox11_anytypecode {
+project(*typelibshared_client): taox11_client, taox11_anytypecode {
   after += *typelibshared_gen_Idl *typelibshared_clientproxy *typelibshared_anytypecode
-  libs += typelibshared_clientproxy typelibshared_anytypecode
+  libs += typelibshared_anytypecode typelibshared_clientproxy
   Source_Files {
     client.cpp
   }
