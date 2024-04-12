@@ -25,6 +25,14 @@ namespace std
     return _os << "\"" << conv.to_bytes(_v) << "\"";
   }
 
+  /// std::wstring_view to ostream insertion
+  inline std::ostream&
+  operator<< (std::ostream& _os, const std::wstring_view& _v)
+  {
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
+    return _os << "\"" << conv.to_bytes(_v.data()) << "\"";
+  }
+
   /// wchar_t to ostream insertion
   inline std::ostream&
   operator<< (std::ostream& _os, const wchar_t& _v)
