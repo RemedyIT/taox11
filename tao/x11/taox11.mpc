@@ -290,8 +290,8 @@ project(taox11) : taox11_defaults, taolib {
     basic_arguments.h
     base/basic_traits.h
     base/bounded_map_t.h
-    bounded_string_t.h
-    bounded_type_traits_t.h
+    base/bounded_string_t.h
+    base/bounded_type_traits_t.h
     base/bounded_vector_t.h
     cdr_long_double.h
     corba.h
