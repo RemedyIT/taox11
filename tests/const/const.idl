@@ -5,7 +5,12 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-/// Put the interfaces in a module, to avoid global namespace pollution
+typedef fixed<10,3> fixed_type;
+typedef fixed<20,3> large_type;
+typedef fixed<10,2> second_fixed_type;
+typedef fixed<7,6> pi_type;
+const pi_type pi_double = 3.142857;
+
 module Test
 {
   const char ch_val = 'a';
@@ -47,6 +52,9 @@ module Test
   const long long_e12 = +long_e11;
   const long long_e13 = -long_e12;
   const long long_e14 = ~long_e13;
+
+  typedef fixed<7,6> pi_type;
+  const pi_type pi = 3.142857;
 };
 
 interface A
@@ -55,5 +63,11 @@ interface A
 
   typedef string<5> bounded_string;
   const bounded_string bstr = "12345";
+
+  const large_type large = 3.142857;
+  const pi_type pi_fixed = 3.142857;
+
+  typedef fixed<5,5> f_type;
+  const f_type five = 12345;
 };
 
