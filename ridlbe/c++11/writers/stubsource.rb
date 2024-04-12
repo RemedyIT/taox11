@@ -75,24 +75,6 @@ module IDL
         visitor(PostVisitor).visit
       end
 
-      def visit_const(node)
-        unless node.enclosure.is_a?(IDL::AST::Module)
-          case node.idltype.resolved_type
-          when IDL::Type::Fixed
-            println
-            printiln('// generated from StubSourceWriter#visit_const')
-            printi("const #{node.idltype.cxx_type} ")
-            println(node.enclosure.cxxname + '::' + node.cxxname + ' {"' + expression_to_s(node.expression, node.enclosure) + '"};')
-          end
-          if [Type::String, Type::WString].include?(node.expression.idltype.class)
-            println
-            printiln('// generated from StubSourceWriter#visit_const')
-            printi("const #{node.idltype.cxx_type} ")
-            println(node.enclosure.cxxname + '::' + node.cxxname + ' {' + expression_to_s(node.expression, node.enclosure) + '};')
-          end
-        end
-      end
-
       def enter_module(node)
         super
         println

@@ -729,8 +729,6 @@ module IDL
 
       def enter_interface(node)
         return unless needs_ami_generation?(node)
-
-        ami_interface.visit_amic_pre(node)
       end
 
       def leave_interface(node)

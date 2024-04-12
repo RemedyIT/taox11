@@ -268,7 +268,7 @@ module IDL
           if node.enclosure.is_a?(IDL::AST::Module)
             printi("const #{node.idltype.cxx_type(node.enclosure)} ")
           else
-            printi("static const #{node.idltype.cxx_type(node.enclosure)} ")
+            printi("static inline const #{node.idltype.cxx_type(node.enclosure)} ")
           end
         else
           if node.enclosure.is_a?(IDL::AST::Module)
@@ -281,25 +281,20 @@ module IDL
           else
             case node.idltype.resolved_type
             when IDL::Type::Fixed
-              printi("static const #{node.idltype.cxx_type(node.enclosure)} ")
+              printi("static inline const #{node.idltype.cxx_type(node.enclosure)} ")
             else
               printi("static constexpr #{node.idltype.cxx_type(node.enclosure)} ")
             end
           end
         end
-        if node.enclosure.is_a?(IDL::AST::Module) || ![Type::String, Type::WString].include?(node.expression.idltype.class)
+        if node.enclosure.is_a?(IDL::AST::Module)
           if node.expression.is_a?(IDL::Expression::Value)
-            case node.idltype.resolved_type
-            when IDL::Type::Fixed
-              println("#{node.cxxname};")
-            else
-              println("#{node.cxxname} {#{node.idltype.resolved_type.value_to_s(node.value)}};")
-            end
+            println("#{node.cxxname} {#{node.idltype.resolved_type.value_to_s(node.value)}};")
           else
             println("#{node.cxxname} = #{expression_to_s(node.expression, node.enclosure)};")
           end
         else
-          println(node.cxxname + ';')
+          println("#{node.cxxname} {#{expression_to_s(node.expression, node.enclosure)}};")
         end
       end
 
