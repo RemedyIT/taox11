@@ -52,13 +52,13 @@ main(int argc, char* argv[])
     {
       TAOX11_TEST_DEBUG << "Test string type." << std::endl;
       std::string getText = hello->get_string ();
-      if (getText != "Hello there!")
+      if (getText != test_string)
       {
         TAOX11_TEST_ERROR << "ERROR: hello->get_string() returned an unexpected value. "
-          << "expected <Hello there!>, received <" << getText << ">" << std::endl;
+          << "expected <" << test_string << ">, received <" << getText << ">" << std::endl;
         ++result;
       }
-      hello->set_string ("Hello there!");
+      hello->set_string (test_string);
     }
 
     {
@@ -75,7 +75,7 @@ main(int argc, char* argv[])
 
     {
       TAOX11_TEST_DEBUG << "Test string type inout parameter." << std::endl;
-      std::string inoutText = "Hello there!";
+      std::string inoutText = test_string;
       hello->inout_string (inoutText);
       if (inoutText != "I hear you!")
       {
