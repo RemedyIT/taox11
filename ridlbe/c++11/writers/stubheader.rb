@@ -501,7 +501,7 @@ module IDL
           add_post_include('tao/x11/valuetype/abstract_base.h')
         when IDL::Type::WString,
              IDL::Type::WChar
-          add_post_include('tao/x11/wstringwchar_ostream.h') if params[:gen_ostream_operators]
+          add_post_include('tao/x11/base/wstringwchar_ostream.h') if params[:gen_ostream_operators]
         end
       end
 

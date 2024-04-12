@@ -339,7 +339,7 @@ project(taox11) : taox11_defaults, taolib {
     valuetype_adapter.h
     base/versioned_x11_namespace.h
     base/versionx11.h
-    wstringwchar_ostream.h
+    base/wstringwchar_ostream.h
   }
 
   Header_Files {
