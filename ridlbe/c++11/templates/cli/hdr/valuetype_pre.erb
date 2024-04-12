@@ -47,7 +47,7 @@ protected:
 % end
   using _shared_ptr_type = std::shared_ptr<<%= cxxname %>>;
 
-  static const std::string __<%= cxxname.downcase %>_repository_id;
+  static inline const std::string __<%= cxxname.downcase %>_repository_id {"<%= repository_id %>"};
 
 % if is_truncatable?
   <%= cxxname %> ();
