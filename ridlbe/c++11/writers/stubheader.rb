@@ -322,15 +322,6 @@ module IDL
       end
 
       def visit_includes(parser)
-        # unless params[:gen_anytypecode_header]
-        #   writer(AnyTypeCodeHeaderIncludeWriter,
-        #         { default_pre_includes: @default_pre_includes,
-        #           default_post_includes: @default_post_includes }) do |w|
-        #     w.visit_nodes(parser)
-        #     @default_pre_includes = w.default_pre_includes
-        #     @default_post_includes = w.default_post_includes
-        #   end
-        # end
         writer(StubHeaderIncludeWriter,
                { default_pre_includes: @default_pre_includes,
                  default_post_includes: @default_post_includes }) do |w|
