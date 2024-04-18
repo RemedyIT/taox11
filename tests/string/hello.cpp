@@ -20,16 +20,16 @@ Hello::Hello (IDL::traits<CORBA::ORB>::ref_type orb, int& result)
 std::string
 Hello::get_string ()
 {
-  return "Hello there!";
+  return test_string;
 }
 
 void
 Hello::set_string (const std::string& text)
 {
-  if (text != "Hello there!")
+  if (text != test_string)
   {
     TAOX11_TEST_ERROR << "ERROR: Hello::set_string received an unexpected value. "
-      << "expected <Hello there!>, received <" << text <<">" << std::endl;
+      << "expected <" << test_string << ">, received <" << text <<">" << std::endl;
     ++this->result_;
   }
 }
@@ -43,10 +43,10 @@ Hello::out_string (std::string& text)
 void
 Hello::inout_string (std::string& text)
 {
-  if (text != "Hello there!")
+  if (text != test_string)
   {
     TAOX11_TEST_ERROR << "ERROR: Hello::inout_string received an unexpected value. "
-      << "expected <Hello there!>, received <" << text << ">" << std::endl;
+      << "expected <" << test_string << "!>, received <" << text << ">" << std::endl;
     ++this->result_;
   }
   text = "I hear you!";

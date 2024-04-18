@@ -8,6 +8,7 @@
 #include "orb.idl"
 
 const string name = "testing";
+const string test_string = "Hello there!";
 
 /// Put the interfaces in a module, to avoid global namespace pollution
 module Test
