@@ -159,6 +159,8 @@ TAOX11 is using at least the following {cxx11} features
 * Variadic templates
 * Explicitly defaulted and deleted special member functions
 * Lambdas
+* Static inline constants
+* `std::optional`
 
 === Compilation
 
