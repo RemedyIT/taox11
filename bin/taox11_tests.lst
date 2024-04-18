@@ -178,6 +178,7 @@ tests/timebase/run_test.pl:
 tests/typecode/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
 tests/typecode_adapter/orb_create/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
 tests/typecode_adapter/resolve_ref/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
+tests/typelib/nocpp/run_test.pl:
 tests/typelib/shared/run_test.pl:
 tests/typelib/stdlib/run_test.pl:
 tests/typelib/taox11/run_test.pl:
