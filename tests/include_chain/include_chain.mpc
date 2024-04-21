@@ -5,7 +5,7 @@ project(*x11_Idl): ridl_ostream_defaults, taox11_anytypecode {
     a.idl
   }
   IDL_Files {
-    idlflags += -Scp
+    idlflags += -Scph
     b.idl
   }
   IDL_Files {

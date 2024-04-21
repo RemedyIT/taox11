@@ -15,11 +15,11 @@
 
 #include /**/ "ace/config-all.h"
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "tao/x11/system_exception.h"
 #include "tao/x11/object_fwd.h"
-#include "tao/x11/basic_traits.h"
-#include "tao/x11/taox11_export.h"
+#include "tao/x11/base/basic_traits.h"
+#include "tao/x11/base/taox11_export.h"
 
 #include "tao/x11/anytypecode/any_impl.h"
 #include "tao/x11/anytypecode/typecode_ref.h"

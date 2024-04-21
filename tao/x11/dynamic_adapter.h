@@ -14,7 +14,7 @@
 
 #include "ace/Service_Object.h"
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "tao/x11/object_traits_t.h"
 
 #if !defined (CORBA_E_COMPACT) && !defined (CORBA_E_MICRO)

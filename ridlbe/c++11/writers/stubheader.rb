@@ -27,22 +27,24 @@ module IDL
       def initialize(output = STDOUT, opts = {})
         super
         @default_pre_includes = [
-          'tao/x11/stddef.h',
-          'tao/x11/basic_traits.h',
-          'tao/x11/corba.h'
+          'tao/x11/base/stddef.h',
+          'tao/x11/base/basic_traits.h'
         ]
 
-        @default_pre_includes << 'tao/x11/orb.h' unless params[:no_orb_include]
+        @default_pre_includes << 'tao/x11/corba.h' unless params[:gen_stub_proxy_source]
         @default_post_includes = []
-        @default_post_includes << 'tao/x11/anytypecode/any.h' if params[:gen_any_ops]
-        if params[:gen_typecodes]
-          if params[:gen_anytypecode_source]
-            @default_post_includes << 'tao/x11/anytypecode/typecode_ref.h'
-          else
-            @default_post_includes << 'tao/x11/anytypecode/typecode.h'
+
+        unless params[:output_anytypecode_header]
+          @default_post_includes << 'tao/x11/anytypecode/any.h' if params[:gen_any_ops]
+          if params[:gen_typecodes]
+            if params[:gen_anytypecode_source]
+              @default_post_includes << 'tao/x11/anytypecode/typecode_ref.h'
+            else
+              @default_post_includes << 'tao/x11/anytypecode/typecode.h'
+            end
           end
+          @default_post_includes << 'tao/x11/anytypecode/typecode_constants.h' if params[:gen_typecodes]
         end
-        @default_post_includes << 'tao/x11/anytypecode/typecode_constants.h' if params[:gen_typecodes]
 
         @include_guard = "__RIDL_#{File.basename(params[:output] || '').to_random_include_guard}_INCLUDED__"
 
@@ -329,11 +331,11 @@ module IDL
       end
 
       def visit_anyops(parser)
-        writer(StubHeaderAnyOpWriter).visit_nodes(parser)
+        writer(StubHeaderAnyOpWriter).visit_nodes(parser) unless params[:gen_anytypecode_header]
       end
 
       def visit_typecodes(parser)
-        writer(StubHeaderTypecodeWriter).visit_nodes(parser)
+        writer(StubHeaderTypecodeWriter).visit_nodes(parser) unless params[:gen_anytypecode_header]
       end
 
       def visit_idl_traits(parser)
@@ -381,6 +383,8 @@ module IDL
 
       def enter_interface(node)
         return if node.is_pseudo?
+
+        add_pre_include('tao/x11/orb.h') unless params[:no_orb_include]
 
         add_post_include('tao/x11/object_ostream.h')
 
@@ -431,7 +435,8 @@ module IDL
       end
 
       def enter_union(node)
-        add_include('tao/x11/system_exception.h')
+        add_include('tao/x11/system_exception.h') unless params[:gen_stub_proxy_source]
+        add_pre_include('stdexcept') if params[:gen_stub_proxy_source]
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
@@ -451,21 +456,21 @@ module IDL
         when IDL::Type::Fixed
           add_include('tao/x11/fixed_t.h')
         when IDL::Type::Sequence
-          add_include('tao/x11/bounded_vector_t.h') if idl_type.size.to_i.positive?
-          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/base/bounded_vector_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/base/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
           check_idl_type(idl_type.basetype)
         when IDL::Type::Map
           add_include('map')
-          add_include('tao/x11/bounded_map_t.h') if idl_type.size.to_i.positive?
-          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/base/bounded_map_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/base/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
           check_idl_type(idl_type.keytype)
           check_idl_type(idl_type.valuetype)
         when IDL::Type::Array
           check_idl_type(idl_type.basetype)
         when IDL::Type::String,
              IDL::Type::WString
-          add_include('tao/x11/bounded_string_t.h') if idl_type.size.to_i.positive?
-          add_include('tao/x11/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/base/bounded_string_t.h') if idl_type.size.to_i.positive?
+          add_include('tao/x11/base/bounded_type_traits_t.h') if idl_type.size.to_i.positive?
           check_idl_type(idl_type)
         end
       end
@@ -487,7 +492,7 @@ module IDL
           add_post_include('tao/x11/valuetype/abstract_base.h')
         when IDL::Type::WString,
              IDL::Type::WChar
-          add_post_include('tao/x11/wstringwchar_ostream.h') if params[:gen_ostream_operators]
+          add_post_include('tao/x11/base/wstringwchar_ostream.h') if params[:gen_ostream_operators]
         end
       end
 
@@ -497,6 +502,10 @@ module IDL
 
       def add_post_include(inc_file)
         @default_post_includes << inc_file unless @default_post_includes.include?(inc_file)
+      end
+
+      def add_pre_include(inc_file)
+        @default_pre_includes << inc_file unless @default_pre_includes.include?(inc_file)
       end
     end
 

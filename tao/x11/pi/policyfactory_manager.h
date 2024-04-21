@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include /**/ "tao/x11/pre.h"
+#include /**/ "tao/x11/base/pre.h"
 
 #include "ace/Service_Config.h"
 #include "tao/x11/pi/taox11_pi_export.h"
@@ -48,7 +48,7 @@ namespace TAOX11_NAMESPACE
 
 #endif
 
-#include /**/ "tao/x11/post.h"
+#include /**/ "tao/x11/base/post.h"
 
 #endif /* TAOX11_POLICYFACTORY_MANAGER_INCLUDED */
 

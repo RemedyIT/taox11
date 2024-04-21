@@ -15,7 +15,7 @@
 
 #include /**/ "ace/config-all.h"
 
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 
 #include "tao/x11/sequence_cdr_t.h"
 #include "tao/x11/anytypecode/VisibilityC.h"

@@ -25,9 +25,14 @@ module IDL
         # Object traits are only required for interfaces and valuetypes
         @object_traits_specializations = false
 
+        # Proxy implementation is only required for interfaces
+        @proxy_impl = false
+
         @default_pre_includes = []
-        unless params[:no_cdr_streaming]
+        @default_post_includes = []
+        unless params[:no_cdr_streaming] || params[:gen_stub_proxy_source]
           @default_pre_includes << 'tao/CDR.h'
+          @default_post_includes << 'tao/x11/cdr_long_double.h'
         end
         if params[:gen_typecodes] && !params[:gen_anytypecode_source]
           @default_pre_includes << 'tao/AnyTypeCode/TypeCode.h'
@@ -36,9 +41,7 @@ module IDL
         if params[:gen_any_ops] && !params[:gen_anytypecode_source]
           @default_pre_includes << 'tao/AnyTypeCode/Any_Impl_T.h'
         end
-        @default_post_includes = [
-          'tao/x11/tao_corba.h'
-        ]
+        @default_post_includes << 'tao/x11/base/tao_corba.h' unless params[:gen_stub_proxy_source]
         @default_post_includes << 'tao/x11/anytypecode/typecode.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
         @default_post_includes << 'tao/x11/anytypecode/typecode_impl.h' if (params[:gen_typecodes] || params[:gen_any_ops]) && !params[:gen_anytypecode_source]
       end
@@ -53,7 +56,7 @@ module IDL
 
       def post_visit(parser)
         # stub proxy implementations
-        visit_proxy(parser) unless params[:no_client_proxy]
+        visit_proxy_implementation(parser) if @proxy_impl && !params[:gen_stub_proxy_source]
 
         visit_anyops(parser) if params[:gen_any_ops] && !params[:gen_anytypecode_source]
 
@@ -62,11 +65,11 @@ module IDL
           visit_object_traits_specializations(parser)
 
           # Object ref traits specializations
-          visit_proxy_object_ref_traits_specializations(parser) unless params[:no_client_proxy]
+          visit_proxy_object_ref_traits_specializations(parser) unless params[:no_stub_proxy_hdr] || params[:gen_stub_proxy_source]
         end
 
         # CDR operators
-        visit_cdr(parser) unless params[:no_cdr_streaming]
+        visit_cdr(parser) unless params[:gen_stub_proxy_source]
 
         super
         visitor(PostVisitor).visit
@@ -89,8 +92,13 @@ module IDL
       end
 
       def enter_interface(node)
-        @object_traits_specializations = true
         return if node.is_abstract?
+
+        if !node.is_local? && !node.is_pseudo? && !node.is_abstract?
+          @proxy_impl = true
+        end
+
+        @object_traits_specializations = true
 
         visitor(InterfaceVisitor).visit_pre(node)
       end
@@ -141,10 +149,6 @@ module IDL
                  default_post_includes: @default_post_includes }).visit_nodes(parser)
       end
 
-      def visit_proxy(parser)
-        writer(StubProxySourceWriter).visit_nodes(parser) unless params[:no_client_proxy]
-      end
-
       def visit_anyops(parser)
         writer(StubSourceAnyOpWriter).visit_nodes(parser)
       end
@@ -153,16 +157,20 @@ module IDL
         writer(StubSourceObjTraitsWriter).visit_nodes(parser)
       end
 
+      def visit_proxy_implementation(parser)
+          writer(StubProxySourceProxyImplWriter).visit_nodes(parser) unless params[:gen_stub_proxy_source]
+      end
+
       def visit_proxy_object_ref_traits_specializations(parser)
         writer(StubSourceProxyObjRefTraitsWriter).visit_nodes(parser)
       end
 
-      def visit_cdr(parser)
-        writer(StubSourceCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming]
-      end
-
       def visit_typecodes(parser)
         writer(StubSourceTypecodeWriter).visit_nodes(parser)
+      end
+
+      def visit_cdr(parser)
+        writer(StubProxySourceCDRWriter).visit_nodes(parser) unless params[:no_cdr_streaming]
       end
     end # StubSourceWriter
 
@@ -188,6 +196,8 @@ module IDL
         properties[:pre_includes] = @default_pre_includes
         properties[:post_includes] = @default_post_includes
         properties[:includes] = @includes
+        visitor(HeaderVisitor).visit
+        visitor(IncludeStubProxyDefineVisitor).visit
         visitor(PreVisitor).visit
       end
 
@@ -202,6 +212,7 @@ module IDL
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
 
         add_post_include('tao/x11/objproxy.h')
+
         check_idl_type(node.idltype)
       end
 
@@ -352,21 +363,21 @@ module IDL
              IDL::Type::Boolean,
              IDL::Type::WChar,
              IDL::Type::Octet
-          add_include('tao/x11/special_basic_arguments.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/special_basic_arguments.h') unless params[:no_cdr_streaming] || params[:gen_stub_proxy_source]
         when IDL::Type::LongDouble
-          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming] || params[:gen_stub_proxy_source]
         when IDL::Type::Integer,
              IDL::Type::Double,
              IDL::Type::Float,
              IDL::Type::Void
-          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming] || params[:gen_stub_proxy_source]
         when IDL::Type::String,
              IDL::Type::WString
-          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming] || params[:gen_stub_proxy_source]
         when IDL::Type::Object,
              IDL::Type::Interface,
              IDL::Type::Component
-          add_include('tao/x11/stub_arg_traits.h') unless params[:no_cdr_streaming]
+          add_include('tao/x11/stub_arg_traits.h') unless params[:no_cdr_streaming] || params[:gen_stub_proxy_source]
         when IDL::Type::Sequence
           # arg template included in P.h
           check_idl_type(idl_type.basetype)
@@ -401,36 +412,6 @@ module IDL
       end
     end
 
-    class StubProxySourceWriter < StubSourceBaseWriter
-      def initialize(output = STDOUT, opts = {})
-        super
-      end
-
-      def enter_module(node)
-        super
-        println
-        printiln('// generated from StubProxySourceWriter#enter_module')
-        printiln('namespace ' + node.cxxname)
-        printiln('{')
-        inc_nest
-      end
-
-      def leave_module(node)
-        dec_nest
-        printiln("} // namespace #{node.cxxname}")
-        println
-        super
-      end
-
-      def enter_interface(node)
-        super
-        return if node.is_local? || node.is_pseudo? || node.is_abstract?
-
-        visitor(InterfaceVisitor).visit_proxy(node)
-        println
-      end
-    end # StubProxySourceWriter
-
     class StubSourceObjTraitsWriter < StubSourceBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
@@ -464,113 +445,6 @@ module IDL
       end
     end
 
-    class StubSourceProxyObjRefTraitsWriter < StubSourceBaseWriter
-      def initialize(output = STDOUT, opts = {})
-        super
-      end
-
-      def pre_visit(_parser)
-        println
-        printiln('// generated from StubSourceProxyObjRefTraitsWriter#pre_visit')
-      end
-
-      def post_visit(parser); end
-
-      def enter_interface(node)
-        return if node.is_local? || node.is_pseudo? || node.is_abstract?
-
-        visitor(InterfaceVisitor).visit_object_ref_traits(node)
-      end
-    end
-
-    class StubSourceCDRWriter < StubSourceBaseWriter
-      def initialize(output = STDOUT, opts = {})
-        super
-        # CDR operators are generated outside the scopes of the IDL defined types
-        # in a common naming scope so do not track scopes such that all typenames
-        # will always be generated fully scoped.
-        self.disable_scope_tracking = true
-      end
-
-      def pre_visit(parser)
-        super
-        printiln('// generated from StubSourceCDRWriter#pre_visit')
-        println('TAO_BEGIN_VERSIONED_NAMESPACE_DECL')
-      end
-
-      def post_visit(parser)
-        println
-        println('TAO_END_VERSIONED_NAMESPACE_DECL')
-        super
-      end
-
-      def enter_interface(node)
-        return if node.is_local? || node.is_pseudo? || params[:no_cdr_streaming]
-
-        visitor(InterfaceVisitor).visit_cdr(node)
-      end
-
-      def enter_valuetype(node)
-        return if node.is_local? || params[:no_cdr_streaming]
-
-        visitor(ValuetypeVisitor).visit_cdr(node)
-      end
-
-      def visit_valuebox(node)
-        return if node.is_local? || params[:no_cdr_streaming]
-
-        visitor(ValueboxVisitor).visit_cdr(node)
-      end
-
-      def enter_struct(node)
-        return if node.is_local? || params[:no_cdr_streaming]
-
-        visitor(StructVisitor).visit_cdr(node)
-      end
-
-      def enter_union(node)
-        return if node.is_local? || params[:no_cdr_streaming]
-
-        visitor(UnionVisitor).visit_cdr(node)
-      end
-
-      def enter_exception(node)
-        return if params[:no_cdr_streaming]
-
-        visitor(ExceptionVisitor).visit_cdr(node)
-      end
-
-      def visit_enum(node)
-        return if params[:no_cdr_streaming]
-
-        visitor(EnumVisitor).visit_cdr(node)
-      end
-
-      def visit_bitmask(node)
-        return if params[:no_cdr_streaming]
-
-        visitor(BitmaskVisitor).visit_cdr(node)
-      end
-
-      def visit_bitset(node)
-        return if params[:no_cdr_streaming]
-
-        visitor(BitsetVisitor).visit_cdr(node)
-      end
-
-      def visit_typedef(node)
-        return if node.is_local? || params[:no_cdr_streaming]
-        # nothing to do if this is just an alias for another defined type
-        return if node.idltype.is_a?(IDL::Type::ScopedName) || node.idltype.resolved_type.is_standard_type?
-
-        idl_type = node.idltype.resolved_type
-        case idl_type
-        when IDL::Type::String, IDL::Type::WString
-          visitor(StringVisitor).visit_cdr(node) # only bounded, unbounded is standard_type
-        end
-      end
-    end # StubProxySourceCDRWriter
-
     class StubSourceAnyOpWriter < StubSourceBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
@@ -587,8 +461,7 @@ module IDL
 
       def post_visit(parser)
         dec_nest
-        println
-        println('  } // namespace TAOX11_NAMESPACE::CORBA')
+        println('} // namespace TAOX11_NAMESPACE::CORBA')
         super
       end
 

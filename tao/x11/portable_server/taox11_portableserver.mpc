@@ -53,7 +53,7 @@ project(taox11_portableserver_idl) : ridl_core_defaults, install, pidl_install {
     $(TAO_ROOT)/tao/PortableServer/PortableServer.pidl
   }
   IDL_Files {
-    idlflags += -Scp -Sna
+    idlflags += -Scph -Sna
     idlflags += -Wb,add_post_include=tao/x11/portable_server/servant_forward.h
     idlflags -= -Sa -St
     gendir = .

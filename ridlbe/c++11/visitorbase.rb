@@ -33,12 +33,28 @@ module IDL
         params[:no_client_inline]
       end
 
-      def client_proxy
-        File.basename(params[:output_prx] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + params[:proxy_pfx] + '.h'))
+      def anytypecode_hdr
+        File.basename(params[:output_anytypecode_header] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + params[:anytypecode_pfx] + '.h'))
       end
 
-      def no_client_proxy?
-        params[:no_client_proxy] && params[:ami_stub_output_prx].nil?
+      def stub_proxy_hdr
+        File.basename(params[:output_stub_proxy_header] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + params[:proxy_pfx] + '.h'))
+      end
+
+      def stub_proxy_source
+        File.basename(params[:output_stub_proxy_source] || (File.basename(params[:idlfile], params[:idlext]) + params[:stub_pfx] + params[:proxy_pfx] + '.cpp'))
+      end
+
+      def no_stub_proxy_hdr?
+        params[:no_stub_proxy_hdr] && params[:ami_stub_output_prx].nil?
+      end
+
+      def stub_proxy_src?
+        params[:gen_stub_proxy_source]
+      end
+
+      def anytypecode_hdr?
+        params[:gen_anytypecode_header]
       end
 
       def client_source
@@ -130,15 +146,27 @@ module IDL
       end
 
       def anytypecode_export_include?
-        !params[:anytypecode_export_include].nil?
+        !(params[:anytypecode_export_include] || params[:export_include]).nil?
       end
 
       def anytypecode_export_include
-        params[:anytypecode_export_include]
+        params[:anytypecode_export_include] || params[:export_include]
       end
 
       def anytypecode_export_macro
         params[:anytypecode_export_macro] ? params[:anytypecode_export_macro] + ' ' : self.stub_export_macro
+      end
+
+      def stub_proxy_export_include?
+        !params[:stub_proxy_export_include].nil?
+      end
+
+      def stub_proxy_export_include
+        params[:stub_proxy_export_include]
+      end
+
+      def stub_proxy_export_macro
+        params[:stub_proxy_export_macro] ? params[:stub_proxy_export_macro] + ' ' : self.stub_export_macro
       end
 
       def skel_export_include?

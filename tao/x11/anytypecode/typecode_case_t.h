@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/AnyTypeCode/TypeCode.h"
 #include "tao/AnyTypeCode/TypeCode_Case_Base_T.h"
 

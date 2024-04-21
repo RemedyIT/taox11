@@ -7,7 +7,7 @@
 #ifndef GENERIC_SERVANT_EXPORT_H
 #define GENERIC_SERVANT_EXPORT_H
 
-#include "tao/x11/taox11_export_macros.h"
+#include "tao/x11/base/taox11_export_macros.h"
 
 #if defined (TAOX11_AS_STATIC_LIBS)
 #  if !defined (GENERIC_SERVANT_HAS_DLL)

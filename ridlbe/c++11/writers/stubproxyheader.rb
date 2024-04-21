@@ -1,8 +1,8 @@
 #--------------------------------------------------------------------
-# @file    stubproxy.rb
+# @file    stubproxyheader.rb
 # @author  Martin Corino
 #
-# @brief   walker class for stub header
+# @brief   walker class for stub proxy header
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
 #--------------------------------------------------------------------
@@ -30,8 +30,10 @@ module IDL
         @default_post_includes = []
       end
 
+      @object_varout = false
+
       def visit_nodes(parser)
-        @include_guard = "__RIDL_#{File.basename(params[:output_prx] || '').to_random_include_guard}_INCLUDED__"
+        @include_guard = "__RIDL_#{File.basename(params[:output_stub_proxy_header] || '').to_random_include_guard}_INCLUDED__"
         super
         visitor(PostVisitor).visit
       end
@@ -73,6 +75,9 @@ module IDL
         super
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
 
+        # varout generation is only necessary for interfaces
+        @object_varout = true
+
         println
         printiln('// generated from StubProxyHeaderWriter#enter_interface')
         visitor(InterfaceVisitor).visit_pre(node)
@@ -101,7 +106,7 @@ module IDL
       end
 
       def visit_obj_var_out_specializations(parser)
-        writer(StubProxyHeaderVarOutWriter).visit_nodes(parser)
+        writer(StubProxyHeaderVarOutWriter).visit_nodes(parser) if @object_varout
       end
 
       def visit_obj_ref_traits_specializations(parser)

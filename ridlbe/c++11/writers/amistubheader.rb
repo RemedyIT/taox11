@@ -28,8 +28,8 @@ module IDL
       def initialize(output = STDOUT, opts = {})
         super
         @default_pre_includes = [
-          'tao/x11/stddef.h',
-          'tao/x11/basic_traits.h',
+          'tao/x11/base/stddef.h',
+          'tao/x11/base/basic_traits.h',
           'tao/x11/corba.h',
           'tao/x11/system_exception.h'
         ]
@@ -90,8 +90,8 @@ module IDL
         visitor(PostVisitor) do |v|
           v.class_eval do
             ###
-            # Overload standard #client_proxy for this visitor instance
-            def client_proxy
+            # Overload standard #stub_proxy for this visitor instance
+            def stub_proxy_hdr
               File.basename(params[:idlfile], params[:idlext]) + params[:ami_pfx] + params[:stub_pfx] + params[:proxy_pfx] + '.h'
             end
           end

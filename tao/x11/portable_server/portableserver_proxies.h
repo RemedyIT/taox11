@@ -17,12 +17,12 @@
 #include "tao/PortableServer/ServantActivatorC.h"
 #include "tao/PortableServer/Non_Servant_Upcall.h"
 
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 
 #define TAO_PORTABLE_SERVER \
   TAO_VERSIONED_NAMESPACE_NAME::PortableServer
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 
 namespace TAOX11_NAMESPACE
 {

@@ -17,8 +17,10 @@
 #include "<%= incfile %>"
 % end
 % post_includes.each do |incfile|
-
 #include "<%= incfile %>"
 % end
+%   if stub_proxy_export_include?
+#include /**/ "<%= stub_proxy_export_include %>"
+%   end
 
 <%= taox11_version_check %>

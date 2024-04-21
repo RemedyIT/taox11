@@ -13,7 +13,7 @@
 
 #include /**/ "ace/config-all.h"
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "tao/x11/system_exception.h"
 
 namespace TAOX11_NAMESPACE

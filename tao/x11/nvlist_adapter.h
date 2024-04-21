@@ -13,7 +13,7 @@
 #pragma once
 
 #include "ace/Service_Object.h"
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "tao/x11/object_traits_t.h"
 
 #if (TAO_HAS_MINIMUM_CORBA == 0) && !defined (CORBA_E_COMPACT) && !defined (CORBA_E_MICRO)

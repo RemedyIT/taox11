@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/ifr_client_adapter.h"
 
 #if !defined (CORBA_E_COMPACT) && !defined (CORBA_E_MICRO)

@@ -10,7 +10,7 @@
 #ifndef TAOX11_AMIC_TRAITS_T_H_INCLUDED
 #define TAOX11_AMIC_TRAITS_T_H_INCLUDED
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 
 namespace TAOX11_NAMESPACE
 {

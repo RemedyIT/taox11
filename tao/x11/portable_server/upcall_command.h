@@ -12,8 +12,8 @@
 
 #pragma once
 
-#include "tao/x11/tao_corba.h"
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/tao_corba.h"
+#include "tao/x11/base/stddef.h"
 #include "tao/x11/portable_server/taox11_portableserver_export.h"
 #include "tao/PortableServer/Upcall_Command.h"
 

@@ -1,10 +1,6 @@
 
 // generated from <%= ridl_template_path %>
-<%= proxy_cxxname %>::<%= proxy_cxxname %> (
-  TAO_Stub *objref,
-  TAO_CORBA::Boolean _tao_collocated,
-  TAO_Abstract_ServantBase *servant,
-  TAO_ORB_Core *oc) :
+<%= proxy_cxxname %>::<%= proxy_cxxname %> (TAO_Stub *objref, TAO_CORBA::Boolean _tao_collocated, TAO_Abstract_ServantBase *servant, TAO_ORB_Core *oc) :
     TAO_CORBA::Object (objref, _tao_collocated, servant, oc)
 % if is_derived?
 %   _bases = ancestors.dup.find_all { |_a| !_a.is_abstract? }
@@ -15,9 +11,7 @@
 {
 }
 
-<%= proxy_cxxname %>::<%= proxy_cxxname %> (
-  TAO_IOP::IOR *ior,
-  TAO_ORB_Core *orb_core) :
+<%= proxy_cxxname %>::<%= proxy_cxxname %> (TAO_IOP::IOR *ior, TAO_ORB_Core *orb_core) :
     TAO_CORBA::Object (ior, orb_core)
 % if is_derived?
 %   _bases = ancestors.dup.find_all { |_a| !_a.is_abstract? }
@@ -40,8 +34,7 @@
 }
 
 <%= proxy_cxxname %>::_ptr_type
-<%= proxy_cxxname %>::_narrow (
-  TAO_CORBA::Object::_ptr_type _tao_objref)
+<%= proxy_cxxname %>::_narrow (TAO_CORBA::Object::_ptr_type _tao_objref)
 {
   return TAO_TAO::Narrow_Utils<<%= proxy_cxxname %>>::narrow (_tao_objref, "<%= repository_id %>");
 }

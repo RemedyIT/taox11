@@ -81,6 +81,20 @@ sub get_output {
       push(@out, $1);
     }
   }
+  if ($flags =~ /--Gxhcpr/) {
+    if ($flags =~ /-Wb,stub_proxy_export_file=(\S*)/) {
+      push(@out, $1);
+    } elsif ($flags =~ /-Wb,stub_proxy_export_include=(\S*)/) {
+      push(@out, $1);
+    }
+  }
+  if ($flags =~ /--Gxhat/) {
+    if ($flags =~ /-Wb,anytypecode_export_file=(\S*)/) {
+      push(@out, $1);
+    } elsif ($flags =~ /-Wb,anytypecode_export_include=(\S*)/) {
+      push(@out, $1);
+    }
+  }
   if ($flags =~ /-Gxhsv/ && $flags =~ /-Wb,svnt_export_include=(\S*)/) {
     push(@out, $1);
   }

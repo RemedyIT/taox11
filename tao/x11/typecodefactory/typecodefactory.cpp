@@ -8,7 +8,7 @@
  */
 
 #include "tao/objectid.h"
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "ace/Service_Config.h"
 
 #include "tao/x11/typecodefactory/typecodefactory.h"

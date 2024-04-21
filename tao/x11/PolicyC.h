@@ -18,17 +18,17 @@
 #ifndef __RIDL_POLICYC_H_INCLUDED__
 #define __RIDL_POLICYC_H_INCLUDED__
 
-#include /**/ "tao/x11/pre.h"
+#include /**/ "tao/x11/base/pre.h"
 
-#include "tao/x11/stddef.h"
-#include "tao/x11/basic_traits.h"
+#include "tao/x11/base/stddef.h"
+#include "tao/x11/base/basic_traits.h"
 #include "tao/x11/corba.h"
 #include "tao/x11/system_exception.h"
 #include "tao/x11/object.h"
 #include "tao/x11/user_exception.h"
 #include "tao/x11/anytypecode/any.h"
 #include "tao/x11/anytypecode/typecode_ref.h"
-#include "tao/x11/taox11_export.h"
+#include "tao/x11/base/taox11_export.h"
 
 using namespace TAOX11_NAMESPACE;
 
@@ -518,7 +518,7 @@ TAOX11_Export std::ostream& operator<< (
 #include "PolicyP.h"
 #endif
 
-#include /**/ "tao/x11/post.h"
+#include /**/ "tao/x11/base/post.h"
 
 #endif // __RIDL_POLICYC_H_INCLUDED__
 

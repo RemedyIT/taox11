@@ -13,7 +13,7 @@ project(taox11_core_idl) : ridl_core_defaults, install, pidl_install {
   idlflags += -SS -Sorb -Gp -Gd -Gatc -o . \
               -I $(TAO_ROOT) \
               -Wb,export_macro=TAOX11_Export \
-              -Wb,export_include=tao/x11/taox11_export.h \
+              -Wb,export_include=tao/x11/base/taox11_export.h \
               -Wb,anytypecode_export_macro=TAOX11_AnyTypeCode_Export \
               -Wb,anytypecode_export_include=tao/x11/anytypecode/taox11_anytypecode_export.h
 
@@ -49,7 +49,7 @@ project(taox11_core_idl) : ridl_core_defaults, install, pidl_install {
 
   IDL_Files {
     idlflags -= -Wb,export_macro=TAOX11_Export \
-                -Wb,export_include=tao/x11/taox11_export.h
+                -Wb,export_include=tao/x11/base/taox11_export.h
     idlflags += -Sots \
                 -Wb,export_macro=TAOX11_AnyTypeCode_Export \
                 -Wb,export_include=tao/x11/anytypecode/taox11_anytypecode_export.h
@@ -288,18 +288,18 @@ project(taox11) : taox11_defaults, taolib {
     array_cdr_t.h
     basic_argument_t.h
     basic_arguments.h
-    basic_traits.h
-    bounded_map_t.h
-    bounded_string_t.h
-    bounded_type_traits_t.h
-    bounded_vector_t.h
+    base/basic_traits.h
+    base/bounded_map_t.h
+    base/bounded_string_t.h
+    base/bounded_type_traits_t.h
+    base/bounded_vector_t.h
     cdr_long_double.h
     corba.h
     dynamic_adapter.h
     exception.h
     exception_macros.h
     fixed_t.h
-    idl_traits_t.h
+    base/idl_traits_t.h
     ifr_client_adapter.h
     ifr_client_adapter_impl_base.h
     log.h
@@ -325,21 +325,21 @@ project(taox11) : taox11_defaults, taolib {
     sequence_conversion_t.h
     special_basic_argument_t.h
     special_basic_arguments.h
-    stddef.h
+    base/stddef.h
     stub_arg_traits.h
     system_exception.h
     system_exception_x11.h
-    tao_corba.h
-    taox11_export.h
+    base/tao_corba.h
+    base/taox11_export.h
     typecode_factory_adapter.h
     user_exception.h
     user_exception_proxy_in_t.h
     user_exception_proxy_out.h
     valuefactory_manager_adapter.h
     valuetype_adapter.h
-    versioned_x11_namespace.h
-    versionx11.h
-    wstringwchar_ostream.h
+    base/versioned_x11_namespace.h
+    base/versionx11.h
+    base/wstringwchar_ostream.h
   }
 
   Header_Files {

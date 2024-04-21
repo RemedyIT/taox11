@@ -1,13 +1,13 @@
 
 // generated from <%= ridl_template_path %>
 /// CDR streaming operator specializations for <%= amic_scoped_cxxname %>
-TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, TAOX11_NAMESPACE::CORBA::amic_traits<<%= scoped_cxxname %>>::ref_type _tao_objref)
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR& strm, TAOX11_NAMESPACE::CORBA::amic_traits<<%= scoped_cxxname %>>::ref_type _tao_objref)
 {
   TAOX11_IDL::traits<TAOX11_CORBA::Object>::ref_type _x11_obj { std::move(_tao_objref) };
   return (strm << _x11_obj);
 }
 
-TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, TAOX11_NAMESPACE::CORBA::amic_traits<<%= scoped_cxxname %>>::ref_type& _tao_objref)
+TAO_CORBA::Boolean operator>> (TAO_InputCDR& strm, TAOX11_NAMESPACE::CORBA::amic_traits<<%= scoped_cxxname %>>::ref_type& _tao_objref)
 {
   TAO_CORBA::Object_var obj;
   if (!(strm >> obj.inout ()))

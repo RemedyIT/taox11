@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 
 #include "tao/x11/ort/taox11_ort_export.h"
 

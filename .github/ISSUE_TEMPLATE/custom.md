@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 **Version**
-Your TAOX11 version from taox11/tao/x11/versionx11.h
+Your TAOX11 version from taox11/tao/x11/base/versionx11.h
 
 **Describe the issue**
 Description of your issue with as much as detail as possible

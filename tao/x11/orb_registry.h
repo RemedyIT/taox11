@@ -10,8 +10,8 @@
 #ifndef TAOX11_ORB_REGISTRY_H_INCLUDED
 #define TAOX11_ORB_REGISTRY_H_INCLUDED
 
-#include "tao/x11/stddef.h"
-#include "tao/x11/taox11_export.h"
+#include "tao/x11/base/stddef.h"
+#include "tao/x11/base/taox11_export.h"
 #include "tao/x11/object.h"
 #include "tao/x11/orb.h"
 #include "tao/x11/anyinsert_adapter.h"

@@ -10,8 +10,8 @@
 #ifndef TAOX11_LONG_DOUBLE_ARGUMENT_T_H_INCLUDED
 #define TAOX11_LONG_DOUBLE_ARGUMENT_T_H_INCLUDED
 
-#include "tao/x11/tao_corba.h"
-#include "tao/x11/taox11_export.h"
+#include "tao/x11/base/tao_corba.h"
+#include "tao/x11/base/taox11_export.h"
 
 // In cases where sizeof(long double) == 16 the 'long double' type
 // is identical to CORBA::LongDouble (old C++) and the arg traits

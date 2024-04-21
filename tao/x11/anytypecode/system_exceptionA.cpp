@@ -7,7 +7,7 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/corba.h"
 #include "tao/x11/system_exception.h"
 #include "tao/x11/system_exception_x11.h"

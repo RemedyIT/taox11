@@ -10,10 +10,10 @@
 #ifndef TAOX11_MAP_CDR_T_H_INCLUDED
 #define TAOX11_MAP_CDR_T_H_INCLUDED
 
-#include "tao/x11/tao_corba.h"
-#include "tao/x11/taox11_export.h"
-#include "tao/x11/basic_traits.h"
-#include "tao/x11/bounded_map_t.h"
+#include "tao/x11/base/tao_corba.h"
+#include "tao/x11/base/taox11_export.h"
+#include "tao/x11/base/basic_traits.h"
+#include "tao/x11/base/bounded_map_t.h"
 
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 

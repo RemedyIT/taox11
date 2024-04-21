@@ -11,8 +11,8 @@
 #define TAOX11_LOG_H
 
 #include "tao/x11/logger/log_base.h"
-#include "tao/x11/versioned_x11_namespace.h"
-#include "tao/x11/taox11_export.h"
+#include "tao/x11/base/versioned_x11_namespace.h"
+#include "tao/x11/base/taox11_export.h"
 
 namespace TAOX11_NAMESPACE
 {

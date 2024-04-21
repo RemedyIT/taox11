@@ -21,8 +21,7 @@
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
 /// CDR output operator for long double
-inline CORBA::Boolean operator<< (TAO_OutputCDR& os,
-                                  long double x)
+inline CORBA::Boolean operator<< (TAO_OutputCDR& os, long double x)
 {
   CORBA::LongDouble ld;
   return
@@ -32,8 +31,7 @@ inline CORBA::Boolean operator<< (TAO_OutputCDR& os,
 }
 
 /// CDR input operators for long double
-inline CORBA::Boolean operator>> (TAO_InputCDR &is,
-                                  long double &x)
+inline CORBA::Boolean operator>> (TAO_InputCDR &is, long double &x)
 {
   CORBA::LongDouble ld;
   if (!(static_cast<ACE_InputCDR &> (is) >> ld))

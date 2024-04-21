@@ -8,7 +8,7 @@
  */
 
 // pull in TAO dependencies first
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/pi_server/tao_pi_server.h"
 
 // TAOX11 dependencies

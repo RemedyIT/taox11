@@ -24,20 +24,23 @@ project: taox11_basedefaults, taobaseidldefaults {
     optional(source_pre_extension) {
       commandflags(-GC) += AmiC
       commandflags(-GCa) += AmiC
+      commandflags(-Gcpc) += CP
+      commandflags(-Gatc) += A
     }
 
     optional(header_pre_extension) {
-      commandflags(!-Scp) += CP
+      commandflags(!-Scph) += CP
       commandflags(!-Ssh) += SP
       commandflags(-GC) += AmiC, AmiCP
       commandflags(-GCa) += AmiC, AmiCP
+      commandflags(-Gath) += A
     }
   }
 
   after -= TAO_IDL_EXE
   idlflags -= $(TAO_IDLFLAGS)
   idlflags -= -Sa -St
-  idlflags += -Wb,pre_include=tao/x11/pre.h \
-              -Wb,post_include=tao/x11/post.h -I$(TAOX11_ROOT)
+  idlflags += -Wb,pre_include=tao/x11/base/pre.h \
+              -Wb,post_include=tao/x11/base/post.h -I$(TAOX11_ROOT)
   idlflags += $(RIDLCFLAGS) -Sci -Ssi -Sa -St
 }

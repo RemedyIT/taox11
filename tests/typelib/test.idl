@@ -1,0 +1,36 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * Only use types that should be usable with the CORBA support in the proxy source
+ * - basic types
+ * - struct
+ * - union (be aware of the exception
+ * - (bounded) (w)string
+ * - (bounded) sequences
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+module Test
+{
+  typedef short myshort;
+  struct Bar
+  {
+    short my1;
+  };
+  typedef string<6> b_string;
+  typedef wstring<6> b_wstring;
+
+  enum Color {
+    COLOR_RED,
+    COLOR_BLUE
+  };
+  union TestUnion_U3 switch(Color)
+  {
+  case COLOR_BLUE:
+    short myshort;
+  case COLOR_RED:
+    long mylong;
+  };
+};

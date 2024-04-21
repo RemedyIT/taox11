@@ -9,7 +9,7 @@
 
 #include "tao/CodecFactory/CodecFactory.h"
 #include "tao/objectid.h"
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 
 #include "tao/x11/codecfactory/codecfactory.h"
 #include "tao/x11/orb_registry.h"

@@ -9,8 +9,7 @@
 #ifndef TAOX11_BOUNDED_TYPE_TRAITS_T_H_INCLUDED
 #define TAOX11_BOUNDED_TYPE_TRAITS_T_H_INCLUDED
 
-#include "tao/x11/idl_traits_t.h"
-#include "tao/x11/object_traits_t.h"
+#include <type_traits>
 
 namespace TAOX11_NAMESPACE
 {

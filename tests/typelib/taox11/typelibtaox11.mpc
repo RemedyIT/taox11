@@ -1,0 +1,24 @@
+// -*- MPC -*-
+
+project(*proxysource_gen_Idl): ridl_ostream_defaults {
+  idlflags += -Gcpc -Gatc -Gath
+  idlflags -= -Sa -St
+  IDL_Files {
+    ../test.idl
+  }
+  custom_only = 1
+}
+
+project(*proxysource_taox11_Client): taox11_client, taox11_anytypecode {
+  after += *proxysource_gen_Idl
+  Source_Files {
+    client.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testA.cpp
+    testCP.cpp
+  }
+}
+
+

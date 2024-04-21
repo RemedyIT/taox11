@@ -12,8 +12,6 @@
 
 #pragma once
 
-#include "ace/config-macros.h"
-
 #include <stdint.h>
 #include <stdlib.h>
 #include <string>
@@ -48,9 +46,11 @@
  * as well as user code get build according to the
  * macros that get tested and defined inside this file.
  */
-#include "tao/orbconf.h"
-#include "tao/x11/taox11_export.h"
-#include "tao/x11/versioned_x11_namespace.h"
+#if __has_include("tao/orbconf.h")
+# include "tao/orbconf.h"
+#endif
+#include "tao/x11/base/taox11_export.h"
+#include "tao/x11/base/versioned_x11_namespace.h"
 
 #define TAOX11_CORBA TAOX11_NAMESPACE::CORBA
 

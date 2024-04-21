@@ -13,11 +13,11 @@
 
 #pragma once
 
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/PolicyC.h"
 
 #include "ace/Service_Config.h"
-#include "tao/x11/basic_traits.h"
+#include "tao/x11/base/basic_traits.h"
 #include "tao/x11/anyinsert_adapter.h"
 #include "tao/x11/anytypecode/any.h"
 

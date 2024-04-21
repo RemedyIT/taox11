@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "tao/x11/object_loader.h"
 #include "tao/x11/typecodefactory/taox11_typecodefactory_export.h"
 

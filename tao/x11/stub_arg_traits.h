@@ -13,7 +13,7 @@
 #pragma once
 
 #include "tao/CORBA_methods.h"
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/arg_traits_t.h"
 #include "tao/x11/basic_argument_t.h"
 #include "tao/x11/anyinsert_policy_t.h"
@@ -37,10 +37,8 @@ namespace TAOX11_NAMESPACE
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
 // CDR streaming operator specializations
-TAOX11_Export TAO_CORBA::Boolean operator<< (TAO_OutputCDR &,
-    TAOX11_CORBA::object_traits<TAOX11_CORBA::Object>::ref_type);
-TAOX11_Export TAO_CORBA::Boolean operator>> (TAO_InputCDR &,
-    TAOX11_CORBA::object_traits<TAOX11_CORBA::Object>::ref_type&);
+TAOX11_Export TAO_CORBA::Boolean operator<< (TAO_OutputCDR &, TAOX11_CORBA::object_traits<TAOX11_CORBA::Object>::ref_type);
+TAOX11_Export TAO_CORBA::Boolean operator>> (TAO_InputCDR &, TAOX11_CORBA::object_traits<TAOX11_CORBA::Object>::ref_type&);
 
 TAO_END_VERSIONED_NAMESPACE_DECL
 

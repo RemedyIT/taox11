@@ -8,7 +8,7 @@
  */
 
 // TAO namespace dependencies
-#include "tao/x11/tao_corba.h"
+#include "tao/x11/base/tao_corba.h"
 #include "tao/x11/objproxy.h"
 #include "tao/AnyTypeCode/DynamicC.h"
 

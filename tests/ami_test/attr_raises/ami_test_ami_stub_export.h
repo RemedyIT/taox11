@@ -9,7 +9,7 @@
 #ifndef __RIDL_AMI_TEST_AMI_STUB_EXPORT_H_EXPORT_INCLUDED__
 #define __RIDL_AMI_TEST_AMI_STUB_EXPORT_H_EXPORT_INCLUDED__
 
-#include "tao/x11/taox11_export_macros.h"
+#include "tao/x11/base/taox11_export_macros.h"
 
 #if defined (TAOX11_AS_STATIC_LIBS) && !defined (AMI_TEST_AMI_STUB_HAS_DLL)
 #  define AMI_TEST_AMI_STUB_HAS_DLL 0

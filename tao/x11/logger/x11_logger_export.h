@@ -9,7 +9,7 @@
 #ifndef X11_LOGGER_EXPORT_H
 #define X11_LOGGER_EXPORT_H
 
-#include "tao/x11/taox11_export_macros.h"
+#include "tao/x11/base/taox11_export_macros.h"
 
 #if defined (TAOX11_AS_STATIC_LIBS) && !defined (X11_LOGGER_HAS_DLL)
 #  define X11_LOGGER_HAS_DLL 0

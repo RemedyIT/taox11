@@ -6,7 +6,7 @@
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
-#include "tao/x11/basic_traits.h"
+#include "tao/x11/base/basic_traits.h"
 #include "tao/x11/orb.h"
 #include "tao/x11/object.h"
 

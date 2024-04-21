@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include "tao/x11/stddef.h"
+#include "tao/x11/base/stddef.h"
 #include "ace/Service_Object.h"
 #include "tao/x11/ior_table/taox11_ior_table_export.h"
 
