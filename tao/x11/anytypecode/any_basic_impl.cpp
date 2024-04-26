@@ -16,7 +16,6 @@
 #include "tao/x11/anytypecode/typecode_constants.h"
 #include "tao/x11/system_exception.h"
 
-#include "ace/Auto_Ptr.h"
 #include "ace/OS_NS_string.h"
 
 namespace TAOX11_NAMESPACE
