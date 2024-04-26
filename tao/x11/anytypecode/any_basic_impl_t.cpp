@@ -15,8 +15,6 @@
 #include "tao/CDR.h"
 #include "tao/x11/log.h"
 
-#include "ace/Auto_Ptr.h"
-
 namespace TAOX11_NAMESPACE
 {
   template<typename TRAITS, template <typename T> class MARSHAL_POLICY>
