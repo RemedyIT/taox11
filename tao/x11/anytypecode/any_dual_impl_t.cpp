@@ -14,7 +14,6 @@
 #include "tao/x11/anytypecode/any_unknown_type.h"
 #include "tao/CDR.h"
 
-#include "ace/Auto_Ptr.h"
 #include "ace/OS_Memory.h"
 
 namespace TAOX11_NAMESPACE
