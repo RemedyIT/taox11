@@ -28,6 +28,7 @@ module IDL
       def initialize(output = STDOUT, opts = {})
         super
         @include_guard = "__RIDL_#{File.basename(params[:srv_output_hdr] || '').to_random_include_guard}_INCLUDED__"
+        @servant_traits = false
       end
 
       def pre_visit(parser)
@@ -42,7 +43,7 @@ module IDL
         end
 
         # Servant traits specializations
-        visit_servant_traits_specializations(parser)
+        visit_servant_traits_specializations(parser) if @servant_traits
 
         super
         visitor(PostVisitor).visit
@@ -75,6 +76,8 @@ module IDL
       def enter_interface(node)
         return if node.is_local? || node.is_abstract?
 
+        @servant_traits = true
+
         super
         visitor(InterfaceVisitor).visit_pre(node)
         inc_nest  # POA
@@ -93,6 +96,8 @@ module IDL
       def enter_valuetype(node)
         super
         return if node.is_local? || !node.supports_concrete_interface?
+
+        @servant_traits = true
 
         visitor(ValuetypeVisitor).visit_pre(node)
       end
@@ -132,10 +137,14 @@ module IDL
       def initialize(output = STDOUT, opts = {})
         super
         @includes = []
-        @includes << 'tao/x11/portable_server/servantbase.h' unless params[:no_servant_code]
       end
 
       attr_reader :includes
+
+      def enter_interface(node)
+        @includes << 'tao/x11/portable_server/servantbase.h' unless params[:no_servant_code]
+        super
+      end
 
       def post_visit(_parser)
         properties[:includes] = @includes
