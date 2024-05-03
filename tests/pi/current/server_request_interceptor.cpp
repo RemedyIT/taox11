@@ -35,7 +35,7 @@ ServerRequestInterceptor::receive_request_service_contexts (
 {
   TAOX11_TEST_INFO << "ServerRequestInterceptor::receive_request_service_contexts (" << ri->operation () << ")" << std::endl;
 
-  std::string op = ri->operation ();
+  std::string const op = ri->operation ();
 
   if (op != "invoke_me")
     return; // Don't mess with PICurrent if not invoking test method.
@@ -70,6 +70,10 @@ ServerRequestInterceptor::receive_request (
 
   try
   {
+    CORBA::OctetSeq const ai = ri->adapter_id ();
+    PortableInterceptor::ObjectId const oi = ri->object_id ();
+    IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type narrow_ri = IDL::traits<PortableInterceptor::ServerRequestInfo>::narrow (ri);
+
     CORBA::Any new_data;
     uint32_t number = 19;
     new_data <<= number;
