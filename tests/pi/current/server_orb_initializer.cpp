@@ -46,17 +46,20 @@ ServerORBInitializer::post_init (
   ::slot_id = info->allocate_slot_id ();
 
   IDL::traits<PortableInterceptor::ServerRequestInterceptor>::ref_type server_interceptor =
-      CORBA::make_reference<ServerRequestInterceptor> (
-          ::slot_id,
-          pi_current);
+      CORBA::make_reference<ServerRequestInterceptor> (::slot_id, pi_current);
 
-  info->add_server_request_interceptor (server_interceptor);
+  IDL::traits<PortableInterceptor::ServerRequestInterceptor>::ref_type server_interceptor2 =
+    IDL::traits<PortableInterceptor::ServerRequestInterceptor>::narrow (server_interceptor);
+
+  info->add_server_request_interceptor (server_interceptor2);
 
   IDL::traits<PortableInterceptor::ClientRequestInterceptor>::ref_type client_interceptor =
-      CORBA::make_reference<ClientRequestInterceptor2> (
-          ::slot_id);
+      CORBA::make_reference<ClientRequestInterceptor2> (::slot_id);
 
-  info->add_client_request_interceptor (client_interceptor);
+  IDL::traits<PortableInterceptor::ClientRequestInterceptor>::ref_type client_interceptor2 =
+    IDL::traits<PortableInterceptor::ClientRequestInterceptor>::narrow (client_interceptor);
+
+  info->add_client_request_interceptor (client_interceptor2);
 
 //  // Disable collocation -- TAO-specific!!!
 //  //
