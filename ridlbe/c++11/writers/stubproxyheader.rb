@@ -28,9 +28,8 @@ module IDL
         super
         @default_pre_includes = []
         @default_post_includes = []
+        @object_varout = false
       end
-
-      @object_varout = false
 
       def visit_nodes(parser)
         @include_guard = "__RIDL_#{File.basename(params[:output_stub_proxy_header] || '').to_random_include_guard}_INCLUDED__"
