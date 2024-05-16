@@ -32,7 +32,7 @@ env:
   TAOX11_ROOT: ${{ github.workspace }}
   INSTALL_PREFIX: ${{ github.workspace }}/stage
   X11_BRANCH: master
-  ACETAOMPC_BRANCH: Latest_ACE7TAO3_Micro
+  ACETAOMPC_BRANCH: Latest_ACE8TAO4_Micro
 
 jobs:
   build:
