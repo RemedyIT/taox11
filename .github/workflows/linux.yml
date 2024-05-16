@@ -80,6 +80,7 @@ jobs:
             CXX: g++-13
             ruby: '3.2'
             PackageDeps: g++-13
+            Repo: ppa:ubuntu-toolchain-r/test
           - os: ubuntu-22.04
             CC: gcc-10
             CXX: g++-10
