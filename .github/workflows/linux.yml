@@ -75,7 +75,7 @@ jobs:
             CXX: g++-12
             ruby: '3.2'
             PackageDeps: g++-12
-          - os: ubuntu-22.04
+          - os: ubuntu-24.04
             CC: gcc-13
             CXX: g++-13
             ruby: '3.2'
