@@ -35,7 +35,6 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
       return (_strm << ACE_OutputCDR::from_std_wstring (_bstr, _Bound));
     }
 
-
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
     static bool extract (
