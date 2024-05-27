@@ -1,5 +1,5 @@
 /**
- * @file    string_cdr_t.h
+ * @file    bounded_string_cdr_t.h
  * @author  Johnny Willemsen
  *
  * @brief   x11 string marshaling templates
