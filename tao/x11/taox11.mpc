@@ -293,6 +293,7 @@ project(taox11) : taox11_defaults, taolib {
     base/bounded_string_t.h
     base/bounded_type_traits_t.h
     base/bounded_vector_t.h
+    bounded_string_cdr_t.h
     cdr_long_double.h
     corba.h
     dynamic_adapter.h

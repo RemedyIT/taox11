@@ -14,20 +14,15 @@ class TAOX11_NAMESPACE::Arg_Traits<<%= scoped_cxxtype %>>
 
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
-/// CDR streaming methods for <%= scoped_cxxname %>
-<%= stub_proxy_export_macro %>bool _cdr_in_<%= scoped_cxxname.scope_to_cxxname %> (TAO_OutputCDR &, const IDL::traits<<%= scoped_cxxtype %>>::value_type&);
-<%= stub_proxy_export_macro %>bool _cdr_out_<%= scoped_cxxname.scope_to_cxxname %> (TAO_InputCDR &, IDL::traits<<%= scoped_cxxtype %>>::value_type&);
-#define _ALIAS_<%= scoped_cxxname.scope_to_cxxname %>_CDR_OPS_IMPL_
-
 /// @name CDR streaming operator specializations for <%= scoped_cxxname %>
 //@{
 inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR &cdr, const IDL::traits<<%= scoped_cxxtype %>>::value_type &v)
 {
-  return _cdr_in_<%= scoped_cxxname.scope_to_cxxname %> (cdr, v);
+  return taox11_string_cdr<<%= scoped_cxxtype %>::value_type>::insert<<%= bound %>U> (cdr, v);
 }
 inline TAO_CORBA::Boolean operator>> (TAO_InputCDR &cdr, IDL::traits<<%= scoped_cxxtype %>>::value_type& v)
 {
-  return _cdr_out_<%= scoped_cxxname.scope_to_cxxname %> (cdr, v);
+  return taox11_string_cdr<<%= scoped_cxxtype %>::value_type>::extract<<%= bound %>U> (cdr, v);
 }
 //@}
 
