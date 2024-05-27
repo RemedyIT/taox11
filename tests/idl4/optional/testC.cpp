@@ -20,23 +20,6 @@
 // generated from StubProxySourceCDRWriter#pre_visit
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
-// generated from c++11/templates/cli/src/string_cdr
-#if defined(_ALIAS_bds_CDR_OPS_IMPL_)
-bool _cdr_in_bds (
-  TAO_OutputCDR &strm,
-  const IDL::traits<TAOX11_IDL::bounded_string<650>>::value_type &_bstr)
-{
-  return (strm << ACE_OutputCDR::from_std_string (_bstr, 650));
-}
-
-bool _cdr_out_bds (
-  TAO_InputCDR &strm,
-  IDL::traits<TAOX11_IDL::bounded_string<650>>::value_type &_bstr)
-{
-  return (strm >> ACE_InputCDR::to_std_string (_bstr, 650));
-}
-#endif // _ALIAS_bds_CDR_OPS_IMPL_
-
 // generated from c++11/templates/cli/src/struct_cdr
 TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const bar &_tao_aggregate)
 {
@@ -44,7 +27,8 @@ TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const bar &_tao_aggregate)
     (strm << _tao_aggregate.x ()) &&
     (strm << _tao_aggregate.y ()) &&
     (strm << _tao_aggregate.z ()) &&
-    (strm << _tao_aggregate.a ());
+    (strm << _tao_aggregate.a ()) &&
+    (strm << _tao_aggregate.opt_string ());
 }
 
 TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, bar &_tao_aggregate)
@@ -53,38 +37,9 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, bar &_tao_aggregate)
     (strm >> _tao_aggregate.x ()) &&
     (strm >> _tao_aggregate.y ()) &&
     (strm >> _tao_aggregate.z ()) &&
-    (strm >> _tao_aggregate.a ());
+    (strm >> _tao_aggregate.a ()) &&
+    (strm >> _tao_aggregate.opt_string ());
 }
-
-// Unaliased type : IDL::optional<int16_t>
-// MD5            : 390A720FCF9D6B2326C7F41A8BC2534C
-#if !defined(_CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_IMPL_)
-#define _CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_IMPL_
-TAO_CORBA::Boolean operator<< (TAO_OutputCDR&strm, const IDL::optional<int16_t>&_val)
-{
-  return taox11_optional_cdr<IDL::optional<int16_t>>::insert (strm,  _val);
-}
-
-TAO_CORBA::Boolean operator>> (TAO_InputCDR& strm, IDL::optional<int16_t>&_val)
-{
-  return taox11_optional_cdr<IDL::optional<int16_t>>::extract (strm,  _val);
-}
-#endif
-
-// Unaliased type : IDL::optional<int16_t>
-// MD5            : 390A720FCF9D6B2326C7F41A8BC2534C
-#if !defined(_CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_IMPL_)
-#define _CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_IMPL_
-TAO_CORBA::Boolean operator<< (TAO_OutputCDR&strm, const IDL::optional<int16_t>&_val)
-{
-  return taox11_optional_cdr<IDL::optional<int16_t>>::insert (strm,  _val);
-}
-
-TAO_CORBA::Boolean operator>> (TAO_InputCDR& strm, IDL::optional<int16_t>&_val)
-{
-  return taox11_optional_cdr<IDL::optional<int16_t>>::extract (strm,  _val);
-}
-#endif
 
 TAO_END_VERSIONED_NAMESPACE_DECL
 

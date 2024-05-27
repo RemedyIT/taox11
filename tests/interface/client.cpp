@@ -61,7 +61,6 @@ int main(int argc, char* argv[])
       IDL::traits<CORBA::Object>::ref_type obj2;
       std::swap (obj, obj2);
       std::swap (obj, obj2);
-#if defined (ACE_HAS_CPP17)
       if (!std::is_swappable<IDL::traits<CORBA::Object>::ref_type>())
       {
         TAOX11_TEST_ERROR << "ERROR: IDL::traits<CORBA::Object>::ref_type is not swappable." << std::endl;
@@ -71,7 +70,6 @@ int main(int argc, char* argv[])
       {
         TAOX11_TEST_DEBUG << "IDL::traits<CORBA::Object>::ref_type is swappable." << std::endl;
       }
-#endif /* ACE_HAS_CPP17 */
 
       if (!test_nil_invocation())
         ++result;

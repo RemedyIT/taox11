@@ -312,6 +312,8 @@ project(taox11) : taox11_defaults, taolib {
     object_ostream.h
     object_traits_t.h
     objproxy.h
+    optional_t.h
+    optional_cdr_t.h
     orb.h
     orb_constants.h
     orb_registry.h

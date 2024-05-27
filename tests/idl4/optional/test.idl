@@ -5,15 +5,11 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-typedef map<string,long> StringLongMap;
-
-typedef string<650> bds;
-typedef sequence<short, 100> bs;
-
 struct bar
 {
   short x;
   string y;
   @optional short z;
   @optional short a;
+  @optional string opt_string;
 };

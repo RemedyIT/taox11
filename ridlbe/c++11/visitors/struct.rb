@@ -29,6 +29,10 @@ module IDL
         false
       end
 
+      def has_optional?
+        true
+      end
+
       # Return the base of this struct, nil in case of no base struct
       def base
         node.base
@@ -123,7 +127,7 @@ module IDL
 
       def cxx_in_type
         if optional?
-          "const IDL::optional<#{super}>&"
+          "const IDL::optional<#{cxx_return_type}>&"
         elsif external?
           "const std::shared_ptr<#{super}>&"
         else

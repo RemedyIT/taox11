@@ -6,15 +6,14 @@
  *        https://www.remedy.nl
  */
 
-#ifndef __RIDL_TESTCP_H_GCEACAAC_INCLUDED__
-#define __RIDL_TESTCP_H_GCEACAAC_INCLUDED__
+#ifndef __RIDL_TESTCP_H_EEHHIGHB_INCLUDED__
+#define __RIDL_TESTCP_H_EEHHIGHB_INCLUDED__
 
 #pragma once
 
 #include "tao/x11/anyinsert_policy_t.h"
-#include "tao/x11/map_cdr_t.h"
 #include "tao/x11/basic_argument_t.h"
-#include "tao/x11/sequence_cdr_t.h"
+#include "tao/x11/optional_cdr_t.h"
 
 #include /**/ "tao/x11/base/versionx11.h"
 
@@ -24,98 +23,6 @@
 
 // generated from StubProxyHeaderObjRefTraitsWriter#pre_visit
 // generated from StubProxyHeaderCDRWriter#pre_visit
-
-// generated from c++11/templates/cli/prx/map_cdr
-// Unaliased type : std::map<std::string, int32_t>
-// MD5            : 9591659AF1C35F72B6270EE9C6D3AFEF
-#if !defined (_ALIAS_9591659AF1C35F72B6270EE9C6D3AFEF_ARG_TRAITS_)
-#define _ALIAS_9591659AF1C35F72B6270EE9C6D3AFEF_ARG_TRAITS_
-/// Argument traits specializations for StringLongMap
-template<>
-class TAOX11_NAMESPACE::Arg_Traits<::StringLongMap>
-  : public Basic_Arg_Traits_T<::StringLongMap, Any_Insert_Policy_Noop>
-{
-};
-
-TAO_BEGIN_VERSIONED_NAMESPACE_DECL
-
-/// @name CDR streaming operator specializations for StringLongMap
-//@{
-inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR& cdr, const IDL::traits<::StringLongMap>::value_type& v)
-{
-  return taox11_map_cdr<::StringLongMap::key_type, ::StringLongMap::mapped_type>::insert (cdr, v);
-}
-inline TAO_CORBA::Boolean operator>> (TAO_InputCDR& cdr, IDL::traits<::StringLongMap>::value_type& v)
-{
-  return taox11_map_cdr<::StringLongMap::key_type, ::StringLongMap::mapped_type>::extract (cdr, v);
-}
-//@}
-
-TAO_END_VERSIONED_NAMESPACE_DECL
-# endif // !_ALIAS_9591659AF1C35F72B6270EE9C6D3AFEF_ARG_TRAITS_
-
-// generated from c++11/templates/cli/prx/string_cdr
-// Unaliased type : TAOX11_IDL::bounded_string<650>
-// MD5            : 8A4C2C8D2E43F29AF2FF47B029780F14
-#if !defined (_ALIAS_8A4C2C8D2E43F29AF2FF47B029780F14_ARG_TRAITS_)
-#define _ALIAS_8A4C2C8D2E43F29AF2FF47B029780F14_ARG_TRAITS_
-/// Argument traits specializations for bds
-template<>
-class TAOX11_NAMESPACE::Arg_Traits<TAOX11_IDL::bounded_string<650>>
-  : public Basic_Arg_Traits_T<TAOX11_IDL::bounded_string<650>, Any_Insert_Policy_Noop>
-{
-};
-
-TAO_BEGIN_VERSIONED_NAMESPACE_DECL
-
-/// CDR streaming methods for bds
-bool _cdr_in_bds (TAO_OutputCDR &, const IDL::traits<TAOX11_IDL::bounded_string<650>>::value_type&);
-bool _cdr_out_bds (TAO_InputCDR &, IDL::traits<TAOX11_IDL::bounded_string<650>>::value_type&);
-#define _ALIAS_bds_CDR_OPS_IMPL_
-
-/// @name CDR streaming operator specializations for bds
-//@{
-inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR &cdr, const IDL::traits<TAOX11_IDL::bounded_string<650>>::value_type &v)
-{
-  return _cdr_in_bds (cdr, v);
-}
-inline TAO_CORBA::Boolean operator>> (TAO_InputCDR &cdr, IDL::traits<TAOX11_IDL::bounded_string<650>>::value_type& v)
-{
-  return _cdr_out_bds (cdr, v);
-}
-//@}
-
-TAO_END_VERSIONED_NAMESPACE_DECL
-# endif // !_ALIAS_8A4C2C8D2E43F29AF2FF47B029780F14_ARG_TRAITS_
-
-// generated from c++11/templates/cli/prx/sequence_cdr
-// Unaliased type : TAOX11_NAMESPACE::IDL::bounded_vector<int16_t, 100>
-// MD5            : D0B8C685EFADFAF646AABDA450D4F77E
-#if !defined (_ALIAS_D0B8C685EFADFAF646AABDA450D4F77E_ARG_TRAITS_)
-#define _ALIAS_D0B8C685EFADFAF646AABDA450D4F77E_ARG_TRAITS_
-/// Argument traits specializations for bs
-template<>
-class TAOX11_NAMESPACE::Arg_Traits<::bs>
-  : public Basic_Arg_Traits_T<::bs, Any_Insert_Policy_Noop>
-{
-};
-
-TAO_BEGIN_VERSIONED_NAMESPACE_DECL
-
-/// @name CDR streaming operator specializations for bs
-//@{
-inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR &cdr, const IDL::traits<::bs>::value_type &v)
-{
-  return taox11_sequence_cdr<::bs::value_type>::insert<100U> (cdr, v);
-}
-inline TAO_CORBA::Boolean operator>> (TAO_InputCDR &cdr, IDL::traits<::bs>::value_type& v)
-{
-  return taox11_sequence_cdr<::bs::value_type>::extract<100U> (cdr, v);
-}
-//@}
-
-TAO_END_VERSIONED_NAMESPACE_DECL
-# endif // !_ALIAS_D0B8C685EFADFAF646AABDA450D4F77E_ARG_TRAITS_
 
 // generated from c++11/templates/cli/prx/struct_cdr
 # if !defined (_BAR_TRAITS_)
@@ -141,8 +48,14 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR&, bar&);
 #define _CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_DECL_
 /// @name CDR streaming operator specializations for IDL::optional<int16_t>
 //@{
-TAO_CORBA::Boolean operator<< (TAO_OutputCDR&, const IDL::optional<int16_t>&);
-TAO_CORBA::Boolean operator>> (TAO_InputCDR&, IDL::optional<int16_t>&);
+inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR& _strm, const IDL::optional<int16_t>& _val)
+{
+  return taox11_optional_cdr<IDL::optional<int16_t>>::insert (_strm,  _val);
+}
+TAO_CORBA::Boolean operator>> (TAO_InputCDR& _strm, IDL::optional<int16_t>& _val)
+{
+  return taox11_optional_cdr<IDL::optional<int16_t>>::extract (_strm,  _val);
+}
 //@}
 #endif
 // Unaliased type : IDL::optional<int16_t>
@@ -151,14 +64,36 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR&, IDL::optional<int16_t>&);
 #define _CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_DECL_
 /// @name CDR streaming operator specializations for IDL::optional<int16_t>
 //@{
-TAO_CORBA::Boolean operator<< (TAO_OutputCDR&, const IDL::optional<int16_t>&);
-TAO_CORBA::Boolean operator>> (TAO_InputCDR&, IDL::optional<int16_t>&);
+inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR& _strm, const IDL::optional<int16_t>& _val)
+{
+  return taox11_optional_cdr<IDL::optional<int16_t>>::insert (_strm,  _val);
+}
+TAO_CORBA::Boolean operator>> (TAO_InputCDR& _strm, IDL::optional<int16_t>& _val)
+{
+  return taox11_optional_cdr<IDL::optional<int16_t>>::extract (_strm,  _val);
+}
+//@}
+#endif
+// Unaliased type : IDL::optional<std::string>
+// MD5            : A982838BA1CB55023DC96331D8B18A34
+#if !defined(_CDR_A982838BA1CB55023DC96331D8B18A34_OPTIONAL_DECL_)
+#define _CDR_A982838BA1CB55023DC96331D8B18A34_OPTIONAL_DECL_
+/// @name CDR streaming operator specializations for IDL::optional<std::string>
+//@{
+inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR& _strm, const IDL::optional<std::string>& _val)
+{
+  return taox11_optional_cdr<IDL::optional<std::string>>::insert (_strm,  _val);
+}
+TAO_CORBA::Boolean operator>> (TAO_InputCDR& _strm, IDL::optional<std::string>& _val)
+{
+  return taox11_optional_cdr<IDL::optional<std::string>>::extract (_strm,  _val);
+}
 //@}
 #endif
 
 TAO_END_VERSIONED_NAMESPACE_DECL
 
 
-#endif /* __RIDL_TESTCP_H_GCEACAAC_INCLUDED__ */
+#endif /* __RIDL_TESTCP_H_EEHHIGHB_INCLUDED__ */
 
 // -*- END -*-

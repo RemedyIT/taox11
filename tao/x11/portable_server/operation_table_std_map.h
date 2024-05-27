@@ -72,11 +72,7 @@ public:
             const TAO::Operation_Skeletons skel_ptr) override;
 
 private:
-#if defined (ACE_HAS_CPP17)
   using key_map_type = std::string_view ;
-#else
-  using key_map_type = std::string ;
-#endif /* ACE_HAS_CPP17 */
 
   using map_type = std::unordered_map<key_map_type, TAO::Operation_Skeletons>;
 

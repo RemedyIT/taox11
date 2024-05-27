@@ -26,7 +26,6 @@ test_data_union (IDL::traits<Test::Foo>::ref_type foo)
   data.pointData (Test::Point (12, 34));
   retval += check_union (data, Test::DataType::dtPoint, "before pass_union");
 
-#if defined (ACE_HAS_CPP17)
   if (!std::is_swappable<Test::Data>())
   {
     TAOX11_TEST_ERROR << "ERROR: V is not swappable." << std::endl;
@@ -36,7 +35,6 @@ test_data_union (IDL::traits<Test::Foo>::ref_type foo)
   {
     TAOX11_TEST_DEBUG << "Test::Data is swappable." << std::endl;
   }
-#endif /* ACE_HAS_CPP17 */
 
   if (foo->pass_union (data))
   {

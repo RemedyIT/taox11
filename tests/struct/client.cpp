@@ -106,7 +106,6 @@ int main(int argc, char* argv[])
       V s5;
       V s6;
       test_swap (s5, s6);
-#if defined (ACE_HAS_CPP17)
       if (!std::is_swappable<V>())
       {
         TAOX11_TEST_ERROR << "ERROR: V is not swappable." << std::endl;
@@ -116,7 +115,6 @@ int main(int argc, char* argv[])
       {
         TAOX11_TEST_DEBUG << "V is swappable." << std::endl;
       }
-#endif /* ACE_HAS_CPP17 */
 
       TAOX11_TEST_DEBUG << "successfully called Foo::update_struct (" << simple3 << ") => " << simple4 << std::endl;
 

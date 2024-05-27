@@ -27,8 +27,14 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 #define _CDR_<%= alias_md5 %>_OPTIONAL_DECL_
 /// @name CDR streaming operator specializations for <%= _m.cxx_member_type %>
 //@{
-<%= stub_proxy_export_macro %>TAO_CORBA::Boolean operator<< (TAO_OutputCDR&, const <%= _m.cxx_member_type %>&);
-<%= stub_proxy_export_macro %>TAO_CORBA::Boolean operator>> (TAO_InputCDR&, <%= _m.cxx_member_type %>&);
+inline <%= stub_proxy_export_macro %>TAO_CORBA::Boolean operator<< (TAO_OutputCDR& _strm, const <%= _m.cxx_member_type %>& _val)
+{
+  return taox11_optional_cdr<<%= _m.cxx_member_type %>>::insert (_strm,  _val);
+}
+<%= stub_proxy_export_macro %>TAO_CORBA::Boolean operator>> (TAO_InputCDR& _strm, <%= _m.cxx_member_type %>& _val)
+{
+  return taox11_optional_cdr<<%= _m.cxx_member_type %>>::extract (_strm,  _val);
+}
 //@}
 #endif
 % end
