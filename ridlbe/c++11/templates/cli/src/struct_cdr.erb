@@ -30,3 +30,17 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR &<% if member_count > 0 || !base.nil
   return true;
 % end
 }
+%members.each do |_m|
+% if _m.optional?
+
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR&strm, const <%= _m.cxx_member_type %>&_val)
+{
+  return taox11_optional_cdr<<%= _m.cxx_member_type %>>::insert (strm,  _val);
+}
+
+TAO_CORBA::Boolean operator>> (TAO_InputCDR& strm, <%= _m.cxx_member_type %>&_val)
+{
+  return taox11_optional_cdr<<%= _m.cxx_member_type %>>::extract (strm,  _val);
+}
+% end
+%end

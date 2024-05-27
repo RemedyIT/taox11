@@ -6,8 +6,8 @@
  *        https://www.remedy.nl
  */
 
-#ifndef __RIDL_TESTCP_H_DFHECBEC_INCLUDED__
-#define __RIDL_TESTCP_H_DFHECBEC_INCLUDED__
+#ifndef __RIDL_TESTCP_H_IHIFDICE_INCLUDED__
+#define __RIDL_TESTCP_H_IHIFDICE_INCLUDED__
 
 #pragma once
 
@@ -104,6 +104,9 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 //@{
 TAO_CORBA::Boolean operator<< (TAO_OutputCDR&, const bar&);
 TAO_CORBA::Boolean operator>> (TAO_InputCDR&, bar&);
+//@}
+/// @name CDR streaming operator specializations for IDL::optional<int16_t>
+//@{
 TAO_CORBA::Boolean operator<< (TAO_OutputCDR&, const IDL::optional<int16_t>&);
 TAO_CORBA::Boolean operator>> (TAO_InputCDR&, IDL::optional<int16_t>&);
 //@}
@@ -111,6 +114,6 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR&, IDL::optional<int16_t>&);
 TAO_END_VERSIONED_NAMESPACE_DECL
 
 
-#endif /* __RIDL_TESTCP_H_DFHECBEC_INCLUDED__ */
+#endif /* __RIDL_TESTCP_H_IHIFDICE_INCLUDED__ */
 
 // -*- END -*-

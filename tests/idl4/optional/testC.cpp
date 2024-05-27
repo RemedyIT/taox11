@@ -20,17 +20,6 @@
 // generated from StubProxySourceCDRWriter#pre_visit
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
-TAO_CORBA::Boolean operator<< (TAO_OutputCDR&strm, const IDL::optional<int16_t>&_val)
-{
-  return taox11_optional_cdr<IDL::optional<int16_t>>::insert (strm,  _val);
-}
-
-TAO_CORBA::Boolean operator>> (TAO_InputCDR& strm, IDL::optional<int16_t>&_val)
-{
-  return taox11_optional_cdr<IDL::optional<int16_t>>::extract (strm,  _val);
-}
-
-
 // generated from c++11/templates/cli/src/string_cdr
 #if defined(_ALIAS_bds_CDR_OPS_IMPL_)
 bool _cdr_in_bds (
@@ -63,6 +52,16 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, bar &_tao_aggregate)
     (strm >> _tao_aggregate.x ()) &&
     (strm >> _tao_aggregate.y ()) &&
     (strm >> _tao_aggregate.z ());
+}
+
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR&strm, const IDL::optional<int16_t>&_val)
+{
+  return taox11_optional_cdr<IDL::optional<int16_t>>::insert (strm,  _val);
+}
+
+TAO_CORBA::Boolean operator>> (TAO_InputCDR& strm, IDL::optional<int16_t>&_val)
+{
+  return taox11_optional_cdr<IDL::optional<int16_t>>::extract (strm,  _val);
 }
 
 TAO_END_VERSIONED_NAMESPACE_DECL
