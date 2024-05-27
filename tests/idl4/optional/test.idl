@@ -5,10 +5,13 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
+typedef map<string,long> StringLongMap;
+
+typedef string<650> bds;
+
 struct bar
 {
   short x;
   string y;
   @optional short z;
 };
-
