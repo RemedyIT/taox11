@@ -224,6 +224,9 @@ module IDL
         when IDL::Type::Array
           add_include('tao/x11/array_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type)
+        when IDL::Type::String,
+             IDL::Type::WString
+          add_include('tao/x11/bounded_string_cdr_t.h') if idl_type.size.to_i.positive? && !params[:no_cdr_streaming]
         end
       end
 

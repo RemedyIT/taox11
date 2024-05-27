@@ -174,18 +174,6 @@ module IDL
 
         visitor(BitsetVisitor).visit_cdr(node)
       end
-
-      def visit_typedef(node)
-        return if node.is_local? || params[:no_cdr_streaming]
-        # nothing to do if this is just an alias for another defined type
-        return if node.idltype.is_a?(IDL::Type::ScopedName) || node.idltype.resolved_type.is_standard_type?
-
-        idl_type = node.idltype.resolved_type
-        case idl_type
-        when IDL::Type::String, IDL::Type::WString
-          visitor(StringVisitor).visit_cdr(node) # only bounded, unbounded is standard_type
-        end
-      end
     end # StubProxySourceCDRWriter
 
     class StubProxySourceProxyImplWriter < StubProxySourceBaseWriter
