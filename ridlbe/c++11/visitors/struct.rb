@@ -29,10 +29,6 @@ module IDL
         false
       end
 
-      def has_optional?
-        true
-      end
-
       # Return the base of this struct, nil in case of no base struct
       def base
         node.base
