@@ -10,5 +10,6 @@ struct bar
   short x;
   string y;
   @optional short z;
+  @optional short a;
+  @optional string opt_string;
 };
-

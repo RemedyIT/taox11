@@ -189,6 +189,7 @@ module IDL
 
         add_include('tao/x11/basic_argument_t.h')
         node.members.each { |m| check_idl_type(m.idltype) }
+        node.members.each { |m| add_include('tao/x11/optional_cdr_t.h') if !m.annotations[:optional].first.nil? }
       end
 
       def enter_union(node)

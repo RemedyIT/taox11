@@ -123,7 +123,7 @@ module IDL
 
       def cxx_in_type
         if optional?
-          "const IDL::optional<#{super}>&"
+          "const IDL::optional<#{cxx_return_type}>&"
         elsif external?
           "const std::shared_ptr<#{super}>&"
         else

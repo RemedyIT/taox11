@@ -2,7 +2,7 @@
 // generated from <%= ridl_template_path %>
 TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> &_tao_union)
 {
-  if (!(strm <<<%= switchtype.cdr_from_fmt % "_tao_union._d ()" %>))
+  if (!(strm << <%= switchtype.cdr_from_fmt % "_tao_union._d ()" %>))
   {
     return false;
   }
