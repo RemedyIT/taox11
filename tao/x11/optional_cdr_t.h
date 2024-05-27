@@ -53,7 +53,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
         if (_strm >> temp_val)
         {
           // set union member and associated discriminant when there are multiple legal discriminant values
-          _optional= std::move (temp_val);
+          _optional = std::move (temp_val);
           return true;
         }
       }
