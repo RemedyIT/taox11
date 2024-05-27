@@ -43,7 +43,8 @@ TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const bar &_tao_aggregate)
   return
     (strm << _tao_aggregate.x ()) &&
     (strm << _tao_aggregate.y ()) &&
-    (strm << _tao_aggregate.z ());
+    (strm << _tao_aggregate.z ()) &&
+    (strm << _tao_aggregate.a ());
 }
 
 TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, bar &_tao_aggregate)
@@ -51,9 +52,14 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, bar &_tao_aggregate)
   return
     (strm >> _tao_aggregate.x ()) &&
     (strm >> _tao_aggregate.y ()) &&
-    (strm >> _tao_aggregate.z ());
+    (strm >> _tao_aggregate.z ()) &&
+    (strm >> _tao_aggregate.a ());
 }
 
+// Unaliased type : IDL::optional<int16_t>
+// MD5            : 390A720FCF9D6B2326C7F41A8BC2534C
+#if !defined(_CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_IMPL_)
+#define _CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_IMPL_
 TAO_CORBA::Boolean operator<< (TAO_OutputCDR&strm, const IDL::optional<int16_t>&_val)
 {
   return taox11_optional_cdr<IDL::optional<int16_t>>::insert (strm,  _val);
@@ -63,6 +69,22 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR& strm, IDL::optional<int16_t>&_val)
 {
   return taox11_optional_cdr<IDL::optional<int16_t>>::extract (strm,  _val);
 }
+#endif
+
+// Unaliased type : IDL::optional<int16_t>
+// MD5            : 390A720FCF9D6B2326C7F41A8BC2534C
+#if !defined(_CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_IMPL_)
+#define _CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_IMPL_
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR&strm, const IDL::optional<int16_t>&_val)
+{
+  return taox11_optional_cdr<IDL::optional<int16_t>>::insert (strm,  _val);
+}
+
+TAO_CORBA::Boolean operator>> (TAO_InputCDR& strm, IDL::optional<int16_t>&_val)
+{
+  return taox11_optional_cdr<IDL::optional<int16_t>>::extract (strm,  _val);
+}
+#endif
 
 TAO_END_VERSIONED_NAMESPACE_DECL
 

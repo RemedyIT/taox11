@@ -6,8 +6,8 @@
  *        https://www.remedy.nl
  */
 
-#ifndef __RIDL_TESTC_H_DJEBDBGG_INCLUDED__
-#define __RIDL_TESTC_H_DJEBDBGG_INCLUDED__
+#ifndef __RIDL_TESTC_H_DIFDHCCB_INCLUDED__
+#define __RIDL_TESTC_H_DIFDHCCB_INCLUDED__
 
 #pragma once
 
@@ -18,6 +18,7 @@
 #include "map"
 #include "tao/x11/base/bounded_string_t.h"
 #include "tao/x11/base/bounded_type_traits_t.h"
+#include "tao/x11/base/bounded_vector_t.h"
 #include "tao/x11/optional_t.h"
 
 #include /**/ "tao/x11/base/versionx11.h"
@@ -36,6 +37,10 @@ using StringLongMap = std::map<std::string, int32_t>;
 /// @copydoc test.idl::bds
 using bds = TAOX11_IDL::bounded_string<650>;
 
+// generated from c++11/templates/cli/hdr/typedef
+/// @copydoc test.idl::bs
+using bs = TAOX11_NAMESPACE::IDL::bounded_vector<int16_t, 100>;
+
 // generated from c++11/templates/cli/hdr/struct_pre
 /// @copydoc test.idl::bar
 class bar
@@ -50,7 +55,8 @@ public:
   explicit inline bar (
     int16_t x,
     std::string y,
-    IDL::optional<int16_t> z);
+    IDL::optional<int16_t> z,
+    IDL::optional<int16_t> a);
   bar& operator= (const bar&) = default;
   bar& operator= (bar&&) = default;
 
@@ -77,6 +83,14 @@ public:
   inline IDL::optional<int16_t>& z () { return this->z_; }
   //@}
 
+  /// @copydoc test.idl::bar::a
+  //@{
+  inline void a (const IDL::optional<int16_t>& _x11_a) { this->a_ = _x11_a; }
+  inline void a (IDL::optional<int16_t>&& _x11_a) { this->a_ = std::move (_x11_a); }
+  inline const IDL::optional<int16_t>& a () const { return this->a_; }
+  inline IDL::optional<int16_t>& a () { return this->a_; }
+  //@}
+
   /// Exchange the value of two structures in an efficient matter
   inline void swap (bar& s);
 
@@ -84,6 +98,7 @@ private:
   int16_t x_{};
   std::string y_{};
   IDL::optional<int16_t> z_{std::nullopt};
+  IDL::optional<int16_t> a_{std::nullopt};
 };// bar
 
 inline void swap (::bar& m1, ::bar& m2) { m1.swap (m2); }
@@ -185,6 +200,52 @@ namespace TAOX11_NAMESPACE::IDL
 
 #endif
 
+  // generated from c++11/templates/cli/hdr/sequence_idl_traits
+  // Unaliased type : TAOX11_NAMESPACE::IDL::bounded_vector<int16_t, 100>
+  // MD5            : D0B8C685EFADFAF646AABDA450D4F77E
+#if !defined(_ALIAS_D0B8C685EFADFAF646AABDA450D4F77E_TRAITS_DECL_)
+#define _ALIAS_D0B8C685EFADFAF646AABDA450D4F77E_TRAITS_DECL_
+
+  template<>
+  struct traits <::bs>
+    : IDL::common_traits<::bs>
+    , IDL::bounded_traits<::bs>
+  {
+    /// std::false_type or std::true_type type indicating whether
+    /// this sequence is declared as bounded
+    using is_bounded = std::true_type;
+    /// IDL::traits<> for the element of the sequence
+    using element_traits = IDL::traits<int16_t>;
+
+    template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
+    static inline OStrm_& write_on(
+        OStrm_& os_, in_type val_,
+        Formatter fmt_ = Formatter ())
+    {
+      return fmt_ (os_, val_);
+    }
+
+    template <typename Formatter = std::false_type>
+    static inline __Writer<Formatter> write (in_type val) { return {val}; }
+  };
+
+  template <typename OStrm_, typename Fmt>
+  inline OStrm_& operator <<(
+      OStrm_& os,
+      IDL::traits<::bs>::__Writer<Fmt> w)
+  {
+    using writer_t = IDL::traits<::bs>::__Writer<Fmt>;
+    using formatter_t = typename std::conditional<
+                          std::is_same<
+                            typename writer_t::formatter_t,
+                            std::false_type>::value,
+                          formatter<::bs, OStrm_>,
+                          typename writer_t::formatter_t>::type;
+    return IDL::traits<::bs>::write_on (os, w.val_, formatter_t ());
+  }
+
+#endif
+
   // generated from c++11/templates/cli/hdr/struct_idl_traits
 #if !defined (_STRUCT_BAR_TRAITS_)
 #define _STRUCT_BAR_TRAITS_
@@ -249,10 +310,12 @@ namespace TAOX11_NAMESPACE::IDL
 inline ::bar::bar (
   int16_t x,
   std::string y,
-  IDL::optional<int16_t> z)
+  IDL::optional<int16_t> z,
+  IDL::optional<int16_t> a)
   : x_ (std::move (x))
   , y_ (std::move (y))
   , z_ (std::move (z))
+  , a_ (std::move (a))
 {
 }
 
@@ -261,6 +324,7 @@ inline void ::bar::swap (::bar& s)
   std::swap (this->x_, s.x_);
   std::swap (this->y_, s.y_);
   std::swap (this->z_, s.z_);
+  std::swap (this->a_, s.a_);
 }
 
 // generated from c++11/templates/cli/hdr/map_os
@@ -276,6 +340,19 @@ inline std::ostream& operator<< (std::ostream& strm, const ::StringLongMap& _v)
 
 #endif // _ALIAS_OSTREAM_9591659AF1C35F72B6270EE9C6D3AFEF_DECL_
 
+// generated from c++11/templates/cli/hdr/sequence_os
+// Unaliased type : TAOX11_NAMESPACE::IDL::bounded_vector<int16_t, 100>
+// MD5            : D0B8C685EFADFAF646AABDA450D4F77E
+#if !defined (_ALIAS_OSTREAM_D0B8C685EFADFAF646AABDA450D4F77E_DECL_)
+#define _ALIAS_OSTREAM_D0B8C685EFADFAF646AABDA450D4F77E_DECL_
+
+inline std::ostream& operator<< (std::ostream& strm, const ::bs& _v)
+{
+  return IDL::traits<::bs>::write_on (strm, _v);
+}
+
+#endif // _ALIAS_OSTREAM_D0B8C685EFADFAF646AABDA450D4F77E_DECL_
+
 // generated from c++11/templates/cli/hdr/struct_os
 inline std::ostream& operator<< (std::ostream& strm, const ::bar& _v)
 {
@@ -289,6 +366,6 @@ inline std::ostream& operator<< (std::ostream& strm, const ::bar& _v)
 
 #include /**/ "tao/x11/base/post.h"
 
-#endif /* __RIDL_TESTC_H_DJEBDBGG_INCLUDED__ */
+#endif /* __RIDL_TESTC_H_DIFDHCCB_INCLUDED__ */
 
 // -*- END -*-

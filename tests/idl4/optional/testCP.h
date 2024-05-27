@@ -6,14 +6,15 @@
  *        https://www.remedy.nl
  */
 
-#ifndef __RIDL_TESTCP_H_IHIFDICE_INCLUDED__
-#define __RIDL_TESTCP_H_IHIFDICE_INCLUDED__
+#ifndef __RIDL_TESTCP_H_GCEACAAC_INCLUDED__
+#define __RIDL_TESTCP_H_GCEACAAC_INCLUDED__
 
 #pragma once
 
 #include "tao/x11/anyinsert_policy_t.h"
 #include "tao/x11/map_cdr_t.h"
 #include "tao/x11/basic_argument_t.h"
+#include "tao/x11/sequence_cdr_t.h"
 
 #include /**/ "tao/x11/base/versionx11.h"
 
@@ -87,6 +88,35 @@ inline TAO_CORBA::Boolean operator>> (TAO_InputCDR &cdr, IDL::traits<TAOX11_IDL:
 TAO_END_VERSIONED_NAMESPACE_DECL
 # endif // !_ALIAS_8A4C2C8D2E43F29AF2FF47B029780F14_ARG_TRAITS_
 
+// generated from c++11/templates/cli/prx/sequence_cdr
+// Unaliased type : TAOX11_NAMESPACE::IDL::bounded_vector<int16_t, 100>
+// MD5            : D0B8C685EFADFAF646AABDA450D4F77E
+#if !defined (_ALIAS_D0B8C685EFADFAF646AABDA450D4F77E_ARG_TRAITS_)
+#define _ALIAS_D0B8C685EFADFAF646AABDA450D4F77E_ARG_TRAITS_
+/// Argument traits specializations for bs
+template<>
+class TAOX11_NAMESPACE::Arg_Traits<::bs>
+  : public Basic_Arg_Traits_T<::bs, Any_Insert_Policy_Noop>
+{
+};
+
+TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+
+/// @name CDR streaming operator specializations for bs
+//@{
+inline TAO_CORBA::Boolean operator<< (TAO_OutputCDR &cdr, const IDL::traits<::bs>::value_type &v)
+{
+  return taox11_sequence_cdr<::bs::value_type>::insert<100U> (cdr, v);
+}
+inline TAO_CORBA::Boolean operator>> (TAO_InputCDR &cdr, IDL::traits<::bs>::value_type& v)
+{
+  return taox11_sequence_cdr<::bs::value_type>::extract<100U> (cdr, v);
+}
+//@}
+
+TAO_END_VERSIONED_NAMESPACE_DECL
+# endif // !_ALIAS_D0B8C685EFADFAF646AABDA450D4F77E_ARG_TRAITS_
+
 // generated from c++11/templates/cli/prx/struct_cdr
 # if !defined (_BAR_TRAITS_)
 # define _BAR_TRAITS_
@@ -105,15 +135,30 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 TAO_CORBA::Boolean operator<< (TAO_OutputCDR&, const bar&);
 TAO_CORBA::Boolean operator>> (TAO_InputCDR&, bar&);
 //@}
+// Unaliased type : IDL::optional<int16_t>
+// MD5            : 390A720FCF9D6B2326C7F41A8BC2534C
+#if !defined(_CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_DECL_)
+#define _CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_DECL_
 /// @name CDR streaming operator specializations for IDL::optional<int16_t>
 //@{
 TAO_CORBA::Boolean operator<< (TAO_OutputCDR&, const IDL::optional<int16_t>&);
 TAO_CORBA::Boolean operator>> (TAO_InputCDR&, IDL::optional<int16_t>&);
 //@}
+#endif
+// Unaliased type : IDL::optional<int16_t>
+// MD5            : 390A720FCF9D6B2326C7F41A8BC2534C
+#if !defined(_CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_DECL_)
+#define _CDR_390A720FCF9D6B2326C7F41A8BC2534C_OPTIONAL_DECL_
+/// @name CDR streaming operator specializations for IDL::optional<int16_t>
+//@{
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR&, const IDL::optional<int16_t>&);
+TAO_CORBA::Boolean operator>> (TAO_InputCDR&, IDL::optional<int16_t>&);
+//@}
+#endif
 
 TAO_END_VERSIONED_NAMESPACE_DECL
 
 
-#endif /* __RIDL_TESTCP_H_IHIFDICE_INCLUDED__ */
+#endif /* __RIDL_TESTCP_H_GCEACAAC_INCLUDED__ */
 
 // -*- END -*-

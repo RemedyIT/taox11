@@ -33,6 +33,11 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR &<% if member_count > 0 || !base.nil
 %members.each do |_m|
 % if _m.optional?
 
+// Unaliased type : <%= _m.cxx_member_type %>
+% alias_md5 =  _m.cxx_member_type.to_md5
+// MD5            : <%= alias_md5 %>
+#if !defined(_CDR_<%= alias_md5 %>_OPTIONAL_IMPL_)
+#define _CDR_<%= alias_md5 %>_OPTIONAL_IMPL_
 TAO_CORBA::Boolean operator<< (TAO_OutputCDR&strm, const <%= _m.cxx_member_type %>&_val)
 {
   return taox11_optional_cdr<<%= _m.cxx_member_type %>>::insert (strm,  _val);
@@ -42,5 +47,6 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR& strm, <%= _m.cxx_member_type %>&_va
 {
   return taox11_optional_cdr<<%= _m.cxx_member_type %>>::extract (strm,  _val);
 }
+#endif
 % end
 %end
