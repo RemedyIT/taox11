@@ -134,7 +134,7 @@ jobs:
     - name: Add packages
       run: |
         sudo apt-get --yes update
-        sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
+        sudo apt-get --yes install --no-upgrade libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
     - name: initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
