@@ -38,10 +38,10 @@ module IDL
           @default_pre_includes << 'tao/CDR.h'
           @default_post_includes << 'tao/x11/cdr_long_double.h'
         end
-        #if params[:gen_typecodes]
+        if params[:gen_typecodes]
           @default_pre_includes << 'tao/AnyTypeCode/TypeCode.h'
           @default_pre_includes << 'tao/AnyTypeCode/TypeCode_Constants.h'
-        #end
+        end
       end
 
       # Object traits are only required for interfaces and valuetypes

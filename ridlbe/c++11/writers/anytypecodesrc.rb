@@ -70,7 +70,6 @@ module IDL
       def visit_typecodes(parser)
         writer(StubSourceTypecodeWriter).visit_nodes(parser)
       end
-
     end # AnyTypeCodeWriter
 
     class AnyTypeCodeSourceIncludeWriter < AnyTypeCodeSourceBaseWriter

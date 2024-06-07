@@ -517,12 +517,6 @@ module IDL
         super
       end
 
-      # def pre_visit(parser)
-      #   writer(StubSourceTaoTypecodeWriter).visit_nodes(parser)
-      #
-      #   super
-      # end
-
       def enter_interface(node)
         visitor(InterfaceVisitor).visit_typecode(node)
       end
