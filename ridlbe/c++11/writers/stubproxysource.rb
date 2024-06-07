@@ -67,7 +67,7 @@ module IDL
       def pre_visit(parser)
         visit_includes(parser)
 
-        visit_typecodes(parser)
+        visit_tao_typecodes(parser)
 
         super
       end
@@ -90,10 +90,6 @@ module IDL
         visitor(PostVisitor).visit
       end
 
-      def visit_typecodes(parser)
-        writer(StubSourceTypecodeWriter).visit_nodes(parser)
-      end
-
       def visit_cdr(parser)
         writer(StubProxySourceCDRWriter).visit_nodes(parser)
       end
@@ -110,6 +106,10 @@ module IDL
 
       def visit_proxy_implementation(parser)
         writer(StubProxySourceProxyImplWriter).visit_nodes(parser)
+      end
+
+      def visit_tao_typecodes(parser)
+        writer(StubSourceTaoTypecodeWriter).visit_nodes(parser)
       end
     end # StubProxySourceWriter
 

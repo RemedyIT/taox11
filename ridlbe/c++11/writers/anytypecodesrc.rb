@@ -45,6 +45,8 @@ module IDL
       def pre_visit(parser)
         visit_includes(parser)
 
+        visit_typecodes(parser)
+
         super
       end
 
@@ -64,6 +66,11 @@ module IDL
       def visit_anyops(parser)
         writer(StubSourceAnyOpWriter).visit_nodes(parser)
       end
+
+      def visit_typecodes(parser)
+        writer(StubSourceTypecodeWriter).visit_nodes(parser)
+      end
+
     end # AnyTypeCodeWriter
 
     class AnyTypeCodeSourceIncludeWriter < AnyTypeCodeSourceBaseWriter
@@ -84,7 +91,7 @@ module IDL
       end
 
       def enter_interface(node)
-        add_pre_include('tao/AnyTypeCode/Objref_TypeCode_Static.h') if params[:gen_typecodes]
+        add_pre_include('tao/AnyTypeCode/Objref_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
         return if node.is_local? || node.is_pseudo? || node.is_abstract?
 
@@ -92,8 +99,8 @@ module IDL
       end
 
       def enter_valuetype(node)
-        add_pre_include('tao/AnyTypeCode/Value_TypeCode_Static.h') if params[:gen_typecodes]
-        add_pre_include('tao/AnyTypeCode/TypeCode_Value_Field.h') if params[:gen_typecodes]
+        add_pre_include('tao/AnyTypeCode/Value_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
+        add_pre_include('tao/AnyTypeCode/TypeCode_Value_Field.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
         return if node.is_abstract? || node.is_local?
 
@@ -101,7 +108,7 @@ module IDL
       end
 
       def visit_valuebox(node)
-        #add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h') if params[:gen_typecodes]
+        add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
         return if node.is_local?
 
@@ -109,8 +116,8 @@ module IDL
       end
 
       def enter_struct(node)
-        add_pre_include('tao/AnyTypeCode/Struct_TypeCode_Static.h') if params[:gen_typecodes]
-        add_pre_include('tao/AnyTypeCode/TypeCode_Struct_Field.h') if params[:gen_typecodes]
+        add_pre_include('tao/AnyTypeCode/Struct_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
+        add_pre_include('tao/AnyTypeCode/TypeCode_Struct_Field.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
         add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if params[:gen_any_ops]
         return if node.is_local?
 
@@ -119,8 +126,8 @@ module IDL
       end
 
       def enter_union(node)
-        add_pre_include('tao/AnyTypeCode/Union_TypeCode_Static.h') if params[:gen_typecodes]
-        add_pre_include('tao/AnyTypeCode/TypeCode_Case_T.h') if params[:gen_typecodes]
+        add_pre_include('tao/AnyTypeCode/Union_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
+        add_pre_include('tao/AnyTypeCode/TypeCode_Case_T.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
         add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if params[:gen_any_ops]
         add_post_include('tao/x11/anytypecode/typecode_case_t.h') if params[:gen_any_ops]
         return if node.is_local?
@@ -130,32 +137,32 @@ module IDL
       end
 
       def enter_exception(node)
-        add_pre_include('tao/AnyTypeCode/Struct_TypeCode_Static.h') if params[:gen_typecodes]
-        add_pre_include('tao/AnyTypeCode/TypeCode_Struct_Field.h') if params[:gen_typecodes]
+        add_pre_include('tao/AnyTypeCode/Struct_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
+        add_pre_include('tao/AnyTypeCode/TypeCode_Struct_Field.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
         add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if params[:gen_any_ops]
         # arg template included in P.h
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 
       def visit_enum(_node)
-        add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h') if params[:gen_typecodes]
+        add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
       end
 
       def visit_bitmask(_node)
-        add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h') if params[:gen_typecodes]
+        add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
       end
 
       def visit_bitset(_node)
-        add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h') if params[:gen_typecodes]
+        add_pre_include('tao/AnyTypeCode/Enum_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if params[:gen_any_ops]
       end
 
       def visit_typedef(node)
         return if node.idltype.resolved_type.is_a?(IDL::Type::Native)
 
-        add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h') if params[:gen_typecodes]
+        add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
         # just an alias or a sequence, array or fixed?
         unless node.idltype.is_a?(IDL::Type::ScopedName)
           add_post_include('tao/x11/anytypecode/any_dual_impl_t.h') if params[:gen_typecodes]
@@ -163,16 +170,16 @@ module IDL
           case idl_type
           when IDL::Type::String,
                IDL::Type::WString
-            add_pre_include('tao/AnyTypeCode/String_TypeCode_Static.h') if params[:gen_typecodes]
+            add_pre_include('tao/AnyTypeCode/String_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
           when IDL::Type::Sequence,
                IDL::Type::Array
-            add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h') if params[:gen_typecodes]
+            add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
             unless node.is_local?
               check_idl_type(idl_type)
               check_idl_type(idl_type.basetype)
             end
           when IDL::Type::Map
-            add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h') if params[:gen_typecodes]
+            add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h') if params[:gen_typecodes] && !params[:gen_stub_proxy_source]
             unless node.is_local?
               check_idl_type(idl_type)
               check_idl_type(idl_type.basetype)

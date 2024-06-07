@@ -166,7 +166,8 @@ module IDL
       end
 
       def visit_typecodes(parser)
-        writer(StubSourceTypecodeWriter).visit_nodes(parser) unless params[:gen_stub_proxy_source]
+        writer(StubSourceTypecodeWriter).visit_nodes(parser) unless params[:gen_anytypecode_source]
+        writer(StubSourceTaoTypecodeWriter).visit_nodes(parser) unless params[:gen_stub_proxy_source]
       end
 
       def visit_cdr(parser)
@@ -516,11 +517,11 @@ module IDL
         super
       end
 
-      def pre_visit(parser)
-        writer(StubSourceTaoTypecodeWriter).visit_nodes(parser)
-
-        super
-      end
+      # def pre_visit(parser)
+      #   writer(StubSourceTaoTypecodeWriter).visit_nodes(parser)
+      #
+      #   super
+      # end
 
       def enter_interface(node)
         visitor(InterfaceVisitor).visit_typecode(node)
