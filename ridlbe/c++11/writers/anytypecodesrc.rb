@@ -45,8 +45,6 @@ module IDL
       def pre_visit(parser)
         visit_includes(parser)
 
-        visit_typecodes(parser)
-
         super
       end
 
@@ -65,10 +63,6 @@ module IDL
 
       def visit_anyops(parser)
         writer(StubSourceAnyOpWriter).visit_nodes(parser)
-      end
-
-      def visit_typecodes(parser)
-        writer(StubSourceTypecodeWriter).visit_nodes(parser)
       end
     end # AnyTypeCodeWriter
 

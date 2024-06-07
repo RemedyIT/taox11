@@ -28,13 +28,20 @@ module IDL
         super
 
         @default_pre_includes = []
-        @default_pre_includes << 'tao/x11/base/tao_corba.h'
-        @default_pre_includes << 'tao/x11/corba.h'
-        @default_post_includes = []
+        @default_post_includes = [
+          'tao/x11/base/tao_corba.h',
+          'tao/x11/corba.h',
+          'tao/x11/anytypecode/typecode_impl.h',
+          'tao/x11/anytypecode/typecode.h'
+        ]
         unless params[:no_cdr_streaming]
           @default_pre_includes << 'tao/CDR.h'
           @default_post_includes << 'tao/x11/cdr_long_double.h'
         end
+        #if params[:gen_typecodes]
+          @default_pre_includes << 'tao/AnyTypeCode/TypeCode.h'
+          @default_pre_includes << 'tao/AnyTypeCode/TypeCode_Constants.h'
+        #end
       end
 
       # Object traits are only required for interfaces and valuetypes
@@ -60,6 +67,8 @@ module IDL
       def pre_visit(parser)
         visit_includes(parser)
 
+        visit_typecodes(parser)
+
         super
       end
 
@@ -79,6 +88,10 @@ module IDL
 
         super
         visitor(PostVisitor).visit
+      end
+
+      def visit_typecodes(parser)
+        writer(StubSourceTypecodeWriter).visit_nodes(parser)
       end
 
       def visit_cdr(parser)
@@ -234,7 +247,7 @@ module IDL
       end
 
       def generate_typecodes?
-        params[:gen_typecodes] && !params[:gen_anytypecode_source]
+        params[:gen_typecodes] && params[:gen_anytypecode_source]
       end
 
       def generate_anyops?
@@ -305,9 +318,7 @@ module IDL
       end
 
       def visit_valuebox(node)
-        if generate_typecodes?
-          add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h')
-        end
+        add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h') if generate_typecodes?
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
         add_post_include('tao/x11/valuetype/valuetype_proxies.h') # after typecode includes

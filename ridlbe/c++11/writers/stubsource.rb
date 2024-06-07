@@ -166,7 +166,7 @@ module IDL
       end
 
       def visit_typecodes(parser)
-        writer(StubSourceTypecodeWriter).visit_nodes(parser)
+        writer(StubSourceTypecodeWriter).visit_nodes(parser) unless params[:gen_stub_proxy_source]
       end
 
       def visit_cdr(parser)
@@ -255,9 +255,7 @@ module IDL
       end
 
       def visit_valuebox(node)
-        if generate_typecodes?
-          add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h')
-        end
+        add_pre_include('tao/AnyTypeCode/Alias_TypeCode_Static.h') if generate_typecodes?
         add_post_include('tao/x11/anytypecode/any_basic_impl_t.h') if generate_anyops?
         add_post_include('tao/x11/anytypecode/typecode.h') # in case not added yet
         add_post_include('tao/x11/valuetype/valuetype_proxies.h') # after typecode includes
