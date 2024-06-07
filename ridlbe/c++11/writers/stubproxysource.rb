@@ -247,7 +247,7 @@ module IDL
       end
 
       def generate_typecodes?
-        params[:gen_typecodes] && params[:gen_anytypecode_source]
+        params[:gen_typecodes] && params[:gen_stub_proxy_source]
       end
 
       def generate_anyops?
