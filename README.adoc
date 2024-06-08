@@ -1,8 +1,8 @@
 image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboard, link=https://www.taox11.org/scoreboard.html]
 image:https://www.codefactor.io/repository/github/remedyit/taox11/badge[CodeFactor, link=https://www.codefactor.io/repository/github/remedyit/taox11]
-image:https://github.com/RemedyIT/taox11/workflows/linux/badge.svg[Linux CI, link=https://github.com/RemedyIT/taox11/actions?query=workflow%3Alinux]
-image:https://github.com/RemedyIT/taox11/workflows/windows/badge.svg[Windows CI, link=https://github.com/RemedyIT/taox11/actions?query=workflow%3Awindows]
-image:https://github.com/RemedyIT/taox11/workflows/fuzzr/badge.svg[Fuzzr CI, link=https://github.com/RemedyIT/taox11/actions?query=workflow%3Afuzzr]
+image:https://github.com/RemedyIT/taox11/actions/workflows/linux.yml/badge.svg[Linux CI, link=https://github.com/RemedyIT/taox11/actions?query=workflow%3Alinux]
+// image:https://github.com/RemedyIT/taox11/actions/workflows/windows.yml/badge.svg[Windows CI, link=https://github.com/RemedyIT/taox11/actions?query=workflow%3Awindows]
+image:https://github.com/RemedyIT/taox11/actions/workflows/fuzzr.yml/badge.svg[Fuzzr CI, link=https://github.com/RemedyIT/taox11/actions?query=workflow%3Afuzzr]
 image:https://codecov.io/gh/RemedyIT/taox11/branch/master/graph/badge.svg[Codecov, link=https://codecov.io/gh/RemedyIT/taox11]
 
 = TAOX11
