@@ -67,7 +67,7 @@ module IDL
       def pre_visit(parser)
         visit_includes(parser)
 
-        visit_tao_typecodes(parser)
+        visit_tao_typecodes(parser) if params[:gen_typecodes]
 
         super
       end
