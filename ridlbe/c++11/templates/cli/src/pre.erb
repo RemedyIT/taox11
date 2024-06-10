@@ -1,12 +1,12 @@
-#if __has_include("tao/x11/base/tao_corba.h")
-# include "tao/x11/base/tao_corba.h"
-#endif
 % pre_includes.each do |incfile|
 #include "<%= incfile %>"
 % end
 % includes.each do |incfile|
 #include "<%= incfile %>"
 % end
+#if __has_include("tao/x11/base/tao_corba.h")
+# include "tao/x11/base/tao_corba.h"
+#endif
 % post_includes.each do |incfile|
 #include "<%= incfile %>"
 % end
