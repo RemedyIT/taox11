@@ -29,7 +29,6 @@ module IDL
 
         @default_pre_includes = []
         @default_post_includes = [
-          'tao/x11/base/tao_corba.h',
           'tao/x11/corba.h',
           'tao/x11/anytypecode/typecode_impl.h',
           'tao/x11/anytypecode/typecode.h'
