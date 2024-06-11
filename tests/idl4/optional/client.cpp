@@ -16,5 +16,8 @@ int main (int /*argc*/, char* /*argv*/[])
   bar mybar;
 
   TAOX11_TEST_INFO << "mybar: " << mybar << std::endl;
+  mybar.z(6);
+  TAOX11_TEST_INFO << "mybar: " << mybar << std::endl;
+
   return retval;
 }

@@ -37,8 +37,7 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
 % unless _m.optional? || _m.external?
         << "<%= _sep %><%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write(val_.<%= _m.cxxname %> ())
 % else
-%# TODO
-%#         << "<%= _sep %><%= _m.cxxname %>=" << (val_.<%= _m.cxxname() %> ().has_value () ? IDL::traits<<%= _m.scoped_cxxtype %>>::write(val_.<%= _m.cxxname %> ().value ()) : "<empty>")
+        << "<%= _sep %><%= _m.cxxname %>="; if (val_.<%= _m.cxxname() %> ().has_value ()) { os_ << IDL::traits<<%= _m.scoped_cxxtype %>>::write(val_.<%= _m.cxxname %> ().value ()); } else { os_ << "std::nullopt"; } os_
 % end
 %     end
 %     _sep = ',' unless _sep

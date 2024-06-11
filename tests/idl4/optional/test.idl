@@ -8,8 +8,9 @@
 struct bar
 {
   short x;
-  string y;
   @optional short z;
+  long z_long;
   @optional short a;
   @optional string opt_string;
+  string y;
 };
