@@ -99,7 +99,7 @@ namespace TAOX11_NAMESPACE
         , label_ (member_label)
       {
       }
-      virtual ~Case_T () = default;
+      ~Case_T () override = default;
 
 
       /**

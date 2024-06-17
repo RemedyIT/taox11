@@ -42,7 +42,7 @@ namespace TAOX11_NAMESPACE
     Any_Dual_Impl_T (CORBA::typecode_reference,
                      const value_type &);
     Any_Dual_Impl_T (CORBA::typecode_reference);
-    virtual ~Any_Dual_Impl_T () = default;
+    ~Any_Dual_Impl_T () override = default;
 
     static void insert (CORBA::Any &,
                         CORBA::typecode_reference,

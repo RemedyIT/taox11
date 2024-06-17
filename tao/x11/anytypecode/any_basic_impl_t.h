@@ -37,7 +37,7 @@ namespace TAOX11_NAMESPACE
 
     Any_Basic_Impl_T (CORBA::typecode_reference,
                       value_type val);
-    virtual ~Any_Basic_Impl_T () = default;
+    ~Any_Basic_Impl_T () override = default;
 
     static void insert (CORBA::Any &,
                         CORBA::typecode_reference,
@@ -75,7 +75,7 @@ namespace TAOX11_NAMESPACE
 
     Any_Object_Impl_T (CORBA::typecode_reference,
                        value_type val);
-    virtual ~Any_Object_Impl_T () = default;
+    ~Any_Object_Impl_T () override = default;
 
     static void insert (CORBA::Any &,
                         CORBA::typecode_reference,
@@ -104,7 +104,7 @@ namespace TAOX11_NAMESPACE
 
     Any_Value_Impl_T (CORBA::typecode_reference,
                       value_type val);
-    virtual ~Any_Value_Impl_T () = default;
+    ~Any_Value_Impl_T () override = default;
 
     bool marshal_type (TAO_OutputCDR &) override;
 
@@ -133,9 +133,8 @@ namespace TAOX11_NAMESPACE
     using ref_type = std::shared_ptr<impl_type>;
     using value_type = typename TRAITS::value_type;
 
-    Any_AbstractBase_Impl_T (CORBA::typecode_reference,
-                      value_type val);
-    virtual ~Any_AbstractBase_Impl_T () = default;
+    Any_AbstractBase_Impl_T (CORBA::typecode_reference, value_type val);
+    ~Any_AbstractBase_Impl_T () override = default;
 
     static void insert (CORBA::Any &,
                         CORBA::typecode_reference,

@@ -34,7 +34,7 @@ namespace TAOX11_NAMESPACE
     Upcall_Command (std::function<void()> execute_function);
 
     /// Destructor.
-    virtual ~Upcall_Command () = default;
+    ~Upcall_Command () override = default;
 
     /// Calls the execute_function catching/wrapping any user exceptions.
     void execute () override;

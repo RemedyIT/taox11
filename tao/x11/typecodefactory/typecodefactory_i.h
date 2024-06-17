@@ -22,21 +22,20 @@
 
 namespace TAOX11_NAMESPACE
 {
-
+  /**
+   * @class TypeCodeFactory_i
+   *
+   * @brief TypeCodeFactory_i.
+   *
+   * Implementation of the CORBA::TypeCodeFactory interface
+   */
   class TAOX11_TYPECODEFACTORY_Export TypeCodeFactory_i
     : public virtual CORBA::TypeCodeFactory,
       public virtual CORBA::LocalObject
   {
-/**
- * @class TypeCodeFactory_i
- *
- * @brief TypeCodeFactory_i.
- *
- * Implementation of the CORBA::TypeCodeFactory interface
- */
   public:
     TypeCodeFactory_i () = default;
-    virtual ~TypeCodeFactory_i () = default;
+    ~TypeCodeFactory_i () override = default;
 
     CORBA::object_reference<CORBA::TypeCode> create_struct_tc (
           const std::string &id,

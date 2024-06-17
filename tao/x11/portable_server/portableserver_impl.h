@@ -160,7 +160,7 @@ namespace TAOX11_NAMESPACE {
       POA_proxy& _proxy ();
 
     protected:
-      virtual ~POA_impl () = default;
+      ~POA_impl () override = default;
 
     private:
       template <typename _Tp1, typename, typename ...Args>
@@ -209,7 +209,7 @@ namespace TAOX11_NAMESPACE {
       POAManager_proxy& _proxy ();
 
     protected:
-      virtual ~POAManager_impl () = default;
+      ~POAManager_impl () override = default;
 
     private:
       template <typename _Tp1, typename, typename ...Args>
@@ -250,7 +250,7 @@ namespace TAOX11_NAMESPACE {
       POAManagerFactory_proxy& _proxy ();
 
     protected:
-      virtual ~POAManagerFactory_impl () = default;
+      ~POAManagerFactory_impl () override = default;
 
     private:
       template <typename _Tp1, typename, typename ...Args>
@@ -289,7 +289,7 @@ namespace TAOX11_NAMESPACE {
       POA_Current_proxy& _proxy ();
 
     protected:
-      virtual ~POA_Current_impl () = default;
+      ~POA_Current_impl () override = default;
 
     private:
       template <typename _Tp1, typename, typename ...Args>

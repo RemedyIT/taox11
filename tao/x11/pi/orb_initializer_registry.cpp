@@ -29,7 +29,7 @@ namespace TAOX11_NAMESPACE
           IDL::traits<PortableInterceptor::ORBInitializer>::ref_type init)
         : init_ (std::move (init))
       {}
-      virtual ~ORBInitializer_proxy () = default;
+      ~ORBInitializer_proxy () override = default;
 
       /// The pre-initialization hook.
       void pre_init (TAO_PI::ORBInitInfo_ptr info) override;

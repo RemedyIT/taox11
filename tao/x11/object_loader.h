@@ -35,7 +35,7 @@ namespace TAOX11_NAMESPACE
   {
   public:
     /// The destructor
-    virtual ~Object_Loader ();
+    ~Object_Loader () override;
 
     /**
      * Create and activate a new object into the orb.

@@ -275,7 +275,7 @@ namespace TAOX11_NAMESPACE
       LocalObject& operator=(const LocalObject&) = delete;
       LocalObject& operator=(LocalObject&&) = delete;
 
-      virtual ~LocalObject ();
+      ~LocalObject () override;
     };
 
   } // namespace CORBA

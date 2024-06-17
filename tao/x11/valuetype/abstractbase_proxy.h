@@ -48,7 +48,7 @@ namespace TAOX11_NAMESPACE
                         TAO_CORBA::Boolean,
                         TAO_Abstract_ServantBase *);
 
-    virtual ~Abstractbase_proxy () = default;
+    ~Abstractbase_proxy () override = default;
   };
 
 } // namespace TAOX11_NAMESPACE

@@ -25,7 +25,7 @@ namespace TAOX11_NAMESPACE
     public:
       explicit PICurrent (TAO_PI::Current_ptr pic);
 
-      virtual ~PICurrent () = default;
+      ~PICurrent () override = default;
 
       CORBA::Any
       get_slot (PortableInterceptor::SlotId id) override;
