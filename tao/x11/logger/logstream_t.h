@@ -50,7 +50,7 @@ namespace x11_logger
     log_buffer_t (typename log_buffer_t<CH, TR>::logprio_type,
                   typename std::basic_ios<CH, TR>::openmode mode);
 
-    virtual ~log_buffer_t () = default;
+    ~log_buffer_t () override = default;
 
     void log_module (const Log_Type& lm)
     { this->lm_typeref_ = lm.get_reference (); }

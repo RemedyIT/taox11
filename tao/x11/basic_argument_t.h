@@ -33,7 +33,7 @@ namespace TAOX11_NAMESPACE
     In_Basic_Argument_T (S const & x)
       : x_ (x) {}
 
-    TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr ) override;
+    TAO_CORBA::Boolean marshal (TAO_OutputCDR &cdr) override;
 #if TAO_HAS_INTERCEPTORS == 1
     void interceptor_value (TAO_CORBA::Any *any) const override;
 #endif /* TAO_HAS_INTERCEPTORS == 1 */
@@ -58,7 +58,7 @@ namespace TAOX11_NAMESPACE
     In_Basic_Clonable_Argument_T (S const & x)
       : In_Basic_Argument_T<S, Insert_Policy> (x)
       , is_clone_ (false) {}
-    virtual ~In_Basic_Clonable_Argument_T ();
+    ~In_Basic_Clonable_Argument_T () override;
 
     TAO_TAO::Argument* clone () override;
 

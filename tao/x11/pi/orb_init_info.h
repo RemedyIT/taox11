@@ -31,7 +31,7 @@ namespace TAOX11_NAMESPACE
     public:
       explicit ORBInitInfo (TAO_PI::ORBInitInfo_3_1_ptr orbii);
 
-      virtual ~ORBInitInfo () = default;
+      ~ORBInitInfo () override = default;
 
       ::TAOX11_NAMESPACE::CORBA::StringSeq arguments () override;
 

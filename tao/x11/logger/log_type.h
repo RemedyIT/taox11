@@ -108,7 +108,7 @@ namespace x11_logger
     {
       this->log_module_ = LOG_MODULE::getInstance ();
     }
-    virtual ~Log_Type_T ()
+    ~Log_Type_T () override
     {
       if (this == Log_Type_T<LOG_MODULE>::reference_)
       {

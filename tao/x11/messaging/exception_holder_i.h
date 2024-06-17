@@ -42,7 +42,7 @@ namespace TAOX11_NAMESPACE
         const ::TAOX11_NAMESPACE::Dynamic::ExceptionList& exc_list) override;
 
   protected:
-    virtual ~ExceptionHolder_i () = default;
+    ~ExceptionHolder_i () override = default;
 
   private:
     ExceptionHolder_i () = delete;

@@ -52,7 +52,7 @@ namespace TAOX11_NAMESPACE
     : public x11_logger::Log_Module
     {
     public:
-      virtual ~TAOX11_Log_Module();
+      ~TAOX11_Log_Module() override;
 
       static TAOX11_Log_Module* getInstance();
 

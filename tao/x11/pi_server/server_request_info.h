@@ -27,7 +27,7 @@ namespace TAOX11_NAMESPACE
     public:
       explicit ServerRequestInfo (TAO_PI::ServerRequestInfo_ptr reqinf);
 
-      virtual ~ServerRequestInfo () = default;
+      ~ServerRequestInfo () override = default;
 
       bool _is_a (const std::string& local_type_id) override;
 

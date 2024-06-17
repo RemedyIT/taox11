@@ -33,7 +33,7 @@ namespace TAOX11_NAMESPACE {
   public:
     using skel_ref_type = std::shared_ptr<TAOX11_NAMESPACE::PortableServer::Servant>;
 
-    virtual ~Servant_proxy () = default;
+    ~Servant_proxy () override = default;
 
     void _add_ref () final;
 

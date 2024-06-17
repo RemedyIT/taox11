@@ -37,7 +37,7 @@ namespace TAOX11_NAMESPACE
       TAOX11_DynCommon (bool allow_truncation);
 
       /// Destructor.
-      virtual ~TAOX11_DynCommon () = default;
+      ~TAOX11_DynCommon () override = default;
 
       IDL::traits<CORBA::TypeCode>::ref_type
       type () override;
