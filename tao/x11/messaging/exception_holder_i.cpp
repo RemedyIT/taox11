@@ -54,14 +54,12 @@ namespace TAOX11_NAMESPACE
       {
         TAO_CORBA::ULong minor {};
         TAO_CORBA::ULong completion {};
-        if (!(_tao_in >> minor) ||
-            !(_tao_in >> completion))
+        if (!(_tao_in >> minor) || !(_tao_in >> completion))
           {
             throw TAOX11_NAMESPACE::CORBA::MARSHAL (0, TAOX11_NAMESPACE::CORBA::COMPLETED_MAYBE);
           }
 
-        TAO_CORBA::SystemException* exception =
-          TAO_TAO::create_system_exception (type_id.c_str());
+        TAO_CORBA::SystemException* exception = TAO_TAO::create_system_exception (type_id.c_str());
 
         if (!exception)
           {
@@ -89,11 +87,11 @@ namespace TAOX11_NAMESPACE
     // This is important to decode the exception.
     for (TAO_CORBA::ULong i = 0; i != this->count_; ++i)
       {
-        if (std::strcmp (type_id.c_str(), this->data_[i].id) == 0)
+        if (type_id == this->data_[i].id)
           {
             TAO_CORBA::Exception * const exception = this->data_[i].alloc ();
 
-            if (exception == nullptr)
+            if (!exception)
               {
                 throw TAOX11_NAMESPACE::CORBA::NO_MEMORY (0, TAOX11_NAMESPACE::CORBA::COMPLETED_YES);
               }
