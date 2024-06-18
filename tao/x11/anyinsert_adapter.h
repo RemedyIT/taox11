@@ -52,7 +52,7 @@ namespace TAOX11_NAMESPACE
     : public ACE_Service_Object
   {
   public:
-    virtual ~AnyInsertAdapter () = default;
+    ~AnyInsertAdapter () override = default;
 
 #define TAOX11_SYSTEM_EXCEPTION(name) \
     virtual void insert_into_any (CORBA::Any * any, const CORBA::name &) = 0; \

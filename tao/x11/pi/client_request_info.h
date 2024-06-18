@@ -27,7 +27,7 @@ namespace TAOX11_NAMESPACE
     public:
       explicit ClientRequestInfo (TAO_PI::ClientRequestInfo_ptr reqinf);
 
-      virtual ~ClientRequestInfo () = default;
+      ~ClientRequestInfo () override = default;
 
       IDL::traits<TAOX11_NAMESPACE::CORBA::Object>::ref_type
       target () override;

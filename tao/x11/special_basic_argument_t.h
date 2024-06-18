@@ -62,7 +62,7 @@ namespace TAOX11_NAMESPACE
     In_Special_Basic_Clonable_Argument_T (S const &x)
       : In_Special_Basic_Argument_T<S, to_S, from_S, Insert_Policy> (x)
       , is_clone_ (false) {}
-    virtual ~In_Special_Basic_Clonable_Argument_T ();
+    ~In_Special_Basic_Clonable_Argument_T () override;
 
     TAO_TAO::Argument* clone () override;
 

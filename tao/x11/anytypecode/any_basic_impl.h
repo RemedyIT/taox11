@@ -31,7 +31,7 @@ namespace TAOX11_NAMESPACE
     Any_Basic_Impl (CORBA::typecode_reference,
                     void *value);
 
-    virtual ~Any_Basic_Impl () = default;
+    ~Any_Basic_Impl () override = default;
 
     static void insert (CORBA::Any &,
                         CORBA::typecode_reference,

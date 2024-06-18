@@ -24,7 +24,7 @@ namespace TAOX11_NAMESPACE
     public:
       explicit IORInfo (TAO_PI::IORInfo_ptr iorinf);
 
-      virtual ~IORInfo () = default;
+      ~IORInfo () override = default;
 
       IDL::traits<CORBA::Policy>::ref_type
       get_effective_policy (CORBA::PolicyType type) override;

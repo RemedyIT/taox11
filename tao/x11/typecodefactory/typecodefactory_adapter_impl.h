@@ -24,7 +24,7 @@ namespace TAOX11_NAMESPACE
   {
   public:
     TypeCodeFactory_Adapter_Impl ();
-    virtual ~TypeCodeFactory_Adapter_Impl ();
+    ~TypeCodeFactory_Adapter_Impl () override;
 
     CORBA::object_reference<CORBA::TypeCode> create_struct_tc (
           const std::string &id,

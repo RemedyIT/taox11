@@ -60,7 +60,7 @@ namespace TAOX11_NAMESPACE
   public:
     In_Basic_Clonable_Argument_T (long double const & x)
       : In_Basic_Argument_T<long double, Insert_Policy> (x) {}
-    virtual ~In_Basic_Clonable_Argument_T ();
+    ~In_Basic_Clonable_Argument_T () override;
 
     TAO_TAO::Argument* clone () override;
 

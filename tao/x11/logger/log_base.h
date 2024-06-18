@@ -177,7 +177,7 @@ namespace x11_logger
     : public x11_logger::Log_Module
   {
   public:
-    virtual ~TAOX11_Test_Log_Module ();
+    ~TAOX11_Test_Log_Module () override;
 
     static TAOX11_Test_Log_Module* getInstance();
 

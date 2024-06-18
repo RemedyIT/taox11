@@ -53,7 +53,7 @@ namespace TAOX11_NAMESPACE
         : TypeCode (),
           static_ (true)
       { this->u_.tcref_ = const_cast<TAO_CORBA::TypeCode_ptr*> (std::addressof(tc)); }
-      virtual ~TypeCode_impl ();
+      ~TypeCode_impl () override;
 
       bool _is_a (const std::string& local_type_id) override;
 

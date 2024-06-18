@@ -25,7 +25,7 @@ namespace TAOX11_NAMESPACE
     public:
       explicit RequestInfo (TAO_PI::RequestInfo_ptr reqinf);
 
-      virtual ~RequestInfo () = default;
+      ~RequestInfo () override = default;
 
       uint32_t request_id () override;
 
