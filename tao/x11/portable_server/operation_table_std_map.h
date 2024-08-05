@@ -31,7 +31,7 @@ namespace TAOX11_NAMESPACE
 struct Operation_db_entry
 {
   /// Operation name
-  char const * opname;
+  std::string_view const opname;
 
   /// Remote/thru-POA skeleton pointer
   TAO_Skeleton skel_ptr;
@@ -72,7 +72,7 @@ public:
             const TAO::Operation_Skeletons skel_ptr) override;
 
 private:
-  using key_map_type = std::string_view ;
+  using key_map_type = std::string_view;
 
   using map_type = std::unordered_map<key_map_type, TAO::Operation_Skeletons>;
 
