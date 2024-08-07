@@ -14,3 +14,16 @@ struct bar
   @optional string opt_string;
   string y;
 };
+
+module Test
+{
+  interface Foo
+  {
+    bar test_bar (in bar bin,
+      inout bar binout,
+      out bar bout);
+
+    /// A method to shutdown the ORB
+    oneway void shutdown ();
+  };
+};
