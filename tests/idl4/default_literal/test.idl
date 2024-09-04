@@ -1,0 +1,21 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+enum Color {
+  GREEN,
+  @default_literal RED,
+  BLUE
+};
+
+typedef Color ColorArray[5];
+typedef sequence<Color> ColorSeq;
+
+struct Shape {
+    Color color_red;
+    ColorArray color_red_array;
+    ColorSeq color_seq;
+};
