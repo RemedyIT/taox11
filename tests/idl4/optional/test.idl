@@ -14,3 +14,17 @@ struct bar
   @optional string opt_string;
   string y;
 };
+
+exception Foo
+{
+  short x;
+  @optional short z;
+};
+
+union TestUnion_Octet switch(octet) {
+  case 1:
+    @optional short FirstCase;
+  case 2:
+    long SecondCase;
+};
+
