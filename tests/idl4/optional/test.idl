@@ -5,6 +5,10 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
+module Mod
+{
+  typedef long longF;
+};
 struct bar
 {
   short x;
@@ -13,6 +17,7 @@ struct bar
   @optional short a;
   @optional string opt_string;
   string y;
+  Mod::longF f;
 };
 
 exception Foo
@@ -26,5 +31,7 @@ union TestUnion_Octet switch(octet) {
     @optional short FirstCase;
   case 2:
     long SecondCase;
+  case 3:
+    @optional Mod::longF f;
 };
 
