@@ -14,8 +14,12 @@ int main (int /*argc*/, char* /*argv*/[])
 {
   int retval {};
   bar mybar;
+  Foo f;
+  TestUnion_Octet to;
 
   TAOX11_TEST_INFO << "mybar: " << mybar << std::endl;
+  TAOX11_TEST_INFO << "f: " << f << std::endl;
+  TAOX11_TEST_INFO << "to: " << to << std::endl;
   mybar.z(6);
   TAOX11_TEST_INFO << "mybar: " << mybar << std::endl;
 
