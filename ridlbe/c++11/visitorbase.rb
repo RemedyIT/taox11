@@ -473,12 +473,12 @@ module IDL
           self._idltype.is_a?(IDL::Type::Any) ? 'CORBA::Any' : scoped_cxx_member_type
       end
 
-      def cdr_to_type
-        self._idltype.cdr_to_type(cur_scope)
+      def cdr_to_helper_type
+        self._idltype.cdr_to_helper_type
       end
 
-      def cdr_from_type
-        self._idltype.cdr_from_type(cur_scope)
+      def cdr_from_helper_type
+        self._idltype.cdr_from_helper_type
       end
 
       def cdr_from_fmt

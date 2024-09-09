@@ -13,7 +13,7 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
 %     # in these cases there is only a single member mapping all labels
 %     _m = _defmem || _ndefmem.shift
 %     if _m.optional?
-        os_ << "<%= _m.cxxname %>="; if (val_.<%= _m.cxxname() %> ().has_value ()) { os_ << IDL::traits<<%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ().value ());} else { os_ << "std::nullopt"; }
+        os_ << "<%= _m.cxxname %>=" << val_.<%= _m.cxxname %> ();
 %     else
         os_ << "<%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ());
 %     end
@@ -24,7 +24,7 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
     if (<%= _lbl == 'false' ? '!' : '' %>val_._d ())
     {
 %     if _m.optional?
-      os_ << "<%= _m.cxxname %>="; if (val_.<%= _m.cxxname() %> ().has_value ()) { os_ << IDL::traits<<%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ().value ());} else { os_ << "std::nullopt"; }
+      os_ << "<%= _m.cxxname %>=" << val_.<%= _m.cxxname %> ();
 %     else
       os_ << "<%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ());
 %     end
@@ -34,7 +34,7 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
     {
 %     _m = _defmem || _ndefmem.shift # get other (non-)default member
 %     if _m.optional?
-      os_ << "<%= _m.cxxname %>="; if (val_.<%= _m.cxxname() %> ().has_value ()) { os_ << IDL::traits<<%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ().value ());} else { os_ << "std::nullopt"; }
+      os_ << "<%= _m.cxxname %>=" << val_.<%= _m.cxxname %> ();
 %     else
       os_ << "<%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ());
 %     end
@@ -51,7 +51,7 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
 %       end
       {
 % if _m.optional?
-        os_ << "<%= _m.cxxname %>="; if (val_.<%= _m.cxxname() %> ().has_value ()) { os_ << IDL::traits<<%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ().value ());} else { os_ << "std::nullopt"; }
+        os_ << "<%= _m.cxxname %>=" << val_.<%= _m.cxxname %> ();
 % elsif _m.external?
 %# TODO
 % else
@@ -67,7 +67,7 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
 %       _m_def = default_member
       {
 % if _m_def.optional?
-        os_ << "<%= _m_def.cxxname %>="; if (val_.<%= _m_def.cxxname() %> ().has_value ()) { os_ << IDL::traits<<%= _m_def.scoped_cxxtype %>>::write (val_.<%= _m_def.cxxname %> ().value ());} else { os_ << "std::nullopt"; }
+        os_ << "<%= _m_def.cxxname %>=" << val_.<%= _m_def.cxxname %> ();
 % elsif _m_def.external?
 %# TODO
 % else

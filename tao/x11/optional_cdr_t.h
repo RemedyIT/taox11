@@ -15,8 +15,11 @@
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
   /// Generic sequence CDR streaming helper template
-  template <typename _Tp, typename _T>
-  struct taox11_optional_cdr_in
+  template <typename...>
+  struct taox11_optional_cdr_in;
+
+  template <typename _Tp>
+  struct taox11_optional_cdr_in<_Tp>
   {
     /// Unbounded insert
     template <typename _Stream>
@@ -30,7 +33,28 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
       bool result { true };
       if (_optional.has_value ())
       {
-        result = _strm << _T (_optional.value ());
+        result = _strm << _optional.value ();
+      }
+      return result;
+    }
+  };
+
+  template <typename _Tp, typename _Thelper>
+  struct taox11_optional_cdr_in<_Tp, _Thelper>
+  {
+    /// Unbounded insert
+    template <typename _Stream>
+    static bool insert (_Stream& _strm, const _Tp& _optional)
+    {
+      if (!(_strm << ACE_OutputCDR::from_boolean (_optional.has_value ())))
+      {
+        return false;
+      }
+
+      bool result { true };
+      if (_optional.has_value ())
+      {
+        result = _strm << _Thelper(_optional.value ());
       }
       return result;
     }
@@ -76,8 +100,8 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   };
 
   /// Generic sequence CDR streaming helper template
-  template <typename _Tp, typename _T>
-  struct taox11_optional_cdr_out<_Tp, _T>
+  template <typename _Tp, typename _Thelper>
+  struct taox11_optional_cdr_out<_Tp, _Thelper>
   {
     /// Unbounded extract
     template <typename _Stream>
@@ -94,7 +118,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
         // If the optional doesn't contain a value initialize it
         if (!_optional) _optional.emplace();
         // extract
-        if (_strm >> _T(_optional.value ()))
+        if (_strm >> _Thelper(_optional.value ()))
         {
           return true;
         }

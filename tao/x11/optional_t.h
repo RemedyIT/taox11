@@ -20,6 +20,20 @@ namespace TAOX11_NAMESPACE
   {
     template<typename T>
     using optional = std::optional<T>;
+
+    template<typename T>
+    std::ostream& operator <<(std::ostream& stream, const optional<T>& optional)
+    {
+      if (optional.has_value())
+      {
+        stream << IDL::traits<T>::write(optional.value ());
+      }
+      else
+      {
+        stream << "std::nullopt";
+      }
+      return stream;
+    }
   } // namespace IDL
 } // namespace TAOX11_NAMESPACE
 
