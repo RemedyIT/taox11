@@ -10,6 +10,8 @@ module Mod
   typedef long longF;
 };
 
+typedef int8 myint8;
+
 struct bar
 {
   short x;
@@ -21,6 +23,12 @@ struct bar
   boolean b;
   string y;
   Mod::longF f;
+  @optional int8 int8_field;
+  @optional uint8 uint8_field;
+  @optional char char_field;
+  @optional wchar wchar_field;
+  @optional octet octet_field;
+  @optional myint8 myint8_field;
 };
 
 exception Foo
@@ -36,5 +44,25 @@ union TestUnion_Octet switch(octet) {
     long SecondCase;
   case 3:
     @optional Mod::longF f;
+  case 4:
+    myint8 myint8_field;
+  case 5:
+    @optional int8 int8_field;
+  case 6:
+    @optional uint8 uint8_field;
+  case 7:
+    @optional char char_field;
+  case 8:
+    @optional wchar wchar_field;
+  case 9:
+    @optional octet octet_field;
+  default:
+    @optional int8 myinft;
 };
 
+union TestUnion_Bool switch(boolean) {
+  case TRUE:
+    @optional int8 myunfi;
+  case FALSE:
+    @optional char jdd;
+};

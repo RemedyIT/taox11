@@ -15,7 +15,7 @@
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
   /// Generic sequence CDR streaming helper template
-  template <typename _Tp, typename _T = _Tp::value_type>
+  template <typename _Tp, typename _T>
   struct taox11_optional_cdr
   {
     /// Unbounded insert
@@ -30,7 +30,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
       bool result { true };
       if (_optional.has_value ())
       {
-        result = _strm << _optional.value ();
+        result = _strm << _T (_optional.value ());
       }
       return result;
     }
