@@ -17,6 +17,8 @@ struct bar
   long z_long;
   @optional short a;
   @optional string opt_string;
+  @optional boolean opt_b;
+  boolean b;
   string y;
   Mod::longF f;
 };
