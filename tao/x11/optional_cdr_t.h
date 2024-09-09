@@ -48,11 +48,12 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
       if (_has_value)
       {
         // If the optional doesn't contain a value initialize it
-        _T temp_val{_optional.emplace()};
+        if (!_optional) _optional.emplace();
+        _T temp_val(_optional.value ());
         // extract
         if (_strm >> temp_val)
         {
-          _optional.value () = temp_val;
+          return true;
         }
         else
         {
