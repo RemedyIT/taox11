@@ -481,14 +481,6 @@ module IDL
         self._idltype.cdr_from_type(cur_scope)
       end
 
-      def scoped_cdr_to_type
-        @self_idltype.cdr_to_type
-      end
-
-      def scoped_cdr_from_type
-        self._idltype.cdr_from_type
-      end
-
       def cdr_from_fmt
         self._idltype.cdr_from_fmt
       end
