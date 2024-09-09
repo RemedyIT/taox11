@@ -15,7 +15,7 @@
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
   /// Generic sequence CDR streaming helper template
-  template <typename _Tp>
+  template <typename _Tp, typename _T>
   struct taox11_optional_cdr
   {
     /// Unbounded insert
@@ -30,7 +30,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
       bool result { true };
       if (_optional.has_value ())
       {
-        result = _strm << _optional.value ();
+        result = _strm << _T (_optional.value ());
       }
       return result;
     }
@@ -47,21 +47,23 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
       if (_has_value)
       {
-        // initialize associated default value
-        typename _Tp::value_type temp_val{};
+        // If the optional doesn't contain a value initialize it
+        _T temp_val{_optional.emplace()};
         // extract
         if (_strm >> temp_val)
         {
-          // set union member and associated discriminant when there are multiple legal discriminant values
-          _optional = std::move (temp_val);
-          return true;
+          _optional.value () = temp_val;
+        }
+        else
+        {
+          return false;
         }
       }
       else
       {
         _optional.reset ();
       }
-      return false;
+      return true;
     }
   };
 

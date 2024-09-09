@@ -150,6 +150,26 @@ module IDL
           super
         end
       end
+
+      def scoped_cxx_in_type
+        if optional?
+          "const IDL::optional<#{scoped_cxx_return_type}>&"
+        elsif external?
+          "const std::shared_ptr<#{super}>&"
+        else
+          super
+        end
+      end
+
+      def scoped_cxx_byval_type
+        if optional?
+          "IDL::optional<#{scoped_cxx_return_type}>"
+        elsif external?
+          "std::shared_ptr<#{scoped_cxx_return_type}>"
+        else
+          super
+        end
+      end
     end
   end
 end

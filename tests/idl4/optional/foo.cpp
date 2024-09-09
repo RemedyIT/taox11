@@ -21,7 +21,8 @@ Foo::test_bar (const bar & sin, bar & sinout, bar & sout)
   sout = sin;
   sinout = sin;
   bar sret = sin;
-  sret.z(6);
+  sret.z(255);
+  sret.z_long(255);
   return sret;
 }
 

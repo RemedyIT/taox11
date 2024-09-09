@@ -161,6 +161,14 @@ module IDL
         _resolved_idltype.is_a?(IDL::Type::Array)
       end
 
+      def optional?
+        !node.annotations[:optional].first.nil?
+      end
+
+      def external?
+        !node.annotations[:external].first.nil?
+      end
+
       # Does this union member has multiple legal discriminator values
       def has_multiple_discriminators?
         labels.size > 1 || is_default?
@@ -180,6 +188,76 @@ module IDL
             res_idl_type = res_idl_type.node.idltype
           end
           _resolved_idltype.value_initializer
+        end
+      end
+
+      def cxx_byval_type
+        if optional?
+          "IDL::optional<#{cxx_return_type}>"
+        elsif external?
+          "std::shared_ptr<#{cxx_return_type}>"
+        else
+          super
+        end
+      end
+
+      def cxx_out_type
+        if optional?
+          "IDL::optional<#{cxx_return_type}>&"
+        elsif external?
+          "std::shared_ptr<#{cxx_return_type}>&"
+        else
+          super
+        end
+      end
+
+      def cxx_in_type
+        if optional?
+          "const IDL::optional<#{cxx_return_type}>&"
+        elsif external?
+          "const std::shared_ptr<#{super}>&"
+        else
+          super
+        end
+      end
+
+      def cxx_move_type
+        if optional?
+          "IDL::optional<#{cxx_return_type}>&&"
+        elsif external?
+          "std::shared_ptr<#{cxx_return_type}>&&"
+        else
+          super
+        end
+      end
+
+      def cxx_member_type
+        if optional?
+          "IDL::optional<#{super}>"
+        elsif external?
+          "std::shared_ptr<#{super}>"
+        else
+          super
+        end
+      end
+
+      def scoped_cxx_out_type
+        if optional?
+          "IDL::optional<#{scoped_cxx_return_type}>&"
+        elsif external?
+          "std::shared_ptr<#{scoped_cxx_return_type}>&"
+        else
+          super
+        end
+      end
+
+      def scoped_cxx_in_type
+        if optional?
+          "const IDL::optional<#{scoped_cxx_return_type}>&"
+        elsif external?
+          "const std::shared_ptr<#{super}>&"
+        else
+          super
         end
       end
     end

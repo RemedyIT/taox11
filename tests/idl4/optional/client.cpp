@@ -51,6 +51,18 @@ int main (int argc, char* argv[])
       bar sret = foo->test_bar (sin, sinout, sout);
       TAOX11_TEST_DEBUG << "Received StringLongMap sret: " << sret << " sinout: " << sinout << " sout: " << sout << std::endl;
 
+      if (sret.z () != 255)
+      {
+          TAOX11_TEST_ERROR << "ERROR: Incorrect z received, not 255 but " << sret.z ().value () << std::endl;
+          return 1;
+      }
+
+      Fooexcep f;
+      TestUnion_Octet to;
+
+      TAOX11_TEST_INFO << "f: " << f << std::endl;
+      TAOX11_TEST_INFO << "to: " << to << std::endl;
+
       TAOX11_TEST_DEBUG << "shutting down..." << std::endl;
       foo->shutdown ();
       _orb->destroy ();
