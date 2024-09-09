@@ -23,6 +23,7 @@ struct bar
   boolean b;
   string y;
   Mod::longF f;
+  int8 regular8;
   @optional int8 int8_field;
   @optional uint8 uint8_field;
   @optional char char_field;

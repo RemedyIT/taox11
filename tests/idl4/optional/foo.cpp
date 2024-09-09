@@ -23,6 +23,8 @@ Foo::test_bar (const bar & sin, bar & sinout, bar & sout)
   bar sret = sin;
   sret.z(255);
   sret.z_long(255);
+  sret.regular8(64);
+  sret.int8_field(125);
   return sret;
 }
 

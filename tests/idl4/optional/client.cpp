@@ -56,6 +56,16 @@ int main (int argc, char* argv[])
           TAOX11_TEST_ERROR << "ERROR: Incorrect z received, not 255 but " << sret.z ().value () << std::endl;
           return 1;
       }
+      if (sret.regular8 () != 64)
+      {
+          TAOX11_TEST_ERROR << "ERROR: Incorrect regular8 received, not 64 but " << sret.int8_field ().value () << std::endl;
+          return 1;
+      }
+      if (sret.int8_field () != 125)
+      {
+          TAOX11_TEST_ERROR << "ERROR: Incorrect int8_field received, not 125 but " << sret.int8_field ().value () << std::endl;
+          return 1;
+      }
 
       Fooexcep f;
       TestUnion_Octet to;
