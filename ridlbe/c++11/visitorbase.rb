@@ -474,19 +474,19 @@ module IDL
       end
 
       def cdr_to_type
-        @node._idltype.cdr_to_type(cur_scope)
+        self._idltype.cdr_to_type(cur_scope)
       end
 
       def cdr_from_type
-        @node._idltype.cdr_from_type(cur_scope)
+        self._idltype.cdr_from_type(cur_scope)
       end
 
       def scoped_cdr_to_type
-        @node._idltype.cdr_to_type
+        @self_idltype.cdr_to_type
       end
 
       def scoped_cdr_from_type
-        @node._idltype.cdr_from_type
+        self._idltype.cdr_from_type
       end
 
       def cdr_from_fmt
