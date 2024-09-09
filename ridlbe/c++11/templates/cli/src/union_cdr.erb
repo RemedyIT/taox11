@@ -15,7 +15,7 @@ TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> 
 %     # in these cases there is only a single member mapping all labels
 %     _m = _defmem || _ndefmem.shift
 % if _m.optional?
-    result = (taox11_optional_cdr<<%= _m.cxx_member_type%>, <%= _m.cdr_from_type %>>::insert (strm, _tao_union.<%= _m.cxxname %> ()));
+    result = (taox11_optional_cdr_in<<%= _m.cxx_member_type%>, <%= _m.cdr_from_type %>>::insert (strm, _tao_union.<%= _m.cxxname %> ()));
 % else
   result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
 % end
@@ -26,7 +26,7 @@ TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> 
   if (<%= _lbl == 'false' ? '!' : '' %>_tao_union._d ())
   {
 % if _m.optional?
-    result = (taox11_optional_cdr<<%= _m.cxx_member_type%>, <%= _m.cdr_from_type %>>::insert (strm, _tao_union.<%= _m.cxxname %> ()));
+    result = (taox11_optional_cdr_in<<%= _m.cxx_member_type%>, <%= _m.cdr_from_type %>>::insert (strm, _tao_union.<%= _m.cxxname %> ()));
 % else
     result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
 %  end
@@ -36,7 +36,7 @@ TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> 
   {
 %     _m = _defmem || _ndefmem.shift # get other (non-)default member
 % if _m.optional?
-    result = (taox11_optional_cdr<<%= _m.cxx_member_type%>, <%= _m.cdr_from_type %>>::insert (strm, _tao_union.<%= _m.cxxname %> ()));
+    result = (taox11_optional_cdr_in<<%= _m.cxx_member_type%>, <%= _m.cdr_from_type %>>::insert (strm, _tao_union.<%= _m.cxxname %> ()));
 % else
     result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
 %  end
@@ -53,7 +53,7 @@ TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> 
 %       end
     {
 % if _m.optional?
-      result = (taox11_optional_cdr<<%= _m.cxx_member_type%>, <%= _m.cdr_from_type %>>::insert (strm, _tao_union.<%= _m.cxxname %> ()));
+      result = (taox11_optional_cdr_in<<%= _m.cxx_member_type%>, <%= _m.cdr_from_type %>>::insert (strm, _tao_union.<%= _m.cxxname %> ()));
 % else
       result = strm << <%= _m.cdr_from_fmt % "_tao_union.#{_m.cxxname} ()" %>;
 % end
@@ -67,7 +67,7 @@ TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> 
 %       _m_def = default_member
     {
 % if _m_def.optional?
-      result = (taox11_optional_cdr<<%= _m_def.cxx_member_type%>, <%= _m_def.cdr_from_type %>>::insert (strm, _tao_union.<%= _m_def.cxxname %> ()));
+      result = (taox11_optional_cdr_in<<%= _m_def.cxx_member_type%>, <%= _m_def.cdr_from_type %>>::insert (strm, _tao_union.<%= _m_def.cxxname %> ()));
 % else
       result = strm << <%= _m_def.cdr_from_fmt % "_tao_union.#{_m_def.cxxname} ()" %>;
 %   end
@@ -113,7 +113,7 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxxname %> &_tao_u
     <%= _m.cxx_member_type %> temp_val<%= _m.value_initializer %>;
     // extract
 %    if _m.optional?
-    if (taox11_optional_cdr<<%= _m.cxx_member_type%>, <%= _m.cdr_to_type %>>::extract (strm, temp_val))
+    if (taox11_optional_cdr_out<<%= _m.cxx_member_type%><%= !_m.cdr_to_type.nil? ? ', ' : '' %><%= _m.cdr_to_type %>>::extract (strm, temp_val))
 %    else
     if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
 %    end
@@ -131,7 +131,7 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxxname %> &_tao_u
     <%= _m.cxx_member_type %> temp_val<%= _m.value_initializer %>;
     // extract
 %    if _m.optional?
-    if (taox11_optional_cdr<<%= _m.cxx_member_type%>, <%= _m.cdr_to_type %>>::extract (strm, temp_val))
+    if (taox11_optional_cdr_out<<%= _m.cxx_member_type%><%= !_m.cdr_to_type.nil? ? ', ' : '' %><%= _m.cdr_to_type %>>::extract (strm, temp_val))
 %    else
     if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
 %    end
@@ -156,7 +156,7 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxxname %> &_tao_u
       <%= _m.cxx_member_type %> temp_val<%= _m.value_initializer %>;
       // extract
 %     if _m.optional?
-    if (taox11_optional_cdr<<%= _m.cxx_member_type%>, <%= _m.cdr_to_type %>>::extract (strm, temp_val))
+    if (taox11_optional_cdr_out<<%= _m.cxx_member_type%><%= !_m.cdr_to_type.nil? ? ', ' : '' %><%= _m.cdr_to_type %>>::extract (strm, temp_val))
 %    else
       if (strm >> <%= _m.cdr_to_fmt % "temp_val" %>)
 %    end
@@ -178,7 +178,7 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxxname %> &_tao_u
       <%= _m_def.cxx_member_type %> temp_val<%= _m_def.value_initializer %>;
       // extract
 %    if _m_def.optional?
-      if (taox11_optional_cdr<<%= _m_def.cxx_member_type%>, <%= _m_def.cdr_to_type %>>::extract (strm, temp_val))
+      if (taox11_optional_cdr_out<<%= _m_def.cxx_member_type%><%= !_m_def.cdr_to_type.nil? ? ', ' : '' %><%= _m_def.cdr_to_type %>>::extract (strm, temp_val))
 %    else
       if (strm >> <%= _m_def.cdr_to_fmt % "temp_val" %>)
 %    end

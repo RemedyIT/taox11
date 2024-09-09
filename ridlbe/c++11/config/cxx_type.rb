@@ -61,7 +61,7 @@ module IDL
     end
 
     def cdr_to_type(scope = nil)
-      cxx_type(scope)
+      #cxx_type(scope)
     end
 
     def cdr_from_type(scope = nil)

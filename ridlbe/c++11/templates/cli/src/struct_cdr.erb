@@ -10,7 +10,7 @@ TAO_CORBA::Boolean operator<< (TAO_OutputCDR &<% if member_count > 0 || !base.ni
 %   _n = member_count-1
 %   members.each_with_index do |_m, _i|
 % if _m.optional?
-    (taox11_optional_cdr<<%= _m.cxx_member_type%>, <%= _m.cdr_from_type %>>::insert (strm, _tao_aggregate.<%= _m.cxxname %> ()))<%= ((_i < _n ) ? ' &&' : ';') %>
+    (taox11_optional_cdr_in<<%= _m.cxx_member_type%>, <%= _m.cdr_from_type %>>::insert (strm, _tao_aggregate.<%= _m.cxxname %> ()))<%= ((_i < _n ) ? ' &&' : ';') %>
 % else
     (strm << <%= _m.cdr_from_fmt % "_tao_aggregate.#{_m.cxxname} ()" %>)<%= ((_i < _n ) ? ' &&' : ';') %>
 % end
@@ -30,7 +30,7 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR &<% if member_count > 0 || !base.nil
 %   members.each_with_index do |_m, _i|
 %#  <%= _m.cdr_to_fmt % "_tao_aggregate.#{_m.cxxname} ()" %>
 %    if _m.optional?
-    (taox11_optional_cdr<<%= _m.cxx_member_type%>, <%= _m.cdr_to_type %>>::extract (strm, _tao_aggregate.<%= _m.cxxname %> ()))<%= ((_i < _n ) ? ' &&' : ';') %>
+    (taox11_optional_cdr_out<<%= _m.cxx_member_type%><%= !_m.cdr_to_type.nil? ? ', ' : '' %><%= _m.cdr_to_type %>>::extract (strm, _tao_aggregate.<%= _m.cxxname %> ()))<%= ((_i < _n ) ? ' &&' : ';') %>
 %    else
     (strm >> <%= _m.cdr_to_fmt % "_tao_aggregate.#{_m.cxxname} ()" %>)<%= ((_i < _n) ? ' &&' : ';') %>
 %     end
