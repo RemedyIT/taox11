@@ -12,20 +12,32 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
 %   if (_defmem && _ndefmem.empty?) || (!_ndefmem.empty? && _ndefmem.first.labels.size>1)
 %     # in these cases there is only a single member mapping all labels
 %     _m = _defmem || _ndefmem.shift
-    os_ << "<%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ());
+%     if _m.optional?
+        os_ << "<%= _m.cxxname %>=" << val_.<%= _m.cxxname %> ();
+%     else
+        os_ << "<%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ());
+%     end
 %   else
 %     # here we have 1 or 2 nondef members with or without a default
 %     _m = _ndefmem.shift # get first non-default member
 %     _lbl = _m.labels.first
     if (<%= _lbl == 'false' ? '!' : '' %>val_._d ())
     {
+%     if _m.optional?
+      os_ << "<%= _m.cxxname %>=" << val_.<%= _m.cxxname %> ();
+%     else
       os_ << "<%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ());
+%     end
     }
 %     if _defmem || !_ndefmem.empty?
     else
     {
 %     _m = _defmem || _ndefmem.shift # get other (non-)default member
+%     if _m.optional?
+      os_ << "<%= _m.cxxname %>=" << val_.<%= _m.cxxname %> ();
+%     else
       os_ << "<%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ());
+%     end
     }
 %     end
 %   end
@@ -38,7 +50,13 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
       case <%= _lbl %>:
 %       end
       {
+% if _m.optional?
+        os_ << "<%= _m.cxxname %>=" << val_.<%= _m.cxxname %> ();
+% elsif _m.external?
+%# TODO
+% else
         os_ << "<%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write (val_.<%= _m.cxxname %> ());
+% end
       }
       break;
 %     end
@@ -48,7 +66,13 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
 %     if has_default?
 %       _m_def = default_member
       {
+% if _m_def.optional?
+        os_ << "<%= _m_def.cxxname %>=" << val_.<%= _m_def.cxxname %> ();
+% elsif _m_def.external?
+%# TODO
+% else
         os_ << "<%= _m_def.cxxname %>=" << IDL::traits<<%= _m_def.scoped_cxxtype %>>::write (val_.<%= _m_def.cxxname %> ());
+% end
       }
 %     end
       break;

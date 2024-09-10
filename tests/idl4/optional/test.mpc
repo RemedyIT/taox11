@@ -8,6 +8,18 @@ project(*optional_gen_idl): ridl_ostream_defaults {
   custom_only = 1
 }
 
+project(*optional_server): taox11_server {
+  after += *optional_gen_idl
+  Source_Files {
+    foo.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
+
 project(*optional_client): taox11_client {
   after += *optional_gen_idl
   Source_Files {

@@ -60,12 +60,10 @@ module IDL
       self.respond_to?(:node) ? cxx_type(node.enclosure) : cxx_type
     end
 
-    def cdr_to_type(scope = nil)
-      cxx_out_type(scope)
+    def cdr_to_helper_type
     end
 
-    def cdr_from_type(scope = nil)
-      cxx_in_type(scope)
+    def cdr_from_helper_type
     end
 
     def resolved_cxx_type(scope = nil)
@@ -232,12 +230,20 @@ module IDL
         'int8'
       end
 
+      def cdr_to_helper_type
+        'ACE_InputCDR::to_int8'
+      end
+
+      def cdr_from_helper_type
+        'ACE_OutputCDR::from_int8'
+      end
+
       def cdr_to_fmt
-        "ACE_InputCDR::to_int8 (#{super})"
+        "#{cdr_to_helper_type} (#{super})"
       end
 
       def cdr_from_fmt
-        "ACE_OutputCDR::from_int8 (#{super})"
+        "#{cdr_from_helper_type} (#{super})"
       end
     end
 
@@ -267,12 +273,20 @@ module IDL
         'uint8'
       end
 
+      def cdr_to_helper_type
+        'ACE_InputCDR::to_uint8'
+      end
+
+      def cdr_from_helper_type
+        'ACE_OutputCDR::from_uint8'
+      end
+
       def cdr_to_fmt
-        "ACE_InputCDR::to_uint8 (#{super})"
+        "#{cdr_to_helper_type} (#{super})"
       end
 
       def cdr_from_fmt
-        "ACE_OutputCDR::from_uint8 (#{super})"
+        "#{cdr_from_helper_type} (#{super})"
       end
     end
 
@@ -339,12 +353,20 @@ module IDL
         'ACE_InputCDR::to_boolean'
       end
 
+      def cdr_to_helper_type
+        'ACE_InputCDR::to_boolean'
+      end
+
+      def cdr_from_helper_type
+        'ACE_OutputCDR::from_boolean'
+      end
+
       def cdr_to_fmt
-        "ACE_InputCDR::to_boolean (#{super})"
+        "#{cdr_to_helper_type} (#{super})"
       end
 
       def cdr_from_fmt
-        "ACE_OutputCDR::from_boolean (#{super})"
+        "#{cdr_from_helper_type} (#{super})"
       end
 
       def is_pod?
@@ -375,12 +397,20 @@ module IDL
         end
       end
 
+      def cdr_to_helper_type
+        'ACE_InputCDR::to_char'
+      end
+
+      def cdr_from_helper_type
+        'ACE_OutputCDR::from_char'
+      end
+
       def cdr_to_fmt
-        "ACE_InputCDR::to_char (#{super})"
+        "#{cdr_to_helper_type} (#{super})"
       end
 
       def cdr_from_fmt
-        "ACE_OutputCDR::from_char (#{super})"
+        "#{cdr_from_helper_type} (#{super})"
       end
 
       def is_pod?
@@ -415,12 +445,20 @@ module IDL
         end
       end
 
+      def cdr_to_helper_type
+        'ACE_InputCDR::to_wchar'
+      end
+
+      def cdr_from_helper_type
+        'ACE_OutputCDR::from_wchar'
+      end
+
       def cdr_to_fmt
-        "ACE_InputCDR::to_wchar (#{super})"
+        "#{cdr_to_helper_type} (#{super})"
       end
 
       def cdr_from_fmt
-        "ACE_OutputCDR::from_wchar (#{super})"
+        "#{cdr_from_helper_type} (#{super})"
       end
 
       def is_pod?
@@ -433,12 +471,20 @@ module IDL
         'ACE_InputCDR::to_octet'
       end
 
+      def cdr_to_helper_type
+        'ACE_InputCDR::to_octet'
+      end
+
+      def cdr_from_helper_type
+        'ACE_OutputCDR::from_octet'
+      end
+
       def cdr_to_fmt
-        "ACE_InputCDR::to_octet (#{super})"
+        "#{cdr_to_helper_type} (#{super})"
       end
 
       def cdr_from_fmt
-        "ACE_OutputCDR::from_octet (#{super})"
+        "#{cdr_from_helper_type} (#{super})"
       end
 
       def os_fmt
@@ -782,12 +828,12 @@ module IDL
         resolved_type.cxx_arg_type
       end
 
-      def cdr_to_type(scope = nil)
-        resolved_type.cdr_to_type(scope)
+      def cdr_to_helper_type
+        resolved_type.cdr_to_helper_type
       end
 
-      def cdr_from_type(scope = nil)
-        resolved_type.cdr_from_type(scope)
+      def cdr_from_helper_type
+        resolved_type.cdr_from_helper_type
       end
 
       def cdr_to_fmt
