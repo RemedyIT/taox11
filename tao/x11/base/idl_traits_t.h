@@ -115,21 +115,21 @@ namespace TAOX11_NAMESPACE
     struct formatter<int8_t, OStrm_>
     {
       inline OStrm_& operator ()(OStrm_& os_, int8_t val_)
-      { os_ << std::hex << static_cast<int16_t> (val_) << std::dec; return os_;}
+      { return os_ << static_cast<int16_t> (val_); }
     };
 
     template <typename OStrm_>
     struct formatter<uint8_t, OStrm_>
     {
       inline OStrm_& operator ()(OStrm_& os_, uint8_t val_)
-      { os_ << std::hex << static_cast<uint16_t> (val_) << std::dec; return os_;}
+      { return os_ << static_cast<uint16_t> (val_); }
     };
 
     template <typename OStrm_>
     struct formatter<char, OStrm_>
     {
       inline OStrm_& operator ()(OStrm_& os_, char val_)
-      { os_ << '\'' << val_ << '\''; return os_; }
+      { return os_ << '\'' << val_ << '\''; }
     };
 
     template <>
@@ -146,7 +146,7 @@ namespace TAOX11_NAMESPACE
     struct formatter<wchar_t, OStrm_>
     {
       inline OStrm_& operator ()(OStrm_& os_, wchar_t val_)
-      { os_ << L'\'' << val_ << L'\''; return os_; }
+      { return os_ << L'\'' << val_ << L'\''; }
     };
 
     template <>
@@ -163,7 +163,7 @@ namespace TAOX11_NAMESPACE
     struct formatter<std::string, OStrm_>
     {
       inline OStrm_& operator ()(OStrm_& os_, std::string val_)
-      { os_ << '"' << val_ << '"'; return os_; }
+      { return os_ << '"' << val_ << '"'; }
     };
 
     template <>
@@ -180,7 +180,7 @@ namespace TAOX11_NAMESPACE
     struct formatter<std::wstring, OStrm_>
     {
       inline OStrm_& operator ()(OStrm_& os_, std::string val_)
-      { os_ << L'"' << val_ << '"'; return os_; }
+      { return os_ << L'"' << val_ << '"'; }
     };
 
     template <>

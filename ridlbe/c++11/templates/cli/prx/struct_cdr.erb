@@ -18,26 +18,5 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 <%= stub_proxy_export_macro %>TAO_CORBA::Boolean operator<< (TAO_OutputCDR&, const <%= scoped_cxxname %>&);
 <%= stub_proxy_export_macro %>TAO_CORBA::Boolean operator>> (TAO_InputCDR&, <%= scoped_cxxname %>&);
 //@}
-%members.each do |_m|
-% if _m.optional?
-// Unaliased type : <%= _m.cxx_member_type %>
-% alias_md5 =  _m.cxx_member_type.to_md5
-// MD5            : <%= alias_md5 %>
-#if !defined(_CDR_<%= alias_md5 %>_OPTIONAL_DECL_)
-#define _CDR_<%= alias_md5 %>_OPTIONAL_DECL_
-/// @name CDR streaming operator specializations for <%= _m.cxx_member_type %>
-//@{
-inline <%= stub_proxy_export_macro %>TAO_CORBA::Boolean operator<< (TAO_OutputCDR& _strm, const <%= _m.cxx_member_type %>& _val)
-{
-  return taox11_optional_cdr<<%= _m.cxx_member_type %>>::insert (_strm,  _val);
-}
-<%= stub_proxy_export_macro %>TAO_CORBA::Boolean operator>> (TAO_InputCDR& _strm, <%= _m.cxx_member_type %>& _val)
-{
-  return taox11_optional_cdr<<%= _m.cxx_member_type %>>::extract (_strm,  _val);
-}
-//@}
-#endif
-% end
-%end
 
 TAO_END_VERSIONED_NAMESPACE_DECL
