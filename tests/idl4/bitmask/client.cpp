@@ -38,35 +38,35 @@ int main (int argc, char* argv[])
     TAOX11_TEST_ERROR << "Flag my_bitmask1 NOT set: " << static_cast<uint16_t>(my_bitmask1) << std::endl;
   }
 
-  if (static_cast<std::underlying_type_t<MyBitMask>>(MyBitMask::flag1) != (0x01 << 1))
+  if (static_cast<std::underlying_type_t<MyBitMask::_flags>>(MyBitMask::flag1) != (0x01 << 1))
   {
     TAOX11_TEST_ERROR << "MyBitMask::flag1 has wrong value" << std::endl;
   }
-  if (static_cast<std::underlying_type_t<MyBitMaskBound8_position>>(MyBitMaskBound8_position::flag64_3) != (0x01 << 3))
+  if (static_cast<std::underlying_type_t<MyBitMaskBound8_position::_flags>>(MyBitMaskBound8_position::flag64_3) != (0x01 << 3))
   {
     TAOX11_TEST_ERROR << "MyBitMaskBound8_position::flag64_3 has wrong value, position annotation not correctly handled" << std::endl;
   }
-  if (static_cast<std::underlying_type_t<MyBitMaskBound8_position>>(MyBitMaskBound8_position::flag64_4) != (0x01 << 4))
+  if (static_cast<std::underlying_type_t<MyBitMaskBound8_position::_flags>>(MyBitMaskBound8_position::flag64_4) != (0x01 << 4))
   {
     TAOX11_TEST_ERROR << "MyBitMaskBound8_position::flag64_4 has wrong value, position annotation not correctly handled" << std::endl;
   }
-  if (static_cast<std::underlying_type_t<MyBitMaskBound8_position>>(MyBitMaskBound8_position::flag64_7) != (0x01 << 7))
+  if (static_cast<std::underlying_type_t<MyBitMaskBound8_position::_flags>>(MyBitMaskBound8_position::flag64_7) != (0x01 << 7))
   {
     TAOX11_TEST_ERROR << "MyBitMaskBound8_position::flag64_7 has wrong value, position annotation not correctly handled" << std::endl;
   }
-  if (!std::is_same<std::underlying_type_t<MyBitMaskBound8>, uint8_t>::value)
+  if (!std::is_same<std::underlying_type_t<MyBitMaskBound8::_flags>, uint8_t>::value)
   {
     TAOX11_TEST_ERROR << "Type of MyBitMaskBound8 is not uint8_t" << std::endl;
   }
-  if (!std::is_same<std::underlying_type_t<MyBitMaskBound16>, uint16_t>::value)
+  if (!std::is_same<std::underlying_type_t<MyBitMaskBound16::_flags>, uint16_t>::value)
   {
     TAOX11_TEST_ERROR << "Type of MyBitMaskBound16 is not uint16_t" << std::endl;
   }
-  if (!std::is_same<std::underlying_type_t<MyBitMaskBound32>, uint32_t>::value)
+  if (!std::is_same<std::underlying_type_t<MyBitMaskBound32::_flags>, uint32_t>::value)
   {
     TAOX11_TEST_ERROR << "Type of MyBitMaskBound32 is not uint32_t" << std::endl;
   }
-  if (!std::is_same<std::underlying_type_t<MyBitMaskBound64>, uint64_t>::value)
+  if (!std::is_same<std::underlying_type_t<MyBitMaskBound64::_flags>, uint64_t>::value)
   {
     TAOX11_TEST_ERROR << "Type of MyBitMaskBound64 is not uint64_t" << std::endl;
   }
