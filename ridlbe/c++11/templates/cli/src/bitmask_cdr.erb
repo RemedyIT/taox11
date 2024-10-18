@@ -2,16 +2,13 @@
 // generated from <%= ridl_template_path %>
 TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> &_tao_bitmask)
 {
-#if defined (ACE_HAS_CPP23)
-  return strm << std::to_underlying (_tao_bitmask);
-#else
-  return strm << static_cast<<%= bitbound.cxx_type %>> (_tao_bitmask);
-#endif
+  std::underlying_type_t<<%= scoped_cxxname %>::_flags> const _tao_temp { _tao_bitmask };
+  return strm << <%= bitbound.cdr_from_fmt % "_tao_temp" %>;
 }
 
 TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxxname %> &_tao_bitmask)
 {
-  std::underlying_type_t<<%= scoped_cxxname %>> _tao_temp <%= bitbound.value_initializer %>;
+  std::underlying_type_t<<%= scoped_cxxname %>::_flags> _tao_temp <%= bitbound.value_initializer %>;
   bool const _tao_success = strm >> <%= bitbound.cdr_to_fmt % "_tao_temp" %>;
 
   if (_tao_success)
