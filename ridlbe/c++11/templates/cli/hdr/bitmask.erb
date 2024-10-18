@@ -18,6 +18,10 @@ public:
   <%= cxx_return_type %>& operator |= (<%= bitbound.cxx_in_type %> _taox11_rhs) { _value |= _taox11_rhs; return *this; }
   <%= cxx_return_type %>& operator &= (<%= bitbound.cxx_in_type %> _taox11_rhs) { _value &= _taox11_rhs; return *this; }
   <%= cxx_return_type %>& operator ^= (<%= bitbound.cxx_in_type %> _taox11_rhs) { _value ^= _taox11_rhs; return *this; }
+  <%= cxx_out_type %> operator= (<%= cxx_in_type %>) = default;
+  <%= cxx_out_type %> operator= (<%= cxx_move_type %>) = default;
+  <%= cxxname %> (<%= cxx_in_type %>) = default;
+  <%= cxxname %> (<%= cxx_move_type %>) = default;
 private:
   <%= bitbound.cxx_member_type %> _value <%= bitbound.value_initializer %>;
 };  // <%= cxxname %>

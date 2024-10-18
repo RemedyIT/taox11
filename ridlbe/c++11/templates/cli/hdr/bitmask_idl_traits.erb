@@ -27,7 +27,7 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
   {
     bool first_ {true};
 %bitvalues.each do |e|
-    if (static_cast<bool>(val_ & <%= scoped_cxxtype %>::<%=e.cxxname %>))
+    if (val_ & <%= scoped_cxxtype %>::<%=e.cxxname %>)
     {
       if (!first_) os_ << "|";
       os_ << "<%= formatted_cxxname %>::<%=e.cxxname %>";
