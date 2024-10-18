@@ -2,7 +2,8 @@
 // generated from <%= ridl_template_path %>
 TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> &_tao_bitmask)
 {
-  return strm << static_cast<<%= bitbound.cxx_type %>> (_tao_bitmask);
+  std::underlying_type_t<<%= scoped_cxxname %>::_flags> const _tao_temp { _tao_bitmask };
+  return strm << <%= bitbound.cdr_from_fmt % "_tao_temp" %>;
 }
 
 TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxxname %> &_tao_bitmask)

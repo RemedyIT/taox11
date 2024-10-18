@@ -28,6 +28,14 @@ Foo::test_mybitmask (const MyBitMask & sin,
     {
       TAOX11_TEST_DEBUG << "test_mybitmask: Received sin<" << sin << ">" << std::endl;
     }
+  if (!(sinout & MyBitMask::flag1))
+    {
+      TAOX11_TEST_ERROR << "ERROR: test_mybitmask: Received incorrect sinout<" << sinout << ">" << std::endl;
+    }
+  else
+    {
+      TAOX11_TEST_DEBUG << "test_mybitmask: Received sinout<" << sinout << ">" << std::endl;
+    }
   sout = sin;
   if (!(sout & MyBitMask::flag0))
     {

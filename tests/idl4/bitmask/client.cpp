@@ -108,7 +108,7 @@ int main (int argc, char* argv[])
       TAOX11_TEST_DEBUG << "narrowed Foo interface" << std::endl;
 
       MyBitMask sin {MyBitMask::flag0};
-      MyBitMask sinout {};
+      MyBitMask sinout {MyBitMask::flag1};
       MyBitMask sout {};
 
       TAOX11_TEST_DEBUG << "Sending MyBitMask sin: " << sin << " sinout: " << sinout << std::endl;
