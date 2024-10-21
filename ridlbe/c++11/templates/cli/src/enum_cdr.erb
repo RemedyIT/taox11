@@ -3,9 +3,11 @@
 TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> &_tao_enumerator)
 {
 #if defined (ACE_HAS_CPP23)
-  return strm << std::to_underlying (_tao_enumerator);
+% _arg = "std::underlying_type_t<#{scoped_cxxname}::_flags>(_tao_enumerator)"
+  return strm << <%= bitbound.cdr_from_fmt % _arg %>;
 #else
-  return strm << static_cast<<%= bitbound.cxx_type %>> (_tao_enumerator);
+% _arg = "static_cast<#{bitbound.cxx_type}> (_tao_enumerator)"
+  return strm << <%= bitbound.cdr_from_fmt % _arg %>;
 #endif
 }
 
