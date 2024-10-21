@@ -37,3 +37,18 @@ enum MyValueEnum {
   @value(5) myv5,
   @value(6) myv6
 };
+
+module Test
+{
+  interface Foo
+  {
+    MyEnum test_myenum (in MyEnum sin, inout MyEnum sinout, out MyEnum sout);
+    MyEnumBound8 test_myenumbound8 (in MyEnumBound8 sin, inout MyEnumBound8 sinout, out MyEnumBound8 sout);
+    MyEnumBound16 test_myenumbound16 (in MyEnumBound16 sin, inout MyEnumBound16 sinout, out MyEnumBound16 sout);
+    MyEnumBound32 test_myenumbound32 (in MyEnumBound32 sin, inout MyEnumBound32 sinout, out MyEnumBound32 sout);
+    MyValueEnum test_myvalueenum (in MyValueEnum sin, inout MyValueEnum sinout, out MyValueEnum sout);
+
+    /// A method to shutdown the ORB
+    oneway void shutdown ();
+  };
+};

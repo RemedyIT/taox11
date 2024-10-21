@@ -18,3 +18,14 @@ project(*idl4_enum_client): taox11_client {
   }
 }
 
+project(*idl4_enum_gen_server): taox11_server {
+  after += *idl4_enum_gen_idl
+  Source_Files {
+    foo.cpp
+    server.cpp
+  }
+  Source_Files {
+    testC.cpp
+    testS.cpp
+  }
+}
