@@ -5,14 +5,14 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-bitset MyBitset {
+bitset MyBitset1 {
   bitfield<1> x;
   bitfield<3> a;
   bitfield<12, short> d;
   bitfield<33> tt;
 };
 
-bitset MyBitset2 : MyBitset {
+bitset MyBitset2 : MyBitset1 {
   bitfield<3> c;
   bitfield<2>;
 };
@@ -22,9 +22,23 @@ bitset MyBitset3 : MyBitset2 {
   bitfield<4, int8>;
 };
 
-bitset MyBitset5
+bitset MyBitset4
 {
   bitfield<3> g;
   bitfield<10> h;
   bitfield<12, long> i;
+};
+
+module Test
+{
+  interface Foo
+  {
+    MyBitset1 test_mybitset1 (in MyBitset1 sin, inout MyBitset1 sinout, out MyBitset1 sout);
+    MyBitset2 test_mybitset2 (in MyBitset2 sin, inout MyBitset2 sinout, out MyBitset2 sout);
+    MyBitset3 test_mybitset3 (in MyBitset3 sin, inout MyBitset3 sinout, out MyBitset3 sout);
+    MyBitset4 test_mybitset4 (in MyBitset4 sin, inout MyBitset4 sinout, out MyBitset4 sout);
+
+    /// A method to shutdown the ORB
+    oneway void shutdown ();
+  };
 };
