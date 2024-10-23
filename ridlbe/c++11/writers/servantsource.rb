@@ -333,7 +333,7 @@ module IDL
         when IDL::Type::Enum
           visitor(EnumVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::BitSet
-          visitor(BitsetVisitor).visit_sarg_traits(res_idl_type.node)# unless is_tracked?(res_idl_type.node)
+          visitor(BitsetVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::BitMask
           visitor(BitmaskVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Union
