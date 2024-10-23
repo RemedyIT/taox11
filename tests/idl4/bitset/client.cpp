@@ -12,7 +12,7 @@
 
 int main (int /*argc*/, char* /*argv*/[])
 {
-  MyBitset mbs1;
+  MyBitset1 mbs1;
 
   // Just compilation test
   TAOX11_TEST_INFO << "mbs1: " << mbs1 << std::endl;
