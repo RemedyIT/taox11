@@ -39,7 +39,7 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
 % elsif _m.external?
 %# TODO
 % else
-        << "<%= _sep %><%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write(val_.<%= _m.cxxname %> ())
+        << "<%= _sep %><%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write(val_.<%= _m.cxxname %><%= member_accessor %>)
 % end
 %     end
 %     _sep = ',' unless _sep

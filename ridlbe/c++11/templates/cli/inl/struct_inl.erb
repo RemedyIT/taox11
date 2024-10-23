@@ -1,3 +1,4 @@
+%if cpp_mapping == 'CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS'
 
 // generated from <%= ridl_template_path %>
 %#
@@ -40,3 +41,4 @@ inline void <%= scoped_cxxtype %>::swap (<%= scoped_cxx_out_type %><% if member_
   std::swap (this-><%= _m.cxxname %>_, s.<%= _m.cxxname %>_);
 % end
 }
+%end

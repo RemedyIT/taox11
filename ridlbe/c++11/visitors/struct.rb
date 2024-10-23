@@ -34,6 +34,16 @@ module IDL
         node.base
       end
 
+      def cpp_mapping
+        return 'CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS' unless node.annotations[:cpp_mapping].first.nil?
+        node.annotations[:cpp_mapping].first
+      end
+
+      def member_accessor
+        ' ()' if cpp_mapping == 'CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS'
+        ''
+      end
+
       # template mapping
 
       map_template :typecode, :typecode
