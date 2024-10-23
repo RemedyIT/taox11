@@ -44,14 +44,10 @@
   inline void swap (<%= cxx_inout_type %> s);
 
 private:
-% members.each do |_m|
-  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<%= _m.value_initializer %>;
-% end
-%else
-% members.each do |_m|
-  <%= _m.cxx_member_type %> <%= _m.cxxname %><%= _m.value_initializer %>;
-% end
 %end
+% members.each do |_m|
+  <%= _m.cxx_member_type %> <%= _m.cxxname %><%= member_postfix %><%= _m.value_initializer %>;
+% end
 };// <%= cxxname %>
 
 %if cpp_mapping == 'CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS'
