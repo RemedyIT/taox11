@@ -34,6 +34,30 @@ module IDL
         node.base
       end
 
+      # Which cpp_mapping we should use, default to class with methods
+      def cpp_mapping
+        return 'CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS' if node.annotations[:cpp_mapping].first.nil?
+        node.annotations[:cpp_mapping].first.fields[:value]
+      end
+
+      # How can we access a struct member, directly or through a method call
+      def member_accessor
+        return ' ()' if cpp_mapping == 'CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS'
+        ''
+      end
+
+      # Possible postfix for all members in C++
+      def member_postfix
+        return '_' if cpp_mapping == 'CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS'
+        ''
+      end
+
+      # Do we map to a C++ class or struct
+      def class_struct
+        return 'class' if cpp_mapping == 'CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS'
+        'struct'
+      end
+
       # template mapping
 
       map_template :typecode, :typecode

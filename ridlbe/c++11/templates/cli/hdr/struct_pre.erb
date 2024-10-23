@@ -1,6 +1,8 @@
 
 // generated from <%= ridl_template_path %>
 /// @copydoc <%= doc_scoped_name %>
-class <%= stub_export_macro %><%= cxxname %><% unless base.nil? %> : public <%= base.cxxname %><% end %>
+<%= class_struct %> <%= stub_export_macro %><%= cxxname %><% unless base.nil? %> : public <%= base.cxxname %><% end %>
 {
+%if cpp_mapping == 'CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS'
 public:
+%end

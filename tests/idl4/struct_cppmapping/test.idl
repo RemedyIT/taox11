@@ -1,0 +1,16 @@
+/**
+ * @file    test.idl
+ * @author  Johnny Willemsen
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+@cpp_mapping(STRUCT_WITH_PUBLIC_MEMBERS)
+struct bar_struct {
+  short b;
+};
+
+@cpp_mapping(CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS)
+struct bar_class {
+  short b;
+};

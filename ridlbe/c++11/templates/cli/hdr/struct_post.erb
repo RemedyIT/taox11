@@ -1,4 +1,5 @@
   // generated from <%= ridl_template_path %>
+%if cpp_mapping == 'CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS'
   <%= cxxname %> () = default;
   ~<%= cxxname %> () = default;
 % unless base.nil?
@@ -43,9 +44,20 @@
   inline void swap (<%= cxx_inout_type %> s);
 
 private:
+%end
 % members.each do |_m|
-  <%= _m.cxx_member_type %> <%= _m.cxxname %>_<%= _m.value_initializer %>;
+  <%= _m.cxx_member_type %> <%= _m.cxxname %><%= member_postfix %><%= _m.value_initializer %>;
 % end
 };// <%= cxxname %>
 
+%if cpp_mapping == 'CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS'
 inline void swap (<%= scoped_cxx_out_type %> m1, <%= scoped_cxx_out_type %> m2) { m1.swap (m2); }
+%else
+inline void swap (<%= scoped_cxx_out_type %> m1, <%= scoped_cxx_out_type %> m2)
+{
+%# Add support for base
+% members.each do |_m|
+  std::swap (m1.<%= _m.cxxname %>, m2.<%= _m.cxxname %>);
+% end
+}
+%end
