@@ -88,6 +88,7 @@ tests/idl4/illegal_idl/run_test.pl:
 tests/idl4/map/run_test.pl:
 tests/idl4/map/run_illegal_idl3_test.pl:
 tests/idl4/optional/run_test.pl:
+tests/idl4/struct_cppmapping/run_test.pl:
 tests/idl4/struct_inheritance/run_test.pl:
 tests/idl4/struct_inheritance/run_illegal_idl3_test.pl:
 tests/idl4/union/run_test.pl:
