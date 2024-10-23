@@ -5,12 +5,12 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-@struct_mapping(STRUCT_WITH_PUBLIC_MEMBERS)
+@cpp_mapping(STRUCT_WITH_PUBLIC_MEMBERS)
 struct bar_struct {
   short b;
 };
 
-@struct_mapping(CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS)
+@cpp_mapping(CLASS_WITH_PUBLIC_ACCESSORS_AND_MODIFIERS)
 struct bar_class {
   short b;
 };
