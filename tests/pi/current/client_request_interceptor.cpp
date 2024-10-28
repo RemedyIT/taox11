@@ -36,6 +36,9 @@ ClientRequestInterceptor::send_request (
 {
   TAOX11_TEST_INFO << "ClientRequestInterceptor::send_request (" << ri->operation () << ") with id " << ri->request_id () << std::endl;
 
+  IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type narrow_ri = IDL::traits<PortableInterceptor::ClientRequestInfo>::narrow (ri);
+  IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type narrow_nullptr = IDL::traits<PortableInterceptor::ClientRequestInfo>::narrow (nullptr);
+
   std::string const op = ri->operation ();
 
   if (op != "invoke_me")

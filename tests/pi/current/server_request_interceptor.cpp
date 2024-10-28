@@ -73,6 +73,7 @@ ServerRequestInterceptor::receive_request (
     CORBA::OctetSeq const ai = ri->adapter_id ();
     PortableInterceptor::ObjectId const oi = ri->object_id ();
     IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type narrow_ri = IDL::traits<PortableInterceptor::ServerRequestInfo>::narrow (ri);
+    IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type narrow_nullptr = IDL::traits<PortableInterceptor::ServerRequestInfo>::narrow (nullptr);
 
     CORBA::Any new_data;
     uint32_t number = 19;
