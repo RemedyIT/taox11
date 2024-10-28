@@ -38,6 +38,25 @@ ClientRequestInterceptor::send_request (
 
   IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type narrow_ri = IDL::traits<PortableInterceptor::ClientRequestInfo>::narrow (ri);
   IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type narrow_nullptr = IDL::traits<PortableInterceptor::ClientRequestInfo>::narrow (nullptr);
+  if (!narrow_ri)
+    {
+      TAOX11_TEST_ERROR << "ERROR: CRI narrow failed" << std::endl;
+    }
+  if (narrow_nullptr)
+    {
+      TAOX11_TEST_ERROR << "ERROR: CRI nullptr narrow failed" << std::endl;
+    }
+
+  IDL::traits<PortableInterceptor::RequestInfo>::ref_type cnarrow_ri = IDL::traits<PortableInterceptor::RequestInfo>::narrow (ri);
+  IDL::traits<PortableInterceptor::RequestInfo>::ref_type cnarrow_nullptr = IDL::traits<PortableInterceptor::RequestInfo>::narrow (nullptr);
+  if (!cnarrow_ri)
+    {
+      TAOX11_TEST_ERROR << "ERROR: rSRI narrow failed" << std::endl;
+    }
+  if (cnarrow_nullptr)
+    {
+      TAOX11_TEST_ERROR << "ERROR: rSRI nullptr narrow failed" << std::endl;
+    }
 
   std::string const op = ri->operation ();
 

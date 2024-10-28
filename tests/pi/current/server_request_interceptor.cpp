@@ -74,9 +74,25 @@ ServerRequestInterceptor::receive_request (
     PortableInterceptor::ObjectId const oi = ri->object_id ();
     IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type narrow_ri = IDL::traits<PortableInterceptor::ServerRequestInfo>::narrow (ri);
     IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type narrow_nullptr = IDL::traits<PortableInterceptor::ServerRequestInfo>::narrow (nullptr);
+    if (!narrow_ri)
+      {
+        TAOX11_TEST_ERROR << "ERROR: SRI narrow failed" << std::endl;
+      }
+    if (narrow_nullptr)
+      {
+        TAOX11_TEST_ERROR << "ERROR: SRI nullptr narrow failed" << std::endl;
+      }
 
     IDL::traits<PortableInterceptor::RequestInfo>::ref_type cnarrow_ri = IDL::traits<PortableInterceptor::RequestInfo>::narrow (ri);
     IDL::traits<PortableInterceptor::RequestInfo>::ref_type cnarrow_nullptr = IDL::traits<PortableInterceptor::RequestInfo>::narrow (nullptr);
+    if (!cnarrow_ri)
+      {
+        TAOX11_TEST_ERROR << "ERROR: rSRI narrow failed" << std::endl;
+      }
+    if (cnarrow_nullptr)
+      {
+        TAOX11_TEST_ERROR << "ERROR: rSRI nullptr narrow failed" << std::endl;
+      }
 
     CORBA::Any new_data;
     uint32_t number = 19;
@@ -94,8 +110,7 @@ ServerRequestInterceptor::receive_request (
     if ((data2 >>= number2)
         && number == number2)
     {
-      TAOX11_TEST_ERROR << "ERROR: TSC was modified because " \
-                  "RSC was modified." << std::endl;
+      TAOX11_TEST_ERROR << "ERROR: TSC was modified because RSC was modified." << std::endl;
 
       throw CORBA::INTERNAL ();
     }
