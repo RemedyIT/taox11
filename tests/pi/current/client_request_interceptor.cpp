@@ -99,6 +99,11 @@ ClientRequestInterceptor::send_request (
       throw CORBA::INTERNAL ();
     }
 
+    IDL::traits<CORBA::Object>::ref_type target = ri->target();
+
+    IDL::traits<CORBA::Object>::ref_type effective_target = ri->effective_target();
+
+    IOP::TaggedProfile tp = ri->effective_profile ();
   }
   catch (const PortableInterceptor::InvalidSlot& ex)
   {
