@@ -75,6 +75,9 @@ ServerRequestInterceptor::receive_request (
     IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type narrow_ri = IDL::traits<PortableInterceptor::ServerRequestInfo>::narrow (ri);
     IDL::traits<PortableInterceptor::ServerRequestInfo>::ref_type narrow_nullptr = IDL::traits<PortableInterceptor::ServerRequestInfo>::narrow (nullptr);
 
+    IDL::traits<PortableInterceptor::RequestInfo>::ref_type cnarrow_ri = IDL::traits<PortableInterceptor::RequestInfo>::narrow (ri);
+    IDL::traits<PortableInterceptor::RequestInfo>::ref_type cnarrow_nullptr = IDL::traits<PortableInterceptor::RequestInfo>::narrow (nullptr);
+
     CORBA::Any new_data;
     uint32_t number = 19;
     new_data <<= number;
