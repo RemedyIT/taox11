@@ -36,6 +36,28 @@ ClientRequestInterceptor::send_request (
 {
   TAOX11_TEST_INFO << "ClientRequestInterceptor::send_request (" << ri->operation () << ") with id " << ri->request_id () << std::endl;
 
+  IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type narrow_ri = IDL::traits<PortableInterceptor::ClientRequestInfo>::narrow (ri);
+  IDL::traits<PortableInterceptor::ClientRequestInfo>::ref_type narrow_nullptr = IDL::traits<PortableInterceptor::ClientRequestInfo>::narrow (nullptr);
+  if (!narrow_ri)
+    {
+      TAOX11_TEST_ERROR << "ERROR: CRI narrow failed" << std::endl;
+    }
+  if (narrow_nullptr)
+    {
+      TAOX11_TEST_ERROR << "ERROR: CRI nullptr narrow failed" << std::endl;
+    }
+
+  IDL::traits<PortableInterceptor::RequestInfo>::ref_type cnarrow_ri = IDL::traits<PortableInterceptor::RequestInfo>::narrow (ri);
+  IDL::traits<PortableInterceptor::RequestInfo>::ref_type cnarrow_nullptr = IDL::traits<PortableInterceptor::RequestInfo>::narrow (nullptr);
+  if (!cnarrow_ri)
+    {
+      TAOX11_TEST_ERROR << "ERROR: rSRI narrow failed" << std::endl;
+    }
+  if (cnarrow_nullptr)
+    {
+      TAOX11_TEST_ERROR << "ERROR: rSRI nullptr narrow failed" << std::endl;
+    }
+
   std::string const op = ri->operation ();
 
   if (op != "invoke_me")
@@ -99,6 +121,11 @@ ClientRequestInterceptor::send_request (
       throw CORBA::INTERNAL ();
     }
 
+    IDL::traits<CORBA::Object>::ref_type target = ri->target();
+
+    IDL::traits<CORBA::Object>::ref_type effective_target = ri->effective_target();
+
+    IOP::TaggedProfile tp = ri->effective_profile ();
   }
   catch (const PortableInterceptor::InvalidSlot& ex)
   {
