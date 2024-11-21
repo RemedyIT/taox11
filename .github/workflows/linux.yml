@@ -165,7 +165,7 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       if: matrix.feature == 'CodeQL'
-    - uses: codecov/codecov-action@v4
+    - uses: codecov/codecov-action@v5
       with:
         fail_ci_if_error: true
         verbose: true # optional (default = false)
