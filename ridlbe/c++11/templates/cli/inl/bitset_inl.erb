@@ -35,3 +35,22 @@ inline void <%= scoped_cxxtype %>::swap (<%= scoped_cxx_out_type %> s)
   std::swap (this->_taox11_<%= cxxname.downcase %>, s._taox11_<%= cxxname.downcase %>);
 %# end
 }
+
+inline bool <%= scoped_cxxtype %>::operator== (const <%= cxxname %> &rhs) const {
+  return
+%unless base.nil?
+    <%= base.cxxname %>::operator==(rhs) &&
+%end
+%_ms = bitfields.dup.find_all {|bitf| !bitf.cxxname.empty? }
+%unless _ms.empty?
+%  while !_ms.empty?
+%    _m = _ms.shift
+    (this->_taox11_<%= cxxname.downcase %>.<%= _m.cxxname %> == rhs._taox11_<%= cxxname.downcase %>.<%= _m.cxxname %>)<%= _ms.empty? ? ';' : ' &&' %>
+%  end
+%end
+}
+
+inline bool <%= scoped_cxxtype %>::operator!= (const <%= cxxname %> &rhs) const
+{
+  return !this->operator== (rhs);
+}
