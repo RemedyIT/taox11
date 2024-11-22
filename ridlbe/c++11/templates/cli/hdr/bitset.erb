@@ -5,6 +5,7 @@
 class <%= cxxname %><% unless base.nil? %> : public <%= base.cxxname %><% end %>
 {
 public:
+%# With C++17 we need to initialize all bitfield members explicitly
   <%= cxxname %> () = default;
   ~<%= cxxname %> () noexcept = default;
   <%= cxxname %> (const <%= cxxname %>&) = default;
@@ -41,9 +42,10 @@ public:
 private:
   struct
   {
+%# Using {} for bitfields is only part of C++20
 %bitfields.each do |bitfield|
     /// @copydoc <%= bitfield.doc_scoped_name %>
-    <%= bitfield.cxx_member_type %> <%= bitfield.cxxname %> : <%= bitfield.bits %><%= bitfield.cxxname.empty? ? '' : ' {}' %>;
+    <%= bitfield.cxx_member_type %> <%= bitfield.cxxname %> : <%= bitfield.bits %><%= bitfield.cxxname.empty? ? '' : '' %>;
 %end
   } _taox11_<%= cxxname.downcase %>;
 }; // <%= cxxname %>
