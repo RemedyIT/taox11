@@ -1,5 +1,4 @@
 
-%# TODO handle inheritance
 // generated from <%= ridl_template_path %>
 template<>
 struct traits <<%= scoped_cxxtype %>>
@@ -22,6 +21,9 @@ struct formatter<<%= scoped_cxxtype %>, OStrm_>
   {
 %_sep = nil
     os_ << "<%= formatted_cxxname %>{"
+%unless base.nil?
+        << IDL::traits<<%= base.cxxname %>>::write(val_) << ','
+%end
 %bitfields.each do |_m|
 % unless _m.cxxname.empty?
         << "<%= _sep %><%= _m.cxxname %>=" << IDL::traits<<%= _m.scoped_cxxtype %>>::write(val_.<%= _m.cxxname %> ())
