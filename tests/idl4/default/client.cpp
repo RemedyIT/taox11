@@ -96,6 +96,16 @@ int main (int /*argc*/, char* /*argv*/[])
     TAOX11_TEST_ERROR << "mybitset2.g() not 3 but: " << mybitset2.g() << std::endl;
     ++retval;
   }
+  if (mybitset1.x() != true)
+  {
+    TAOX11_TEST_ERROR << "mybitset1.x() not true but: " << mybitset1.x() << std::endl;
+    ++retval;
+  }
+  if (mybitset2.h() != false)
+  {
+    TAOX11_TEST_ERROR << "mybitset2.h() not false but: " << mybitset2.h() << std::endl;
+    ++retval;
+  }
 
   TestUnion_Octet tuo;
   TAOX11_TEST_INFO << "tuo: " << tuo << std::endl;
