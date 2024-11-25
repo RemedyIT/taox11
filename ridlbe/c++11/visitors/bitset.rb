@@ -33,6 +33,21 @@ module IDL
       def bits
         node.bits
       end
+      def default_value
+        unless node.annotations[:default].first.nil?
+          "#{node.annotations[:default].first.fields[:value]}"
+        else
+          # Check whether it is a typedef, if so, we need to see if there is an annotation applied to the typedef (or its typedef)
+          res_idl_type = _idltype
+          while res_idl_type.is_a?(IDL::Type::ScopedName)
+            unless res_idl_type.node.annotations[:default].first.nil?
+              return "#{res_idl_type.node.annotations[:default].first.fields[:value]}"
+            end
+            res_idl_type = res_idl_type.node.idltype
+          end
+          _resolved_idltype.default
+        end
+      end
     end
   end
 end
