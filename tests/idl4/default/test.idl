@@ -56,3 +56,10 @@ struct Shape {
     ColorNoDefaultLiteral color_no_default_literal;
     ColorNoDefaultLiteralArray color_no_default_literal_array;
 };
+
+bitset MyBitset1 {
+  bitfield<1> x;
+  bitfield<3> a;
+  @default(5) bitfield<12, short> d;
+  bitfield<33> tt;
+};

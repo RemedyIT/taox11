@@ -15,6 +15,7 @@ int main (int /*argc*/, char* /*argv*/[])
   int retval {};
   bar mybar;
   foo myfoo;
+  MyBitset1 mybitset1 {};
 
   TAOX11_TEST_INFO << "mybar: " << mybar << std::endl;
   TAOX11_TEST_INFO << "myfoo: " << myfoo << std::endl;
@@ -77,6 +78,16 @@ int main (int /*argc*/, char* /*argv*/[])
   if (myfoo.ushort_5() != 5)
   {
     TAOX11_TEST_ERROR << "myfoo.ushort_5() not 5 but: " << myfoo.ushort_5() << std::endl;
+    ++retval;
+  }
+  if (mybitset1.a() != 0)
+  {
+    TAOX11_TEST_ERROR << "mybitset1.a() not 0 but: " << mybitset1.a() << std::endl;
+    ++retval;
+  }
+  if (mybitset1.d() != 5)
+  {
+    TAOX11_TEST_ERROR << "mybitset1.d() not 5 but: " << mybitset1.d() << std::endl;
     ++retval;
   }
 
