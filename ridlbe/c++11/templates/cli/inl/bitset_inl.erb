@@ -4,6 +4,22 @@
 %#  Constructor inlines
 %#
 %#  Initializer CTOR
+%# Required with C++17, with C++20 we can use {} for bitfields
+%_ms = bitfields.dup.find_all {|bitf| !bitf.cxxname.empty? }
+inline <%= scoped_cxxtype %>::<%= cxxname %> ()
+%  _pfx = nil
+%  unless base.nil?
+  : <%= base.cxxname %> ()
+%  end
+% str = ""
+% bitfields.find_all {|bitf| !bitf.cxxname.empty? }.each do |_m|
+%   str = "#{str}#{_pfx}#{_m.default_value}"
+%   _pfx = ', ' unless _pfx
+% end
+  <% if base.nil? %>:<% else %>,<% end %> _taox11_<%= cxxname.downcase %> { <%= str %> }
+{
+}
+
 %_ms = bitfields.dup.find_all {|bitf| !bitf.cxxname.empty? }
 inline <%= scoped_cxxtype %>::<%= cxxname %> (
 %  unless base.nil?

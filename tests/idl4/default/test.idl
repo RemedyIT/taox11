@@ -63,3 +63,9 @@ bitset MyBitset1 {
   @default(5) bitfield<12, short> d;
   bitfield<33> tt;
 };
+
+bitset MyBitset2 : MyBitset1 {
+  bitfield<3> c;
+  bitfield<2>;
+  @default(3) bitfield<12, short> g;
+};

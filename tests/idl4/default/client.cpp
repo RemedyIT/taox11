@@ -16,6 +16,7 @@ int main (int /*argc*/, char* /*argv*/[])
   bar mybar;
   foo myfoo;
   MyBitset1 mybitset1 {};
+  MyBitset2 mybitset2 {};
 
   TAOX11_TEST_INFO << "mybar: " << mybar << std::endl;
   TAOX11_TEST_INFO << "myfoo: " << myfoo << std::endl;
@@ -88,6 +89,11 @@ int main (int /*argc*/, char* /*argv*/[])
   if (mybitset1.d() != 5)
   {
     TAOX11_TEST_ERROR << "mybitset1.d() not 5 but: " << mybitset1.d() << std::endl;
+    ++retval;
+  }
+  if (mybitset2.g() != 3)
+  {
+    TAOX11_TEST_ERROR << "mybitset2.g() not 3 but: " << mybitset2.g() << std::endl;
     ++retval;
   }
 
