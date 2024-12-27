@@ -1,15 +1,4 @@
 // generated from <%= ridl_template_path %>
-#if defined (_MSC_VER) && (_MSC_VER < 1930)
-inline <%= scoped_cxxname %>::u_type_::u_type_ ()
-% if has_default?()
-  : <%= default_member.cxxname %>_<%= default_member.value_initializer %>
-% else
-  : <%= members.first.cxxname %>_<%= members.first.value_initializer %>
-% end
-{
-}
-#endif
-
 inline <%= scoped_cxxname %>::u_type_::~u_type_ ()
 {
 }
