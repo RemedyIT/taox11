@@ -135,10 +135,7 @@ control your logging output and format.
 TAOX11 has been tested with the following compilers
 
 * GCC version 8 or newer
-* Microsoft Visual Studio 2017
-* Microsoft Visual Studio 2019
-* Clang C++ version 5 or newer
-* Intel C++ 2016
+* Microsoft Visual Studio 2022
 
 === Supported platforms
 
@@ -315,8 +312,7 @@ directories and parse the MPC files. Once the GNU makefiles are generated, invok
 Execute the following commands to create the Visual Studio solutions for
 your version.
 
-- `perl %TAOX11_ROOT%/bin/mwc.pl -type vs2017` for Visual Studio 2017
-- `perl %TAOX11_ROOT%/bin/mwc.pl -type vs2019` for Visual Studio 2019
+- `perl %TAOX11_ROOT%/bin/mwc.pl -type vs2022` for Visual Studio 2022
 
 MPC will iterate through all sub
 directories and parse the MPC files. Once the Visual Studio solutions

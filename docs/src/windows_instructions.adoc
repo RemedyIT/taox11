@@ -16,9 +16,7 @@ compilers have been tested:
 
 * MinGW-w64 toolchain (a GNU compiler toolchain variant for the
 Windows platform)
-* Visual Studio 2017 Update 3 or newer
-* Visual Studio 2019
-* Intel C++ 2016
+* Visual Studio 2022
 
 A development environment requires the following software
 installed on the computer hosting the Windows environment
@@ -121,12 +119,12 @@ http://www.7-zip.org/[here].
 
 === Visual Studio
 
-Development using Visual Studio 2017, and 2019 has been tested as well. When you use
+Development using Visual Studio 2022 has been tested as well. When you use
 <<{parent_dir}/brix11/brix11.adoc#,BRIX11>> to compile the project, the project type will be set
 to _solution_ files by default and the _msbuild_ tool will
 be used to compile your application.
 
-Due to the way Microsoft pass:[C++] compilers and linkers on Windows (including the Intel pass:[C++] compiler for Windows)
+Due to the way Microsoft pass:[C++] compilers and linkers on Windows
 handle symbol exports from DLLs it is important that for a debug build of your application you link the
 shipped debug libraries and for a release build of your application the shipped release libraries.
 With <<{parent_dir}/brix11/brix11.adoc#,BRIX11>> building for debug or release can be specified by
