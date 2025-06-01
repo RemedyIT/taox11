@@ -39,12 +39,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: windows-2019
+          - os: windows-2025
             ruby: '2.6'
-            project_type: vs2019
-          - os: windows-2019
+            project_type: vs2022
+          - os: windows-2025
             ruby: '3.0'
-            project_type: vs2019
+            project_type: vs2022
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }}
     steps:
