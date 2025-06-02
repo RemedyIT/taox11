@@ -1193,10 +1193,12 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 #else
       for (long double& _el : _new_seq)
       {
-        if (!(_strm >> _el))
+        TAO_CORBA::LongDouble ld {};
+        if (!(_strm >> _ld))
         {
           return false;
         }
+        _el = ld;
       }
 #endif
       _seq.swap (_new_seq);
