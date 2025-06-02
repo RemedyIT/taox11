@@ -23,9 +23,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static bool insert (
-        _Stream& _strm,
-        const std::vector<_Tp>& _seq)
+    static bool insert (_Stream& _strm, const std::vector<_Tp>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -47,9 +45,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<_Tp, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<_Tp, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -63,9 +59,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static bool extract (
-        _Stream& _strm,
-        std::vector<_Tp>& _seq)
+    static bool extract (_Stream& _strm, std::vector<_Tp>& _seq)
     {
       uint32_t length {};
 
@@ -89,9 +83,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<_Tp, _Bound>& _seq)
+    static bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<_Tp, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -125,9 +117,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<char>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<char>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -141,9 +131,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<char, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<char, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -157,9 +145,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<char>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<char>& _seq)
     {
       uint32_t length {};
 
@@ -177,9 +163,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<char, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<char, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -207,9 +191,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static bool insert (
-        _Stream& _strm,
-        const std::vector<bool>& _seq)
+    static bool insert (_Stream& _strm, const std::vector<bool>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -230,9 +212,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<bool, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<bool, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -246,9 +226,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static bool extract (
-        _Stream& _strm,
-        std::vector<bool>& _seq)
+    static bool extract (_Stream& _strm, std::vector<bool>& _seq)
     {
       uint32_t length {};
 
@@ -274,9 +252,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<bool, _Bound>& _seq)
+    static bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<bool, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -291,7 +267,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
       }
 
       std::vector<bool> _new_seq (length);
-      for ( std::vector <bool>::size_type i = 0; i < length; ++i)
+      for (std::vector <bool>::size_type i = 0; i < length; ++i)
       {
         TAO_CORBA::Boolean v;
         if (!(_strm.read_boolean (v)))
@@ -312,9 +288,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<uint8_t>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<uint8_t>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -328,9 +302,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<uint8_t, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<uint8_t, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -344,9 +316,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<uint8_t>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<uint8_t>& _seq)
     {
       uint32_t length {};
 
@@ -364,9 +334,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<uint8_t, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<uint8_t, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -394,9 +362,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<wchar_t>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<wchar_t>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -410,9 +376,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<wchar_t, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<wchar_t, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -426,9 +390,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<wchar_t>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<wchar_t>& _seq)
     {
       uint32_t length {};
 
@@ -446,9 +408,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<wchar_t, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<wchar_t, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -476,9 +436,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<int8_t>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<int8_t>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -492,9 +450,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<int8_t, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<int8_t, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -508,9 +464,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<int8_t>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<int8_t>& _seq)
     {
       uint32_t length {};
 
@@ -528,9 +482,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<int8_t, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<int8_t, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -558,9 +510,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<int16_t>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<int16_t>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -574,9 +524,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<int16_t, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<int16_t, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -590,9 +538,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<int16_t>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<int16_t>& _seq)
     {
       uint32_t length {};
 
@@ -610,9 +556,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<int16_t, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<int16_t, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -640,9 +584,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<uint16_t>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<uint16_t>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -656,9 +598,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<uint16_t, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<uint16_t, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -672,9 +612,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<uint16_t>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<uint16_t>& _seq)
     {
       uint32_t length {};
 
@@ -692,9 +630,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<uint16_t, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<uint16_t, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -722,9 +658,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<int32_t>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<int32_t>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -738,9 +672,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<int32_t, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<int32_t, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -754,9 +686,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<int32_t>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<int32_t>& _seq)
     {
       uint32_t length {};
 
@@ -774,9 +704,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<int32_t, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<int32_t, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -804,9 +732,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<uint32_t>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<uint32_t>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -820,9 +746,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<uint32_t, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<uint32_t, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -836,9 +760,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<uint32_t>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<uint32_t>& _seq)
     {
       uint32_t length {};
 
@@ -856,9 +778,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<uint32_t, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<uint32_t, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -886,9 +806,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<int64_t>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<int64_t>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -902,9 +820,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<int64_t, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<int64_t, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -918,9 +834,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<int64_t>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<int64_t>& _seq)
     {
       uint32_t length {};
 
@@ -938,9 +852,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<int64_t, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<int64_t, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -968,9 +880,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<uint64_t>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<uint64_t>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -984,9 +894,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<uint64_t, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<uint64_t, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -1000,9 +908,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<uint64_t>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<uint64_t>& _seq)
     {
       uint32_t length {};
 
@@ -1020,9 +926,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<uint64_t, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<uint64_t, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -1050,9 +954,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<float>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<float>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -1066,9 +968,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<float, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<float, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -1082,9 +982,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<float>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<float>& _seq)
     {
       uint32_t length {};
 
@@ -1102,9 +1000,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<float, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<float, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -1132,9 +1028,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<double>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<double>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -1148,9 +1042,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<double, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<double, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -1164,9 +1056,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<double>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<double>& _seq)
     {
       uint32_t length {};
 
@@ -1184,9 +1074,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<double, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<double, _Bound>& _seq)
     {
       uint32_t length {};
 
@@ -1214,9 +1102,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
   {
     /// Unbounded insert
     template <typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const std::vector<long double>& _seq)
+    static inline bool insert (_Stream& _strm, const std::vector<long double>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -1241,9 +1127,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded insert
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool insert (
-        _Stream& _strm,
-        const TAOX11_IDL::bounded_vector<long double, _Bound>& _seq)
+    static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<long double, _Bound>& _seq)
     {
       uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
 
@@ -1257,9 +1141,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Unbounded extract
     template <typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        std::vector<long double>& _seq)
+    static inline bool extract (_Stream& _strm, std::vector<long double>& _seq)
     {
       uint32_t length {};
 
@@ -1287,9 +1169,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
     /// Bounded extract
     template <const uint32_t _Bound, typename _Stream>
-    static inline bool extract (
-        _Stream& _strm,
-        TAOX11_IDL::bounded_vector<long double, _Bound>& _seq)
+    static inline bool extract (_Stream& _strm, TAOX11_IDL::bounded_vector<long double, _Bound>& _seq)
     {
       uint32_t length {};
 
