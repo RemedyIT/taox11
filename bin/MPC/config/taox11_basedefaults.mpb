@@ -9,4 +9,8 @@ project : taox11_rules {
   verbatim(gnuace,macros,1) {
     taox11_build?=1
   }
+
+  specific(prop:microsoft) {
+    macros += _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
+  }
 }
