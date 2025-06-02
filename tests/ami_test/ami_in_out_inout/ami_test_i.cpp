@@ -298,6 +298,17 @@ AMI_Test_i::foo_void_no_arg ()
   TAOX11_TEST_INFO << "AMI_Test_i::foo_void_no_arg. " << std::endl;
 }
 
+long double
+AMI_Test_i::ld_attr ()
+{
+  return {};
+}
+
+void
+AMI_Test_i::ld_attr (long double)
+{
+}
+
 void
 AMI_Test_i::shutdown ()
 {

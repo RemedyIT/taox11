@@ -85,6 +85,9 @@ public:
   int32_t foo_no_arg () override;
   void foo_void_no_arg () override;
 
+  long double ld_attr () override;
+  void ld_attr (long double _v) override;
+
   void shutdown () override;
 
 private:

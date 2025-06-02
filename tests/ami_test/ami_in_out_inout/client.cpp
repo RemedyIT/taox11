@@ -460,6 +460,22 @@ public:
   {
   }
 
+  void get_ld_attr (long double) override
+  {
+  }
+
+  void get_ld_attr_excep (IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type) override
+  {
+  }
+
+  void set_ld_attr () override
+  {
+  }
+
+  void set_ld_attr_excep (IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type) override
+  {
+  }
+
   void shutdown () override
   {
   }
