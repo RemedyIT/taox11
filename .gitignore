@@ -29,6 +29,10 @@ GNUmakefile*
 *.kdev4
 *.so*
 *.dylib
+*.idb
+*.ilk
+*.recipe
+*.log
 commit.txt
 taox11/html
 taox11/latex
