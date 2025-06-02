@@ -377,7 +377,7 @@ TAO_END_VERSIONED_NAMESPACE_DECL
 
 // generated from c++/cli_src/interface_os.erb
 std::ostream& operator<< (
-    std::ostream& strm ,
+    std::ostream& strm,
     IDL::traits<TAOX11_CORBA::Policy>::ref_type _v)
 {
   strm << "object_reference {";
