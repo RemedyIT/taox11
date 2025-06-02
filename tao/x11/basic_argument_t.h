@@ -119,7 +119,6 @@ namespace TAOX11_NAMESPACE
    * @class Ret_Basic_Argument_T
    *
    * @brief Template class for return stub value of basic IDL types.
-   *
    */
   template<typename S,
            template <typename> class Insert_Policy>
