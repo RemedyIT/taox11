@@ -14,6 +14,7 @@
 #include <cstdlib>
 #include <codecvt>
 #include <locale>
+#include <string_view>
 
 namespace std
 {

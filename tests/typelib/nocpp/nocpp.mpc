@@ -15,5 +15,8 @@ project(*nocpp_gen_Client) {
   }
   includes += $(TAOX11_ROOT)
   macros += TAOX11_DISABLE_INCLUDE_ANYTYPECODE TAOX11_DISABLE_INCLUDE_STUB_PROXY_HDR
+  specific(nmake) {
+    compile_flags += /std:c++17
+  }
 }
 
