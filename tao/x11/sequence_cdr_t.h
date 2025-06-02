@@ -1116,7 +1116,8 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 #else
       for (const long double& _el : _seq)
       {
-        if (!(_strm << _el))
+        TAO_CORBA::LongDouble ld {};
+        if (!(_strm << ld.assign(_el())
         {
           return false;
         }
@@ -1157,10 +1158,12 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 #else
       for (long double& _el : _new_seq)
       {
-        if (!(_strm >> _el))
+        TAO_CORBA::LongDouble ld {};
+        if (!(_strm >> ld))
         {
           return false;
         }
+        _el = ld;
       }
 #endif
       _seq.swap (_new_seq);
