@@ -87,6 +87,18 @@ module Test
     charArray  c_array;
   };
 
+  exception NestedReasonEx
+  {
+    enum BarDisc
+    {
+      BAR1,
+      BAR2
+    } kind;
+    Reason why;
+    boolean reason_bool;
+    Data union_data;
+  };
+
   exception ArrayEx
   {
     longArray l_array;
