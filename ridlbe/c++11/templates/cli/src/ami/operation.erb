@@ -187,9 +187,9 @@ void
 %       end
 %       case _arg.direction
 %       when :out
-          <%= _sep %>_<%= _arg.cxxname %>.retn ()
+        <%= _sep %>_<%= _arg.cxxname %>.retn ()
 %       when :inout
-          <%= _sep %>_<%= _arg.cxxname %>.arg ()
+        <%= _sep %>_<%= _arg.cxxname %>.arg ()
 %       end
 %     end
 %   end
