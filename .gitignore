@@ -86,3 +86,5 @@ tests/policies/manipulation/manipulation
 tests/reactor/reactor
 client
 server
+tests/typelib/shared/TYPELIB_stub_proxy_export.h
+tests/typelib/shared/TYPELIB_anytypecode_export.h
