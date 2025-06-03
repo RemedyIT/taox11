@@ -24,7 +24,7 @@ main(int, char* [])
   try
   {
   }
-  catch (const std::exception& e)
+  catch (const std::exception&)
   {
     return 1;
   }
