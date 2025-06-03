@@ -151,21 +151,21 @@ void
     {
       // Demarshall all the arguments.
 %   unless is_oneway? || is_void?
-      <%= scoped_cxx_member_type %> _taox11_ami_return_val;
-      if (!(_tao_in >> <%= cdr_to_fmt % "_taox11_ami_return_val" %>))
+      TAOX11_NAMESPACE::Arg_Traits<<%= scoped_cxx_arg_type %>>::ret_val _taox11_ami_return_val;
+      if (!(_taox11_ami_return_val.demarshal(_tao_in)))
         throw TAOX11_NAMESPACE::CORBA::MARSHAL ();
 
 %   end
 %   arguments.each do |_arg|
 %     case _arg.direction
 %     when :out
-      <%= _arg.scoped_cxx_member_type %> _<%= _arg.cxxname %>;
-      if (!(_tao_in >> <%= _arg.cdr_to_fmt % "_#{_arg.cxxname}" %>))
+      TAOX11_NAMESPACE::Arg_Traits<<%= _arg.scoped_cxx_arg_type %>>::ret_val _<%= _arg.cxxname %>;
+      if (!(_<%= _arg.cxxname %>.demarshal(_tao_in)))
         throw TAOX11_NAMESPACE::CORBA::MARSHAL ();
 
 %     when :inout
-      <%= _arg.scoped_cxx_member_type %> _<%= _arg.cxxname %>;
-      if (!(_tao_in >> <%= _arg.cdr_to_fmt % "_#{_arg.cxxname}" %>))
+      TAOX11_NAMESPACE::Arg_Traits<<%= _arg.scoped_cxx_arg_type %>>::ret_val _<%= _arg.cxxname %>;
+      if (!(_<%= _arg.cxxname %>.demarshal(_tao_in)))
         throw TAOX11_NAMESPACE::CORBA::MARSHAL ();
 
 %     end
@@ -174,7 +174,7 @@ void
       _reply_handler-><%= cxxname %> (
 %   _first = false
 %   unless is_oneway? || is_void?
-          _taox11_ami_return_val
+          _taox11_ami_return_val.retn ()
 %     _first = true
 %   end
 %   arguments.each do |_arg|
@@ -185,7 +185,12 @@ void
 %         _sep = ""
 %         _first = true
 %       end
-        <%= _sep %>_<%= _arg.cxxname %>
+%       case _arg.direction
+%       when :out
+          <%= _sep %>_<%= _arg.cxxname %>.retn ()
+%       when :inout
+          <%= _sep %>_<%= _arg.cxxname %>.arg ()
+%       end
 %     end
 %   end
         );

@@ -103,12 +103,12 @@ void
     case TAO_AMI_REPLY_OK:
     {
       // Demarshall all the arguments.
-      <%= scoped_cxx_member_type %> _taox11_ami_return_val;
-      if (!(_tao_in >> <%= cdr_to_fmt % "_taox11_ami_return_val" %>))
+      TAOX11_NAMESPACE::Arg_Traits<<%= scoped_cxx_arg_type %>>::ret_val _taox11_ami_return_val;
+      if (!(_taox11_ami_return_val.demarshal(_tao_in)))
         throw TAOX11_NAMESPACE::CORBA::MARSHAL ();
 
       // Invoke the call back method.
-      _reply_handler->get_<%= name %> (_taox11_ami_return_val);
+      _reply_handler->get_<%= name %> (_taox11_ami_return_val.retn ());
       break;
     }
     case TAO_AMI_REPLY_USER_EXCEPTION:
