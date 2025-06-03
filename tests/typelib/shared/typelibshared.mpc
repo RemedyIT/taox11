@@ -9,7 +9,7 @@ project(*typelibshared_gen_idl): ridl_ostream_defaults {
   custom_only = 1
 }
 
-project(*typelibshared_clientproxy): taox11_lib {
+project(*typelibshared_clientproxy): taox11_lib, taox11_anytypecode {
   after += *typelibshared_gen_idl
   sharedname    = typelibshared_clientproxy
   dynamicflags += TYPELIB_CLIENT_PROXY_BUILD_DLL
