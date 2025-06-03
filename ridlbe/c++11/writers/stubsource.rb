@@ -638,20 +638,20 @@ module IDL
 
       def enter_union(node)
         visitor(UnionVisitor).visit_tao_typecode(node)
-        enter_scope(node)
+        enter_scope(node) if node.types.size > 0
       end
 
       def leave_union(node)
-        leave_scope(node)
+        leave_scope(node) if node.types.size > 0
       end
 
       def enter_exception(node)
         visitor(ExceptionVisitor).visit_tao_typecode(node)
-        enter_scope(node)
+        enter_scope(node) if node.types.size > 0
       end
 
       def leave_exception(node)
-        leave_scope(node)
+        leave_scope(node) if node.types.size > 0
       end
 
       def visit_enum(node)
