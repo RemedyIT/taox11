@@ -157,6 +157,10 @@ module IDL
         params[:anytypecode_export_macro] ? params[:anytypecode_export_macro] + ' ' : self.stub_export_macro
       end
 
+      def taotypecode_export_macro
+        params[:gen_stub_proxy_source] ? stub_proxy_export_macro : anytypecode_export_macro
+      end
+
       def stub_proxy_export_include?
         !params[:stub_proxy_export_include].nil?
       end
