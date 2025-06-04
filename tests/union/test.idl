@@ -296,19 +296,18 @@ module Test
     case 1: long b;
   };
 
-// Triggers an internal compiler error with Visual Studio 2022 14.7.3
-//   typedef string arrayofstring[5];
-//   union unionarrayofstring switch (long)
-//   {
-//     default: arrayofstring as;
-//     case 1: long b;
-//   };
-//   typedef string multidimarrayofstring[1][2][3];
-//   union uniondimarrayofstring switch (long)
-//   {
-//     default: multidimarrayofstring mdas;
-//     case 1: long b;
-//   };
+  typedef string arrayofstring[5];
+  union unionarrayofstring switch (long)
+  {
+    default: arrayofstring as;
+    case 1: long b;
+  };
+  typedef string multidimarrayofstring[1][2][3];
+  union uniondimarrayofstring switch (long)
+  {
+    default: multidimarrayofstring mdas;
+    case 1: long b;
+  };
 
   /// A very simple interface
   interface Foo
