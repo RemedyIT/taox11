@@ -258,6 +258,10 @@ project(*DLL): ridl_ostream_defaults, taox11_lib, taox11_messaging, taox11_porta
   Template_Files {
     *S_T.cpp
   }
+
+  specific(vs2022) {
+    LanguageStandard = stdcpp20
+  }
 }
 
 project(*Main): taox11_server, taox11_messaging {

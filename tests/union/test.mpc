@@ -17,6 +17,9 @@ project(*union_gen_Server): taox11_server, taox11_anytypecode {
     testC.cpp
     testS.cpp
   }
+  specific(vs2022) {
+    LanguageStandard = stdcpp20
+  }
 }
 
 project(*union_gen_Client): taox11_client, taox11_anytypecode {
@@ -26,6 +29,9 @@ project(*union_gen_Client): taox11_client, taox11_anytypecode {
   }
   Source_Files {
     testC.cpp
+  }
+  specific(vs2022) {
+    LanguageStandard = stdcpp20
   }
 }
 
