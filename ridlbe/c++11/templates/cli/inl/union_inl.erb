@@ -521,11 +521,7 @@ inline void <%= scoped_cxxname %>::_clear ()
 %     # in these cases there is only a single member mapping all labels
 %     _m = _defmem || _ndefmem.shift
 %     unless _m.is_pod?
-%# Workaround for clang, see https://bugs.llvm.org/show_bug.cgi?id=12350
 %       unless _m.is_reference?
-#if defined __clang__ && __clang_major__ <= 10
-  using <%= _m.cxx_member_type %>;
-#endif /* __clang__ && __clang_major__ <= 10 */
 %       end
   this->u_.<%= _m.cxxname %>_.<%= _m.cxx_member_type %>::~<%= _m.cxx_member_type_name %> ();
 %     end
@@ -536,12 +532,6 @@ inline void <%= scoped_cxxname %>::_clear ()
 %     unless _m.is_pod?
   if (<%= _lbl == 'false' ? '!' : '' %>this->disc_)
   {
-%# Workaround for clang, see https://bugs.llvm.org/show_bug.cgi?id=12350
-%       unless _m.is_reference?
-#if defined __clang__ && __clang_major__ <= 10
-    using <%= _m.cxx_member_type %>;
-#endif /* __clang__ && __clang_major__ <= 10 */
-%       end
     this->u_.<%= _m.cxxname %>_.<%= _m.cxx_member_type %>::~<%= _m.cxx_member_type_name %> ();
   }
 %     end
@@ -556,12 +546,6 @@ inline void <%= scoped_cxxname %>::_clear ()
 %         end
 %           _m = _m2
   {
-%# Workaround for clang, see https://bugs.llvm.org/show_bug.cgi?id=12350
-%       unless _m.is_reference?
-#if defined __clang__ && __clang_major__ <= 10
-    using <%= _m.cxx_member_type %>;
-#endif /* __clang__ && __clang_major__ <= 10 */
-%       end
     this->u_.<%= _m.cxxname %>_.<%= _m.cxx_member_type %>::~<%= _m.cxx_member_type_name %> ();
   }
 %       end
@@ -577,12 +561,6 @@ inline void <%= scoped_cxxname %>::_clear ()
 %       end
 %       unless _m.is_pod?
     {
-%# Workaround for clang, see https://bugs.llvm.org/show_bug.cgi?id=12350
-%         unless _m.is_reference?
-#if defined __clang__ && __clang_major__ <= 10
-      using <%= _m.cxx_member_type %>;
-#endif /* __clang__ && __clang_major__ <= 10 */
-%         end
       this->u_.<%= _m.cxxname %>_.<%= _m.cxx_member_type %>::~<%= _m.cxx_member_type_name %> ();
     }
 %       end
@@ -594,12 +572,6 @@ inline void <%= scoped_cxxname %>::_clear ()
 %     _m_def = has_default? ? default_member : members.first
 %     unless _m_def.is_pod?
     {
-%# Workaround for clang, see https://bugs.llvm.org/show_bug.cgi?id=12350
-%       unless _m_def.is_reference?
-#if defined __clang__ && __clang_major__ <= 10
-      using <%= _m_def.cxx_member_type %>;
-#endif /* __clang__ && __clang_major__ <= 10 */
-%       end
       this->u_.<%= _m_def.cxxname %>_.<%= _m_def.cxx_member_type %>::~<%= _m_def.cxx_member_type_name %> ();
     }
 %     end
