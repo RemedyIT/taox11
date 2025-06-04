@@ -5,7 +5,7 @@
  * Only use types that should be usable with the CORBA support in the proxy source
  * - basic types
  * - struct
- * - union (be aware of the exception
+ * - union (be aware of the exceptions that can be thrown)
  * - (bounded) (w)string
  * - (bounded) sequences
  *
