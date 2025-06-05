@@ -45,8 +45,13 @@ jobs:
           - os: windows-2025
             ruby: '3.0'
             project_type: vs2022
+            make_flags: '--debug'
+          - os: windows-2025
+            ruby: '3.0'
+            project_type: vs2022
+            make_flags: '--release'
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }}
+    name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }} ${{ matrix.make_flags }}
     steps:
     - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) && github.repository_owner == 'RemedyIT'
       run: |
@@ -100,5 +105,5 @@ jobs:
       shell: cmd
     - name: Run brix11 make
       run: |
-        %X11_BASE_ROOT%/bin/brix11 make -N -d %X11_BASE_ROOT% -- make -N -d %TAOX11_ROOT%/examples -- make -N -d %TAOX11_ROOT%/orbsvcs/tests -- make -N -d %TAOX11_ROOT%/tests
+        %X11_BASE_ROOT%/bin/brix11 make ${{ matrix.make_flags }} -N -d %X11_BASE_ROOT% -- make -N -d %TAOX11_ROOT%/examples -- make -N -d %TAOX11_ROOT%/orbsvcs/tests -- make -N -d %TAOX11_ROOT%/tests
       shell: cmd
