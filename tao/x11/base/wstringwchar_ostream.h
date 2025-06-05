@@ -16,6 +16,8 @@
 #if !defined (WIN32)
 # include <codecvt>
 # include <locale>
+#else
+# include <Windows.h>
 #endif
 
 namespace std
