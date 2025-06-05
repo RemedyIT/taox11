@@ -27,8 +27,7 @@ namespace TAOX11_NAMESPACE
      *
      * A @c Case_T contains the corresponding case label value, name and
      * pointer to the @c CORBA::TypeCode for a given OMG IDL @c union
-     * @c case.  For
-     * example, the cases in following OMG IDL @c union:
+     * @c case.  For example, the cases in following OMG IDL @c union:
      *
      * \code
      *   union Foo switch (short)
@@ -100,7 +99,6 @@ namespace TAOX11_NAMESPACE
       {
       }
       ~Case_T () override = default;
-
 
       /**
        * @name @c TAO::TypeCode::Case Methods

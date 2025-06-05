@@ -30,8 +30,7 @@ namespace TAOX11_NAMESPACE
   /// return type.
   template<>
   class Arg_Traits<TAOX11_CORBA::Any>
-    : public Basic_Arg_Traits_T<TAOX11_CORBA::Any,
-                                Any_Insert_Policy_Stream>
+    : public Basic_Arg_Traits_T<TAOX11_CORBA::Any, Any_Insert_Policy_Stream>
   {
   };
 } // namespace TAOX11_NAMESPACE

@@ -182,7 +182,7 @@ tests/typecode_adapter/orb_create/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
 tests/typecode_adapter/resolve_ref/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
 tests/typelib/nocpp/run_test.pl:
 tests/typelib/proxyany/run_test.pl:
-tests/typelib/shared/run_test.pl:
+tests/typelib/shared/run_test.pl: !Win32
 tests/typelib/stdlib/run_test.pl:
 tests/typelib/taox11/run_test.pl:
 tests/union/run_test.pl:

@@ -53,7 +53,12 @@ if ($server->WaitForFileTimed ($iorbase1,
     exit 1;
 }
 
-$SV2->Spawn ();
+$server2_status = $SV2->Spawn ();
+
+if ($server2_status != 0) {
+    print STDERR "ERROR: server 2 returned $server2_status\n";
+    exit 1;
+}
 
 if ($server->WaitForFileTimed ($iorbase2,
                                $server->ProcessStartWaitInterval()) == -1) {
@@ -63,7 +68,12 @@ if ($server->WaitForFileTimed ($iorbase2,
     exit 1;
 }
 
-$SV3->Spawn ();
+$server3_status= $SV3->Spawn ();
+
+if ($server3_status != 0) {
+    print STDERR "ERROR: server 3 returned $server3_status\n";
+    exit 1;
+}
 
 if ($server->WaitForFileTimed ($iorbase3,
                                $server->ProcessStartWaitInterval()) == -1) {

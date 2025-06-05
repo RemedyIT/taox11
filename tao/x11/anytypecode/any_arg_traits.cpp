@@ -15,8 +15,7 @@
 
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
 
-TAO_CORBA::Boolean operator<< (TAO_OutputCDR & strm,
-    const TAOX11_CORBA::Any& _any)
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR & strm, const TAOX11_CORBA::Any& _any)
 {
   TAOX11_NAMESPACE::Any_Impl::ref_type impl = _any.impl ();
 
@@ -28,8 +27,7 @@ TAO_CORBA::Boolean operator<< (TAO_OutputCDR & strm,
   return (strm << TAOX11_CORBA::_tc_null);
 }
 
-TAO_CORBA::Boolean operator>> (TAO_InputCDR & strm,
-    TAOX11_CORBA::Any& _any)
+TAO_CORBA::Boolean operator>> (TAO_InputCDR & strm, TAOX11_CORBA::Any& _any)
 {
    TAOX11_CORBA::typecode_reference tc;
 

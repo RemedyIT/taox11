@@ -56,11 +56,21 @@ $CL = $client->CreateProcess ("client",
                               "-ORBdebuglevel $debug_level ".
                               "-a corbaloc:iiop:$TARGETHOSTNAME:$port/SIMPLE_TEST_KEY ".
                               "-t $test_not_found");
-$SV->Spawn ();
+$server_status = $SV->Spawn ();
+
+if ($server_status != 0) {
+    print STDERR "ERROR: server returned $server_status\n";
+    exit 1;
+}
 
 sleep(3);
 
-$CL->Spawn ();
+$client_status = $CL->Spawn ();
+
+if ($client_status != 0) {
+    print STDERR "ERROR: client returned $client_status\n";
+    exit 1;
+}
 
 $client_status = $CL->WaitKill ($client->ProcessStopWaitInterval());
 
