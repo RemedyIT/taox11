@@ -22,5 +22,8 @@ project(*stdlib_gen_Client) {
   specific(vs2022) {
     LanguageStandard = stdcpp17
   }
+  specific(prop:microsoft) {
+    macros += _CRT_SECURE_NO_WARNINGS
+  }
 }
 
