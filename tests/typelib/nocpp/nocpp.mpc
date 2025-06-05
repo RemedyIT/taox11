@@ -18,8 +18,5 @@ project(*nocpp_gen_Client) {
   specific(vs2022) {
     LanguageStandard = stdcpp17
   }
-  specific(prop:microsoft) {
-    macros += _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
-  }
 }
 
