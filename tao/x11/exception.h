@@ -102,9 +102,7 @@ namespace TAOX11_NAMESPACE
       : public common_traits<CORBA::Exception>
     {
       template <typename OStrm_, typename Formatter = formatter<value_type, OStrm_>>
-      static inline OStrm_& write_on(
-          OStrm_& os_, in_type val_,
-          Formatter fmt_ = Formatter ())
+      static inline OStrm_& write_on(OStrm_& os_, in_type val_, Formatter fmt_ = Formatter ())
       {
         return fmt_ (os_, val_);
       }
@@ -116,9 +114,7 @@ namespace TAOX11_NAMESPACE
     template <typename OStrm_>
     struct formatter< CORBA::Exception, OStrm_>
     {
-      inline OStrm_& operator ()(
-          OStrm_& os_,
-          IDL::traits<CORBA::Exception>::in_type x_)
+      inline OStrm_& operator ()(OStrm_& os_, IDL::traits<CORBA::Exception>::in_type x_)
       {
         x_._info (os_);
         return os_;
@@ -137,9 +133,7 @@ namespace TAOX11_NAMESPACE
                             std::false_type>::value,
                           formatter<CORBA::Exception, OStrm_>,
                           typename writer_t::formatter_t>::type;
-      return IDL::traits<CORBA::Exception>::write_on (
-          os, w.val_,
-          formatter_t ());
+      return IDL::traits<CORBA::Exception>::write_on (os, w.val_, formatter_t ());
     }
   } // namespace IDL
 
