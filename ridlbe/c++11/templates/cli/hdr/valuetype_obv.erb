@@ -11,12 +11,7 @@ namespace obv
 % end
   {
   protected:
-%# msvc14.{0|1} have a problem with defaulted constructors, issue #4005
-#if defined (_MSC_VER) && (_MSC_VER < 1920)
-    <%= cxxname %> () {}
-#else
     <%= cxxname %> () = default;
-#endif /* _MSC_VER < 1920 */
     ~<%= cxxname %> () override = default;
     <%= cxxname %> (const <%= cxxname %>&) = default;
     <%= cxxname %> (<%= cxxname %>&&) = default;

@@ -16,12 +16,7 @@ protected:
       TAOX11_CORBA::abstractbase_reference<TAOX11_CORBA::AbstractBase>);
 #endif /* clang <= 11 */
 
-%# msvc14.{0|1|2} have a problem with defaulted constructors, issue #4005
-#if defined (_MSC_VER) && (_MSC_VER < 1930)
-  <%= cxxname %> () {}
-#else
   <%= cxxname %> () = default;
-#endif /* _MSC_VER < 1930 */
   <%= cxxname %> (TAOX11_NAMESPACE::Abstractbase_proxy_ptr prx);
   ~<%= cxxname %> () override = default;
   /// Required for derived value types
@@ -72,15 +67,8 @@ private:
 protected:
   using _shared_ptr_type = std::shared_ptr<<%= cxxname %>>;
 
-%# msvc14.{0|1|2} have a bug that when using a defaulted constructor here we get a crash in the portableserver library
-%# for the POA
-#if defined (_MSC_VER) && (_MSC_VER < 1930)
-  /// Default constructor
-  <%= cxxname %> () {};
-#else
   /// Default constructor
   <%= cxxname %> () = default;
-#endif /* _MSC_VER < 1930 */
   /// Destructor
   ~<%= cxxname %> () override = default;
 
