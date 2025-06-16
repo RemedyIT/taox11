@@ -4,7 +4,7 @@ TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> 
 {
   // Total number of bits in this bitset including the base <%= bitset_bits %>
   <%= underlying_type.cxx_type %> _tao_temp {};
-%# handle base
+%# handle base cdr, need to handle bitpos bitpos here
 % bitpos = 0
 %bitfields.each do |_m|
 % mask = (1 << _m.bits) - 1
@@ -26,7 +26,7 @@ TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxxname %> &_tao_b
   if (_tao_success)
     {
 % bitpos = 0
-%# handle base
+%# handle base cdr, need to handle bitpos bitpos here
 %bitfields.each do |_m|
 % mask = (1 << _m.bits) - 1
 %unless _m.cxxname.empty?
