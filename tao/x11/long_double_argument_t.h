@@ -104,8 +104,7 @@ namespace TAOX11_NAMESPACE
     : public TAO_TAO::OutArgument
   {
   public:
-    Out_Basic_Argument_T (long double & x)
-      : x_ (x) {}
+    Out_Basic_Argument_T (long double & x) : x_ (x) {}
 
     TAO_CORBA::Boolean demarshal (TAO_InputCDR &) override;
 #if TAO_HAS_INTERCEPTORS == 1

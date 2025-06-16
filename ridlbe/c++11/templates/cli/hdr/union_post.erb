@@ -66,22 +66,12 @@ private:
   <%= switch_cxxtype %> disc_ {<% if has_default?() || has_implicit_default?() %><%= default_label %><% else %><%= members.first.nondefault_labels.first %><% end %>};
   union u_type_
   {
-#if defined (_MSC_VER) && (_MSC_VER < 1930)
-    u_type_ ();
-#else
     u_type_ () = default;
-#endif
     ~u_type_ ();
 % members.each do |_m|
 % # The default member or the first member should use the value_initializer
-% # Visual Studio 2019 doesn't seem to like using default, this leads to
-% # an internal compiler error, see SW331
 % if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
-#if defined (_MSC_VER) && (_MSC_VER < 1930)
-    <%= _m.cxx_member_type %> <%= _m.cxxname %>_;
-#else
     <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first) %> <%= _m.value_initializer %><% end %>;
-#endif
 % else
     <%= _m.cxx_member_type %> <%= _m.cxxname %>_;
 % end
