@@ -14,5 +14,5 @@ bitset Base {
 
 
 bitset MyBitset : Base{
-  bitfield<60> x;
+  bitfield<60> y;
 };
