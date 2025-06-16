@@ -29,6 +29,11 @@ bitset MyBitset4
   bitfield<12, long> i;
 };
 
+bitset SmallBitset
+{
+  bitfield<3> g;
+};
+
 module Test
 {
   interface Foo
@@ -37,6 +42,7 @@ module Test
     MyBitset2 test_mybitset2 (in MyBitset2 sin, inout MyBitset2 sinout, out MyBitset2 sout);
     MyBitset3 test_mybitset3 (in MyBitset3 sin, inout MyBitset3 sinout, out MyBitset3 sout);
     MyBitset4 test_mybitset4 (in MyBitset4 sin, inout MyBitset4 sinout, out MyBitset4 sout);
+    SmallBitset test_smallbitset (in SmallBitset sin, inout SmallBitset sinout, out SmallBitset sout);
 
     /// A method to shutdown the ORB
     oneway void shutdown ();

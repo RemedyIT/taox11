@@ -51,6 +51,15 @@ Foo::test_mybitset4 (const MyBitset4 & sin, MyBitset4 & sinout, MyBitset4 & sout
   return sret;
 }
 
+SmallBitset
+Foo::test_smallbitset (const SmallBitset & sin, SmallBitset & sinout, SmallBitset & sout)
+{
+  sout = sin;
+  sinout = sin;
+  SmallBitset sret = sin;
+  return sret;
+}
+
 void
 Foo::shutdown ()
 {
