@@ -120,7 +120,7 @@ int main (int argc, char* argv[])
         }
       TAOX11_TEST_DEBUG << "Received MyBitset4 sret4: " << sret4 << " sinout4: " << sinout4 << " sout4: " << sout4 << std::endl;
 
-      SmallBitset sbin {};
+      SmallBitset sbin { 2 };
       SmallBitset sbinout {};
       SmallBitset sbout {};
 
