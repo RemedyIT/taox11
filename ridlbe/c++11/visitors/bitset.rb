@@ -22,11 +22,6 @@ module IDL
         node.base
       end
 
-      # Total number of bits within the bitset included the optional base
-      def bitset_bits
-        node.bitset_bits
-      end
-
       # The underlying type which can contain all fields of the bitset in one type
       # including the base
       def underlying_type

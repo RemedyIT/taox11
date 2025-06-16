@@ -2,7 +2,6 @@
 // generated from <%= ridl_template_path %>
 TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> &_tao_bitset)
 {
-  // Total number of bits in this bitset including the base <%= bitset_bits %>
   <%= underlying_type.cxx_type %> _tao_temp {};
 %# handle base cdr, need to handle bitpos bitpos here
 % bitpos = 0
@@ -19,7 +18,6 @@ TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> 
 
 TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxxname %> &_tao_bitset)
 {
-  // Total number of bits in this bitset including the base <%= bitset_bits %>
   <%= underlying_type.cxx_type %> _tao_temp {};
   bool const _tao_success = strm >> <%= underlying_type.cdr_to_fmt % "_tao_temp" %>;
 
