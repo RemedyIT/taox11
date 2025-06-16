@@ -61,7 +61,7 @@ bitset MyBitset1 {
   @default(true) bitfield<1> x;
   bitfield<3> a;
   @default(5) bitfield<12, short> d;
-  bitfield<33> tt;
+  bitfield<22> tt;
 };
 
 bitset MyBitset2 : MyBitset1 {
