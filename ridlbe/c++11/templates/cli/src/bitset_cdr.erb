@@ -1,21 +1,39 @@
 
 // generated from <%= ridl_template_path %>
-TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> & /*_tao_bitset*/)
+TAO_CORBA::Boolean operator<< (TAO_OutputCDR &strm, const <%= scoped_cxxname %> &_tao_bitset)
 {
   // Total number of bits in this bitset including the base <%= bitset_bits %>
   <%= underlying_type.cxx_type %> _tao_temp {};
+%# handle base
+% bitpos = 0
+%bitfields.each do |_m|
+% mask = (1 << _m.bits) - 1
+%unless _m.cxxname.empty?
+  _tao_temp |= static_cast<<%= underlying_type.cxx_type %>>(_tao_bitset.<%= _m.cxxname %>() & 0x<%= mask.to_s(16).upcase %>) << <%= bitpos %>;
+%end
+% bitpos += _m.bits
+%end
+
   return strm << <%= underlying_type.cdr_from_fmt % "_tao_temp" %>;
 }
 
-TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxxname %> & /*_tao_bitset*/)
+TAO_CORBA::Boolean operator>> (TAO_InputCDR &strm, <%= scoped_cxxname %> &_tao_bitset)
 {
   // Total number of bits in this bitset including the base <%= bitset_bits %>
-  <%= underlying_type.cxx_type %> _tao_temp;
+  <%= underlying_type.cxx_type %> _tao_temp {};
   bool const _tao_success = strm >> <%= underlying_type.cdr_to_fmt % "_tao_temp" %>;
 
   if (_tao_success)
     {
-%#      //_tao_bitmask = static_cast<<%= scoped_cxxtype %>> (_tao_temp);
+% bitpos = 0
+%# handle base
+%bitfields.each do |_m|
+% mask = (1 << _m.bits) - 1
+%unless _m.cxxname.empty?
+      _tao_bitset.<%= _m.cxxname %> ((_tao_temp >> <%= bitpos %>) & 0x<%= mask.to_s(16).upcase %>);
+%end
+% bitpos += _m.bits
+%end
     }
 
   return _tao_success;
