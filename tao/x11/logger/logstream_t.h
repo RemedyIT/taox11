@@ -60,8 +60,8 @@ namespace x11_logger
 
     typename std::basic_ios<CH, TR>::openmode get_mode () const;
 
-    virtual int_type overflow (int_type c);
-    virtual int sync ();
+    int_type overflow (int_type c) override;
+    int sync () override;
 
     void reset_buffers ();
 
