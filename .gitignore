@@ -91,3 +91,4 @@ tests/typelib/shared/TYPELIB_anytypecode_export.h
 *.o
 *.bmak
 *.tmp
+MAKE0000.*
