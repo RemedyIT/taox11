@@ -37,7 +37,7 @@ Hello::writePoaName()
   {
     TAOX11_TEST_ERROR << "ERROR: Expected 'RootPOA' instead of '" << poa_name
         << "'." << std::endl;
-    return nullptr;
+    return {};
   }
   TAOX11_TEST_INFO << "call get_object_id";
   PortableServer::ObjectId oid = current->get_object_id ();
