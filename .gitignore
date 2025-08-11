@@ -88,3 +88,6 @@ client
 server
 tests/typelib/shared/TYPELIB_stub_proxy_export.h
 tests/typelib/shared/TYPELIB_anytypecode_export.h
+*.o
+*.bmak
+*.tmp
