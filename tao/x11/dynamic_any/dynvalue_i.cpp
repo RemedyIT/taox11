@@ -625,8 +625,7 @@ namespace TAOX11_NAMESPACE
       TAO_InputCDR for_reading (out_cdr);
 
       IDL::traits<CORBA::ValueBase>::ref_type retval;
-      if (!CORBA::ValueBase::_obv_unmarshal (
-            for_reading, retval ))
+      if (!CORBA::ValueBase::_obv_unmarshal (for_reading, retval))
         {
           throw DynamicAny::DynAny::InvalidValue ();
         }
@@ -977,7 +976,7 @@ namespace TAOX11_NAMESPACE
       {
         // Effectively this member? is the same ValueType as previous
         // seen either in another member of this container OR the
-        // whole container itself. (Possiably can happen as a
+        // whole container itself. (Possibly can happen as a
         // circular linked list?)
         TAOX11_LOG_ERROR ("DynValue_i::from_inputCDR() "
                           "Any contains Indirected ValueType");
@@ -1017,7 +1016,7 @@ namespace TAOX11_NAMESPACE
       }
 
       // Ok since we are not indirected (this time), record "this"
-      // DynValue_i for later possiable indirections to use.
+      // DynValue_i for later possible indirections to use.
       if (strm.get_value_map ()->get()
             ->bind (
               start_of_valuetype,

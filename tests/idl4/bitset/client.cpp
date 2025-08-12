@@ -70,7 +70,7 @@ int main (int argc, char* argv[])
       MyBitset2 sinout2 {};
       MyBitset2 sout2 {};
 
-      TAOX11_TEST_DEBUG << "Sending MyBitset2 sin: " << sin2 << " sinout: " << sinout2 << std::endl;
+      TAOX11_TEST_DEBUG << "Sending MyBitset2 sin2: " << sin2 << " sinout: " << sinout2 << std::endl;
       MyBitset2 const sret2 = foo->test_mybitset2 (sin2, sinout2, sout2);
       if (sout2 != sin2)
         {
@@ -79,7 +79,7 @@ int main (int argc, char* argv[])
         }
       if (sinout2 != sin2)
         {
-          TAOX11_TEST_ERROR << "ERROR: sinout2<" << sinout2 << "> != sin<" << sin2 << ">" << std::endl;
+          TAOX11_TEST_ERROR << "ERROR: sinout2<" << sinout2 << "> != sin2<" << sin2 << ">" << std::endl;
           ++error_count;
         }
       TAOX11_TEST_DEBUG << "Received MyBitset2 sret2: " << sret2 << " sinout2: " << sinout2 << " sout2: " << sout2 << std::endl;
@@ -88,7 +88,7 @@ int main (int argc, char* argv[])
       MyBitset3 sinout3 {};
       MyBitset3 sout3 {};
 
-      TAOX11_TEST_DEBUG << "Sending MyBitset3 sin: " << sin3 << " sinout: " << sinout3 << std::endl;
+      TAOX11_TEST_DEBUG << "Sending MyBitset3 sin3: " << sin3 << " sinout: " << sinout3 << std::endl;
       MyBitset3 const sret3 = foo->test_mybitset3 (sin3, sinout3, sout3);
       if (sout3 != sin3)
         {
@@ -97,7 +97,7 @@ int main (int argc, char* argv[])
         }
       if (sinout3 != sin3)
         {
-          TAOX11_TEST_ERROR << "ERROR: sinout3<" << sinout3 << "> != sin<" << sin3 << ">" << std::endl;
+          TAOX11_TEST_ERROR << "ERROR: sinout3<" << sinout3 << "> != sin3<" << sin3 << ">" << std::endl;
           ++error_count;
         }
       TAOX11_TEST_DEBUG << "Received MyBitset3 sret3: " << sret3 << " sinout3: " << sinout3 << " sout3: " << sout3 << std::endl;
@@ -106,7 +106,7 @@ int main (int argc, char* argv[])
       MyBitset4 sinout4 {};
       MyBitset4 sout4 {};
 
-      TAOX11_TEST_DEBUG << "Sending MyBitset4 sin: " << sin4 << " sinout: " << sinout4 << std::endl;
+      TAOX11_TEST_DEBUG << "Sending MyBitset4 sin4: " << sin4 << " sinout: " << sinout4 << std::endl;
       MyBitset4 const sret4 = foo->test_mybitset4 (sin4, sinout4, sout4);
       if (sout4 != sin4)
         {
@@ -115,10 +115,28 @@ int main (int argc, char* argv[])
         }
       if (sinout4 != sin4)
         {
-          TAOX11_TEST_ERROR << "ERROR: sinout4<" << sinout4 << "> != sin<" << sin4 << ">" << std::endl;
+          TAOX11_TEST_ERROR << "ERROR: sinout4<" << sinout4 << "> != sin4<" << sin4 << ">" << std::endl;
           ++error_count;
         }
       TAOX11_TEST_DEBUG << "Received MyBitset4 sret4: " << sret4 << " sinout4: " << sinout4 << " sout4: " << sout4 << std::endl;
+
+      SmallBitset sbin { 2 };
+      SmallBitset sbinout {};
+      SmallBitset sbout {};
+
+      TAOX11_TEST_DEBUG << "Sending SmallBitset sbin: " << sbin << " sbinout: " << sbinout << std::endl;
+      SmallBitset const sbret = foo->test_smallbitset (sbin, sbinout, sbout);
+      if (sbout != sbin)
+        {
+          TAOX11_TEST_ERROR << "ERROR: sbout<" << sbout << "> != sbin<" << sbin << ">" << std::endl;
+          ++error_count;
+        }
+      if (sbinout != sbin)
+        {
+          TAOX11_TEST_ERROR << "ERROR: sbinout<" << sbinout << "> != sbin<" << sbin << ">" << std::endl;
+          ++error_count;
+        }
+      TAOX11_TEST_DEBUG << "Received SmallBitset sbret: " << sbret << " sbinout: " << sbinout << " sbout: " << sbout << std::endl;
 
       TAOX11_TEST_DEBUG << "shutting down..." << std::endl;
       foo->shutdown ();

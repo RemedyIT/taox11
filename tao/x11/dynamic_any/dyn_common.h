@@ -22,13 +22,12 @@ namespace TAOX11_NAMESPACE
 {
   namespace DynamicAny
   {
-
-/**
- * @class TAOX11_DynCommon
- *
- * Contains most of the functionality common to all the
- * DynAny implementation classes.
- */
+    /**
+    * @class TAOX11_DynCommon
+    *
+    * Contains most of the functionality common to all the
+    * DynAny implementation classes.
+    */
     class TAOX11_DynamicAny_Export TAOX11_DynCommon
       : public virtual IDL::traits<DynAny>::base_type
     {

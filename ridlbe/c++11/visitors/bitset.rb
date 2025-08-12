@@ -22,6 +22,12 @@ module IDL
         node.base
       end
 
+      # The underlying type which can contain all fields of the bitset in one type
+      # including the base
+      def underlying_type
+        node.underlying_type
+      end
+
       # template mapping
 
       map_template :bitset, :bitset

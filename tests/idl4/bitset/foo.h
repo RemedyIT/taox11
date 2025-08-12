@@ -22,6 +22,7 @@ public:
   MyBitset2 test_mybitset2 (const MyBitset2 & sin, MyBitset2 & sinout, MyBitset2 & sout) override;
   MyBitset3 test_mybitset3 (const MyBitset3 & sin, MyBitset3 & sinout, MyBitset3 & sout) override;
   MyBitset4 test_mybitset4 (const MyBitset4 & sin, MyBitset4 & sinout, MyBitset4 & sout) override;
+  SmallBitset test_smallbitset (const SmallBitset & sin, SmallBitset & sinout, SmallBitset & sout) override;
 
   void shutdown () override;
 

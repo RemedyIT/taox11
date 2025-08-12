@@ -1,0 +1,18 @@
+/**
+ * @file bitset_65bits_base.idl
+ * @author Johnny Willemsen
+ *
+ * ridlc shall reject use of a bitset which contains more than 64bits spread
+ * between base and derived
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+bitset Base {
+  bitfield<6> x;
+};
+
+
+bitset MyBitset : Base{
+  bitfield<60> y;
+};
