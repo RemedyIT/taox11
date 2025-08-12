@@ -47,8 +47,18 @@ void TestEqual(T exp, T a)
 {
   if (a != exp)
   {
-    std::cout << "ERROR: value expected " << exp << " , received " << a
+    std::cout << "ERROR: Received unexpected value expected " << exp << " , received " << a
         << std::endl;
+    ++result_;
+  }
+}
+
+template<>
+void TestEqual(wchar_t exp, wchar_t a)
+{
+  if (a != exp)
+  {
+    std::cout << "ERROR: Received unexpected wchar_t value" << std::endl;
     ++result_;
   }
 }

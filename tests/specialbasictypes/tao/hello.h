@@ -11,11 +11,6 @@ public:
   /// Constructor
   Hello(CORBA::ORB_ptr orb, int& result);
 
-  template<class T, class U>
-  void TestEq(const char * name, T exp, U a);
-
-  // = The skeleton methods
-
   CORBA::Char getset_char(CORBA::Char min, CORBA::Char max) override;
 
   void out_char(CORBA::Char numin, CORBA::Char_out num) override;

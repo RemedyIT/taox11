@@ -3,14 +3,25 @@
 #include <limits>
 
 template<class T, class U>
-void Hello::TestEq(const char * name, T exp, U a)
+int TestEq(const char * name, T exp, U a)
 {
   if (a != exp)
   {
-    std::cout << "ERROR: " << name << " expected " << exp << " , received "
-        << a << std::endl;
-    ++result_;
+    std::cout << "ERROR: " << name << " expected " << exp << " , received " << a << std::endl;
+    return 1;
   }
+  return 0;
+}
+
+template<>
+int TestEq(const char *name, wchar_t exp, wchar_t a)
+{
+  if (a != exp)
+  {
+    std::cout << "ERROR: Received unexpected wchar_t value for " << name << std::endl;
+    return 1;
+  }
+  return 0;
 }
 
 template<class T>
@@ -28,8 +39,8 @@ Hello::Hello(CORBA::ORB_ptr orb, int& result) :
 
 CORBA::Char Hello::getset_char(CORBA::Char min, CORBA::Char max)
 {
-  TestEq("set min char", std::numeric_limits<char>::min(), min);
-  TestEq("set max char", std::numeric_limits<char>::max(), max);
+  result_ += TestEq("set min char", std::numeric_limits<char>::min(), min);
+  result_ += TestEq("set max char", std::numeric_limits<char>::max(), max);
   return min;
 }
 
@@ -40,8 +51,8 @@ void Hello::out_char(CORBA::Char numin, CORBA::Char_out num)
 
 void Hello::inout_char(CORBA::Char & min, CORBA::Char & max)
 {
-  TestEq("inout min char", std::numeric_limits<char>::min(), min);
-  TestEq("inout max char", std::numeric_limits<char>::max(), max);
+  result_ += TestEq("inout min char", std::numeric_limits<char>::min(), min);
+  result_ += TestEq("inout max char", std::numeric_limits<char>::max(), max);
   swap(min, max);
 }
 
@@ -50,8 +61,8 @@ void Hello::inout_char(CORBA::Char & min, CORBA::Char & max)
 CORBA::WChar Hello::getset_wchar(CORBA::WChar min, CORBA::WChar max)
 {
   // NOTE: No test using <wchar_t>::min and <wchar_t>::max because wchar in Corba is different from wchar in std-library.
-  TestEq("set '0' wchar_t", '0', min);
-  TestEq("set 'z' wchar_t", 'z', max);
+  result_ += TestEq("set '0' wchar_t", L'0', min);
+  result_ += TestEq("set 'z' wchar_t", L'z', max);
   return '0';
 }
 
