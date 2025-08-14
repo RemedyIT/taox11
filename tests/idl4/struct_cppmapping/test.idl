@@ -14,3 +14,19 @@ struct bar_struct {
 struct bar_class {
   short b;
 };
+
+struct AA;
+typedef sequence<AA> AASeq;
+
+@cpp_mapping(STRUCT_WITH_PUBLIC_MEMBERS)
+struct BB
+{
+  AASeq aa_;
+};
+typedef sequence<BB> BBSeq;
+
+@cpp_mapping(STRUCT_WITH_PUBLIC_MEMBERS)
+struct AA
+{
+  BBSeq bb_;
+};
