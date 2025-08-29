@@ -26,18 +26,6 @@ module IDL
         self._resolved_idltype.value_traits_cxx_typename
       end
 
-      def element_cxxtype
-        self._resolved_idltype.basetype.cxx_type(cur_scope)
-      end
-
-      def scoped_element_cxxtype
-        self._resolved_idltype.basetype.cxx_type
-      end
-
-      def scoped_element_os_type_in
-        self._resolved_idltype.basetype.cxx_in_type
-      end
-
       def basetype_scoped_cxx_typecode
         self._resolved_idltype.basetype.is_standard_type? ?
             "TAO_CORBA::#{self._resolved_idltype.basetype.cxx_typecode}" :

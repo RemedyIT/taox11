@@ -10,14 +10,6 @@
 module IDL
   module Cxx11
     class ArrayVisitor < NodeVisitorBase
-      def element_cxxtype
-        self._resolved_idltype.basetype.cxx_type(cur_scope)
-      end
-
-      def scoped_element_cxxtype
-        self._resolved_idltype.basetype.cxx_type
-      end
-
       def scoped_element_traits_cxx_typename
         self._resolved_idltype.base_traits_cxx_typename
       end
