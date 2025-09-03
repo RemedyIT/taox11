@@ -38,5 +38,5 @@ TAOX11 has the following major features:
 . CodecFactory support
 . DynamicAny and TypeCodeFactory support
 . Portable Interceptors
-. Experimental and partial support for https://www.omg.org/spec/IDL/4.2[IDL 4.2] map, int8/uint8, explicitly-named integer types, bitmask, bitset, empty struct, and struct inheritance extensions
+. Partial support for https://www.omg.org/spec/IDL/4.2[IDL 4.2] map, int8/uint8, explicitly-named integer types, bitmask, bitset, empty struct, and struct inheritance extensions
 
