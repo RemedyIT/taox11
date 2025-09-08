@@ -443,8 +443,7 @@ public:
   }
 
 
-  void foo_no_arg_excep (
-     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+  void foo_no_arg_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -455,8 +454,7 @@ public:
 
   }
 
-  void foo_void_no_arg_excep (
-      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+  void foo_void_no_arg_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -464,7 +462,7 @@ public:
   {
   }
 
-  void get_ld_attr_excep (IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type) override
+  void get_ld_attr_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 
@@ -472,7 +470,7 @@ public:
   {
   }
 
-  void set_ld_attr_excep (IDL::traits<TAOX11_NAMESPACE::Messaging::ExceptionHolder>::ref_type) override
+  void set_ld_attr_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 
