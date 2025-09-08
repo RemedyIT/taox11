@@ -8,7 +8,7 @@ image:https://codecov.io/gh/RemedyIT/taox11/branch/master/graph/badge.svg[Codeco
 = TAOX11
 
 https://www.taox11.org[TAOX11] is the https://www.omg.org/spec/CORBA[CORBA] implementation supporting the
-https://www.omg.org/spec/CPP11[IDL to C++11] Language Mapping created by
+https://www.omg.org/spec/CPP11[IDL to C++11] Language Mapping created, maintained, and supported by
 https://www.remedy.nl[Remedy IT]. TAOX11 builds on the core of
 https://www.remedy.nl/opensource/tao.html[TAO] to provide you with a
 large set of features and capabilities. TAO is a well
@@ -38,4 +38,4 @@ TAOX11 has the following major features:
 . CodecFactory support
 . DynamicAny and TypeCodeFactory support
 . Portable Interceptors
-. Experimental and partial support for https://www.omg.org/spec/IDL/4.2[IDL 4.2] map, int8/uint8, explicitly-named integer types, bitmask, bitset, empty struct, and struct inheritance extensions
+. Partial support for https://www.omg.org/spec/IDL/4.2[IDL 4.2] map, int8/uint8, explicitly-named integer types, bitmask, bitset, empty struct, and struct inheritance extensions

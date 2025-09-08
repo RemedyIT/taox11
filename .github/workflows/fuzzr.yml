@@ -36,12 +36,12 @@ jobs:
     - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false && github.repository_owner == 'RemedyIT'
       run: |
         echo "X11_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: '2.7'
     - name: checkout axcioma
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
