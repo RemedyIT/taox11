@@ -92,6 +92,7 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
     - uses: shogo82148/actions-setup-perl@v1
       with:
+        perl-version: '5.32'
         distribution: strawberry
     - name: Run brix11 configure
       run: |
