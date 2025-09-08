@@ -76,7 +76,7 @@ Hello::inout_lstring (std::wstring& text)
   if (text != longText)
   {
     TAOX11_TEST_ERROR << "ERROR: Hello::inout_string received an unexpected value. "
-      << L"expected 66000 times 'c'." << std::endl;
+      << "expected 66000 times 'c'." << std::endl;
     ++this->result_;
   }
   text.assign(66000, L'd');

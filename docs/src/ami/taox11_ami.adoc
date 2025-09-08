@@ -293,7 +293,7 @@ for the reply hander.
 
   // Narrow to reply handler ref type using amic_traits
   CORBA::amic_traits<Test::A>::replyhandler_ref_type test_handler =
-       CORBA::amic_traits<Test::A>::replyhandler_traits::narrow (test_handler_obj);
+    CORBA::amic_traits<Test::A>::replyhandler_traits::narrow (test_handler_obj);
   if (!test_handler)
     {
       return 1;

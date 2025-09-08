@@ -19,5 +19,11 @@ project(*stdlib_gen_Client) {
   }
   includes += $(TAOX11_ROOT)
   macros += TAOX11_DISABLE_INCLUDE_ANYTYPECODE TAOX11_DISABLE_INCLUDE_STUB_PROXY_HDR
+  specific(vs2022) {
+    LanguageStandard = stdcpp17
+  }
+  specific(prop:microsoft) {
+    macros += _CRT_SECURE_NO_WARNINGS
+  }
 }
 

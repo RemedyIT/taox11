@@ -105,6 +105,8 @@ module A
         long foo_no_arg ();
         void foo_void_no_arg ();
 
+        attribute long double ld_attr;
+
         oneway void shutdown ();
       };
   };

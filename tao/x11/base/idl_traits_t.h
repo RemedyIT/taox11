@@ -14,8 +14,12 @@
 #include "tao/x11/base/bounded_vector_t.h"
 #include "tao/x11/base/bounded_map_t.h"
 #include <algorithm>
-#include <codecvt>
-#include <locale>
+#if !defined (WIN32)
+# include <codecvt>
+# include <locale>
+#else
+# include <Windows.h>
+#endif
 
 namespace TAOX11_NAMESPACE
 {
@@ -171,8 +175,19 @@ namespace TAOX11_NAMESPACE
     {
       inline std::basic_ostream<wchar_t>& operator ()(std::basic_ostream<wchar_t>& os_, std::string val_)
       {
+#if defined (WIN32)
+        std::wstring _str;
+          if (!val_.empty ())
+          {
+            int const size_needed = MultiByteToWideChar (CP_ACP, 0, val_.data (), static_cast<int>(val_.size ()), nullptr, 0);
+            _str.resize (size_needed);
+            MultiByteToWideChar (CP_ACP, 0, val_.c_str (), static_cast<int>(val_.size ()), _str.data (), size_needed);
+          }
+        return os_ << '"' << _str << '"';
+#else
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
         return os_ << '"' << converter.from_bytes(val_) << '"';
+#endif
       }
     };
 
@@ -188,8 +203,19 @@ namespace TAOX11_NAMESPACE
     {
       inline std::basic_ostream<char>& operator ()(std::basic_ostream<char>& os_, std::wstring val_)
       {
+#if defined (WIN32)
+        std::string _str;
+        if (!val_.empty ())
+        {
+          int const size_needed = WideCharToMultiByte (CP_UTF8, 0, val_.data (), static_cast<int>(val_.size ()), nullptr, 0, nullptr, nullptr);
+          _str.resize (size_needed);
+          WideCharToMultiByte (CP_UTF8, 0, val_.data (), static_cast<int>(val_.size ()), _str.data (), size_needed, nullptr, nullptr);
+        }
+        return os_ << "\"" << _str << "\"";
+#else
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
         return os_ << "L\"" << conv.to_bytes(val_) << '"';
+#endif
       }
     };
 

@@ -10,6 +10,7 @@ project(*typelibshared_gen_idl): ridl_ostream_defaults {
 }
 
 project(*typelibshared_clientproxy): taox11_lib {
+  avoids += winnt
   after += *typelibshared_gen_idl
   sharedname    = typelibshared_clientproxy
   dynamicflags += TYPELIB_CLIENT_PROXY_BUILD_DLL
@@ -19,6 +20,7 @@ project(*typelibshared_clientproxy): taox11_lib {
 }
 
 project(*typelibshared_anytypecode): taox11_lib, taox11_anytypecode {
+  avoids += winnt
   after += *typelibshared_gen_idl *typelibshared_clientproxy
   sharedname    = typelibshared_anytypecode
   dynamicflags += TYPELIB_ANYTYPECODE_BUILD_DLL
@@ -29,6 +31,7 @@ project(*typelibshared_anytypecode): taox11_lib, taox11_anytypecode {
 }
 
 project(*typelibshared_client): taox11_client, taox11_anytypecode {
+  avoids += winnt
   after += *typelibshared_gen_idl *typelibshared_clientproxy *typelibshared_anytypecode
   libs += typelibshared_anytypecode typelibshared_clientproxy
   Source_Files {

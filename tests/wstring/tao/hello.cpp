@@ -14,8 +14,7 @@ CORBA::WChar * Hello::getset_string(const CORBA::WChar * text)
   if (ACE_OS::strcmp(text, L"Hello there!") != 0)
   {
     std::cout
-        << "ERROR: Hello::set_string parameter value expected 'Hello there!', received "
-        << text << std::endl;
+        << "ERROR: Hello::set_string parameter value expected 'Hello there!', received incorrect value" << std::endl;
     ++result_;
   }
   return CORBA::wstring_dup(L"Hello there!");
@@ -31,8 +30,7 @@ void Hello::inout_string(CORBA::WChar *& text)
   if (ACE_OS::strcmp (text, L"Hello there!") != 0)
   {
     std::cout
-        << "ERROR: Hello::inout_string parameter value expected 'Hello there!', received "
-        << text << std::endl;
+        << "ERROR: Hello::inout_string parameter value expected 'Hello there!', received incorrect value" << std::endl;
     ++result_;
   }
   CORBA::wstring_free (text);

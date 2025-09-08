@@ -189,7 +189,14 @@ namespace TAOX11_NAMESPACE
       case CORBA::TCKind::tk_ulonglong:
         return cdr << this->u_.ull;
       case CORBA::TCKind::tk_longdouble:
-        return cdr << this->u_.ld;
+        {
+#if (ACE_SIZEOF_LONG_DOUBLE == 16)
+          return cdr << this->u_.ld;
+#else
+          TAO_CORBA::LongDouble ld{};
+          return cdr << ld.assign(this->u_.ld);
+#endif
+        }
       case CORBA::TCKind::tk_wchar:
         return cdr << TAO_OutputCDR::from_wchar (this->u_.wc);
       default:
@@ -234,7 +241,19 @@ namespace TAOX11_NAMESPACE
       case CORBA::TCKind::tk_ulonglong:
         return cdr >> this->u_.ull;
       case CORBA::TCKind::tk_longdouble:
+      {
+#if (ACE_SIZEOF_LONG_DOUBLE == 16)
         return cdr >> this->u_.ld;
+#else
+        TAO_CORBA::LongDouble ld{};
+        if (!(cdr >> ld))
+        {
+          return false;
+        }
+        this->u_.ld = ld;
+        return true;
+#endif
+      }
       case CORBA::TCKind::tk_wchar:
         return cdr >> TAO_InputCDR::to_wchar (this->u_.wc);
       default:

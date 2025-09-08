@@ -39,14 +39,19 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: windows-2019
+          - os: windows-2025
             ruby: '2.6'
-            project_type: vs2019
-          - os: windows-2019
-            ruby: '3.0'
-            project_type: vs2019
+            project_type: vs2022
+          - os: windows-2025
+            ruby: '3.1'
+            project_type: vs2022
+            make_flags: '--debug'
+          - os: windows-2025
+            ruby: '3.1'
+            project_type: vs2022
+            make_flags: '--release'
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }}
+    name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }} ${{ matrix.make_flags }}
     steps:
     - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) && github.repository_owner == 'RemedyIT'
       run: |
@@ -80,6 +85,8 @@ jobs:
         path: ${{ env.X11_BASE_ROOT }}
         ref: ${{ env.X11_BRANCH }}
     - uses: ilammy/msvc-dev-cmd@v1
+      with:
+        vsversion: 2022
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
@@ -100,5 +107,5 @@ jobs:
       shell: cmd
     - name: Run brix11 make
       run: |
-        %X11_BASE_ROOT%/bin/brix11 make -N -d %X11_BASE_ROOT% -- make -N -d %TAOX11_ROOT%/examples -- make -N -d %TAOX11_ROOT%/orbsvcs/tests -- make -N -d %TAOX11_ROOT%/tests
+        %X11_BASE_ROOT%/bin/brix11 make ${{ matrix.make_flags }} -N -d %X11_BASE_ROOT% -- make ${{ matrix.make_flags }} -N -d %TAOX11_ROOT%/examples -- make ${{ matrix.make_flags }} -N -d %TAOX11_ROOT%/orbsvcs/tests -- make ${{ matrix.make_flags }} -N -d %TAOX11_ROOT%/tests
       shell: cmd

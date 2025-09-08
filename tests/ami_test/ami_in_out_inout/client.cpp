@@ -443,8 +443,7 @@ public:
   }
 
 
-  void foo_no_arg_excep (
-     IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+  void foo_no_arg_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
   {
   }
 
@@ -455,8 +454,23 @@ public:
 
   }
 
-  void foo_void_no_arg_excep (
-      IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+  void foo_void_no_arg_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type /*excep_holder*/) override
+  {
+  }
+
+  void get_ld_attr (long double) override
+  {
+  }
+
+  void get_ld_attr_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
+  {
+  }
+
+  void set_ld_attr () override
+  {
+  }
+
+  void set_ld_attr_excep (IDL::traits<::Messaging::ExceptionHolder>::ref_type) override
   {
   }
 

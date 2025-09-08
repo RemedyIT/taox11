@@ -324,6 +324,8 @@ project(taox11) : taox11_defaults, taolib {
     orb_typesSP.h
     orbproxy.h
     policyfactory_manager_adapter.h
+    base/pre.h
+    base/post.h
     sequence_cdr_t.h
     sequence_conversion_t.h
     special_basic_argument_t.h
@@ -334,6 +336,7 @@ project(taox11) : taox11_defaults, taolib {
     system_exception_x11.h
     base/tao_corba.h
     base/taox11_export.h
+    base/taox11_export_macros.h
     typecode_factory_adapter.h
     user_exception.h
     user_exception_proxy_in_t.h

@@ -55,7 +55,7 @@ namespace TAOX11_NAMESPACE
 
       friend class TAOX11_NAMESPACE::ValueFactory_proxy;
       template <typename T> friend class abstractbase_reference;
-#if (defined __clang__ && __clang_major__ <= 11)
+#if (defined __clang__ && __clang_major__ <= 20)
       // Clang doesn't support this friend construct, issue #4476
       template<typename T>
       friend struct TAOX11_CORBA::abstractbase_traits;

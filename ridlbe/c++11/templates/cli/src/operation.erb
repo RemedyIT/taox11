@@ -6,7 +6,7 @@
 <%= interface.cxxname %>::<%= cxxname %> (<% if _args.empty? %>)<% end %>
 %   while !_args.empty?
 %     _arg = _args.shift
-    <%= _arg.scoped_stub_arg_type %> <%= _arg.cxxname %><%= _args.empty? ? ')' : ',' %>
+  <%= _arg.scoped_stub_arg_type %> <%= _arg.cxxname %><%= _args.empty? ? ')' : ',' %>
 %   end
 {
 %   if interface.is_abstract?

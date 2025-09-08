@@ -4,7 +4,7 @@
 %##### Abstract interface #####
 %#
 protected:
-#if (defined __clang__ && __clang_major__ <= 11)
+#if (defined __clang__ && __clang_major__ <= 20)
   // Clang doesn't support this friend construct, issue #4476
   friend TAOX11_CORBA::abstractbase_traits<<%= cxxname %>>::ref_type
     TAOX11_CORBA::abstractbase_traits<<%= cxxname %>>::narrow (

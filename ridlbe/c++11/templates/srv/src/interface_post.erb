@@ -7,7 +7,7 @@ static constexpr Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array
 % nr_of_operations = 0;
 % all_operations.each do |_op|
     {"<%= _op.name %>",
-     [] (TAO_ServerRequest& server_request, TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant) constexpr
+     [] (TAO_ServerRequest& server_request, TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant)
      {
       <%= scoped_srvproxy_cxxtype %>* const impl = dynamic_cast<<%= scoped_srvproxy_cxxtype %>*> (servant);
 % unless _op.defining_interface.is_abstract?
@@ -21,7 +21,7 @@ static constexpr Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array
 % end
 % all_attributes.each do |_att|
     {"_get_<%= _att.name %>",
-     [] (TAO_ServerRequest& server_request, TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant) constexpr
+     [] (TAO_ServerRequest& server_request, TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant)
      {
       <%= scoped_srvproxy_cxxtype %>* const impl = dynamic_cast<<%= scoped_srvproxy_cxxtype %>*> (servant);
 % unless _att.defining_interface.is_abstract?
@@ -34,7 +34,7 @@ static constexpr Operation_db_entry tao_x11_<%= scoped_var_name %>_optable_array
 % nr_of_operations += 1
 %   unless _att.is_readonly?
     {"_set_<%= _att.name %>",
-     [] (TAO_ServerRequest& server_request, TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant) constexpr
+     [] (TAO_ServerRequest& server_request, TAO::Portable_Server::Servant_Upcall* servant_upcall, TAO_ServantBase* servant)
      {
       <%= scoped_srvproxy_cxxtype %>* const impl = dynamic_cast<<%= scoped_srvproxy_cxxtype %>*> (servant);
 % unless _att.defining_interface.is_abstract?

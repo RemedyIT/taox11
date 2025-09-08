@@ -34,7 +34,6 @@ namespace TAOX11_NAMESPACE
     };
 
     // Specializations for char type; requires wrapper CDR streaming.
-
     template <>
     struct Case_Traits<char>
     {
@@ -49,15 +48,11 @@ namespace TAOX11_NAMESPACE
 // ----------------------------------------------------------------
 
 
-template <typename DiscriminatorType,
-          typename StringType,
-          typename TypeCodeType>
+template <typename DiscriminatorType, typename StringType, typename TypeCodeType>
 TAO_TAO::TypeCode::Case<StringType, TypeCodeType> *
 TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType, StringType, TypeCodeType>::clone () const
 {
-  using case_type = Case_T<DiscriminatorType,
-                 StringType,
-                 TypeCodeType>;
+  using case_type = Case_T<DiscriminatorType, StringType, TypeCodeType>;
 
   // The compiler generated memberwise copy constructor is sufficient.
   TAO_TAO::TypeCode::Case<StringType, TypeCodeType> * p = new (std::nothrow) case_type (*this);
@@ -66,38 +61,27 @@ TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType, StringType, TypeCodeType>:
   return p;
 }
 
-template <typename DiscriminatorType,
-          typename StringType,
-          typename TypeCodeType>
+template <typename DiscriminatorType, typename StringType, typename TypeCodeType>
 bool
 TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType, StringType, TypeCodeType>::marshal_label (TAO_OutputCDR & cdr) const
 {
-  return
-    (cdr <<
-        TAOX11_NAMESPACE::TypeCode::Case_Traits<DiscriminatorType>::cdr_from (this->label_));
+  return (cdr << TAOX11_NAMESPACE::TypeCode::Case_Traits<DiscriminatorType>::cdr_from (this->label_));
 }
 
-template <typename DiscriminatorType,
-          typename StringType,
-          typename TypeCodeType>
+template <typename DiscriminatorType, typename StringType, typename TypeCodeType>
 bool
-TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType,
-                      StringType,
-                      TypeCodeType>::equal_label (uint32_t index,
-                                                  TAO_CORBA::TypeCode_ptr tao_tc
-                                                  ) const
+TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType, StringType, TypeCodeType>::equal_label (uint32_t index, TAO_CORBA::TypeCode_ptr tao_tc) const
 {
   TAO_CORBA::Any_var tao_any = tao_tc->member_label (index);
   CORBA::Any any;
   Any_Util::tao_any_to_x11_any (tao_any.in (), any);
+
   // The equality operator == below is guaranteed to be defined for
   // the discriminator type since an IDL union discriminator type must
   // be any of the following: (1) an integer, (2) a character, (3) a
   // boolean, or (4) an enumeration.
-
   DiscriminatorType tc_label;
-  if ((any >>= tc_label)
-      && this->label_ == tc_label)
+  if ((any >>= tc_label) && this->label_ == tc_label)
     {
       return true;
     }
@@ -105,13 +89,9 @@ TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType,
   return false;
 }
 
-template <typename DiscriminatorType,
-          typename StringType,
-          typename TypeCodeType>
+template <typename DiscriminatorType, typename StringType, typename TypeCodeType>
 TAO_CORBA::Any*
-TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType,
-                      StringType,
-                      TypeCodeType>::label () const
+TAOX11_NAMESPACE::TypeCode::Case_T<DiscriminatorType, StringType, TypeCodeType>::label () const
 {
   CORBA::Any value;
 
