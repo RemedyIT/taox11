@@ -85,6 +85,9 @@ jobs:
         path: ${{ env.X11_BASE_ROOT }}
         ref: ${{ env.X11_BRANCH }}
     - uses: ilammy/msvc-dev-cmd@v1
+      with:
+        vsversion: 2022
+        toolset: 14.3
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
