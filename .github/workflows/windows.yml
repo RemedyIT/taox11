@@ -43,11 +43,11 @@ jobs:
             ruby: '2.6'
             project_type: vs2022
           - os: windows-2025
-            ruby: '3.0'
+            ruby: '3.1'
             project_type: vs2022
             make_flags: '--debug'
           - os: windows-2025
-            ruby: '3.0'
+            ruby: '3.1'
             project_type: vs2022
             make_flags: '--release'
     runs-on: ${{ matrix.os }}
