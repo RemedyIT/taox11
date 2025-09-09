@@ -109,5 +109,5 @@ jobs:
       shell: cmd
     - name: Run brix11 make
       run: |
-        %X11_BASE_ROOT%/bin/brix11 make ${{ matrix.make_flags }} -N -d %X11_BASE_ROOT% -- make ${{ matrix.make_flags }} -N -d %TAOX11_ROOT%/examples -- make ${{ matrix.make_flags }} -N -d %TAOX11_ROOT%/orbsvcs/tests -- make ${{ matrix.make_flags }} -N -d %TAOX11_ROOT%/tests
+        %X11_BASE_ROOT%/bin/brix11 make ${{ matrix.make_flags }} -N %X11_BASE_ROOT% -- make ${{ matrix.make_flags }} -N %TAOX11_ROOT%/examples -- make ${{ matrix.make_flags }} -N %TAOX11_ROOT%/orbsvcs/tests -- make ${{ matrix.make_flags }} -N %TAOX11_ROOT%/tests
       shell: cmd

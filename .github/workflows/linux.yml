@@ -155,7 +155,7 @@ jobs:
         $X11_BASE_ROOT/bin/brix11 gen build axcioma/workspace.mwc -- gen build $TAOX11_ROOT/examples -- gen build $TAOX11_ROOT/orbsvcs/tests -- gen build $TAOX11_ROOT/tests
     - name: Run brix11 make
       run: |
-        $X11_BASE_ROOT/bin/brix11 make -N -d $X11_BASE_ROOT -- make -N -d $TAOX11_ROOT/examples -- make -N -d $TAOX11_ROOT/orbsvcs/tests -- make -N -d $TAOX11_ROOT/tests
+        $X11_BASE_ROOT/bin/brix11 make -N $X11_BASE_ROOT -- make -N $TAOX11_ROOT/examples -- make -N $TAOX11_ROOT/orbsvcs/tests -- make -N $TAOX11_ROOT/tests
     - name: Run brix11 tests
       run: |
         $X11_BASE_ROOT/bin/brix11 run list -l $TAOX11_ROOT/bin/taox11_tests.lst -r $TAOX11_ROOT
