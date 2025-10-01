@@ -163,14 +163,20 @@ TAOX11 is using at least the following {cxx11} features
 
 ==== Linux
 
-Before compiling TAOX11 on Linux check the following
-prerequisites:
+Before compiling TAOX11 check the following prerequisites
 
 [cols="<,<",options="header",]
 |=========================================
 |Prerequisite |Package name
-|ruby 2.5 or newer|ruby
-|perl version 5.10 or newer |perl
+|ruby 2.5 through 3.1.2 |ruby
+|perl v5.10 through v5.36 |perl
+|=========================================
+
+On Linux make sure you have installed the following additional prerequisites
+
+[cols="<,<",options="header",]
+|=========================================
+|Prerequisite |Package name
 |gcc version 11 or newer |gcc
 |g++ version 11 or newer |gcc-c++
 |GNU make version 3.81 or newer |make
