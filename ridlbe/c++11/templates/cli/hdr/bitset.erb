@@ -32,8 +32,8 @@ public:
   bool operator!= (const <%= cxxname %> &rhs) const;
 
 %bitfields.find_all {|bitf| !bitf.cxxname.empty? }.each do |_m|
-  inline void <%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11_<%= _m.cxxname %>) { this->_taox11_<%= cxxname.downcase %>.<%= _m.cxxname %> = _x11_<%= _m.cxxname %>; }
-  inline <%= _m.cxx_in_type %> <%= _m.cxxname %> () const { return this->_taox11_<%= cxxname.downcase %>.<%= _m.cxxname %>; }
+  [[nodiscard]] inline void <%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11_<%= _m.cxxname %>) { this->_taox11_<%= cxxname.downcase %>.<%= _m.cxxname %> = _x11_<%= _m.cxxname %>; }
+  [[nodiscard]] inline <%= _m.cxx_in_type %> <%= _m.cxxname %> () const { return this->_taox11_<%= cxxname.downcase %>.<%= _m.cxxname %>; }
 %end
 
   /// Exchange the value of two bitsets in an efficient matter

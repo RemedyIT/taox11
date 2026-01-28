@@ -14,8 +14,8 @@ public:
 % unless boxed_type_is_pod? || boxed_type_is_reference?
   void _value (<%= boxed_cxx_move_type %> v) { this->value_ = std::move (v); }
 % end
-  <%= boxed_cxx_in_type %> _value () const { return this->value_; }
-  <%= boxed_cxx_out_type %> _value () { return this->value_; }
+  [[nodiscard]] <%= boxed_cxx_in_type %> _value () const { return this->value_; }
+  [[nodiscard]] <%= boxed_cxx_out_type %> _value () { return this->value_; }
 
   TAOX11_IDL::traits<TAOX11_CORBA::ValueBase>::ref_type _copy_value () const override;
 

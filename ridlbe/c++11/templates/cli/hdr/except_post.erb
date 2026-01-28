@@ -29,8 +29,8 @@
 %   unless _m.is_pod? || _m.is_reference?
   void <%= _m.cxxname %> (<%= _m.cxx_move_type %> _x11_<%= _m.cxxname %>)  { this-><%= _m.cxxname %>_ = std::move (_x11_<%= _m.cxxname %>); }
 %   end
-  <%= _m.cxx_in_type %> <%= _m.cxxname %> () const { return this-><%= _m.cxxname %>_; }
-  <%= _m.cxx_out_type %> <%= _m.cxxname %> () { return this-><%= _m.cxxname %>_; };
+  [[nodiscard]] <%= _m.cxx_in_type %> <%= _m.cxxname %> () const { return this-><%= _m.cxxname %>_; }
+  [[nodiscard]] <%= _m.cxx_out_type %> <%= _m.cxxname %> () { return this-><%= _m.cxxname %>_; };
   //@}
 % end
 
