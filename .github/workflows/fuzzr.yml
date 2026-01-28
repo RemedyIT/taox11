@@ -28,7 +28,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
     - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) && github.repository_owner == 'RemedyIT'
       run: |
