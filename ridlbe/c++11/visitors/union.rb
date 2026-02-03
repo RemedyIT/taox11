@@ -17,15 +17,6 @@ module IDL
         end
       end
 
-      def unique_member_types
-        types = []
-        node.members.each do |_m|
-          (umv = visitor(UnionMemberVisitor)).visit(_m)
-          types << (umv.cxx_member_type)
-        end
-        types.uniq
-      end
-
       def member_count
         node.members.size
       end
