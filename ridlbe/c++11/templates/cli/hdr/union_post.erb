@@ -63,6 +63,13 @@ private:
   inline void _move_u (<%= cxx_inout_type %> u);
   inline void _clear ();
 
+
+  std::variant <
+% unique_member_types.each do |_m|
+  <%= _m %><% unless _m.equal?(enumerators.last)%>,<%end%>
+% end
+  > vv;
+
   <%= switch_cxxtype %> disc_ {<% if has_default?() || has_implicit_default?() %><%= default_label %><% else %><%= members.first.nondefault_labels.first %><% end %>};
   union u_type_
   {

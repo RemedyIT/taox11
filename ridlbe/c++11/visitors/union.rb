@@ -6,6 +6,7 @@
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
 #--------------------------------------------------------------------
+require 'set'
 
 module IDL
   module Cxx11
@@ -15,6 +16,15 @@ module IDL
           (umv = visitor(UnionMemberVisitor)).visit(um)
           umv
         end
+      end
+
+      def unique_member_types
+        types = Set[]
+        node.members.each do |_m|
+          (umv = visitor(UnionMemberVisitor)).visit(_m)
+          types.add (umv.cxx_member_type)
+        end
+        types
       end
 
       def member_count
