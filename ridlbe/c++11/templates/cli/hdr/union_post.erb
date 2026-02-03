@@ -66,22 +66,22 @@ private:
   <%= switch_cxxtype %> disc_ {<% if has_default?() || has_implicit_default?() %><%= default_label %><% else %><%= members.first.nondefault_labels.first %><% end %>};
 % unique_member_types = []
 % members.each do |_m|
-%   unique_member_types |= [_m.cxx_member_type]
+%   unique_member_types << _m.cxx_member_type
 % end
-  std::variant <<% unique_member_types.each do |_m| %><%= _m %><% unless _m == unique_member_types.last %>, <% end %><% end %>> u_type_;
-  union u_type_
-  {
-    u_type_ () = default;
-    ~u_type_ ();
-% members.each do |_m|
-% # The default member or the first member should use the value_initializer
-% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
-    <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first) %> <%= _m.value_initializer %><% end %>;
-% else
-    <%= _m.cxx_member_type %> <%= _m.cxxname %>_;
-% end
-% end
-  } u_ {};
+  using u_type_ = std::variant<<% members.each do |_m| %><%= _m.cxx_member_type %><% unless _m.equal?(members.last) %>, <% end %><% end %>>;
+%#  union u_type_
+%#  {
+%#    u_type_ () = default;
+%#    ~u_type_ ();
+%# % members.each do |_m|
+%# % # The default member or the first member should use the value_initializer
+%# % if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
+%#    <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first) %> <%= _m.value_initializer %><% end %>;
+%#% else
+%#    <%= _m.cxx_member_type %> <%= _m.cxxname %>_;
+%#% end
+%#% end
+  u_type_ u_ {}; // todo set default
 }; // class <%= cxxname %>
 
 inline void swap (<%= scoped_cxx_out_type %> m1, <%= scoped_cxx_out_type %> m2) { m1.swap (m2); }
