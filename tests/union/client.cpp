@@ -374,6 +374,15 @@ test_data_z (IDL::traits<Test::Foo>::ref_type foo)
       << data << "> - <" << ret << ">." << std::endl;
   }
 
+  data.z_string() = "Bar";
+  if (data.z_string () != "Bar")
+  {
+    TAOX11_TEST_ERROR << "ERROR: Unexpected data found in Z_Union data: "
+      << "expected <\"Bar\"> - found <" << data.z_string () << ">"
+      << std::endl;
+    ++retval;
+  }
+
   // Check that passing an invalid discriminator will result in an exception
   Test::Z_Union data2;
   try
