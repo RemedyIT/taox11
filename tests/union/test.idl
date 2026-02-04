@@ -184,6 +184,14 @@ module Test
       // by default (implicit), empty union
     };
 
+  typedef long mylong;
+  union DefaultDataTypeDef switch (short)
+    {
+      case 1: long longData;
+      case 2: short shortData;
+      default: mylong defData;
+    };
+
   union DefaultData switch (short)
     {
       case 1: long longData;
