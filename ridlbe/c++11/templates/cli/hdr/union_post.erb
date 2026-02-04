@@ -65,7 +65,9 @@ private:
 % members.each_with_index do |_m, _index|
 %   if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
 %     def_index = _index
-%     default_value = ", #{_m.default_value}"
+%     if _m.default_value != nil
+%       default_value = ", #{_m.default_value}"
+%     end
 %   end
 % end
 %# The default member or the first member should use the value_initializer
