@@ -225,11 +225,8 @@ inline <%= _m.scoped_cxx_out_type %> <%= scoped_cxxname %>::<%= _m.cxxname %> ()
 
 inline void <%= scoped_cxxname %>::swap (<%= scoped_cxx_out_type %> u)
 {
-  if (this != std::addressof(u))
-  {
-    std::swap (this->disc_, u.disc_);
-    std::swap (this->u_, u.u_);
-  }
+  std::swap (this->disc_, u.disc_);
+  std::swap (this->u_, u.u_);
 }
 % if has_implicit_default?
 
