@@ -59,27 +59,16 @@
 
 private:
   <%= switch_cxxtype %> disc_ {<% if has_default?() || has_implicit_default?() %><%= default_label %><% else %><%= members.first.nondefault_labels.first %><% end %>};
-% unique_member_types = []
-% members.each do |_m|
-%   unique_member_types << _m.cxx_member_type
-% end
   using u_type_ = std::variant<<% members.each do |_m| %><%= _m.cxx_member_type %><% unless _m.equal?(members.last) %>, <% end %><% end %>>;
-%#  union u_type_
-%#  {
-%#    u_type_ () = default;
-%#    ~u_type_ ();
 % def_index = 0
 % default_value = ''
 % members.each_with_index do |_m, _index|
-%# % # The default member or the first member should use the value_initializer
-% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
-%   def_index = _index
-%   default_value = ", #{_m.default_value}"
-%#% else
-%#    <%= _m.cxx_member_type %> <%= _m.cxxname %>_;
+%   if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
+%     def_index = _index
+%     default_value = ", #{_m.default_value}"
+%   end
 % end
-% end
-% # The default member or the first member should use the value_initializer
+%# The default member or the first member should use the value_initializer
   u_type_ u_ {std::in_place_index<<%= def_index %>><%= default_value %>};
 }; // class <%= cxxname %>
 
