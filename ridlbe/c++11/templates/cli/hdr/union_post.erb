@@ -69,15 +69,18 @@ private:
 %#  {
 %#    u_type_ () = default;
 %#    ~u_type_ ();
-%# % members.each do |_m|
+% def_index = 0
+% members.each_with_index do |_m, _index|
 %# % # The default member or the first member should use the value_initializer
-%# % if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
+% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
+%   def_index = _index
 %#    <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first) %> <%= _m.value_initializer %><% end %>;
 %#% else
 %#    <%= _m.cxx_member_type %> <%= _m.cxxname %>_;
-%#% end
-%#% end
-  u_type_ u_ {}; // todo set default
+% end
+% end
+% # The default member or the first member should use the value_initializer
+  u_type_ u_ {std::in_place_index<<%= def_index %>>};
 }; // class <%= cxxname %>
 
 inline void swap (<%= scoped_cxx_out_type %> m1, <%= scoped_cxx_out_type %> m2) { m1.swap (m2); }
