@@ -8,15 +8,15 @@
 %end
   <%= cxxname %> () = default;
   /// Copy constructor
-  inline <%= cxxname %> (<%= cxx_in_type %>);
+  <%= cxxname %> (<%= cxx_in_type %>) = default;
   /// Move constructor
-  inline <%= cxxname %> (<%= cxx_move_type %>);
+  <%= cxxname %> (<%= cxx_move_type %>) = default;
   /// Destructor
-  inline ~<%= cxxname %> ();
+  ~<%= cxxname %> () = default;
   /// Copy assignment operator
-  inline <%= cxxtype %> &operator= (<%= cxx_in_type %>);
+  <%= cxxtype %> &operator= (<%= cxx_in_type %>) = default;
   /// Move assignment operator
-  inline <%= cxxtype %> &operator= (<%= cxx_move_type %>);
+  <%= cxxtype %> &operator= (<%= cxx_move_type %>) = default;
 
   /// Set the discriminator. Only possible to set it to a
   /// value within the same current union member, otherwise
@@ -59,10 +59,6 @@
   inline void swap (<%= cxx_inout_type %> u);
 
 private:
-  inline void _swap_u (<%= cxx_inout_type %> u);
-  inline void _move_u (<%= cxx_inout_type %> u);
-  inline void _clear ();
-
   <%= switch_cxxtype %> disc_ {<% if has_default?() || has_implicit_default?() %><%= default_label %><% else %><%= members.first.nondefault_labels.first %><% end %>};
 % unique_member_types = []
 % members.each do |_m|
