@@ -56,7 +56,7 @@ inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
 % end
   }
 }
-% members.each do |_m|
+% members.each_with_index do |_m, _index|
 %if _m.is_default?
 % default_disc = default_label
 %else
@@ -111,15 +111,15 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11
     this->disc_ = <% if _m.has_multiple_discriminators? %>_x11_disc<% else %><%= _m.nondefault_labels.first %><% end %>;
 %   end
 %   unless _m.is_pod?
-    this->u_ = _x11_<%= _m.cxxname %>;
+    this->u_.emplace<<%= _index %>>(_x11_<%= _m.cxxname %>);
   }
   else
   {
-    this->u_ = _x11_<%= _m.cxxname %>;
+    this->u_.emplace<<%= _index %>>(_x11_<%= _m.cxxname %>);
   }
 %   else
   }
-  this->u_ = _x11_<%= _m.cxxname %>;
+  this->u_.emplace<<%= _index %>>(_x11_<%= _m.cxxname %>);
 %   end
 }
 %   unless _m.is_pod? || _m.is_reference?
@@ -216,7 +216,7 @@ inline <%= _m.scoped_cxx_in_type %> <%= scoped_cxxname %>::<%= _m.cxxname %> () 
 %     end
   }
 %   end
-  return std::get<<%= _m.scoped_cxx_in_type %>>(this->u_);
+  return std::get<<%= _index %>>(this->u_);
 }
 
 inline <%= _m.scoped_cxx_out_type %> <%= scoped_cxxname %>::<%= _m.cxxname %> ()
@@ -251,7 +251,7 @@ inline <%= _m.scoped_cxx_out_type %> <%= scoped_cxxname %>::<%= _m.cxxname %> ()
 %     end
   }
 %   end
-  return std::get<<%= _m.scoped_cxx_out_type %>>(this->u_);
+  return std::get<<%= _index %>>(this->u_);
 }
 % end
 
@@ -269,7 +269,7 @@ inline void <%= scoped_cxxname %>::_default ()
 {
   this->disc_ = <%= default_label %>;
 %   if !members.first.is_pod?
-  new (std::addressof(this->u_.<%= members.first.cxxname %>_)) <%= members.first.cxx_member_type %> ();
+  this->u_.emplace<0>(<%= members.first.cxx_member_type %>{});
 %   end
 }
 % end
