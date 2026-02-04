@@ -21,7 +21,7 @@ check_bad_param (
     switch (t)
     {
       case Test::DataType::dtEmpty: break;
-      case Test::DataType::dtLong:  d.longData (); break;
+      case Test::DataType::dtLong: d.longData (); break;
       case Test::DataType::dtShort: d.shortData (); break;
       case Test::DataType::dtString:d.stringData (); break;
       case Test::DataType::dtPoint: d.pointData (); break;
