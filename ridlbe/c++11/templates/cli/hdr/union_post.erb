@@ -22,7 +22,7 @@
   /// a BAD_PARAM exception is thrown
   inline void _d (<%= switch_in_cxxtype %>);
   /// Get the discriminator
-  inline <%= switch_in_cxxtype %> _d () const  { return this->disc_; }
+  [[nodiscard]] inline <%= switch_in_cxxtype %> _d () const  { return this->disc_; }
 % members.each do |_m|
 %if _m.is_default?
 % default_disc = default_label
@@ -42,10 +42,10 @@
 %   end
   /// Get the value of the union, if the discriminator doesn't match a
   /// BAD_PARAM exception is thrown
-  inline <%= _m.cxx_in_type %> <%= _m.cxxname %> () const;
+  [[nodiscard]] inline <%= _m.cxx_in_type %> <%= _m.cxxname %> () const;
   /// Get the value of the union, if the discriminator doesn't match a
   /// BAD_PARAM exception is thrown
-  inline <%= _m.cxx_out_type %> <%= _m.cxxname %> ();
+  [[nodiscard]] inline <%= _m.cxx_out_type %> <%= _m.cxxname %> ();
   //@}
 % end
 % if has_implicit_default?
