@@ -44,50 +44,45 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-22.04
-            CC: gcc-9
-            CXX: g++-9
-            ruby: '2.5'
-            PackageDeps: g++-9
-          - os: ubuntu-22.04
-            CC: gcc-9
-            CXX: g++-9
-            ruby: '2.6'
-            PackageDeps: g++-9
-            feature: Codecov
-          - os: ubuntu-22.04
-            CC: gcc-10
-            CXX: g++-10
+          - os: ubuntu-24.04
+            CC: gcc-13
+            CXX: g++-13
             ruby: '3.0'
-            PackageDeps: g++-10
-          - os: ubuntu-22.04
-            CC: gcc-11
-            CXX: g++-11
+            PackageDeps: g++-13
+            make_flags: '--release'
+          - os: ubuntu-24.04
+            CC: gcc-13
+            CXX: g++-13
             ruby: '3.0'
-            PackageDeps: g++-11
-          - os: ubuntu-22.04
-            CC: gcc-12
-            CXX: g++-12
+            PackageDeps: g++-13
+            make_flags: '--debug'
+          - os: ubuntu-24.04
+            CC: gcc-13
+            CXX: g++-13
             ruby: '3.1'
-            PackageDeps: g++-12
-          - os: ubuntu-22.04
-            CC: gcc-12
-            CXX: g++-12
-            ruby: '3.2'
-            PackageDeps: g++-12
+            PackageDeps: g++-13
+            make_flags: '--release'
           - os: ubuntu-24.04
             CC: gcc-13
             CXX: g++-13
             ruby: '3.2'
             PackageDeps: g++-13
-          - os: ubuntu-22.04
-            CC: gcc-10
-            CXX: g++-10
-            ruby: '2.7'
-            PackageDeps: g++-10
+            make_flags: '--release'
+          - os: ubuntu-24.04
+            CC: gcc-13
+            CXX: g++-13
+            ruby: '3.2'
+            PackageDeps: g++-13
+            make_flags: '--debug'
+          - os: ubuntu-24.04
+            CC: gcc-13
+            CXX: g++-13
+            ruby: '3.0'
+            PackageDeps: g++-13
             feature: CodeQL
+            make_flags: '--release'
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} ${{ matrix.CXX }} ruby-${{ matrix.ruby }}
+    name: ${{ matrix.os }} ${{ matrix.CXX }} ruby-${{ matrix.ruby }} ${{ matrix.make_flags }}
     env:
       CC: ${{ matrix.CC }}
       CXX: ${{ matrix.CXX }}
@@ -155,7 +150,7 @@ jobs:
         $X11_BASE_ROOT/bin/brix11 gen build axcioma/workspace.mwc -- gen build $TAOX11_ROOT/examples -- gen build $TAOX11_ROOT/orbsvcs/tests -- gen build $TAOX11_ROOT/tests
     - name: Run brix11 make
       run: |
-        $X11_BASE_ROOT/bin/brix11 make -N $X11_BASE_ROOT -- make -N $TAOX11_ROOT/examples -- make -N $TAOX11_ROOT/orbsvcs/tests -- make -N $TAOX11_ROOT/tests
+        $X11_BASE_ROOT/bin/brix11 make ${{ matrix.make_flags }} -N $X11_BASE_ROOT -- make ${{ matrix.make_flags }} -N $TAOX11_ROOT/examples -- make ${{ matrix.make_flags }} -N $TAOX11_ROOT/orbsvcs/tests -- make ${{ matrix.make_flags }} -N $TAOX11_ROOT/tests
     - name: Run brix11 tests
       run: |
         $X11_BASE_ROOT/bin/brix11 run list -l $TAOX11_ROOT/bin/taox11_tests.lst -r $TAOX11_ROOT
