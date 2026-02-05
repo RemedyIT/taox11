@@ -61,11 +61,6 @@ inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
   }
 }
 % members.each_with_index do |_m, _index|
-%if _m.is_default?
-% default_disc = default_label
-%else
-% default_disc = _m.nondefault_labels.first
-%end
 
 inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11_<%= _m.cxxname %><% if _m.has_multiple_discriminators? %>, <%= switch_in_cxxtype %> _x11_disc<% end %>)
 {
