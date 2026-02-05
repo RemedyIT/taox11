@@ -13,20 +13,12 @@
 #include <fstream>
 #include "testS.h"
 
-// GCC 4.x and 6 have a bug which prevents us to use the tie
-// specialization without specifying the namespace explicitly
-#if defined __GNUC__ && (__GNUC__ < 7)
-#define TAOX11_LACKS_TIE_SPECIALIZATION
-#endif
-
-#if !defined (TAOX11_LACKS_TIE_SPECIALIZATION)
 template <>
 std::string
 CORBA::servant_traits<Test::Hello>::tie_type<Hello_impl>::get_string()
 {
   return _tied_object()->get_string2 ();
 }
-#endif /* !TAOX11_LACKS_TIE_SPECIALIZATION */
 
 int
 main(int argc, ACE_TCHAR *argv[])
