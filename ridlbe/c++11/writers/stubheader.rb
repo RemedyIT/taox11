@@ -437,6 +437,7 @@ module IDL
       def enter_union(node)
         add_include('tao/x11/system_exception.h') unless params[:gen_stub_proxy_source]
         add_pre_include('stdexcept') if params[:gen_stub_proxy_source]
+        add_pre_include('variant')
         node.members.each { |m| check_idl_type(m.idltype) }
       end
 

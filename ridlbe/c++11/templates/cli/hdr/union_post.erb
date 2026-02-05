@@ -1,4 +1,3 @@
-
   // generated from <%= ridl_template_path %>
 % if has_implicit_default? || has_default?
   /// Default constructor creating an union initialized to
@@ -8,15 +7,15 @@
 %end
   <%= cxxname %> () = default;
   /// Copy constructor
-  inline <%= cxxname %> (<%= cxx_in_type %>);
+  <%= cxxname %> (<%= cxx_in_type %>) = default;
   /// Move constructor
-  inline <%= cxxname %> (<%= cxx_move_type %>);
+  <%= cxxname %> (<%= cxx_move_type %>) = default;
   /// Destructor
-  inline ~<%= cxxname %> ();
+  ~<%= cxxname %> () = default;
   /// Copy assignment operator
-  inline <%= cxxtype %> &operator= (<%= cxx_in_type %>);
+  <%= cxxtype %> &operator= (<%= cxx_in_type %>) = default;
   /// Move assignment operator
-  inline <%= cxxtype %> &operator= (<%= cxx_move_type %>);
+  <%= cxxtype %> &operator= (<%= cxx_move_type %>) = default;
 
   /// Set the discriminator. Only possible to set it to a
   /// value within the same current union member, otherwise
@@ -59,25 +58,20 @@
   inline void swap (<%= cxx_inout_type %> u);
 
 private:
-  inline void _swap_u (<%= cxx_inout_type %> u);
-  inline void _move_u (<%= cxx_inout_type %> u);
-  inline void _clear ();
-
   <%= switch_cxxtype %> disc_ {<% if has_default?() || has_implicit_default?() %><%= default_label %><% else %><%= members.first.nondefault_labels.first %><% end %>};
-  union u_type_
-  {
-    u_type_ () = default;
-    ~u_type_ ();
-% members.each do |_m|
-% # The default member or the first member should use the value_initializer
-% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
-    <%= _m.cxx_member_type %> <%= _m.cxxname %>_<% if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first) %> <%= _m.value_initializer %><% end %>;
-% else
-    <%= _m.cxx_member_type %> <%= _m.cxxname %>_;
+  using u_type_ = std::variant<<% members.each do |_m| %><%= _m.cxx_member_type %><% unless _m.equal?(members.last) %>, <% end %><% end %>>;
+% def_index = 0
+% default_value = ''
+% members.each_with_index do |_m, _index|
+%   if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
+%     def_index = _index
+%     if _m.default_value != nil
+%       default_value = ", #{_m.default_value}"
+%     end
+%   end
 % end
-% end
-  } u_ {};
+%# The default member or the first member should use the default_value
+  u_type_ u_ {std::in_place_index<<%= def_index %>><%= default_value %>};
 }; // class <%= cxxname %>
 
 inline void swap (<%= scoped_cxx_out_type %> m1, <%= scoped_cxx_out_type %> m2) { m1.swap (m2); }
-

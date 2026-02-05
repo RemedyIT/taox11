@@ -174,20 +174,20 @@ module IDL
         labels.size > 1 || is_default?
       end
 
-      def value_initializer
+      def default_value
         # When we have an annotation directly applied to this node we are using it
         unless node.annotations[:default].first.nil?
-          "{#{node.annotations[:default].first.fields[:value]}}"
+          node.annotations[:default].first.fields[:value].to_s
         else
           # Check whether it is a typedef, if so, we need to see if there is an annotation applied to the typedef (or its typedef)
           res_idl_type = _idltype
           while res_idl_type.is_a?(IDL::Type::ScopedName)
             unless res_idl_type.node.annotations[:default].first.nil?
-              return "{#{res_idl_type.node.annotations[:default].first.fields[:value]}}"
+              return res_idl_type.node.annotations[:default].first.fields[:value].to_s
             end
             res_idl_type = res_idl_type.node.idltype
           end
-          _resolved_idltype.value_initializer
+          _resolved_idltype.default_value
         end
       end
 
