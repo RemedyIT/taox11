@@ -1,5 +1,16 @@
 // generated from <%= ridl_template_path %>
-inline <%= scoped_cxxname %>::<%= cxxname %> ()
+% def_index = 0
+% default_value = ''
+% members.each_with_index do |_m, _index|
+%   if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
+%     def_index = _index
+%     if _m.default_value != nil
+%       default_value = ", #{_m.default_value}"
+%     end
+%   end
+% end
+%# The default member or the first member should use the default_value
+inline <%= scoped_cxxname %>::<%= cxxname %> () : u_ {std::in_place_index<<%= def_index %>><%= default_value %>}
 {
 }
 
