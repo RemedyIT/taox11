@@ -63,16 +63,16 @@ jobs:
             PackageDeps: g++-13
             make_flags: '--release'
           - os: ubuntu-24.04
-            CC: gcc-13
-            CXX: g++-13
+            CC: gcc-14
+            CXX: g++-14
             ruby: '3.2'
-            PackageDeps: g++-13
+            PackageDeps: g++-14
             make_flags: '--release'
           - os: ubuntu-24.04
-            CC: gcc-13
-            CXX: g++-13
+            CC: gcc-14
+            CXX: g++-14
             ruby: '3.2'
-            PackageDeps: g++-13
+            PackageDeps: g++-14
             make_flags: '--debug'
           - os: ubuntu-24.04
             CC: gcc-13
