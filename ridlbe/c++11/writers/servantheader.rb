@@ -141,8 +141,13 @@ module IDL
 
       attr_reader :includes
 
+      def add_include(inc_file)
+        @includes << inc_file unless @includes.include?(inc_file)
+      end
+
       def enter_interface(node)
-        @includes << 'tao/x11/portable_server/servantbase.h' unless params[:no_servant_code]
+        return if node.is_local? || params[:no_servant_code]
+        add_include('tao/x11/portable_server/servantbase.h')
         super
       end
 
