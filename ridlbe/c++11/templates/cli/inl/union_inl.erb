@@ -102,7 +102,6 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11
   }
 %   end
 % end
-%   _lbl = _m.has_multiple_discriminators? ? '_x11_disc' : _m.is_default? ? default_label : _m.nondefault_labels.first
 %   if _m.is_default?
   this->disc_ = _x11_disc;
 %   else
