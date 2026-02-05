@@ -1,4 +1,8 @@
 // generated from <%= ridl_template_path %>
+inline <%= scoped_cxxname %>::<%= cxxname %> ()
+{
+}
+
 inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
 {
   if (this->disc_ != discval)
@@ -233,8 +237,6 @@ inline void <%= scoped_cxxname %>::swap (<%= scoped_cxx_out_type %> u)
 inline void <%= scoped_cxxname %>::_default ()
 {
   this->disc_ = <%= default_label %>;
-%   if !members.first.is_pod?
   this->u_.emplace<0>(<%= members.first.cxx_member_type %>{});
-%   end
 }
 % end

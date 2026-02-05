@@ -23,10 +23,10 @@ check_bad_param (
       case Test::DataType::dtEmpty: break;
       case Test::DataType::dtLong: d.longData (); break;
       case Test::DataType::dtShort: d.shortData (); break;
-      case Test::DataType::dtString:d.stringData (); break;
+      case Test::DataType::dtString: d.stringData (); break;
       case Test::DataType::dtPoint: d.pointData (); break;
       case Test::DataType::dtTrack: d.trackData (); break;
-      case Test::DataType::dtGlobal:d.globalData (); break;
+      case Test::DataType::dtGlobal: d.globalData (); break;
     }
     if (t != discriminator)
     {

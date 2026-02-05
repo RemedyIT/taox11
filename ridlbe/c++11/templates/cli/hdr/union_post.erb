@@ -5,7 +5,8 @@
 % else
   /// Default constructor creating an empty union
 %end
-  <%= cxxname %> () = default;
+%# gcc < 13 has problems when the constructor is default
+  inline <%= cxxname %> ();
   /// Copy constructor
   <%= cxxname %> (<%= cxx_in_type %>) = default;
   /// Move constructor
@@ -22,7 +23,7 @@
   /// a BAD_PARAM exception is thrown
   inline void _d (<%= switch_in_cxxtype %>);
   /// Get the discriminator
-  [[nodiscard]] inline <%= switch_in_cxxtype %> _d () const  { return this->disc_; }
+  inline <%= switch_in_cxxtype %> _d () const  { return this->disc_; }
 % members.each do |_m|
 %if _m.is_default?
 % default_disc = default_label
@@ -42,10 +43,10 @@
 %   end
   /// Get the value of the union, if the discriminator doesn't match a
   /// BAD_PARAM exception is thrown
-  [[nodiscard]] inline <%= _m.cxx_in_type %> <%= _m.cxxname %> () const;
+  inline <%= _m.cxx_in_type %> <%= _m.cxxname %> () const;
   /// Get the value of the union, if the discriminator doesn't match a
   /// BAD_PARAM exception is thrown
-  [[nodiscard]] inline <%= _m.cxx_out_type %> <%= _m.cxxname %> ();
+  inline <%= _m.cxx_out_type %> <%= _m.cxxname %> ();
   //@}
 % end
 % if has_implicit_default?
