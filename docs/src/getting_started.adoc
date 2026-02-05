@@ -134,7 +134,7 @@ control your logging output and format.
 
 TAOX11 has been tested with the following compilers
 
-* GCC version 11 or newer
+* GCC version 13 or newer
 * Microsoft Visual Studio 2022
 
 === Supported platforms
@@ -168,7 +168,7 @@ Before compiling TAOX11 check the following prerequisites
 [cols="<,<",options="header",]
 |=========================================
 |Prerequisite |Package name
-|ruby 2.5 through 3.1.2 |ruby
+|ruby 3.0 through 3.1.2 |ruby
 |perl v5.10 through v5.36 |perl
 |=========================================
 
@@ -177,8 +177,8 @@ On Linux make sure you have installed the following additional prerequisites
 [cols="<,<",options="header",]
 |=========================================
 |Prerequisite |Package name
-|gcc version 11 or newer |gcc
-|g++ version 11 or newer |gcc-c++
+|gcc version 13 or newer |gcc
+|g++ version 13 or newer |gcc-c++
 |GNU make version 3.81 or newer |make
 |GNU Bash|bash
 |=========================================
