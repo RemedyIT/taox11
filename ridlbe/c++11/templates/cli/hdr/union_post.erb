@@ -5,8 +5,7 @@
 % else
   /// Default constructor creating an empty union
 %end
-%# gcc < 13 has problems when the constructor is default
-  inline <%= cxxname %> ();
+  <%= cxxname %> () = default;
   /// Copy constructor
   <%= cxxname %> (<%= cxx_in_type %>) = default;
   /// Move constructor
@@ -61,8 +60,18 @@
 private:
   <%= switch_cxxtype %> disc_ {<% if has_default?() || has_implicit_default?() %><%= default_label %><% else %><%= members.first.nondefault_labels.first %><% end %>};
   using u_type_ = std::variant<<% members.each do |_m| %><%= _m.cxx_member_type %><% unless _m.equal?(members.last) %>, <% end %><% end %>>;
-%# gcc < 13 has problems when we initialize u_ here
-  u_type_ u_;
+% def_index = 0
+% default_value = ''
+% members.each_with_index do |_m, _index|
+%   if (has_default?() && _m.is_default?) || (!has_default?() && _m == members.first)
+%     def_index = _index
+%     if _m.default_value != nil
+%       default_value = ", #{_m.default_value}"
+%     end
+%   end
+% end
+%# The default member or the first member should use the default_value
+  u_type_ u_ {std::in_place_index<<%= def_index %>><%= default_value %>};
 }; // class <%= cxxname %>
 
 inline void swap (<%= scoped_cxx_out_type %> m1, <%= scoped_cxx_out_type %> m2) { m1.swap (m2); }
