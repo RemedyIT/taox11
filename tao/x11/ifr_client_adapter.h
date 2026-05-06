@@ -48,7 +48,7 @@ namespace TAOX11_NAMESPACE
     : public ACE_Service_Object
   {
   public:
-    ~IFRClientAdapter() = default;
+    ~IFRClientAdapter() override = default;
 
     virtual CORBA::object_reference<CORBA::InterfaceDef> get_interface (
         const std::string& repo_id) = 0;

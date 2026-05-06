@@ -30,7 +30,7 @@ namespace TAOX11_NAMESPACE
     : public ACE_Service_Object
   {
   public:
-    ~PolicyFactoryManagerAdapter () = default;
+    ~PolicyFactoryManagerAdapter () override = default;
     // Policy factory operations
 
     virtual CORBA::object_reference<CORBA::Policy>

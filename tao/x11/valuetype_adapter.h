@@ -28,7 +28,7 @@ namespace TAOX11_NAMESPACE
     : public ACE_Service_Object
   {
   public:
-    ~ValueTypeAdapter() = default;
+    ~ValueTypeAdapter() override = default;
 
     virtual bool
     stream_to_value (
