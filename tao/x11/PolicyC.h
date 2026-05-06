@@ -238,7 +238,7 @@ namespace TAOX11_NAMESPACE
 
       Policy ();
       explicit Policy (TAOX11_NAMESPACE::Object_proxy_ptr op);
-      ~Policy () = default;
+      ~Policy () override = default;
 
       virtual object_traits<Policy>::ref_type copy_i ();
 

@@ -30,7 +30,7 @@ namespace TAOX11_NAMESPACE
     : public ACE_Service_Object
   {
   public:
-    ~ValueFactoryManagerAdapter() = default;
+    ~ValueFactoryManagerAdapter() override = default;
     // Value factory operations
     virtual CORBA::ValueFactory
     register_value_factory (

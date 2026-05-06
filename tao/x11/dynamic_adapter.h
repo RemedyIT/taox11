@@ -51,7 +51,7 @@ namespace TAOX11_NAMESPACE
     : public ACE_Service_Object
   {
   public:
-    ~DynamicAdapter() = default;
+    ~DynamicAdapter() override = default;
 
     // CORBA::Object::_create_request and CORBA::Object::_request.
     virtual void create_request (

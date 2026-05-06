@@ -38,7 +38,7 @@ namespace TAOX11_NAMESPACE
     : public ACE_Service_Object
   {
   public:
-    ~NVListAdapter() = default;
+    ~NVListAdapter() override = default;
 
     virtual void create_list (
         uint32_t count, CORBA::object_reference<CORBA::NVList>& newlist) = 0;

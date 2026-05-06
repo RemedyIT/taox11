@@ -50,7 +50,7 @@ namespace TAOX11_NAMESPACE
     : public ACE_Service_Object
   {
   public:
-    ~TypecodeFactoryAdapter() = default;
+    ~TypecodeFactoryAdapter() override = default;
 
     virtual CORBA::object_reference<CORBA::TypeCode> create_struct_tc (
         const std::string &id,
