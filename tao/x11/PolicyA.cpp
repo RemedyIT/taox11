@@ -34,7 +34,7 @@ namespace __tao
   {
     namespace CORBA
     {
-      TAO_CORBA::TypeCode_ptr const _tc_Policy = 0; // dummy to satify linker
+      TAO_CORBA::TypeCode_ptr const _tc_Policy = nullptr; // dummy to satify linker
     }
   }
 }
