@@ -55,7 +55,11 @@ namespace TAOX11_NAMESPACE
   {
     // First check for discriminator
     TAO_CORBA::Boolean discriminator;
-    stream->read_boolean (discriminator);
+    if (!stream->read_boolean (discriminator))
+    {
+      return TAO::TRAVERSE_STOP;
+    }
+
 
     // object or value?
     if (discriminator)
@@ -88,7 +92,10 @@ namespace TAOX11_NAMESPACE
   {
     // First check for discriminator
     TAO_CORBA::Boolean discriminator;
-    src->read_boolean (discriminator);
+    if(!src->read_boolean (discriminator))
+    {
+      return TAO::TRAVERSE_STOP;
+    }
 
     // object or value?
     if (discriminator)
