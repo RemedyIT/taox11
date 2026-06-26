@@ -33,7 +33,7 @@ module Test
   {
     long len;
   };
-  // test names with embedded undercores
+  // test names with embedded underscores
   struct S_S
   {
     long len;

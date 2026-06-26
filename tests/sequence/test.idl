@@ -59,7 +59,7 @@ module Test
   typedef sequence<Simple> AnotherSimpleSeq;
   typedef sequence<Simple2> Simple2Seq;
   typedef sequence<Simple2> AnotherSimple2Seq;
-  // test names with embedded undercores
+  // test names with embedded underscores
   typedef sequence<Simple2> Simple_Seq;
   typedef sequence<Simple2> Simple__Seq;
 
