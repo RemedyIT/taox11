@@ -39,15 +39,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: windows-2025
+          - os: windows-2022
             ruby: '2.6'
             project_type: vs2022
             make_flags: '--release'
-          - os: windows-2025
+          - os: windows-2022
             ruby: '3.1'
             project_type: vs2022
             make_flags: '--debug'
-          - os: windows-2025
+          - os: windows-2022
             ruby: '3.1'
             project_type: vs2022
             make_flags: '--release'
