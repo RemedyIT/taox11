@@ -294,7 +294,13 @@ module IDL
             println("#{node.cxxname} = #{expression_to_s(node.expression, node.enclosure)};")
           end
         else
-          println("#{node.cxxname} {#{expression_to_s(node.expression, node.enclosure)}};")
+          initializer = if node.idltype.resolved_type.is_a?(IDL::Type::Fixed) &&
+                           node.expression.is_a?(IDL::Expression::Value)
+                          node.idltype.resolved_type.value_to_s(node.value)
+                        else
+                          expression_to_s(node.expression, node.enclosure)
+                        end
+          println("#{node.cxxname} {#{initializer}};")
         end
       end
 
