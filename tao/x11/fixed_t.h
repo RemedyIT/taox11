@@ -18,6 +18,7 @@
 #include <cstdint>
 #include <iomanip>
 #include <istream>
+#include <locale>
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
@@ -308,6 +309,7 @@ namespace TAOX11_NAMESPACE
         if (!std::isfinite(value))
           throw CORBA::DATA_CONVERSION();
         std::ostringstream os;
+        os.imbue(std::locale::classic());
         os << std::fixed << std::setprecision(scale) << value;
         return os.str();
       }
