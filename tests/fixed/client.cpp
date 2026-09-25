@@ -53,6 +53,7 @@ int main(int, char*[])
     const fixed_type left("1.250");
     const fixed_type right("2.000");
     check(left.to_string() == "1.250", "preserve trailing zeros");
+    check(fixed_type("1.250d") == left, "IDL fixed suffix");
     check(left.fixed_digits() == 4 && left.fixed_scale() == 3, "value digits and scale");
     check(static_cast<bool>(left), "nonzero is true");
     check(static_cast<int64_t>(left) == 1, "integer conversion truncates");
@@ -88,6 +89,14 @@ int main(int, char*[])
     V::F::f_type fractional_decoded;
     check(static_cast<bool>(fractional_input >> fractional_decoded) &&
           fractional_decoded == V::F::fraction, "CDR all-fraction round trip");
+
+    const fixed_type negative("-12.345");
+    TAO_OutputCDR negative_output;
+    check(static_cast<bool>(negative_output << negative), "CDR negative write");
+    TAO_InputCDR negative_input(negative_output);
+    fixed_type negative_decoded;
+    check(static_cast<bool>(negative_input >> negative_decoded) &&
+          negative_decoded == negative, "CDR negative round trip");
 
     check(pi_double.to_string() == "3.142857", "global fixed constant");
     check(V::pi.to_string() == "3.142857", "module fixed constant");
