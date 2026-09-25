@@ -60,6 +60,7 @@ module Test
 interface A
 {
   const float pi = 3.14159;
+  const double d_val = 66.66;
 
   typedef string<5> bounded_string;
   const bounded_string bstr = "12345";

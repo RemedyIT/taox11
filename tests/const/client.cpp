@@ -33,6 +33,9 @@ const TName test_name = "wilco";
 const TCounter test_double_count = test_count * 2;
 const float test_pi = 3.14159f;
 
+static_assert (A::d_val == 66.66,
+               "IDL interface double constants must retain double precision");
+
 int main(int, char*[])
 {
   int result {};
