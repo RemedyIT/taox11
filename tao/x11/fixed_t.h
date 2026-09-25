@@ -1,6 +1,7 @@
 // -*- C++ -*-
 /**
  * @file fixed_t.h
+ * @author Johnny Willemsen
  * @brief IDL fixed decimal value, backed by ACE_CDR::Fixed
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
