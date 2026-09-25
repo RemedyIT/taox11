@@ -132,7 +132,19 @@ namespace TAOX11_NAMESPACE
       Fixed operator-() const { return Fixed(checked(-this->value_)); }
       explicit operator bool() const { return !(!this->value_); }
 
-      uint16_t fixed_digits() const { return this->value_.fixed_digits(); }
+      uint16_t fixed_digits() const
+      {
+        const std::string value = this->to_string();
+        const size_t start = value.front() == '-' ? 1 : 0;
+        const size_t point = value.find('.');
+        const size_t end = point == std::string::npos ? value.size() : point;
+        size_t first = start;
+        while (first < end && value[first] == '0')
+          ++first;
+        const size_t used = end - first +
+            (point == std::string::npos ? 0 : value.size() - point - 1);
+        return static_cast<uint16_t>(used ? used : 1);
+      }
       uint16_t fixed_scale() const { return this->value_.fixed_scale(); }
 
       friend Fixed operator+(Fixed lhs, const Fixed& rhs) { return lhs += rhs; }

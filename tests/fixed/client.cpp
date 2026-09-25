@@ -94,6 +94,8 @@ int main(int, char*[])
     check(V::F::pi.to_string() == "3.142857", "interface fixed constant");
     check(V::F::large.to_string() == "3.142", "large fixed constant");
     check(V::F::fraction.to_string() == "0.12345", "fractional fixed constant");
+    check(V::F::fraction.fixed_digits() == 5 && V::F::fraction.fixed_scale() == 5,
+          "fractional value digits and scale");
 
     expect_conversion_error<fixed_type>("1.2not-a-number");
     expect_conversion_error<fixed_type>("1.2345");
