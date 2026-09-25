@@ -70,6 +70,11 @@ int main(int, char*[])
     check((changed++).to_string() == "1.000" && changed.to_string() == "2.000", "postincrement");
     check((--changed).to_string() == "1.000", "predecrement");
 
+    fixed_type swapped("3.000");
+    using std::swap;
+    swap(changed, swapped);
+    check(changed.to_string() == "3.000" && swapped.to_string() == "1.000", "swap");
+
     std::stringstream stream;
     stream << left;
     check(stream.str() == "1.250", "stream output");

@@ -18,7 +18,6 @@
 #include <cstdint>
 #include <iomanip>
 #include <istream>
-#include <limits>
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
@@ -158,6 +157,12 @@ namespace TAOX11_NAMESPACE
       friend bool operator>(const Fixed& lhs, const Fixed& rhs) { return rhs < lhs; }
       friend bool operator<=(const Fixed& lhs, const Fixed& rhs) { return !(rhs < lhs); }
       friend bool operator>=(const Fixed& lhs, const Fixed& rhs) { return !(lhs < rhs); }
+
+      friend void swap(Fixed& lhs, Fixed& rhs)
+      {
+        using std::swap;
+        swap(lhs.value_, rhs.value_);
+      }
 
       friend std::ostream& operator<<(std::ostream& os, const Fixed& value)
       {
