@@ -1,5 +1,6 @@
 /**
  * @file client.cpp
+ * @author Johnny Willemsen
  * @brief IDL fixed decimal regression tests
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
