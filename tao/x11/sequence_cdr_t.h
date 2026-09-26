@@ -13,6 +13,7 @@
 #include "tao/x11/base/tao_corba.h"
 #include "tao/x11/base/taox11_export.h"
 #include "tao/x11/base/basic_traits.h"
+#include "tao/x11/base/cdr_length.h"
 #include "tao/x11/base/bounded_vector_t.h"
 
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
@@ -25,7 +26,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static bool insert (_Stream& _strm, const std::vector<_Tp>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -47,7 +48,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<_Tp, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -119,7 +120,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<char>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -133,7 +134,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<char, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -193,7 +194,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static bool insert (_Stream& _strm, const std::vector<bool>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -214,7 +215,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<bool, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -290,7 +291,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<uint8_t>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -304,7 +305,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<uint8_t, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -364,7 +365,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<wchar_t>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -378,7 +379,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<wchar_t, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -438,7 +439,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<int8_t>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -452,7 +453,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<int8_t, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -512,7 +513,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<int16_t>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -526,7 +527,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<int16_t, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -586,7 +587,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<uint16_t>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -600,7 +601,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<uint16_t, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -660,7 +661,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<int32_t>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -674,7 +675,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<int32_t, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -734,7 +735,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<uint32_t>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -748,7 +749,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<uint32_t, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -808,7 +809,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<int64_t>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -822,7 +823,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<int64_t, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -882,7 +883,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<uint64_t>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -896,7 +897,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<uint64_t, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -956,7 +957,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<float>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -970,7 +971,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<float, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -1030,7 +1031,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<double>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -1044,7 +1045,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<double, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {
@@ -1104,7 +1105,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static inline bool insert (_Stream& _strm, const std::vector<long double>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (!(_strm << length))
       {
@@ -1130,7 +1131,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_vector<long double, _Bound>& _seq)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_seq.size ());
+      uint32_t const length = taox11_cdr_length (_seq.size ());
 
       if (_Bound && length > _Bound)
       {

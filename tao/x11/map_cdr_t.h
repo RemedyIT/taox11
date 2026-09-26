@@ -13,6 +13,7 @@
 #include "tao/x11/base/tao_corba.h"
 #include "tao/x11/base/taox11_export.h"
 #include "tao/x11/base/basic_traits.h"
+#include "tao/x11/base/cdr_length.h"
 #include "tao/x11/base/bounded_map_t.h"
 
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
@@ -25,7 +26,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <typename _Stream>
     static bool insert (_Stream& _strm, const std::map<_Tp,_Tx>& _map)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_map.size ());
+      uint32_t const length = taox11_cdr_length (_map.size ());
 
       if (!(_strm << length))
       {
@@ -51,7 +52,7 @@ TAO_BEGIN_VERSIONED_NAMESPACE_DECL
     template <const uint32_t _Bound, typename _Stream>
     static inline bool insert (_Stream& _strm, const TAOX11_IDL::bounded_map<_Tp, _Tx, _Bound>& _map)
     {
-      uint32_t const length = ACE_Utils::truncate_cast<uint32_t> (_map.size ());
+      uint32_t const length = taox11_cdr_length (_map.size ());
 
       if (_Bound && length > _Bound)
       {

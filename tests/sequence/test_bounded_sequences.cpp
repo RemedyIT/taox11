@@ -7,12 +7,36 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 #include "test_bounded_sequences.h"
+#include "tao/x11/base/cdr_length.h"
+
+#include <limits>
 
 #include "testlib/taox11_testlog.h"
 
 void
 test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
 {
+  // Exercise the CDR limit without allocating a container larger than 4 GiB.
+  const auto max_length = (std::numeric_limits<uint32_t>::max) ();
+  if (TAO_VERSIONED_NAMESPACE_NAME::taox11_cdr_length (max_length) != max_length)
+    {
+      TAOX11_TEST_ERROR << "Incorrect maximum CDR length" << std::endl;
+      ++error_count;
+    }
+  if (sizeof (std::size_t) > sizeof (uint32_t))
+    {
+      try
+        {
+          TAO_VERSIONED_NAMESPACE_NAME::taox11_cdr_length (
+            static_cast<std::size_t> (max_length) + 1);
+          TAOX11_TEST_ERROR << "Oversized CDR length was accepted" << std::endl;
+          ++error_count;
+        }
+      catch (const TAO_CORBA::BAD_PARAM&)
+        {
+        }
+    }
+
   TAOX11_TEST_DEBUG << std::endl << "Test bounded sequences." << std::endl;
   TAOX11_TEST_DEBUG << "======================================" << std::endl;
 
