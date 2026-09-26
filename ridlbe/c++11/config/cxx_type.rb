@@ -972,7 +972,9 @@ module IDL
       end
 
       def value_to_s(v, _scope = nil)
-        v.to_s.gsub(/d|D/, '')
+        # A C++ floating literal would first round the decimal through double.
+        # Construct the fixed value from the original decimal spelling instead.
+        v.to_s.sub(/[dD]\z/, '').inspect
       end
     end
 
