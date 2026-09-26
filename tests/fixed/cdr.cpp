@@ -6,7 +6,6 @@
  */
 
 #include "testC.h"
-#include "testP.h"
 #include "tao/CDR.h"
 #include "testlib/taox11_testlog.h"
 
