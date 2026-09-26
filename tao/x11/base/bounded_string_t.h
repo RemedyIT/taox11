@@ -184,7 +184,7 @@ namespace TAOX11_NAMESPACE
 
       bounded_basic_string&
       assign(bounded_basic_string&& __str)
-      { this->_String::assign (__str); return *this; }
+      { this->_String::assign (std::move (__str)); return *this; }
 
       bounded_basic_string&
       assign(const bounded_basic_string& __str, size_type __pos, size_type __n)
