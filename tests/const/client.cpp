@@ -11,6 +11,8 @@
 
 #include "testlib/taox11_testlog.h"
 
+#include <type_traits>
+
 const char test_ch('a');
 const wchar_t test_wch_val = L'X';
 const uint8_t test_oct_val = 123;
@@ -32,6 +34,19 @@ const TCounter test_count = 99;
 const TName test_name = "wilco";
 const TCounter test_double_count = test_count * 2;
 const float test_pi = 3.14159f;
+
+static_assert (std::is_same_v<decltype (Test::f_val), const float>);
+static_assert (std::is_same_v<decltype (Test::d_val), const double>);
+static_assert (std::is_same_v<decltype (Test::ld_val), const long double>);
+
+static_assert (Test::f_val == 1.23F);
+static_assert (Test::d_val == 454.23);
+static_assert (Test::ld_val == 678.91L);
+static_assert (Test::double_count == 198);
+static_assert (Test::long_e14 == -3);
+static_assert (A::pi == 3.14159F);
+static_assert (A::d_val == 66.66,
+               "IDL interface double constants must retain double precision");
 
 int main(int, char*[])
 {

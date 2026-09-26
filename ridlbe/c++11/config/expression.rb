@@ -11,10 +11,10 @@ module IDL
   module Base
     # reopen and extend module
     module ExpressionConverter
-      def expression_to_s(exp, scope = nil)
+      def expression_to_s(exp, scope = nil, idltype = nil)
         case exp
         when Expression::Value
-          value_to_s(exp)
+          idltype ? idltype.value_to_s(exp.value) : value_to_s(exp)
         when Expression::Operation
           operation_to_s(exp)
         when Expression::ScopedName
