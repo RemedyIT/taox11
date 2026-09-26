@@ -39,15 +39,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: windows-2025
+          - os: windows-2022
             ruby: '2.6'
             project_type: vs2022
             make_flags: '--release'
-          - os: windows-2025
+          - os: windows-2022
             ruby: '3.1'
             project_type: vs2022
             make_flags: '--debug'
-          - os: windows-2025
+          - os: windows-2022
             ruby: '3.1'
             project_type: vs2022
             make_flags: '--release'
@@ -85,7 +85,7 @@ jobs:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
         ref: ${{ env.X11_BRANCH }}
-    - uses: ilammy/msvc-dev-cmd@v1
+    - uses: step-security/msvc-dev-cmd@v1
       with:
         vsversion: 2022
     - uses: ruby/setup-ruby@v1
