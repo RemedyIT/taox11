@@ -1,5 +1,6 @@
 /**
  * @file test.idl
+ * @author Martin Corino
  * @author Johnny Willemsen
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
@@ -7,8 +8,10 @@
 typedef fixed<10,3> fixed_type;
 typedef fixed<20,3> large_type;
 typedef fixed<10,2> second_fixed_type;
+typedef fixed_type fixed_array[3];
 typedef fixed<7,6> pi_type;
 
+// Fixed as double
 const pi_type pi_double = 3.142857;
 
 module V
