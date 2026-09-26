@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <limits>
 #include <sstream>
+#include <tuple>
 
 namespace
 {
@@ -41,6 +42,7 @@ namespace
 
 int main(int, char*[])
 {
+  static_assert(std::tuple_size<fixed_array>::value == 3);
   static_assert(IDL::traits<pi_type>::digits() == 7);
   static_assert(IDL::traits<pi_type>::scale() == 6);
   static_assert(IDL::traits<V::pi_type>::digits() == 7);
@@ -89,6 +91,17 @@ int main(int, char*[])
     TAO_InputCDR input(output);
     fixed_type decoded;
     check(static_cast<bool>(input >> decoded) && decoded == left, "CDR round trip");
+
+    fixed_array array_value {};
+    array_value[0] = left;
+    array_value[1] = right;
+    array_value[2] = fixed_type("-3.125");
+    TAO_OutputCDR array_output;
+    check(static_cast<bool>(array_output << array_value), "fixed array CDR write");
+    TAO_InputCDR array_input(array_output);
+    fixed_array array_decoded {};
+    check(static_cast<bool>(array_input >> array_decoded) && array_decoded == array_value,
+          "fixed array CDR round trip");
 
     TAO_OutputCDR fractional_output;
     check(static_cast<bool>(fractional_output << V::F::fraction), "CDR all-fraction write");
