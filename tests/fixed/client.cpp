@@ -34,7 +34,7 @@ namespace
       (void)value;
       check(false, "expected DATA_CONVERSION");
     }
-    catch (const CORBA::DATA_CONVERSION&) {}
+    catch (const TAOX11_NAMESPACE::CORBA::DATA_CONVERSION&) {}
   }
 }
 
@@ -122,7 +122,7 @@ int main(int, char*[])
       (void)(left / zero);
       check(false, "division by zero must throw");
     }
-    catch (const CORBA::DATA_CONVERSION&) {}
+    catch (const TAOX11_NAMESPACE::CORBA::DATA_CONVERSION&) {}
 
     using big_fixed = IDL::Fixed<31, 0>;
     const big_fixed max_value("9999999999999999999999999999999");
@@ -131,20 +131,20 @@ int main(int, char*[])
       (void)(max_value + big_fixed(1));
       check(false, "addition overflow must throw");
     }
-    catch (const CORBA::DATA_CONVERSION&) {}
+    catch (const TAOX11_NAMESPACE::CORBA::DATA_CONVERSION&) {}
     try
     {
       (void)(max_value * big_fixed(10));
       check(false, "multiplication overflow must throw");
     }
-    catch (const CORBA::DATA_CONVERSION&) {}
+    catch (const TAOX11_NAMESPACE::CORBA::DATA_CONVERSION&) {}
 
     try
     {
       (void)static_cast<int64_t>(big_fixed("9223372036854775808"));
       check(false, "integer conversion overflow must throw");
     }
-    catch (const CORBA::DATA_CONVERSION&) {}
+    catch (const TAOX11_NAMESPACE::CORBA::DATA_CONVERSION&) {}
 
     expect_conversion_error<fixed_type>("1e20");
     try
@@ -152,7 +152,7 @@ int main(int, char*[])
       (void)fixed_type(std::numeric_limits<double>::infinity());
       check(false, "nonfinite value must throw");
     }
-    catch (const CORBA::DATA_CONVERSION&) {}
+    catch (const TAOX11_NAMESPACE::CORBA::DATA_CONVERSION&) {}
   }
   catch (const std::exception& ex)
   {
