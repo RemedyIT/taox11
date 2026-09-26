@@ -451,26 +451,29 @@ namespace TAOX11_NAMESPACE
   } // namespace IDL
 } // namespace TAOX11_NAMESPACE
 
-namespace std
+namespace TAOX11_NAMESPACE
 {
-  /// See IDL::bounded_basic_string::swap().
-  template<typename _CharT, const uint32_t _Bound, typename _Traits, typename _Alloc>
-    inline void
-    swap(TAOX11_NAMESPACE::IDL::bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>& __x,
-        TAOX11_NAMESPACE::IDL::bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>& __y)
-    { __x.swap(__y); }
+  namespace IDL
+  {
+    /// See IDL::bounded_basic_string::swap().
+    template<typename _CharT, const uint32_t _Bound, typename _Traits, typename _Alloc>
+      inline void
+      swap(bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>& __x,
+          bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>& __y)
+      { __x.swap(__y); }
 
-  template<typename _CharT, const uint32_t _Bound, typename _Traits, typename _Alloc>
-    inline void
-    swap(TAOX11_NAMESPACE::IDL::bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>& __x,
-         basic_string<_CharT, _Traits, _Alloc>& __y)
-    { __x.swap(__y); }
+    template<typename _CharT, const uint32_t _Bound, typename _Traits, typename _Alloc>
+      inline void
+      swap(bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>& __x,
+           std::basic_string<_CharT, _Traits, _Alloc>& __y)
+      { __x.swap(__y); }
 
-  template<typename _CharT, const uint32_t _Bound, typename _Traits, typename _Alloc>
-    inline void
-    swap(basic_string<_CharT, _Traits, _Alloc>& __x,
-        TAOX11_NAMESPACE::IDL::bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>& __y)
-    { __x.swap(__y); }
-} // namespace std
+    template<typename _CharT, const uint32_t _Bound, typename _Traits, typename _Alloc>
+      inline void
+      swap(std::basic_string<_CharT, _Traits, _Alloc>& __x,
+          bounded_basic_string<_CharT, _Bound, _Traits, _Alloc>& __y)
+      { __x.swap(__y); }
+  } // namespace IDL
+} // namespace TAOX11_NAMESPACE
 
 #endif // __IDL_BOUNDED_STRING_T_H_INCLUDED__

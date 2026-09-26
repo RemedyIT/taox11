@@ -7,12 +7,43 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 #include "test_bounded_sequences.h"
+#include "tao/x11/base/bounded_map_t.h"
+#include "tao/x11/base/bounded_string_t.h"
+
+#include <utility>
 
 #include "testlib/taox11_testlog.h"
 
 void
 test_bounded_sequences (IDL::traits<Test::Foo>::ref_type foo, int &error_count)
 {
+  // Check that unqualified swap finds the bounded overloads through ADL.
+  using std::swap;
+  IDL::bounded_vector<int, 2> vector_a {1}, vector_b {2};
+  std::vector<int> vector_std {3};
+  swap (vector_a, vector_b);
+  swap (vector_a, vector_std);
+  swap (vector_std, vector_a);
+  if (vector_a[0] != 2 || vector_b[0] != 1 || vector_std[0] != 3)
+    ++error_count;
+
+  IDL::bounded_map<int, int, 2> map_a {{1, 1}}, map_b {{2, 2}};
+  std::map<int, int> map_std {{3, 3}};
+  swap (map_a, map_b);
+  swap (map_a, map_std);
+  swap (map_std, map_a);
+  if (map_a.begin ()->first != 2 || map_b.begin ()->first != 1 ||
+      map_std.begin ()->first != 3)
+    ++error_count;
+
+  IDL::bounded_basic_string<char, 2> string_a ("abc"), string_b ("def");
+  std::string string_std ("ghi");
+  swap (string_a, string_b);
+  swap (string_a, string_std);
+  swap (string_std, string_a);
+  if (string_a != "def" || string_b != "abc" || string_std != "ghi")
+    ++error_count;
+
   TAOX11_TEST_DEBUG << std::endl << "Test bounded sequences." << std::endl;
   TAOX11_TEST_DEBUG << "======================================" << std::endl;
 
