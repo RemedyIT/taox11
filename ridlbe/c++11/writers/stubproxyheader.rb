@@ -274,6 +274,9 @@ module IDL
     end
 
     class StubProxyHeaderCDRWriter < StubProxyHeaderBaseWriter
+      def initialize(output = STDOUT, opts = {})
+        super
+      end
 
       def pre_visit(parser)
         super
@@ -359,8 +362,11 @@ module IDL
           visitor(FixedVisitor).visit_arg_traits(node)
           return
         end
-        return if node.idltype.is_a?(IDL::Type::ScopedName) || idl_type.is_standard_type?
+        return if node.idltype.is_a?(IDL::Type::ScopedName) ||
+                  (idl_type.is_standard_type? && !idl_type.is_a?(IDL::Type::Fixed))
         case idl_type
+        when IDL::Type::Fixed
+          visitor(FixedVisitor).visit_arg_traits(node)
         when IDL::Type::Sequence
           visitor(SequenceVisitor).visit_cdr(node)
         when IDL::Type::Map
