@@ -324,9 +324,12 @@ module IDL
         res_idl_type = idl_type.resolved_type
         case res_idl_type
         when IDL::Type::Fixed
-          if node && node.idltype.resolved_type.is_a?(IDL::Type::Fixed)
-            visitor(FixedVisitor).visit_sarg_traits(node) unless is_tracked?(node)
-          end
+          fixed_node = if idl_type.is_a?(IDL::Type::ScopedName)
+                         idl_type.node
+                       elsif node && node.idltype.resolved_type.is_a?(IDL::Type::Fixed)
+                         node
+                       end
+          visitor(FixedVisitor).visit_sarg_traits(fixed_node) if fixed_node && !is_tracked?(fixed_node)
         when IDL::Type::Interface
           visitor(InterfaceVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Valuebox
