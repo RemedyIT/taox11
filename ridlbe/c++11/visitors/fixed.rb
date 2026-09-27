@@ -17,9 +17,6 @@ module IDL
       def scale
         self._resolved_idltype.scale
       end
-
-      map_template :cdr, :fixed_cdr
-      map_template :sarg_traits, :fixed_sarg_traits
     end
   end
 end
