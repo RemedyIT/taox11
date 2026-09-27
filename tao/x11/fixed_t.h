@@ -12,6 +12,9 @@
 #include "ace/CDR_Base.h"
 #include "tao/x11/base/versioned_x11_namespace.h"
 #include "tao/x11/system_exception.h"
+#include "tao/x11/anyinsert_policy_t.h"
+#include "tao/x11/basic_argument_t.h"
+#include "tao/x11/portable_server/basic_sargument_t.h"
 
 #include <cmath>
 #include <array>
@@ -411,6 +414,21 @@ namespace TAOX11_NAMESPACE
       ACE_CDR::Fixed value_;
     };
   } // namespace IDL
+
+  template <uint16_t digits, uint16_t scale>
+  class Arg_Traits<IDL::Fixed<digits, scale>>
+    : public Basic_Arg_Traits_T<IDL::Fixed<digits, scale>, Any_Insert_Policy_Noop>
+  {
+  };
+
+  namespace PS
+  {
+    template <uint16_t digits, uint16_t scale>
+    class SArg_Traits<IDL::Fixed<digits, scale>>
+      : public Basic_SArg_Traits_T<IDL::Fixed<digits, scale>, Any_Insert_Policy_Noop>
+    {
+    };
+  } // namespace PS
 } // namespace TAOX11_NAMESPACE
 
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
