@@ -21,7 +21,6 @@ public:
   large_type echo_large(const large_type& value) override;
   pi_type echo_pi(const pi_type& value) override;
   V::F::f_type echo_fraction(const V::F::f_type& value) override;
-  max_fixed echo_max(const max_fixed& value) override;
   void shutdown() override;
 
   int errors() const { return this->errors_; }

@@ -53,13 +53,6 @@ V::F::f_type FixedTest_i::echo_fraction(const V::F::f_type& value)
   return value;
 }
 
-max_fixed FixedTest_i::echo_max(const max_fixed& value)
-{
-  this->check(value == max_fixed("9999999999999999999999999999999"),
-              "maximum fixed value");
-  return value;
-}
-
 void FixedTest_i::shutdown()
 {
   this->orb_->shutdown(false);

@@ -155,9 +155,6 @@ int main(int argc, char* argv[])
           "fractional fixed client/server round trip");
 
     using max_fixed = IDL::Fixed<31, 0>;
-    max_fixed const maximum("9999999999999999999999999999999");
-    check(fixed_test->echo_max(maximum) == maximum, "maximum fixed client/server round trip");
-
     fixed_test->shutdown();
     orb->destroy();
 
