@@ -73,7 +73,7 @@ int main(int argc, ACE_TCHAR* argv[])
       return 1;
     }
 
-    IDL::traits<FixedTest_i>::ref_type servant = CORBA::make_reference<FixedTest_i>(orb);
+    CORBA::servant_reference<FixedTest_i> servant = CORBA::make_reference<FixedTest_i>(orb);
     PortableServer::ObjectId id = root_poa->activate_object(servant);
     IDL::traits<CORBA::Object>::ref_type servant_object = root_poa->id_to_reference(id);
     IDL::traits<FixedTest>::ref_type fixed_test = IDL::traits<FixedTest>::narrow(servant_object);
