@@ -416,13 +416,6 @@ module IDL
         printiln("} // namespace #{node.cxxname}")
       end
 
-      public
-
-      def enter_interface(node)
-         return if node.is_local? || node.is_pseudo? || node.is_abstract?
-
-         visitor(InterfaceVisitor).visit_object_ref_traits(node)
-      end
     end # StubProxyHeaderVarOutWriter
 
     class StubProxyHeaderObjRefTraitsWriter < StubProxyHeaderBaseWriter
