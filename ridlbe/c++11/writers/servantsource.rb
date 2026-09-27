@@ -296,14 +296,14 @@ module IDL
       def visit_operation(node)
         return if node.enclosure.is_local? || node.enclosure.is_pseudo? || node.enclosure.is_abstract?
 
-        check_idl_type(node.idltype)
-        node.params.each { |parm| check_idl_type(parm.idltype) }
+        check_idl_type(node.idltype, node)
+        node.params.each { |parm| check_idl_type(parm.idltype, parm) }
       end
 
       def visit_attribute(node)
         return if node.enclosure.is_local? || node.enclosure.is_pseudo? || node.enclosure.is_abstract?
 
-        check_idl_type(node.idltype)
+        check_idl_type(node.idltype, node)
       end
 
       private
@@ -320,11 +320,13 @@ module IDL
         end
       end
 
-      def check_idl_type(idl_type)
+      def check_idl_type(idl_type, node = nil)
         res_idl_type = idl_type.resolved_type
         case res_idl_type
         when IDL::Type::Fixed
-          visitor(FixedVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
+          if node && node.idltype.resolved_type.is_a?(IDL::Type::Fixed)
+            visitor(FixedVisitor).visit_sarg_traits(node) unless is_tracked?(node)
+          end
         when IDL::Type::Interface
           visitor(InterfaceVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Valuebox
