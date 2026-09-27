@@ -126,7 +126,7 @@ module IDL
         @default_pre_includes = params[:default_pre_includes]
         @default_post_includes = params[:default_post_includes]
         @includes = []
-        @includes << 'tao/x11/anyinsert_policy_t.h'
+        @includes << 'tao/x11/anyinsert_policy_t.h' unless params[:no_cdr_streaming]
       end
 
       attr_reader :includes
