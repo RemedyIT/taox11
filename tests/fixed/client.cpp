@@ -154,7 +154,6 @@ int main(int argc, char* argv[])
     check(fixed_test->echo_fraction(fraction) == fraction,
           "fractional fixed client/server round trip");
 
-    using max_fixed = IDL::Fixed<31, 0>;
     fixed_test->shutdown();
     orb->destroy();
 
