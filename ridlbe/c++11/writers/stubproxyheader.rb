@@ -361,7 +361,7 @@ module IDL
         return if node.idltype.is_a?(IDL::Type::ScopedName) || idl_type.is_standard_type?
         case idl_type
         when IDL::Type::Fixed
-          visitor(FixedVisitor).visit_arg_traits(node)
+          visitor(FixedVisitor).visit_cdr(node)
         when IDL::Type::Sequence
           visitor(SequenceVisitor).visit_cdr(node)
         when IDL::Type::Map
