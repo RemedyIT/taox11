@@ -28,3 +28,16 @@ module V
     const f_type fraction = 0.12345;
   };
 };
+
+typedef fixed<31,0> max_fixed;
+
+interface FixedTest
+{
+  fixed_type echo_fixed(in fixed_type value);
+  fixed_array echo_fixed_array(in fixed_array value);
+  large_type echo_large(in large_type value);
+  pi_type echo_pi(in pi_type value);
+  V::F::f_type echo_fraction(in V::F::f_type value);
+  max_fixed echo_max(in max_fixed value);
+  oneway void shutdown();
+};

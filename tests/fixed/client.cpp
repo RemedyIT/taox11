@@ -8,13 +8,12 @@
 #include "tao/x11/corba.h"
 #include "testC.h"
 #include "testlib/taox11_testlog.h"
+#include "ace/Get_Opt.h"
 
 #include <cstdint>
 #include <limits>
 #include <sstream>
 #include <tuple>
-
-int test_fixed_cdr(fixed_type const& left, fixed_type const& right);
 
 namespace
 {
@@ -57,8 +56,21 @@ namespace
   }
 }
 
-int main(int, char*[])
+int main(int argc, char* argv[])
 {
+  const ACE_TCHAR* ior = ACE_TEXT("file://test.ior");
+  ACE_Get_Opt get_opts(argc, argv, ACE_TEXT("k:"));
+  int c;
+  while ((c = get_opts()) != -1)
+  {
+    if (c == 'k')
+      ior = get_opts.opt_arg();
+    else
+    {
+      TAOX11_TEST_ERROR << "usage: -k <ior>" << std::endl;
+      return 1;
+    }
+  }
   static_assert(std::tuple_size<fixed_array>::value == 3);
   static_assert(IDL::traits<pi_type>::digits() == 7);
   static_assert(IDL::traits<pi_type>::scale() == 6);
@@ -67,6 +79,27 @@ int main(int, char*[])
 
   try
   {
+    IDL::traits<CORBA::ORB>::ref_type orb = CORBA::ORB_init(argc, argv);
+    if (!orb)
+    {
+      TAOX11_TEST_ERROR << "CORBA::ORB_init returned a null ORB" << std::endl;
+      return 1;
+    }
+
+    IDL::traits<CORBA::Object>::ref_type object = orb->string_to_object(ior);
+    if (!object)
+    {
+      TAOX11_TEST_ERROR << "string_to_object returned a null object" << std::endl;
+      return 1;
+    }
+
+    IDL::traits<FixedTest>::ref_type fixed_test = IDL::traits<FixedTest>::narrow(object);
+    if (!fixed_test)
+    {
+      TAOX11_TEST_ERROR << "narrow returned a null FixedTest reference" << std::endl;
+      return 1;
+    }
+
     fixed_type const zero;
     check(!static_cast<bool>(zero), "zero is false");
     check(zero.to_string() == "0.000", "default value and scale");
@@ -106,7 +139,27 @@ int main(int, char*[])
     input_stream >> read;
     check(read == left, "stream input");
 
-    errors += test_fixed_cdr(left, right);
+    check(fixed_test->echo_fixed(left) == left, "fixed client/server round trip");
+
+    fixed_array const values {left, right, fixed_type("-3.125")};
+    check(fixed_test->echo_fixed_array(values) == values, "fixed array client/server round trip");
+
+    large_type const large("3.142");
+    check(fixed_test->echo_large(large) == large, "large fixed client/server round trip");
+
+    pi_type const pi("3.142857");
+    check(fixed_test->echo_pi(pi) == pi, "pi fixed client/server round trip");
+
+    V::F::f_type const fraction("0.12345");
+    check(fixed_test->echo_fraction(fraction) == fraction,
+          "fractional fixed client/server round trip");
+
+    using max_fixed = IDL::Fixed<31, 0>;
+    max_fixed const maximum("9999999999999999999999999999999");
+    check(fixed_test->echo_max(maximum) == maximum, "maximum fixed client/server round trip");
+
+    fixed_test->shutdown();
+    orb->destroy();
 
     check(pi_double.to_string() == "3.142857", "global fixed constant");
     check(V::pi.to_string() == "3.142857", "module fixed constant");
