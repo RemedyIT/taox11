@@ -277,7 +277,6 @@ module IDL
       def initialize(output = STDOUT, opts = {})
         super
         @node_tracker = []
-        @fixed_traits_tracker = []
       end
 
       def pre_visit(parser)
@@ -325,11 +324,7 @@ module IDL
         res_idl_type = idl_type.resolved_type
         case res_idl_type
         when IDL::Type::Fixed
-          key = [res_idl_type.digits, res_idl_type.scale]
-          unless @fixed_traits_tracker.include?(key)
-            @fixed_traits_tracker << key
-            visitor(FixedVisitor).visit_sarg_traits(idl_type.node)
-          end
+          visitor(FixedVisitor).visit_sarg_traits(idl_type.node)
         when IDL::Type::Interface
           visitor(InterfaceVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Valuebox
