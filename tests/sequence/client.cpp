@@ -16,6 +16,8 @@
 #include "test_corba_sequences.h"
 #include "test_bounded_sequences.h"
 
+bool test_cdr_length ();
+
 bool run_cross_tao_test = false;
 
 bool
@@ -134,6 +136,12 @@ int main (int argc, char* argv[])
 
       if (!run_cross_tao_test)
         {
+          if (!test_cdr_length ())
+            {
+              TAOX11_TEST_ERROR << "test_cdr_length - ERROR : internal CDR length test failed."
+                << std::endl;
+              ++error_count;
+            }
           test_bounded_sequences (foo, error_count);
           test_corba_sequences (foo, error_count);
 
