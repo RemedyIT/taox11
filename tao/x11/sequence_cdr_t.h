@@ -13,7 +13,7 @@
 #include "tao/x11/base/tao_corba.h"
 #include "tao/x11/base/taox11_export.h"
 #include "tao/x11/base/basic_traits.h"
-#include "tao/x11/base/cdr_length.h"
+#include "tao/x11/cdr_length.h"
 #include "tao/x11/base/bounded_vector_t.h"
 
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL

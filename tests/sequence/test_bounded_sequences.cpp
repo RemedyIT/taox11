@@ -6,7 +6,7 @@
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
-#include "tao/x11/base/cdr_length.h"
+#include "tao/x11/cdr_length.h"
 #include "test_bounded_sequences.h"
 
 #include <limits>
