@@ -7,6 +7,7 @@
 
 #include "testC.h"
 #include "tao/CDR.h"
+#include "tao/x11/array_cdr_t.h"
 #include "testlib/taox11_testlog.h"
 
 int test_fixed_cdr(fixed_type const& left, fixed_type const& right)
@@ -32,10 +33,12 @@ int test_fixed_cdr(fixed_type const& left, fixed_type const& right)
   array_value[1] = right;
   array_value[2] = fixed_type("-3.125");
   TAO_OutputCDR array_output;
-  check(static_cast<bool>(array_output << array_value), "fixed array CDR write");
+  check(TAO_VERSIONED_NAMESPACE_NAME::taox11_array_cdr<0U, fixed_type, 3>::insert(
+            array_output, array_value), "fixed array CDR write");
   TAO_InputCDR array_input(array_output);
   fixed_array array_decoded {};
-  check(static_cast<bool>(array_input >> array_decoded) && array_decoded == array_value,
+  check(TAO_VERSIONED_NAMESPACE_NAME::taox11_array_cdr<0U, fixed_type, 3>::extract(
+            array_input, array_decoded) && array_decoded == array_value,
         "fixed array CDR round trip");
 
   TAO_OutputCDR fractional_output;
