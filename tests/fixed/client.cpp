@@ -125,6 +125,12 @@ int main(int, char*[])
 
     using big_fixed = IDL::Fixed<31, 0>;
     big_fixed const max_value("9999999999999999999999999999999");
+    check((max_value / big_fixed(2)).to_string() == "4999999999999999999999999999999",
+          "maximum fixed value divided by two");
+    using small_fixed = IDL::Fixed<3, 2>;
+    small_fixed const large_quotient("9.99");
+    expect_conversion_error([&] { (void)(large_quotient / small_fixed("0.01")); },
+                            "unrepresentable division must throw DATA_CONVERSION");
     expect_conversion_error([&] { (void)(max_value + big_fixed(1)); },
                             "addition overflow must throw DATA_CONVERSION");
     expect_conversion_error([&] { (void)(max_value * big_fixed(10)); },

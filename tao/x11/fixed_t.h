@@ -118,7 +118,7 @@ namespace TAOX11_NAMESPACE
       {
         if (!rhs)
           throw CORBA::DATA_CONVERSION();
-        try { this->value_ = checked((this->value_ / rhs.value_).truncate(scale)); }
+        try { this->value_ = divide(this->value_, rhs.value_); }
         catch (std::overflow_error const&) { throw CORBA::DATA_CONVERSION(); }
         return *this;
       }
@@ -253,6 +253,105 @@ namespace TAOX11_NAMESPACE
         if (!value.to_string(buffer, sizeof(buffer)))
           throw CORBA::DATA_CONVERSION();
         return parse(buffer);
+      }
+
+      static std::string normalize_digits(std::string value)
+      {
+        const size_t first = value.find_first_not_of('0');
+        if (first == std::string::npos)
+          return "0";
+        value.erase(0, first);
+        return value;
+      }
+
+      static int compare_digits(const std::string& lhs, const std::string& rhs)
+      {
+        if (lhs.size() != rhs.size())
+          return lhs.size() < rhs.size() ? -1 : 1;
+        return lhs.compare(rhs);
+      }
+
+      static std::string subtract_digits(const std::string& lhs, const std::string& rhs)
+      {
+        std::string result(lhs.size(), '0');
+        int borrow = 0;
+        for (size_t i = 0; i < lhs.size(); ++i)
+        {
+          int digit = lhs[lhs.size() - i - 1] - '0' - borrow;
+          if (i < rhs.size())
+            digit -= rhs[rhs.size() - i - 1] - '0';
+          if (digit < 0)
+          {
+            digit += 10;
+            borrow = 1;
+          }
+          else
+            borrow = 0;
+          result[lhs.size() - i - 1] = static_cast<char>('0' + digit);
+        }
+        return normalize_digits(result);
+      }
+
+      static std::string divide_digits(const std::string& numerator,
+                                       const std::string& denominator)
+      {
+        std::string quotient;
+        std::string remainder("0");
+        for (const char digit : numerator)
+        {
+          remainder = normalize_digits(remainder + digit);
+          unsigned int quotient_digit = 0;
+          while (compare_digits(remainder, denominator) >= 0)
+          {
+            remainder = subtract_digits(remainder, denominator);
+            ++quotient_digit;
+          }
+          quotient += static_cast<char>('0' + quotient_digit);
+        }
+        return normalize_digits(quotient);
+      }
+
+      static std::string fixed_digits(const ACE_CDR::Fixed& value,
+                                      uint16_t& value_scale, bool& negative)
+      {
+        char buffer[ACE_CDR::Fixed::MAX_STRING_SIZE];
+        if (!value.to_string(buffer, sizeof(buffer)))
+          throw CORBA::DATA_CONVERSION();
+
+        std::string number(buffer);
+        negative = number.front() == '-';
+        if (negative)
+          number.erase(0, 1);
+        const size_t point = number.find('.');
+        value_scale = point == std::string::npos
+            ? 0 : static_cast<uint16_t>(number.size() - point - 1);
+        if (point != std::string::npos)
+          number.erase(point, 1);
+        return normalize_digits(number);
+      }
+
+      static ACE_CDR::Fixed divide(const ACE_CDR::Fixed& lhs,
+                                   const ACE_CDR::Fixed& rhs)
+      {
+        uint16_t lhs_scale = 0;
+        uint16_t rhs_scale = 0;
+        bool lhs_negative = false;
+        bool rhs_negative = false;
+        std::string numerator = fixed_digits(lhs, lhs_scale, lhs_negative);
+        std::string denominator = fixed_digits(rhs, rhs_scale, rhs_negative);
+        numerator.append(rhs_scale + scale, '0');
+        denominator.append(lhs_scale, '0');
+
+        std::string quotient = divide_digits(numerator, denominator);
+        if (scale)
+        {
+          if (quotient.size() <= scale)
+            quotient.insert(0, scale + 1 - quotient.size(), '0');
+          quotient.insert(quotient.size() - scale, 1, '.');
+        }
+        if (lhs_negative != rhs_negative && quotient.find_first_of("123456789") != std::string::npos)
+          quotient.insert(0, 1, '-');
+        return parse(quotient);
       }
 
       static ACE_CDR::Fixed parse(std::string text)
