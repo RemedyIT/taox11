@@ -236,7 +236,8 @@ module IDL
       def check_idl_type(idl_type)
         idl_type = idl_type.resolved_type
         case idl_type
-        when IDL::Type::Enum
+        when IDL::Type::Enum,
+             IDL::Type::Fixed
           add_include('tao/x11/basic_argument_t.h')
         when IDL::Type::Any
           add_include('tao/x11/anytypecode/any_arg_traits.h')
@@ -273,6 +274,7 @@ module IDL
     class StubProxyHeaderCDRWriter < StubProxyHeaderBaseWriter
       def initialize(output = STDOUT, opts = {})
         super
+        @fixed_traits_tracker = []
       end
 
       def pre_visit(parser)
@@ -354,9 +356,16 @@ module IDL
       def visit_typedef(node)
         return if node.is_local? || params[:no_cdr_streaming]
         # nothing to do if this is just an alias for another defined type
-        return if node.idltype.is_a?(IDL::Type::ScopedName) || node.idltype.resolved_type.is_standard_type?
-
         idl_type = node.idltype.resolved_type
+        if idl_type.is_a?(IDL::Type::Fixed)
+          key = [idl_type.digits, idl_type.scale]
+          unless @fixed_traits_tracker.include?(key)
+            @fixed_traits_tracker << key
+            visitor(FixedVisitor).visit_arg_traits(node)
+          end
+          return
+        end
+        return if node.idltype.is_a?(IDL::Type::ScopedName) || idl_type.is_standard_type?
         case idl_type
         when IDL::Type::Sequence
           visitor(SequenceVisitor).visit_cdr(node)
