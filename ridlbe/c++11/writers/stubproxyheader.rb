@@ -358,7 +358,7 @@ module IDL
         return if node.is_local? || params[:no_cdr_streaming]
         # nothing to do if this is just an alias for another defined type
         idl_type = node.idltype.resolved_type
-        return if node.idltype.is_a?(IDL::Type::ScopedName) || idl_type.is_standard_type?
+        return if node.idltype.is_a?(IDL::Type::ScopedName) || (idl_type.is_standard_type? && !idl_type.is_a?(IDL::Type::Fixed))
         case idl_type
         when IDL::Type::Fixed
           visitor(FixedVisitor).visit_cdr(node)
@@ -414,6 +414,14 @@ module IDL
         dec_nest
         printiln("} // namespace #{node.cxxname}")
       end
+
+      public
+
+      def enter_interface(node)
+         return if node.is_local? || node.is_pseudo? || node.is_abstract?
+
+         visitor(InterfaceVisitor).visit_object_ref_traits(node)
+      end
     end # StubProxyHeaderVarOutWriter
 
     class StubProxyHeaderObjRefTraitsWriter < StubProxyHeaderBaseWriter
@@ -468,7 +476,7 @@ module IDL
 
       def leave_scope(node)
         dec_nest
-        printiln("} // namespace #{node.cxxname}")
+        println("} // namespace #{node.cxxname}")
       end
 
       public
