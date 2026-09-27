@@ -324,7 +324,7 @@ module IDL
         res_idl_type = idl_type.resolved_type
         case res_idl_type
         when IDL::Type::Fixed
-          visitor(FixedVisitor).visit_sarg_traits(idl_type.node)
+          visitor(FixedVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Interface
           visitor(InterfaceVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Valuebox
