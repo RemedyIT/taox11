@@ -358,10 +358,6 @@ module IDL
         return if node.is_local? || params[:no_cdr_streaming]
         # nothing to do if this is just an alias for another defined type
         idl_type = node.idltype.resolved_type
-        if idl_type.is_a?(IDL::Type::Fixed)
-          visitor(FixedVisitor).visit_arg_traits(node)
-          return
-        end
         return if node.idltype.is_a?(IDL::Type::ScopedName) ||
                   (idl_type.is_standard_type? && !idl_type.is_a?(IDL::Type::Fixed))
         case idl_type
