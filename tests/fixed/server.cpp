@@ -62,6 +62,7 @@ int main(int argc, ACE_TCHAR* argv[])
       return 1;
     }
     output << ior;
+    output.close();
 
     poaman->activate();
     orb->run();
