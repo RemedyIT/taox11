@@ -58,19 +58,6 @@ namespace
 
 int main(int argc, char* argv[])
 {
-  const ACE_TCHAR* ior = ACE_TEXT("file://test.ior");
-  ACE_Get_Opt get_opts(argc, argv, ACE_TEXT("k:"));
-  int c;
-  while ((c = get_opts()) != -1)
-  {
-    if (c == 'k')
-      ior = get_opts.opt_arg();
-    else
-    {
-      TAOX11_TEST_ERROR << "usage: -k <ior>" << std::endl;
-      return 1;
-    }
-  }
   static_assert(std::tuple_size<fixed_array>::value == 3);
   static_assert(IDL::traits<pi_type>::digits() == 7);
   static_assert(IDL::traits<pi_type>::scale() == 6);
@@ -84,6 +71,20 @@ int main(int argc, char* argv[])
     {
       TAOX11_TEST_ERROR << "CORBA::ORB_init returned a null ORB" << std::endl;
       return 1;
+    }
+
+    const ACE_TCHAR* ior = ACE_TEXT("file://test.ior");
+    ACE_Get_Opt get_opts(argc, argv, ACE_TEXT("k:"));
+    int c;
+    while ((c = get_opts()) != -1)
+    {
+      if (c == 'k')
+        ior = get_opts.opt_arg();
+      else
+      {
+        TAOX11_TEST_ERROR << "usage: -k <ior>" << std::endl;
+        return 1;
+      }
     }
 
     IDL::traits<CORBA::Object>::ref_type object = orb->string_to_object(ior);
