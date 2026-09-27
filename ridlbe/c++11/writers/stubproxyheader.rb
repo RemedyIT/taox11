@@ -46,7 +46,6 @@ module IDL
       def post_visit(parser)
         visit_obj_var_out_specializations(parser)
         visit_obj_ref_traits_specializations(parser)
-        visit_fixed_arg_traits(parser)
 
         # CDR operators
         visit_cdr(parser) unless params[:no_cdr_streaming]
@@ -99,10 +98,6 @@ module IDL
           w.include_guard = @include_guard
           w.visit_nodes(parser)
         end
-      end
-
-      def visit_fixed_arg_traits(parser)
-        writer(StubProxyHeaderFixedArgTraitsWriter).visit_nodes(parser)
       end
 
       def visit_cdr(parser)
@@ -278,26 +273,6 @@ module IDL
       end
     end
 
-    class StubProxyHeaderFixedArgTraitsWriter < StubProxyHeaderBaseWriter
-      def initialize(output = STDOUT, opts = {})
-        super
-        @fixed_traits_tracker = []
-      end
-
-      def visit_typedef(node)
-        return if node.is_local?
-
-        idl_type = node.idltype.resolved_type
-        return unless idl_type.is_a?(IDL::Type::Fixed)
-
-        key = [idl_type.digits, idl_type.scale]
-        unless @fixed_traits_tracker.include?(key)
-          @fixed_traits_tracker << key
-          visitor(FixedVisitor).visit_arg_traits(node)
-        end
-      end
-    end # StubProxyHeaderFixedArgTraitsWriter
-
     class StubProxyHeaderCDRWriter < StubProxyHeaderBaseWriter
 
       def pre_visit(parser)
@@ -380,6 +355,10 @@ module IDL
         return if node.is_local? || params[:no_cdr_streaming]
         # nothing to do if this is just an alias for another defined type
         idl_type = node.idltype.resolved_type
+        if idl_type.is_a?(IDL::Type::Fixed)
+          visitor(FixedVisitor).visit_arg_traits(node)
+          return
+        end
         return if node.idltype.is_a?(IDL::Type::ScopedName) || idl_type.is_standard_type?
         case idl_type
         when IDL::Type::Sequence
