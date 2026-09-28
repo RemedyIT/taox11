@@ -176,10 +176,33 @@ int main(int, char*[])
           << " but it is <" << A::bstr << ">" << std::endl;
       ++result;
     }
+    if (A::large.to_string() != "3.142")
+    {
+      TAOX11_TEST_ERROR << "ERROR: A::large not equal to <3.142> but it is <"
+          << A::large.to_string() << ">" << std::endl;
+      ++result;
+    }
+    if (A::pi_fixed.to_string() != "3.142857")
+    {
+      TAOX11_TEST_ERROR << "ERROR: A::pi_fixed not equal to <3.142857> but it is <"
+          << A::pi_fixed.to_string() << ">" << std::endl;
+      ++result;
+    }
+    if (A::five.to_string() != "0.12345")
+    {
+      TAOX11_TEST_ERROR << "ERROR: A::five not equal to <0.12345> but it is <"
+          << A::five.to_string() << ">" << std::endl;
+      ++result;
+    }
   }
   catch (const std::exception& e)
   {
-    TAOX11_TEST_ERROR << "exception caught: " << e << std::endl;
+    TAOX11_TEST_ERROR << "ERROR: unexpected exception in const test: " << e.what() << std::endl;
+    return 1;
+  }
+  catch (...)
+  {
+    TAOX11_TEST_ERROR << "ERROR: unexpected non-standard exception in const test" << std::endl;
     return 1;
   }
   if (result != 0)

@@ -43,7 +43,7 @@ module A
            getraises (DidTheRightThing);
 
         typedef fixed<5,5> fixed_type;
-        const fixed_type ami_fixed_type = 3.141;
+        const fixed_type ami_fixed_type = 0.03141;
 
         oneway void shutdown ();
       };
