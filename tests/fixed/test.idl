@@ -1,16 +1,14 @@
 /**
- * @file    test.idl
- * @author  Martin Corino
- *
+ * @file test.idl
+ * @author Martin Corino
+ * @author Johnny Willemsen
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
 typedef fixed<10,3> fixed_type;
 typedef fixed<20,3> large_type;
 typedef fixed<10,2> second_fixed_type;
-
-// TODO: create a typedef for an array
-
+typedef fixed_type fixed_array[3];
 typedef fixed<7,6> pi_type;
 
 // Fixed as double
@@ -23,10 +21,20 @@ module V
 
   interface F
   {
-    const large_type large = 3.142857;
+    const large_type large = 3.142;
     const pi_type pi = 3.142857;
 
     typedef fixed<5,5> f_type;
-    const f_type five = 12345;
+    const f_type fraction = 0.12345;
   };
+};
+
+interface FixedTest
+{
+  fixed_type echo_fixed(in fixed_type value);
+  fixed_array echo_fixed_array(in fixed_array value);
+  large_type echo_large(in large_type value);
+  pi_type echo_pi(in pi_type value);
+  V::F::f_type echo_fraction(in V::F::f_type value);
+  oneway void shutdown();
 };

@@ -197,7 +197,8 @@ module IDL
         case idl_type
         when IDL::Type::Sequence,
              IDL::Type::Map,
-             IDL::Type::Array
+             IDL::Type::Array,
+             IDL::Type::Fixed
           check_idl_type(idl_type)
         end
       end
@@ -224,6 +225,10 @@ module IDL
              IDL::Type::BitSet
           add_include('tao/x11/portable_server/basic_sargument_t.h')
           add_include('tao/x11/basic_argument_t.h')
+        when IDL::Type::Fixed
+          add_include('tao/x11/portable_server/basic_sargument_t.h')
+          add_include('tao/x11/basic_argument_t.h')
+          add_include('tao/x11/fixed_cdr_t.h') unless params[:no_cdr_streaming]
         when IDL::Type::String,
              IDL::Type::WString
           add_include('tao/x11/portable_server/basic_sarguments.h')
@@ -322,6 +327,15 @@ module IDL
       def check_idl_type(idl_type)
         res_idl_type = idl_type.resolved_type
         case res_idl_type
+        when IDL::Type::Fixed
+          return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous fixed types
+
+          # find base typedef for fixed
+          res_idl_type = idl_type
+          while res_idl_type.node.idltype.is_a?(IDL::Type::ScopedName)
+            res_idl_type = res_idl_type.node.idltype
+          end
+          visitor(FixedVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Interface
           visitor(InterfaceVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Valuebox

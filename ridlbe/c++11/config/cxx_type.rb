@@ -963,6 +963,10 @@ module IDL
     end
 
     class Fixed
+      def is_standard_type?
+        false
+      end
+
       def cxx_type(_scope = nil)
         digits.nil? ? 'TAOX11_NAMESPACE::IDL::Fixed' : "TAOX11_NAMESPACE::IDL::Fixed<#{digits}, #{scale}>"
       end
@@ -972,7 +976,9 @@ module IDL
       end
 
       def value_to_s(v, _scope = nil)
-        v.to_s.gsub(/d|D/, '')
+        # A C++ floating literal would first round the decimal through double.
+        # Construct the fixed value from the original decimal spelling instead.
+        v.to_s.sub(/[dD]\z/, '').inspect
       end
     end
 
