@@ -226,7 +226,7 @@ module IDL
           add_include('tao/x11/array_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type)
         when IDL::Type::Fixed
-          add_include('tao/x11/basic_argument_t.h')
+          check_idl_type(idl_type)
         when IDL::Type::String,
              IDL::Type::WString
           add_include('tao/x11/bounded_string_cdr_t.h') if idl_type.size.to_i.positive? && !params[:no_cdr_streaming]
@@ -238,9 +238,11 @@ module IDL
       def check_idl_type(idl_type)
         idl_type = idl_type.resolved_type
         case idl_type
-        when IDL::Type::Enum,
-             IDL::Type::Fixed
+        when IDL::Type::Enum
           add_include('tao/x11/basic_argument_t.h')
+        when IDL::Type::Fixed
+          add_include('tao/x11/basic_argument_t.h')
+          add_include('tao/x11/fixed_cdr_t.h') unless params[:no_cdr_streaming]
         when IDL::Type::Any
           add_include('tao/x11/anytypecode/any_arg_traits.h')
         when IDL::Type::Interface

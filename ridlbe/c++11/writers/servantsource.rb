@@ -197,7 +197,8 @@ module IDL
         case idl_type
         when IDL::Type::Sequence,
              IDL::Type::Map,
-             IDL::Type::Array
+             IDL::Type::Array,
+             IDL::Type::Fixed
           check_idl_type(idl_type)
         end
       end
@@ -220,11 +221,14 @@ module IDL
           add_include('tao/x11/portable_server/basic_sarguments.h')
           add_include('tao/x11/basic_arguments.h')
         when IDL::Type::Enum,
-             IDL::Type::Fixed,
              IDL::Type::BitMask,
              IDL::Type::BitSet
           add_include('tao/x11/portable_server/basic_sargument_t.h')
           add_include('tao/x11/basic_argument_t.h')
+        when IDL::Type::Fixed
+          add_include('tao/x11/portable_server/basic_sargument_t.h')
+          add_include('tao/x11/basic_argument_t.h')
+          add_include('tao/x11/fixed_cdr_t.h') unless params[:no_cdr_streaming]
         when IDL::Type::String,
              IDL::Type::WString
           add_include('tao/x11/portable_server/basic_sarguments.h')
