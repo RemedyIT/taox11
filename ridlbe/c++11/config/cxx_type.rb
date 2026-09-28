@@ -963,6 +963,10 @@ module IDL
     end
 
     class Fixed
+      def is_standard_type?
+        false
+      end
+
       def cxx_type(_scope = nil)
         digits.nil? ? 'TAOX11_NAMESPACE::IDL::Fixed' : "TAOX11_NAMESPACE::IDL::Fixed<#{digits}, #{scale}>"
       end
