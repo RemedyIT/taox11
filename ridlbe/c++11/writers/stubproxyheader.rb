@@ -225,6 +225,8 @@ module IDL
         when IDL::Type::Array
           add_include('tao/x11/array_cdr_t.h') unless params[:no_cdr_streaming]
           check_idl_type(idl_type)
+        when IDL::Type::Fixed
+          check_idl_type(idl_type)
         when IDL::Type::String,
              IDL::Type::WString
           add_include('tao/x11/bounded_string_cdr_t.h') if idl_type.size.to_i.positive? && !params[:no_cdr_streaming]
@@ -238,6 +240,9 @@ module IDL
         case idl_type
         when IDL::Type::Enum
           add_include('tao/x11/basic_argument_t.h')
+        when IDL::Type::Fixed
+          add_include('tao/x11/basic_argument_t.h')
+          add_include('tao/x11/fixed_cdr_t.h') unless params[:no_cdr_streaming]
         when IDL::Type::Any
           add_include('tao/x11/anytypecode/any_arg_traits.h')
         when IDL::Type::Interface
@@ -354,10 +359,11 @@ module IDL
       def visit_typedef(node)
         return if node.is_local? || params[:no_cdr_streaming]
         # nothing to do if this is just an alias for another defined type
-        return if node.idltype.is_a?(IDL::Type::ScopedName) || node.idltype.resolved_type.is_standard_type?
-
         idl_type = node.idltype.resolved_type
+        return if node.idltype.is_a?(IDL::Type::ScopedName) || idl_type.is_standard_type?
         case idl_type
+        when IDL::Type::Fixed
+          visitor(FixedVisitor).visit_cdr(node)
         when IDL::Type::Sequence
           visitor(SequenceVisitor).visit_cdr(node)
         when IDL::Type::Map

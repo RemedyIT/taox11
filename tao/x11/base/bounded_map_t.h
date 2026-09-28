@@ -116,26 +116,29 @@ namespace TAOX11_NAMESPACE
   } // namespace IDL
 } // namespace TAOX11_NAMESPACE
 
-namespace std
+namespace TAOX11_NAMESPACE
 {
-  /// See IDL::bounded_map::swap().
-  template<typename _Keyp, typename _Tp, const uint32_t _Bound, typename _Comparep, typename _Alloc>
-    inline void
-    swap(TAOX11_NAMESPACE::IDL::bounded_map<_Keyp, _Tp, _Bound, _Comparep, _Alloc>& __x,
-         TAOX11_NAMESPACE::IDL::bounded_map<_Keyp, _Tp, _Bound, _Comparep, _Alloc>& __y)
-    { __x.swap(__y); }
+  namespace IDL
+  {
+    /// See IDL::bounded_map::swap().
+    template<typename _Keyp, typename _Tp, const uint32_t _Bound, typename _Comparep, typename _Alloc>
+      inline void
+      swap(bounded_map<_Keyp, _Tp, _Bound, _Comparep, _Alloc>& __x,
+           bounded_map<_Keyp, _Tp, _Bound, _Comparep, _Alloc>& __y)
+      { __x.swap(__y); }
 
-  template<typename _Keyp, typename _Tp, const uint32_t _Bound, typename _Comparep, typename _Alloc>
-    inline void
-    swap(TAOX11_NAMESPACE::IDL::bounded_map<_Keyp, _Tp, _Bound, _Comparep, _Alloc>& __x,
-         map<_Keyp, _Tp, _Comparep, _Alloc>& __y)
-    { __x.swap(__y); }
+    template<typename _Keyp, typename _Tp, const uint32_t _Bound, typename _Comparep, typename _Alloc>
+      inline void
+      swap(bounded_map<_Keyp, _Tp, _Bound, _Comparep, _Alloc>& __x,
+           std::map<_Keyp, _Tp, _Comparep, _Alloc>& __y)
+      { __x.swap(__y); }
 
-  template<typename _Keyp, typename _Tp, const uint32_t _Bound, typename _Comparep, typename _Alloc>
-    inline void
-    swap(map<_Keyp, _Tp, _Comparep, _Alloc>& __x,
-         TAOX11_NAMESPACE::IDL::bounded_map<_Keyp, _Tp, _Bound, _Comparep, _Alloc>& __y)
-    { __x.swap(__y); }
-} // namespace std
+    template<typename _Keyp, typename _Tp, const uint32_t _Bound, typename _Comparep, typename _Alloc>
+      inline void
+      swap(std::map<_Keyp, _Tp, _Comparep, _Alloc>& __x,
+           bounded_map<_Keyp, _Tp, _Bound, _Comparep, _Alloc>& __y)
+      { __x.swap(__y); }
+  } // namespace IDL
+} // namespace TAOX11_NAMESPACE
 
 #endif // __IDL__BOUNDED_MAP_T_H_INCLUDED__

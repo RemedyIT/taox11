@@ -1,0 +1,11 @@
+// generated from <%= ridl_template_path %>
+% traits_md5 = resolved_cxxtype.to_md5
+#if !defined (_FIXED_<%= traits_md5 %>_SARG_TRAITS_)
+#define _FIXED_<%= traits_md5 %>_SARG_TRAITS_
+/// Skeleton argument traits specialization for <%= resolved_cxxtype %>
+template<>
+class SArg_Traits<<%= resolved_cxxtype %>>
+  : public Basic_SArg_Traits_T<<%= resolved_cxxtype %>, <% if generate_any_support? %>Any_Insert_Policy_Stream<% else %>Any_Insert_Policy_Noop<% end %>>
+{
+};
+#endif // _FIXED_<%= traits_md5 %>_SARG_TRAITS_

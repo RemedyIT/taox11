@@ -118,26 +118,29 @@ namespace TAOX11_NAMESPACE
   } // namespace IDL
 } // namespace TAOX11_NAMESPACE
 
-namespace std
+namespace TAOX11_NAMESPACE
 {
-  /// See IDL::bounded_vector::swap().
-  template<typename _Tp, const uint32_t _Bound, typename _Alloc>
-    inline void
-    swap(TAOX11_NAMESPACE::IDL::bounded_vector<_Tp, _Bound, _Alloc>& __x,
-         TAOX11_NAMESPACE::IDL::bounded_vector<_Tp, _Bound, _Alloc>& __y)
-    { __x.swap(__y); }
+  namespace IDL
+  {
+    /// See IDL::bounded_vector::swap().
+    template<typename _Tp, const uint32_t _Bound, typename _Alloc>
+      inline void
+      swap(bounded_vector<_Tp, _Bound, _Alloc>& __x,
+           bounded_vector<_Tp, _Bound, _Alloc>& __y)
+      { __x.swap(__y); }
 
-  template<typename _Tp, const uint32_t _Bound, typename _Alloc>
-    inline void
-    swap(TAOX11_NAMESPACE::IDL::bounded_vector<_Tp, _Bound, _Alloc>& __x,
-         vector<_Tp, _Alloc>& __y)
-    { __x.swap(__y); }
+    template<typename _Tp, const uint32_t _Bound, typename _Alloc>
+      inline void
+      swap(bounded_vector<_Tp, _Bound, _Alloc>& __x,
+           std::vector<_Tp, _Alloc>& __y)
+      { __x.swap(__y); }
 
-  template<typename _Tp, const uint32_t _Bound, typename _Alloc>
-    inline void
-    swap(vector<_Tp, _Alloc>& __x,
-         TAOX11_NAMESPACE::IDL::bounded_vector<_Tp, _Bound, _Alloc>& __y)
-    { __x.swap(__y); }
-} // namespace std
+    template<typename _Tp, const uint32_t _Bound, typename _Alloc>
+      inline void
+      swap(std::vector<_Tp, _Alloc>& __x,
+           bounded_vector<_Tp, _Bound, _Alloc>& __y)
+      { __x.swap(__y); }
+  } // namespace IDL
+} // namespace TAOX11_NAMESPACE
 
 #endif // __IDL__BOUNDED_VECTOR_T_H_INCLUDED__
