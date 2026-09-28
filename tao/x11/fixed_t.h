@@ -415,17 +415,19 @@ namespace TAOX11_NAMESPACE
 } // namespace TAOX11_NAMESPACE
 
 TAO_BEGIN_VERSIONED_NAMESPACE_DECL
-  template <uint16_t digits, uint16_t scale>
-  inline bool operator<<(TAO_OutputCDR& cdr, TAOX11_NAMESPACE::IDL::Fixed<digits, scale> const& value)
-  {
-    return value.write_cdr(cdr);
-  }
 
-  template <uint16_t digits, uint16_t scale>
-  inline bool operator>>(TAO_InputCDR& cdr, TAOX11_NAMESPACE::IDL::Fixed<digits, scale>& value)
-  {
-    return TAOX11_NAMESPACE::IDL::Fixed<digits, scale>::read_cdr(cdr, value);
-  }
+template <uint16_t digits, uint16_t scale>
+inline bool operator<<(TAO_OutputCDR& cdr, TAOX11_NAMESPACE::IDL::Fixed<digits, scale> const& value)
+{
+  return value.write_cdr(cdr);
+}
+
+template <uint16_t digits, uint16_t scale>
+inline bool operator>>(TAO_InputCDR& cdr, TAOX11_NAMESPACE::IDL::Fixed<digits, scale>& value)
+{
+  return TAOX11_NAMESPACE::IDL::Fixed<digits, scale>::read_cdr(cdr, value);
+}
+
 TAO_END_VERSIONED_NAMESPACE_DECL
 
 namespace std
