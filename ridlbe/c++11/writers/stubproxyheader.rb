@@ -414,7 +414,6 @@ module IDL
         dec_nest
         printiln("} // namespace #{node.cxxname}")
       end
-
     end # StubProxyHeaderVarOutWriter
 
     class StubProxyHeaderObjRefTraitsWriter < StubProxyHeaderBaseWriter
@@ -469,7 +468,7 @@ module IDL
 
       def leave_scope(node)
         dec_nest
-        println("} // namespace #{node.cxxname}")
+        printiln("} // namespace #{node.cxxname}")
       end
 
       public
