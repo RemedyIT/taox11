@@ -296,14 +296,14 @@ module IDL
       def visit_operation(node)
         return if node.enclosure.is_local? || node.enclosure.is_pseudo? || node.enclosure.is_abstract?
 
-        check_idl_type(node.idltype, node)
-        node.params.each { |parm| check_idl_type(parm.idltype, parm) }
+        check_idl_type(node.idltype)
+        node.params.each { |parm| check_idl_type(parm.idltype) }
       end
 
       def visit_attribute(node)
         return if node.enclosure.is_local? || node.enclosure.is_pseudo? || node.enclosure.is_abstract?
 
-        check_idl_type(node.idltype, node)
+        check_idl_type(node.idltype)
       end
 
       private
@@ -320,16 +320,18 @@ module IDL
         end
       end
 
-      def check_idl_type(idl_type, node = nil)
+      def check_idl_type(idl_type)
         res_idl_type = idl_type.resolved_type
         case res_idl_type
         when IDL::Type::Fixed
-          fixed_node = if idl_type.is_a?(IDL::Type::ScopedName)
-                         idl_type.node
-                       elsif node && node.idltype.resolved_type.is_a?(IDL::Type::Fixed)
-                         node
-                       end
-          visitor(FixedVisitor).visit_sarg_traits(fixed_node) if fixed_node && !is_tracked?(fixed_node)
+          return unless idl_type.is_a?(IDL::Type::ScopedName) # can't handle anonymous fixed types
+
+          # find base typedef for fixed
+          res_idl_type = idl_type
+          while res_idl_type.node.idltype.is_a?(IDL::Type::ScopedName)
+            res_idl_type = res_idl_type.node.idltype
+          end
+          visitor(FixedVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Interface
           visitor(InterfaceVisitor).visit_sarg_traits(res_idl_type.node) unless is_tracked?(res_idl_type.node)
         when IDL::Type::Valuebox
