@@ -287,14 +287,15 @@ module IDL
             end
           end
         end
+        value = expression_to_s(node.expression, node.enclosure, node.idltype.resolved_type)
         if node.enclosure.is_a?(IDL::AST::Module)
           if node.expression.is_a?(IDL::Expression::Value)
-            println("#{node.cxxname} {#{node.idltype.resolved_type.value_to_s(node.value)}};")
+            println("#{node.cxxname} {#{value}};")
           else
-            println("#{node.cxxname} = #{expression_to_s(node.expression, node.enclosure)};")
+            println("#{node.cxxname} = #{value};")
           end
         else
-          println("#{node.cxxname} {#{expression_to_s(node.expression, node.enclosure)}};")
+          println("#{node.cxxname} {#{value}};")
         end
       end
 

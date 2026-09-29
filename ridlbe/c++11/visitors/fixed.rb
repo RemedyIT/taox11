@@ -10,6 +10,10 @@
 module IDL
   module Cxx11
     class FixedVisitor < NodeVisitorBase
+      def is_standard_type?
+        false
+      end
+
       def digits
         self._resolved_idltype.digits
       end

@@ -26,6 +26,7 @@ project(*sequence_client): taox11_client {
     test_sequences.cpp
     test_corba_sequences.cpp
     test_bounded_sequences.cpp
+    test_cdr_length.cpp
   }
   Source_Files {
     testC.cpp

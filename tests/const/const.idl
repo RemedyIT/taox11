@@ -60,14 +60,14 @@ module Test
 interface A
 {
   const float pi = 3.14159;
+  const double d_val = 66.66;
 
   typedef string<5> bounded_string;
   const bounded_string bstr = "12345";
 
-  const large_type large = 3.142857;
+  const large_type large = 3.142;
   const pi_type pi_fixed = 3.142857;
 
   typedef fixed<5,5> f_type;
-  const f_type five = 12345;
+  const f_type five = 0.12345;
 };
-

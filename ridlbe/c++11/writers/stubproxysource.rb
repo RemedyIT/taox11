@@ -434,6 +434,8 @@ module IDL
         when IDL::Type::String,
              IDL::Type::WString
           add_include('tao/x11/basic_arguments.h') unless params[:no_cdr_streaming]
+        when IDL::Type::Fixed
+          add_include('tao/x11/fixed_cdr_t.h') unless params[:no_cdr_streaming]
         when IDL::Type::Object,
              IDL::Type::Interface,
              IDL::Type::Component

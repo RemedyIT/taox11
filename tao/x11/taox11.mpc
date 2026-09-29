@@ -299,6 +299,7 @@ project(taox11) : taox11_defaults, taolib {
     dynamic_adapter.h
     exception.h
     exception_macros.h
+    fixed_cdr_t.h
     fixed_t.h
     base/idl_traits_t.h
     ifr_client_adapter.h

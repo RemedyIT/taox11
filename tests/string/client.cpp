@@ -10,11 +10,24 @@
 #include "testC.h"
 #include "testlib/taox11_testlog.h"
 #include "testdata.h"
+#include <utility>
 
 int
 main(int argc, char* argv[])
 {
   int result = 0;
+  // A bounded-string rvalue must reach std::string's move assignment.
+  IDL::bounded_basic_string<char, 200> source (std::string (128, 'x'));
+  IDL::bounded_basic_string<char, 200> destination;
+  const char* original_data = source.data ();
+  destination.assign (std::move (source));
+  if (destination != std::string (128, 'x') || destination.data () != original_data)
+    {
+      TAOX11_TEST_ERROR << "bounded string assign(rvalue) copied its buffer"
+        << std::endl;
+      ++result;
+    }
+
   try
   {
     IDL::traits<CORBA::ORB>::ref_type orb = CORBA::ORB_init(argc, argv);

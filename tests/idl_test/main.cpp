@@ -15,6 +15,8 @@
 #include "tao/x11/anytypecode/any.h"
 #include "testlib/taox11_testlog.h"
 
+static_assert (ClassConstants::Vt::vt_long == 66.66,
+               "IDL double constants must retain double precision");
 
 class hello_i : public virtual CORBA::servant_traits<hello>::base_type
 {
