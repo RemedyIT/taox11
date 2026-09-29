@@ -3,57 +3,43 @@ inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
 {
   if (this->disc_ != discval)
   {
-% # in case a boolean switch has 1 or 2 non-default members with only a single label per member
-% # any label change is invalid as is the case when all label values are mapped to a
-% # single member
-% _ndefmem = non_default_members
-% if all_labels_single? || (switchtype_boolean? && (!_ndefmem.empty? && _ndefmem.first.labels.size==1))
-    throw <%= invalid_argument_exception %>;
-% # with any other boolean switch (single member for all labels) all label changes are valid
-% elsif switchtype_boolean?
-    this->disc_ = discval;
-% else
-    switch (this->disc_)
+% if switchtype_boolean?
+%   _default_index = has_default? ? members.index(default_member) : member_count
+%   _false_index = _default_index
+%   _true_index = _default_index
+%   members.each_with_index do |_m, _index|
+%     _false_index = _index if _m.nondefault_labels.include?('false')
+%     _true_index = _index if _m.nondefault_labels.include?('true')
+%   end
+    auto const _x11_member = [] (<%= switch_in_cxxtype %> value) -> std::size_t
     {
-%   members.each do |_m|
-%     unless _m.is_default?
-%       _m.nondefault_labels.each do |_lbl|
-      case <%= _lbl %>:
-%       end
+      return value ? <%= _true_index %>U : <%= _false_index %>U;
+    };
+% else
+    auto const _x11_member = [] (<%= switch_in_cxxtype %> value) -> std::size_t
+    {
+      switch (value)
       {
-        switch (discval)
-        {
-%       _m.nondefault_labels.each do |_lbl|
-          case <%= _lbl %>:
-%       end
-            break;
-          default:
-            throw <%= invalid_argument_exception %>;
-        }
-      }
-      break;
+%   members.each_with_index do |_m, _index|
+%     _m.nondefault_labels.each do |_lbl|
+        case <%= _lbl %>:
 %     end
+          return <%= _index %>U;
 %   end
-%   if has_default?() || has_implicit_default?()
-      default:
-      {
-        switch (discval)
-        {
-%     members.each do |_m|
-%       _m.nondefault_labels.each do |_lbl|
-          case <%= _lbl %>:
-%       end unless _m.is_default?
-%     end
-            throw <%= invalid_argument_exception %>;
-          default:
-            break;
-        }
+        default:
+          return <%= has_default? ? members.index(default_member) : member_count %>U;
       }
-      break;
-%   end
+    };
+% end
+% if has_implicit_default?
+    if (_x11_member (this->disc_) != _x11_member (discval))
+% else
+    if (this->u_.index () != _x11_member (discval))
+% end
+    {
+      throw <%= invalid_argument_exception %>;
     }
     this->disc_ = discval;
-% end
   }
 }
 % members.each_with_index do |_m, _index|
