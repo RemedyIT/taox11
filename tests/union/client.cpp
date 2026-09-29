@@ -617,18 +617,18 @@ test_union_discriminators ()
   }
 
   Test::BoolUnion7 boolean_explicit_default;
-  boolean_explicit_default.dummyStr ("value", false);
+  boolean_explicit_default.dummyStr ("value", true);
 
   try
   {
-    boolean_explicit_default._d (true);
+    boolean_explicit_default._d (false);
     TAOX11_TEST_ERROR << "ERROR: BoolUnion7 changed its active default member" << std::endl;
     ++retval;
   }
   catch (CORBA::BAD_PARAM const &)
   {
   }
-  if (boolean_explicit_default._d () || boolean_explicit_default.dummyStr () != "value")
+  if (!boolean_explicit_default._d () || boolean_explicit_default.dummyStr () != "value")
   {
     TAOX11_TEST_ERROR << "ERROR: BoolUnion7 changed after BAD_PARAM" << std::endl;
     ++retval;
@@ -636,7 +636,7 @@ test_union_discriminators ()
 
   try
   {
-    boolean_explicit_default.dummyStr (std::string {"invalid"}, true);
+    boolean_explicit_default.dummyStr (std::string {"invalid"}, false);
     TAOX11_TEST_ERROR << "ERROR: BoolUnion7 setter accepted an invalid discriminator" << std::endl;
     ++retval;
   }
@@ -644,7 +644,7 @@ test_union_discriminators ()
   {
   }
 
-  if (boolean_explicit_default._d () || boolean_explicit_default.dummyStr () != "value")
+  if (!boolean_explicit_default._d () || boolean_explicit_default.dummyStr () != "value")
   {
     TAOX11_TEST_ERROR << "ERROR: BoolUnion7 setter changed the union after BAD_PARAM" << std::endl;
     ++retval;
