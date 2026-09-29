@@ -435,6 +435,99 @@ test_data_z (IDL::traits<Test::Foo>::ref_type foo)
 }
 
 uint16_t
+test_union_discriminators ()
+{
+  uint16_t retval {};
+
+  Test::Z_Union shared_labels;
+  shared_labels.z_string ("value", 1);
+  shared_labels._d (3);
+  if (shared_labels._d () != 3 || shared_labels.z_string () != "value")
+  {
+    TAOX11_TEST_ERROR << "ERROR: Z_Union rejected a valid discriminator for the same member" << std::endl;
+    ++retval;
+  }
+
+  try
+  {
+    shared_labels._d (4);
+    TAOX11_TEST_ERROR << "ERROR: Z_Union accepted a discriminator for another member" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  if (shared_labels._d () != 3)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Z_Union changed its discriminator after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  Test::DefaultData explicit_default;
+  explicit_default.defData (10);
+  explicit_default._d (3);
+
+  try
+  {
+    explicit_default._d (1);
+    TAOX11_TEST_ERROR << "ERROR: DefaultData changed its active default member" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  Test::Data implicit_default;
+
+  try
+  {
+    implicit_default._d (Test::DataType::dtLong);
+    TAOX11_TEST_ERROR << "ERROR: Data selected a member from its implicit default" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  implicit_default.longData (11);
+
+  try
+  {
+    implicit_default._d (Test::DataType::dtShort);
+    TAOX11_TEST_ERROR << "ERROR: Data changed its active member" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  Test::BoolUnion1 single_boolean_member;
+  single_boolean_member.dummyVal (12);
+  single_boolean_member._d (false);
+  if (single_boolean_member._d ())
+  {
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion1 rejected a valid discriminator for the same member" << std::endl;
+    ++retval;
+  }
+
+  Test::BoolUnion6 boolean_union;
+  boolean_union.dummyVal (13);
+
+  try
+  {
+    boolean_union._d (false);
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion6 changed its active member" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  return retval;
+}
+
+uint16_t
 test_union_message (IDL::traits<Test::Foo>::ref_type foo)
 {
   uint16_t retval = 0;
@@ -566,6 +659,7 @@ int main (int argc, char* argv[])
       retval += test_data_x (foo);
       retval += test_data_y (foo);
       retval += test_data_z (foo);
+      retval += test_union_discriminators ();
       retval += test_union_message (foo);
       retval += test_value_initialization ();
 
