@@ -440,7 +440,8 @@ test_union_discriminators ()
   uint16_t retval {};
 
   Test::Z_Union shared_labels;
-  shared_labels.z_string ("value", 1);
+  std::string copy_value {"value"};
+  shared_labels.z_string (copy_value, 1);
   shared_labels._d (3);
   if (shared_labels._d () != 3 || shared_labels.z_string () != "value")
   {
@@ -464,9 +465,49 @@ test_union_discriminators ()
     ++retval;
   }
 
+  try
+  {
+    shared_labels.z_string (copy_value, 4);
+    TAOX11_TEST_ERROR << "ERROR: Z_Union copy setter accepted an invalid discriminator" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  if (shared_labels._d () != 3 || shared_labels.z_string () != "value")
+  {
+    TAOX11_TEST_ERROR << "ERROR: Z_Union copy setter changed the union after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  Test::Z_Union moved_labels;
+  std::string move_value {"moved"};
+  moved_labels.z_string (std::move (move_value), 2);
+  if (moved_labels._d () != 2 || moved_labels.z_string () != "moved")
+  {
+    TAOX11_TEST_ERROR << "ERROR: Z_Union move setter rejected a valid discriminator" << std::endl;
+    ++retval;
+  }
+
+  try
+  {
+    moved_labels.z_string (std::string {"invalid"}, 4);
+    TAOX11_TEST_ERROR << "ERROR: Z_Union move setter accepted an invalid discriminator" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  if (moved_labels._d () != 2 || moved_labels.z_string () != "moved")
+  {
+    TAOX11_TEST_ERROR << "ERROR: Z_Union move setter changed the union after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
   Test::DefaultData explicit_default;
-  explicit_default.defData (10);
-  explicit_default._d (3);
+  explicit_default.defData (10, 3);
   if (explicit_default._d () != 3 || explicit_default.defData () != 10)
   {
     TAOX11_TEST_ERROR << "ERROR: DefaultData rejected a valid discriminator for its default member" << std::endl;
@@ -485,6 +526,22 @@ test_union_discriminators ()
   if (explicit_default._d () != 3 || explicit_default.defData () != 10)
   {
     TAOX11_TEST_ERROR << "ERROR: DefaultData changed after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  try
+  {
+    explicit_default.defData (20, 1);
+    TAOX11_TEST_ERROR << "ERROR: DefaultData setter accepted an invalid discriminator" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  if (explicit_default._d () != 3 || explicit_default.defData () != 10)
+  {
+    TAOX11_TEST_ERROR << "ERROR: DefaultData setter changed the union after BAD_PARAM" << std::endl;
     ++retval;
   }
 
@@ -574,6 +631,22 @@ test_union_discriminators ()
   if (boolean_explicit_default._d () || boolean_explicit_default.dummyStr () != "value")
   {
     TAOX11_TEST_ERROR << "ERROR: BoolUnion7 changed after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  try
+  {
+    boolean_explicit_default.dummyStr (std::string {"invalid"}, true);
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion7 setter accepted an invalid discriminator" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  if (boolean_explicit_default._d () || boolean_explicit_default.dummyStr () != "value")
+  {
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion7 setter changed the union after BAD_PARAM" << std::endl;
     ++retval;
   }
 
