@@ -1,0 +1,10 @@
+/**
+ * @file    fixed_constant_digits.idl
+ *
+ * A fixed constant with more integral digits than its declared precision
+ * permits is illegal.
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+const fixed<5,5> invalid = 12345;
