@@ -7,8 +7,11 @@ inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
 % # discriminator change is valid when both values select the same member. This
 % # also handles boolean unions where both labels select one member or each label
 % # selects a different member.
+% _default_index = member_count
+% members.each_with_index do |_m, _index|
+%   _default_index = _index if _m.is_default?
+% end
 % if switchtype_boolean?
-%   _default_index = has_default? ? members.index(default_member) : member_count
 %   _false_index = _default_index
 %   _true_index = _default_index
 %   members.each_with_index do |_m, _index|
@@ -31,7 +34,7 @@ inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
           return <%= _index %>U;
 %   end
         default:
-          return <%= has_default? ? members.index(default_member) : member_count %>U;
+          return <%= _default_index %>U;
       }
     };
 % end
