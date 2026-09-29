@@ -3,6 +3,10 @@ inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
 {
   if (this->disc_ != discval)
   {
+% # Map each discriminator value to the index of the union member it selects. A
+% # discriminator change is valid when both values select the same member. This
+% # also handles boolean unions where both labels select one member or each label
+% # selects a different member.
 % if switchtype_boolean?
 %   _default_index = has_default? ? members.index(default_member) : member_count
 %   _false_index = _default_index
@@ -31,6 +35,9 @@ inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
       }
     };
 % end
+% # An implicit default has no corresponding std::variant alternative. Compare
+% # the classifications of both discriminator values in that case; otherwise the
+% # active variant index directly identifies the currently selected member.
 % if has_implicit_default?
     if (_x11_member (this->disc_) != _x11_member (discval))
 % else
