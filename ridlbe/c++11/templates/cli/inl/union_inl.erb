@@ -1,8 +1,8 @@
 // generated from <%= ridl_template_path %>
-% # Map each discriminator value to the index of the union member it selects. A
-% # discriminator change is valid when both values select the same member. This
-% # also handles boolean unions where both labels select one member or each label
-% # selects a different member.
+% # Map each discriminator value to the index of the union member it selects.
+% # Values not covered by an explicit label map to the default member, or to
+% # member_count when the union has no explicit default member. This also handles
+% # boolean unions where both labels select one member or separate members.
 % _default_index = member_count
 % members.each_with_index do |_m, _index|
 %   _default_index = _index if _m.is_default?
