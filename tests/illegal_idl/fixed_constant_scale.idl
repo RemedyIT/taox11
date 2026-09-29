@@ -1,5 +1,6 @@
 /**
  * @file    fixed_constant_scale.idl
+ * @author  Johnny Willemsen
  *
  * A fixed constant with nonzero digits beyond its declared scale is illegal.
  *
