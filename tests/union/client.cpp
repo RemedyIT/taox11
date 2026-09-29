@@ -467,6 +467,11 @@ test_union_discriminators ()
   Test::DefaultData explicit_default;
   explicit_default.defData (10);
   explicit_default._d (3);
+  if (explicit_default._d () != 3 || explicit_default.defData () != 10)
+  {
+    TAOX11_TEST_ERROR << "ERROR: DefaultData rejected a valid discriminator for its default member" << std::endl;
+    ++retval;
+  }
 
   try
   {
@@ -477,8 +482,14 @@ test_union_discriminators ()
   catch (CORBA::BAD_PARAM const &)
   {
   }
+  if (explicit_default._d () != 3 || explicit_default.defData () != 10)
+  {
+    TAOX11_TEST_ERROR << "ERROR: DefaultData changed after BAD_PARAM" << std::endl;
+    ++retval;
+  }
 
   Test::Data implicit_default;
+  Test::DataType const implicit_default_disc = implicit_default._d ();
 
   try
   {
@@ -488,6 +499,11 @@ test_union_discriminators ()
   }
   catch (CORBA::BAD_PARAM const &)
   {
+  }
+  if (implicit_default._d () != implicit_default_disc)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Data changed its implicit-default discriminator after BAD_PARAM" << std::endl;
+    ++retval;
   }
 
   implicit_default.longData (11);
@@ -501,13 +517,27 @@ test_union_discriminators ()
   catch (CORBA::BAD_PARAM const &)
   {
   }
+  if (implicit_default._d () != Test::DataType::dtLong || implicit_default.longData () != 11)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Data changed its active member after BAD_PARAM" << std::endl;
+    ++retval;
+  }
 
   Test::BoolUnion1 single_boolean_member;
   single_boolean_member.dummyVal (12);
   single_boolean_member._d (false);
-  if (single_boolean_member._d ())
+  if (single_boolean_member._d () || single_boolean_member.dummyVal () != 12)
   {
     TAOX11_TEST_ERROR << "ERROR: BoolUnion1 rejected a valid discriminator for the same member" << std::endl;
+    ++retval;
+  }
+
+  Test::BoolUnion2 boolean_default_member;
+  boolean_default_member.dummyVal (14, false);
+  boolean_default_member._d (true);
+  if (!boolean_default_member._d () || boolean_default_member.dummyVal () != 14)
+  {
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion2 rejected a valid discriminator for its default member" << std::endl;
     ++retval;
   }
 
@@ -522,6 +552,29 @@ test_union_discriminators ()
   }
   catch (CORBA::BAD_PARAM const &)
   {
+  }
+  if (!boolean_union._d () || boolean_union.dummyVal () != 13)
+  {
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion6 changed after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  Test::BoolUnion7 boolean_explicit_default;
+  boolean_explicit_default.dummyStr ("value", false);
+
+  try
+  {
+    boolean_explicit_default._d (true);
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion7 changed its active default member" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+  if (boolean_explicit_default._d () || boolean_explicit_default.dummyStr () != "value")
+  {
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion7 changed after BAD_PARAM" << std::endl;
+    ++retval;
   }
 
   return retval;
