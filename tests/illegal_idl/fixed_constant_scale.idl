@@ -1,0 +1,9 @@
+/**
+ * @file    fixed_constant_scale.idl
+ *
+ * A fixed constant with nonzero digits beyond its declared scale is illegal.
+ *
+ * @copyright Copyright (c) Remedy IT Expertise BV
+ */
+
+const fixed<20,3> invalid = 3.142857;
