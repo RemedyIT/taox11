@@ -123,7 +123,12 @@ Foo::update_union (Test::Data & s)
 bool
 Foo::update_default_union (Test::DefaultData & dd)
 {
-  if (dd.defData () != 123456)
+  if (dd._d () != 3)
+  {
+    ACE_ERROR ((LM_ERROR, "Foo::update_union - ERROR - incorrect discriminator received - "
+      "expected <3> - received <%d>\n", dd._d ()));
+  }
+  else if (dd.defData () != 123456)
   {
     ACE_ERROR ((LM_ERROR, "Foo::update_union -  ERROR - incorrect defData received - "
       "expected <123456> - received <%d>\n", dd.defData ()));
