@@ -260,6 +260,11 @@ module IDL
       end
 
       def visit_const(node)
+        fixed_type = node.idltype.resolved_type
+        if fixed_type.is_a?(IDL::Type::Fixed) && fixed_type.digits.nil?
+          raise IDL::ParseError, 'Unbounded fixed constants are not supported by the C++11 mapping'
+        end
+
         println
         printiln('// generated from StubHeaderWriter#visit_const')
         printiln("/// @copydoc #{self.doc_scoped_name node}")

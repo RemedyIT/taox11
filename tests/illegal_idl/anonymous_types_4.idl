@@ -5,5 +5,5 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-// Anonymous fixed constants are illegal
+// Unbounded fixed constants are not supported by the C++11 mapping
 const fixed pi_double = 3.142857;
