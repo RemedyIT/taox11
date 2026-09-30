@@ -435,6 +435,244 @@ test_data_z (IDL::traits<Test::Foo>::ref_type foo)
 }
 
 uint16_t
+test_union_discriminators ()
+{
+  uint16_t retval {};
+
+  Test::Z_Union shared_labels;
+  std::string copy_value {"value"};
+  shared_labels.z_string (copy_value, 1);
+  shared_labels._d (3);
+  if (shared_labels._d () != 3 || shared_labels.z_string () != "value")
+  {
+    TAOX11_TEST_ERROR << "ERROR: Z_Union rejected a valid discriminator for the same member" << std::endl;
+    ++retval;
+  }
+
+  Test::TestUnion_U3 explicit_default_index;
+  explicit_default_index.FirstCase (Test::State::STATE_PASS, Test::Color::COLOR_BLUE);
+  if (explicit_default_index._d () != Test::Color::COLOR_BLUE
+      || explicit_default_index.FirstCase () != Test::State::STATE_PASS)
+  {
+    TAOX11_TEST_ERROR << "ERROR: TestUnion_U3 failed to select its explicit default member" << std::endl;
+    ++retval;
+  }
+
+  Test::TestStruct second_case {};
+  second_case.willFailHere (42);
+  explicit_default_index.SecondCase (second_case);
+  if (explicit_default_index._d () != Test::Color::COLOR_RED
+      || explicit_default_index.SecondCase ().willFailHere () != 42)
+  {
+    TAOX11_TEST_ERROR << "ERROR: TestUnion_U3 failed to select its labeled member" << std::endl;
+    ++retval;
+  }
+
+  try
+  {
+    shared_labels._d (4);
+    TAOX11_TEST_ERROR << "ERROR: Z_Union accepted a discriminator for another member" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  if (shared_labels._d () != 3)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Z_Union changed its discriminator after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  try
+  {
+    shared_labels.z_string (copy_value, 4);
+    TAOX11_TEST_ERROR << "ERROR: Z_Union copy setter accepted an invalid discriminator" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  if (shared_labels._d () != 3 || shared_labels.z_string () != "value")
+  {
+    TAOX11_TEST_ERROR << "ERROR: Z_Union copy setter changed the union after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  Test::Z_Union moved_labels;
+  std::string move_value {"moved"};
+  moved_labels.z_string (std::move (move_value), 2);
+  if (moved_labels._d () != 2 || moved_labels.z_string () != "moved")
+  {
+    TAOX11_TEST_ERROR << "ERROR: Z_Union move setter rejected a valid discriminator" << std::endl;
+    ++retval;
+  }
+
+  try
+  {
+    moved_labels.z_string (std::string {"invalid"}, 4);
+    TAOX11_TEST_ERROR << "ERROR: Z_Union move setter accepted an invalid discriminator" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  if (moved_labels._d () != 2 || moved_labels.z_string () != "moved")
+  {
+    TAOX11_TEST_ERROR << "ERROR: Z_Union move setter changed the union after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  Test::DefaultData explicit_default;
+  explicit_default.defData (10, 3);
+  if (explicit_default._d () != 3 || explicit_default.defData () != 10)
+  {
+    TAOX11_TEST_ERROR << "ERROR: DefaultData rejected a valid discriminator for its default member" << std::endl;
+    ++retval;
+  }
+
+  try
+  {
+    explicit_default._d (1);
+    TAOX11_TEST_ERROR << "ERROR: DefaultData changed its active default member" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+  if (explicit_default._d () != 3 || explicit_default.defData () != 10)
+  {
+    TAOX11_TEST_ERROR << "ERROR: DefaultData changed after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  try
+  {
+    explicit_default.defData (20, 1);
+    TAOX11_TEST_ERROR << "ERROR: DefaultData setter accepted an invalid discriminator" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  if (explicit_default._d () != 3 || explicit_default.defData () != 10)
+  {
+    TAOX11_TEST_ERROR << "ERROR: DefaultData setter changed the union after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  Test::Data implicit_default;
+  Test::DataType const implicit_default_disc = implicit_default._d ();
+
+  try
+  {
+    implicit_default._d (Test::DataType::dtLong);
+    TAOX11_TEST_ERROR << "ERROR: Data selected a member from its implicit default" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+  if (implicit_default._d () != implicit_default_disc)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Data changed its implicit-default discriminator after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  implicit_default.longData (11);
+
+  try
+  {
+    implicit_default._d (Test::DataType::dtShort);
+    TAOX11_TEST_ERROR << "ERROR: Data changed its active member" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+  if (implicit_default._d () != Test::DataType::dtLong || implicit_default.longData () != 11)
+  {
+    TAOX11_TEST_ERROR << "ERROR: Data changed its active member after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  Test::BoolUnion1 single_boolean_member;
+  single_boolean_member.dummyVal (12);
+  single_boolean_member._d (false);
+  if (single_boolean_member._d () || single_boolean_member.dummyVal () != 12)
+  {
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion1 rejected a valid discriminator for the same member" << std::endl;
+    ++retval;
+  }
+
+  Test::BoolUnion2 boolean_default_member;
+  boolean_default_member.dummyVal (14, false);
+  boolean_default_member._d (true);
+  if (!boolean_default_member._d () || boolean_default_member.dummyVal () != 14)
+  {
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion2 rejected a valid discriminator for its default member" << std::endl;
+    ++retval;
+  }
+
+  Test::BoolUnion6 boolean_union;
+  boolean_union.dummyVal (13);
+
+  try
+  {
+    boolean_union._d (false);
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion6 changed its active member" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+  if (!boolean_union._d () || boolean_union.dummyVal () != 13)
+  {
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion6 changed after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  Test::BoolUnion7 boolean_explicit_default;
+  boolean_explicit_default.dummyStr ("value", true);
+
+  try
+  {
+    boolean_explicit_default._d (false);
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion7 changed its active default member" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+  if (!boolean_explicit_default._d () || boolean_explicit_default.dummyStr () != "value")
+  {
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion7 changed after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  try
+  {
+    boolean_explicit_default.dummyStr (std::string {"invalid"}, false);
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion7 setter accepted an invalid discriminator" << std::endl;
+    ++retval;
+  }
+  catch (CORBA::BAD_PARAM const &)
+  {
+  }
+
+  if (!boolean_explicit_default._d () || boolean_explicit_default.dummyStr () != "value")
+  {
+    TAOX11_TEST_ERROR << "ERROR: BoolUnion7 setter changed the union after BAD_PARAM" << std::endl;
+    ++retval;
+  }
+
+  return retval;
+}
+
+uint16_t
 test_union_message (IDL::traits<Test::Foo>::ref_type foo)
 {
   uint16_t retval = 0;
@@ -566,6 +804,7 @@ int main (int argc, char* argv[])
       retval += test_data_x (foo);
       retval += test_data_y (foo);
       retval += test_data_z (foo);
+      retval += test_union_discriminators ();
       retval += test_union_message (foo);
       retval += test_value_initialization ();
 

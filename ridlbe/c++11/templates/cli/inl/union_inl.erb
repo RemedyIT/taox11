@@ -1,59 +1,55 @@
 // generated from <%= ridl_template_path %>
+% # Map each discriminator value to the index of the union member it selects.
+% # Values not covered by an explicit label map to the default member, or to
+% # member_count when the union has no explicit default member. This also handles
+% # boolean unions where both labels select one member or separate members.
+% _default_index = member_count
+% members.each_with_index do |_m, _index|
+%   _default_index = _index if _m.is_default?
+% end
+inline std::size_t <%= scoped_cxxname %>::_x11_member_index (<%= switch_in_cxxtype %> value)
+{
+% if switchtype_boolean?
+%   _false_index = _default_index
+%   _true_index = _default_index
+%   members.each_with_index do |_m, _index|
+%     _false_index = _index if _m.nondefault_labels.include?('false')
+%     _true_index = _index if _m.nondefault_labels.include?('true')
+%   end
+  return value ? <%= _true_index %>U : <%= _false_index %>U;
+% else
+  switch (value)
+  {
+%   members.each_with_index do |_m, _index|
+%     _m.nondefault_labels.each do |_lbl|
+    case <%= _lbl %>:
+%     end
+%     unless _m.nondefault_labels.empty?
+      return <%= _index %>U;
+%     end
+%   end
+    default:
+      return <%= _default_index %>U;
+  }
+% end
+}
+
 inline void <%= scoped_cxxname %>::_d (<%= switch_in_cxxtype %> discval)
 {
   if (this->disc_ != discval)
   {
-% # in case a boolean switch has 1 or 2 non-default members with only a single label per member
-% # any label change is invalid as is the case when all label values are mapped to a
-% # single member
-% _ndefmem = non_default_members
-% if all_labels_single? || (switchtype_boolean? && (!_ndefmem.empty? && _ndefmem.first.labels.size==1))
-    throw <%= invalid_argument_exception %>;
-% # with any other boolean switch (single member for all labels) all label changes are valid
-% elsif switchtype_boolean?
-    this->disc_ = discval;
+% # An implicit default has no corresponding std::variant alternative. Compare
+% # the classifications of both discriminator values in that case; otherwise the
+% # active variant index directly identifies the currently selected member.
+% if has_implicit_default?
+    if (_x11_member_index (this->disc_) != _x11_member_index (discval))
 % else
-    switch (this->disc_)
+    if (this->u_.index () != _x11_member_index (discval))
+% end
     {
-%   members.each do |_m|
-%     unless _m.is_default?
-%       _m.nondefault_labels.each do |_lbl|
-      case <%= _lbl %>:
-%       end
-      {
-        switch (discval)
-        {
-%       _m.nondefault_labels.each do |_lbl|
-          case <%= _lbl %>:
-%       end
-            break;
-          default:
-            throw <%= invalid_argument_exception %>;
-        }
-      }
-      break;
-%     end
-%   end
-%   if has_default?() || has_implicit_default?()
-      default:
-      {
-        switch (discval)
-        {
-%     members.each do |_m|
-%       _m.nondefault_labels.each do |_lbl|
-          case <%= _lbl %>:
-%       end unless _m.is_default?
-%     end
-            throw <%= invalid_argument_exception %>;
-          default:
-            break;
-        }
-      }
-      break;
-%   end
+      throw <%= invalid_argument_exception %>;
     }
     this->disc_ = discval;
-% end
   }
 }
 % members.each_with_index do |_m, _index|
@@ -62,36 +58,10 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_in_type %> _x11
 {
 %   if _m.has_multiple_discriminators?
   // Check whether a valid discriminator value got passed
-%   if switchtype_boolean?
-%     if _m.labels.size == 1
-%       _lbl = _m.labels.first
-  if (<%= _lbl == 'true' ? '!' : '' %>_x11_disc)
+  if (_x11_member_index (_x11_disc) != <%= _index %>U)
   {
     throw <%= invalid_argument_exception %>;
   }
-%     end
-%   else
-  switch (_x11_disc)
-  {
-%     if _m.is_default?
-%       members.each do |_m2|
-%         _m2.nondefault_labels.each do |_lbl|
-    case <%= _lbl %>:
-%         end unless _m2.is_default?
-%       end
-      throw <%= invalid_argument_exception %>;
-    default:
-      break;
-%     else
-%       _m.nondefault_labels.each do |_lbl|
-    case <%= _lbl %>:
-%       end
-      break;
-    default:
-      throw <%= invalid_argument_exception %>;
-%     end
-  }
-%   end
 % end
 %   if _m.is_default?
   this->disc_ = _x11_disc;
@@ -106,36 +76,10 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_move_type %> _x
 {
 %   if _m.has_multiple_discriminators?
   // Check whether a valid discriminator value got passed
-%   if switchtype_boolean?
-%     if _m.labels.size == 1
-%       _lbl = _m.labels.first
-  if (<%= _lbl == 'true' ? '!' : '' %>_x11_disc)
+  if (_x11_member_index (_x11_disc) != <%= _index %>U)
   {
     throw <%= invalid_argument_exception %>;
   }
-%     end
-%   else
-  switch (_x11_disc)
-  {
-%     if _m.is_default?
-%       members.each do |_m2|
-%         _m2.nondefault_labels.each do |_lbl|
-    case <%= _lbl %>:
-%         end unless _m2.is_default?
-%       end
-      throw <%= invalid_argument_exception %>;
-    default:
-      break;
-%     else
-%       _m.nondefault_labels.each do |_lbl|
-    case <%= _lbl %>:
-%       end
-      break;
-    default:
-      throw <%= invalid_argument_exception %>;
-%     end
-  }
-%   end
 % end
 %     if _m.is_default?
   this->disc_ = _x11_disc;
@@ -148,71 +92,19 @@ inline void <%= scoped_cxxname %>::<%= _m.cxxname %> (<%= _m.cxx_move_type %> _x
 
 inline <%= _m.scoped_cxx_in_type %> <%= scoped_cxxname %>::<%= _m.cxxname %> () const
 {
-%   if switchtype_boolean?
-%     if _m.labels.size == 1
-%       _lbl = _m.labels.first
-  if (<%= _lbl == 'true' ? '!' : '' %>this->disc_)
+  if (_x11_member_index (this->disc_) != <%= _index %>U)
   {
     throw <%= invalid_argument_exception %>;
   }
-%     end
-%   else
-  switch (this->disc_)
-  {
-%     if _m.is_default?
-%       members.each do |_m2|
-%         _m2.nondefault_labels.each do |_lbl|
-    case <%= _lbl %>:
-%         end unless _m2.is_default?
-%       end
-      throw <%= invalid_argument_exception %>;
-    default:
-      break;
-%     else
-%       _m.nondefault_labels.each do |_lbl|
-    case <%= _lbl %>:
-%       end
-      break;
-    default:
-      throw <%= invalid_argument_exception %>;
-%     end
-  }
-%   end
   return std::get<<%= _index %>>(this->u_);
 }
 
 inline <%= _m.scoped_cxx_out_type %> <%= scoped_cxxname %>::<%= _m.cxxname %> ()
 {
-%   if switchtype_boolean?
-%     if _m.labels.size == 1
-%       _lbl = _m.labels.first
-  if (<%= _lbl == 'true' ? '!' : '' %>this->disc_)
+  if (_x11_member_index (this->disc_) != <%= _index %>U)
   {
     throw <%= invalid_argument_exception %>;
   }
-%     end
-%   else
-  switch (this->disc_)
-  {
-%     if _m.is_default?
-%       members.each do |_m2|
-%         _m2.nondefault_labels.each do |_lbl|
-    case <%= _lbl %>:
-%         end unless _m2.is_default?
-%       end
-      throw <%= invalid_argument_exception %>;
-    default:
-      break;
-%     else
-%       _m.nondefault_labels.each do |_lbl|
-    case <%= _lbl %>:
-%       end
-      break;
-    default:
-      throw <%= invalid_argument_exception %>;
-%     end
-  }
-%   end
   return std::get<<%= _index %>>(this->u_);
 }
 % end
