@@ -1,6 +1,7 @@
 // -*- MPC -*-
 
-project(*utf_conversion): taox11_basedefaults {
+project(*utf_conversion): x11_logger {
+  requires += x11_logging
   exename = utf_conversion
   Source_Files {
     test.cpp

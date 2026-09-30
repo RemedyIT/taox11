@@ -9,7 +9,7 @@
 #include "tao/x11/base/idl_traits_t.h"
 #include "tao/x11/base/wstringwchar_ostream.h"
 #include "tao/x11/base/utf8_utf16.h"
-#include <cstdio>
+#include "testlib/taox11_testlog.h"
 #include <limits>
 #include <sstream>
 
@@ -24,7 +24,7 @@ namespace
   {
     if (!condition)
     {
-      std::fprintf (stderr, "ERROR: %s\n", description);
+      TAOX11_TEST_ERROR << "ERROR: " << description << std::endl;
       ++errors;
     }
   }
