@@ -156,7 +156,13 @@ Foo::update_default_union (Test::DefaultData & dd)
   std::ostringstream ss;
   ss << IDL::traits<Test::DefaultData>::write (dd) << std::endl;
 
-  if (dd.defData () != 123456)
+  if (dd._d () != 3)
+  {
+    TAOX11_TEST_ERROR << "Foo::update_union - ERROR - incorrect discriminator received - "
+      << "expected <3> - received <" << dd._d () << ">" << std::endl;
+    ++this->errors_;
+  }
+  else if (dd.defData () != 123456)
   {
     TAOX11_TEST_ERROR << "Foo::update_union -  ERROR - incorrect defData received - "
       << "expected <123456> - received <" <<  dd.defData () << ">" << std::endl;
