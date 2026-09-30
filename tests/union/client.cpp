@@ -459,10 +459,10 @@ test_union_discriminators ()
   }
 
   Test::TestStruct second_case {};
-  second_case.willFailHere = 42;
+  second_case.willFailHere (42);
   explicit_default_index.SecondCase (second_case);
   if (explicit_default_index._d () != Test::Color::COLOR_RED
-      || explicit_default_index.SecondCase ().willFailHere != 42)
+      || explicit_default_index.SecondCase ().willFailHere () != 42)
   {
     TAOX11_TEST_ERROR << "ERROR: TestUnion_U3 failed to select its labeled member" << std::endl;
     ++retval;
