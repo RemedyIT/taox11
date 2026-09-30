@@ -142,9 +142,11 @@ check_default_union (const Test::DefaultData & d, int16_t discriminator,
       << discriminator <<"> - found <" << d._d () << ">" << std::endl;
     ++retval;
   }
-  retval += check_bad_param (d, 1, discriminator);
-  retval += check_bad_param (d, 2, discriminator);
-  retval += check_bad_param (d, -1, discriminator);
+  int16_t const member_discriminator =
+    discriminator == 1 || discriminator == 2 ? discriminator : -1;
+  retval += check_bad_param (d, 1, member_discriminator);
+  retval += check_bad_param (d, 2, member_discriminator);
+  retval += check_bad_param (d, -1, member_discriminator);
 
   return retval;
 }
