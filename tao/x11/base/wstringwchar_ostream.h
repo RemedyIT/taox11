@@ -12,10 +12,12 @@
 
 #include <ostream>
 #include <cstdlib>
+#include <cwchar>
+#include <memory>
+#include <string>
 #include <string_view>
 #if !defined (WIN32)
-# include <codecvt>
-# include <locale>
+# include "tao/x11/base/utf8_utf16.h"
 #else
 # include <Windows.h>
 #endif
@@ -36,8 +38,7 @@ namespace std
     }
     return _os << "\"" << _str << "\"";
 #else
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
-    return _os << "\"" << conv.to_bytes(_v) << "\"";
+    return _os << "\"" << TAOX11_NAMESPACE::detail::utf16_to_utf8 (_v) << "\"";
 #endif
   }
 
@@ -55,8 +56,7 @@ namespace std
     }
     return _os << "\"" << _str << "\"";
 #else
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
-    return _os << "\"" << conv.to_bytes(_v.data()) << "\"";
+    return _os << "\"" << TAOX11_NAMESPACE::detail::utf16_to_utf8 (_v) << "\"";
 #endif
   }
 

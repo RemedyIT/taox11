@@ -1,0 +1,8 @@
+// -*- MPC -*-
+
+project(*utf_conversion): taox11_basedefaults {
+  exename = utf_conversion
+  Source_Files {
+    test.cpp
+  }
+}
