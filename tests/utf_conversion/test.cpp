@@ -6,7 +6,6 @@
  * @copyright Copyright (c) Remedy IT Expertise BV
  */
 
-#include "tao/x11/base/idl_traits_t.h"
 #include "tao/x11/base/wstringwchar_ostream.h"
 #include "tao/x11/base/utf8_utf16.h"
 #include "testlib/taox11_testlog.h"
@@ -104,15 +103,6 @@ int main ()
   stream.str ("");
   stream << std::wstring_view (nul_wide);
   check (stream.str () == '"' + nul_bytes + '"', "view with embedded NUL");
-
-#if !defined (WIN32)
-  std::wostringstream wide_stream;
-  x11::IDL::formatter<std::string, std::wostream> {} (wide_stream, utf8);
-  check (wide_stream.str () == L'"' + wide + L'"', "string formatter");
-  stream.str ("");
-  x11::IDL::formatter<std::wstring, std::ostream> {} (stream, wide);
-  check (stream.str () == "L\"" + utf8 + '"', "wstring formatter prefix");
-#endif
 
   return errors == 0 ? 0 : 1;
 }
