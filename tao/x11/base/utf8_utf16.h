@@ -1,5 +1,6 @@
 /**
  * @file    utf8_utf16.h
+ * @author  Johnny Willemsen
  * @brief   Locale-independent UTF-8/UTF-16 conversion for stream formatting.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV

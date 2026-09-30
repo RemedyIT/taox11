@@ -1,5 +1,6 @@
 /**
  * @file    test.cpp
+ * @author  Johnny Willemsen
  * @brief   Standalone UTF conversion and stream formatting regression tests.
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
@@ -8,8 +9,12 @@
 #include "tao/x11/base/idl_traits_t.h"
 #include "tao/x11/base/wstringwchar_ostream.h"
 #include "tao/x11/base/utf8_utf16.h"
+#include <cstdio>
 #include <limits>
 #include <sstream>
+
+// Use the configured namespace without requiring generated IDL headers.
+namespace x11 = TAOX11_VERSIONED_NAMESPACE_NAME;
 
 namespace
 {
@@ -19,7 +24,7 @@ namespace
   {
     if (!condition)
     {
-      std::cerr << "ERROR: " << description << '\n';
+      std::fprintf (stderr, "ERROR: %s\n", description);
       ++errors;
     }
   }
@@ -40,8 +45,8 @@ namespace
 
 int main ()
 {
-  using TAOX11_NAMESPACE::detail::utf8_to_utf16;
-  using TAOX11_NAMESPACE::detail::utf16_to_utf8;
+  using x11::detail::utf8_to_utf16;
+  using x11::detail::utf16_to_utf8;
 
   // Independent expected encodings, including every UTF-8 length boundary.
   std::string const utf8 = "A\xc3\xa9\xe2\x82\xac\xf0\x9f\x98\x80";
@@ -102,10 +107,10 @@ int main ()
 
 #if !defined (WIN32)
   std::wostringstream wide_stream;
-  TAOX11_NAMESPACE::IDL::formatter<std::string, std::wostream> {} (wide_stream, utf8);
+  x11::IDL::formatter<std::string, std::wostream> {} (wide_stream, utf8);
   check (wide_stream.str () == L'"' + wide + L'"', "string formatter");
   stream.str ("");
-  TAOX11_NAMESPACE::IDL::formatter<std::wstring, std::ostream> {} (stream, wide);
+  x11::IDL::formatter<std::wstring, std::ostream> {} (stream, wide);
   check (stream.str () == "L\"" + utf8 + '"', "wstring formatter prefix");
 #endif
 

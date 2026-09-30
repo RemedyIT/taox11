@@ -1,4 +1,10 @@
+#---------------------------------------------------------------------
+# @file    run_test.pl
+# @author  Johnny Willemsen
+# @brief   Standalone UTF conversion regression test runner
+#
 # @copyright Copyright (c) Remedy IT Expertise BV
+#---------------------------------------------------------------------
 
 use lib "$ENV{ACE_ROOT}/bin";
 use PerlACE::TestTarget;
