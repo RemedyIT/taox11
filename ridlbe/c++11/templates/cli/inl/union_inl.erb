@@ -24,7 +24,9 @@ inline std::size_t <%= scoped_cxxname %>::_x11_member_index (<%= switch_in_cxxty
 %     _m.nondefault_labels.each do |_lbl|
     case <%= _lbl %>:
 %     end
+%     unless _m.nondefault_labels.empty?
       return <%= _index %>U;
+%     end
 %   end
     default:
       return <%= _default_index %>U;

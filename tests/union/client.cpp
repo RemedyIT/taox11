@@ -449,6 +449,25 @@ test_union_discriminators ()
     ++retval;
   }
 
+  Test::TestUnion_U3 explicit_default_index;
+  explicit_default_index.FirstCase (Test::State::STATE_PASS, Test::Color::COLOR_BLUE);
+  if (explicit_default_index._d () != Test::Color::COLOR_BLUE
+      || explicit_default_index.FirstCase () != Test::State::STATE_PASS)
+  {
+    TAOX11_TEST_ERROR << "ERROR: TestUnion_U3 failed to select its explicit default member" << std::endl;
+    ++retval;
+  }
+
+  Test::TestStruct second_case {};
+  second_case.willFailHere = 42;
+  explicit_default_index.SecondCase (second_case);
+  if (explicit_default_index._d () != Test::Color::COLOR_RED
+      || explicit_default_index.SecondCase ().willFailHere != 42)
+  {
+    TAOX11_TEST_ERROR << "ERROR: TestUnion_U3 failed to select its labeled member" << std::endl;
+    ++retval;
+  }
+
   try
   {
     shared_labels._d (4);
