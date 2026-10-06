@@ -42,7 +42,7 @@ namespace TAOX11_NAMESPACE
     class valuetype_reference;
 
     template <typename T,
-              typename = std::enable_if_t<std::is_base_of_v<std::conditional_t<std::is_base_of<PortableServer::Servant, T>::value, void, CORBA::ValueBase>, T>>,
+              typename = std::enable_if_t<std::is_base_of_v<std::conditional_t<std::is_base_of_v<PortableServer::Servant, T>, void, CORBA::ValueBase>, T>>,
               typename ...Args>
     constexpr valuetype_reference<T> make_reference(Args&& ...args);
 
