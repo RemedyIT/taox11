@@ -11,6 +11,12 @@
 
 #include "testlib/taox11_testlog.h"
 #include <limits>
+#include <type_traits>
+
+static_assert (std::is_same_v<IDL::traits<Test::Hello>::ref_type,
+                              CORBA::object_reference<Test::Hello>>);
+static_assert (std::is_same_v<IDL::traits<Test::iA>::weak_ref_type,
+                              CORBA::weak_object_reference<Test::iA>>);
 
 int result_ = 0;
 
@@ -191,5 +197,4 @@ int main(int argc, char* argv[])
   }
   return result_;
 }
-
 
