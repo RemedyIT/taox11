@@ -334,6 +334,8 @@ module IDL
             when IDL::Type::String,
                  IDL::Type::WString
               add_pre_include('tao/AnyTypeCode/String_TypeCode_Static.h')
+            when IDL::Type::Fixed
+              add_pre_include('tao/AnyTypeCode/Fixed_TypeCode.h')
             when IDL::Type::Sequence,
                  IDL::Type::Array
               add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h')
@@ -685,6 +687,8 @@ module IDL
             visitor(MapVisitor).visit_tao_typecode(node)
           when IDL::Type::Array
             visitor(ArrayVisitor).visit_tao_typecode(node)
+          when IDL::Type::Fixed
+            visitor(TypedefVisitor).visit_tao_typecode(node)
           end
         end
       end

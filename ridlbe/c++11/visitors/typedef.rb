@@ -64,6 +64,18 @@ module IDL
         self._idltype.is_a?(IDL::Type::WString)
       end
 
+      def is_fixed_typedef?
+        self._resolved_idltype.is_a?(IDL::Type::Fixed)
+      end
+
+      def fixed_digits
+        self._resolved_idltype.digits
+      end
+
+      def fixed_scale
+        self._resolved_idltype.scale
+      end
+
       def is_bounded_type?
         case self._resolved_idltype
         when IDL::Type::Sequence,
@@ -94,9 +106,13 @@ module IDL
       end
 
       def aliased_scoped_cxx_typecode
-        self._idltype.is_standard_type? ?
-            "TAO_CORBA::#{self._idltype.cxx_typecode}" :
-            "__tao::#{self._idltype.scoped_cxx_typecode}"
+        if self.is_fixed_typedef?
+          "_tao_tc_fixed_#{self.fixed_digits}_#{self.fixed_scale}_ptr"
+        elsif self._idltype.is_standard_type?
+          "TAO_CORBA::#{self._idltype.cxx_typecode}"
+        else
+          "__tao::#{self._idltype.scoped_cxx_typecode}"
+        end
       end
 
       # overloaded from visitorbase

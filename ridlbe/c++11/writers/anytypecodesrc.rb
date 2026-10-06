@@ -176,6 +176,8 @@ module IDL
           when IDL::Type::String,
                IDL::Type::WString
             add_pre_include('tao/AnyTypeCode/String_TypeCode_Static.h') if generate_tao_anytypecode?
+          when IDL::Type::Fixed
+            add_pre_include('tao/AnyTypeCode/Fixed_TypeCode.h') if generate_tao_anytypecode?
           when IDL::Type::Sequence,
                IDL::Type::Array
             add_pre_include('tao/AnyTypeCode/Sequence_TypeCode_Static.h') if generate_tao_anytypecode?
