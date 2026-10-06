@@ -58,6 +58,7 @@
   inline void swap (<%= cxx_inout_type %> u);
 
 private:
+  static inline std::size_t _x11_member_index (<%= switch_in_cxxtype %>);
   <%= switch_cxxtype %> disc_ {<% if has_default?() || has_implicit_default?() %><%= default_label %><% else %><%= members.first.nondefault_labels.first %><% end %>};
   using u_type_ = std::variant<<% members.each do |_m| %><%= _m.cxx_member_type %><% unless _m.equal?(members.last) %>, <% end %><% end %>>;
 % def_index = 0
