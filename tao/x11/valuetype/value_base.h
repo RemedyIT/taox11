@@ -189,12 +189,12 @@ namespace TAOX11_NAMESPACE
         IDL::traits<CORBA::ValueBase>::__Writer<Fmt> w)
     {
       using writer_t = IDL::traits<CORBA::ValueBase>::__Writer<Fmt>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<CORBA::ValueBase, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<CORBA::ValueBase>::write_on (
           os, w.val_,
           formatter_t ());

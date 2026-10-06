@@ -413,12 +413,12 @@ namespace TAOX11_NAMESPACE
         IDL::traits<CORBA::ORB::InvalidName>::__Writer<Fmt> w)
     {
       using writer_t = IDL::traits<CORBA::ORB::InvalidName>::__Writer<Fmt>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<CORBA::ORB::InvalidName, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<CORBA::ORB::InvalidName>::write_on (
           os, w.val_,
           formatter_t ());
@@ -442,12 +442,12 @@ namespace TAOX11_NAMESPACE
         IDL::traits<CORBA::ORB>::__Writer<Fmt> w)
     {
       using writer_t = IDL::traits<CORBA::ORB>::__Writer<Fmt>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<CORBA::ORB, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<CORBA::ORB>::write_on (
           os, w.val_,
           formatter_t ());
