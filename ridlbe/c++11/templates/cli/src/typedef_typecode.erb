@@ -1,8 +1,8 @@
 
 // generated from <%= ridl_template_path %>
 % if is_fixed_typedef?
-#ifndef _TAO_TYPECODE_FIXED_<%= fixed_digits %>_<%= fixed_scale %>_GUARD
-#define _TAO_TYPECODE_FIXED_<%= fixed_digits %>_<%= fixed_scale %>_GUARD
+#ifndef _TAO_TYPECODE_FIXED_<%= fixed_typecode_guard_signature %>_<%= fixed_digits %>_<%= fixed_scale %>_GUARD
+#define _TAO_TYPECODE_FIXED_<%= fixed_typecode_guard_signature %>_<%= fixed_digits %>_<%= fixed_scale %>_GUARD
 static TAO_TAO::TypeCode::Fixed<TAO_TAO::Null_RefCount_Policy>
   _tao_tc_fixed_<%= fixed_digits %>_<%= fixed_scale %> (<%= fixed_digits %>, <%= fixed_scale %>);
 

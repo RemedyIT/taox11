@@ -65,7 +65,7 @@ module IDL
       end
 
       def is_fixed_typedef?
-        self._resolved_idltype.is_a?(IDL::Type::Fixed)
+        self._idltype.is_a?(IDL::Type::Fixed)
       end
 
       def fixed_digits
@@ -74,6 +74,11 @@ module IDL
 
       def fixed_scale
         self._resolved_idltype.scale
+      end
+
+      def fixed_typecode_guard_signature
+        (node.enclosure && !node.enclosure.scopes.empty?) ?
+          node.enclosure.scoped_cxxname.to_include_guard : 'GLOBAL'
       end
 
       def is_bounded_type?

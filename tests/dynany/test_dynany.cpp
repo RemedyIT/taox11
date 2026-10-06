@@ -180,16 +180,34 @@ Test_DynAny::run_test ()
         dynany_factory->create_dyn_any_from_type_code (DynAnyTests::_tc_test_fixed_seq);
       IDL::traits<DynamicAny::DynSequence>::ref_type sequence =
         IDL::traits<DynamicAny::DynSequence>::narrow (sequence_any);
-      sequence->set_length (1);
-      sequence->seek (0);
-      IDL::traits<DynamicAny::DynFixed>::ref_type component =
-        IDL::traits<DynamicAny::DynFixed>::narrow (sequence->current_component ());
-      if (!component || !component->set_value ("8.125") || component->get_value () != "8.125")
+      if (!sequence)
       {
-        TAOX11_TEST_ERROR << "DynFixed sequence component failed" << std::endl;
+        TAOX11_TEST_ERROR << "Nil DynSequence for DynFixed sequence" << std::endl;
+        ++this->error_count_;
+        sequence_any->destroy ();
+      }
+      else
+      {
+        sequence->set_length (1);
+        sequence->seek (0);
+        IDL::traits<DynamicAny::DynFixed>::ref_type component =
+          IDL::traits<DynamicAny::DynFixed>::narrow (sequence->current_component ());
+        if (!component || !component->set_value ("8.125") || component->get_value () != "8.125")
+        {
+          TAOX11_TEST_ERROR << "DynFixed sequence component failed" << std::endl;
+          ++this->error_count_;
+        }
+        sequence->destroy ();
+      }
+
+      IDL::traits<CORBA::TypeCode>::ref_type fixed_alias_tc = DynAnyTests::_tc_test_fixed_alias;
+      if (fixed_alias_tc->kind () != CORBA::TCKind::tk_alias ||
+          fixed_alias_tc->content_type ()->kind () != CORBA::TCKind::tk_alias ||
+          fixed_alias_tc->content_type ()->content_type ()->kind () != CORBA::TCKind::tk_fixed)
+      {
+        TAOX11_TEST_ERROR << "DynFixed alias TypeCode did not retain its alias chain" << std::endl;
         ++this->error_count_;
       }
-      sequence->destroy ();
     }
 
     {

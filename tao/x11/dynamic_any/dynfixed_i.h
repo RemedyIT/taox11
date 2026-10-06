@@ -1,5 +1,6 @@
 /**
  * @file    dynfixed_i.h
+ * @author  Johnny Willemsen
  * @brief   CORBA C++11 DynamicAny implementation for fixed-point values
  *
  * @copyright Copyright (c) Remedy IT Expertise BV

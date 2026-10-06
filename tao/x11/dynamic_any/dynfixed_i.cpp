@@ -1,5 +1,6 @@
 /**
  * @file    dynfixed_i.cpp
+ * @author  Johnny Willemsen
  * @brief   CORBA C++11 DynamicAny implementation for fixed-point values
  *
  * @copyright Copyright (c) Remedy IT Expertise BV
@@ -328,6 +329,10 @@ namespace TAOX11_NAMESPACE
 
       CORBA::Any any = dyn_any->to_any ();
       TAOX11_CORBA::Any::impl_ref_type impl = any.impl ();
+      if (!impl)
+      {
+        return false;
+      }
       ACE_CDR::Fixed value = ACE_CDR::Fixed::from_integer ();
       bool decoded {};
       if (impl->encoded ())
