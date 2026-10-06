@@ -44,13 +44,13 @@ namespace TAOX11_NAMESPACE
     template <typename T>
     struct traits
     {
-      using _traits_type = typename std::conditional<
-                          std::is_base_of<CORBA::LocalObject, T>::value,
+      using _traits_type = std::conditional_t<
+                          std::is_base_of_v<CORBA::LocalObject, T>,
                           CORBA::object_traits<T>,
-                          typename std::conditional<
-                                  std::is_base_of<CORBA::ValueBase, T>::value,
+                          std::conditional_t<
+                                  std::is_base_of_v<CORBA::ValueBase, T>,
                                   CORBA::valuetype_traits<T>,
-                                  void>::type>::type;
+                                  void>>;
 
       using ref_type = typename _traits_type::ref_type;
       using weak_ref_type = typename _traits_type::weak_ref_type;
