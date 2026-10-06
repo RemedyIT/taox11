@@ -22,10 +22,10 @@ main (int, char *[])
 {
   int retval {};
 
-  using boolean_sarg_traits = TAOX11_NAMESPACE::PS::SArg_Traits<ACE_InputCDR::to_boolean>;
-  using boolean_arg_traits = TAOX11_NAMESPACE::Arg_Traits<ACE_InputCDR::to_boolean>;
-  using basic_sarg_traits = TAOX11_NAMESPACE::PS::SArg_Traits<int32_t>;
-  using basic_arg_traits = TAOX11_NAMESPACE::Arg_Traits<int32_t>;
+  using boolean_sarg_traits = taox11::PS::SArg_Traits<ACE_InputCDR::to_boolean>;
+  using boolean_arg_traits = taox11::Arg_Traits<ACE_InputCDR::to_boolean>;
+  using basic_sarg_traits = taox11::PS::SArg_Traits<int32_t>;
+  using basic_arg_traits = taox11::Arg_Traits<int32_t>;
 
   boolean_sarg_traits::ret_val boolean_ret;
   boolean_sarg_traits::out_arg_val boolean_out;
@@ -77,8 +77,8 @@ main (int, char *[])
     }
 
 #if (ACE_SIZEOF_LONG_DOUBLE != 16)
-  using long_double_sarg_traits = TAOX11_NAMESPACE::PS::SArg_Traits<long double>;
-  using long_double_arg_traits = TAOX11_NAMESPACE::Arg_Traits<long double>;
+  using long_double_sarg_traits = taox11::PS::SArg_Traits<long double>;
+  using long_double_arg_traits = taox11::Arg_Traits<long double>;
   long_double_sarg_traits::ret_val long_double_ret;
   long_double_sarg_traits::out_arg_val long_double_out;
   long_double_arg_traits::ret_val client_long_double_ret;
