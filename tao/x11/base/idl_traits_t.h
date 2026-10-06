@@ -47,10 +47,10 @@ namespace TAOX11_NAMESPACE
       using _traits_type = std::conditional_t<
                           std::is_base_of_v<CORBA::LocalObject, T>,
                           CORBA::object_traits<T>,
-                          typename std::conditional<
+                          std::conditional_t<
                                   std::is_base_of_v<CORBA::ValueBase, T>,
                                   CORBA::valuetype_traits<T>,
-                                  void>::type>;
+                                  void>>;
 
       using ref_type = typename _traits_type::ref_type;
       using weak_ref_type = typename _traits_type::weak_ref_type;
