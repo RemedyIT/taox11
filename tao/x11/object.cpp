@@ -84,9 +84,7 @@ namespace TAOX11_NAMESPACE
     /*  Object and LocalObject implementation
      *
      */
-    Object::~Object ()
-    {
-    }
+    Object::~Object () = default;
 
     Object::_shared_ptr_type Object::_lock_shared ()
     {
@@ -423,9 +421,7 @@ namespace TAOX11_NAMESPACE
       return op ? make_reference<Object> (new Object_proxy (std::move (op))) : nullptr;
     }
 
-    LocalObject::~LocalObject ()
-    {
-    }
+    LocalObject::~LocalObject () = default;
 
     bool LocalObject::_is_a (const std::string& local_type_id)
     {
