@@ -38,6 +38,7 @@ tests/ami_test/replyhandler/run_test.pl: !CORBA_E_MICRO
 tests/ami_test/use_of_gca/run_test.pl: !CORBA_E_MICRO
 tests/ami_test/weak_ref/run_test.pl: !CORBA_E_COMPACT !CORBA_E_MICRO
 tests/annotations/run_test.pl:
+tests/argument_storage/run_test.pl:
 tests/any/anynonstandardtc/run_test.pl:
 tests/any/basic/run_test.pl:
 tests/any/corbaseq/run_test.pl:

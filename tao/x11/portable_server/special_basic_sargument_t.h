@@ -46,7 +46,7 @@ namespace TAOX11_NAMESPACE
     S & arg () { return this->x_; }
 
   private:
-    S x_;
+    S x_ {};
   };
 
   /**
@@ -72,7 +72,7 @@ namespace TAOX11_NAMESPACE
     S & arg () { return this->x_; }
 
   private:
-    S x_;
+    S x_ {};
   };
 
   /**
@@ -97,7 +97,7 @@ namespace TAOX11_NAMESPACE
     S & arg () { return this->x_; }
 
   private:
-    S x_;
+    S x_ {};
   };
 
   /**
@@ -122,7 +122,7 @@ namespace TAOX11_NAMESPACE
     S & arg () { return this->x_; }
 
   private:
-    S x_;
+    S x_ {};
   };
 
   /**
