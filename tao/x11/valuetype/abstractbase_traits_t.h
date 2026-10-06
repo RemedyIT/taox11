@@ -50,23 +50,19 @@ namespace TAOX11_NAMESPACE
 
       abstractbase_reference (std::nullptr_t = nullptr)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       abstractbase_reference (const abstractbase_reference<_Tp1> &aref)
         : abs_ (aref.abs_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       abstractbase_reference (abstractbase_reference<_Tp1> &&aref)
         : abs_ (std::move (aref.abs_))
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       abstractbase_reference (const object_reference<_Tp1> &oref)
         : abs_ (oref.stub_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       abstractbase_reference (const valuetype_reference<_Tp1> &vtref)
         : abs_ (vtref.vtp_)
       {}
@@ -98,28 +94,22 @@ namespace TAOX11_NAMESPACE
 
       void operator=(std::nullptr_t)
       { this->abs_.reset (); }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator=(const abstractbase_reference<_Tp1>& aref)
       { this->abs_ = aref.abs_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator=(abstractbase_reference<_Tp1>&& aref)
       { this->abs_ = std::move (aref.abs_); }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator=(const object_reference<_Tp1>& oref)
       { this->abs_ = oref.stub_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator=(object_reference<_Tp1>&& oref)
       { this->abs_ = std::move (oref.stub_); }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator=(const valuetype_reference<_Tp1>& vtref)
       { this->abs_ = vtref.vtp_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator=(valuetype_reference<_Tp1>&& vtref)
       { this->abs_ = std::move (vtref.vtp_); }
 
@@ -134,13 +124,11 @@ namespace TAOX11_NAMESPACE
       friend class weak_abstractbase_reference<T>;
       friend class AbstractBase;
 
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       explicit abstractbase_reference (_Tp1* t)
         : abs_ (std::dynamic_pointer_cast<T> (t->_lock_shared ()))
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_base_of<_Tp1, T>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_base_of_v<_Tp1, T>>>
       explicit abstractbase_reference (const std::shared_ptr<_Tp1>& sp)
         : abs_ (std::dynamic_pointer_cast<T> (sp))
       {}
@@ -148,8 +136,7 @@ namespace TAOX11_NAMESPACE
         : abs_ (sp)
       {}
 
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_base_of<typename _Tp1::value_type, T>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_base_of_v<typename _Tp1::value_type, T>>>
       static abstractbase_reference<T> _narrow(_Tp1 sp)
       { return abstractbase_reference<T> (std::dynamic_pointer_cast<T> (sp.abs_)); }
 
@@ -163,61 +150,49 @@ namespace TAOX11_NAMESPACE
     public:
       weak_abstractbase_reference ()
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_abstractbase_reference (const weak_abstractbase_reference<_Tp1>& woref)
         : abs_ (woref.abs_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_abstractbase_reference (const abstractbase_reference<_Tp1>& oref)
         : abs_ (oref.abs_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_abstractbase_reference (const weak_object_reference<_Tp1>& woref)
         : abs_ (woref.stub_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_abstractbase_reference (const object_reference<_Tp1>& oref)
         : abs_ (oref.stub_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_abstractbase_reference (const weak_valuetype_reference<_Tp1>& wvref)
         : abs_ (wvref.vtp_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_abstractbase_reference (const valuetype_reference<_Tp1>& vtref)
         : abs_ (vtref.vtp_)
       {}
 
       ~weak_abstractbase_reference () = default;
 
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (const weak_abstractbase_reference<_Tp1>& woref)
       { this->abs_ = woref.abs_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (const abstractbase_reference<_Tp1>& oref)
       { this->abs_ = oref.abs_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (const weak_object_reference<_Tp1>& woref)
       { this->abs_ = woref.stub_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (const object_reference<_Tp1>& oref)
       { this->abs_ = oref.stub_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (const weak_valuetype_reference<_Tp1>& wvref)
       { this->abs_ = wvref.vtp_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (const valuetype_reference<_Tp1>& vtref)
       { this->abs_ = vtref.vtp_; }
 

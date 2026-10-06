@@ -17,8 +17,8 @@ struct <%= skel_export_macro %>servant_traits<<%= scoped_cxxtype %>>
   /// Try to narrow the provided reference @a base to a <%= scoped_cxxtype %>
   /// reference. Returns a new reference when this succeeds, a nil reference
   /// when this fails. Narrowing a nil reference will return a nil reference.
-  template <typename _Tp1, typename = typename
-      std::enable_if<std::is_convertible<<%= scoped_skel_cxxtype %>*, _Tp1*>::value>::type>
+  template <typename _Tp1, typename =
+      std::enable_if_t<std::is_convertible_v<<%= scoped_skel_cxxtype %>*, _Tp1*>>>
   static ref_type narrow (servant_reference<_Tp1> base)
   {
     return ref_type::_narrow (std::move(base));
