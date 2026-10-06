@@ -113,9 +113,7 @@ namespace TAOX11_NAMESPACE
       this->orb_registry_ = ORB_Registry::instance (true);
     }
 
-    ORB::~ORB ()
-    {
-    }
+    ORB::~ORB () = default;
 
     ORB_Proxy& ORB::proxy ()
     {
@@ -864,4 +862,3 @@ namespace TAOX11_NAMESPACE
     }
   } // namespace CORBA
 } // namespace TAOX11_NAMESPACE
-

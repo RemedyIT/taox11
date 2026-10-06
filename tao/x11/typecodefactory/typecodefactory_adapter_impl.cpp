@@ -18,13 +18,9 @@
 namespace TAOX11_NAMESPACE
 {
 
-TypeCodeFactory_Adapter_Impl::TypeCodeFactory_Adapter_Impl ()
-{
-}
+TypeCodeFactory_Adapter_Impl::TypeCodeFactory_Adapter_Impl () = default;
 
-TypeCodeFactory_Adapter_Impl::~TypeCodeFactory_Adapter_Impl ()
-{
-}
+TypeCodeFactory_Adapter_Impl::~TypeCodeFactory_Adapter_Impl () = default;
 
 CORBA::object_reference<CORBA::TypeCode>
  TypeCodeFactory_Adapter_Impl::create_struct_tc (
