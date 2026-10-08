@@ -43,14 +43,17 @@ jobs:
             ruby: '2.6'
             project_type: vs2022
             make_flags: '--release'
+            test_args: '-- -ExeSubDir Release'
           - os: windows-2022
             ruby: '3.1'
             project_type: vs2022
             make_flags: '--debug'
+            test_args: ''
           - os: windows-2022
             ruby: '3.1'
             project_type: vs2022
             make_flags: '--release'
+            test_args: '-- -ExeSubDir Release'
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }} ${{ matrix.make_flags }}
     steps:
@@ -113,5 +116,5 @@ jobs:
       shell: cmd
     - name: Run brix11 tests
       run: |
-        %X11_BASE_ROOT%/bin/brix11 run list -l %TAOX11_ROOT%/bin/taox11_tests.lst -r %TAOX11_ROOT%
+        %X11_BASE_ROOT%\bin\brix11 -E run list -l %TAOX11_ROOT%\bin\taox11_tests.lst -r %TAOX11_ROOT% -s \x22X:\autobuild\win32sandbox\sandbox64.exe -t 5400000\x22 ${{ matrix.test_args }}
       shell: cmd
