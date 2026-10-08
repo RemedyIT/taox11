@@ -30,6 +30,7 @@ env:
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
   RIDL_ROOT: ${{ github.workspace }}/ridl
   TAOX11_ROOT: ${{ github.workspace }}
+  AUTOBUILD_ROOT: ${{ github.workspace }}/autobuild
   X11_BRANCH: master
   ACETAOMPC_BRANCH: master
 
@@ -88,6 +89,11 @@ jobs:
         repository: RemedyIT/axcioma
         path: ${{ env.X11_BASE_ROOT }}
         ref: ${{ env.X11_BRANCH }}
+    - name: checkout autobuild
+      uses: actions/checkout@v7
+      with:
+        repository: DOCGroup/autobuild
+        path: ${{ env.AUTOBUILD_ROOT }}
     - uses: step-security/msvc-dev-cmd@v1
       with:
         vsversion: 2022
@@ -116,5 +122,5 @@ jobs:
       shell: cmd
     - name: Run brix11 tests
       run: |
-        %X11_BASE_ROOT%\bin\brix11 -E run list -l %TAOX11_ROOT%\bin\taox11_tests.lst -r %TAOX11_ROOT% -s \x22X:\autobuild\win32sandbox\sandbox64.exe -t 5400000\x22 ${{ matrix.test_args }}
+        %X11_BASE_ROOT%\bin\brix11 -E run list -l %TAOX11_ROOT%\bin\taox11_tests.lst -r %TAOX11_ROOT% -s \x22%AUTOBUILD_ROOT%\win32sandbox\sandbox64.exe -t 5400000\x22 ${{ matrix.test_args }}
       shell: cmd
