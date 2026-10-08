@@ -28,7 +28,8 @@ env:
   TAO_ROOT: ${{ github.workspace }}/ACE_TAO/TAO
   MPC_ROOT: ${{ github.workspace }}/ACE_TAO/MPC
   X11_BASE_ROOT: ${{ github.workspace }}/axcioma
-  RIDL_ROOT: ${{ github.workspace }}/ridl
+  RIDL_BASE_ROOT: ${{ github.workspace }}/ridl
+  RIDL_ROOT: ${{ github.workspace }}/ridl/lib
   TAOX11_ROOT: ${{ github.workspace }}
   X11_BRANCH: master
   ACETAOMPC_BRANCH: master
@@ -80,7 +81,7 @@ jobs:
       uses: actions/checkout@v7
       with:
         repository: RemedyIT/ridl
-        path: ${{ env.RIDL_ROOT }}
+        path: ${{ env.RIDL_BASE_ROOT }}
         ref: ${{ env.X11_BRANCH }}
     - name: checkout axcioma
       uses: actions/checkout@v7
