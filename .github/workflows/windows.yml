@@ -32,7 +32,7 @@ env:
   RIDL_ROOT: ${{ github.workspace }}/ridl/lib
   TAOX11_ROOT: ${{ github.workspace }}
   X11_BRANCH: master
-  ACETAOMPC_BRANCH: master
+  ACETAOMPC_BRANCH: Latest_ACE8TAO4_Micro
 
 jobs:
   build:
