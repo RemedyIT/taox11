@@ -208,6 +208,18 @@ Test_DynAny::run_test ()
         TAOX11_TEST_ERROR << "DynFixed alias TypeCode did not retain its alias chain" << std::endl;
         ++this->error_count_;
       }
+
+      IDL::traits<DynamicAny::DynAny>::ref_type fixed_alias_any =
+        dynany_factory->create_dyn_any_from_type_code (DynAnyTests::_tc_test_fixed_alias);
+      IDL::traits<DynamicAny::DynFixed>::ref_type fixed_alias =
+        IDL::traits<DynamicAny::DynFixed>::narrow (fixed_alias_any);
+      if (!fixed_alias || !fixed_alias->set_value ("4.567") ||
+          fixed_alias->get_value () != "4.567")
+      {
+        TAOX11_TEST_ERROR << "DynFixed alias factory creation failed" << std::endl;
+        ++this->error_count_;
+      }
+      fixed_alias_any->destroy ();
     }
 
     {
