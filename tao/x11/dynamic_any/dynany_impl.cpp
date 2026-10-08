@@ -641,22 +641,5 @@ namespace TAOX11_NAMESPACE
       return nullptr;
     }
 
-    //DynFixed unimplemented, we only need to implement the narrow
-    //otherwise the compiler complains.
-    template<>
-    TAOX11_DynamicAny_Export object_traits<DynamicAny::DynFixed>::ref_type
-    object_traits<DynamicAny::DynFixed>::narrow (
-         object_reference<CORBA::Object> obj)
-    {
-      if (obj)
-      {
-        if (obj->_is_local ())
-        {
-          return ref_type::_narrow (std::move(obj));
-        }
-      }
-      return nullptr;
-   }
   }
 }
-
