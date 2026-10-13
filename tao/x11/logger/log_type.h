@@ -82,7 +82,7 @@ namespace x11_logger
   class X11_Logger_Export Log_Type
   {
   public:
-    virtual ~Log_Type() {}
+    virtual ~Log_Type() = default;
 
     inline Log_Module* get_module() const
     { return this->log_module_; }

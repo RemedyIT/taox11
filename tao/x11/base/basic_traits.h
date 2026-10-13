@@ -223,192 +223,192 @@ namespace TAOX11_NAMESPACE
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<bool>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<bool>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<bool, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<bool>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<char>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<char>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<char, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<char>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<wchar_t>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<wchar_t>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<wchar_t, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<wchar_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<int8_t>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<int8_t>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<int8_t, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<int8_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<uint8_t>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<uint8_t>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<uint8_t, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<uint8_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<int16_t>::__Writer<Formatter> w)
     {
       using writer_t =  IDL::traits<int16_t>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<int16_t, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<int16_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<uint16_t>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<uint16_t>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<uint16_t, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<uint16_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<int32_t>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<int32_t>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<int32_t, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<int32_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<uint32_t>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<uint32_t>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<uint32_t, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<uint32_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<int64_t>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<int64_t>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<int64_t, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<int64_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<uint64_t>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<uint64_t>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<uint64_t, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<uint64_t>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<float>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<float>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<float, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<float>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<double>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<double>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<double, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<double>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<long double>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<long double>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<long double, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<long double>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<std::string>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<std::string>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<std::string, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<std::string>::write_on (os, w.val_, formatter_t ());
     }
     template <typename OStrm_, typename Formatter>
     inline OStrm_& operator <<(OStrm_& os, IDL::traits<std::wstring>::__Writer<Formatter> w)
     {
       using writer_t = IDL::traits<std::wstring>::__Writer<Formatter>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<std::wstring, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<std::wstring>::write_on (os, w.val_, formatter_t ());
     }
   } // namespace IDL

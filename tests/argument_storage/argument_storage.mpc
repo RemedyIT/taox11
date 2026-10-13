@@ -1,0 +1,5 @@
+// -*- MPC -*-
+
+project(*argument_storage): taox11_server {
+  exename = argument_storage
+}

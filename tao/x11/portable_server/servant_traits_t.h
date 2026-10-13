@@ -33,8 +33,7 @@ namespace TAOX11_NAMESPACE
     template <typename T>
     class servant_reference;
 
-    template <typename T, typename = typename
-      std::enable_if<std::is_base_of<PortableServer::Servant, T>::value>::type, typename ...Args>
+    template <typename T, typename = std::enable_if_t<std::is_base_of_v<PortableServer::Servant, T>>, typename ...Args>
     constexpr servant_reference<T> make_reference(Args&& ...args);
 
     template <typename T>
@@ -46,8 +45,7 @@ namespace TAOX11_NAMESPACE
       using ref_type = servant_reference<T>;
       using weak_ref_type = weak_servant_reference<T>;
 
-      template <typename _Tp, typename = typename
-          std::enable_if<std::is_base_of<PortableServer::Servant, typename _Tp::value_type>::value>::type>
+      template <typename _Tp, typename = std::enable_if_t<std::is_base_of_v<PortableServer::Servant, typename _Tp::value_type>>>
       inline static ref_type narrow (_Tp vt)
       {
         return ref_type::_narrow (std::move(vt));
@@ -65,18 +63,15 @@ namespace TAOX11_NAMESPACE
 
       servant_reference (std::nullptr_t = nullptr)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       servant_reference (const servant_reference<_Tp1>& sref)
         : srvt_ (sref.srvt_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       servant_reference (servant_reference<_Tp1> &&sref)
         : srvt_ (std::move (sref.srvt_))
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       servant_reference (const valuetype_reference<_Tp1>& vtref)
         : srvt_ (vtref.vtp_)
       {}
@@ -106,20 +101,16 @@ namespace TAOX11_NAMESPACE
 
       void operator=(std::nullptr_t)
       { this->srvt_.reset (); }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator=(const servant_reference<_Tp1>& sref)
       { this->srvt_ = sref.srvt_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator=(servant_reference<_Tp1>&& sref)
       { this->srvt_ = std::move (sref.srvt_); }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator=(const valuetype_reference<_Tp1>& vtref)
       { this->srvt_ = vtref.vtp_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator=(valuetype_reference<_Tp1>&& vtref)
       { this->srvt_ = std::move (vtref.vtp_); }
 
@@ -140,8 +131,7 @@ namespace TAOX11_NAMESPACE
       explicit servant_reference (_Tp1* t)
         : srvt_ (std::dynamic_pointer_cast<T> (t->_lock_shared ()))
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_base_of<_Tp1, T>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_base_of_v<_Tp1, T>>>
       explicit servant_reference (const std::shared_ptr<_Tp1>& sp)
         : srvt_ (std::dynamic_pointer_cast<T> (sp))
       {}
@@ -149,8 +139,7 @@ namespace TAOX11_NAMESPACE
         : srvt_ (sp)
       {}
 
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_base_of<typename _Tp1::value_type, T>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_base_of_v<typename _Tp1::value_type, T>>>
       static servant_reference<T> _narrow(_Tp1 sp)
       { return servant_reference<T> (std::dynamic_pointer_cast<T> (sp.srvt_)); }
 
@@ -163,50 +152,40 @@ namespace TAOX11_NAMESPACE
     {
     public:
       weak_servant_reference () = default;
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_servant_reference (const weak_servant_reference<_Tp1>& woref)
         : srvt_ (woref.srvt_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_servant_reference (weak_servant_reference<_Tp1>&& woref)
         : srvt_ (std::move(woref.srvt_))
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_servant_reference (const servant_reference<_Tp1>& oref)
         : srvt_ (oref.srvt_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_servant_reference (const weak_valuetype_reference<_Tp1>& wvref)
         : srvt_ (wvref.vtp_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_servant_reference (const valuetype_reference<_Tp1>& vtref)
         : srvt_ (vtref.vtp_)
       {}
 
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (const weak_servant_reference<_Tp1>& woref)
       { this->srvt_ = woref.srvt_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (weak_servant_reference<_Tp1>&& woref)
       { this->srvt_ = std::move(woref.srvt_); }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (const servant_reference<_Tp1>& oref)
       { this->srvt_ = oref.srvt_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (const weak_valuetype_reference<_Tp1>& wvref)
       { this->srvt_ = wvref.vtp_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (const valuetype_reference<_Tp1>& vtref)
       { this->srvt_ = vtref.vtp_; }
 

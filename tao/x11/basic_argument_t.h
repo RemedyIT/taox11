@@ -137,7 +137,7 @@ namespace TAOX11_NAMESPACE
     S retn () { return std::move (this->x_); }
 
   private:
-    S x_;
+    S x_ {};
   };
 
   /**

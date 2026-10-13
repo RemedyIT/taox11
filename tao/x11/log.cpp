@@ -29,9 +29,7 @@ namespace TAOX11_NAMESPACE
       {
       }
 
-      TAOX11_Log_Module::~TAOX11_Log_Module()
-      {
-      }
+      TAOX11_Log_Module::~TAOX11_Log_Module() = default;
 
     } // namespace taox11_logger
 } // namespace TAOX11_NAMESPACE

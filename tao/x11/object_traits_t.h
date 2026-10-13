@@ -32,8 +32,7 @@ namespace TAOX11_NAMESPACE
     template <typename T>
     class object_reference;
 
-    template <typename T, typename = typename
-      std::enable_if<std::is_base_of<CORBA::Object, T>::value>::type, typename ...Args>
+    template <typename T, typename = std::enable_if_t<std::is_base_of_v<CORBA::Object, T>>, typename ...Args>
     constexpr object_reference<T> make_reference(Args&& ...args);
 
     template <typename T>
@@ -53,8 +52,7 @@ namespace TAOX11_NAMESPACE
       static shared_ptr_type lock_shared (stub_type*);
 
       template <typename TInst,
-          typename = typename
-            std::enable_if<std::is_base_of<T, TInst>::value>::type,
+          typename = std::enable_if_t<std::is_base_of_v<T, TInst>>,
           typename ...Args>
       static inline constexpr object_reference<T> make_reference(Args&& ...args)
       {
@@ -72,13 +70,11 @@ namespace TAOX11_NAMESPACE
 
       object_reference (std::nullptr_t = nullptr)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<typename _Tp1::ptr_type, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<typename _Tp1::ptr_type, T*>>>
       object_reference (const _Tp1& oref)
         : stub_ (oref.stub_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<typename _Tp1::ptr_type, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<typename _Tp1::ptr_type, T*>>>
       object_reference (_Tp1&& oref)
         : stub_ (std::move (oref.stub_))
       {}
@@ -110,12 +106,10 @@ namespace TAOX11_NAMESPACE
 
       void operator=(std::nullptr_t)
       { this->stub_.reset (); }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<typename _Tp1::ptr_type, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<typename _Tp1::ptr_type, T*>>>
       void operator=(const _Tp1& oref)
       { this->stub_ = oref.stub_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<typename _Tp1::ptr_type, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<typename _Tp1::ptr_type, T*>>>
       void operator=(_Tp1&& oref)
       { this->stub_ = std::move (oref.stub_); }
 
@@ -134,13 +128,11 @@ namespace TAOX11_NAMESPACE
       friend constexpr object_reference<_Tp1> make_reference(Args&& ...args);
       friend class Object;
 
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       explicit object_reference (_Tp1* t)
         : stub_ (object_traits<T>::lock_shared (t))
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_base_of<_Tp1, T>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_base_of_v<_Tp1, T>>>
       explicit object_reference (const std::shared_ptr<_Tp1>& sp)
         : stub_ (std::dynamic_pointer_cast<T> (sp))
       {}
@@ -148,8 +140,7 @@ namespace TAOX11_NAMESPACE
         : stub_ (sp)
       {}
 
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_base_of<typename _Tp1::value_type, T>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_base_of_v<typename _Tp1::value_type, T>>>
       static object_reference<T> _narrow(_Tp1 sp)
       { return object_reference<T> (std::dynamic_pointer_cast<T> (sp.stub_)); }
 
@@ -162,34 +153,28 @@ namespace TAOX11_NAMESPACE
     {
     public:
       weak_object_reference () = default;
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_object_reference (const weak_object_reference<_Tp1>& woref)
         : stub_ (woref.stub_)
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_object_reference (weak_object_reference<_Tp1>&& woref)
         : stub_ (std::move(woref.stub_))
       {}
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       weak_object_reference (const object_reference<_Tp1>& oref)
         : stub_ (oref.stub_)
       {}
 
       ~weak_object_reference () = default;
 
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (const weak_object_reference<_Tp1>& woref)
       { this->stub_ = woref.stub_; }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (weak_object_reference<_Tp1>&& woref)
       { this->stub_ = std::move(woref.stub_); }
-      template<typename _Tp1, typename = typename
-        std::enable_if<std::is_convertible<_Tp1*, T*>::value>::type>
+      template<typename _Tp1, typename = std::enable_if_t<std::is_convertible_v<_Tp1*, T*>>>
       void operator= (const object_reference<_Tp1>& oref)
       { this->stub_ = oref.stub_; }
 

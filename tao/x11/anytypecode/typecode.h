@@ -314,12 +314,12 @@ namespace TAOX11_NAMESPACE
         IDL::traits<CORBA::TypeCode>::__Writer<Fmt> w)
     {
       using writer_t = IDL::traits<CORBA::TypeCode>::__Writer<Fmt>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<CORBA::TypeCode, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<CORBA::TypeCode>::write_on (
           os, w.val_,
           formatter_t ());
@@ -359,12 +359,12 @@ namespace TAOX11_NAMESPACE
         IDL::traits<CORBA::TypeCode::Bounds>::__Writer<Fmt> w)
     {
       using writer_t = IDL::traits<CORBA::TypeCode::Bounds>::__Writer<Fmt>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<CORBA::TypeCode::Bounds, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<CORBA::TypeCode::Bounds>::write_on (
           os, w.val_,
           formatter_t ());
@@ -404,12 +404,12 @@ namespace TAOX11_NAMESPACE
         IDL::traits<CORBA::TypeCode::BadKind>::__Writer<Fmt> w)
     {
       using writer_t = IDL::traits<CORBA::TypeCode::BadKind>::__Writer<Fmt>;
-      using formatter_t = typename std::conditional<
-                          std::is_same<
+      using formatter_t = std::conditional_t<
+                          std::is_same_v<
                             typename writer_t::formatter_t,
-                            std::false_type>::value,
+                            std::false_type>,
                           formatter<CORBA::TypeCode::BadKind, OStrm_>,
-                          typename writer_t::formatter_t>::type;
+                          typename writer_t::formatter_t>;
       return IDL::traits<CORBA::TypeCode::BadKind>::write_on (
           os, w.val_,
           formatter_t ());

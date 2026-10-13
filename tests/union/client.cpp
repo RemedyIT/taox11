@@ -257,8 +257,8 @@ test_data_default_union (IDL::traits<Test::Foo>::ref_type foo)
         << std::endl;
       ++retval;
     }
-  data4.defData (123456);
-  retval += check_default_union (data4, -1, "after moving data4 to def");
+  data4.defData (123456, 3);
+  retval += check_default_union (data4, 3, "after moving data4 to def");
   if (data4.defData () != 123456)
     {
       TAOX11_TEST_ERROR << "ERROR: Unexpected value for defData found in "

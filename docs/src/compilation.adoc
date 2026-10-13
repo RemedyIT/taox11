@@ -76,7 +76,7 @@ command; whether we need to link an application or compile sources,
 these command line options are always applied:
 
 -----------------------------------
-        -std=c++11
+        -std=c++17
         -Wno-deprecated
         -fvisibility=hidden
         -fvisibility-inlines-hidden

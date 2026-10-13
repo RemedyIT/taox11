@@ -10,7 +10,5 @@
 
 namespace TAOX11_NAMESPACE
 {
-  Object_Loader::~Object_Loader ()
-  {
-  }
+  Object_Loader::~Object_Loader () = default;
 }
