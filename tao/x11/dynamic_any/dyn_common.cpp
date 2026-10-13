@@ -14,6 +14,7 @@
 #include "tao/x11/dynamic_any/dynany_impl.h"
 #include "tao/x11/dynamic_any/dynsequence_i.h"
 #include "tao/x11/dynamic_any/dynenum_i.h"
+#include "tao/x11/dynamic_any/dynfixed_i.h"
 #include "tao/x11/dynamic_any/dynunion_i.h"
 #include "tao/x11/dynamic_any/dynstruct_i.h"
 #include "tao/x11/dynamic_any/dynarray_i.h"
@@ -1183,7 +1184,9 @@ namespace TAOX11_NAMESPACE
                                                       destroying);
           break;
         case CORBA::TCKind::tk_fixed:
-          throw CORBA::NO_IMPLEMENT ();
+          DynAnyFlagUtils<DynFixed_i>::set_flag_t (component,
+                                                   destroying);
+          break;
         default:
           DynAnyFlagUtils<DynAny_i>::set_flag_t (component,
                                                  destroying);
@@ -1301,4 +1304,3 @@ namespace TAOX11_NAMESPACE
     }
   } //DynamicAny namespace
 } //TAOX11_NAMESPACE
-

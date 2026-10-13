@@ -125,6 +125,104 @@ Test_DynAny::run_test ()
     }
 
     {
+      TAOX11_TEST_DEBUG << "testing: DynFixed" << std::endl;
+
+      IDL::traits<DynamicAny::DynAny>::ref_type dyn_any =
+        dynany_factory->create_dyn_any_from_type_code (DynAnyTests::_tc_test_fixed);
+      IDL::traits<DynamicAny::DynFixed>::ref_type fixed =
+        IDL::traits<DynamicAny::DynFixed>::narrow (dyn_any);
+      if (!fixed)
+      {
+        TAOX11_TEST_ERROR << "Nil DynFixed after create_dyn_any_from_type_code" << std::endl;
+        ++this->error_count_;
+      }
+      else
+      {
+        if (fixed->get_value () != "0.000")
+        {
+          TAOX11_TEST_ERROR << "Unexpected DynFixed default value" << std::endl;
+          ++this->error_count_;
+        }
+        if (fixed->set_value ("12.3456"))
+        {
+          TAOX11_TEST_ERROR << "DynFixed did not report truncation" << std::endl;
+          ++this->error_count_;
+        }
+        if (fixed->get_value () != "12.345")
+        {
+          TAOX11_TEST_ERROR << "Unexpected truncated DynFixed value" << std::endl;
+          ++this->error_count_;
+        }
+        CORBA::Any value = fixed->to_any ();
+        IDL::traits<DynamicAny::DynAny>::ref_type roundtrip_any =
+          dynany_factory->create_dyn_any (value);
+        IDL::traits<DynamicAny::DynFixed>::ref_type roundtrip =
+          IDL::traits<DynamicAny::DynFixed>::narrow (roundtrip_any);
+        if (!roundtrip || roundtrip->get_value () != "12.345" || !roundtrip->equal (fixed))
+        {
+          TAOX11_TEST_ERROR << "DynFixed Any round trip failed" << std::endl;
+          ++this->error_count_;
+        }
+        try
+        {
+          fixed->set_value ("invalid");
+          TAOX11_TEST_ERROR << "DynFixed accepted an invalid value" << std::endl;
+          ++this->error_count_;
+        }
+        catch (DynamicAny::DynAny::TypeMismatch const&)
+        {
+        }
+        dyn_any->destroy ();
+        roundtrip_any->destroy ();
+      }
+
+      IDL::traits<DynamicAny::DynAny>::ref_type sequence_any =
+        dynany_factory->create_dyn_any_from_type_code (DynAnyTests::_tc_test_fixed_seq);
+      IDL::traits<DynamicAny::DynSequence>::ref_type sequence =
+        IDL::traits<DynamicAny::DynSequence>::narrow (sequence_any);
+      if (!sequence)
+      {
+        TAOX11_TEST_ERROR << "Nil DynSequence for DynFixed sequence" << std::endl;
+        ++this->error_count_;
+        sequence_any->destroy ();
+      }
+      else
+      {
+        sequence->set_length (1);
+        sequence->seek (0);
+        IDL::traits<DynamicAny::DynFixed>::ref_type component =
+          IDL::traits<DynamicAny::DynFixed>::narrow (sequence->current_component ());
+        if (!component || !component->set_value ("8.125") || component->get_value () != "8.125")
+        {
+          TAOX11_TEST_ERROR << "DynFixed sequence component failed" << std::endl;
+          ++this->error_count_;
+        }
+        sequence->destroy ();
+      }
+
+      IDL::traits<CORBA::TypeCode>::ref_type fixed_alias_tc = DynAnyTests::_tc_test_fixed_alias;
+      if (fixed_alias_tc->kind () != CORBA::TCKind::tk_alias ||
+          fixed_alias_tc->content_type ()->kind () != CORBA::TCKind::tk_alias ||
+          fixed_alias_tc->content_type ()->content_type ()->kind () != CORBA::TCKind::tk_fixed)
+      {
+        TAOX11_TEST_ERROR << "DynFixed alias TypeCode did not retain its alias chain" << std::endl;
+        ++this->error_count_;
+      }
+
+      IDL::traits<DynamicAny::DynAny>::ref_type fixed_alias_any =
+        dynany_factory->create_dyn_any_from_type_code (DynAnyTests::_tc_test_fixed_alias);
+      IDL::traits<DynamicAny::DynFixed>::ref_type fixed_alias =
+        IDL::traits<DynamicAny::DynFixed>::narrow (fixed_alias_any);
+      if (!fixed_alias || !fixed_alias->set_value ("4.567") ||
+          fixed_alias->get_value () != "4.567")
+      {
+        TAOX11_TEST_ERROR << "DynFixed alias factory creation failed" << std::endl;
+        ++this->error_count_;
+      }
+      fixed_alias_any->destroy ();
+    }
+
+    {
       TAOX11_TEST_DEBUG <<"\t*=*=*=*=" << data.labels[6]<< "=*=*=*=*" << std::endl;
 
       TAOX11_TEST_DEBUG << "testing: constructor(Any)/equal/insert/get" << std::endl;

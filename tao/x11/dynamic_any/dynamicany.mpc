@@ -32,6 +32,7 @@ project(taox11_dynamicany) : taox11_lib, install, taox11_valuetype, taox11_avoid
     dynarray_i.cpp
     dyn_common.cpp
     dynenum_i.cpp
+    dynfixed_i.cpp
     dynsequence_i.cpp
     dynstruct_i.cpp
     dynunion_i.cpp
@@ -55,6 +56,7 @@ project(taox11_dynamicany) : taox11_lib, install, taox11_valuetype, taox11_avoid
     dynanyutils_t.h
     dynarray_i.h
     dynenum_i.h
+    dynfixed_i.h
     dynsequence_i.h
     dynstruct_i.h
     dynunion_i.h
