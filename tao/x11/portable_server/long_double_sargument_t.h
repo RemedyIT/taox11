@@ -38,7 +38,7 @@ namespace TAOX11_NAMESPACE::PS
     long double& arg () { return this->x_; }
 
   private:
-    long double x_;
+    long double x_ {};
   };
 
   /**
@@ -62,7 +62,7 @@ namespace TAOX11_NAMESPACE::PS
     long double & arg () { return this->x_; }
 
   private:
-    long double x_;
+    long double x_ {};
   };
 
   /**
@@ -85,7 +85,7 @@ namespace TAOX11_NAMESPACE::PS
     long double & arg () { return this->x_; }
 
   private:
-    long double x_;
+    long double x_ {};
   };
 
   /**
@@ -108,7 +108,7 @@ namespace TAOX11_NAMESPACE::PS
     long double & arg () { return this->x_; }
 
   private:
-    long double x_;
+    long double x_ {};
   };
 } // namespace TAOX11_NAMESPACE::PS
 

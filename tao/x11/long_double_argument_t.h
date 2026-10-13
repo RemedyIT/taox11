@@ -65,7 +65,7 @@ namespace TAOX11_NAMESPACE
     TAO_TAO::Argument* clone () override;
 
   private:
-    bool is_clone_;
+    bool is_clone_ {false};
   };
 
   /**
@@ -139,7 +139,7 @@ namespace TAOX11_NAMESPACE
     long double retn () { return std::move (this->x_); }
 
   private:
-    long double x_;
+    long double x_ {};
   };
 
 } // namespace TAOX11_NAMESPACE
