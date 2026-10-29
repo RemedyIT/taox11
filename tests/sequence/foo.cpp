@@ -197,7 +197,7 @@ Foo::string_bounded  (const Test::StringBounded & sin,
     {
       el = "boo";
     }
-  sret.push_back ("fail");
+  sret.emplace_back ("fail");
   return sret;
 }
 
@@ -386,8 +386,8 @@ Foo::test_corba_sequences (const ::Test::CorbaSequences& cs_in,
 
   cs_inout.wchar_seq().push_back ('A');
   cs_inout.char_seq().push_back ('B');
-  cs_inout.wstring_seq ().push_back (L"boo");
-  cs_inout.string_seq ().push_back ("hi");
+  cs_inout.wstring_seq ().emplace_back (L"boo");
+  cs_inout.string_seq ().emplace_back ("hi");
   cs_inout.short_seq ().push_back (1);
   cs_inout.ushort_seq ().push_back (2);
   cs_inout.long_seq ().push_back (3);

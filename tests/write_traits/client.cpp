@@ -85,11 +85,11 @@ int main(int argc, char* argv[])
         for (uint8_t b2=0; b2 < 16 ;++b2)
           m[b1][b2] = (b1*16)+b2;
       Test::StringList sl;
-      sl.push_back("string1");
-      sl.push_back("string2");
-      sl.push_back("string3");
-      sl.push_back("string4");
-      sl.push_back("string5");
+      sl.emplace_back("string1");
+      sl.emplace_back("string2");
+      sl.emplace_back("string3");
+      sl.emplace_back("string4");
+      sl.emplace_back("string5");
       Test::Alphabet abc;
       for (char c='a'; c<='z' ;++c)
         abc.push_back(c);

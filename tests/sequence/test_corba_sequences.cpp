@@ -150,8 +150,8 @@ fill_sequences (Test::CorbaSequences &cs)
       cs.wchar_seq().push_back (wc_data[i]);
       cs.char_seq().push_back (i+32);
 
-      cs.wstring_seq ().push_back (L"wstr-hi");
-      cs.string_seq ().push_back ("str-hi");
+      cs.wstring_seq ().emplace_back (L"wstr-hi");
+      cs.string_seq ().emplace_back ("str-hi");
 
       if ((i%2) == 0)
         {
