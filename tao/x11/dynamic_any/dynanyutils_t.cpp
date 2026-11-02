@@ -14,6 +14,7 @@
 #include "tao/x11/dynamic_any/dynany_impl.h"
 #include "tao/x11/dynamic_any/dynarray_i.h"
 #include "tao/x11/dynamic_any/dynenum_i.h"
+#include "tao/x11/dynamic_any/dynfixed_i.h"
 #include "tao/x11/dynamic_any/dynsequence_i.h"
 #include "tao/x11/dynamic_any/dynstruct_i.h"
 #include "tao/x11/dynamic_any/dynunion_i.h"
@@ -221,6 +222,10 @@ namespace TAOX11_NAMESPACE
               ANY_TC>::create_dyn_any_t (any_tc, allow_truncation);
 
         case CORBA::TCKind::tk_fixed:
+          return
+            CreateDynAnyUtils<
+              DynamicAny::DynFixed_i,
+              ANY_TC>::create_dyn_any_t (any_tc, allow_truncation);
         case CORBA::TCKind::tk_component:
         case CORBA::TCKind::tk_home:
           throw CORBA::NO_IMPLEMENT ();
