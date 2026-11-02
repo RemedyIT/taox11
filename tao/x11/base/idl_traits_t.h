@@ -15,7 +15,7 @@
 #include "tao/x11/base/bounded_map_t.h"
 #include <algorithm>
 #if !defined (WIN32)
-# include <codecvt>
+# include "tao/x11/base/utf8_utf16.h"
 # include <locale>
 #else
 # include <Windows.h>
@@ -185,8 +185,7 @@ namespace TAOX11_NAMESPACE
           }
         return os_ << '"' << _str << '"';
 #else
-        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-        return os_ << '"' << converter.from_bytes(val_) << '"';
+        return os_ << '"' << TAOX11_NAMESPACE::detail::utf8_to_utf16 (val_) << '"';
 #endif
       }
     };
@@ -213,8 +212,7 @@ namespace TAOX11_NAMESPACE
         }
         return os_ << "\"" << _str << "\"";
 #else
-        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
-        return os_ << "L\"" << conv.to_bytes(val_) << '"';
+        return os_ << "L\"" << TAOX11_NAMESPACE::detail::utf16_to_utf8 (val_) << '"';
 #endif
       }
     };
